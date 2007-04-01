@@ -1,0 +1,1236 @@
+<para>The XSL Recommendation defines the behaviors of two classes of
+formatters based on their media type: visual and aural.  It further
+divides the class of visual formatters into interactive media and
+non-interactive media formatters.</para>
+
+<para>xmlroff is a visual formatter for non-interactive media.</para>
+
+<para>xmlroff implements a range of formatting objects and properties
+from the Basic, Extended, and Complete conformance levels.</para>
+
+<para>xmlroff does not claim Basic conformance to the XSL
+Recommendation since it does not yet implement all of the Basic level
+formatting objects and properties.</para>
+
+<para>xmlroff supports both "lr-tb" and "rl-tb" values of the
+writing-mode property (and the "lr" and "rl" shorthands).</para>
+
+<section>
+<title>Conformance Levels</title>
+
+<para>From Section 8, Conformance, of the XSL Recommendation:</para>
+
+<blockquote>
+<para>This specification defines three levels of conformance, in order
+of completeness:</para>
+
+<informaltable>
+      <tgroup cols="2">
+	<thead>
+<row>
+<entry>Level</entry>
+<entry>Description</entry>
+	  </row>
+	</thead>
+<tbody>
+<row>
+<entry role="basic">Basic</entry>
+<entry>Includes the set of formatting objects and properties needed to
+support a minimum level of pagination or aural rendering.</entry>
+	  </row>
+<row>
+<entry role="extended">Extended</entry>
+<entry>Includes everything else, except for shorthands. It is
+intended for applications whose goal is to provide sophisticated
+pagination.</entry>
+	  </row>
+<row>
+<entry role="complete">Complete</entry>
+<entry>Includes everything.</entry>
+	  </row>
+	</tbody>
+      </tgroup>
+    </informaltable>
+
+<para>Conformance to this specification is expressed in terms of
+conformance to any of the above levels.</para>
+
+<para>An application that claims conformance to a given level of this
+specification must implement all the formatting objects and properties
+that apply to it for a given medium.</para>
+    </blockquote>
+
+<para>Conformance for visual and aural XSL formatters is defined
+separately for each formatting object.  For example, implementing
+fo:page-number is necessary for Basic level conformance for a visual
+formatter, but only necessary for Extended level conformance for an
+aural formatter.</para>
+
+<para>In contrast, formatting object properties only have one defined
+conformance level, but there are also some properties that apply to
+only one class of formatter.  For example, page-height and
+voice-family are both in the set of properties for Basic level
+conformance, but page-height applies only to visual media and
+voice-family applies only to aural media.</para>
+
+<para>Appendix B and Section C.3 of the XSL Recommendation list a
+<emphasis>proposed</emphasis> fallback treatment for each Extended
+level formatting object and property.  The fallbacks are defined "[i]n
+order to ensure interoperability."  Also, "[c]orrect processing of
+fallbacks does not constitute conformance."</para>
+
+<para>All formatting objects are assigned to either Basic or Extended
+level conformance.  There are no Complete level formatting objects.</para>
+
+<para>Some formatting objects are specific to Extended level
+conformant interactive media formatters.  Non-interactive media
+formatters such as xmlroff, however, must, for Extended level
+conformance, implement the proposed fallback treatment of the Extended
+level interactive media formatting objects.</para>
+
+  </section>
+
+<section>
+<title>Stated Conformance</title>
+
+<para>The stated conformance also has three levels:</para>
+
+<informaltable>
+      <tgroup cols="2">
+	<thead>
+<row>
+<entry>Level</entry>
+<entry>Description</entry>
+	  </row>
+	</thead>
+<tbody>
+<row>
+<entry role="yes">Yes</entry>
+<entry>xmlroff implements the formatting object, property, or fallback
+behaviour, possibly
+with some caveats.</entry>
+	  </row>
+<row>
+<entry role="no">No</entry>
+<entry>xmlroff does not implement the formatting object, property,
+or fallback behaviour, but a workaround may also be suggested.</entry>
+	  </row>
+<row>
+<entry role="na">N/A</entry>
+<entry>xmlroff does not need to formatting object, property, or
+fallback behaviour.  For example, xmlroff does not implement properties
+for aural or interactive presentation, and it does not implement
+fallback behaviour for implemented formatting objects.</entry>
+	  </row>
+	</tbody>
+      </tgroup>
+    </informaltable>
+
+  </section>
+
+<section>
+<title>Formatting Objects</title>
+
+<para>All the formatting object specified by the XSL 1.0
+Recommendation are accepted.  Not all are supported, however.</para>
+
+<para>The following tables are based on the tables in Appendix B of
+the XSL Recommendation.  The conformance level and proposed fallback
+treatment for visual processors are shown along with an indication of
+whether xmlroff implements the formatting object or the fallback
+treatment.  Conformance level and fallbacks for aural processors are
+not shown.</para>
+
+    <section><title>Declaration and Pagination and Layout Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup span="1" cols="5">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:root</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:page-sequence</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:page-sequence-master</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:single-page-master-reference</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:repeatable-page-master-reference</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:repeatable-page-master-alternatives</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Use the page-master referenced in the first fo:conditional-page-master-reference child</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:conditional-page-master-reference</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Use the page-master referenced in the first fo:conditional-page-master-reference child</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:layout-master-set</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:simple-page-master</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:region-body</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:region-before</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Include after content of body region is placed</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:region-after</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Include after content of body region is placed.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:region-start</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Include after content of body region is placed</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:region-end</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Include after content of body region is placed</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:declarations</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:color-profile</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Ignore, use the sRGB fallback of the rgb-icc function</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:flow</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:static-content</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Include after content of body region is placed</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:title</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Include before content of body region is placed</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+    <section><title>Block Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup span="1" cols="5">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:block</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:block-container</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Display
+indication that content cannot be correctly
+rendered</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+    <section><title>Inline Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup span="1" cols="5">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:bidi-override</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>Display indication that content cannot be correctly rendered.</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:character</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:initial-property-set</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Ignore any properties specified on this object.</entry>
+	      <entry role="yes">Yes</entry>
+	    </row>
+	    <row>
+	      <entry>fo:external-graphic</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes.  Supported formats determined by
+      underlying graphics library.</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:instream-foreign-object</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Display an indication that content cannot be correctly rendered.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:inline</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:inline-container</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Display indication that content cannot be correctly rendered. </entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:leader</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:page-number</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:page-number-citation</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Display an indication that content cannot be correctly rendered.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+
+    <section><title>Table Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup span="1" cols="5">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:table-and-caption</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-column</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-caption</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>
+                <itemizedlist>
+		  <listitem><para>caption-side="start" becomes caption-side="before"</para></listitem>
+		  <listitem><para>caption-side="end" becomes caption-side="after"</para></listitem>
+		  <listitem><para>caption-side="left" becomes caption-side="before"</para></listitem>
+		  <listitem><para>caption-side="right" becomes caption-side="after"</para></listitem>
+		</itemizedlist>
+	      </entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-header</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-footer</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Place at end of table.
+</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-body</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-row</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:table-cell</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+
+    <section><title>List Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup cols="5" span="1">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:list-block</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:list-item</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:list-item-body</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:list-item-label</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>Labels that
+break across multiple lines
+				are treated as separate blocks before
+list-item-body.
+				</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+
+    <section id="ConfMulti"><title>Link and Multi Formatting Objects</title>
+
+<para>xmlroff is a non-interactive media formatter.  Only the fallback
+treatment for the interactive media formatting objects will be
+implemented.</para>
+
+      <informaltable border="1" width="90%">
+	<tgroup cols="5" span="1">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:basic-link</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Promote content
+to parent formatting object.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:multi-switch</entry>
+	      <entry role="extended">Extended.
+Need not be implemented for extended conformance for non-interactive media</entry>
+	      <entry role="no">No</entry>
+	      <entry>
+For basic conformance and extended conformance for non-interactive media:
+utilize the contents of the first eligible
+multi-case formatting object.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:multi-case</entry>
+	      <entry role="basic">Basic
+Needed as wrapper for fallback for
+multi-switch</entry>
+	      <entry role="no">No</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:multi-toggle</entry>
+	      <entry role="extended">Extended.
+Need not be implemented for extended conformance for non-interactive media</entry>
+	      <entry role="no">No</entry>
+	      <entry>
+For basic conformance and extended conformance for non-interactive media:
+promote content to parent formatting object.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:multi-properties</entry>
+	      <entry role="extended">Extended.
+Need not be implemented for extended conformance for non-interactive media</entry>
+	      <entry role="no">No</entry>
+	      <entry>
+For basic conformance and extended conformance for non-interactive media:
+promote content to parent formatting object.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:multi-property-set</entry>
+	      <entry role="extended">
+Extended.
+Need not be implemented for extended conformance for non-interactive media</entry>
+	      <entry role="no">No</entry>
+	      <entry>
+For basic conformance and extended conformance for non-interactive media:
+ignore.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+
+    <section><title>Out-of-line Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup cols="5" span="1">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:float</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Place inline.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:footnote</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Place inline.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	    <row>
+	      <entry>fo:footnote-body</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Place inline.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+
+    <section><title>Other Formatting Objects</title>
+      <informaltable border="1" width="90%">
+	<tgroup cols="5" span="1">
+	  <thead>
+	    <row><entry>Formatting Object</entry><entry>Level</entry><entry>xmlroff</entry><entry>Fallback</entry><entry>xmlroff</entry></row>
+	  </thead>
+	  <tbody>
+	    <row>
+	      <entry>fo:wrapper</entry>
+	      <entry role="basic">Basic</entry>
+	      <entry role="yes">Yes</entry>
+	      <entry>-</entry>
+	      <entry role="na">N/A</entry>
+	    </row>
+	    <row>
+	      <entry>fo:marker</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Ignore.</entry>
+	      <entry role="yes">Yes</entry>
+	    </row>
+	    <row>
+	      <entry>fo:retrieve-marker</entry>
+	      <entry role="extended">Extended</entry>
+	      <entry role="no">No</entry>
+	      <entry>Display indication that
+content cannot be correctly rendered.</entry>
+	      <entry role="no">No</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    </section>
+  </section>
+
+<section>
+<title>Properties</title>
+<informaltable>
+      <tgroup cols="4">
+	<thead>
+<row>
+<entry>Property</entry><entry>Values</entry><entry>Level</entry><entry>xmlroff</entry></row></thead>
+<tbody>
+<row>
+<entry>absolute-position</entry><entry>auto | absolute | fixed | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>active-state</entry><entry>link | visited | active | hover | focus</entry><entry role="extended">Extended</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>alignment-adjust</entry><entry>auto | baseline | before-edge
+| text-before-edge | middle | central | after-edge
+| text-after-edge | ideographic | alphabetic | hanging | mathematical
+| &lt;percentage&gt; | &lt;length&gt;
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>alignment-baseline</entry><entry>auto | baseline | before-edge
+| text-before-edge | middle | central | after-edge
+| text-after-edge | ideographic | alphabetic | hanging | mathematical
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>auto-restore</entry><entry>true | false</entry><entry role="extended">Extended</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>azimuth</entry><entry>&lt;angle&gt; | [[ left-side | far-left | left
+| center-left | center | center-right | right | far-right | right-side
+] || behind ] | leftwards | rightwards | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>background</entry><entry>[&lt;background-color&gt; ||
+&lt;background-image&gt;
+|| &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt;
+]] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>background-attachment</entry><entry>scroll | fixed | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>background-color</entry><entry>&lt;color&gt; | transparent | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>background-image</entry><entry>&lt;uri-specification&gt; | none | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>background-position</entry><entry>[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} |
+[ [top | center | bottom] || [left | center | right] ] ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>background-position-horizontal</entry><entry>&lt;percentage&gt; | &lt;length&gt; |
+left | center | right | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>background-position-vertical</entry><entry>&lt;percentage&gt; | &lt;length&gt; |
+top | center | bottom | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>background-repeat</entry><entry>repeat | repeat-x | repeat-y | no-repeat | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>baseline-shift</entry><entry>baseline | sub | super | &lt;percentage&gt; | &lt;length&gt;
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>blank-or-not-blank</entry><entry>blank | not-blank | any | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>block-progression-dimension</entry><entry>auto | &lt;length&gt; | &lt;percentage&gt; | &lt;length-range&gt;
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-after-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-after-precedence</entry><entry>force | &lt;integer&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-after-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-after-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-before-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-before-precedence</entry><entry>force | &lt;integer&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-before-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-before-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-bottom</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-bottom-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-bottom-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-bottom-width</entry><entry>&lt;border-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-collapse</entry><entry>collapse | collapse-with-precedence | separate | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-color</entry><entry>[ &lt;color&gt; | transparent ]{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-end-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-end-precedence</entry><entry>force | &lt;integer&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-end-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-end-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-left</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-left-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-left-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-left-width</entry><entry>&lt;border-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-right</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-right-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-right-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-right-width</entry><entry>&lt;border-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-separation</entry><entry>&lt;length-bp-ip-direction&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-spacing</entry><entry>&lt;length&gt; &lt;length&gt;? | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-start-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-start-precedence</entry><entry>force | &lt;integer&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>border-start-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-start-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-style</entry><entry>&lt;border-style&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-top</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>border-top-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-top-style</entry><entry>&lt;border-style&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-top-width</entry><entry>&lt;border-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>border-width</entry><entry>&lt;border-width&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>bottom</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="extended">Extended</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>break-after</entry><entry>auto | column | page | even-page | odd-page | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>break-before</entry><entry>auto | column | page | even-page | odd-page | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>caption-side</entry><entry>before | after | start | end | top | bottom | left | right | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>case-name</entry><entry>&lt;name&gt;</entry><entry role="extended">Extended</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>case-title</entry><entry>&lt;string&gt;</entry><entry role="extended">Extended</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>character</entry><entry>&lt;character&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>clear</entry><entry>start | end | left | right | both | none | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>clip</entry><entry>&lt;shape&gt; | auto | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>color-profile-name</entry><entry>&lt;name&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>column-count</entry><entry>&lt;number&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>column-gap</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>column-number</entry><entry>&lt;number&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>column-width</entry><entry>&lt;length&gt; | &lt;percentage&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>content-height</entry><entry>auto | scale-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>content-type</entry><entry>&lt;string&gt; | auto</entry><entry
+role="extended">Extended</entry><entry role="no">No.  Content type is
+detected automatically by the image library.</entry></row>
+<row>
+<entry>content-width</entry><entry>auto | scale-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>country</entry><entry>none | &lt;country&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>cue</entry><entry>&lt;cue-before&gt; || &lt;cue-after&gt; | inherit</entry><entry role="complete">Complete</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>cue-after</entry><entry>&lt;uri-specification&gt; | none | inherit </entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>cue-before</entry><entry>&lt;uri-specification&gt; | none | inherit </entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>destination-placement-offset</entry><entry>&lt;length&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>direction</entry><entry>ltr | rtl | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>display-align</entry><entry>auto | before | center | after
+| inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>dominant-baseline</entry><entry>auto | use-script | no-change | reset-size
+| ideographic | alphabetic | hanging | mathematical
+| central | middle | text-after-edge | text-before-edge
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>elevation</entry><entry>&lt;angle&gt; | below | level | above | higher
+| lower | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>empty-cells</entry><entry>show | hide | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>end-indent</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>ends-row</entry><entry>true | false</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>extent</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>external-destination</entry><entry>&lt;uri-specification&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>float</entry><entry>before | start | end | left | right | none | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>flow-name</entry><entry>&lt;name&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>font</entry><entry>[ [ &lt;font-style&gt; || &lt;font-variant&gt;
+|| &lt;font-weight&gt; ]? &lt;font-size&gt; [ / &lt;line-height&gt;]? &lt;font-family&gt;
+] | caption | icon | menu | message-box | small-caption | status-bar
+| inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>font-family</entry><entry>[[ &lt;family-name&gt; | &lt;generic-family&gt;
+],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>font-selection-strategy</entry><entry>auto | character-by-character | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>font-size</entry><entry>&lt;absolute-size&gt; | &lt;relative-size&gt; | &lt;length&gt;
+| &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>font-size-adjust</entry><entry>&lt;number&gt; | none | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>font-stretch</entry><entry>normal | wider | narrower | ultra-condensed
+| extra-condensed | condensed | semi-condensed | semi-expanded |
+expanded | extra-expanded | ultra-expanded | inherit</entry><entry role="extended">Extended</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>font-style</entry><entry>normal | italic | oblique |  backslant | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>font-variant</entry><entry>normal | small-caps | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>font-weight</entry><entry>normal | bold | bolder | lighter | 100 | 200
+| 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>force-page-count</entry><entry>auto | even | odd | end-on-even | end-on-odd | no-force
+| inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>format</entry><entry>&lt;string&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>glyph-orientation-horizontal</entry><entry>&lt;angle&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>glyph-orientation-vertical</entry><entry>auto | &lt;angle&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>grouping-separator</entry><entry>&lt;character&gt;</entry><entry role="extended">Extended</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>grouping-size</entry><entry>&lt;number&gt;</entry><entry role="extended">Extended</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>height</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>hyphenate</entry><entry>false | true | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>hyphenation-character</entry><entry>&lt;character&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>hyphenation-keep</entry><entry>auto | column | page | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>hyphenation-ladder-count</entry><entry>no-limit | &lt;number&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>hyphenation-push-character-count</entry><entry>&lt;number&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>hyphenation-remain-character-count</entry><entry>&lt;number&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>id</entry><entry> &lt;id&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>indicate-destination</entry><entry>true | false</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>initial-page-number</entry><entry>auto | auto-odd | auto-even | &lt;number&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>inline-progression-dimension</entry><entry>auto | &lt;length&gt; | &lt;percentage&gt; | &lt;length-range&gt;
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>internal-destination</entry><entry>empty string |  &lt;idref&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>intrusion-displace</entry><entry>auto | none | line | indent | block | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>keep-together</entry><entry>&lt;keep&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>keep-with-next</entry><entry>&lt;keep&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>keep-with-previous</entry><entry>&lt;keep&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>language</entry><entry>none | &lt;language&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>last-line-end-indent</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>leader-alignment</entry><entry>none | reference-area | page | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>leader-length</entry><entry>&lt;length-range&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>leader-pattern</entry><entry>space | rule | dots | use-content | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>leader-pattern-width</entry><entry>use-font-metrics | &lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>left</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>letter-spacing</entry><entry>normal | &lt;length&gt; | &lt;space&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>letter-value</entry><entry>auto | alphabetic | traditional</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>linefeed-treatment</entry><entry>ignore | preserve | treat-as-space | treat-as-zero-width-space | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>line-height</entry><entry>normal | &lt;length&gt; | &lt;number&gt; | &lt;percentage&gt; | &lt;space&gt;
+| inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>line-height-shift-adjustment</entry><entry>consider-shifts | disregard-shifts | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>line-stacking-strategy</entry><entry>line-height | font-height | max-height | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>margin</entry><entry>&lt;margin-width&gt;{1,4} | inherit </entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<row>
+<entry>margin-bottom</entry><entry>&lt;margin-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>margin-left</entry><entry>&lt;margin-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>margin-right</entry><entry>&lt;margin-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>margin-top</entry><entry>&lt;margin-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>marker-class-name</entry><entry>&lt;name&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>master-name</entry><entry>&lt;name&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>master-reference</entry><entry>&lt;name&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>max-height</entry><entry>&lt;length&gt; | &lt;percentage&gt; | none | inherit </entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>maximum-repeats</entry><entry>&lt;number&gt; | no-limit | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>max-width</entry><entry>&lt;length&gt; | &lt;percentage&gt; | none | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>media-usage</entry><entry>auto | paginate | bounded-in-one-dimension | unbounded</entry><entry role="extended">Extended</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>min-height</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit </entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>min-width</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>number-columns-repeated</entry><entry>&lt;number&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>number-columns-spanned</entry><entry>&lt;number&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>number-rows-spanned</entry><entry>&lt;number&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>odd-or-even</entry><entry>odd | even | any | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>orphans</entry><entry>&lt;integer&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>overflow</entry><entry>visible | hidden | scroll | error-if-overflow | auto | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>padding</entry><entry>&lt;padding-width&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-after</entry><entry>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-before</entry><entry>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-bottom</entry><entry>&lt;padding-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-end</entry><entry>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-left</entry><entry>&lt;padding-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-right</entry><entry>&lt;padding-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-start</entry><entry>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>padding-top</entry><entry>&lt;padding-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>page-break-after</entry><entry>auto | always | avoid | left | right | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>page-break-before</entry><entry>auto | always | avoid | left | right | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>page-break-inside</entry><entry>avoid | auto | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>page-height</entry><entry>auto | indefinite | &lt;length&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>page-position</entry><entry>first | last | rest | any | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>page-width</entry><entry>auto | indefinite | &lt;length&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>pause</entry><entry>[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit</entry><entry role="complete">Complete</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>pause-after</entry><entry>&lt;time&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>pause-before</entry><entry>&lt;time&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>pitch</entry><entry>&lt;frequency&gt; | x-low | low | medium | high
+| x-high | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>pitch-range</entry><entry>&lt;number&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>play-during</entry><entry>&lt;uri-specification&gt; mix? repeat? | auto | none | inherit </entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>position</entry><entry>static | relative | absolute | fixed | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>precedence</entry><entry>true | false | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>provisional-distance-between-starts</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>provisional-label-separation</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>reference-orientation</entry><entry> 0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>ref-id</entry><entry>&lt;idref&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>region-name</entry><entry>xsl-region-body | xsl-region-start | xsl-region-end
+| xsl-region-before | xsl-region-after | xsl-before-float-separator
+| xsl-footnote-separator | &lt;name&gt;</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>relative-align</entry><entry>before | baseline
+| inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>relative-position</entry><entry>static | relative | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>rendering-intent</entry><entry>auto | perceptual | relative-colorimetric | saturation | absolute-colorimetric | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>retrieve-boundary</entry><entry>page | page-sequence | document</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>retrieve-class-name</entry><entry>&lt;name&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>retrieve-position</entry><entry>first-starting-within-page | first-including-carryover |
+last-starting-within-page | last-ending-within-page</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>richness</entry><entry>&lt;number&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>right</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>role</entry><entry>&lt;string&gt; | &lt;uri-specification&gt; | none | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>rule-style</entry><entry>none | dotted | dashed | solid | double | groove
+| ridge | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>rule-thickness</entry><entry>&lt;length&gt;</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>scaling</entry><entry>uniform | non-uniform | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>scaling-method</entry><entry>auto | integer-pixels | resample-any-method | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>score-spaces</entry><entry>true | false | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>script</entry><entry>none | auto | &lt;script&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>show-destination</entry><entry>replace | new</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>size</entry><entry>&lt;length&gt;{1,2} | auto | landscape | portrait
+| inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>source-document</entry><entry>&lt;uri-specification&gt; [&lt;uri-specification&gt;]* | none | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>space-after</entry><entry>&lt;space&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>space-before</entry><entry>&lt;space&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>space-end</entry><entry>&lt;space&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>space-start</entry><entry>&lt;space&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>span</entry><entry>none | all | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>speak</entry><entry>normal | none | spell-out | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>speak-header</entry><entry>once | always | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>speak-numeral</entry><entry>digits | continuous | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>speak-punctuation</entry><entry>code | none | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>speech-rate</entry><entry>&lt;number&gt; | x-slow | slow | medium | fast
+| x-fast | faster | slower | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>src</entry><entry>&lt;uri-specification&gt; |
+inherit</entry><entry role="basic">Basic</entry><entry
+role="yes">Yes.  Only local files are supported at present.</entry></row>
+<row>
+<entry>start-indent</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>starting-state</entry><entry>show | hide</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>starts-row</entry><entry>true | false</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>stress</entry><entry>&lt;number&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>suppress-at-line-break</entry><entry>auto | suppress | retain | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>switch-to</entry><entry>xsl-preceding | xsl-following | xsl-any | &lt;name&gt;[ &lt;name&gt;]*</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>table-layout</entry><entry>auto | fixed | inherit</entry><entry role="extended">Extended</entry><entry role="yes">'fixed' only</entry></row>
+<row>
+<entry>table-omit-footer-at-break</entry><entry>true | false</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>table-omit-header-at-break</entry><entry>true | false</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>target-presentation-context</entry><entry>use-target-processing-context |  &lt;uri-specification&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>target-processing-context</entry><entry>document-root |  &lt;uri-specification&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>target-stylesheet</entry><entry>use-normal-stylesheet |  &lt;uri-specification&gt;</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>text-align</entry><entry>start | center | end | justify | inside | outside
+| left | right | &lt;string&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>text-align-last</entry><entry>relative | start | center | end | justify | inside
+| outside | left | right | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>text-altitude</entry><entry>use-font-metrics | &lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>text-decoration</entry><entry>none | [ [ underline | no-underline] || [ overline | no-overline ]
+|| [ line-through | no-line-through ] || [ blink | no-blink ] ]
+
+| inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>text-depth</entry><entry>use-font-metrics | &lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>text-indent</entry><entry>&lt;length&gt; | &lt;percentage&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>text-shadow</entry><entry>none | [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?
+,]* [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?] | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>text-transform</entry><entry>capitalize | uppercase | lowercase | none | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>top</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>treat-as-word-space</entry><entry>auto | true | false | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>unicode-bidi</entry><entry>normal | embed | bidi-override | inherit</entry><entry role="extended">Extended</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>vertical-align</entry><entry>baseline | middle | sub | super | text-top |
+text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>visibility</entry><entry>visible | hidden | collapse | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>voice-family</entry><entry>[[&lt;specific-voice&gt; | &lt;generic-voice&gt;
+],]* [&lt;specific-voice&gt; | &lt;generic-voice&gt; ] | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>volume</entry><entry>&lt;number&gt; | &lt;percentage&gt; | silent | x-soft
+| soft | medium | loud | x-loud | inherit</entry><entry role="basic">Basic</entry><entry role="na">N/A</entry></row>
+<row>
+<entry>white-space</entry><entry>normal | pre | nowrap | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>white-space-collapse</entry><entry>false | true | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>white-space-treatment</entry><entry>ignore | preserve | ignore-if-before-linefeed |
+ignore-if-after-linefeed | ignore-if-surrounding-linefeed | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>widows</entry><entry>&lt;integer&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>width</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>word-spacing</entry><entry>normal | &lt;length&gt; | &lt;space&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+<row>
+<entry>wrap-option</entry><entry>no-wrap | wrap | inherit</entry><entry role="basic">Basic</entry><entry role="no">No</entry></row>
+<row>
+<entry>writing-mode</entry><entry>lr-tb | rl-tb | tb-rl | lr | rl | tb | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
+<row>
+<entry>xml:lang</entry><entry>&lt;country-language&gt; | inherit</entry><entry role="complete">Complete</entry><entry role="no">No</entry></row>
+<row>
+<entry>z-index</entry><entry>auto | &lt;integer&gt; | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+</tbody>
+      </tgroup>
+</informaltable>
+</section>

@@ -1,0 +1,75 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-space-end-maximum
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoPropertySpaceEndMaximum ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceEndMaximumClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_end_maximum_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_maximum_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_maximum_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_maximum_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_maximum_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

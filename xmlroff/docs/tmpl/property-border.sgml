@@ -1,0 +1,89 @@
+<!-- ##### SECTION Title ##### -->
+FoPropertyBorder
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumBorderStyle ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_BORDER_STYLE_NONE: 
+@FO_ENUM_BORDER_STYLE_HIDDEN: 
+@FO_ENUM_BORDER_STYLE_DOTTED: 
+@FO_ENUM_BORDER_STYLE_DASHED: 
+@FO_ENUM_BORDER_STYLE_SOLID: 
+@FO_ENUM_BORDER_STYLE_DOUBLE: 
+@FO_ENUM_BORDER_STYLE_GROOVE: 
+@FO_ENUM_BORDER_STYLE_RIDGE: 
+@FO_ENUM_BORDER_STYLE_INSET: 
+@FO_ENUM_BORDER_STYLE_OUTSET: 
+@FO_ENUM_BORDER_STYLE_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_BORDER_STYLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_property_border_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_resolve ##### -->
+<para>
+
+</para>
+
+@current_context: 
+@parent_context: 
+
+
+<!-- ##### FUNCTION fo_property_border_get_width_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_get_style_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_get_color_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

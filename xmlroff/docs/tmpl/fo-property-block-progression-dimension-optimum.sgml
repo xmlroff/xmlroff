@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-block-progression-dimension-optimum
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBlockProgressionDimensionOptimum ##### -->
+<para>
+The #FoPropertyBlockProgressionDimensionOptimum structure represents one instance of the
+'block-progression-dimension.optimum' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBlockProgressionDimensionOptimumClass ##### -->
+<para>
+The #FoPropertyBlockProgressionDimensionOptimumClass structure represents the type of
+the 'block-progression-dimension.optimum' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_block_progression_dimension_optimum_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_block_progression_dimension_optimum_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

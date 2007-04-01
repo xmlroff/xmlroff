@@ -1,0 +1,62 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-font-stretch
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_STRETCH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_enum_font_stretch_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### STRUCT FoPropertyFontStretch ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyFontStretchClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

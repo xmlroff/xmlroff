@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-space-end-conditionality
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySpaceEndCondity ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceEndCondityClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_end_condity_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_condity_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

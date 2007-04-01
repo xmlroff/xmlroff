@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+src
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySrc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySrcClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_src_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_src_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

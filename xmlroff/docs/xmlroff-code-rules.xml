@@ -1,0 +1,97 @@
+<section id="xmlroff-code-rules">
+<sectioninfo>
+<title>Rules of the Code</title>
+<subtitle>xmlroff Code Rules</subtitle>
+<abstract><para>Coding conventions for xmlroff code</para></abstract>
+</sectioninfo>
+
+<section>
+<title>Abbreviations</title>
+
+<para>
+The following abbreviations are used in file, variable, function, and
+parameter names.
+</para>
+
+<note>
+<para>
+Formatting Object and property names are <emphasis>NOT</emphasis> abbreviated
+when used in class and property names.  For example,
+&ldquo;block-progression-dimension&rdquo; is abbreviated to
+&ldquo;bpdim&rdquo; in function names, but when used as a property
+name (in the GObject sense), it remains
+&ldquo;block-progression-dimension&rdquo;
+</para>
+</note>
+
+<informaltable>
+    <tgroup cols="2">
+<thead>
+<row>
+<entry>Abbreviation</entry>
+<entry>Term</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>bp</entry>
+	  <entry>block-progression</entry>
+	</row>
+<row>
+<entry>bpd</entry>
+	  <entry>block-progression-direction</entry>
+	</row>
+<row>
+<entry>bpdim</entry>
+	  <entry>block-progression-dimension</entry>
+	</row>
+<row>
+<entry>cond</entry>
+	  <entry>conditional</entry>
+	</row>
+<row>
+<entry>condity</entry>
+	  <entry>conditionality</entry>
+	</row>
+<row>
+<entry>expr</entry>
+	  <entry>expression</entry>
+	</row>
+<row>
+<entry>ip</entry>
+	  <entry>inline-progression</entry>
+	</row>
+<row>
+<entry>ipd</entry>
+	  <entry>inline-progression-direction</entry>
+	</row>
+<row>
+<entry>ipdim</entry>
+	  <entry>inline-progression-dimension</entry>
+	</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</section>
+
+<section>
+<title>Compare pointers to NULL</title>
+
+<para>
+From Section 17.1, Boolean Expressions, of &ldquo;Code Complete&rdquo;
+by Steve McConnell.
+</para>
+
+<para>For pointers, write:
+
+<programlisting>while (buffer != NULL) ...</programlisting>
+
+rather than
+
+<programlisting>while (buffer) ...</programlisting>
+</para>
+
+</section>
+
+</section>

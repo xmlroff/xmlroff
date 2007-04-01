@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-background-image
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBackgroundImage ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBackgroundImageClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_background_image_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_background_image_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

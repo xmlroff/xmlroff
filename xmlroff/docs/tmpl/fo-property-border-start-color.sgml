@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-start-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderStartColor ##### -->
+<para>
+The #FoPropertyBorderStartColor structure represents one instance of the
+'border-start-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderStartColorClass ##### -->
+<para>
+The #FoPropertyBorderStartColorClass structure represents the type of
+the 'border-start-color' XSL property.
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_start_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_start_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

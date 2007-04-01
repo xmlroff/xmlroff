@@ -1,0 +1,120 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-alignment-adjust
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumAlignmentAdjust ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_ALIGNMENT_ADJUST_AUTO: 
+@FO_ENUM_ALIGNMENT_ADJUST_BASELINE: 
+@FO_ENUM_ALIGNMENT_ADJUST_BEFORE_EDGE: 
+@FO_ENUM_ALIGNMENT_ADJUST_TEXT_BEFORE_EDGE: 
+@FO_ENUM_ALIGNMENT_ADJUST_MIDDLE: 
+@FO_ENUM_ALIGNMENT_ADJUST_CENTRAL: 
+@FO_ENUM_ALIGNMENT_ADJUST_AFTER_EDGE: 
+@FO_ENUM_ALIGNMENT_ADJUST_TEXT_AFTER_EDGE: 
+@FO_ENUM_ALIGNMENT_ADJUST_IDEOGRAPHIC: 
+@FO_ENUM_ALIGNMENT_ADJUST_ALPHABETIC: 
+@FO_ENUM_ALIGNMENT_ADJUST_HANGING: 
+@FO_ENUM_ALIGNMENT_ADJUST_MATHEMATICAL: 
+@FO_ENUM_ALIGNMENT_ADJUST_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_ALIGNMENT_ADJUST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyAlignmentAdjust ##### -->
+<para>
+The #FoPropertyAlignmentAdust structure represents one instance of the
+'alignment-adjust' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyAlignmentAdjustClass ##### -->
+<para>
+The #FoPropertyAlignmentAdjustClass structure represents the type of
+the 'alignment-adjust' property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_new_attr ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+

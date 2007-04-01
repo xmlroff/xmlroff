@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+pkgincludedir=@includedir@/libfo-@LT_RELEASE@
+
+enable_gp=@ENABLE_GP@
+compat_stylesheet=@prefix@/share/xml/libfo-@VERSION@/libfo-compat.xsl
+
+Name: libfo
+Description: XSL formatter library for xmlroff
+Version: @VERSION@
+Requires: @GNOMEPRINT_REQUIRES@ glib-2.0 gobject-2.0 gmodule-2.0 libxslt pangoxsl gdk-pixbuf-2.0
+Libs: -L${libdir} -lfo-@LT_RELEASE@ @GNOMEPRINT_LIBS@
+Cflags: -I${pkgincludedir} @GNOMEPRINT_CFLAGS@
+

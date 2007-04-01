@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-keep-together-within-column
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyKeepTogetherWithinColumn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyKeepTogetherWithinColumnClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

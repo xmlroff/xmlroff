@@ -1,0 +1,45 @@
+<!-- ##### SECTION Title ##### -->
+Folayout-master-set
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoLayoutMasterSet ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoLayoutMasterSetClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_layout_master_set_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_master_set_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-padding-before
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyPaddingBefore ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyPaddingBeforeClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_padding_before_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_padding_before_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

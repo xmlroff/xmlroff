@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-orphans
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyOrphans ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyOrphansClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_orphans_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_orphans_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

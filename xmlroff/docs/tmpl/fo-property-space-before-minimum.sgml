@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-space-before-minimum
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySpaceBeforeMinimum ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceBeforeMinimumClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_before_minimum_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_before_minimum_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

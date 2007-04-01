@@ -1,0 +1,412 @@
+<!-- ##### SECTION Title ##### -->
+expression-parser-private
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION xslRegisterVariableLookup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@f: 
+@varCtxt: 
+
+
+<!-- ##### FUNCTION xslDebugDumpObject ##### -->
+<para>
+
+</para>
+
+@output: 
+@cur: 
+@depth: 
+
+
+<!-- ##### FUNCTION xslRegisterNs ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@prefix: 
+@ns_uri: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslNsLookup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@ns_uri: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslRegisteredNsCleanup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslRegisterFunc ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@f: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslRegisterFuncNS ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@ns_uri: 
+@f: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslRegisterVariable ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslRegisterVariableNS ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@ns_uri: 
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslFunctionLookup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslFunctionLookupNS ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@ns_uri: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslRegisteredFuncsCleanup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslVariableLookup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslVariableLookupNS ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@name: 
+@ns_uri: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslRegisteredVariablesCleanup ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslNewParserContext ##### -->
+<para>
+
+</para>
+
+@str: 
+@property_name: 
+@fo_context: 
+@resolve_enum_func: 
+@current_font_size: 
+@fo_node: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslFreeParserContext ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslNewValueTree ##### -->
+<para>
+
+</para>
+
+@val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslNodeSetAdd ##### -->
+<para>
+
+</para>
+
+@cur: 
+@val: 
+
+
+<!-- ##### FUNCTION xslIdFunction ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@nargs: 
+
+
+<!-- ##### FUNCTION xslRoot ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslEvalExpr ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslParseName ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslParseNCName ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslNodeSetMerge ##### -->
+<para>
+
+</para>
+
+@val1: 
+@val2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslNodeSetDel ##### -->
+<para>
+
+</para>
+
+@cur: 
+@val: 
+
+
+<!-- ##### FUNCTION xslNodeSetRemove ##### -->
+<para>
+
+</para>
+
+@cur: 
+@val: 
+
+
+<!-- ##### FUNCTION xslFreeNodeSet ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### FUNCTION xslNewNodeSetList ##### -->
+<para>
+
+</para>
+
+@val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslWrapNodeSet ##### -->
+<para>
+
+</para>
+
+@val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslFreeNodeSetList ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### FUNCTION xslEqualValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslCompareValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@inf: 
+@strict: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslValueFlipSign ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslAddValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslSubValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslMultValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslDivValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslModValues ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+
+
+<!-- ##### FUNCTION xslNextPreceding ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@cur: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslNextAncestor ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@cur: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xslNextPrecedingSibling ##### -->
+<para>
+
+</para>
+
+@ctxt: 
+@cur: 
+@Returns: 
+
+

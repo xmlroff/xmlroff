@@ -1,0 +1,41 @@
+<!-- ##### SECTION Title ##### -->
+fo-repeatable-page-master-alternatives
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoRepeatablePageMasterAlternatives ##### -->
+<para>
+
+</para>
+
+@parent_instance: 
+
+<!-- ##### STRUCT FoRepeatablePageMasterAlternativesClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### FUNCTION fo_repeatable_page_master_alternatives_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

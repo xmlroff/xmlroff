@@ -1,0 +1,70 @@
+<!-- ##### SECTION Title ##### -->
+fo-number
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoNumber ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoNumber:value ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoNumberClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_number_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_number_new_with_value ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_number_get_value ##### -->
+<para>
+
+</para>
+
+@number: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_number_get_number_one ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

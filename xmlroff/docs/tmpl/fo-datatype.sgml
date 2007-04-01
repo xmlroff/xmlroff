@@ -1,0 +1,213 @@
+<!-- ##### SECTION Title ##### -->
+FoDatatype
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoDatatype ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoDatatypeClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DATATYPE_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_datatype_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoDatatypeError ##### -->
+<para>
+
+</para>
+
+@FO_DATATYPE_ERROR_WRONG_DATATYPE: 
+@FO_DATATYPE_ERROR_ADD: 
+@FO_DATATYPE_ERROR_SUB: 
+@FO_DATATYPE_ERROR_MUL: 
+@FO_DATATYPE_ERROR_DIV: 
+@FO_DATATYPE_ERROR_MOD: 
+@FO_DATATYPE_ERROR_MAX: 
+@FO_DATATYPE_ERROR_MIN: 
+@FO_DATATYPE_ERROR_FLOOR: 
+@FO_DATATYPE_ERROR_ROUND: 
+@FO_DATATYPE_ERROR_CEILING: 
+@FO_DATATYPE_ERROR_ABS: 
+@FO_DATATYPE_ERROR_NEGATE: 
+
+<!-- ##### FUNCTION fo_datatype_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_copy ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_get_condity_discard ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_get_condity_retain ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_add ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_sub ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_mul ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_div ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_mod ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_max ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_min ##### -->
+<para>
+
+</para>
+
+@arg1: 
+@arg2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_floor ##### -->
+<para>
+
+</para>
+
+@arg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_ceiling ##### -->
+<para>
+
+</para>
+
+@arg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_abs ##### -->
+<para>
+
+</para>
+
+@arg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_round ##### -->
+<para>
+
+</para>
+
+@arg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_datatype_negate ##### -->
+<para>
+
+</para>
+
+@arg: 
+@Returns: 
+
+

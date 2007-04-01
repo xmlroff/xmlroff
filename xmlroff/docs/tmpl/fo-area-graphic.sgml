@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+fo-area-graphic
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaGraphic ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaGraphicClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_graphic_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

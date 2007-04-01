@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-alignment-baseline
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyAlignmentBaseline ##### -->
+<para>
+The #FoPropertyAlignmentBaseline structure represents one instance of the
+'alignment-baseline' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyAlignmentBaselineClass ##### -->
+<para>
+The #FoPropertyAlignmentBaselineClass structure represents the type of
+the 'alignment-baseline' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"><fo:layout-master-set><fo:simple-page-master page-height="7in" page-width="5in" master-name="page"><fo:region-body margin-right="1in" margin-left="1in" margin-bottom="1in" margin-top="1in" region-name="body"/><fo:region-before extent="1in" precedence="true" region-name="header"/><fo:region-after extent="2in" precedence="true" region-name="footer"/><fo:region-start extent="1in" region-name="sSide"/><fo:region-end extent="1in" region-name="eSide"/></fo:simple-page-master></fo:layout-master-set><fo:page-sequence master-reference="page"><fo:static-content flow-name="header"><fo:block border-after-color="blue" border-after-width="medium" border-after-style="solid" text-align="center" font-size="17pt" font-family="Serif">Sample XSL-FO file</fo:block><fo:block border-end-color="black" border-start-color="black" border-after-color="black" border-before-color="black" border-end-style="solid" border-start-style="solid" border-after-style="solid" border-before-style="solid" border-end-width="3px" border-start-width="3px" border-after-width="3px" border-before-width="3px" color="white" background-color="black">
+  This text appears in the before region of the document.
+  With the default writing mode that is the region at the top.
+  </fo:block></fo:static-content><fo:static-content flow-name="footer"><fo:block text-align="left" border-before-color="blue" border-before-width="medium" border-before-style="solid" font-size="15pt"><fo:inline font-style="italic">
+       XSL
+     </fo:inline></fo:block><fo:block font-style="bold" font-size="16pt" text-align="right"><fo:page-number/></fo:block><fo:block border-end-color="black" border-start-color="black" border-after-color="black" border-before-color="black" border-end-style="solid" border-start-style="solid" border-after-style="solid" border-before-style="solid" border-end-width="3px" border-start-width="3px" border-after-width="3px" border-before-width="3px" color="black" background-color="silver">
+  This text appears in the after region of the document.
+  With the default writing mode that is the region at the bottom.
+  </fo:block></fo:static-content><fo:static-content flow-name="sSide"><fo:block border-end-color="black" border-start-color="black" border-after-color="black" border-before-color="black" border-end-style="solid" border-start-style="solid" border-after-style="solid" border-before-style="solid" border-end-width="3px" border-start-width="3px" border-after-width="3px" border-before-width="3px" color="gray" background-color="white">
+  This text appears in the start region of the document.
+  With the default writing mode that is the region at the left.
+  </fo:block></fo:static-content><fo:static-content flow-name="eSide"><fo:block border-end-color="black" border-start-color="black" border-after-color="black" border-before-color="black" border-end-style="solid" border-start-style="solid" border-after-style="solid" border-before-style="solid" border-end-width="3px" border-start-width="3px" border-after-width="3px" border-before-width="3px" color="yellow" background-color="maroon">
+  This text appears in the end region of the document.
+  With the default writing mode that is the region at the right.
+  </fo:block></fo:static-content><fo:flow flow-name="body"><fo:block border-end-color="black" border-start-color="black" border-after-color="black" border-before-color="black" border-end-style="solid" border-start-style="solid" border-after-style="solid" border-before-style="solid" border-end-width="3px" border-start-width="3px" border-after-width="3px" border-before-width="3px" color="black" background-color="white">
+  Extensible Markup Language (XML) has become the standard format
+  for data interchange to support e-business initiatives such as
+  Web services, business process integration, customer relationship
+  management, supply chain management, business-to-business commerce
+  (B2B) and more.
+
+  <fo:block-container left="0%" bottom="50%" font-style="italic" font-size="15pt" text-align="center" absolute-position="absolute">Formatting Objects Test Suite</fo:block-container></fo:block></fo:flow></fo:page-sequence></fo:root>

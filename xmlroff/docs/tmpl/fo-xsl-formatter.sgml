@@ -1,0 +1,126 @@
+<!-- ##### SECTION Title ##### -->
+FoXslFormatter
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_XSL_FORMATTER_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoXslFormatterError ##### -->
+<para>
+
+</para>
+
+@FO_XSL_FORMATTER_ERROR_FAILED: 
+@FO_XSL_FORMATTER_ERROR_FORMAT_FAILED: 
+@FO_XSL_FORMATTER_ERROR_PARSE_FAILED: 
+@FO_XSL_FORMATTER_ERROR_NO_RESULT_TREE: 
+@FO_XSL_FORMATTER_ERROR_NO_AREA_TREE: 
+@FO_XSL_FORMATTER_ERROR_NO_FO_DOC: 
+@FO_XSL_FORMATTER_ERROR_NOT_FO_DOC: 
+@FO_XSL_FORMATTER_ERROR_UNKNOWN_FO: 
+
+<!-- ##### STRUCT FoXslFormatter ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoXslFormatterClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_format ##### -->
+<para>
+
+</para>
+
+@fo_xsl_formatter: 
+@libfo_context: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_draw ##### -->
+<para>
+
+</para>
+
+@fo_xsl_formatter: 
+@libfo_context: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_set_result_tree ##### -->
+<para>
+
+</para>
+
+@fo_xsl_formatter: 
+@result_tree: 
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_set_fo_doc ##### -->
+<para>
+
+</para>
+
+@fo_xsl_formatter: 
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_get_fo_tree ##### -->
+<para>
+
+</para>
+
+@fo_xsl_formatter: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xsl_formatter_get_area_tree ##### -->
+<para>
+
+</para>
+
+@fo_xsl_formatter: 
+@Returns: 
+
+

@@ -1,0 +1,99 @@
+<!-- ##### SECTION Title ##### -->
+Fomulti-toggle
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoMultiToggle ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoMultiToggleClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_multi_toggle_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_set_id ##### -->
+<para>
+
+</para>
+
+@fo_multi_toggle: 
+@new_id: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_get_id ##### -->
+<para>
+
+</para>
+
+@fo_multi_toggle: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_set_role ##### -->
+<para>
+
+</para>
+
+@fo_multi_toggle: 
+@new_role: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_get_role ##### -->
+<para>
+
+</para>
+
+@fo_multi_toggle: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_set_source_document ##### -->
+<para>
+
+</para>
+
+@fo_multi_toggle: 
+@new_source_document: 
+
+
+<!-- ##### FUNCTION fo_multi_toggle_get_source_document ##### -->
+<para>
+
+</para>
+
+@fo_multi_toggle: 
+@Returns: 
+
+

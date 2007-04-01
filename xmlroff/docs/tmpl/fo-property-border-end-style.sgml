@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-end-style
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderEndStyle ##### -->
+<para>
+The #FoPropertyBorderEndStyle structure represents one instance of the
+'border-end-style' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderEndStyleClass ##### -->
+<para>
+The #FoPropertyBorderEndStyleClass structure represents the type of
+the 'border-end-style' XSL property.
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_end_style_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_end_style_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

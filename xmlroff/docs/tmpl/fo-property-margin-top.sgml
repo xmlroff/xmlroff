@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-margin-top
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyMarginTop ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyMarginTopClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_margin_top_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_margin_top_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

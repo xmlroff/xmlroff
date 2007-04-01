@@ -1,0 +1,57 @@
+<!-- ##### SECTION Title ##### -->
+fo-multi-property-set
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoMultiPropertySet ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoMultiPropertySetClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_multi_property_set_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_property_set_set_id ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_id: 
+
+
+<!-- ##### FUNCTION fo_multi_property_set_get_id ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+

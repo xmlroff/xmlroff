@@ -1,0 +1,296 @@
+<!-- ##### SECTION Title ##### -->
+fo-doc-commands
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION fo_doc_begin_page ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@width: 
+@height: 
+@error: 
+
+
+<!-- ##### FUNCTION fo_doc_end_page ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_get_fill_color ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_set_fill_color ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@color: 
+
+
+<!-- ##### FUNCTION fo_doc_get_stroke_color ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_set_stroke_color ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@color: 
+
+
+<!-- ##### FUNCTION fo_doc_get_line_cap ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_set_line_cap ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@line_cap: 
+
+
+<!-- ##### FUNCTION fo_doc_get_line_join ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_set_line_join ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@line_join: 
+
+
+<!-- ##### FUNCTION fo_doc_get_line_width ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_set_line_width ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@line_width: 
+
+
+<!-- ##### FUNCTION fo_doc_set_dash ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@b: 
+@w: 
+
+
+<!-- ##### FUNCTION fo_doc_translate ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@x: 
+@y: 
+
+
+<!-- ##### FUNCTION fo_doc_clip ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_save ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_restore ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_line_to ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@x: 
+@y: 
+
+
+<!-- ##### FUNCTION fo_doc_move_to ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@x: 
+@y: 
+
+
+<!-- ##### FUNCTION fo_doc_line_stroked ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@x0: 
+@y0: 
+@x1: 
+@y1: 
+
+
+<!-- ##### FUNCTION fo_doc_rect_stroked ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@x: 
+@y: 
+@width: 
+@height: 
+
+
+<!-- ##### FUNCTION fo_doc_rect_filled ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@x: 
+@y: 
+@width: 
+@height: 
+
+
+<!-- ##### FUNCTION fo_doc_fill ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_stroke ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_fill_stroke ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+
+<!-- ##### FUNCTION fo_doc_place_image ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@fo_image: 
+@x: 
+@y: 
+@xscale: 
+@yscale: 
+
+
+<!-- ##### FUNCTION fo_doc_get_font_desc ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_render_layout_lines ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@area_layout: 
+@x: 
+@y: 
+
+
+<!-- ##### FUNCTION fo_doc_render_layout ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@area_layout: 
+@x: 
+@y: 
+
+

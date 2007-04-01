@@ -1,0 +1,1646 @@
+2004-08-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.8 ===
+
+	* NEWS: Updated.for xmlroff 0.2.8.
+
+	* area/fo-area-layout.c: Updated some doc comments to match
+	function prototypes.
+
+	* area/fo-area.c: Updated some function doc comments.
+
+2004-08-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-libfo-context.[ch], libfo/fo-utils.h, xmlroff.c: Added
+	'warning mode' that doesn't do anything yet.
+
+	* property/Makefile.am: Corrected bug where
+	libfo_property_include_HEADERS was being declared as empty string.
+
+2004-08-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.fo.in: Deleted some text to avoid '--' in a comment in
+	generated xmlroff.fo.
+
+	* INSTALL: Replaced generic instructions with xmlroff-specific
+	instructions from Fabio Arciniegas (with minor tweaks).
+
+	* xmlroff.fo: Removed since now generated from xmlroff.fo.in.
+
+	* xmlroff.c: Rearranged #ifdef so don't fault if specify
+	unsupported backend.
+
+	* configure.in: Default to not building PDFlib backend.  Upped
+	version number.
+
+	* xmlroff.fo.in: Added to generate xmlroff.fo without
+	PDFlib-specific info when no PDFlib backend.
+
+	* libfo/fo-xslt-transformer.c: Reordered '#include
+	<libxslt/xsltInternals.h>' to avoid problem when compiling with
+	recent libxslt.
+
+2004-06-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.7 ===
+
+	* NEWS: Updated for xmlroff 0.2.7.
+
+	* fo-context-util.c: Added handling of .length and .conditionality
+	when resolving padding.
+
+	* libfo/fo-doc-gp.c, libfo/fo-doc-pdflib.c (_render_layout_lines):
+	'y' wasn't being adjusted for 'line_first' line height.
+
+	* area/fo-area-layout.[ch]: Added
+	fo_area_layout_get_line_height().
+
+	* area/fo-area.c: Doc comment changes.
+
+2004-06-01  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* docs/Makefile.am: Added fo-property-type-condity-private.h to
+	$(IGNORE_FILES).
+
+	* datatype/fo-datatype.[ch]: Removed unused FoEnumDatatypeCondity.
+
+	* datatype/fo-space.c: Cosmetic and doc-comment changes.
+
+	* datatype/fo-length.c, property/fo-property-padding-after.c:
+	Changes following from changes to fo-length-conditional.[ch].
+
+	* datatype/fo-length-conditional.[ch]: Changed to use gdouble and
+	gboolean for components, like FoSpace does.
+
+	* fo/fo-table-cell.c: Doc comment updates.
+
+	* libfo/fo-xsl-formatter.h: Removed prototypes for non-existent
+	fo_xsl_formater_ref() and fo_xsl_formatter_unref().
+
+2004-05-29  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/Makefile.am: Now install fo-fo.h.
+
+	* datatype/Makefile.am: Now install fo-datatype.h and fo-enum.h.
+
+	* area/Makefile.am: Now install fo-area.h.
+
+	* fo-node.h: Made functions of fo_node_next_sibling(),
+	fo_node_first_child() and fo_node_parent().
+
+	* fo-context.[ch], fo-context-private.h, fo-context-util.c,
+	property/fo-property-eval.c,
+	property/fo-property-padding-after-conditionality.[ch],
+	property/fo-property-padding-after-length.[ch],
+	property/fo-property-padding-before-conditionality.[ch],
+	property/fo-property-padding-before-length.[ch],
+	property/fo-property-padding-end-conditionality.[ch],
+	property/fo-property-padding-end-length.[ch],
+	property/fo-property-padding-start-conditionality.[ch],
+	property/fo-property-padding-start-length.[ch],
+	property/fo-property-type-condity-private.h,
+	property/fo-property-type-condity.[ch], property/Makefile.am,
+	property/fo-all-property.h: Added and started supporting .length
+	and .conditionality for padding properties.
+
+2004-05-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-node.c: Added readonly GObject properties corresponding to
+	fo_node_parent(), fo_node_first_child(), and
+	fo_node_next_sibling() for use when navigating an FoNode tree
+	using only g_object_get_property().
+
+2004-05-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/fo-property.c: Doc comment changes to fix copy/paste
+	errors.
+
+	* fo/fo-fo-private.h, fo/fo-fo.h: Moved fo_fo_get/set_element() to
+	fo-fo-private.h to hide libxml2 dependency.
+
+	* datatype/fo-space.c: Made parameters 'CONSTRUCT_ONLY'.  Swapped
+	order of _get/_set functions.
+
+	* datatype/fo-length-conditional.[ch]: Added
+	fo_length_cond_resolve().
+
+	* datatype/fo-boolean.c: Added _sprintf().
+
+	* fo-object.c: Doc comment changes.
+
+	* Makefile.am: Now install fo-context.h, fo-object.h, and
+	fo-node.h when installing libfo.
+
+	* configure.in: Upped version number to 0.2.7.
+
+	* result-to-fo.[ch]: Added warning about unsupported properties
+	based on patch by Charles Bozeman.
+
+2004-05-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.6 ===
+
+	* NEWS: Updated for xmlroff 0.2.6.
+
+2004-05-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Upped version to 0.2.6.
+
+	* property/fo-property-util.c: Doc-comment change.
+
+	* property/fo-property-margin.c: Whitespace differences only.
+
+	* property/fo-property-region-name.c: Fixed bug where predefined
+	region names weren't being recognised.
+
+	* property/fo-property-padding.c: Removed use of
+	fo-property-padding-private.h.
+
+	* property/fo-property-block-progression-dimension-maximum.[ch],
+	property/fo-property-block-progression-dimension-minimum.[ch],
+	property/fo-property-block-progression-dimension-optimum.[ch],
+	property/fo-property-block-progression-dimension.[ch],
+	property/fo-property-border-after-precedence.[ch],
+	property/fo-property-border-before-precedence.[ch],
+	property/fo-property-border-collapse.[ch],
+	property/fo-property-border-end-precedence.[ch],
+	property/fo-property-border-start-precedence.[ch],
+	property/fo-property-inline-progression-dimension-maximum.[ch],
+	property/fo-property-inline-progression-dimension-minimum.[ch],
+	property/fo-property-inline-progression-dimension-optimum.[ch],
+	property/fo-property-inline-progression-dimension.[ch],
+	property/fo-property-line-height.[ch],
+	property/fo-property-line-stacking-strategy.[ch],
+	property/fo-property-media-usage.[ch]: Updated to match spec-dump
+	with enums in fo-enum.[ch].
+
+	* property/Makefile.am, property/fo-property-margin-private.h,
+	property/fo-property-padding-private.h: Removed unused
+	fo-property-margin-private.h and fo-property-padding-private.h.
+
+	* libfo/fo-layout-gp.c, libfo/fo-layout-pdflib.c,
+	libfo/fo-layout-private.h, libfo/fo-layout.[ch], libfo/fo-utils.h:
+	Removed FoEnumLineStackingStrategy in favour of enums in
+	fo-enum.h.
+
+	* datatype/fo-space.c: Doc comment changes.
+
+	* datatype/fo-length.c: Corrected a comment-start that was
+	confusing gtk-doc.
+
+	* datatype/fo-enum.[ch]: Added fo_enum_get_nick().  Added some doc
+	comments.
+
+	* result-to-fo.c: Removed unused FoNewFromExpression typedef and
+	variable.
+
+2004-04-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.5 ===
+
+	* datatype/fo-length.c: Commented out g_unref() of width_thin,
+	width_medium, and width_thick that were giving "assertion
+	`object->ref_count > 0' failed" messages.
+
+2004-04-01  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* NEWS: Updated for xmlroff 0.2.5.
+
+2004-03-31  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/fo-property-private.h,
+	property/fo-property-space-after-precedence.c,
+	property/fo-property.[ch], result-to-fo.[ch]: Removed all
+	new_from_expression, eval_expression, eval_expression2.
+
+	* property/fo-property-font-family.[ch],
+	property/fo-property-font-size.[ch],
+	property/fo-property-number-columns-spanned.h,
+	property/fo-property-provisional-label-separation.h,
+	property/fo-property-space-after-precedence.h: Updated to (mostly)
+	match current spec-dump.
+
+	* property/fo-property-eval.c: Changed 'font-family' and
+	'font-size' to _get_type.
+
+	* property/fo-all-property.h: Comment change.
+
+	* property/fo-property-baseline-shift.c: Changed initial value
+	back to 0pt length.
+
+	* Makefile.am, expression-parser.[ch]: Removed unused
+	expression-parser.[ch].
+
+2004-03-30  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-table-caption.h, fo/fo-table-cell-private.h,
+	fo/fo-table-cell.[ch], fo/fo-table-column-private.h,
+	fo/fo-table-column.[ch], fo/fo-table-footer-private.h,
+	fo/fo-table-footer.[ch], fo/fo-table-header-private.h,
+	fo/fo-table-header.[ch], fo/fo-table-private.h,
+	fo/fo-table-row-private.h, fo/fo-table-row.[ch], fo/fo-table.[ch],
+	fo/fo-title-private.h, fo/fo-title.[ch],
+	property/fo-property-background-color.[ch],
+	property/fo-property-eval.c, fo/fo-list-item.h,
+	fo/fo-page-number-citation-private.h,
+	fo/fo-page-number-citation.[ch], fo/fo-page-number-private.h,
+	fo/fo-page-number.[ch], fo/fo-region-after-private.h,
+	fo/fo-region-after.[ch], fo/fo-region-before-private.h,
+	fo/fo-region-before.[ch], fo/fo-region-body-private.h,
+	fo/fo-region-body.[ch], fo/fo-region-end-private.h,
+	fo/fo-region-end.[ch], fo/fo-region-start-private.h,
+	fo/fo-region-start.[ch], fo/fo-table-and-caption-private.h,
+	fo/fo-table-and-caption.[ch], fo/fo-table-body-private.h,
+	fo/fo-table-body.[ch], fo/fo-table-border-fo-private.h,
+	fo/fo-table-border-fo.[ch], fo/fo-table-caption-private.h,
+	fo/fo-table-caption.c, fo/fo-block.[ch],
+	fo/fo-character-private.h, fo/fo-character.[ch],
+	fo/fo-external-graphic-private.h, fo/fo-external-graphic.[ch],
+	fo/fo-initial-property-set-private.h,
+	fo/fo-initial-property-set.[ch], fo/fo-inline-container-private.h,
+	fo/fo-inline-container.[ch], fo/fo-inline-private.h,
+	fo/fo-inline.[ch], fo/fo-instream-foreign-object-private.h,
+	fo/fo-instream-foreign-object.[ch], fo/fo-leader-private.h,
+	fo/fo-leader.[ch], fo/fo-list-block-private.h,
+	fo/fo-list-block.[ch], fo/fo-list-item-private.h,
+	fo/fo-list-item.c, fo/fo-block-area.c,
+	fo/fo-block-container-private.h, fo/fo-block-container.[ch],
+	fo/fo-block-fo-private.h, fo/fo-block-fo.[ch],
+	fo/fo-block-private.h, fo-context-private.h, fo-context.[ch],
+	fo/fo-basic-link-private.h, fo/fo-basic-link.[ch], result-to-fo.c,
+	area-to-pdf.c: Converted 'background-color' property from
+	FoDatatype back to FoProperty.
+
+	* fo/fo-footnote.c: Added NULL for value_table.
+
+	* libfo/fo-font-desc-private.h, libfo/fo-font-desc.c
+	(fo_font_desc_get_font_description): Made FoFontDesc argument a
+	const.
+
+	* libfo/fo-layout.c: Removed fo_layout_init().
+
+2004-03-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-text.[ch]: Added 'const' to value in fo_text_set_value().
+
+	* expr/fo-expr-eval.c: Doc comment change.
+
+	* fo/fo-marker.c, fo/fo-multi-case.c: Added NULL for GTypeInfo
+	entry for value_table.
+
+	* property/fo-property-baseline-shift.c: Change back to resolving
+	enumeration tokens to specific lengths.
+
+	* property/fo-property-column-width.[ch],
+	property/fo-property-private.h, property/fo-property-util.[ch],
+	property/fo-property.[ch]: Added 'const' to three parameters of
+	FoResolvePercentFunc.
+
+	* property/fo-property-scaling-method.c,
+	property/fo-property-scaling.c,
+	property/fo-property-table-layout.c,
+	property/fo-property-alignment-adjust.c,
+	property/fo-property-alignment-baseline.c,
+	property/fo-property-keep-together-within-column.c,
+	property/fo-property-keep-together-within-line.c,
+	property/fo-property-keep-together-within-page.c,
+	property/fo-property-keep-with-next-within-column.c,
+	property/fo-property-keep-with-next-within-line.c,
+	property/fo-property-keep-with-next-within-page.c,
+	property/fo-property-keep-with-previous-within-column.c,
+	property/fo-property-keep-with-previous-within-line.c,
+	property/fo-property-keep-with-previous-within-page.c,
+	property/fo-property-letter-value.c,
+	property/fo-property-overflow.c,
+	property/fo-property-page-height.c,
+	property/fo-property-page-width.c: Changes to match rename of
+	fo_enum_get_auto() to fo_enum_get_enum_auto().
+
+	* fo/fo-region-after.c, fo/fo-region-before.c,
+	fo/fo-region-body.c, fo/fo-region-end.c, fo/fo-region-start.c,
+	fo/fo-table-cell.c, fo/fo-table.c,
+	fo/fo-instream-foreign-object.c, fo/fo-leader.c,
+	fo/fo-list-block.c, fo/fo-list-item.c,
+	fo/fo-page-number-citation.c, fo/fo-page-number.c, fo/fo-block.c,
+	fo/fo-character.c, fo/fo-external-graphic.c, fo/fo-float.c,
+	fo/fo-inline-container.c, fo/fo-inline.c: Changes to match
+	functions moving to fo-context-util.[ch].
+
+	* area/fo-area.c, fo/fo-bidi-override.c, area-to-pdf.c: Changes to
+	match change to all enums now in fo-enum.[ch].
+
+	* property/fo-property-border-before-width.[ch],
+	property/fo-property-break-after.[ch],
+	property/fo-property-break-before.[ch],
+	property/fo-property-character.[ch],
+	property/fo-property-clip.[ch], property/fo-property-color.[ch],
+	property/fo-property-column-number.[ch],
+	property/fo-property-content-height.[ch],
+	property/fo-property-content-type.[ch],
+	property/fo-property-content-width.[ch],
+	property/fo-property-direction.[ch],
+	property/fo-property-dominant-baseline.[ch],
+	property/fo-property-flow-name.[ch]: Updated to match current
+	spec-dump with all enums in fo-enum.[ch].
+
+	* fo/fo-footnote-body-private.h, fo/fo-footnote-body.[ch]: Updated
+	to match current spec-dump.
+
+	* datatype/fo-length.[ch]: Added fo_length_get_length_minus_3pt()
+	and fo_length_get_length_3pt().
+
+	* datatype/fo-enum.[ch]: Added fo_enum_get_enum_ltr/uniform.
+	Renamed fo_enum_get_auto to fo_enum_get_enum_auto().
+
+	* fo-context-util.[ch]: Moved fo_property_border_resolve() here as
+	fo_context_util_border_resolve().  Moved
+	fo_property_dominant_baseline_resolve() here as
+	fo_context_util_dominant_baseline_resolve().
+
+2004-03-23  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c: Removed _base_finalize().  Fixed bug in color
+	calculations.
+
+	* fo/fo-footnote-body.c: Added NULL for value_table to quieten
+	compiler warning.
+
+	* property/fo-property-space-before-precedence.[ch],
+	property/fo-property-space-end-conditionality.[ch],
+	property/fo-property-space-end-maximum.[ch],
+	property/fo-property-space-end-minimum.[ch],
+	property/fo-property-space-end-optimum.[ch],
+	property/fo-property-space-end-precedence.[ch],
+	property/fo-property-space-start-conditionality.[ch],
+	property/fo-property-space-start-maximum.[ch],
+	property/fo-property-space-start-minimum.[ch],
+	property/fo-property-space-start-optimum.[ch],
+	property/fo-property-space-start-precedence.[ch],
+	property/fo-property-src.[ch],
+	property/fo-property-table-layout.[ch], property/fo-property.c,
+	property/fo-property-border-right-style.[ch],
+	property/fo-property-border-right-width.[ch],
+	property/fo-property-border-start-color.[ch],
+	property/fo-property-border-start-style.[ch],
+	property/fo-property-border-start-width.[ch],
+	property/fo-property-border-top-color.[ch],
+	property/fo-property-border-top-style.[ch],
+	property/fo-property-border-top-width.[ch],
+	property/fo-property-border.c,
+	property/fo-property-keep-together-within-column.[ch],
+	property/fo-property-keep-together-within-line.[ch],
+	property/fo-property-keep-together-within-page.[ch],
+	property/fo-property-keep-together.c,
+	property/fo-property-keep-with-next-within-column.[ch],
+	property/fo-property-keep-with-next-within-line.[ch],
+	property/fo-property-keep-with-next-within-page.[ch],
+	property/fo-property-keep-with-next.c,
+	property/fo-property-keep-with-previous-within-column.[ch],
+	property/fo-property-keep-with-previous-within-line.[ch],
+	property/fo-property-keep-with-previous-within-page.[ch],
+	property/fo-property-keep-with-previous.c,
+	property/fo-property-letter-value.[ch],
+	property/fo-property-margin.[ch],
+	property/fo-property-number-columns-spanned.c,
+	property/fo-property-number-rows-spanned.[ch],
+	property/fo-property-overflow.[ch],
+	property/fo-property-padding-after.c,
+	property/fo-property-padding-before.c,
+	property/fo-property-padding-bottom.c,
+	property/fo-property-padding-end.c,
+	property/fo-property-padding-left.c,
+	property/fo-property-padding-private.h,
+	property/fo-property-padding-right.c,
+	property/fo-property-padding-start.c,
+	property/fo-property-padding-top.c,
+	property/fo-property-padding.[ch],
+	property/fo-property-page-height.[ch],
+	property/fo-property-page-width.[ch],
+	property/fo-property-private.h,
+	property/fo-property-provisional-distance-between-starts.[ch],
+	property/fo-property-provisional-label-separation.c,
+	property/fo-property-region-name.[ch],
+	property/fo-property-scaling-method.[ch],
+	property/fo-property-scaling.[ch],
+	property/fo-property-space-after-conditionality.[ch],
+	property/fo-property-space-after-maximum.[ch],
+	property/fo-property-space-after-minimum.[ch],
+	property/fo-property-space-after-optimum.[ch],
+	property/fo-property-space-after-precedence.c,
+	property/fo-property-space-before-conditionality.[ch],
+	property/fo-property-space-before-maximum.[ch],
+	property/fo-property-space-before-minimum.[ch],
+	property/fo-property-space-before-optimum.[ch],
+	property/fo-property-alignment-adjust.[ch],
+	property/fo-property-alignment-baseline.[ch],
+	property/fo-property-background-image.[ch],
+	property/fo-property-baseline-shift.[ch],
+	property/fo-property-border-after-color.[ch],
+	property/fo-property-border-after-style.[ch],
+	property/fo-property-border-after-width.[ch],
+	property/fo-property-border-before-color.[ch],
+	property/fo-property-border-before-style.[ch],
+	property/fo-property-border-before-width.c,
+	property/fo-property-border-bottom-color.[ch],
+	property/fo-property-border-bottom-style.[ch],
+	property/fo-property-border-bottom-width.[ch],
+	property/fo-property-border-end-color.[ch],
+	property/fo-property-border-end-style.[ch],
+	property/fo-property-border-end-width.[ch],
+	property/fo-property-border-left-color.[ch],
+	property/fo-property-border-left-style.[ch],
+	property/fo-property-border-left-width.[ch],
+	property/fo-property-border-private.h,
+	property/fo-property-border-right-color.[ch]: Updates to match
+	spec-dump where enumeration tokens in fo-enum.[ch].
+
+	* property/fo-property-color.c: Changes to match functions moved
+	to fo-property-util.
+
+	* property/fo-property-column-width.c: Added a g_free().
+
+	* property/fo-property-util.[ch]: Added common functions for
+	validating color, margin, padding, and common enumeration tokens.
+
+	* property/fo-all-property.h: Added fo-property-margin.h.
+
+	* libfo/fo-utils.h: Added fo_propagate_and_return_if_error() and
+	fo_propagate_and_return_val_if_error().
+
+	* fo/fo-region-after.c, fo/fo-region-before.c,
+	fo/fo-region-body.c, fo/fo-region-end.c, fo/fo-region-start.c,
+	fo/fo-table-caption.c, fo/fo-table-cell.c, fo/fo-table-column.c,
+	fo/fo-table-row.c, fo/fo-table.c, fo/fo-block-container.c,
+	fo/fo-block.c, fo/fo-external-graphic.c, fo/fo-inline-container.c,
+	fo/fo-inline.c, fo/fo-instream-foreign-object.c,
+	fo/fo-list-block.c, fo/fo-list-item.c, fo/fo-page-sequence-area.c:
+	Called function name changes.
+
+	* fo/fo-fo.c, fo/fo-block-area.c: Added a cast to quieten compiler
+	warning.
+
+	* datatype/fo-tblr.c: Now set initial values on _new().  Doc
+	comment changes.
+
+	* datatype/fo-length.[ch]: Added get_length_6pt(),
+	get_width_thin/medium/thick().
+
+	* datatype/fo-integer.[ch]: Added fo_integer_get_integer_zero().
+
+	* datatype/fo-enum.[ch]: Added enum for all defined enumeration
+	tokens, added _get_enum_by_value() and _get_enum_by_nick().
+
+	* property/fo-property-eval.c, result-to-fo.c: Added more
+	properties updated to not use _new_from_expression().
+
+	* fo-context-util.[ch]: Changed function names to begin with
+	fo_context_util.  Added fo_context_util_paddings_resolve() and
+	fo_context_util_margins_resolve().
+
+	* configure.in: Changed name in AC_INIT.
+
+	* expr/fo-expr-eval.h: Added fo_expr_padding_eval().
+
+	* expr/fo-expr-eval.c: Added fo_expr_padding_eval().  Reworked
+	existing code to break out IS_NUMERIC(), is_unit_name(),
+	parse_length(), parse_percentage(), and parse_number() as separate
+	functions or macros.
+
+2004-02-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* datatype/fo-enum.[ch]: Started adding property expression
+	enumeration tokens here instead of with individual properties.
+
+	* datatype/fo-string.[ch]: fo_string_new_with_value(): Made value
+	'const gchar*' instead of 'gchar*'.
+
+	* datatype/fo-space.c: Fixed copy-and-paste errors in some
+	function comments.
+
+	* datatype/fo-datatype.c: Changed uses of fo_number_new() to
+	fo_number_new_with_value().
+
+	* datatype/fo-number.[ch]: Removed fo_number_new() in favour of
+	fo_number_new_with_value().
+
+	* property/fo-property-margin-bottom.[ch],
+	property/fo-property-margin-left.[ch],
+	property/fo-property-margin-right.[ch],
+	property/fo-property-margin-top.[ch]: Updated to match current
+	(enums in fo-enum.h) spec-dump.
+
+	* fo-context-private.h, fo-context.[ch]: Added margin and padding
+	shorthand properties.
+
+2004-02-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-list-block.c, fo/fo-list-item.c, fo/fo-region-after.c,
+	fo/fo-region-before.c, fo/fo-region-body.c, fo/fo-region-end.c,
+	fo/fo-region-start.c, fo/fo-table-cell.c, fo/fo-table.c,
+	fo/fo-block.c: Changed fo_property_padding_resolve() call to
+	fo_context_padding_resolve().
+
+	* expr/fo-expr-context.c: Corrected grammar in comment for NXT(n).
+
+	* datatype/fo-length.[ch]: Added fo_length_get_length_12() and
+	fo_length_get_length_24().
+
+	* property/fo-property-eval.c,
+	property/fo-property-provisional-distance-between-starts.[ch],
+	result-to-fo.c: Updated to match current spec-dump.
+
+	* datatype/Makefile.am, datatype/fo-tblr.[ch], fo-all-datatype.h:
+	Added tblr (top-bottom-left-right) datatype.
+
+	* configure.in: Upped version number to 0.2.5.
+
+2003-12-19  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-table.c (fo_table_span_info_start_row): Commented-out
+	spanning cells fill row error.
+
+2003-12-19  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.4 ===
+
+	* fo/fo-table.c (fo_table_span_info_start_row): Commented-out
+	spanning cells fill row error.
+	
+2003-12-18  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Added examples/xml2003/Makefile to AC_OUTOUT list.
+
+	* examples/xml2003/Makefile.am: Makefile.am for running "XSL FO
+	Chef's Tools Exhibition" samples.
+
+	* examples/Makefile.am: Added xml2003 as subdir.
+
+	* examples/xml2003/fixup.xsl: Updated to better process more samples.
+
+2003-12-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area-table-continuation.c: Changed some function calls
+	because of functions removed from keep-* properties.
+
+	* datatype/fo-percentage.c: Doc comment changes.
+
+	* datatype/fo-length-range.c (fo_length_range_new_with_value):
+	Changed parameter name to match name in .h.
+
+	* datatype/fo-color.c: Added six doc comments.
+
+	* area/fo-area-area.c, area/fo-area-spanning-table-cell.c,
+	area/fo-area-table-cell.c, area/fo-area-table-continuation.c,
+	area/fo-area-table.c: Changed function names because of functions
+	removed from keep-* properties.
+
+	* property/fo-property-eval.c, result-to-fo.c: Changes to match
+	updated keep-* properties.
+
+	* configure.in: Corrected missing $ in 'if have_pdflib' statement.
+
+	* NEWS: Updated for xmlroff 0.2.4.
+
+	* property/fo-property-keep-together.[ch],
+	property/fo-property-keep-with-next.[ch],
+	property/fo-property-keep-with-previous.[ch]: Updated to match
+	current spec-dump.
+
+	* fo/fo-block.c (fo_block_validate_content): For cases not covered
+	by existing code, now logs or propagates an error instead of just
+	aborting with g_assert_not_reached() so can see where unhandled
+	case occurs.
+
+	* property/fo-property-margin.c (fo_property_margin_validate):
+	Added GError argument.  (fo_property_margin_resolve): Changed use
+	of removed fo_property_space_before/after_get/set_value() to
+	fo_property_get/set_value().
+
+	* property/fo-property-format.c (fo_property_format_init): Added
+	correct initial value ("1") instead of using NULL.  Changed to use
+	new fo_property_new_from_string() as 'new_from_expr' function.
+
+	* property/fo-property-column-width.c,
+	property/fo-property-font-family.c
+	(fo_property_column_width_new_from_expr): Use new
+	fo_string_new_with_value().
+
+	* libfo/fo-doc-gp.c, libfo/fo-doc-pdflib.c: Fixed gfloat instead
+	of guint16 bugs when setting colors.
+
+	* fo/fo-page-sequence-master.c: Changed class name to
+	'page-sequence-master'.
+
+	* fo/fo-inline-container.c
+	(fo_inline_container_get_text_attr_list): Added an FO_FO() call to
+	quieten compiler warning.
+
+	* fo/fo-block-area.c (fo_block_area_new): Changed to use
+	fo_property_get_value() instead of obsolete
+	fo_property_space_before_get_value() and
+	fo_property_space_after_get_value().
+
+	* expr/fo-expr-eval.c (eval_literal): Using new
+	fo_string_new_with_value().
+
+	* datatype/fo-uri-specification.c (fo_uri_specification_get_type):
+	Added NULL 'value_table' entry in GTypeInfo.
+
+	*datatype/fo-percentage.[ch]: Added
+	fo_percentage_new_with_value() and
+	fo_percentage_get_percentage_hundred().  Added many doc comments.
+
+	* datatype/fo-numeric.c (fo_numeric_init): Removed.
+
+	* datatype/fo-length.c (fo_length_get_length_zero): Changed
+	'!length' to 'length == NULL'.
+
+	*datatype/fo-length-range.[ch]: Added
+	fo_length_range_new_with_value() and
+	fo_length_range_get_length_range_hundred_percent().  Added several
+	doc comments.
+
+2003-12-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area.c (fo_area_border_padding_space_resolve): Changed
+	two function calls to fo_property_get_value to match updates of
+	space-before and space-after properties to match spec-dump.
+
+	* datatype/fo-name.c: Removed unused fo_name_finalize() prototype.
+
+	* datatype/fo-space.[ch]: Added fo_space_get_space_0pt().
+	Corrected assertions in fo_space_resolve() to handle FoSpace as
+	value of shorthand.
+
+	* datatype/fo-string.[ch]: Updated so value can
+	only be set when FoString is initialised.  Added
+	fo_string_get_string_one() for use with 'format' property.
+
+	* fo/fo-block-container-area.c: Corrected '#include' of area type
+	to FoAreaViewportReference.
+
+	* fo/fo-block.c (fo_block_validate_content): Added calling parent
+	validate_content for handling markers.
+
+	* fo/fo-fo.c (fo_fo_validate_content): Tried adding calling for
+	each type in hierarchy but defeated by FO rewriting for different
+	fo:block types.
+
+	* fo/fo-marker-parent.c (fo_marker_parent_validate_content): Added
+	to move markers to marker list.
+
+	* fo/fo-wrapper.c (fo_wrapper_validate_content): Fixed '!' syntax
+	bug in 'if' statement.
+
+	* fo/fo-text.c (fo_text_debug_dump): Move output of node type to
+	before any properties.
+
+	* property/fo-property-role.c (fo_property_role_resolve_enum):
+	Turn tokens other than 'none' into FoString.
+
+	* property/fo-property-private.h, property/fo-property.c: Added
+	fo_property_new_from_string() for use by 'format'.
+
+	* property/fo-property-orphans.c, property/fo-property-widows.c
+	(_validate): Added conversion from FoNumber to FoInteger.
+
+	* property/fo-property-space-after.[ch],
+	property/fo-property-space-before.[ch],
+	property/fo-property-space-end.[ch],
+	property/fo-property-space-start.[ch]: Updated to match spec-dump.
+
+	* property/fo-property-eval.c, result-to-fo.c: Changes to match
+	updated properties.
+
+2003-12-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-wrapper.c (fo_wrapper_validate_content): When current
+	child_node is FoText with whitespace-only content, always rewrite
+	wrapper type unless current FO is already FoWrapperWhitespace.
+
+	* fo/fo-block.c (fo_block_validate_content): Stopped continuous
+	loop on FoText or FoWrapperWhitespace child when current FO is
+	FoBlockLayout.
+
+	* fo/Makefile.am, fo/fo-block-container-area.c,
+	fo/fo-block-container-area.h, fo/fo-block-container.c: Added
+	fo-block-container-area.[ch]
+
+	* fo/fo-table.[ch]: Added FO_TABLE_ERROR_FIXED_BUT_AUTO warning
+	for when 'fixed' table layout is specified but isn't going to
+	happen because i-p-d is 'auto'.
+
+	* libfo/fo-doc.c: Added '#include <string.h>' to quieten compiler
+	warning.
+
+	* fo/fo-block-block-private.h: Added '#include' of
+	fo-block-block.h.
+
+	* fo/fo-block-block-area.c: Simplified by removing block_block
+	variable and some casts.
+
+	* fo/fo-block-area.c: Added '#include <libfo/fo-doc-commands.h>'
+	to quieten compiler warning.
+
+	* datatype/fo-space.c: Corrected use of wrong component to set
+	conditionality.
+
+	* datatype/fo-boolean.[ch]: Added fo_boolean_get_true() and
+	fo_boolean_get_false().
+
+	* property/fo-property-eval.c, result-to-fo.c: Changes to match
+	updated properties.
+
+	* property/fo-property-space-after-conditionality.[ch],
+	property/fo-property-space-before-conditionality.[ch],
+	property/fo-property-space-end-conditionality.[ch],
+	property/fo-property-space-start-conditionality.[ch]: Updated to
+	match spec-dump and to use FoBoolean 'true' for 'retain'.
+
+	* autogen.sh: Added support for building with libtool 1.5 (Dave
+	Malcolm).
+
+2003-11-26  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am, configure.in, xmlroff.spec.in: Added
+	xmlroff.spec.in for use with rpmbuild (Tim Waugh).
+
+2003-11-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-font-desc.c: Added parentheses to make two macros
+	safer.
+
+	* fo/fo-external-graphic.c: Removed unused include and unused
+	struct, and variable using PDFlib datatypes.
+
+2003-07-22  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Added back LT_RELEASE for libfo-0.2.pc.in.
+
+	* Makefile.am: Corrected variable used for libtool -version-info
+	to match configure.in usage.
+
+	* libfo/fo-doc.c: Updated to use fo-doc-commands.h.
+
+	* libfo/fo-doc-private.h: Added #include of fo-datatype.h and
+	fo-area.h; no longer included fo-doc.h.
+
+	* libfo/fo-doc-pdflib.h: Removed unused fo_doc_pdflib_ref() and
+	fo_doc_pdflib_unref() prototypes.
+
+	* libfo/fo-doc-gp.c: Updated to use fo-doc-commands.h.
+
+	* libfo/fo-doc-gp.h: Removed _set_parameter(), _set_value(), and
+	_set_info(), _ref(), _unref().
+
+	* area-to-pdf.h, fo/fo-external-graphic.c, libfo/Makefile.am,
+	libfo/fo-doc-pdflib.c: Updated to use fo-doc-commands.h.
+
+	* libfo/fo-doc-commands.h, libfo/fo-doc.h: Moved 'commands' --
+	i.e. fo_doc_begin_page(), etc. -- to new fo-doc-commands.h so
+	installed fo-doc.h header does not have any dependency on
+	FoDatatype or FoArea, since their header files are not currently
+	installed.  Changed some files that used fo-doc.h to use
+	fo-doc-commands.h instead of or as well as fo-doc.h.
+
+	* xmlroff.c, xmlroff.fo: Changed to default to 'gp' backend
+	instead of 'pdflib'.
+
+2003-07-21  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-libfo-context.h: Commented out fo_libfo_context_new()
+	prototype since in fo-libfo-basic.h.
+
+	* libfo/fo-libfo-basic.c: Changed to use g_object_unref() to unref
+	fo_xsl_formatter since now GObject.
+
+	* configure.in: Added M4 macros for version numbers, etc.
+
+	* xmlroff.c: Changed to use g_object_unref() to unref
+	fo_xsl_formatter since now GObject.
+
+	* fo-object.c: Cosmetic changes.
+
+	*libfo/fo-xsl-formatter.[ch]: Added
+	fo_xsl_formatter_draw().  Changed to GObject instead of boxed
+	object.
+
+	* area-to-pdf.h: Changed to use FoDebugLevel type for debug level.
+
+2003-07-18  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.c: Removed fo_area_to_pdf_data, fo_area_to_pdf() call,
+	and fo_object_debug_dump() calls since they are all now part of
+	fo_xsl_formatter_draw().
+
+	* libfo/fo-libfo-context.[ch], libfo/fo-utils.h: Added
+	FO_DEBUG_NONE and a typedef for FoDebugFlag and used them.
+
+2003-07-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.3 ===
+
+	* fo/Makefile.am: Added missing fo-color-profile-private.h to
+	sources.
+
+	* configure.in: Added several AC_HELP_STRING.  Remodelled PDFlib
+	and Pango checking.
+
+	* README: Minor change in license description.
+
+	* Makefile.am: Stopped hardcoding $(pkgconfigdir).
+
+	* xmlroff.fo: Updated to show '--backend' parameter.
+
+2003-07-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Expanded.
+
+	* NEWS: Updated for xmlroff 0.2.3.
+
+	* area/fo-area-table.c, area/fo-area-table-cell.c,
+	area/fo-area-table-cell-proxy.c,
+	area/fo-area-table-continuation.c, area/fo-area-table-row.c,
+	fo/fo-bidi-override.c, fo/fo-table-area.c, fo/fo-table.c,
+	area/fo-area-layout.c, area/fo-area-spanning-table-cell.c,
+	fo-context-util.c: Change to use fo_property_get/set_value() for
+	updated properties.
+
+	* fo/fo-simple-page-master.h: Added back prototypes for
+	_name_get() and _name_add() functions.
+
+	* property/fo-property-content-type.h,
+	property/fo-property-content-width.h: Updated to match spec-dump.
+
+	* libfo/fo-doc.[ch], libfo/fo-layout.c, libfo/fo-layout-gp.c,
+	libfo/fo-layout-pdflib.c, libfo/fo-libfo-context.[ch],
+	libfo/fo-xml-doc.c, libfo/fo-xsl-formatter.c,
+	libfo/fo-xslt-transformer.c: Doc comment and function parameter
+	name changes to silence gtk-doc.
+
+	* libfo/fo-doc-gp.c: Changed a '0' to '0.0' to quieten compiler.
+
+	* datatype/fo-number.[ch], datatype/fo-percentage.[ch],
+	datatype/fo-string.[ch], datatype/fo-unknown.[ch],
+	datatype/fo-uri-specification.[ch]: Reordered _get() and _set()
+	functions.
+
+	* datatype/fo-datatype.h: Reordered enum declarations.  Added
+	'void' in two prototypes.
+
+	* datatype/fo-datatype.c, area/fo-area.c: Added doc comments.
+
+	* property/fo-property-block-progression-dimension.[ch],
+	property/fo-property-block-progression-dimension-maximum.[ch],
+	property/fo-property-block-progression-dimension-minimum.[ch],
+	property/fo-property-block-progression-dimension-optimum.[ch],
+	property/fo-property-border-collapse.[ch],
+	property/fo-property-border-separation.[ch],
+	property/fo-property-display-align.[ch],
+	property/fo-property-eval.c, property/fo-property-height.[ch],
+	property/fo-property-inline-progression-dimension.[ch],
+	property/fo-property-inline-progression-dimension-maximum.[ch],
+	property/fo-property-inline-progression-dimension-minimum.[ch],
+	property/fo-property-inline-progression-dimension-optimum.[ch],
+	property/fo-property-orphans.[ch],
+	property/fo-property-text-align.[ch],
+	property/fo-property-unicode-bidi.[ch],
+	property/fo-property-widows.[ch], property/fo-property-width.[ch],
+	property/fo-property-wrap-option.[ch], result-to-fo.c: Updated
+	properties to match spec-dump.
+
+	* fo-object.c: Improved doc comments to satisfy gtk-doc.
+
+	* fo-context.[ch]: Made _get_ for spaces components static.
+
+2003-06-30  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-libfo-basic.c: Changed to use
+	fo_doc_new_from_type(NULL) so independent of backend.
+
+	* libfo/fo-layout.[ch]: Removed dependence on pangopdflib.h.
+	Started adding FoRectangle.
+
+	* libfo/fo-doc.[ch], libfo/fo-doc-private.h: Added
+	fo_doc_open_file(), fo_doc_place_image(), fo_doc_place_image(),
+	and fo_doc_close_image().  Image functions are currently just
+	wrappers for PDFlib-style image functions and aren't supported by
+	FoDocGP, but this allows libfo to compile without PDFlib.
+	fo_doc_open_file() lets an application open an output file without
+	worrying about which backend to use.
+
+	* libfo/fo-doc-pdflib.c: Added _place_image(), _open_image_file(),
+	and _close_image().
+
+	* libfo/fo-doc-gp.c: Commented out making new GnomePrintContext,
+	etc., in _init().
+
+	* libfo/Makefile.am: Added conditional inclusion of PDFlib and
+	GNOME Print specific files in lib.
+
+	* fo/fo-external-graphic-private.h: Store FoDoc* in instance
+	structure so can use fo_doc_*() image functions.
+
+	* fo/fo-external-graphic.c: Use fo_doc_*() image functions instead
+	of PDF_*() image functions.
+
+	* fo/fo-text.c, fo/fo-basic-link.c, fo/fo-bidi-override.c,
+	fo/fo-block-area.c, fo/fo-character.c, fo/fo-inline.c,
+	fo/fo-inline-container.c, fo/fo-inline-fo.[ch],
+	fo/fo-instream-foreign-object.c, fo/fo-leader.c,
+	fo/fo-multi-toggle.c, fo/fo-page-number.c,
+	fo/fo-page-number-citation.c: Added 'fo_doc' parameter to
+	fo_inline_fo_get_text_attr_list().
+
+	* examples/Makefile.am: Moving 'io' subdir to separate
+	'libfo-examples' CVS module.
+
+	* xmlroff.fo: Corrected a 'column-width'.
+
+	* xmlroff.c: Reworked choosing backends.
+
+	* property/fo-property-border-after-precedence.[ch],
+	property/fo-property-border-before-precedence.[ch],
+	property/fo-property-border-end-precedence.[ch],
+	property/fo-property-border-start-precedence.[ch],
+	property/fo-property-eval.c,
+	property/fo-property-grouping-separator.[ch],
+	property/fo-property-grouping-size.[ch],
+	property/fo-property-score-spaces.[ch], result-to-fo.c: Updated
+	properties to match current spec-dump.
+
+	* fo-context.c: Updated to match current spec-dump.
+
+	* configure.in: Changed --enable-gnome-print to --enable-gp.
+	Added $GNOMEPRINT_CFLAGS to $CFLAGS.  Added informative message
+	about enabled FoDoc subtypes.  Reordered Pango checks to come
+	after working out whether need PDFlib and/or GNOME Print backends
+	of Pango.
+
+	* Makefile.am: Added 'pkgconfigdir' and 'pkgconfig_DATA'.
+
+	* libfo-0.2.pc.in, libfo.pc.in: Removed libfo.pc.in in favour of
+	libfo-0.2.pc.in since library is versioned.
+
+2003-05-27  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c (fo_doc_gp_init): Set config printer to "PDF"
+	to get PDF output.
+
+	* Makefile.am: Discovered '.' can be in $(SUBDIRS).  Added '.' and
+	rearranged others so everything can compile in one pass.
+
+2003-05-23  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp-private.h: Removed unused instance properties
+	repeated from FoDoc.
+
+	* fo/fo-block-area.[ch], fo/fo-block-layout.c,
+	fo/fo-flow-area.[ch], fo/fo-fo.[ch], fo/fo-fo-private.h,
+	fo/fo-list-block-area.[ch], fo/fo-list-item-area.[ch],
+	fo/fo-list-item-body-area.[ch], fo/fo-list-item-label-area.[ch],
+	fo/fo-page-sequence-area.[ch], fo/fo-region-body-area.[ch],
+	fo/fo-static-content.c, fo/fo-table-part.c, result-to-fo.[ch]:
+	Changed FoPangoContext uses to FoDoc since FoPangoContext merged
+	into FoDoc.
+
+	* libfo/fo-xsl-formatter.[ch]: Added fo_xsl_formatter_set_fo_doc()
+	since no FoPangoContext anymore.
+
+	* libfo/fo-doc.[ch], libfo/fo-doc-private.h: Removed
+	FoPangoContext.  Added get_new_layout() class method.
+
+	* libfo/fo-doc-pdflib.c: Added _get_new_layout() and
+	_debug_dump().  Other cosmetic changes.
+
+	* libfo/fo-doc-gp.c: Hacked to make work.  Added initialising job,
+	context, and config in fo_doc_gp_init().  Added
+	fo_doc_gp_get_new_layout() since FoDoc types now make FoLayout
+	types.  Added gnome_print_job_print_to_file(), etc. to
+	fo_doc_gp_finalize() so file actually gets printed.  Added setting
+	FO_DOC (fo_doc_gp)->pango_context whenever new job created in
+	fo_doc_gp_showpage().  Fixed wrong context bugs in
+	fo_doc_gp_render_layout() and fo_doc_gp_render_layout_lines().
+	Added fo_doc_gp_debug_dump().
+
+	* xmlroff.c: Added '--backend' option for choosing PDFlib or GNOME
+	Print backend.
+
+	* libfo/fo-layout.c, libfo/fo-layout-gp.[ch],
+	libfo/fo-layout-gp-private.h, libfo/fo-layout.h,
+	libfo/fo-layout-pdflib.[ch], libfo/fo-layout-pdflib-private.h,
+	libfo/fo-layout-private.h, libfo/Makefile.am: Added PDFlib and GP
+	variants of FoLayout because of line-height &
+	line-stacking-strategy funcs.
+
+2003-05-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* datatype/fo-expression.h, datatype/fo-id.h,
+	datatype/fo-length-conditional.h: Cosmetic changes to make
+	updating docs easier.
+
+	* libfo/fo-doc.c, libfo/fo-doc-gp.h, libfo/fo-doc-pdflib.h:
+	Comment changes to stop confusing gtk-doc.
+
+	* fo/fo-root.[ch], fo/fo-root-private.h, fo-object.c: Changed
+	initial comment open and close to stop confusing gtk-doc.
+
+	* fo/fo-simple-page-master.c: Reordered include statements.
+
+	* fo/fo-tree.h: Added '#include <fo/fo-fo.h>'.
+
+	* property/fo-property-master-name.c: Corrected typo.
+
+	* fo/fo-declarations.[ch], fo/fo-declarations-private.h: Updated
+	to match current spec-dump (and stop confusing gtk-doc).
+
+	* fo/fo-page-sequence.c, fo/fo-page-sequence-master.c,
+	fo/fo-simple-page-master.c, property/fo-property-eval.c,
+	result-to-fo.c: Changes to match updated properties.
+
+	* datatype/fo-name.[ch]: Added fo_name_get_name_empty().
+
+	* libfo/fo-libfo-basic.c, libfo/fo-libfo.h: Added 'libfo/' to
+	(possibly new) '#include <fo-doc*.h>'.
+
+	* fo-doc-pdflib.h: Moved to libfo directory.
+
+	* configure.in: Added handling of PangoPDF pangogp backend.
+
+	* area-to-pdf.c: Changes to match FoDoc api changes.
+
+	* area-to-pdf.h, examples/io/xmlroff-libfo.c, fo/fo-flow-area.h,
+	fo/fo-flow.c, fo/fo-fo.h, result-to-fo.h, xmlroff.c: Added
+	'libfo/' to (possibly new) '#include <fo-doc*.h>'.
+
+	* fo/fo-conditional-page-master-reference.[ch],
+	fo/fo-conditional-page-master-reference-private.h: Updated to
+	match spec-dump.
+
+	* fo/fo-simple-page-master.[ch],
+	fo/fo-simple-page-master-private.h,
+	fo/fo-single-page-master-reference.[ch],
+	fo/fo-single-page-master-reference-private.h,
+	property/fo-property-master-name.[ch],
+	property/fo-property-master-reference.[ch]: Updated to match
+	current spec-dump.
+
+	* libfo/fo-xsl-formatter.c: Added paths in include statements.
+
+	* libfo/fo-utils.h, property/fo-property-font-stretch.h,
+	property/fo-property-font-style.h,
+	property/fo-property-font-variant.h: Moved some enum typedefs to
+	fo-utils.h so FoLayout doesn't include properties.
+
+	* libfo/fo-libfo-basic.h: Correct __FO_BASIC_H__ to
+	__FO_LIBFO_BASIC_H__.
+
+	* libfo/fo-font-desc.[ch], libfo/fo-font-desc-private.h,
+	libfo/fo-layout.[ch], libfo/fo-layout-private.h: Added FoLayout
+	and FoFontDesc.
+
+	* fo-doc.c, fo-doc-gp.[ch], fo-doc-gp-private.h, fo-doc.h,
+	fo-doc-pdflib.c, fo-doc-pdflib-private.h, fo-doc-private.h,
+	libfo/fo-doc.c, libfo/fo-doc-gp.[ch], libfo/fo-doc-gp-private.h,
+	libfo/fo-doc.h, libfo/fo-doc-pdflib.[ch],
+	libfo/fo-doc-pdflib-private.h, libfo/fo-doc-private.h,
+	libfo/fo-pango-context.[ch], libfo/fo-pango-context-private.h,
+	libfo/Makefile.am, Makefile.am: Moved fo-doc*[ch] to libfo
+	directory and merging in fo-pango-context*.[ch].
+
+	* property/fo-property-padding.c, fo/fo-region-body-area.c,
+	area/fo-area.c, fo-context-util.c, property/fo-property-eval.c,
+	result-to-fo.c: Changes to match properties updated to match
+	spec-dump.
+
+	* libfo/fo-xsl-formatter.h, libfo/fo-xslt-transformer.h: Corrected
+	FO_TYPE_* #define.
+
+	* libfo/fo-xml-doc.h: Corrected filename in initial comment.
+
+	* fo/fo-page-sequence-area.c: Commented out a g_return_if_fail()
+	that will always fail.
+
+	* fo/fo-block-area.c: Added use of FoLayout and
+	FoFontDesc. Removed unused #include statements.
+
+	* datatype/fo-length-conditional.[ch]: Added
+	fo_length_cond_get_length_cond_zero().
+
+	* fo-node.c, fo-object.h: Cosmetic changes.
+
+	* property/fo-property-line-stacking-strategy.[ch],
+	property/fo-property-role.[ch],
+	property/fo-property-source-document.[ch],
+	property/fo-property-text-indent.[ch],
+	property/fo-property-end-indent.[ch],
+	property/fo-property-padding-after.[ch],
+	property/fo-property-padding-before.[ch],
+	property/fo-property-padding-bottom.[ch],
+	property/fo-property-padding-end.[ch],
+	property/fo-property-padding-left.[ch],
+	property/fo-property-padding-right.[ch],
+	property/fo-property-padding-start.[ch],
+	property/fo-property-padding-top.[ch],
+	property/fo-property-start-indent.[ch]: Updated to match current
+	spec-dump.
+
+2003-05-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area-tree.c: (_debug_dump_properties) :Removed an unused
+	statement.
+
+	* fo-doc.[ch], fo-doc-pdflib.c, fo-doc-private.h: Added
+	_line_stroked(), _rect_stroked(), and _rect_filled(), removed
+	_rect().
+
+	* fo-doc-gp.[ch], fo-doc-gp-private.h, Makefile.am: Added FoDocGP
+	-- GNOME Print (pangogp) version of FoDoc.
+
+2003-04-15  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-table-cell-area.h, fo/fo-table-row-area.h: Removed
+	unnecessary #include of Pango header file.
+
+	* area/fo-area-tree.c: Removed PangoContext instance variable.
+
+	* fo/fo-block-whitespace.c, fo/fo-block-block.c,
+	fo/fo-block-layout.c: Removed unused _init(), _set_property(), and
+	_get_property() functions.
+
+	* libfo/fo-libfo.h: Removed '#include <fo-doc-pdflib.h>'.
+
+	* fo/fo-table-area.c, fo/fo-table-cell-area.[ch],
+	fo/fo-table-row-area.[ch], fo/fo-wrapper-block-area.c,
+	area/fo-area-page.c, fo/fo-block-block-area.c: Removed unnecessary
+	#include of Pango header file.
+
+	* fo/fo-static-content.[ch], fo/fo-static-content-private.h:
+	Updated to match current spec-dump.
+
+	* libfo/fo-libfo-basic.c: PDF_boot() and PDF_shutdown() calls now
+	in fo-doc-pdflib.c.
+
+	* libfo/fo-libfo-basic.h: Removed unused code.
+
+	* libfo/fo-libfo-context.c: Spelling correction in a g_param name.
+
+	* libfo/fo-pango-context.h, libfo/fo-pango-context-private.h,
+	libfo/fo-pango-context.c: Changed from 'boxed' object type to
+	'instantiated' object type.
+
+	* property/fo-property-background-color.[ch]: Updated to mostly
+	match current spec-dump.
+
+	* fo/fo-page-sequence-area.h, fo/fo-region-body-area.[ch],
+	fo/fo-table-part.c, libfo/fo-xsl-formatter.c,
+	fo/fo-block-area.[ch], fo/fo-flow-area.[ch], fo/fo-fo.[ch],
+	fo/fo-fo-private.h, fo/fo-list-block-area.[ch],
+	fo/fo-list-item-area.[ch], fo/fo-list-item-body-area.[ch],
+	fo/fo-list-item-label-area.[ch], fo/fo-page-sequence-area.c,
+	result-to-fo.[ch]: Using FoPangoContext in place of PangoContext
+	so no #include of pango headers.
+
+	* font-hash.[ch], fo-to-area.[ch]: Removed since unused.
+
+	* area/fo-area-layout.h (fo_area_layout_new_from_block): Removed
+	since unused.
+
+	* xmlroff.c: Added include of fo-doc-pdflib.h since removed from
+	fo-libfo.h.
+
+	* fo-doc-private.h, area-to-pdf.c, fo-doc.[ch],
+	fo-doc-pdflib.[ch]: Added fo_doc_render_layout() and
+	fo_doc_render_layout_lines().
+
+	* fo/fo-color-profile.h, fo/fo-color-profile-private.h,
+	fo/fo-color-profile.c: Updated to match current spec-dump.
+
+2003-04-14  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/fo-property-keep-with-previous-within-line.c,
+	property/fo-property-line-height.c,
+	property/fo-property-alignment-adjust.c,
+	property/fo-property-alignment-baseline.c,
+	property/fo-property-dominant-baseline.c,
+	property/fo-property-keep-together-within-line.c,
+	property/fo-property-keep-with-next-within-line.c,
+	fo/fo-external-graphic.c, fo/fo-block-area.c: Changes from adding
+	pango-xsl-attributes.[ch] to PangoPDF.
+
+	* fo/fo-wrapper-block.c, fo/fo-wrapper-inline.c,
+	fo/fo-wrapper-whitespace.c: Removed unused instance init and
+	get/set property functions.
+
+	* libfo/fo-libfo.h: Added include of fo-doc-pdflib.h.
+
+	* fo/fo-multi-toggle.h, fo/fo-multi-toggle-private.h,
+	fo/fo-multi-toggle.c: Updated to match current spec-dump.
+
+2003-03-25  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* expr/fo-expr-eval.c: Change to use new fo_name_new_with_value().
+
+	* fo/fo-table-part.c: Added casts, removed prop_context variable
+	to pacify compiler warnings.
+
+	* libfo/fo-xsl-formatter.[ch]
+	(fo_xsl_formatter_new_from_lifo_context): Added.
+
+	* examples/io/xmlroff-libfo.c, libfo/fo-libfo-basic.c,
+	libfo/fo-xml-doc.c, area-to-pdf.c, libfo/fo-xslt-transformer.c:
+	Changes to match FoDoc/FoDocPDFLIB and FoLibfoContext changes.
+
+	* datatype/fo-unknown.c: Minor changes to silence compiler
+	warnings and cosmetic changes.
+
+	* datatype/fo-name.[ch]: Added _new_with_value() func, doc comment
+	and cosmetic changes.
+
+	* datatype/fo-enum.c, datatype/fo-expression.c, datatype/fo-id.c,
+	datatype/fo-integer.c, datatype/fo-keep.h: Minor changes to
+	silence compiler warnings and cosmetic changes.
+
+	* datatype/fo-boolean.c (fo_boolean_debug_sprintf): Removed since
+	unused.
+
+	* xmlroff.c: Added but disable font-embed control.  Removed
+	POPT_ARGFLAG_ONEDASH for args.
+
+	* datatype/fo-length-bp-ip-d.c, datatype/fo-length-conditional.c:
+	Removed unused _init(), _base_class_init(), and
+	_base_class_finalize() func.
+
+	* fo/fo-table-caption.c, fo/fo-region-before.c, fo/fo-inline.c:
+	Added include of fo-context-util.h to stop compiler complaining.
+
+	* fo/fo-wrapper.c: Changed type name string to 'wrapper'.
+
+	* fo-doc.h, fo-doc-pdflib.[ch], fo-doc-pdflib-private.h,
+	fo-doc-private.h, fo-doc.c, Makefile.am: Made FoDoc an abstract
+	type, added FoDocPDFLIB type for PDFlib output docs.
+
+	*libfo/fo-pango-context.[ch]: Added but disabled setting of
+	font-embed property.
+
+	*libfo/fo-libfo-context.[ch]: Added 'font-embed' property, renamed
+	'use-sgml-catalogs' to 'sgml-catalogs'.
+
+	* area/fo-area-tree.c, fo-node.c: Doc comment changes.
+
+2003-03-19  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Moved fo-utils.h to libfo directory.
+
+	* area/fo-area.h: Reversed order of _set and _get functions.
+
+	* examples/io/Makefile.am, examples/io/xmlroff-basic.c,
+	examples/io/xmlroff-init2.c, examples/io/xmlroff-libfo.c,
+	examples/Makefile.am: Added examples of using top-level interfaces
+	to libfo.
+
+	* area/fo-area.c: Reversed order of _set and _get functions.
+
+	* area/fo-area-tree.h: Qualified included file names with
+	directory name.
+
+	* xmlroff.c: Updated to use new public interface objects in libfo
+	directory.
+
+	* result-to-fo.h: Qualified included file names with directory
+	name.
+
+	* result-to-fo.c: Cast first arg to
+	fo_object_log_or_propagate_error().
+
+	* fo-utils.h: Made '_()' and 'N_()' macros conditional on not
+	being already defined.
+
+	* fo-doc.[ch], fo-doc-private.h: Moved fo_doc_get_pdf_doc()
+	prototype to new fo-doc-private.h.
+
+	* fo-context.h: Qualified included file names with directory name.
+
+	* docs/xmlroff-docs.sgml: Added new object types.
+
+	* fo/fo-root.h, fo/fo-root-private.h, fo/fo-declarations.[ch],
+	fo/fo-root.c: Updated to match current spec-dump.
+
+	* fo/fo-declarations-private.h, fo/Makefile.am: Added
+	fo-declarations-private.h.
+
+	* expression-parser.h, fo-all-datatype.h: Qualified included file
+	names with directory name.
+
+	* configure.in, libfo.pc.in: Added .in of pkg-config file for
+	libfo library.
+
+	* libfo/fo-libfo-basic.[ch], libfo/fo-libfo-context.[ch],
+	libfo/fo-libfo.h, libfo/fo-pango-context.[ch],
+	libfo/fo-pango-context-private.h, libfo/fo-xml-doc.[ch],
+	libfo/fo-xml-doc-private.h, libfo/fo-xsl-formatter.[ch],
+	libfo/fo-xslt-transformer.[ch],
+	libfo/fo-xslt-transformer-private.h, libfo/Makefile.am,
+	Makefile.am: Added libfo directory for public interface to libfo.
+
+2003-03-12  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* examples/solaris/pdflib.upr,
+	examples/solaris/tar-exclusions.txt,
+	examples/solaris/pangoft2_aliases, examples/solaris/pangorc,
+	examples/solaris/mktar.sh, examples/linux/urw-font-test.fo,
+	examples/linux/pdflib.upr, examples/linux/pangoft2_aliases,
+	examples/linux/pangorc, examples/linux/mktar.sh: Removed since
+	unused.
+
+	* property/fo-property-media-usage.h, fo/fo-layout-master-set.h,
+	property/fo-property-media-usage.c, fo/fo-layout-master-set.c:
+	Updated to match current spec-dump.
+
+	* fo/Makefile.am, fo/fo-layout-master-set-private.h: Added
+	fo-layout-master-set-private.h.
+
+	* xmlroff.c: Removed some unneeded #includes.
+
+	* fo/fo-instream-foreign-object.c, fo/fo-inline-container.c: Added
+	missing #include of fo-context-util.h.
+
+	* fo-context.[ch]: Updated to match current spec-dump.
+
+	* configure.in, Makefile.am: Added major.minor and libtool magic
+	version numbers to libfo.so filename.
+
+2003-03-11  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-all-datatype.h: Added #include of fo-pcw.h.
+
+	* fo/fo-table.[ch], fo/fo-table-header.[ch],
+	fo/fo-table-header-private.h, fo/fo-table-private.h,
+	fo/fo-table-row.[ch], fo/fo-table-row-private.h, fo/fo-title.[ch],
+	fo/fo-title-private.h, fo/fo-table-body.h,
+	fo/fo-table-border-fo.h, fo/fo-table-caption.[ch],
+	fo/fo-table-caption-private.h, fo/fo-table-cell.[ch],
+	fo/fo-table-cell-private.h, fo/fo-table-column.[ch],
+	fo/fo-table-column-private.h, fo/fo-table-footer.[ch],
+	fo/fo-table-footer-private.h, fo/fo-region-before.[ch],
+	fo/fo-region-before-private.h, fo/fo-region-body.[ch],
+	fo/fo-region-body-private.h, fo/fo-region-end.[ch],
+	fo/fo-region-end-private.h, fo/fo-region-start.[ch],
+	fo/fo-region-start-private.h, fo/fo-table-and-caption.[ch],
+	fo/fo-table-and-caption-private.h, fo/fo-table-body.c,
+	fo/fo-table-body-private.h, fo/fo-page-number.[ch],
+	fo/fo-page-number-private.h, fo/fo-region-after.[ch],
+	fo/fo-region-after-private.h, fo/fo-page-number-citation.h,
+	fo/fo-list-item.h, fo/fo-page-number-citation.c,
+	fo/fo-page-number-citation-private.h, fo/fo-list-item.c,
+	fo/fo-list-item-private.h, fo/fo-list-item-label.[ch],
+	fo/fo-list-item-label-private.h, fo/fo-list-item-body.[ch],
+	fo/fo-list-item-body-private.h, fo/fo-leader.h,
+	fo/fo-list-block.[ch], fo/fo-list-block-private.h, fo/fo-leader.c,
+	fo/fo-instream-foreign-object.h, fo/fo-leader-private.h,
+	fo/fo-inline.h, fo/fo-instream-foreign-object.c,
+	fo/fo-instream-foreign-object-private.h,
+	fo/fo-initial-property-set.h, fo/fo-inline.c,
+	fo/fo-inline-container.[ch], fo/fo-inline-container-private.h,
+	fo/fo-inline-private.h, fo/fo-external-graphic.h,
+	fo/fo-initial-property-set.c,
+	fo/fo-initial-property-set-private.h, fo/fo-external-graphic.c,
+	fo/fo-external-graphic-private.h, fo/fo-character.c,
+	fo/fo-character-private.h, fo/fo-block.h, fo/fo-basic-link.h,
+	fo/fo-block.c, fo/fo-block-container.c, fo/fo-block-private.h,
+	fo/fo-basic-link.c, fo/fo-basic-link-private.h: Added
+	'background-image' property support to FOs but not to areas.
+
+2003-03-09  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area.c, fo/fo-block-area.c, fo/fo-flow.c,
+	property/fo-property-end-indent.h, property/fo-property-eval.c,
+	property/fo-property-flow-name.[ch],
+	property/fo-property-format.[ch], fo-context-util.c,
+	property/fo-property-content-height.[ch],
+	property/fo-property-content-type.c,
+	property/fo-property-content-width.[ch],
+	property/fo-property-end-indent.c, result-to-fo.c: Updated
+	content-{height,type,width}, end-indent, flow-name, and format.
+
+2003-03-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-table.c, fo/fo-wrapper.c, fo/fo-wrapper-private.h,
+	fo/fo-table-private.h, fo/fo-table-part.c,
+	fo/fo-table-part-private.h, fo/fo-table-and-caption.c,
+	fo/fo-table-caption.c, fo/fo-table-caption-private.h,
+	fo/fo-table-cell-private.h, fo/fo-marker-parent.h,
+	fo/fo-table-and-caption-private.h, fo/fo-marker-parent.c,
+	fo/fo-marker-parent-private.h, fo/fo-list-item.c,
+	fo/fo-list-item-body.c, fo/fo-list-item-body-private.h,
+	fo/fo-list-item-label.c, fo/fo-list-item-label-private.h,
+	fo/fo-list-item-private.h, fo/fo-list-block.c,
+	fo/fo-list-block-private.h, fo/fo-inline.c,
+	fo/fo-inline-private.h, fo/fo-fo.c, fo/fo-inline-container.c,
+	fo/fo-inline-container-private.h, fo/fo-block.c, fo/fo-flow.c,
+	fo/fo-flow-private.h, fo/fo-block-private.h,
+	fo/fo-block-container.c, fo/fo-block-container-private.h,
+	fo/fo-bidi-override.c, fo/fo-bidi-override-private.h,
+	fo/fo-basic-link.c, fo/fo-basic-link-private.h, fo/Makefile.am:
+	Added FoMarkerParent type for handling fo:marker FOs.
+
+	* fo/fo-table-column.c: Updates 'column-number' _get/_set calls.
+
+	* fo/fo-table-cell.c: Added FoMarkerParent as parent type.  Update
+	'column-number' _get/_set calls.
+
+	* property/fo-property-eval.c, property/fo-property-clip.[ch],
+	property/fo-property-column-number.[ch],
+	property/fo-property-direction.[ch],
+	property/fo-property-break-after.h,
+	property/fo-property-break-before.[ch],
+	property/fo-property-break-after.c, result-to-fo.c: Updated
+	'break-before', 'break-after', clip', 'column-number', and
+	'direction.
+
+2003-03-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.2 ===
+
+	* property/fo-property-block-progression-dimension.c,
+	property/fo-property-break-after.c,
+	property/fo-property-break-before.c,
+	property/fo-property-direction.c,
+	property/fo-property-end-indent.c, property/fo-property-format.c,
+	property/fo-property-background-color.c,
+	property/fo-property-block-progression-dimension-maximum.c,
+	property/fo-property-block-progression-dimension-minimum.c,
+	property/fo-property-block-progression-dimension-optimum.c:
+	Changed class name string to see if causing doc hyperlink failure.
+	It was.
+
+	* datatype/fo-error.c (fo_error_init): Removed.
+
+	* property/fo-property-color.h: Removed unused FoEnumColor,
+	fo_enum_color_get_type(), and FO_TYPE_ENUM_COLOR.
+
+	* datatype/fo-boolean.[ch], datatype/fo-char.[ch],
+	datatype/fo-enum.[ch]: Made 'value' G_PARAM_CONSTRUCT_ONLY.  Added
+	_new_with_value().
+
+	* area/Makefile.am, expr/Makefile.am, fo/Makefile.am,
+	property/Makefile.am: Added $(LIBXSLT_CFLAGS) to INCLUDES
+	(#695662, Charles Bozeman).
+
+	* property/fo-property-margin.h,
+	property/fo-property-margin-private.h,
+	property/fo-property-margin.c: Added FoEnumMargin as common
+	declaration of 'auto' enumeration token.  Added
+	fo_property_margin_validate_single_margin() for use by individual
+	margin properties.  Updated to better match current spec-dump and
+	add documentation comments.
+
+	* property/fo-property-margin-left.[ch]: Updated to match current
+	spec-dump.  Started using FoPropertyMarginEnum.
+
+	* fo/fo-character.c, property/fo-property-character.h,
+	property/fo-property-character.c, property/fo-property-eval.c,
+	result-to-fo.c: Updated 'character' property to match current
+	spec-dump.
+
+	* configure.in: Increased version number to 0.2.2.
+
+	* autogen.sh: Added check for and use of 'libtoolize'.
+
+2003-02-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.1 ===
+
+	* configure.in: Updated version number.
+
+	* TODO: Added two entries.
+
+	* fo/fo-external-graphic.c: Changed to use
+	fo_property_text_property_get_attr().
+
+	* fo/fo-text.c: Cosmetic changes only.
+
+	* fo/fo-fo.c: Revised 'invalid datatype' error message text.
+
+	* property/fo-property-border-private.h: Removed
+	_resolve_color_enum(), _validate_color(), and
+	_get_color_initial().
+
+	* property/fo-property-eval.c: Changed hashed functions for 10
+	properties.
+
+	* property/fo-property-color.[ch]: Removed _resolve_enum() and
+	_validate().  Update to match spec-dump.
+
+	* property/fo-property-border-after-color.c,
+	property/fo-property-border-before-color.c,
+	property/fo-property-border-bottom-color.c,
+	property/fo-property-border-end-color.c,
+	property/fo-property-border-left-color.c,
+	property/fo-property-border-right-color.c,
+	property/fo-property-border-start-color.c,
+	property/fo-property-border-top-color.c,
+	property/fo-property-border.c: Color _resolve_enum(), _validate(),
+	and _get_initial() functions removed in favour of common functions
+	in fo-property-util.[ch].
+
+	* property/fo-property-background-color.c: Doc comment punctuation
+	changes only.
+
+	* property/fo-property-background-image.[ch]: Updated to match
+	current spec-dump.
+
+	* property/fo-property.c: Added FO_PROPERTY_ERROR_ILLEGAL_NEGATIVE
+	error type.  Added doc comments.
+
+	* property/fo-property.h: Added FO_PROPERTY_ERROR_ILLEGAL_NEGATIVE
+	error type.
+
+	* property/fo-property-font-stretch.h,
+	property/fo-property-font-style.[ch],
+	property/fo-property-font-variant.[ch],
+	property/fo-property-font-weight.[ch],
+	property/fo-property-keep-together-within-line.[ch],
+	property/fo-property-keep-with-next-within-line.[ch],
+	property/fo-property-keep-with-previous-within-line.[ch],
+	property/fo-property-line-height.[ch],
+	property/fo-property-alignment-baseline.[ch],
+	property/fo-property-baseline-shift.c,
+	property/fo-property-common-font.c,
+	property/fo-property-dominant-baseline.[ch],
+	property/fo-property-font-family.[ch],
+	property/fo-property-font-size.[ch],
+	property/fo-property-font-stretch.c,
+	property/fo-property-alignment-adjust.[ch]: Added
+	fo_property_text_property interface.  Updated to match spec-dump.
+
+	* property/fo-property-text-property.[ch],
+	property/fo-property-util.h, property/Makefile.am,
+	property/fo-property-util.c: Common property utilities and
+	interface for inline properties.
+
+	* fo/fo-block.c, fo/fo-initial-property-set.c, fo/fo-title.c:
+	Fixed use of fo_property_line_height_resolve() in _validate()
+	function.
+
+	* fo/fo-block-area.c: Replaced calls to individual _get_attr()
+	functions for properties with fo_property_text_property_get_attr()
+	calls for the inline properties that implement the
+	fo_property_text_property interface.  Removed superfluous
+	FO_PROPERTY() macros.  Fiddled #include path prefixes.
+
+	* fo/fo-basic-link.c, fo/fo-bidi-override.c, fo/fo-inline.c,
+	fo/fo-inline-container.c, fo/fo-instream-foreign-object.c,
+	fo/fo-leader.c, fo/fo-page-number.c, fo/fo-page-number-citation.c:
+	In _get_text_attr_list(), replaced calls to individual _get_attr()
+	functions for properties with fo_property_text_property_get_attr()
+	calls for the inline properties that implement the
+	fo_property_text_property interface.  Also fixed use of
+	fo_property_line_height_resolve() in _validate() function for FOs
+	that have a 'line-height' property.
+
+	* fo/fo-character.[ch], fo/fo-character-private.h: Added
+	'background-image' property and updated to match spec-dump.
+
+	* datatype/fo-keep.[ch]: Added fo_keep_get_enum_auto() and
+	fo_keep_get_enum_always().
+
+	* datatype/fo-color.h: Removed unused FoColorKeyword typedef.
+
+	* datatype/fo-color.c: Cosmetic changes only.
+
+	* result-to-fo.c: Added 13 new-style properties.  Added GError
+	error handling.
+
+	* result-to-fo.h: Added typedef, #define, and prototypes for using
+	GError for errors.
+
+	* configure.in: Changed path of 'special' directory where extra
+	compiler messages happen.
+
+2003-02-27  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.fo: Simple sample FO file for testing that xmlroff built
+	correctly.
+
+2003-02-26  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.c: Replaced POPT_TABLEEND with its expansion since macro
+	not in older popt.h.
+
+	* Makefile.am: Changed position of $(LIBXSLT_LIBS) in
+	xmlroff_LDADD to avoid link problem.
+
+	* config.sub, config.guess: Removed since should be installed by
+	'libtoolize' or 'automake -a'.
+
+	* TODO: xmlroff TODO file.
+
+2003-02-13  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/*.[ch]: Removed .c and .h files for currently
+	unsupporeted properties.
+
+2003-02-11  Tony Graham <Tony.Graham@Sun.COM>
+
+	* === Released 0.2.0 ===

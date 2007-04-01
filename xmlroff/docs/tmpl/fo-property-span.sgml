@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+span
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySpan ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpanClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_span_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_span_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

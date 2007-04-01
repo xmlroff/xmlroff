@@ -1,0 +1,41 @@
+<!-- ##### SECTION Title ##### -->
+FoWrapperInlineEmpty
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoWrapperInlineEmpty ##### -->
+<para>
+
+</para>
+
+@parent_instance: 
+
+<!-- ##### STRUCT FoWrapperInlineEmptyClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### FUNCTION fo_wrapper_inline_empty_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

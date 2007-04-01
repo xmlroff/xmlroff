@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-space-before-optimum
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySpaceBeforeOptimum ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceBeforeOptimumClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_before_optimum_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_before_optimum_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

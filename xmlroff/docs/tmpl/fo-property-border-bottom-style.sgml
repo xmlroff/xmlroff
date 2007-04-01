@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-bottom-style
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderBottomStyle ##### -->
+<para>
+The #FoPropertyBorderBottomStyle structure represents one instance of the
+'border-bottom-style' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderBottomStyleClass ##### -->
+<para>
+The #FoPropertyBorderBottomStyleClass structure represents the type of
+the 'border-bottom-style' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_bottom_style_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_bottom_style_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

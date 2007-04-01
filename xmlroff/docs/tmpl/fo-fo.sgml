@@ -1,0 +1,348 @@
+<!-- ##### SECTION Title ##### -->
+FoFo
+
+<!-- ##### SECTION Short_Description ##### -->
+Base formatting object object
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoFo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoFo:allow-mixed-content ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoFo:context ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoFo:flow ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoFo:generate-reference-area ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoFo:tree ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoFoClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_FO_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_fo_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoFoError ##### -->
+<para>
+
+</para>
+
+@FO_FO_ERROR_FAILED: 
+@FO_FO_ERROR_WARNING: 
+@FO_FO_ERROR_EMPTY: 
+@FO_FO_ERROR_NOT_EMPTY: 
+@FO_FO_ERROR_NOT_BLOCK: 
+@FO_FO_ERROR_INVALID_CHILD: 
+@FO_FO_ERROR_INVALID_CONTENT: 
+@FO_FO_ERROR_ENUMERATION_TOKEN: 
+@FO_FO_ERROR_DATATYPE: 
+@FO_FO_ERROR_DATATYPE_REPLACE: 
+@FO_FO_ERROR_DATATYPE_NULL: 
+@FO_FO_ERROR_UNSUPPORTED_PROPERTY: 
+@FO_FO_ERROR_LAST: 
+
+<!-- ##### STRUCT FoFoAreaNew2Context ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@parent_area: 
+@new_area: 
+@continue_after_error: 
+@debug_level: 
+@warning_mode: 
+
+<!-- ##### STRUCT FoFoAreaIterator ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_fo_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_debug_dump_properties ##### -->
+<para>
+
+</para>
+
+@fo: 
+@depth: 
+
+
+<!-- ##### FUNCTION fo_fo_set_context ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_context: 
+
+
+<!-- ##### FUNCTION fo_fo_get_context ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@context: 
+
+
+<!-- ##### FUNCTION fo_fo_get_flow ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_get_tree ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_get_generate_reference_area ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_get_allow_mixed_content ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_validate_content ##### -->
+<para>
+
+</para>
+
+@fo: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_resolve_property_attributes ##### -->
+<para>
+
+</para>
+
+@fo_node: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_children_properties_resolve ##### -->
+<para>
+
+</para>
+
+@this_fo: 
+@this_fo_parent_area: 
+@new_area: 
+@prop_eval_hash: 
+@fo_doc: 
+@continue_after_error: 
+@debug_level: 
+@warning_mode: 
+@error: 
+
+
+<!-- ##### FUNCTION fo_fo_validate ##### -->
+<para>
+
+</para>
+
+@fo: 
+@current_context: 
+@parent_context: 
+@error: 
+
+
+<!-- ##### FUNCTION fo_fo_clone ##### -->
+<para>
+
+</para>
+
+@original: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_area_new ##### -->
+<para>
+
+</para>
+
+@fo: 
+@fo_doc: 
+@parent_area: 
+@new_area: 
+@debug_level: 
+
+
+<!-- ##### FUNCTION fo_fo_area_new2 ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+@error: 
+
+
+<!-- ##### FUNCTION fo_fo_trim_whitespace_children ##### -->
+<para>
+
+</para>
+
+@fo: 
+
+
+<!-- ##### FUNCTION fo_fo_validate_content_empty ##### -->
+<para>
+
+</para>
+
+@fo: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_validate_content_block_plus ##### -->
+<para>
+
+</para>
+
+@fo: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_validate_pcdata_or_inline ##### -->
+<para>
+
+</para>
+
+@fo_node: 
+@is_not_pcdata_inline: 
+
+
+<!-- ##### FUNCTION fo_fo_validate_block_or_whitespace ##### -->
+<para>
+
+</para>
+
+@fo_node: 
+@is_not_block_or_whitespace: 
+
+
+<!-- ##### FUNCTION fo_fo_validate_pcdata_inline_block_neutral ##### -->
+<para>
+
+</para>
+
+@fo_node: 
+@is_not_pcdata_inline_block_neutral: 
+
+
+<!-- ##### FUNCTION fo_fo_get_area_iterator ##### -->
+<para>
+
+</para>
+
+@fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_area_iterator_get_area ##### -->
+<para>
+
+</para>
+
+@iterator: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_fo_area_iterator_next ##### -->
+<para>
+
+</para>
+
+@iterator: 
+@Returns: 
+
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-space-start-maximum
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySpaceStartMaximum ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceStartMaximumClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_start_maximum_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_start_maximum_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

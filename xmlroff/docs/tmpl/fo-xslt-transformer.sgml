@@ -1,0 +1,57 @@
+<!-- ##### SECTION Title ##### -->
+FoXsltTransformer
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION fo_xslt_transformer_do_transform ##### -->
+<para>
+
+</para>
+
+@xml_doc: 
+@stylesheet_doc: 
+@libfo_context: 
+@error: 
+@Returns: 
+
+
+<!-- ##### MACRO FO_XSLT_TRANSFORMER_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM FoXsltTransformerError ##### -->
+<para>
+
+</para>
+
+@FO_XSLT_TRANSFORMER_ERROR_FAILED: 
+@FO_XSLT_TRANSFORMER_ERROR_TRANSFORM_FAILED: 
+@FO_XSLT_TRANSFORMER_ERROR_NO_STYLESHEET_DOC: 
+@FO_XSLT_TRANSFORMER_ERROR_NO_XML_DOC: 
+@FO_XSLT_TRANSFORMER_ERROR_PARSE_FAILED: 
+
+<!-- ##### FUNCTION fo_xslt_transformer_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

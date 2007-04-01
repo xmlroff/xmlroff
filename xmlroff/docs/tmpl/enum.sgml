@@ -1,0 +1,72 @@
+<!-- ##### SECTION Title ##### -->
+Foenum
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoEnum ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoEnumClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_enum_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_enum_set_enum_class ##### -->
+<para>
+
+</para>
+
+@fo_enum: 
+@new_enum_class: 
+
+
+<!-- ##### FUNCTION fo_enum_get_enum_class ##### -->
+<para>
+
+</para>
+
+@fo_enum: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_enum_set_value ##### -->
+<para>
+
+</para>
+
+@fo_enum: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_enum_get_value ##### -->
+<para>
+
+</para>
+
+@fo_enum: 
+@Returns: 
+
+

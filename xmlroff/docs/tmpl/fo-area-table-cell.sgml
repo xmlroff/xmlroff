@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+fo-area-table-cell
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaTableCell ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaTableCellClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_table_cell_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

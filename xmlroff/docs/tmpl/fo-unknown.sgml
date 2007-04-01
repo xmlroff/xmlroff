@@ -1,0 +1,62 @@
+<!-- ##### SECTION Title ##### -->
+fo-unknown
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoUnknown ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoUnknown:value ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoUnknownClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_unknown_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_unknown_get_value ##### -->
+<para>
+
+</para>
+
+@unknown: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_unknown_set_value ##### -->
+<para>
+
+</para>
+
+@unknown: 
+@new_value: 
+
+

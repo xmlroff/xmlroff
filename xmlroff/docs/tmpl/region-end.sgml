@@ -1,0 +1,842 @@
+<!-- ##### SECTION Title ##### -->
+Foregion-end
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoRegionEnd ##### -->
+<para>
+
+</para>
+
+@parent_instance: 
+@background_color: 
+@border_after_color: 
+@border_after_style: 
+@border_after_width: 
+@border_before_color: 
+@border_before_style: 
+@border_before_width: 
+@border_bottom_color: 
+@border_bottom_style: 
+@border_bottom_width: 
+@border_end_color: 
+@border_end_style: 
+@border_end_width: 
+@border_left_color: 
+@border_left_style: 
+@border_left_width: 
+@border_right_color: 
+@border_right_style: 
+@border_right_width: 
+@border_start_color: 
+@border_start_style: 
+@border_start_width: 
+@border_top_color: 
+@border_top_style: 
+@border_top_width: 
+@padding_after: 
+@padding_before: 
+@padding_bottom: 
+@padding_end: 
+@padding_left: 
+@padding_right: 
+@padding_start: 
+@padding_top: 
+@region_name: 
+@writing_mode: 
+
+<!-- ##### STRUCT FoRegionEndClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_region_end_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_background_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_background_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_background_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_bottom_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_bottom_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_bottom_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_bottom_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_bottom_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_bottom_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_bottom_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_bottom_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_bottom_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_left_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_left_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_left_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_left_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_left_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_left_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_left_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_left_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_left_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_right_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_right_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_right_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_right_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_right_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_right_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_right_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_right_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_right_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_top_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_top_color: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_top_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_top_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_top_style: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_top_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_border_top_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_top_width: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_border_top_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_after ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_after: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_after ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_before ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_before: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_before ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_bottom ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_bottom: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_bottom ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_end ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_end: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_end ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_left ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_left: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_left ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_right ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_right: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_right ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_start ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_start: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_start ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_padding_top ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_top: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_padding_top ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_region_name ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_region_name: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_region_name ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_set_writing_mode ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_writing_mode: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+
+<!-- ##### FUNCTION fo_region_end_get_writing_mode ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@fo_region_end: 
+
+

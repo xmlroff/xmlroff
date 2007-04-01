@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-unicode-bidi
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyUnicodeBidi ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyUnicodeBidiClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_unicode_bidi_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_unicode_bidi_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

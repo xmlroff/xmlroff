@@ -1,0 +1,151 @@
+<!-- ##### SECTION Title ##### -->
+fo-keep
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_KEEP ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### STRUCT FoKeep ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoKeep:within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoKeep:within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoKeep:within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoKeepClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_keep_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_new_with_value ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_keep_auto ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_keep_always ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_within_line ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_within_column ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_within_page ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_resolve ##### -->
+<para>
+
+</para>
+
+@shortform: 
+@within_line: 
+@within_column: 
+@within_page: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_enum_auto ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_keep_get_enum_always ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-keep-together-within-line
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyKeepTogetherWithinLine ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyKeepTogetherWithinLineClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_line_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_line_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

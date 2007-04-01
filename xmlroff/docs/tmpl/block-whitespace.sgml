@@ -1,0 +1,45 @@
+<!-- ##### SECTION Title ##### -->
+Foblock-whitespace
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoBlockWhitespace ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoBlockWhitespaceClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_block_whitespace_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_block_whitespace_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+

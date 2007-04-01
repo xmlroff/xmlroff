@@ -1,0 +1,224 @@
+<!-- ##### SECTION Title ##### -->
+fo-area-page
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaPage ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoAreaPage:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoAreaPage:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoAreaPage:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoAreaPage:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoAreaPage:page-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoAreaPage:page-number ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoAreaPage:page-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoAreaPageClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_AREA_PAGE_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_area_page_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoAreaPageError ##### -->
+<para>
+
+</para>
+
+@FO_AREA_PAGE_ERROR_FAILED: 
+@FO_AREA_PAGE_ERROR_WARNING: 
+@FO_AREA_PAGE_ERROR_OVERFLOW: 
+
+<!-- ##### FUNCTION fo_area_page_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_page_number ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_page_number: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_page_number ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_page_width ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_page_width: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_page_width ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_page_height ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_page_height: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_page_height ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_top ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_top: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_top ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_bottom ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_bottom: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_bottom ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_left ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_left: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_left ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_right ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_right: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_right ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+

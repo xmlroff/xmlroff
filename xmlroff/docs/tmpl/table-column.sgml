@@ -1,0 +1,770 @@
+<!-- ##### SECTION Title ##### -->
+Fotable-column
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO FO_TABLE_COLUMN_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_table_column_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoTableColumnError ##### -->
+<para>
+
+</para>
+
+@FO_TABLE_COLUMN_ERROR_FAILED: 
+@FO_TABLE_COLUMN_ERROR_WARNING: 
+@FO_TABLE_COLUMN_ERROR_FIXED_NO_WIDTH: 
+@FO_TABLE_COLUMN_ERROR_LAST: 
+
+<!-- ##### STRUCT FoTableColumn ##### -->
+<para>
+
+</para>
+
+@parent_instance: 
+@offset: 
+@background_color: 
+@border_after_color: 
+@border_after_precedence: 
+@border_after_style: 
+@border_after_width: 
+@border_before_color: 
+@border_before_precedence: 
+@border_before_style: 
+@border_before_width: 
+@border_bottom_color: 
+@border_bottom_style: 
+@border_bottom_width: 
+@border_end_color: 
+@border_end_precedence: 
+@border_end_style: 
+@border_end_width: 
+@border_left_color: 
+@border_left_style: 
+@border_left_width: 
+@border_right_color: 
+@border_right_style: 
+@border_right_width: 
+@border_start_color: 
+@border_start_precedence: 
+@border_start_style: 
+@border_start_width: 
+@border_top_color: 
+@border_top_style: 
+@border_top_width: 
+@column_number: 
+@column_width: 
+@number_columns_repeated: 
+@number_columns_spanned: 
+@padding_after: 
+@padding_before: 
+@padding_bottom: 
+@padding_end: 
+@padding_left: 
+@padding_right: 
+@padding_start: 
+@padding_top: 
+
+<!-- ##### STRUCT FoTableColumnClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_table_column_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_background_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_background_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_background_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_bottom_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_bottom_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_bottom_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_bottom_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_bottom_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_bottom_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_bottom_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_bottom_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_bottom_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_left_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_left_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_left_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_left_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_left_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_left_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_left_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_left_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_left_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_right_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_right_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_right_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_right_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_right_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_right_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_right_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_right_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_right_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_top_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_top_color: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_top_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_top_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_top_style: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_top_style ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_border_top_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_top_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_border_top_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_column_number ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_column_number: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_column_number ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_column_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_column_width: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_column_width ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_number_columns_repeated ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_number_columns_repeated: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_number_columns_repeated ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_number_columns_spanned ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_number_columns_spanned: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_number_columns_spanned ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_after ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_after: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_after ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_before ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_before: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_before ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_bottom ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_bottom: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_bottom ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_end ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_end: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_end ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_left ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_left: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_left ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_right ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_right: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_right ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_start ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_start: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_start ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_column_set_padding_top ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_padding_top: 
+
+
+<!-- ##### FUNCTION fo_table_column_get_padding_top ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+

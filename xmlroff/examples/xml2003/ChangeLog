@@ -1,0 +1,19 @@
+2004-10-20  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am, fixup.xsl: 'fixup.xsl' moved to 'libfo-compat.xsl'
+	in main directory.
+
+2003-12-18  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am: Makefile.am for running "XSL FO Chef's Tools
+	Exhibition" samples.
+
+	* fixup.xsl: Updated to better process more samples.
+
+2003-12-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* ChangeLog, README, Sample1.fo, Sample2.zip, Sample3.fo,
+	Sample4.fo.zip, Sample5.fo, Sample6.fo, Sample7.fo.gz,
+	Sample8.zip, fixup.xsl: Samples from XML 2003 "XSL FO Chef's Tools
+	Exhibition" and related files.
+

@@ -1,0 +1,196 @@
+<!-- ##### SECTION Title ##### -->
+fo-utils
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO _ ##### -->
+<para>
+
+</para>
+
+@String: 
+
+
+<!-- ##### MACRO N_ ##### -->
+<para>
+
+</para>
+
+@String: 
+
+
+<!-- ##### MACRO fo_propagate_and_return_if_error ##### -->
+<para>
+
+</para>
+
+@src: 
+@dest: 
+
+
+<!-- ##### MACRO fo_propagate_and_return_val_if_error ##### -->
+<para>
+
+</para>
+
+@src: 
+@dest: 
+@val: 
+
+
+<!-- ##### TYPEDEF FoDebugFlag ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_NONE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_DEBUG_RESULT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_DEBUG_FO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_DEBUG_AREA ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_DEBUG_PANGO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_DEBUG_PDF ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_DEBUG_MAX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### TYPEDEF FoWarningFlag ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_WARNING_NONE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_WARNING_FO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_WARNING_PROPERTY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_WARNING_UNSUPPORTED_PROPERTY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FO_WARNING_MAX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM FoEnumAreaDirection ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_AREA_DIRECTION_UNKNOWN: 
+@FO_ENUM_AREA_DIRECTION_LR: 
+@FO_ENUM_AREA_DIRECTION_RL: 
+@FO_ENUM_AREA_DIRECTION_TB: 
+@FO_ENUM_AREA_DIRECTION_BT: 
+
+<!-- ##### ENUM FoEnumFontStretch ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_STRETCH_ULTRA_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_EXTRA_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_SEMI_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_NORMAL: 
+@FO_ENUM_FONT_STRETCH_SEMI_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_EXTRA_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_ULTRA_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_WIDER: 
+@FO_ENUM_FONT_STRETCH_NARROWER: 
+
+<!-- ##### ENUM FoEnumFontStyle ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_STYLE_NORMAL: 
+@FO_ENUM_FONT_STYLE_ITALIC: 
+@FO_ENUM_FONT_STYLE_OBLIQUE: 
+@FO_ENUM_FONT_STYLE_BACKSLANT: 
+
+<!-- ##### ENUM FoEnumFontVariant ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_VARIANT_NORMAL: 
+@FO_ENUM_FONT_VARIANT_SMALL_CAPS: 
+

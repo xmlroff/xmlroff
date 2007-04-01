@@ -1,0 +1,81 @@
+<!-- ##### SECTION Title ##### -->
+Fofootnote-body
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoFootnoteBody ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoFootnoteBodyClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_footnote_body_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_footnote_body_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+
+<!-- ##### FUNCTION fo_footnote_body_set_role ##### -->
+<para>
+
+</para>
+
+@fo_footnote_body: 
+@new_role: 
+
+
+<!-- ##### FUNCTION fo_footnote_body_get_role ##### -->
+<para>
+
+</para>
+
+@fo_footnote_body: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_footnote_body_set_source_document ##### -->
+<para>
+
+</para>
+
+@fo_footnote_body: 
+@new_source_document: 
+
+
+<!-- ##### FUNCTION fo_footnote_body_get_source_document ##### -->
+<para>
+
+</para>
+
+@fo_footnote_body: 
+@Returns: 
+
+

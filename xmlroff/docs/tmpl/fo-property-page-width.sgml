@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-page-width
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyPageWidth ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyPageWidthClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_page_width_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_page_width_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

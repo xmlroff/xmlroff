@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-end-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderEndColor ##### -->
+<para>
+The #FoPropertyBorderEndColor structure represents one instance of the
+'border-end-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderEndColorClass ##### -->
+<para>
+The #FoPropertyBorderEndColorClass structure represents the type of
+the 'border-end-color' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_end_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_end_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

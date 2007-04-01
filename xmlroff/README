@@ -1,0 +1,90 @@
+This directory includes the xmlroff XSL Formatter.
+
+xmlroff is a fast, free, high-quality, multi-platform XSL formatter
+that aims to excel at DocBook formatting and that integrates easily
+with other programs and with scripting languages.
+
+The xmlroff XSL Formatter is a library -- libfo -- and a command-line
+program -- xmlroff -- for formatting XML according to the XSL 1.0
+Recommendation.
+
+See http://xmlroff.org/.
+
+To test xmlroff:
+
+   ./xmlroff xmlroff.fo
+
+PDF output is written to layout.pdf.
+
+xmlroff.fo documents the xmlroff command-line options and parameters,
+so you can use the formatted output as a guide for running xmlroff.
+
+
+Compatibility
+=============
+
+Details of the compatibility with the XSL 1.0 Specification of the
+current xmlroff version is shown in the xmlroff manual (see
+'./docs/html/index.html') and on the xmlroff website at
+http://xmlroff.org/conformance.html.
+
+Use the libfo-compat.xsl stylesheet (both built into xmlroff and
+installed when you installed xmlroff) to remove some of the formatting
+objects and properties that cause problems when using xmlroff.
+
+To invoke the built-in libfo-compat.xsl stylesheet when running
+xmlroff:
+
+   xmlroff --compat xmlroff.fo
+
+To write a copy of the built-in libfo-compat.xsl stylesheet:
+
+   xmlroff --compat-stylesheet > libfo-compat.xsl
+
+To get the location of the installed libfo-compat.xsl stylesheet:
+
+   pkg-config --variable=compat_stylesheet libfo-0.4
+
+
+Dependencies
+============
+
+libfo depends on GNOME Print, GDK, Pango, PangoXSL, libxml2, libxslt,
+GLib, and GObject.
+
+xmlroff distributions include a bundled copy of PangoXSL so you don't
+have to download it separately.
+
+If you are compiling the Cairo backend, libfo also depends on Cairo
+and on Pango 1.10 or later.
+
+Building libfo additionally requires Perl.
+
+The xmlroff executable additionally depends on popt.
+
+See the xmlroff website for further details.
+
+
+Building
+========
+
+See the file INSTALL for details.
+
+
+License
+=======
+
+The xmlroff XSL Formatter is licensed under the terms of a BSD-style
+license.  See the file COPYING for details.
+
+
+Mailing List
+============
+
+xmlroff and libfo are discussed on the
+xmlroff-list@lists.sourceforge.net mailing list.  See
+http://lists.sourceforge.net/lists/listinfo/xmlroff-list
+
+Tony Graham
+tonygraham@users.sourceforge.net
+30 May 2006

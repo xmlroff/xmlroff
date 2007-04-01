@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-source-document
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySourceDocument ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySourceDocumentClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_source_document_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_source_document_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

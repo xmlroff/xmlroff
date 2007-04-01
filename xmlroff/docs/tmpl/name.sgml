@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+Foname
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoName ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoNameClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_name_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_name_set_value ##### -->
+<para>
+
+</para>
+
+@name: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_name_get_value ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+

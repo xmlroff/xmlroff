@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+FoLayoutCairo
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoLayoutCairo ##### -->
+<para>
+
+</para>
+
+@parent_instance: 
+
+<!-- ##### STRUCT FoLayoutCairoClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### FUNCTION fo_layout_cairo_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_cairo_new_from_fo_doc ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+

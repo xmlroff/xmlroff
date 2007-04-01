@@ -1,0 +1,117 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-font-stretch
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumFontStretch ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_STRETCH_ULTRA_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_EXTRA_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_SEMI_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_NORMAL: 
+@FO_ENUM_FONT_STRETCH_SEMI_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_EXTRA_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_ULTRA_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_WIDER: 
+@FO_ENUM_FONT_STRETCH_NARROWER: 
+@FO_ENUM_FONT_STRETCH_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_STRETCH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyFontStretch ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyFontStretchClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_stretch_new_attr ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+content-height
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyContentHeight ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyContentHeightClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_content_height_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_content_height_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

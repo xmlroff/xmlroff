@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+extent
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyExtent ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyExtentClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_extent_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_extent_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

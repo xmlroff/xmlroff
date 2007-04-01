@@ -1,0 +1,1621 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Adobe submission for XSL-FO Chef's presentation at XML-2003 (Philadelphia). -->
+
+<fo:root
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:ext-fo="http://ns.adobe.com/Extended-XSL-FO/20031030/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    color="black"
+>
+
+    <fo:declarations>
+
+    </fo:declarations>
+
+    <fo:layout-master-set>
+
+        <fo:simple-page-master
+            master-name="first-page-master"
+            page-height="11in"
+            page-width="8.5in"
+            margin-top="0.25in"
+            space-after.optimum="0.25in"
+            space-start.optimum="0.25in"
+            space-end.optimum="0.25in"
+			background-color="rgb(176,196,222)"
+        >
+			<fo:region-body 
+				region-name="BodyFlow"
+				margin-top="1.5in"
+				margin-left="0in"
+				margin-right="0in"
+				margin-bottom="0.5in"
+				ext-fo:border-top-color="black"
+				ext-fo:border-start-color="rgb(0,128,0)"
+				ext-fo:border-end-color="red"
+				ext-fo:border-bottom-color="blue"
+				ext-fo:border-width=".25in"
+				ext-fo:border-style="solid"
+				ext-fo:padding=".25in"
+				background-color="white"
+				column-count="2"
+				column-gap="0.25in"
+				ext-fo:column-balancing="true"
+			/>
+
+			<fo:region-before 
+				region-name="Flag"
+				extent="1.25in"
+				ext-fo:padding="3pt"
+				background-color="white"
+            />
+           
+
+			<fo:region-after 
+				extent="0.25in"
+				ext-fo:padding="3pt"
+				background-color="white"
+            />
+             
+        </fo:simple-page-master>
+
+
+        <fo:simple-page-master
+            master-name="odd-page-master"
+            page-height="11in"
+            page-width="8.5in"
+            margin-top="0.25in"
+            space-after.optimum="0.25in"
+            space-start.optimum="0.25in"
+            space-end.optimum="0.25in"
+			background-color="rgb(176,196,222)"
+        >
+			<fo:region-body 
+				region-name="BodyFlow"
+				margin-top="0.625in"
+				margin-left="0.5in"
+				margin-right="0in"
+				margin-bottom="0.5in"
+				ext-fo:border-top-color="black"
+				ext-fo:border-start-color="rgb(0,128,0)"
+				ext-fo:border-end-color="red"
+				ext-fo:border-bottom-color="blue"
+				ext-fo:border-width=".25in"
+				ext-fo:border-style="solid"
+				ext-fo:padding=".25in"
+				background-color="white"
+				column-count="4"
+				column-gap="0.25in"
+				ext-fo:column-balancing="true"
+				reference-orientation="90"
+			/>
+
+			<fo:region-before 
+				extent="0.325in"
+				background-color="white"
+				precedence="true"
+				ext-fo:padding="3pt"
+				ext-fo:space-after="0.25in"
+            />        
+
+			<fo:region-after 
+				extent="0.25in"
+				background-color="white"
+				ext-fo:padding="3pt"
+            />
+
+			<fo:region-start 
+				extent="0.25in"
+				background-color="rgb(88,98,111)"
+				ext-fo:space-end="0.25in"
+            />
+            
+         </fo:simple-page-master>
+
+
+        <fo:simple-page-master
+            master-name="even-page-master"
+            page-height="11in"
+            page-width="8.5in"
+            margin-top="0.25in"
+            space-after.optimum="0.25in"
+            space-start.optimum="0.25in"
+            space-end.optimum="0.25in"
+			background-color="rgb(176,196,222)"
+        >
+			<fo:region-body 
+				region-name="BodyFlow"
+				margin-top="0.625in"
+				margin-left="0in"
+				margin-right="0.5in"
+				margin-bottom="0.5in"
+				ext-fo:border-top-color="black"
+				ext-fo:border-start-color="rgb(0,128,0)"
+				ext-fo:border-end-color="red"
+				ext-fo:border-bottom-color="blue"
+				ext-fo:border-width=".25in"
+				ext-fo:border-style="solid"
+				ext-fo:padding=".25in"
+				background-color="white"
+				column-count="2"
+				column-gap="0.25in"
+				ext-fo:column-balancing="true"
+			/>
+
+			<fo:region-before 
+				extent="0.325in"
+				ext-fo:padding="3pt"
+				background-color="white"
+            />
+           
+
+			<fo:region-after 
+				extent="0.25in"
+				background-color="white"
+				ext-fo:padding="3pt"
+            />
+            
+			<fo:region-end 
+				extent="0.25in"
+				background-color="rgb(88,98,111)"
+				ext-fo:space-start="0.25in"
+            />
+            
+        </fo:simple-page-master>
+        
+
+        <fo:page-sequence-master master-name="frame-pages">
+            <fo:repeatable-page-master-alternatives>
+                <fo:conditional-page-master-reference 
+                    page-position="first" 
+                    master-reference="first-page-master"
+                />
+                <fo:conditional-page-master-reference 
+                    odd-or-even="even" 
+                    master-reference="even-page-master"
+                />
+                <fo:conditional-page-master-reference 
+                    odd-or-even="odd" 
+                    master-reference="odd-page-master"
+                />
+            </fo:repeatable-page-master-alternatives>
+        </fo:page-sequence-master>
+        
+    </fo:layout-master-set>
+
+
+    <fo:page-sequence
+        master-reference="frame-pages"
+		format="i"
+    >
+                
+        <fo:static-content
+            flow-name="xsl-region-before"
+        >
+            <fo:block orphans="0" widows="0"
+                role="FeaHedFirst"
+                margin="0in"
+                line-height="30.0pt"
+                font-size="27.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+                span="all"
+            >What Is XSL-FO and When Should I Use It?</fo:block>
+
+         </fo:static-content>        
+
+        <fo:static-content
+            flow-name="xsl-region-after"
+        >
+            <fo:block orphans="0" widows="0"
+                role="PageNumber"
+                margin="0in"
+                line-height="10.0pt"
+                font-size="9.0pt"
+                font-family="Sabon"
+                font-style="italic"
+                color="rgb(0,0,128)"
+                span="all"
+            >Page: <fo:page-number /></fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="PageNumber"
+                margin="0in"
+                line-height="10.0pt"
+                font-size="9.0pt"
+                font-family="Sabon"
+                font-style="italic"
+                color="rgb(0,0,128)"
+                span="all"
+            ><fo:retrieve-marker retrieve-class-name="header-1"/></fo:block>
+
+        </fo:static-content>        
+
+        <fo:static-content
+            flow-name="Flag"
+        >
+            <fo:block orphans="0" widows="0"
+                role="FeaHedFirst"
+                margin="0in"
+                line-height="30.0pt"
+                font-size="27.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+                span="all"
+            >What Is XSL-FO and When Should I Use It?</fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Byline"
+                line-height="12.0pt"
+                font-size="12.0pt"
+                font-family="Sabon"
+                font-variant="small-caps"
+                font-weight="bold"
+                span="all"
+            >By Stephen Deach</fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="FeaDek"
+                text-align="justify"
+                margin-top="6.0pt"
+                margin-right="0in"
+                margin-bottom="12.0pt"
+                margin-left="0in"
+                line-height="12.0pt"
+                text-autospace="none"
+                font-size="11.0pt"
+                font-family="Memphis"
+                font-weight="450"
+                color="gray"
+                span="all"
+            >A spate of recent product announcements regarding XSL-FO raised
+                a number of questions in our minds: What is it? Which documents are a good fit
+                for XSL-FO?  Which aren't? What skills do publishers need to use 
+                XSL-FO? &#x2014; An
+                author of the XSL-FO spec, Stephen Deach of Adobe Systems, offers these
+                answers.
+            </fo:block>
+        </fo:static-content>        
+
+        <fo:flow
+            flow-name="BodyFlow" 
+            margin="0in"
+            text-align="justify"
+            line-height="12.0pt"
+            font-size="9.5pt"
+            font-family="Sabon"
+            xml:lang="en-us"
+            hyphenate="true"
+            widows="0"
+            orphans="0"
+        >
+            <fo:block orphans="0" widows="0"
+                role="P"
+                text-indent="0pt"
+				word-spacing.optimum="140%"
+				word-spacing.minimum="150%"
+				word-spacing.maximum="150%"
+            ><fo:marker marker-class-name="header-1">What Is XSL-FO and When Should I Use It?</fo:marker><fo:float
+                    role="drop"
+                    text-align="center" 
+                    float="left" 
+                    inline-progression-dimension.optimum="50pt"
+                    block-progression-dimension.optimum="19pt"
+                    background-color="white"
+                >
+                    <fo:block orphans="0" widows="0"
+                        font-family="Sabon"
+                        font-weight="normal"
+                        font-size="25pt"
+                        line-height="24pt"
+                        color="red"
+                        text-align="start" 
+                   >XSL</fo:block>
+                </fo:float><fo:float
+                    role="runaround"
+                    text-align="center" 
+                    float="right" 
+                    inline-progression-dimension.optimum="1in"
+                    block-progression-dimension.optimum="1.35in"
+                    background-color="white"
+                    border="black 1pt solid"
+                    padding="2pt"
+                >
+                    <fo:block orphans="0" widows="0"
+                        font-family="MyriadPro"
+                        font-weight="normal"
+                        font-size="7pt"
+                        line-height="1em"
+                        space-after.optimum="1pt"
+                        color="rgb(0,0,128)"
+                        text-align="left" 
+                   >XSL-FO provided by:</fo:block>
+                    <fo:block font-size="8pt"
+                        line-height="2pt"
+                        space-after.optimum="3pt"
+                        color="rgb(0,0,128)"
+                        text-align="center"
+                    ><fo:instream-foreign-object
+                            content-width="0.9in" 
+                            content-height="1.09in"
+                        >
+                            <svg:svg
+                                xmlns:svg="http://www.w3.org/2000/svg"
+                                width="90.609pt"
+                                height="109.078pt"
+                                viewBox="0 0 90.609 109.078"
+                                xml:space="preserve"
+                            >
+                                <svg:g
+                                    id="Layer_x0020_1" 
+                                    style="fill-rule:nonzero;clip-rule:nonzero;stroke:#000000;stroke-miterlimit:4;"
+                                >
+                                    <svg:path
+                                        style="fill:#FB0F0C;stroke:none;" 
+                                        d="M0.108,69.875H0V0.864h28.835L0.108,69.875z M39.851,56.051h-13.5l12.636-29.698l18.36,43.522H45.359l-5.508-13.824z M49.14,0.864h28.835v69.01h-0.108L49.14,0.864z"
+                                    />
+                                    <svg:path
+                                        style="stroke:none;"
+                                        d="M5.938,102.706l-1.188,6.048H0.324l5.508-25.056h5.399l4.967,25.056h-4.427l-1.188-6.048H5.938z M10.26,99.25l-0.864-5.399c-0.325-1.62-0.649-3.996-0.864-5.725H8.423c-0.324,1.729-0.647,4.213-0.971,5.725L6.479,99.25h3.781z
+                                        M30.779,83.051v20.52c0,1.62,0.107,3.672,0.107,5.184h-3.888l-0.215-2.052h-0.108c-0.647,1.296-2.052,2.376-3.779,2.376c-3.672,0-5.616-4.103-5.616-9.396c0-6.264,2.808-9.396,5.832-9.396c1.512,0,2.591,0.864,3.023,1.944h0.108v-9.18h4.537z M26.243,97.522
+                                        c0-0.324,0-0.647-0.108-1.08c-0.107-1.188-0.756-2.268-1.835-2.268c-1.835,0-2.484,2.591-2.484,5.616c0,3.564,0.973,5.508,2.376,5.508c0.756,0,1.512-0.324,1.944-1.837c0.108-0.215,0.108-0.647,0.108-1.08v-4.86z M33.262,99.683c0-6.48,3.349-9.396,6.913-9.396
+                                        c3.996,0,6.587,3.456,6.587,9.287c0,7.452-3.996,9.396-6.696,9.396c-4.211,0-6.804-3.347-6.804-9.287z M42.227,99.574c0-2.591-0.432-5.94-2.269-5.94c-1.835,0-2.268,3.349-2.268,5.94c0,3.025,0.541,5.94,2.376,5.94c1.729,0,2.161-3.24,2.161-5.94z M49.247,83.051
+                                        h4.535v9.504h0.108c0.864-1.403,2.052-2.268,3.779-2.268c3.349,0,5.077,3.888,5.077,8.963c0,6.372-2.484,9.828-5.833,9.828c-1.512,0-2.591-0.756-3.564-2.484h-0.107l-0.217,2.161h-3.888c0-1.512,0.108-3.564,0.108-5.184v-20.52z M53.782,102.274
+                                        c0,0.432,0.108,0.864,0.217,1.188c0.432,1.513,1.188,1.944,1.835,1.944c1.729,0,2.484-2.268,2.484-5.832c0-3.132-0.756-5.399-2.484-5.399c-0.864,0-1.62,0.971-1.835,1.944c-0.108,0.324-0.217,0.756-0.217,1.188v4.967z M69.01,101.194
+                                        c0.107,3.24,1.835,4.32,3.996,4.32c1.295,0,2.483-0.324,3.347-0.647l0.647,3.24c-1.295,0.539-3.023,0.863-4.859,0.863c-4.86,0-7.452-3.347-7.452-8.963c0-6.048,3.023-9.719,7.02-9.719c3.888,0,6.048,3.24,6.048,8.423c0,1.296-0.108,1.945-0.108,2.484h-8.64z
+                                        M73.654,97.954c0-2.483-0.756-4.32-2.161-4.32c-1.619,0-2.376,2.376-2.376,4.32h4.537z M85.749,0c2.808,0,4.86,2.052,4.86,4.752s-2.052,4.752-4.86,4.752c-2.483,0-4.752-2.052-4.752-4.752S83.266,0,85.749,0z M85.749,8.424c2.161,0,3.672-1.62,3.672-3.672
+                                        c0-2.051-1.512-3.671-3.672-3.671c-1.944,0-3.671,1.62-3.671,3.671c0,2.052,1.727,3.672,3.671,3.672z M84.993,7.452h-1.08V1.944h1.62c1.62,0,2.268,0.649,2.268,1.729c0,0.864-0.432,1.08-1.188,1.188c0.649,0.324,0.973,0.973,1.08,1.62l0.217,0.971h-0.973
+                                        L86.613,6.48c-0.215-0.541-0.432-1.188-1.08-1.188h-0.541v2.159z M84.993,4.428h0.541c0.541,0,1.188-0.108,1.188-0.756c0-0.541-0.432-0.864-1.188-0.864h-0.541v1.62z"
+                                    />
+                                </svg:g>
+                            </svg:svg>
+                        </fo:instream-foreign-object
+                    ></fo:block>
+                    <fo:block orphans="0" widows="0"
+                        font-family="CourierStd"
+                        font-weight="normal"
+                        font-size="8pt"
+                        line-height="10pt"
+                        space-before.optimum="4pt"
+                        text-align="right"
+                        color="blue"
+                        text-decoration="underline"
+                    ><fo:basic-link external-destination="http://www.adobe.com">www.adobe.com</fo:basic-link></fo:block>
+                </fo:float>stands for e<fo:wrapper color="red">X</fo:wrapper>tensible 
+                    <fo:inline color="red">S</fo:inline>tylesheet 
+                    <fo:inline-container baseline-shift="-2.5pt"
+								inline-progression-dimension.optimum="10pt"
+                                block-progression-dimension.optimum="10pt"
+								border="blue,0.1pt,solid"
+								background-color="yellow"
+                                color="red"
+								space-end="1pt">
+							<fo:block orphans="0" widows="0"
+								text-align="center"
+								space-before="0.5pt"
+							>L</fo:block></fo:inline-container>anguage.
+                    Unfortunately, the term XSL is occasionally used in both a generic and a
+                    specific sense, which leads to great
+					confusion.
+					<fo:leader 
+						leader-pattern="rule" 
+						leader-length="1.0in"
+						rule-style="dashed"
+					/>
+					Generically, XSL is actually a
+                    family of three Recommendations produced by the W3C's XSL Working Group: XSL
+                    Transformations (XSLT), XML Path Language (XPath), and Extensible Stylesheet
+                    Language (the specific use of 
+					XSL).
+					<fo:leader 
+						leader-pattern="dots" 
+						leader-length="1.0in" 
+					/>
+					To ease the confusion over the specific and
+                    generic uses of XSL, most people refer to the last specification (which
+                    actually specifies the formatting objects) as XSL-FO.</fo:block
+            >
+			<fo:block orphans="0" widows="0"
+                role="P"
+                text-indent="15pt"
+				word-spacing.minimum="25%"
+				word-spacing.optimum="25%"
+				word-spacing.maximum="30%"
+            >There is also significant confusion over
+                the differences between XSL-FO and CSS. CSS (Cascading Style Sheets) is an
+                external stylesheet language. It is used to apply styling to an XML or HTML
+                document by selecting elements in the document and attaching styling properties
+                to each selected element. In contrast, XSL-FO is a language for completely describing
+                a styled document, including its content organization, styling, layouts and
+                layout-selection rules&#x2009;&#x2014;&#x2009;everything needed to format and paginate it. To use it,
+                one applies an XSLT stylesheet (or some other mechanism) to the original XML or
+                XHTML document, transforming into an XSL-FO document, which is then fed to a
+                formatter.</fo:block
+            >
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+				span="all"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+            >XSL-FO's history and status <fo:marker marker-class-name="header-1">XSL-FO's history and status</fo:marker></fo:block>
+
+            <fo:block-container span="all" orphans="0" widows="0" role="P1" text-indent="0pt"
+				inline-progression-dimension="5in"
+				block-progression-dimension="108pt"
+                border-top-color="black"
+				border-start-color="rgb(0,128,0)"
+				border-end-color="red"
+				border-bottom-color="blue"
+				border-width=".25in"
+				border-style="solid"
+				padding=".125in"
+				space-after="6pt"
+            >
+				<fo:block
+					text-align="center"
+					linefeed-treatment="preserve"
+				>The XSL Working Group (XSL-WG) was initially chartered by the W3C
+					(World Wide Web Consortium) in January 1998. </fo:block>
+				<fo:block
+					space-before="4pt"
+					text-align="center"
+				>The
+				first official WG meeting was held in February 1998.</fo:block>
+            
+				<fo:block
+					space-before="4pt"
+					text-align="center"
+				>In early 1999, it was decided to split
+					XSLT and XPath out into separate specifications, since they are used in other
+					environments within W3C and could be made available sooner than the formatting
+					objects. These both became W3C recommendations<fo:inline linefeed-treatment="preserve">
+						</fo:inline>on November 16, 1999.</fo:block>
+
+				<fo:block
+					space-before="4pt"
+					text-align="center"
+				>The formatting portion became a W3C
+				recommendation on October 15, 2001.</fo:block>
+
+			</fo:block-container>
+
+			<fo:table
+				border="3pt,black,solid" 
+				padding="6pt"
+			>
+				<fo:table-column
+					column-width="0.75in" 
+					column-number="1"
+				/>
+				<fo:table-column 
+					column-width="5.25in" 
+					column-number="2"
+				/>
+
+				<fo:table-header>
+					<fo:table-row>
+
+						<fo:table-cell
+							border-bottom="0.5pt,red,solid"
+							display-align="middle"
+							number-columns-spanned="2"
+						>
+							<fo:block orphans="0" widows="0"
+								text-align="left"
+								line-height="9.5pt"
+								font-size="9.5pt"
+								font-family="Myriad Pro"
+								font-weight="800"
+								font-stretch="condensed"
+								color="rgb(0,0,128)"
+							>Why was XSL developed? </fo:block>
+							<fo:block
+								text-indent="0pt"
+							>When
+								the XSL-WG was formed, there were three significant issues with the existing
+								Web standards.
+							</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+				</fo:table-header>
+
+				<fo:table-footer>
+					<fo:table-row>
+
+						<fo:table-cell
+							border-top="0.5pt,red,solid"
+							display-align="middle"
+							number-columns-spanned="2"
+						>
+							<fo:block
+								text-indent="0pt"
+								text-align="center"
+							>These issues are described in this table.
+							</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+				</fo:table-footer>
+
+				<fo:table-body>
+					<fo:table-row>
+
+						<fo:table-cell
+							border-right="0.5pt,blue,solid"
+							border-bottom="0.5pt,blue,solid"
+							display-align="before"
+						>
+							<fo:block
+								space-before="4pt"
+								text-align="right"
+							>First</fo:block>
+						</fo:table-cell>
+
+						<fo:table-cell
+							border-bottom="0.5pt,blue,solid"
+						>
+							<fo:block>There 
+								was no language for describing the pagination of complex
+								documents on the Web. (Even today, when you print a 
+								document from the common-brand browsers, the line of 
+								text at the page boundary is often sliced in half. If this
+								happens in a picture, half the picture appears on the
+								first page and a blank box appears on the next page.)
+							</fo:block>
+
+							<fo:block orphans="0" widows="0" text-indent="15pt">CSS-2.0
+								added some basic support for pagination, but to this day
+								it has not been fully implemented in the common browsers.
+								Moreover, CSS will work only with documents whose content 
+								is organized the same way as the 
+								presentation&#x2009;&#x2014;&#x2009;no
+								skipped elements, no elements presented out of sequence, 
+								etc.
+							</fo:block>
+
+						</fo:table-cell>
+
+					</fo:table-row>
+
+            		<fo:table-row background-color="rgb(119,136,153)">
+
+						<fo:table-cell
+							border-right="0.5pt,blue,solid"
+							border-bottom="0.5pt,blue,solid"
+							border-top="0.5pt,blue,solid"
+							display-align="middle"
+						>
+
+							<fo:block
+								space-before="4pt"
+								text-align="center"
+							>Second</fo:block>
+
+						</fo:table-cell>
+
+						<fo:table-cell
+							border-bottom="0.5pt,blue,solid"
+							border-top="0.5pt,blue,solid"
+						>
+
+							<fo:block
+								orphans="0"
+								widows="0"
+							>There 
+								was no way to deal with long documents and complex layouts.
+								No Web standard could support things like tables of 
+								contents, top and bottom floats, footnotes, endnotes, 
+								indexes or multiple articles on a
+								page&#x2009;&#x2014;&#x2009;layouts 
+								that are common in newspaper, magazine or 
+								retail-catalog pages.
+							</fo:block>
+
+						</fo:table-cell>
+
+					</fo:table-row>
+
+					<fo:table-row>
+						<fo:table-cell
+							border-right="0.5pt,blue,solid"
+							border-top="0.5pt,blue,solid"
+							display-align="after"
+						>
+
+							<fo:block
+								space-before="4pt"
+								text-align="left"
+							>Third</fo:block>
+
+						</fo:table-cell>
+
+						<fo:table-cell
+							border-top="0.5pt,blue,solid"
+						>
+
+							<fo:block
+								orphans="0"
+								widows="0"
+							>The 
+								level of typography in CSS was not sufficient for print
+								documents. CSS was limited to what was needed for browsers 
+								and easy for the browser manufacturers to implement.
+							</fo:block>
+
+						</fo:table-cell>
+
+					</fo:table-row>
+				</fo:table-body>
+            </fo:table>
+
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+				span="all"
+            >Goals of the Working Group<fo:marker marker-class-name="header-1">Goals of the Working Group</fo:marker></fo:block>
+
+            <fo:block
+				orphans="0" 
+				widows="0" 
+				role="P1" 
+				text-indent="0pt"
+				span="all"
+			>To respond to the issues above, the
+            XSL-WG established a number of
+            goals for the design of XSLT and XSL-FO. I've summarized the
+			<fo:inline 
+				color="red" 
+				text-decoration="overline"
+				text-transform="lowercase"
+			>fOuR</fo:inline>
+			<fo:inline 
+				color="red" 
+				text-decoration="throughline"
+				text-transform="none"
+			>fIvE</fo:inline>
+			<fo:inline 
+				color="rgb(0,128,0)" 
+				text-decoration="underline"
+				text-transform="uppercase"
+			>sIx</fo:inline>
+			most important ones below.</fo:block>
+
+		<fo:list-block
+			span="all"
+		    provisional-distance-between-starts="1.25in"
+		    provisional-label-separation=".25in"
+		>
+			<fo:list-item start-indent="0.25in">
+				<fo:list-item-label
+				>
+					<fo:block orphans="0" widows="0"
+						end-indent="label-end()"
+						margin-top="12.0pt"
+						text-align="left"
+						line-height="12.0pt"
+						font-size="9.5pt"
+						font-family="Myriad Pro"
+						font-weight="800"
+						font-stretch="condensed"
+						color="rgb(0,0,128)">1. XML syntax.</fo:block>
+						span="all"
+				</fo:list-item-label>
+            
+				<fo:list-item-body orphans="0" widows="0" role="P1">
+					<fo:block
+						start-indent="body-start()"
+						span="all"
+					>XSLT and XSL-FO should
+						be expressed in a pure XML syntax. This has two significant
+						advantages: XSLT	and XSL-FO work with existing XML parsers, 
+						and they can be validated and
+						manipulated using existing XML tools.
+					</fo:block>
+				</fo:list-item-body>
+            </fo:list-item>
+
+
+			<fo:wrapper
+				text-decoration.overline="true"
+				text-decoration.underline="true"
+			>
+				<fo:list-item start-indent="0.25in">
+					<fo:list-item-label
+					>
+						<fo:block
+							orphans="0"
+							widows="0"
+							end-indent="label-end()"
+							margin-top="12.0pt"
+							text-align="left"
+							line-height="12.0pt"
+							font-size="9.5pt"
+							font-family="Myriad Pro"
+							font-weight="800"
+							font-stretch="condensed"
+							color="rgb(0,0,128)"
+							span="all"
+						>2. Declarative.</fo:block>
+					</fo:list-item-label>
+            
+					<fo:list-item-body>
+						<fo:block
+							start-indent="body-start()"
+							span="all"
+						>XSLT 
+							and XSL-FO should be declarative, a set of elements and attributes 
+							fully describing what the desired result looks like. (In contrast, 
+							a procedural language such as PostScript describes the algorithms 
+							that will yield the result.) Even though programming expressions 
+							are allowed in some attributes, there should be no requirement to 
+							use them and no requirement to use internal scripting.
+						</fo:block>
+					</fo:list-item-body>
+				</fo:list-item>
+			</fo:wrapper>
+
+			<fo:list-item start-indent="0.25in">
+				<fo:list-item-label
+				>
+					<fo:block
+						orphans="0"
+						widows="0"
+						end-indent="label-end()"
+						margin-top="12.0pt"
+						text-align="left"
+						line-height="12.0pt"
+						font-size="9.5pt"
+						font-family="Myriad Pro"
+						font-weight="800"
+						font-stretch="condensed"
+						color="rgb(0,0,128)"
+						span="all"
+					>3. Build on CSS.</fo:block>
+				</fo:list-item-label>
+            
+				<fo:list-item-body>
+					<fo:block
+						start-indent="body-start()"
+						span="all"
+					>XSL should extend
+						and augment CSS-2 to cover a different problem-space. At the same time, it
+						should share as many styling properties and as much of the formatting/layout
+						model from CSS as possible.</fo:block>
+
+					<fo:block
+						start-indent="body-start()"
+						orphans="0"
+						widows="0"
+						text-indent="15pt"
+						span="all"
+					>The extended problem-space includes support for paginated documents
+						with greater complexity than can be supported by decorating (attaching styling
+						attributes to) the original XML-content tree. For content-driven documents
+						(such as textbooks, manuals, contracts or industrial catalogs), XSL should add
+						support for features like the aforementioned footnotes, endnotes, floats,
+						indexes, tables of contents, odd and even page masters, insert pages, running
+						headers and footers, etc. It should also add support for layout-driven
+						documents such as newspapers, magazines, catalogs and brochures. Of course, it
+						should continue to support the scrolling-galley documents (browser documents)
+						that could be supported using CSS. 
+						<fo:footnote><fo:inline
+							font-style="italic"
+						>1</fo:inline><fo:footnote-body><fo:block font-style="italic" start-indent="0.5in" text-indent="-1em">The orignal version of the text in this sample appeared in:
+						<fo:inline
+							color="blue" 
+							text-decoration="underline"
+							><fo:basic-link external-destination="http://www.seyboldreports.com/TSR/free/0217/techwatch.html">The Seybold Report - Analyzing Publishing Technologies; Vol. 2, No. 17; Dec. 9, 2002</fo:basic-link></fo:inline
+						><fo:inline 
+							font-style="italic"
+							>. [Modifications have been made to this sample, please see the original.]</fo:inline
+						></fo:block></fo:footnote-body></fo:footnote><fo:footnote><fo:inline
+							font-style="italic"
+						>1</fo:inline><fo:footnote-body><fo:block font-style="italic" start-indent="0.5in" text-indent="-1em">For a more in-depth discussion of
+							layout-driven vs. content-driven documents, 
+							see my presentation from Seybold
+							San Francisco '98 at:
+						<fo:inline
+							color="blue" 
+							text-decoration="underline"
+							><fo:basic-link external-destination="http://www.seyboldreports.com/TSR/free/0217/sdeach.pdf">www.seyboldreports.com/TSR/free/0217/sdeach.pdf</fo:basic-link></fo:inline
+						><fo:inline 
+							font-style="italic"
+							>.</fo:inline
+						></fo:block></fo:footnote-body></fo:footnote>
+					</fo:block>
+				</fo:list-item-body>
+            </fo:list-item>
+
+
+			<fo:list-item start-indent="0.25in">
+				<fo:list-item-label
+				>
+					<fo:block orphans="0" widows="0"
+						end-indent="label-end()"
+						margin-top="12.0pt"
+						text-align="left"
+						line-height="12.0pt"
+						font-size="9.5pt"
+						font-family="Myriad Pro"
+						font-weight="800"
+						font-stretch="condensed"
+						color="rgb(0,0,128)"
+						span="all"
+					>4. Cross-media.</fo:block>
+				</fo:list-item-label>
+            
+				<fo:list-item-body>
+					<fo:block
+						start-indent="body-start()"
+						span="all"
+					>XSL should cover the
+						basic presentation requirements for most print uses; for a wide range of
+						display devices, including reflow or repagination for palmtop devices; and for
+						the accessibility requirements that are now mandated by many governments. 
+					</fo:block>
+
+					<fo:block
+						start-indent="body-start()"
+						text-indent="15pt"
+						span="all"
+					>To do this, it is necessary to provide a transformation mechanism to
+						reorganize and filter the content to present a better representation for each
+						desired medium and access requirement. This also makes it necessary to separate
+						out the layout designs and the pagination sequencing controls so that the same
+						stylized content can be placed in different layouts. 
+					</fo:block>
+
+					<fo:block
+						start-indent="body-start()"
+						text-indent="15pt"
+						span="all"
+					>The transformation mechanism should also provide a way to modify the
+						presentation (styling and layout) to support accessibility requirements such as
+						larger text or alternate fonts, black-on-white and white-on-black (or alternate
+						color schemes), alternate navigation and aural presentation.
+					</fo:block>
+				</fo:list-item-body>
+            </fo:list-item>
+
+
+			<fo:list-item start-indent="0.25in">
+				<fo:list-item-label
+				>
+					<fo:block orphans="0" widows="0"
+						end-indent="label-end()"
+						margin-top="12.0pt"
+						text-align="left"
+						line-height="12.0pt"
+						font-size="9.5pt"
+						font-family="Myriad Pro"
+						font-weight="800"
+						font-stretch="condensed"
+						color="rgb(0,0,128)"
+						span="all"
+					>5. Typographic quality.</fo:block>
+				</fo:list-item-label>
+            
+				<fo:list-item-body>
+					<fo:block
+						start-indent="body-start()"
+						span="all"
+					>XSL-FO should match or exceed the
+						typographic and layout features of existing
+						page formatters and should be compatible with their underlying formatting
+						models.
+					</fo:block>
+				</fo:list-item-body>
+            </fo:list-item>
+
+
+			<fo:list-item start-indent="0.25in">
+				<fo:list-item-label
+				>
+					<fo:block orphans="0" widows="0"
+						end-indent="label-end()"
+						margin-top="12.0pt"
+						text-align="left"
+						line-height="12.0pt"
+						font-size="9.5pt"
+						font-family="Myriad Pro"
+						font-weight="800"
+						font-stretch="condensed"
+						color="rgb(0,0,128)"
+						span="all"
+					>6. Multilingual market.</fo:block>
+				</fo:list-item-label>
+            
+				<fo:list-item-body>
+					<fo:block
+						start-indent="body-start()"
+						span="all"
+					>XSL-FO's multilingual support should include the use of Unicode and
+						the Unicode bidirectional rules. It should support a number of the special
+						composition features used in Asian and Middle Eastern languages, or at least to
+						make it easy to add them in the future. XSL-FO should also provides support for
+						the multilingual features of modern font technologies, such as OpenType fonts.
+					</fo:block>
+				</fo:list-item-body>
+            </fo:list-item>
+ 		</fo:list-block>
+
+
+           <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >Intended-use guidelines.<fo:marker marker-class-name="header-1">Intended-use guidelines</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">In addition
+            to the goals for the project, the Working Group also established some
+            guidelines or expectations for how XSL-FO would be used. Most important, XSL-FO
+            is explicitly <fo:inline font-style="italic">not</fo:inline> designed to be hand-authored. Rather, it is supposed
+            to be machine-generated through XSLT, scripting, and composition or design
+            applications. This is not a radical concept; today's dynamically published Web
+            sites routinely store their content in neutral XML and then machine-generate
+            the appropriate HTML for the target browser. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Though not a primary goal, it was expected that XSL-FO could also
+            serve as an interchange language for prestyled content. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                 font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >How close did XSL come to its initial goals?<fo:marker marker-class-name="header-1">How close did XSL come to its initial goals?</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">Since
+            it was necessary to make the final-feature decisions for XSL-FO far enough in
+            advance to allow for production of a CR (Candidate Recommendation) document, as
+            well as to allow for about a year of interoperability testing between several
+            independent implementations, the feature set was frozen in February 1999. In
+            order to meet a fall-1999 CR date, it was decided to deliver only
+            content-driven formatting in the initial release, deferring layout-driven
+            formatting, full internationalization and forms support to a later release. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">The initial spec for XSL-FO had basic support for multilingual
+            documents, including support for bidirectional and vertical writing modes.
+            There had been some overlapping work in other Working Groups dealing with full
+            internationalization and form fields, but these joint efforts were not far
+            enough along when XSL-FO became a candidate recommendation. Therefore, it was
+            necessary to defer support for full internationalization and forms. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Except for these deferrals, we met our original goals. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >Current activity<fo:marker marker-class-name="header-1">Current activity</fo:marker></fo:block>
+
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">Activity is ongoing, even as the XSL Working Group goes through the
+            process of rechartering. (Working Groups in the W3C are always chartered for a
+            finite agenda and a finite period of time.) On the XSL-FO side, the members are
+            in the process of following up on errors and omissions in the XSL 1.0 document.
+            They have published an errata document and responses to the questions posted to
+            the comment lists. They are proposing an XSL 1.1 document to correct errata and
+            make some additions to support dynamic documents. They are also gathering
+            requirements for XSL 2.0. </fo:block>
+
+ 			<fo:block-container
+                role="runaround"
+                text-align="center" 
+                float="left"
+				span="all"
+                inline-progression-dimension.optimum="8em"
+                block-progression-dimension.optimum="11.1em"
+                background-color="white"
+                border="black 1pt solid"
+                padding=".3em"
+				space-after.optimum="1em"
+            >
+                <fo:block
+                    font-family="MyriadPro"
+                    font-weight="normal"
+                    font-size=".75em"
+                    line-height="100%"
+                    space-after.optimum="2.0em"
+                    color="rgb(0,0,128)"
+                    text-align="left" 
+               >XSL-FO provided by:</fo:block>
+                <fo:block
+                    font-size="1em"
+                    line-height="2pt"
+                    space-after.optimum="0.8em"
+                    color="rgb(0,0,128)"
+                    text-align="center"
+                ><fo:instream-foreign-object
+                        content-width="6.6em" 
+                        content-height="8em"
+                    >
+                        <svg:svg
+                            xmlns:svg="http://www.w3.org/2000/svg"
+                            width="90.609pt"
+                            height="109.078pt"
+                            viewBox="0 0 90.609 109.078"
+                            xml:space="preserve"
+                        >
+                            <svg:g
+                                id="Layer_x0020_1" 
+                                style="fill-rule:nonzero;clip-rule:nonzero;stroke:#000000;stroke-miterlimit:4;"
+                            >
+                                <svg:path
+                                    style="fill:#FB0F0C;stroke:none;" 
+                                    d="M0.108,69.875H0V0.864h28.835L0.108,69.875z M39.851,56.051h-13.5l12.636-29.698l18.36,43.522H45.359l-5.508-13.824z M49.14,0.864h28.835v69.01h-0.108L49.14,0.864z"
+                                />
+                                <svg:path
+                                    style="stroke:none;"
+                                    d="M5.938,102.706l-1.188,6.048H0.324l5.508-25.056h5.399l4.967,25.056h-4.427l-1.188-6.048H5.938z M10.26,99.25l-0.864-5.399c-0.325-1.62-0.649-3.996-0.864-5.725H8.423c-0.324,1.729-0.647,4.213-0.971,5.725L6.479,99.25h3.781z
+                                    M30.779,83.051v20.52c0,1.62,0.107,3.672,0.107,5.184h-3.888l-0.215-2.052h-0.108c-0.647,1.296-2.052,2.376-3.779,2.376c-3.672,0-5.616-4.103-5.616-9.396c0-6.264,2.808-9.396,5.832-9.396c1.512,0,2.591,0.864,3.023,1.944h0.108v-9.18h4.537z M26.243,97.522
+                                    c0-0.324,0-0.647-0.108-1.08c-0.107-1.188-0.756-2.268-1.835-2.268c-1.835,0-2.484,2.591-2.484,5.616c0,3.564,0.973,5.508,2.376,5.508c0.756,0,1.512-0.324,1.944-1.837c0.108-0.215,0.108-0.647,0.108-1.08v-4.86z M33.262,99.683c0-6.48,3.349-9.396,6.913-9.396
+                                    c3.996,0,6.587,3.456,6.587,9.287c0,7.452-3.996,9.396-6.696,9.396c-4.211,0-6.804-3.347-6.804-9.287z M42.227,99.574c0-2.591-0.432-5.94-2.269-5.94c-1.835,0-2.268,3.349-2.268,5.94c0,3.025,0.541,5.94,2.376,5.94c1.729,0,2.161-3.24,2.161-5.94z M49.247,83.051
+                                    h4.535v9.504h0.108c0.864-1.403,2.052-2.268,3.779-2.268c3.349,0,5.077,3.888,5.077,8.963c0,6.372-2.484,9.828-5.833,9.828c-1.512,0-2.591-0.756-3.564-2.484h-0.107l-0.217,2.161h-3.888c0-1.512,0.108-3.564,0.108-5.184v-20.52z M53.782,102.274
+                                    c0,0.432,0.108,0.864,0.217,1.188c0.432,1.513,1.188,1.944,1.835,1.944c1.729,0,2.484-2.268,2.484-5.832c0-3.132-0.756-5.399-2.484-5.399c-0.864,0-1.62,0.971-1.835,1.944c-0.108,0.324-0.217,0.756-0.217,1.188v4.967z M69.01,101.194
+                                    c0.107,3.24,1.835,4.32,3.996,4.32c1.295,0,2.483-0.324,3.347-0.647l0.647,3.24c-1.295,0.539-3.023,0.863-4.859,0.863c-4.86,0-7.452-3.347-7.452-8.963c0-6.048,3.023-9.719,7.02-9.719c3.888,0,6.048,3.24,6.048,8.423c0,1.296-0.108,1.945-0.108,2.484h-8.64z
+                                    M73.654,97.954c0-2.483-0.756-4.32-2.161-4.32c-1.619,0-2.376,2.376-2.376,4.32h4.537z M85.749,0c2.808,0,4.86,2.052,4.86,4.752s-2.052,4.752-4.86,4.752c-2.483,0-4.752-2.052-4.752-4.752S83.266,0,85.749,0z M85.749,8.424c2.161,0,3.672-1.62,3.672-3.672
+                                    c0-2.051-1.512-3.671-3.672-3.671c-1.944,0-3.671,1.62-3.671,3.671c0,2.052,1.727,3.672,3.671,3.672z M84.993,7.452h-1.08V1.944h1.62c1.62,0,2.268,0.649,2.268,1.729c0,0.864-0.432,1.08-1.188,1.188c0.649,0.324,0.973,0.973,1.08,1.62l0.217,0.971h-0.973
+                                    L86.613,6.48c-0.215-0.541-0.432-1.188-1.08-1.188h-0.541v2.159z M84.993,4.428h0.541c0.541,0,1.188-0.108,1.188-0.756c0-0.541-0.432-0.864-1.188-0.864h-0.541v1.62z"
+                                />
+                            </svg:g>
+                        </svg:svg>
+                    </fo:instream-foreign-object
+                ></fo:block>
+            </fo:block-container>
+
+           <fo:block orphans="0" widows="0" role="P" text-indent="15pt">On the XSLT and XPath side, the WG is in the process of developing
+            version 2.0. It has recently published updated working drafts on each of these. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >Future directions.<fo:marker marker-class-name="header-1">Future directions</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">The first priority is to
+            correct problems discovered in the current document. Then, it is certainly
+            expected that the XSL WG will address the capabilities that were deferred from
+            XSL 1.0 due to time limitations. These include layout-driven documents, full
+            internationalization and named stylesets. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >Why and when should I use XSL-FO?<fo:marker marker-class-name="header-1">Why and when should I use XSL-FO?</fo:marker></fo:block>
+
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">I frequently get asked, "Given CSS, why do I need XSL-FO?" Another
+            common question is, "Given the wonderful WYSIWYG composition tools we already
+            have, many of which can process XML, why bother with XSL-FO?" Some questioners
+            also note that CSS and XSL stylesheets are arguably harder to write (and
+            certainly less designer-friendly) than the nice GUIs of composition programs
+            such as FrameMaker and InDesign. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">If I ever publish a book on composition technology, I'm going to
+            subtitle it, "There is never just one right way." The requirements of the
+            publishing industry are broad and diverse. Some documents require the creative
+            professional to interactively modify the layout, the content and the typography
+            to get an acceptable result; other documents are best generated and formatted
+            on demand using rule-based systems. XSL-FO is designed to fill a hole in the
+            format-on-demand sector of this industry; thus it is an ideal fit for
+            batch-pagination products such as Adobe Document Server. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">The requirements of the format-on-demand sector are quite different
+            from those addressed by interactive, WYSIWYG composition tools such as FrameMaker
+            and InDesign. Today's WYSIWYG composition tools are very good at creating and
+            perfecting individual documents, which is the primary thrust of much of the
+            traditional publishing industry. In these WYSIWYG products, the content and
+            styling and layout are tightly bound within the document, so reflowing the
+            document to an alternate medium (display vs. paper, displays with differing
+            sizes or form-factors) is difficult. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Another area where WYSIWYG tools are not so good is producing
+            thousands of documents whose content is pulled from a database and poured into
+            templates. Examples include insurance policies, contracts, manuals, mail-order
+            catalogs with regional or demographic variations, and textbooks and teaching
+            aids with state-by-state or school-district-specific variations. In
+            circumstances like these, the important issue is the ease with which whole
+            collections of documents can be given a common look and feel. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+            >Where interactive is best.<fo:marker marker-class-name="header-1">Where interactive is best.</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">There
+            are two situations that are best handled by interactive desktop-composition
+            software: when a designer needs creative control of the layout, and when a
+            writer or illustrator needs to work on the content while simultaneously viewing
+            or modifying its layout. In magazine production, page design is often complex
+            and multilayered, and the
+            layout for each page is uniquely tailored to the content. (Often, both the
+            content and the layout will be adjusted repetitively to get the desired
+            result.) In brochure production, the graphics and the layout may be produced at
+            the same time and changes in one influence the other. In newspaper production,
+            content is often edited to fit an exact space. In these situations, interactive
+            composition tools like Adobe InDesign and Adobe InCopy are proper choices. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">The workflow for creating technical documentation (and other types
+            of long documents) is rather different; because of the volume of the content,
+            the styling and layout are often applied via rules. The styling provides the
+            reader with visual cues of the content's organization and the specific meaning
+            of some text (such as commands or language scripts), so it helps the author's
+            creativity and improves the document's quality if the author can see the
+            content being styled as it is written and edited. And it also helps to see the
+            pages laid out as a reader would see them, as this allows minor adjustments to
+            be made to improve the overall result. Therefore, using interactive composition
+            software for such publications still makes sense, although the ideal tools
+            would still start with a rules-based approach to page layout; this is the
+            approach taken in Adobe FrameMaker. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+            >Where XSL-FO is best.<fo:marker marker-class-name="header-1">Where XSL-FO is best.</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">There are
+            situations, however, where interactive composition is impossible. Examples
+            include generating content-driven documents in response to individual customer
+            requests (perhaps coming to your Web server) or variations of a document to
+            match different demographic sectors. In such situations, XSL-FO running in a
+            product like Adobe Document Server is the proper choice. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Although the range of applications is expected to grow over time, at
+            this point a server-based XSL-FO solution is useful for producing documents
+            such as: </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Bul"
+                start-indent="15pt"
+                space-before="6pt"
+                space-after="6pt"
+            ><fo:inline font-weight="bold" font-style="italic">Financial-planning guides.</fo:inline> These are custom
+            reports that recommend stocks, bonds and mutual funds, each with an associated
+            prospectus. The versioning is specific to each customer, financial planner and
+            stockbroker. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Bul"
+                start-indent="15pt"
+                space-before="6pt"
+                space-after="6pt"
+            ><fo:inline font-weight="bold" font-style="italic">Owner and maintenance manuals.</fo:inline> Increasingly,
+            these are generated based on a specific user request and customized to include
+            only the information that is relevant to the customer's model or serial number. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Bul"
+                start-indent="15pt"
+                space-before="6pt"
+                space-after="6pt"
+            ><fo:inline font-weight="bold" font-style="italic">Legal agreements and contracts.</fo:inline> Initially,
+            paralegals will produce a <fo:inline font-style="italic">pro forma</fo:inline> contract with boilerplate from a
+            legal-agreement database. During the negotiations, they repeatedly produce
+            documents that represent the current state of the contract with all information
+            up to date and in one place. Only at the very end do they produce an &quot;as
+            signed&quot; archival version with the terms that were accepted by the
+            principals. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Another important goal is to print uniquely
+            created content that
+            takes graphics and text from the same neutral XML content sources that are
+            driving dynamic publishing on the Web. XSL-FO, in conjunction with its
+            companion XML specification SVG, gives a clear way to unite Web-oriented
+            dynamic publishing tools and print. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+            >XSL-FO vs. an existing batch solution.<fo:marker marker-class-name="header-1">XSL-FO vs. an existing batch solution.</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">If you have a batch system that you are happy with, today
+            is not the day you want to move it to XSL-FO. In fact, since you have a tested
+            solution and your people are trained on how to use it and how to work on it,
+            you may not ever want to migrate it to
+            XSL-FO. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">On the other hand, if you do not currently have a batch solution, if
+            you are looking at a new problem, or if you are expanding into new markets;
+            then the decision becomes more difficult. Many of the batch vendors will be adding
+            support for XSL-FO as an adjunct to their native formatting language or their
+            built-in XML solution. (A sidebar on describes some of today's products.) The decision comes down to the fit of a
+            particular language and workflow to the problem at hand. This must be evaluated
+            on a case-by-case basis. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">I can give only some general suggestions. The process can be
+            divided roughly into two categories: preparing your content for composition,
+            and matching your formatting requirements to composition functionality. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Content preparation usually entails a conversion from some original
+            data format into something you can feed to the XSL-FO formatter. You will need
+            to do one of three things: Write a program in a traditional programming
+            language, write a script in one of the many scripting languages, or use XSLT.
+            Your choice must be based on the skills you have available or can acquire. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Matching your composition problem to the styling mechanism requires
+            first that you find a formatting engine that covers the functional requirements
+            you have. Then you must evaluate the language and styling mechanism that you
+            use to direct that engine. (Do you really need every feature of the composition
+            engine or of the styling language? Probably not.) If your suppliers are
+            providing the styled input, you must also
+            evaluate the language and styling mechanism based on their abilities. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">As I said before, different solutions work best for different
+            problems. Some people will be more comfortable in an XML-tools and XSLT
+            environment, others in a programming-language or script-based conversion
+            environment. Some will be more comfortable moving through an intermediate
+            language such as XSL-FO, while others will be more comfortable driving their
+            batch system in its native language. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >How do I get started?<fo:marker marker-class-name="header-1">How do I get started?</fo:marker></fo:block>
+
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">XSL-FO is now in the "early-adopter" phase. This means the user
+            must have higher skills than will be required once it becomes well established.
+            Fortunately, the people who are already working with server-based
+            document-production systems probably have most of the necessary core expertise.
+            </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">For those that want to move into the use of XSL- FO, I'm going to
+            point you to the W3C's XSL Web page (see sidebar). I suggest you look at the tutorials on
+            XSLT and XSL-FO that are cited there and choose the one that seems a best-fit
+            for your level of understanding and for your usage environment. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >The tools are coming, the tools are coming . . . </fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">It
+            is not intended that XSL-FO be manually created in a basic text editor (the way
+            most early HTML and CSS was created). Instead, it is expected that a wide
+            variety of authoring tools will become available over the next few years. Some
+            of these will evolve from basic database-driven tools that run scripts or XSLT
+            to produce the XSL-FO. Others will be plug-ins for today's interactive
+            composition tools that allow you to capture the stylesheets and flow the
+            content. Eventually, there will be interactive tools designed specifically for
+            creating XSLT stylesheets and XSL-FO stylesheet components. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >Hand-authoring XSLT and XSL-FO.<fo:marker marker-class-name="header-1">Hand-authoring XSLT and XSL-FO.</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">As
+            noted above, XSLT and XSL-FO were designed for machine generation, not manual
+            authoring. Nevertheless, authoring is not impossible to do. Since it is an
+            XML-syntax, XSL-FO can be created through nearly any of the XML editing tools.
+            Once you get through the initial learning curve, it is not significantly more
+            difficult to author XSLT than it is to author CSS-2 selector rules of equal
+            sophistication. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">The mapping from XML+CSS to XSL-FO is pretty straightforward. For
+            nearly all values of the CSS "display" property, the display property's value
+            becomes the XSL-FO element tag. The XML element tag becomes the value of the
+            XSL-FO role property, and the remaining properties are changed from CSS's
+            <fo:inline
+                role="CodeFragment"
+                font-family="Courier Std"
+                font-size="9pt"
+                font-weight="bold"
+            >style="name:value"</fo:inline>
+            syntax to XML's
+            <fo:inline
+                role="CodeFragment"
+                font-family="Courier Std"
+                font-size="9pt"
+                font-weight="bold"
+            >name="value"</fo:inline>
+            syntax. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Converting HTML+CSS adds only one further task: One must provide
+            explicit styling properties for each HTML element tag that has implicit
+            properties. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">In content-driven print-production environments that have
+            hierarchical styling models (such as those commonly used with SGML), users will
+            have no trouble adapting to the use of XSL-FO. It is only necessary to learn
+            XSL-FO's element names, attribute names and attribute-value names. </fo:block>
+
+            <fo:block orphans="0" widows="0" role="P" text-indent="15pt">Those people who are currently using traditional markup languages
+            (originating in the late 1960s and remaining the primary formatting language
+            model through the mid-1980s) will need to learn to adapt to a hierarchical
+            model. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Leadin"
+                ext-fo:span="runin"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                text-align="left"
+                line-height="12.0pt"
+                font-size="9.5pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+            >Patience, patience.<fo:marker marker-class-name="header-1">Patience, patience</fo:marker></fo:block>
+            
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">XSL-FO has been a
+            recommendation for only about a year. We are just starting to see the first
+            tools come on the market that simplify its authoring. This is about the same
+            rate of progress as with later versions of HTML, and is faster than we saw with
+            CSS. It took about four years for CSS-1 to be fully adopted. As Web standards
+            become more sophisticated, the adoption rates become slower. For example, the
+            adoption of the majority of CSS-2 is progressing at a somewhat slower rate than
+            CSS-1. Therefore, I expect the significant adoption of XSL-FO to develop over a
+            three-to-five-year time frame. </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+                color="rgb(0,0,128)"
+            >Conclusion<fo:marker marker-class-name="header-1">Conclusion</fo:marker></fo:block>
+
+            <fo:block orphans="0" widows="0" role="P1" text-indent="0pt">XSL is a set of three W3C Recommendations
+            (commonly referred to as
+            XSLT, XPath and XSL-FO) that define a stylesheet language for producing
+            format-on-demand documents. It is not a replacement for your WYSIWYG authoring
+            tools, but it is useful for some problems, such as very large documents or
+            those derived from database content, that are not well served by the current
+            tools. Or at least it will be. At this time, one year after XSL-FO was accepted
+            by the W3C, there are not a large number of tools to make authoring of XSL-FO
+            easy. They are beginning to appear, though, and we have recently seen a flurry
+            of announcements. Today, XSL is most useful if you need to produce
+            customer-tailored, paginated documents on a server. I expect this to broaden
+            over the next few years.</fo:block>
+
+
+            <fo:block orphans="0" widows="0"
+                role="H1"
+                keep-with-next="always"
+                margin-top="12.0pt"
+                margin-right="0in"
+                margin-bottom="0in"
+                margin-left="0in"
+                line-height="12.0pt"
+                font-size="11.0pt"
+                font-family="Myriad Pro"
+                font-weight="800"
+                font-stretch="condensed"
+               color="rgb(0,0,128)"
+            >About the Author </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                role="Captionrt"
+                margin="0in"
+                margin-bottom=".0001pt"
+                line-height="10.0pt"
+                punctuation-wrap="simple"
+                text-autospace="none"
+                font-size="7.0pt"
+                font-family="Myriad Pro"
+                font-weight="normal"
+                font-stretch="normal"
+            >Stephen Deach is a Senior Computer Scientist at Adobe
+            Systems. He has represented Adobe on the W3C-XSL Working Group and was editor
+            of the formatting objects portion of the XSL specifications during most of the
+            development of XSL-FO. He has been a speaker at a number of Seybold conferences
+            and has written an article on font-hinting technology
+            for <fo:inline font-style="italic">The Seybold Report
+            on Desktop Publishing (see Vol. 6, No. 7).</fo:inline> At Adobe, he has worked on
+            Illustrator, FrameMaker, Acrobat and the Adobe Document Server.</fo:block>
+            <fo:block orphans="0" widows="0"
+                role="Captionrt"
+                margin="0in"
+                margin-bottom=".0001pt"
+                line-height="10.0pt"
+                punctuation-wrap="simple"
+                text-autospace="none"
+                font-size="7.0pt"
+                font-family="Myriad Pro"
+                space-before="3pt"
+                space-after="3pt"
+                font-weight="normal"
+                font-stretch="normal"
+            >Contact him 
+				at <fo:inline 
+					color="blue" 
+					text-decoration="underline"
+				>sdeach@adobe.com</fo:inline
+				>.
+            </fo:block>
+
+            <fo:block orphans="0" widows="0"
+                font-size="2pt"
+                line-height="2pt"
+                space-after.optimum="2pt"
+                color="black"
+                text-align="center"
+                span="none"
+            ><fo:leader
+               leader-pattern="rule" 
+               leader-length="1.5in" 
+               rule-style="solid"
+               rule-thickness="0.25pt"
+            /></fo:block>
+			<fo:multi-switch>
+				<fo:multi-case
+					starting-state="hide"
+					case-name="case-1"
+					case-title="case-1"
+				>
+					<fo:block orphans="0" widows="0"
+						role="EndSlug"
+						line-height="7pt"
+						font-size="7pt"
+						font-family="Sabon"
+						font-style="italic"
+						font-weight="normal"
+						color="black"
+						span="none"
+						text-align="center"
+					>&#x2014;&#x2009;end&#x2009;&#x2014;</fo:block>
+				</fo:multi-case>
+				<fo:multi-case
+					starting-state="show"
+					case-name="case-2"
+					case-title="case-2"
+				>
+					<fo:block orphans="0" widows="0"
+						role="EndSlug"
+						line-height="7pt"
+						font-size="7pt"
+						font-family="Sabon"
+						font-style="italic"
+						font-weight="normal"
+						color="red"
+						span="none"
+						text-align="center"
+					>&#x2014;&#x2009;You should not see red!&#x2009;&#x2014;</fo:block>
+				</fo:multi-case>
+			</fo:multi-switch>
+            <fo:block orphans="0" widows="0"
+                font-size="2pt"
+                line-height="2pt"
+                space-after.optimum="0pt"
+                color="black"
+                text-align="center"
+                span="none"
+            ><fo:leader
+               leader-pattern="rule" 
+               leader-length="1.5in" 
+               rule-style="solid"
+               rule-thickness="0.25pt"
+            /></fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>
+

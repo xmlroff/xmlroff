@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-keep-with-previous-within-page
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyKeepWithPreviousWithinPage ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyKeepWithPreviousWithinPageClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_page_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_page_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-score-spaces
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyScoreSpaces ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyScoreSpacesClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_score_spaces_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_score_spaces_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

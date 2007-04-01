@@ -1,0 +1,116 @@
+<!-- ##### SECTION Title ##### -->
+FoArea
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION fo_area_set_page ##### -->
+<para>
+
+</para>
+
+@fo_area: 
+@page_area: 
+
+
+<!-- ##### FUNCTION fo_area_set_reference ##### -->
+<para>
+
+</para>
+
+@fo_area: 
+@reference_area: 
+
+
+<!-- ##### FUNCTION fo_area_set_page_sequence ##### -->
+<para>
+
+</para>
+
+@fo_area: 
+@page_sequence_area: 
+
+
+<!-- ##### FUNCTION fo_area_set_is_first ##### -->
+<para>
+
+</para>
+
+@fo_area: 
+@new_is_first: 
+
+
+<!-- ##### FUNCTION fo_area_set_is_last ##### -->
+<para>
+
+</para>
+
+@fo_area: 
+@new_is_last: 
+
+
+<!-- ##### ARG FoArea:page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:page-sequence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:is-first ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:is-last ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:next-x ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:next-y ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:available-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:available-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:child-available-ipdim ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:child-available-bpdim ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoArea:generated-by ##### -->
+<para>
+
+</para>
+

@@ -1,0 +1,123 @@
+<!-- ##### SECTION Title ##### -->
+FoXmlDoc
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_XML_DOC_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_xml_doc_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoXmlDocError ##### -->
+<para>
+
+</para>
+
+@FO_XML_DOC_ERROR_FAILED: 
+@FO_XML_DOC_ERROR_FILENAME_PARSE_FAILED: 
+@FO_XML_DOC_ERROR_MEMORY_PARSE_FAILED: 
+@FO_XML_DOC_ERROR_NO_FILENAME: 
+
+<!-- ##### STRUCT FoXmlDoc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_xml_doc_new_from_filename ##### -->
+<para>
+
+</para>
+
+@filename: 
+@libfo_context: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xml_doc_new_from_memory ##### -->
+<para>
+
+</para>
+
+@buffer: 
+@size: 
+@URL: 
+@encoding: 
+@libfo_context: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xml_doc_new_from_string ##### -->
+<para>
+
+</para>
+
+@curr: 
+@URL: 
+@encoding: 
+@libfo_context: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xml_doc_ref ##### -->
+<para>
+
+</para>
+
+@fo_xml_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xml_doc_unref ##### -->
+<para>
+
+</para>
+
+@fo_xml_doc: 
+
+
+<!-- ##### FUNCTION fo_xml_doc_get_base ##### -->
+<para>
+
+</para>
+
+@fo_xml_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_xml_doc_set_base ##### -->
+<para>
+
+</para>
+
+@fo_xml_doc: 
+@URL: 
+
+

@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+Foboolean
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoBoolean ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoBooleanClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_boolean_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_boolean_set_value ##### -->
+<para>
+
+</para>
+
+@boolean: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_boolean_get_value ##### -->
+<para>
+
+</para>
+
+@boolean: 
+@Returns: 
+
+

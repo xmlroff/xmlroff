@@ -1,0 +1,97 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-space-end-precedence
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumSpaceEndPrecedence ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_SPACE_END_PRECEDENCE_FORCE: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_SPACE_END_PRECEDENCE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertySpaceEndPrecedence ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceEndPrecedenceClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_end_precedence_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_precedence_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_precedence_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_precedence_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_precedence_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_end_precedence_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

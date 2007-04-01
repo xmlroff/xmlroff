@@ -1,0 +1,125 @@
+<section id="basic-interface">
+<sectioninfo>
+<title>Basic Interface</title>
+<abstract><para>Using the basic interface</para></abstract>
+</sectioninfo>
+
+<section>
+<title>Overview</title>
+
+<para>The libfo basic interface defined in
+<filename>fo-lifo-basic.h</filename> provides a high-level interface to the
+formatter while hiding the use of GObjects.</para>
+
+  </section>
+
+<section>
+<title>Lifecycle</title>
+
+<para>The lifecycle is init&ndash;format&ndash;shutdown.</para>
+
+<section>
+<title>Initialise</title>
+
+<para>There are two ways to initialise the basic formatter.  The first
+way leaves memory allocation under the control of the formatter.  The
+second way allows the calling program to provide the functions to
+be used for allocating, reallocating, and freeing memory.</para>
+
+<programlisting>gboolean         fo_libfo_init (void);
+
+typedef  gpointer (*FoMalloc)      (gsize    n_bytes);
+typedef  gpointer (*FoRealloc)     (gpointer mem,
+				    gsize    n_bytes);
+typedef  void     (*FoFree)        (gpointer mem);
+
+gboolean         fo_libfo_init2 (FoMalloc  fo_malloc,
+				 FoRealloc fo_realloc,
+				 FoFree    fo_free);</programlisting>
+
+<para>In both cases, the return value is an indication of whether or
+not the formatter was successfully initialised.  The functions return
+<literal>TRUE</literal> on success, and <literal>FALSE</literal> on
+failure.</para>
+
+</section>
+
+<section>
+<title>Format</title>
+
+<para>There is one function for performing the formatting.  The inputs
+are:
+
+</para>
+
+<variablelist>
+<varlistentry>
+<term>libfo_context</term>
+<listitem><para>Information controlling the formatting.  See below.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>xml</term>
+<listitem><para>The filename of the input XML file.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>xslt</term>
+<listitem><para>The filename of the stylesheet file to apply.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>out</term>
+<listitem><para>The filename of the output PDF or PostScript file.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>error</term>
+<listitem><para>Indication of any error that occured.</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>The return value is an indication of the success or failure of
+the formatting.  The function returns <literal>TRUE</literal> on
+success, and <literal>FALSE</literal> on failure.  When the return
+value is <literal>FALSE</literal>, the <varname>error</varname> value
+contains information about any error that occurred.</para>
+
+<programlisting>gboolean         fo_libfo_format (FoLibfoContext *libfo_context,
+				  const gchar    *xml,
+				  const gchar    *xslt,
+				  const gchar    *out,
+				  GError        **error);</programlisting>
+
+</section>
+
+<section>
+<title>Shutdown</title>
+
+<para>There is one function for shutting down the formatter.</para>
+
+<programlisting>gboolean         fo_libfo_shutdown (void);</programlisting>
+
+<para>The return value is an indication of the success or failure of
+the formatting.  The function returns <literal>TRUE</literal> on
+success, and <literal>FALSE</literal> on failure.  However, if the
+shutdown does fail, there isn't a whole lot that you can then
+do.</para>
+
+</section>
+
+  </section>
+
+<section>
+<title><classname>FoLibfoContext</classname></title>
+
+<para>You can use a <classname>FoLibfoContext</classname> to control
+aspects of the formatting, including:</para>
+
+<itemizedlist>
+<listitem><para>Output format (currently ignored).</para></listitem>
+<listitem><para>Font embedding (currently ignored).</para></listitem>
+<listitem><para>Validation of input XML document.</para></listitem>
+<listitem><para>Use or non-use of SGML catalogs when parsing inputs.</para></listitem>
+<listitem><para>Warning mode.</para></listitem>
+<listitem><para>Debug mode.</para></listitem>
+</itemizedlist>
+</section>
+
+</section>

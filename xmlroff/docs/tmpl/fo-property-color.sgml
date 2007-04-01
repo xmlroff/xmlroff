@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyColor ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyColorClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

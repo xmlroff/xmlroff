@@ -1,0 +1,53 @@
+<!-- ##### SECTION Title ##### -->
+Folength
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoLength ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoLengthClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_length_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_get_value ##### -->
+<para>
+
+</para>
+
+@length: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_get_length_zero ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+fo-float
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoFloat ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoFloatClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_float_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_float_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+

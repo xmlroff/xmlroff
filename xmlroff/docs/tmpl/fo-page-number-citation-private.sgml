@@ -1,0 +1,311 @@
+<!-- ##### SECTION Title ##### -->
+FoPageNumberCitation
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:alignment-adjust ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:alignment-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:baseline-shift ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:dominant-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:font-family ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:font-stretch ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:font-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:font-variant ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:font-weight ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:line-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:score-spaces ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:space-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:space-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageNumberCitation:wrap-option ##### -->
+<para>
+
+</para>
+

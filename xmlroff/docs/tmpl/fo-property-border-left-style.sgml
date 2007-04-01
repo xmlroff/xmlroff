@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-left-style
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderLeftStyle ##### -->
+<para>
+The #FoPropertyBorderLeftStyle structure represents one instance of the
+'border-left-style' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderLeftStyleClass ##### -->
+<para>
+The #FoPropertyBorderLeftStyleClass structure represents the type of
+the 'border-left-style' XSL property.
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_left_style_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_left_style_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+fo-uri-specification
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoUriSpecification ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoUriSpecification:value ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoUriSpecificationClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_uri_specification_new_with_value ##### -->
+<para>
+
+</para>
+
+@new_value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_uri_specification_get_value ##### -->
+<para>
+
+</para>
+
+@uri_specification: 
+@Returns: 
+
+

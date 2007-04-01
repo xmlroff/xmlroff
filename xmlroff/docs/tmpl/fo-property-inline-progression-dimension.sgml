@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-inline-progression-dimension
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyInlineProgressionDimension ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyInlineProgressionDimensionClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_inline_progression_dimension_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_inline_progression_dimension_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

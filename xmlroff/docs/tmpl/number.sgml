@@ -1,0 +1,62 @@
+<!-- ##### SECTION Title ##### -->
+Fonumber
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoNumber ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoNumberClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_number_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_number_set_value ##### -->
+<para>
+
+</para>
+
+@number: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_number_get_value ##### -->
+<para>
+
+</para>
+
+@number: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_number_get_number_one ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-left-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderLeftColor ##### -->
+<para>
+The #FoPropertyBorderLeftColor structure represents one instance of the
+'border-left-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderLeftColorClass ##### -->
+<para>
+The #FoPropertyBorderLeftColorClass structure represents the type of
+the 'border-left-color' XSL property.
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_left_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_left_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,28 @@
+<!-- ##### SECTION Title ##### -->
+xmlroff
+
+<!-- ##### SECTION Short_Description ##### -->
+xmlroff is wonderful
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+xmlroff is really wonderful.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+</para>
+
+<!-- ##### FUNCTION fo_xml_doc_to_fo_and_area_trees ##### -->
+<para>
+
+</para>
+
+@res: 
+@pango_context: 
+@fo_tree: 
+@area_tree: 
+@debug_level: 
+@error: 
+
+

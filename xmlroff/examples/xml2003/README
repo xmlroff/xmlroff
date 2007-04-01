@@ -1,0 +1,46 @@
+XML 2003 "XSL FO Chef's Tools Exhibition" Samples
+=================================================
+
+The files in this directory are (mostly) the sample files from the
+"XSL FO Chef's Tools Exhibition" that was presented at the XML 2003
+conference in Philadelphia in December 2003 by Tommie Usdin of
+Mulberry Technologies.
+
+The results from multiple XSL formatters' processing of the samples
+will be summarised on the Mulberry web site after the conference.
+
+Some sample files include markup that is contrary to the XSL 1.0
+Recommendation, and some use formatting objects that the current
+version of xmlroff does not support.  You should run fixup.xsl on the
+provided sample files: e.g.,
+
+   xsltproc fixup.xsl Sample1.fo > Sample1.fix.fo
+
+to make versions that conform to the Recommendation and that xmlroff
+can better handle.
+
+Manifest
+========
+
+   README                       This file
+
+   fixup.xsl			XSLT stylesheet for correcting samples
+				and modifying them so xmlroff doesn't
+				fail on them.
+
+   Sample1.fo			Sample files.
+   Sample2.zip
+   Sample3.fo
+   Sample4.fo.zip
+   Sample5.fo
+   Sample6.fo
+   Sample7.fo.gz
+   Sample8.zip
+
+
+fixup.xsl
+=========
+
+Apart from using normalize-space() on text nodes, the stylesheet
+outputs a message whenever it corrects or otherwise modifies the
+input.

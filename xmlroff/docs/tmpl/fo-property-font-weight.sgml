@@ -1,0 +1,55 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-font-weight
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyFontWeight ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyFontWeightClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_font_weight_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_weight_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_weight_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

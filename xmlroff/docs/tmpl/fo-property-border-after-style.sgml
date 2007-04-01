@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-after-style
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderAfterStyle ##### -->
+<para>
+The #FoPropertyBorderAfterStyle structure represents one instance of the
+'border-after-style' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderAfterStyleClass ##### -->
+<para>
+The #FoPropertyBorderAfterStyleClass structure represents the type of
+the 'border-after-style' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_after_style_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_after_style_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

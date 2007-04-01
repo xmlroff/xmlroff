@@ -1,0 +1,460 @@
+2007-01-31  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.4.0 ===
+
+	* NEWS: Updated for 0.4.0.
+
+	* configure.in: Added passing --enable-gtk-doc value to PangoXSL
+	configure or autogen.sh script.
+
+2006-12-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am: Removed reference to GOBJECT_LIBS.
+
+	* configure.in: Added checking for pkg-config and PangoXSL.  Upped
+	version to 0.4.0,
+
+2006-09-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/libfo-compat.c.tmpl: Filled in some doc comments.
+
+2006-08-22  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Changed to run 'configure' of bundled PangoXSL
+	directly instead of relying on AC_CONFIG_SUBDIRS.
+	AC_CONFIG_SUBDIRS ran PangoXSL 'configure' at end of xmlroff
+	'configure', which meant xmlroff 'configure' had to be run twice
+	to pick up 'pangoxsl.pc' from bundled PangoXSL.
+
+2006-08-10  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.99 ===
+
+	* NEWS: Updated for 0.3.99.
+
+	* Makefile.am: Removed this directory's 'xmlroff.fo' from
+	distribution since 'xmlroff.fo' now produced and packaged in
+	'docs' directory.
+
+	* configure.in: Added extra blank lines after messages about
+	whether or not to rerun 'configure'.
+
+	* xmlroff.spec.in: Added dependency on popt-devel.
+
+2006-08-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-xslt-transformer.c: More playing with base for relative
+	URIs.
+
+	* libfo/fo-doc-cairo.c: Line dash and line cap are working except
+	for top borders of blocks.
+
+2006-07-27  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-cairo.c: Corrected fo_doc_cairo_move_to().  Fixed
+	several bugs in Cairo backend.
+
+2006-07-26  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/libfo-compat.c.tmpl: Added setting base URL of comatible
+	result document to that of original result doc so relative URLs
+	still work.
+
+	* libfo/fo-xml-doc.c, libfo/fo-xml-doc.h: Added functions to get
+	and set base URL.
+
+	* Makefile.am: Removed POPT_LIBS from libfo libs.
+
+	* configure.in: Reworked checking for popt.h and libpopt.
+
+2006-07-25  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* datatype/fo-length.c, datatype/fo-length.h,
+	property/fo-property-page-height.c,
+	property/fo-property-page-width.c: 'auto' page-height and
+	page-width default to A4 height and width.
+
+	* property/fo-property.c, property/fo-property.h: Added check for
+	zero-length property values.  AFAICT, no property can have a
+	zero-length value.
+
+2006-07-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Added helpful message about rerunning 'configure'
+	when building using bundled PangoXSL.
+
+2006-07-22  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c: Removed second prototype and reference to
+	fo_doc_gp_translate.
+
+2006-07-13  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-cairo.c: Added
+	pango_cairo_font_map_set_resolution() call so text output is now
+	the right size.  Other reformatting.
+
+	* libfo-0.4.pc.in: Hardcoded library version 0.4 while xmlroff
+	version is 0.3.99.
+
+	* configure.in: Upped required Cairo version, if used, to 1.2.0
+	since that's the minimum for producing useful PDF, PostScript, and
+	SVG.
+
+2006-07-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-cairo.c: Added SVG output.  Moved error message
+	strings to fo-doc.c.
+
+	* README: Added that xmlroff executable depends on popt.
+
+	* libfo/fo-doc.c: Added a message string from fo-d0c-cairo.c.
+
+	* configure.in: Upped version to 0.3.99.
+
+2006-05-30  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.98 ===
+
+	* README, INSTALL.in: Updated for PangoXSL being bundled with
+	xmlroff distributions.
+
+2006-05-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/Makefile.am: Added 'libfo-compat.c.tmpl' to files in
+	distribution.
+
+	* libfo/fo-xslt-transformer-private.h: Minor improvement to
+	includes.
+
+	* configure.in: Changed version to 0.3.98 since not finished with
+	0.4.0.  Added building bundled copy of PangoXSL.
+
+	* .cvsignore, Makefile.am, configure.in: Added
+	building bundled copy of PangoXSL.
+
+	* area/fo-area.h, area/fo-area-private.h: Moved three prototypes
+	to fo-area-private.h.
+
+	* area/fo-area-layout-private.h, area/fo-area-layout.c,
+	area/fo-area-layout.h: Changed 'line_first' and 'line_last' to
+	guint.  Reformatted and improved doc comments.
+
+	* area/fo-area.c, datatype/fo-enum.h, libfo/fo-doc-gp.c,
+	libfo/fo-doc.c: Improved doc comments.
+
+	* property/fo-property-media-usage.c,
+	property/fo-property-media-usage.h: Updated to match current
+	spec-dump.
+
+2006-04-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* NEWS: Updated for xmlroff 0.4.0.
+
+2006-04-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-xml-doc-private.h, libfo/fo-xml-doc.c,
+	libfo/fo-xml-doc.h: Simplified creating from a filename, added
+	creating from memory and from a string.
+
+	* libfo/fo-xsl-formatter.c, libfo/fo-xsl-formatter.h: Removed
+	support for SGML catalogs.
+
+	* libfo/fo-libfo-basic.c: Changed to use new ways to create
+	FoXmlDoc and to run XSLT transformations.
+
+	* libfo/fo-libfo-context.c, libfo/fo-libfo-context.h,
+	libfo/fo-xml-node.c, libfo/fo-xml-node.h: Removed support for SGML
+	catalogs.
+
+	* libfo/fo-xslt-transformer.c, libfo/fo-xslt-transformer.h:
+	Reduced XSLT transformation to just running
+	fo_xslt_transformer_do_transform().
+
+	* libfo/Makefile.am, libfo/libfo-compat.c.tmpl,
+	libfo/libfo-compat.h: Added functions to run and to print
+	compatibility stylesheet.
+
+	* xmlroff.c: Added '--compat' and '--compat-stylesheet' options
+	and removed '--catalogs' option.  Using simplified methods of
+	creating FoXmlDoc objects and of running XSLT transformations.
+
+	* tools/insert-file-as-string.pl: Perl script for inserting a text
+	file into C source code.
+
+	* xmlroff.fo: Added '--compat' and '--compat-stylesheet' options
+	and removed '--catalogs' option.
+
+	* README: Added details of '--compat' and '--compat-stylesheet'
+	options and finding installed libfo-compat.xsl.
+
+	* libfo/.cvsignore: Added 'libfo-compat.c' and 's-libfo-compat-c'
+	to list of files to be ignored.
+
+	* libfo-0.4.pc.in: Added 'enable_cairo' variable to indicate if
+	libfo was built with Cairo backend.
+
+2006-04-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-page-sequence-private.h, fo/fo-page-sequence.c,
+	fo/fo-page-sequence.h: Updated to match current spec-dump.
+
+	* fo/fo-fo.c, libfo/fo-doc.c, libfo/fo-xml-node-private.h,
+	libfo/fo-xml-node.h: Documentation and/or cosmetic changes only.
+
+	* libfo/fo-xsl-formatter.h: Removed trailing comma.
+
+2006-03-29  tonygraham  <tonygraham@zako.dublin.ireland.sun.com>
+
+	* fo/fo-fo-private.h, fo/fo-fo.c, fo/fo-wrapper.c: Added
+	fo_fo_register_id() to simplify details of registering an Id.
+
+2006-03-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-block-layout.c, fo/fo-static-content.c,
+	fo/fo-table-part.c: Removed unnecessary includes of
+	'result-to-fo.h'.
+
+	* xmlroff.fo: Added '-w' for warning mode.
+
+	* fo/fo-character.c: Reverted GObject name to 'fo-character' so
+	GObject doesn't complain about conflict with reserved name.
+
+	* fo/fo-block-layout.c, fo/fo-fo-private.h, fo/fo-fo.c,
+	fo/fo-fo.h, fo/fo-static-content.c, fo/fo-table-part.c: Added
+	passing around of warning mode.
+
+	* fo/fo-wrapper-inline-empty.c: Corrected (hopefully) the UTF-8
+	for ZERO WIDTH SPACE.
+
+	* libfo/.cvsignore: Added ignoring files for convenience
+	libraries.
+
+	* property/.cvsignore: .cvsignore file for 'property'
+	subdirectory.
+
+	* libfo/fo-libfo-context.c, libfo/fo-libfo-context.h: Added
+	getting and setting warning mode.
+
+	* libfo/fo-utils.h: Added FO_WARNING_UNSUPPORTED_PROPERTY.
+
+	* libfo/fo-xsl-formatter.h, libfo/fo-xsl-formatter.c: Added
+	xml_doc_to_fo_and_area_trees() from result-to-fo.c.  Added passing
+	around of warning mode.
+
+	* fo/fo-external-graphic-private.h, fo/fo-external-graphic.c,
+	fo/fo-external-graphic.h: Moved
+	fo_external_graphic_get_text_attr_list() and
+	fo_external_graphic_callback_test() to new
+	fo-external-graphic-area.c.  Updated to match current spec-dump.
+
+	* fo/Makefile.am, fo/fo-external-graphic-area.c,
+	fo/fo-external-graphic-area.h: Moved
+	fo_external_graphic_get_text_attr_list() and
+	fo_external_graphic_callback_test() to new
+	fo-external-graphic-area.c.
+
+	* area/fo-area.h: Moved fo_area_real_add_child() prototype to
+	fo-area-private.h.
+
+	* area/fo-area-private.h: Moved fo_area_real_add_child() to
+	fo-area-private.h.
+
+	* area/Makefile.am, area/fo-area-graphic.c,
+	area/fo-area-graphic.h, area/fo-area-inline-private.h,
+	area/fo-area-inline.c, area/fo-area-inline.h: Adding FoAreaInline
+	and FoAreaGraphic as first steps to moving creation of areas for
+	inlines out of 'fo' code.
+
+	* xmlroff.c: Changed to simple setting of warning mode as numeric
+	value.
+
+	* README: Added where to find conformance info.  Added note about
+	Cairo.
+
+	* Makefile.am, result-to-fo.c, result-to-fo.h: Removed
+	result-to-fo.[ch] since remaining functions moved to
+	fo-xsl-formatter.c.
+
+2006-03-22  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/Makefile.am, fo/fo-block-private.h, fo/fo-block.c,
+	fo/fo-block.h, property/fo-property-linefeed-treatment.c,
+	property/fo-property-linefeed-treatment.h,
+	property/fo-property-white-space-collapse.h,
+	property/fo-property-white-space-treatment.c,
+	property/fo-property-white-space-treatment.h,
+	fo-context-private.h, fo-context.c, fo-context.h,
+	property/fo-all-property.h, property/fo-property-eval.c,
+	property/fo-property-white-space-collapse.c: Added
+	'linefeed-treatment', 'white-space-collapse', and
+	'white-space-treatment' but don't yet use them.
+
+	* fo/fo-character-private.h, fo/fo-character.c: Updated to match
+	current spec-dump.
+
+2006-03-21  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-all-fo.h: Added 'fo/' prefix to includes.
+
+	* fo-node.c: Made fo_node_get_ancestor_or_self_by_type() match on
+	subtypes of specified type.
+
+	* property/fo-property-ref-id.c, property/fo-property-ref-id.h,
+	property/fo-property-span.c, property/fo-property-span.h: Added
+	'ref-id' and 'span' properties.
+
+	* fo-context-private.h, fo-context.h, fo-context.c: Added 'ref-id'
+	and 'span'.  Updated to match spec-dump.
+
+	* libfo-compat.xsl: Removed removing of empty fo:wrapper.
+
+	* datatype/fo-boolean.c: Corrected fo_boolean_sprintf() so
+	returned value can be freed.
+
+	* fo/Makefile.am, fo/fo-wrapper-inline-empty-private.h,
+	fo/fo-wrapper-inline-empty.c, fo/fo-wrapper-inline-empty.h: Added
+	FoWrapperInlineEmpty for empty fo:wrapper that DocBook stylesheets
+	use as targets for cross-references.
+
+	* fo/fo-block-container-private.h, fo/fo-block-container.c,
+	fo/fo-block-container.h, fo/fo-block-private.h, fo/fo-block.c,
+	fo/fo-block.h: Added 'span' property.  Updated to match current
+	spec-dump.
+
+	* fo/fo-fo-private.h, fo/fo-fo.c: Moved fo_fo_update_after_clone()
+	from fo-fo.c to fo-fo-private.h so FoFo subtypes can use it.
+
+	* fo/fo-page-number-citation-private.h,
+	fo/fo-page-number-citation.c, fo/fo-page-number-citation.h: Added
+	generating page number if ref-id value in id hash (i.e., no
+	forward references yet).  Updated to match current spec-dump.
+
+	* fo/fo-tree.c, fo/fo-tree.h: Added fo_tree_id_add() and
+	fo_tree_id_get() for hash of ids of FOs.
+
+	* fo/fo-wrapper-inline-private.h, fo/fo-wrapper-inline.c,
+	fo/fo-wrapper-inline.h: Updated to match current spec-dump (though
+	not autogenerated).
+
+	* fo/fo-wrapper.c: Added writing 'id' to hash.  Made proper base
+	class for wrapper types. Updated to match current spec-dump.
+
+	* fo/fo-wrapper-private.h, fo/fo-wrapper.h: Updated to match
+	current spec-dump.
+
+	* libfo/fo-doc-cairo.c: Added some casts of fo_doc.
+
+	* property/Makefile.am: Added 'ref-id' and 'span'.
+
+	* property/fo-all-property.h: Added 'ref-id' and 'span'.  Added
+	'property/' prefix to includes.
+
+	* property/fo-property-eval.c: Added 'extent', 'ref-id', and
+	'span'.  Now generated by spec-dump.
+
+	* property/fo-property-eval.h: Minor edits in comments.
+
+	* property/fo-property-id.c, property/fo-property-id.h: Updated to
+	match current spec-dump.
+
+2006-03-20  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-compat.xsl: Corrected match pattern for empty
+	'fo:wrapper'.
+
+2006-03-14  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc.c: Added support for specifying Cairo backend and
+	as fallback for default.
+
+	* libfo/fo-doc-cairo.c: Reworked y-coordinates since Cairo y-axis
+	inverted w.r.t. GNOME Print.
+
+	* configure.in: Defaulting to not build Cairo backend.  Enable
+	with --enable-cairo.
+
+	* Makefile.am: Removed undefined GOBJECT variables.
+
+	* fo/fo-table-body-private.h, fo/fo-table-body.c,
+	fo/fo-table-body.h: Updated to match current spec-dump (after
+	updating spec-dump to match).
+
+2006-03-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am: Changed library version from 0.3 to 0.4.  Added
+	references to new convenience libraries.
+
+	* expr/Makefile.am: Added libxslt cflags to includes since not
+	being added by configure.
+
+	* area/Makefile.am, datatype/Makefile.am, fo/Makefile.am:
+	Corrected includes.
+
+	* libfo/Makefile.am: Added 'libfo-fodoc.la' convenience library so
+	fewer compiles depend on Pango/Cairo/Gnome Print headers or
+	libraries.
+
+	* property/Makefile.am: Put text properties in
+	'libfo-text-property.la' convenience library so fewer compilations
+	depend on Pango headers or libs.
+
+	* util/Makefile.am: Corrected includes and libs.
+
+	* libfo/fo-xsl-formatter.c: Change to match changed
+	fo_xml_doc_to_fo_and_area_trees() argument.
+
+	* libfo/fo-doc-commands.h, libfo/fo-doc-private.h, libfo/fo-doc.c,
+	libfo/fo-doc.h, libfo/fo-doc-gp.c: Changed all gfloat parameters
+	to gdouble in honour of Cairo.
+
+	* area-to-pdf.c: Changes to match changes in fo-doc-commands.h.
+
+	* fo/fo-page-sequence-area.c: Removed some old, commented-out
+	code.
+
+	* fo/fo-fo-private.h, fo/fo-fo.c, fo/fo-fo.h: Moved
+	fo_fo_resolve_property_attributes_default() from result-to-fo.c.
+	Added fo_fo_get/set_element().
+
+	* libfo/fo-font-desc.c: Added a 'const' to quieten compiler.
+
+	* libfo/fo-layout-private.h: Added include of
+	pangoxsl/pango-xsl-attributes.h.
+
+	* fo/fo-block-area.c: Changed to match changes in
+	fo-area-layout-private.h.
+
+2006-03-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-flow-area.c, fo/fo-flow.c, fo/fo-flow.h: Changed type of
+	fo_flow_get_region_master() argument to FoFo.
+
+	* area/fo-area-layout-private.h, area/fo-area-layout.c,
+	area/fo-area-layout.h: Changed PangoLayout in instance struct to
+	FoLayout so PangoLayout not referred to in header files.
+
+	* xmlroff.c, xmlroff.fo: Added '--backend cairo' option for
+	selecting Cairo backend.
+
+	* result-to-fo.c, result-to-fo.h: Moved
+	fo_fo_resolve_property_attributes_default() and associated
+	functions to fo/fo-fo.c.
+
+	* libfo-0.4.pc.in: pkg-config file for libfo-0.4.
+
+	* libfo/fo-xml-node-private.h, libfo/fo-xml-node.c,
+	libfo/fo-xml-node.h: Wrapper for xmlNodePtr so fewer libfo header
+	files depend on libxml2.
+
+	* libfo/fo-doc-cairo-private.h, libfo/fo-doc-cairo.c,
+	libfo/fo-doc-cairo.h, libfo/fo-layout-cairo-private.h,
+	libfo/fo-layout-cairo.c, libfo/fo-layout-cairo.h: Files for Cairo
+	backend.
+
+	* ChangeLog.pre-0.4: Moved old changes out of ChangeLog to
+	ChangeLog.pre0.4.
+
+	* configure.in: Upped version to 0.4.0.  Added Cairo backend.
+	Reduced CFLAGS to just GLib flags.
+

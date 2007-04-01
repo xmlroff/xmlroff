@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!--<!doctype book PUBLIC "-//OASIS//DTD DocBook V3.1//EN" [-->
+<!-- $Id: xmlroff-docs.sgml,v 1.20 2007/01/31 16:24:35 menteith Exp $ -->
+
+<!--<!ENTITY xmlroff SYSTEM "xml/main.xml">-->
+
+<!ENTITY xmlroff-code-rules SYSTEM "xmlroff-code-rules.xml">
+<!ENTITY directory-structure SYSTEM "directory-structure.xml">
+<!ENTITY fo-h-file SYSTEM "fo-h-file.xml">
+<!ENTITY fo-c-file SYSTEM "fo-c-file.xml">
+<!ENTITY fo-area-c-file SYSTEM "fo-area-c-file.xml">
+<!ENTITY backends SYSTEM "backends.xml">
+<!ENTITY generating-source SYSTEM "generating-source.xml">
+<!ENTITY debugging SYSTEM "debugging.xml">
+<!ENTITY basic-interface SYSTEM "basic-interface.xml">
+<!ENTITY conformance-body SYSTEM "conformance-body.xml">
+
+<!-- FoObject -->
+
+<!ENTITY fo-object SYSTEM "xml/fo-object.xml">
+
+<!-- Context -->
+
+<!ENTITY fo-context SYSTEM "xml/fo-context.xml">
+
+<!-- Node -->
+
+<!ENTITY fo-node SYSTEM "xml/fo-node.xml">
+
+<!-- Areas -->
+
+<!ENTITY fo-area SYSTEM "xml/fo-area.xml">
+<!ENTITY fo-area-area SYSTEM "xml/fo-area-area.xml">
+<!ENTITY fo-area-graphic SYSTEM "xml/fo-area-graphic.xml">
+<!ENTITY fo-area-inline SYSTEM "xml/fo-area-inline.xml">
+<!ENTITY fo-area-layout SYSTEM "xml/fo-area-layout.xml">
+<!ENTITY fo-area-list-item SYSTEM "xml/fo-area-list-item.xml">
+<!ENTITY fo-area-normal SYSTEM "xml/fo-area-normal.xml">
+<!ENTITY fo-area-page SYSTEM "xml/fo-area-page.xml">
+<!ENTITY fo-area-reference SYSTEM "xml/fo-area-reference.xml">
+<!ENTITY fo-area-spanning-table-cell SYSTEM "xml/fo-area-spanning-table-cell.xml">
+<!ENTITY fo-area-table-body SYSTEM "xml/fo-area-table-body.xml">
+<!ENTITY fo-area-table-cell-proxy SYSTEM "xml/fo-area-table-cell-proxy.xml">
+<!ENTITY fo-area-table-cell SYSTEM "xml/fo-area-table-cell.xml">
+<!ENTITY fo-area-table-continuation SYSTEM "xml/fo-area-table-continuation.xml">
+<!ENTITY fo-area-table-footer SYSTEM "xml/fo-area-table-footer.xml">
+<!ENTITY fo-area-table-header SYSTEM "xml/fo-area-table-header.xml">
+<!ENTITY fo-area-table-part SYSTEM "xml/fo-area-table-part.xml">
+<!ENTITY fo-area-table-row SYSTEM "xml/fo-area-table-row.xml">
+<!ENTITY fo-area-table SYSTEM "xml/fo-area-table.xml">
+<!ENTITY fo-area-tree SYSTEM "xml/fo-area-tree.xml">
+<!ENTITY fo-area-viewport-reference SYSTEM "xml/fo-area-viewport-reference.xml">
+
+<!-- Interfaces -->
+
+<!ENTITY fo-block-fo SYSTEM "xml/fo-block-fo.xml">
+<!ENTITY fo-inline-fo SYSTEM "xml/fo-inline-fo.xml">
+<!ENTITY fo-neutral-fo SYSTEM "xml/fo-neutral-fo.xml">
+<!ENTITY fo-pixbuf SYSTEM "xml/fo-pixbuf.xml">
+<!ENTITY fo-table-border-fo SYSTEM "xml/fo-table-border-fo.xml">
+<!ENTITY fo-property-text-property SYSTEM "xml/fo-property-text-property.xml">
+
+<!-- FOs -->
+
+<!ENTITY fo-fo SYSTEM "xml/fo-fo.xml">
+<!ENTITY fo-basic-link SYSTEM "xml/fo-basic-link.xml">
+<!ENTITY fo-bidi-override SYSTEM "xml/fo-bidi-override.xml">
+<!ENTITY fo-block-area SYSTEM "xml/fo-block-area.xml">
+<!ENTITY fo-block-block-area SYSTEM "xml/fo-block-block-area.xml">
+<!ENTITY fo-block-block SYSTEM "xml/fo-block-block.xml">
+<!ENTITY fo-block SYSTEM "xml/fo-block.xml">
+<!ENTITY fo-block-container SYSTEM "xml/fo-block-container.xml">
+<!ENTITY fo-block-layout SYSTEM "xml/fo-block-layout.xml">
+<!ENTITY fo-block-whitespace SYSTEM "xml/fo-block-whitespace.xml">
+<!ENTITY fo-character SYSTEM "xml/fo-character.xml">
+<!ENTITY fo-color-profile SYSTEM "xml/fo-color-profile.xml">
+<!ENTITY fo-conditional-page-master-reference SYSTEM "xml/fo-conditional-page-master-reference.xml">
+<!ENTITY fo-declarations SYSTEM "xml/fo-declarations.xml">
+<!ENTITY fo-external-graphic SYSTEM "xml/fo-external-graphic.xml">
+<!ENTITY fo-float SYSTEM "xml/fo-float.xml">
+<!ENTITY fo-flow-area SYSTEM "xml/fo-flow-area.xml">
+<!ENTITY fo-flow SYSTEM "xml/fo-flow.xml">
+<!ENTITY fo-footnote-body SYSTEM "xml/fo-footnote-body.xml">
+<!ENTITY fo-footnote SYSTEM "xml/fo-footnote.xml">
+<!ENTITY fo-initial-property-set SYSTEM "xml/fo-initial-property-set.xml">
+<!ENTITY fo-inline SYSTEM "xml/fo-inline.xml">
+<!ENTITY fo-inline-container SYSTEM "xml/fo-inline-container.xml">
+<!ENTITY fo-instream-foreign-object SYSTEM "xml/fo-instream-foreign-object.xml">
+<!ENTITY fo-layout-master-set SYSTEM "xml/fo-layout-master-set.xml">
+<!ENTITY fo-leader SYSTEM "xml/fo-leader.xml">
+<!ENTITY fo-list-block-area SYSTEM "xml/fo-list-block-area.xml">
+<!ENTITY fo-list-block SYSTEM "xml/fo-list-block.xml">
+<!ENTITY fo-list-item-area SYSTEM "xml/fo-list-item-area.xml">
+<!ENTITY fo-list-item-body-area SYSTEM "xml/fo-list-item-body-area.xml">
+<!ENTITY fo-list-item-body SYSTEM "xml/fo-list-item-body.xml">
+<!ENTITY fo-list-item SYSTEM "xml/fo-list-item.xml">
+<!ENTITY fo-list-item-label-area SYSTEM "xml/fo-list-item-label-area.xml">
+<!ENTITY fo-list-item-label SYSTEM "xml/fo-list-item-label.xml">
+<!ENTITY fo-marker SYSTEM "xml/fo-marker.xml">
+<!ENTITY fo-marker-parent SYSTEM "xml/fo-marker-parent.xml">
+<!ENTITY fo-multi-case SYSTEM "xml/fo-multi-case.xml">
+<!ENTITY fo-multi-properties SYSTEM "xml/fo-multi-properties.xml">
+<!ENTITY fo-multi-property-set SYSTEM "xml/fo-multi-property-set.xml">
+<!ENTITY fo-multi-switch SYSTEM "xml/fo-multi-switch.xml">
+<!ENTITY fo-multi-toggle SYSTEM "xml/fo-multi-toggle.xml">
+<!ENTITY fo-page-number SYSTEM "xml/fo-page-number.xml">
+<!ENTITY fo-page-number-citation SYSTEM "xml/fo-page-number-citation.xml">
+<!ENTITY fo-page-sequence-area SYSTEM "xml/fo-page-sequence-area.xml">
+<!ENTITY fo-page-sequence SYSTEM "xml/fo-page-sequence.xml">
+<!ENTITY fo-page-sequence-master SYSTEM "xml/fo-page-sequence-master.xml">
+<!ENTITY fo-region-after SYSTEM "xml/fo-region-after.xml">
+<!ENTITY fo-region-before SYSTEM "xml/fo-region-before.xml">
+<!ENTITY fo-region-body-area SYSTEM "xml/fo-region-body-area.xml">
+<!ENTITY fo-region-body SYSTEM "xml/fo-region-body.xml">
+<!ENTITY fo-region-end SYSTEM "xml/fo-region-end.xml">
+<!ENTITY fo-region-start SYSTEM "xml/fo-region-start.xml">
+<!ENTITY fo-repeatable-page-master-alternatives SYSTEM "xml/fo-repeatable-page-master-alternatives.xml">
+<!ENTITY fo-repeatable-page-master-reference SYSTEM "xml/fo-repeatable-page-master-reference.xml">
+<!ENTITY fo-retrieve-marker SYSTEM "xml/fo-retrieve-marker.xml">
+<!ENTITY fo-root SYSTEM "xml/fo-root.xml">
+<!ENTITY fo-simple-page-master SYSTEM "xml/fo-simple-page-master.xml">
+<!ENTITY fo-single-page-master-reference SYSTEM "xml/fo-single-page-master-reference.xml">
+<!ENTITY fo-static-content SYSTEM "xml/fo-static-content.xml">
+<!ENTITY fo-table-and-caption SYSTEM "xml/fo-table-and-caption.xml">
+<!ENTITY fo-table-area SYSTEM "xml/fo-table-area.xml">
+<!ENTITY fo-table-body SYSTEM "xml/fo-table-body.xml">
+<!ENTITY fo-table SYSTEM "xml/fo-table.xml">
+<!ENTITY fo-table-caption SYSTEM "xml/fo-table-caption.xml">
+<!ENTITY fo-table-cell SYSTEM "xml/fo-table-cell.xml">
+<!ENTITY fo-table-column SYSTEM "xml/fo-table-column.xml">
+<!ENTITY fo-table-footer SYSTEM "xml/fo-table-footer.xml">
+<!ENTITY fo-table-header SYSTEM "xml/fo-table-header.xml">
+<!ENTITY fo-table-part SYSTEM "xml/fo-table-part.xml">
+<!ENTITY fo-table-row SYSTEM "xml/fo-table-row.xml">
+<!ENTITY fo-text SYSTEM "xml/fo-text.xml">
+<!ENTITY fo-title SYSTEM "xml/fo-title.xml">
+<!ENTITY fo-tree SYSTEM "xml/fo-tree.xml">
+<!ENTITY fo-wrapper-block-area SYSTEM "xml/fo-wrapper-block-area.xml">
+<!ENTITY fo-wrapper-block SYSTEM "xml/fo-wrapper-block.xml">
+<!ENTITY fo-wrapper SYSTEM "xml/fo-wrapper.xml">
+<!ENTITY fo-wrapper-inline SYSTEM "xml/fo-wrapper-inline.xml">
+<!ENTITY fo-wrapper-inline-empty SYSTEM "xml/fo-wrapper-inline-empty.xml">
+<!ENTITY fo-wrapper-whitespace SYSTEM "xml/fo-wrapper-whitespace.xml">
+
+<!-- Properties -->
+
+<!-- Declarations for files for supported properties.
+     File is generated by a 'spec-dump' package Makefile target. -->
+<!ENTITY % xmlroff-property-decl SYSTEM "xmlroff-property-decl.ent">
+%xmlroff-property-decl;
+<!ENTITY xmlroff-property-ref SYSTEM "xmlroff-property-ref.ent">
+
+<!-- Datatypes -->
+
+<!ENTITY fo-boolean SYSTEM "xml/fo-boolean.xml">
+<!ENTITY fo-char SYSTEM "xml/fo-char.xml">
+<!ENTITY fo-color SYSTEM "xml/fo-color.xml">
+<!ENTITY fo-datatype SYSTEM "xml/fo-datatype.xml">
+<!ENTITY fo-enum SYSTEM "xml/fo-enum.xml">
+<!ENTITY fo-error SYSTEM "xml/fo-error.xml">
+<!ENTITY fo-expression SYSTEM "xml/fo-expression.xml">
+<!ENTITY fo-id SYSTEM "xml/fo-id.xml">
+<!ENTITY fo-integer SYSTEM "xml/fo-integer.xml">
+<!ENTITY fo-keep SYSTEM "xml/fo-keep.xml">
+<!ENTITY fo-length SYSTEM "xml/fo-length.xml">
+<!ENTITY fo-length-bp-ip-d SYSTEM "xml/fo-length-bp-ip-d.xml">
+<!ENTITY fo-length-conditional SYSTEM "xml/fo-length-conditional.xml">
+<!ENTITY fo-length-range SYSTEM "xml/fo-length-range.xml">
+<!ENTITY fo-name SYSTEM "xml/fo-name.xml">
+<!ENTITY fo-number SYSTEM "xml/fo-number.xml">
+<!ENTITY fo-numeric SYSTEM "xml/fo-numeric.xml">
+<!ENTITY fo-pcw SYSTEM "xml/fo-pcw.xml">
+<!ENTITY fo-percentage SYSTEM "xml/fo-percentage.xml">
+<!ENTITY fo-space SYSTEM "xml/fo-space.xml">
+<!ENTITY fo-string SYSTEM "xml/fo-string.xml">
+<!ENTITY fo-tblr SYSTEM "xml/fo-tblr.xml">
+<!ENTITY fo-unknown SYSTEM "xml/fo-unknown.xml">
+<!ENTITY fo-uri-specification SYSTEM "xml/fo-uri-specification.xml">
+<!ENTITY fo-wsc SYSTEM "xml/fo-wsc.xml">
+
+<!-- Other objects -->
+<!ENTITY fo-doc SYSTEM "xml/fo-doc.xml">
+<!ENTITY fo-doc-commands SYSTEM "xml/fo-doc-commands.xml">
+<!ENTITY fo-doc-cairo SYSTEM "xml/fo-doc-cairo.xml">
+<!ENTITY fo-doc-gp SYSTEM "xml/fo-doc-gp.xml">
+<!ENTITY fo-font-desc SYSTEM "xml/fo-font-desc.xml">
+<!ENTITY fo-layout SYSTEM "xml/fo-layout.xml">
+<!ENTITY fo-layout-cairo SYSTEM "xml/fo-layout-cairo.xml">
+<!ENTITY fo-layout-gp SYSTEM "xml/fo-layout-gp.xml">
+<!ENTITY fo-libfo-basic SYSTEM "xml/fo-libfo-basic.xml">
+<!ENTITY fo-libfo-context SYSTEM "xml/fo-libfo-context.xml">
+<!ENTITY fo-xml-doc SYSTEM "xml/fo-xml-doc.xml">
+<!ENTITY fo-xml-node SYSTEM "xml/fo-xml-node.xml">
+<!ENTITY fo-xsl-formatter SYSTEM "xml/fo-xsl-formatter.xml">
+<!ENTITY fo-xslt-transformer SYSTEM "xml/fo-xslt-transformer.xml">
+
+<!-- Utility objects -->
+<!ENTITY fo-hash-table SYSTEM "xml/fo-hash-table.xml">
+<!ENTITY fo-image SYSTEM "xml/fo-image.xml">
+
+<!-- Autogenerated files -->
+<!ENTITY index-Object-Tree SYSTEM "xml/tree_index.sgml">
+
+]>
+<book id="index">
+  <bookinfo>
+    <title>xmlroff Reference Manual</title>
+  </bookinfo>
+
+<!--
+  <chapter id="xmlroff">
+    <title>xmlroff is wonderful</title>
+    &xmlroff;
+  </chapter>
+-->
+  <chapter id="introduction">
+    <title>Things to know</title>
+    &xmlroff-code-rules;
+    &directory-structure;
+    &fo-h-file;
+    &fo-c-file;
+    &fo-area-c-file;
+    &generating-source;
+    &debugging;
+    &basic-interface;
+    &backends;
+    <section id="conformance">
+    <sectioninfo>
+    <title>Conformance</title>
+    <abstract><para>xmlroff Conformance to XSL 1.0 Recommendation</para></abstract>
+    </sectioninfo>
+    &conformance-body;
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Object Hierarchy</title>
+    &index-Object-Tree;
+  </chapter>
+
+  <chapter id="object">
+    <title>FoObject is wonderful</title>
+    &fo-object;
+  </chapter>
+
+  <chapter id="node">
+    <title>FoNode is wonderful</title>
+    &fo-node;
+  </chapter>
+
+  <chapter id="interfaces">
+    <title>Interfaces are truly wonderful</title>
+    &fo-block-fo;
+    &fo-inline-fo;
+    &fo-neutral-fo;
+    &fo-property-text-property;
+    &fo-pixbuf;
+    &fo-table-border-fo;
+  </chapter>
+
+  <chapter id="formatting-objects">
+    <title>Formatting Objects are truly wonderful</title>
+    &fo-fo;
+    &fo-basic-link;
+    &fo-bidi-override;
+    <!--&fo-block-area;-->
+    <!--&fo-block-block-area;-->
+    &fo-block-block;
+    &fo-block;
+    &fo-block-container;
+    &fo-block-layout;
+    &fo-block-whitespace;
+    &fo-character;
+    &fo-color-profile;
+    &fo-conditional-page-master-reference;
+    &fo-declarations;
+    &fo-external-graphic;
+    &fo-float;
+    <!--&fo-flow-area;-->
+    &fo-flow;
+    &fo-footnote-body;
+    &fo-footnote;
+    &fo-initial-property-set;
+    &fo-inline;
+    &fo-inline-container;
+    &fo-instream-foreign-object;
+    &fo-layout-master-set;
+    &fo-leader;
+    <!--&fo-list-block-area;-->
+    &fo-list-block;
+    <!--&fo-list-item-area;-->
+    <!--&fo-list-item-body-area;-->
+    &fo-list-item-body;
+    &fo-list-item;
+    <!--&fo-list-item-label-area;-->
+    &fo-list-item-label;
+    &fo-marker;
+    &fo-marker-parent;
+    &fo-multi-case;
+    &fo-multi-properties;
+    &fo-multi-property-set;
+    &fo-multi-switch;
+    &fo-multi-toggle;
+    &fo-page-number;
+    &fo-page-number-citation;
+    <!--&fo-page-sequence-area;-->
+    &fo-page-sequence;
+    &fo-page-sequence-master;
+    &fo-region-after;
+    &fo-region-before;
+    <!--&fo-region-body-area;-->
+    &fo-region-body;
+    &fo-region-end;
+    &fo-region-start;
+    &fo-repeatable-page-master-alternatives;
+    &fo-repeatable-page-master-reference;
+    &fo-retrieve-marker;
+    &fo-root;
+    &fo-simple-page-master;
+    &fo-single-page-master-reference;
+    &fo-static-content;
+    &fo-table-and-caption;
+    <!--&fo-table-area;-->
+    &fo-table-body;
+    &fo-table;
+    &fo-table-caption;
+    &fo-table-cell;
+    &fo-table-column;
+    &fo-table-footer;
+    &fo-table-header;
+    &fo-table-part;
+    &fo-table-row;
+    &fo-text;
+    &fo-title;
+    &fo-tree;
+    <!--&fo-wrapper-block-area;-->
+    &fo-wrapper-block;
+    &fo-wrapper;
+    &fo-wrapper-inline;
+    &fo-wrapper-inline-empty;
+    &fo-wrapper-whitespace;
+  </chapter>
+
+<!-- File containing references to files for supported properties.
+     File is generated by a 'spec-dump' package Makefile target. -->
+  &xmlroff-property-ref;
+
+  <chapter id="areas">
+    <title>Area Objects</title>
+    &fo-area;
+    &fo-area-area;
+    &fo-area-graphic;
+    &fo-area-inline;
+    &fo-area-layout;
+    &fo-area-list-item;
+    &fo-area-normal;
+    &fo-area-page;
+    &fo-area-reference;
+    &fo-area-spanning-table-cell;
+    &fo-area-table-body;
+    &fo-area-table-cell-proxy;
+    &fo-area-table-cell;
+    &fo-area-table-continuation;
+    &fo-area-table-footer;
+    &fo-area-table-header;
+    &fo-area-table-part;
+    &fo-area-table-row;
+    &fo-area-table;
+    &fo-area-tree;
+    &fo-area-viewport-reference;
+  </chapter>
+
+  <chapter id="datatypes">
+    <title>Datatype Objects</title>
+    &fo-datatype;
+    &fo-boolean;
+    &fo-char;
+    &fo-color;
+    &fo-enum;
+    &fo-error;
+    &fo-expression;
+    &fo-id;
+    &fo-integer;
+    &fo-keep;
+    &fo-length;
+    &fo-length-bp-ip-d;
+    &fo-length-conditional;
+    &fo-length-range;
+    &fo-name;
+    &fo-number;
+    &fo-numeric;
+    &fo-pcw;
+    &fo-percentage;
+    &fo-space;
+    &fo-string;
+    &fo-tblr;
+    &fo-unknown;
+    &fo-uri-specification;
+    &fo-wsc;
+  </chapter>
+
+  <chapter id="context">
+    <title>Property Context Object</title>
+    &fo-context;
+  </chapter>
+
+  <chapter id="other-objects">
+    <title>Other Objects</title>
+    &fo-doc;
+    &fo-doc-commands;
+    &fo-doc-cairo;
+    &fo-doc-gp;
+    &fo-font-desc;
+    &fo-layout;
+    &fo-layout-cairo;
+    &fo-layout-gp;
+    &fo-libfo-basic;
+    &fo-libfo-context;
+    &fo-xml-doc;
+    &fo-xml-node;
+    &fo-xsl-formatter;
+    &fo-xslt-transformer;
+  </chapter>
+
+  <chapter id="utility-objects">
+    <title>Utility Objects</title>
+    &fo-hash-table;
+    &fo-image;
+  </chapter>
+
+</book>

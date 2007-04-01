@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-after-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderAfterColor ##### -->
+<para>
+The #FoPropertyBorderAfterColor structure represents one instance of the
+'border-after-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderAfterColorClass ##### -->
+<para>
+The #FoPropertyBorderAfterColorClass structure represents the type of
+the 'border-after-color' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_after_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_after_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

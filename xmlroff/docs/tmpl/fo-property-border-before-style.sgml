@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-before-style
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderBeforeStyle ##### -->
+<para>
+The #FoPropertyBorderBeforeStyle structure represents one instance of the
+'border-before-style' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderBeforeStyleClass ##### -->
+<para>
+The #FoPropertyBorderBeforeStyleClass structure represents the type of
+the 'border-before-style' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_before_style_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_before_style_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

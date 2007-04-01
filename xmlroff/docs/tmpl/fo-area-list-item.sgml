@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+FoAreaListItem
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaListItem ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaListItemClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_list_item_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

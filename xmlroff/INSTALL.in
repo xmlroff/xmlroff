@@ -1,0 +1,187 @@
+@VERSION@ Beginner's Installation Notes             MINI-HOWTO
+----------------------------------------------------------
+Fabio Arciniegas
+
+Contents
+--------
+
+. Introduction
+. Overview of the process
+. Installing dependencies
+. Building and installing pangoxsl
+. Building and installing xmlroff
+. Common Trouble
+. Testing 
+
+Introduction
+------------
+xmlroff is an open source XSL formatter. xmlroff has the ability of  
+rendering XSL-FO as PDF documents and therefore can be particularly
+interesting to a variety of individuals and projects (e.g. UBL
+enthusiasts can render XSL-FO transformations of their documents to
+PDF).
+
+xmlroff is also an alpha technology and as such it's
+building/installation can be daunting.
+
+The goal of this document is to provide a concise but useful guide
+to the compilation and installation of xmlroff for beginners on a
+typical modern linux system (such as Debian 9), paying especial
+attention to details which would otherwise rely on knowledge of
+C development under linux.
+
+Experts in the compilation of alpha/beta level software on linux
+platforms will probably want to skip this document. 
+
+DISCLAIMER
+----------
+
+I realize the information on this document is pretty
+unpolished and makes lots of assumptions about your system. I hope such
+assumptions are correct for most modern cases (the main target was
+individual users in linux platforms such as Debian 9), and hope the net
+effect of this document is positive, but I don't guarantee it in any
+way.  
+
+This document does not replace any official documentation, and is
+provided WITHOUT ANY WARRANTY OR PROMISE EXPLICIT OR IMPLICIT.
+
+
+
+
+Overview of the Process
+-----------------------
+The process is ideally very simple:
+
+1. download xmlroff
+2. Install the dependencies
+3. Run ./configure twice
+4. run make
+5. run make install
+
+Instead of providing a generalized version of those steps, assuming
+ you know how to build C programs in linux (that is the goal general
+ install notes are for), I will assume that you have a typical modern
+ workstation configuration and don't know much about building
+ software from scratch on linux.
+
+Download pangoxsl and xmlroff
+-----------------------------
+Get the	xmlroff source from:
+http://xmlroff.org/
+
+You will find a standard page with a download link that goes to
+SourceForge. In SourceForge look for the following links:
+
+For pangoxsl: pangoxsl-1.6.0.1.tar.gz
+http://prdownloads.sourceforge.net/pangopdf/pangoxsl-1.6.0.1.tar.gz?download
+
+For xmlroff: xmlroff-@VERSION@.tar.gz
+http://prdownloads.sourceforge.net/xmlroff/xmlroff-@VERSION@.tar.gz?download
+
+For xmlroff you will find other packages in the same page
+(e.g. examples of how to use xmlroff as a library), don't concern
+yourself with them just now, the goal is to get xmlroff running as a
+command line successfully.
+
+Beginning with xmlroff-0.3.98, xmlroff-@VERSION@.tar.gz includes a
+bundled copy of PangoXSL.  You can also get the pangoxsl source from:
+http://pangopdf.sourceforge.net/
+
+
+
+Installing dependencies
+-----------------------
+xmlroff depends on a number of packages: libgnomeprint, pango,
+pangoxsl, libxml2, libxslt, GTK2, GLib and GObject.
+
+The xmlroff site contains particular versions needed for each package
+and links to their particular sites. If you go to each site you will
+find source versions of each package. I recommend you DON'T use this,
+instead, use your package manager utility (most systems nowadays have
+KPackage installed as part of the standard KDE environment) to install
+the most recent packaged versions of each software. 
+
+When you are installing the packages, you will notice that next to
+some of them, there are similar packages with the '-dev' (or '-devel')
+suffix. You will want to install those too, they include header files
+you need to compile against later. In particular you want to select
+from the package list libgnome2-dev and libxslt-dev for installation.
+
+
+Building xmlroff
+----------------
+
+Now, untar xmlroff :
+
+tar zxvf xmlroff-@VERSION@.tar.gz
+
+Now you should be ready. Inside the xmlroff directory do these
+four: 
+ 
+./configure
+
+./configure
+
+make
+
+make install
+
+(The two './configure' are required because of how xmlroff bundles a
+copy of PangoXSL.)
+
+TESTING
+-------
+
+xmlroff xmlroff.fo 
+
+The result is written to layout.pdf.
+
+
+ENSURING COMPATIBILITY
+----------------------
+
+xmlroff includes a 'libfo-compat.xsl' stylesheet that you can run on
+your FO files to help ensure that they use only the subset of the XSL
+specification that xmlroff supports.
+
+'libfo-compat.xsl' attempts to rewrite or remove elements and
+attributes that cause problems for xmlroff.  The formatted result may
+not be what you expect, but you are more likely to get formatted
+output if you do run 'libfo-compat.xsl' on problematic files.
+
+If you supply a 'verbose' parameter with a non-false value, the
+stylesheet prints status messages explaining what is being modified.
+
+'libfo-compat.xsl' typically installs in /usr/share/xml/libfo-@VERSION@ or
+/usr/local/share/xml/libfo-@VERSION@.  There are three ways to refer to
+the stylesheet on the xsltproc command line:
+
+ - Directly using xmlroff
+
+      xmlroff --compat in.fo
+
+ - Directly using xsltproc
+
+      xsltproc /usr/share/xml/libfo-@VERSION@/libfo-compat.xsl in.fo > out.fo
+
+ - Using XML catalogs
+
+   Add the following two lines to /etc/xml/catalog:
+
+     <delegateURI uriStartString="http://xmlroff.org/release/libfo/@VERSION@" catalog="file:///usr/local/share/xml/libfo-@VERSION@/catalog.xml"/>
+     <delegateURI uriStartString="http://xmlroff.org/release/libfo/current" catalog="file:///usr/local/share/xml/libfo-@VERSION@/catalog.xml"/>
+
+   then use the URI for the stylesheet:
+
+      xsltproc http://xmlroff.org/release/libfo/current/libfo-compat.xsl in.fo > out.fo
+
+ - Using pkg-config
+
+   The pkg-config file for libfo defines a variable for the location
+   of 'libfo-compat.xsl':
+
+      xsltproc `pkg-config --variable=compat_stylesheet libfo-0.4` in.fo > out.fo
+
+----------------------------------------------------------------------
+$Id: INSTALL.in,v 1.3 2006/05/30 14:38:11 tonygraham Exp $

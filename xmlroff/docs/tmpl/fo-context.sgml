@@ -1,0 +1,3849 @@
+<!-- ##### SECTION Title ##### -->
+FoContext
+
+<!-- ##### SECTION Short_Description ##### -->
+FoContext is wonderful
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+FoContext is really wonderful.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoContext ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoContext:alignment-adjust ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:alignment-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:baseline-shift ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:block-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:block-progression-dimension-maximum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:block-progression-dimension-minimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:block-progression-dimension-optimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-collapse ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-separation ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:border-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:break-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:break-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:character ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:clip ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:column-number ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:column-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:content-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:content-type ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:content-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:direction ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:display-align ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:dominant-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:end-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:extent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:flow-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:font-family ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:font-stretch ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:font-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:font-variant ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:font-weight ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:format ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:grouping-separator ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:grouping-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:inline-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:inline-progression-dimension-maximum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:inline-progression-dimension-minimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:inline-progression-dimension-optimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:letter-value ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:line-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:line-stacking-strategy ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:linefeed-treatment ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:margin ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:master-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:master-reference ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:media-usage ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:number-columns-repeated ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:number-columns-spanned ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:number-rows-spanned ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:orphans ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:overflow ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-after-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-after-length ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-before-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-before-length ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-end-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-end-length ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-start-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-start-length ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:page-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:page-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:provisional-distance-between-starts ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:provisional-label-separation ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:ref-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:region-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:scaling ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:scaling-method ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:score-spaces ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-after-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-after-maximum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-after-minimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-after-optimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-before-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-before-maximum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-before-minimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-before-optimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-end-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-end-maximum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-end-minimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-end-optimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-start-conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-start-maximum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-start-minimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-start-optimum ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:space-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:span ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:src ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:start-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:table-layout ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:text-align ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:text-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:unicode-bidi ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:white-space-collapse ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:white-space-treatment ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:widows ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:wrap-option ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoContext:writing-mode ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoContextClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_context_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_initialize ##### -->
+<para>
+
+</para>
+
+@context: 
+
+
+<!-- ##### FUNCTION fo_context_merge ##### -->
+<para>
+
+</para>
+
+@primary: 
+@secondary: 
+
+
+<!-- ##### FUNCTION fo_context_update_from_slist ##### -->
+<para>
+
+</para>
+
+@context: 
+@property_list: 
+
+
+<!-- ##### FUNCTION fo_context_debug_dump_properties ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@depth: 
+
+
+<!-- ##### FUNCTION fo_context_get_alignment_adjust ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_alignment_adjust ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_alignment_adjust: 
+
+
+<!-- ##### FUNCTION fo_context_get_alignment_baseline ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_alignment_baseline ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_alignment_baseline: 
+
+
+<!-- ##### FUNCTION fo_context_get_background_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_background_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_background_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_background_image ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_background_image ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_background_image: 
+
+
+<!-- ##### FUNCTION fo_context_get_baseline_shift ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_baseline_shift ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_baseline_shift: 
+
+
+<!-- ##### FUNCTION fo_context_get_block_progression_dimension ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_block_progression_dimension ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_block_progression_dimension: 
+
+
+<!-- ##### FUNCTION fo_context_get_block_progression_dimension_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_block_progression_dimension_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_block_progression_dimension_minimum: 
+
+
+<!-- ##### FUNCTION fo_context_get_block_progression_dimension_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_block_progression_dimension_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_block_progression_dimension_optimum: 
+
+
+<!-- ##### FUNCTION fo_context_get_block_progression_dimension_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_block_progression_dimension_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_block_progression_dimension_maximum: 
+
+
+<!-- ##### FUNCTION fo_context_get_border ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_after_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_after_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_after_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_after_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_after_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_after_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_before_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_before_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_before_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_before_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_before_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_before_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_bottom ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_bottom ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_bottom: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_bottom_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_bottom_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_bottom_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_bottom_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_bottom_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_bottom_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_bottom_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_bottom_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_bottom_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_collapse ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_collapse ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_collapse: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_end_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_end_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_end_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_end_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_end_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_end_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_left ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_left ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_left: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_left_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_left_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_left_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_left_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_left_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_left_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_left_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_left_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_left_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_right ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_right ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_right: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_right_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_right_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_right_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_right_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_right_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_right_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_right_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_right_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_right_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_separation ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_separation ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_separation: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_start_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_start_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_start_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_start_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_start_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_start_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_top ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_top ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_top: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_top_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_top_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_top_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_top_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_top_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_top_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_top_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_top_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_top_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_border_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_border_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_border_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_break_after ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_break_after ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_break_after: 
+
+
+<!-- ##### FUNCTION fo_context_get_break_before ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_break_before ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_break_before: 
+
+
+<!-- ##### FUNCTION fo_context_get_character ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_character ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_character: 
+
+
+<!-- ##### FUNCTION fo_context_get_clip ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_clip ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_clip: 
+
+
+<!-- ##### FUNCTION fo_context_get_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_color ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_color: 
+
+
+<!-- ##### FUNCTION fo_context_get_column_number ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_column_number ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_column_number: 
+
+
+<!-- ##### FUNCTION fo_context_get_column_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_column_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_column_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_content_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_content_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_content_height: 
+
+
+<!-- ##### FUNCTION fo_context_get_content_type ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_content_type ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_content_type: 
+
+
+<!-- ##### FUNCTION fo_context_get_content_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_content_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_content_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_direction ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_direction ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_direction: 
+
+
+<!-- ##### FUNCTION fo_context_get_display_align ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_display_align ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_display_align: 
+
+
+<!-- ##### FUNCTION fo_context_get_dominant_baseline ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_dominant_baseline ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_dominant_baseline: 
+
+
+<!-- ##### FUNCTION fo_context_get_end_indent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_end_indent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_end_indent: 
+
+
+<!-- ##### FUNCTION fo_context_get_extent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_extent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_extent: 
+
+
+<!-- ##### FUNCTION fo_context_get_flow_name ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_flow_name ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_flow_name: 
+
+
+<!-- ##### FUNCTION fo_context_get_font_family ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_font_family ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_font_family: 
+
+
+<!-- ##### FUNCTION fo_context_get_font_size ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_font_size ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_font_size: 
+
+
+<!-- ##### FUNCTION fo_context_get_font_stretch ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_font_stretch ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_font_stretch: 
+
+
+<!-- ##### FUNCTION fo_context_get_font_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_font_style ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_font_style: 
+
+
+<!-- ##### FUNCTION fo_context_get_font_variant ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_font_variant ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_font_variant: 
+
+
+<!-- ##### FUNCTION fo_context_get_font_weight ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_font_weight ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_font_weight: 
+
+
+<!-- ##### FUNCTION fo_context_get_format ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_format ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_format: 
+
+
+<!-- ##### FUNCTION fo_context_get_grouping_separator ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_grouping_separator ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_grouping_separator: 
+
+
+<!-- ##### FUNCTION fo_context_get_grouping_size ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_grouping_size ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_grouping_size: 
+
+
+<!-- ##### FUNCTION fo_context_get_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_height: 
+
+
+<!-- ##### FUNCTION fo_context_get_id ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_id ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_id: 
+
+
+<!-- ##### FUNCTION fo_context_get_inline_progression_dimension ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_inline_progression_dimension ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_inline_progression_dimension: 
+
+
+<!-- ##### FUNCTION fo_context_get_inline_progression_dimension_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_inline_progression_dimension_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_inline_progression_dimension_minimum: 
+
+
+<!-- ##### FUNCTION fo_context_get_inline_progression_dimension_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_inline_progression_dimension_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_inline_progression_dimension_optimum: 
+
+
+<!-- ##### FUNCTION fo_context_get_inline_progression_dimension_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_inline_progression_dimension_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_inline_progression_dimension_maximum: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_together ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_together ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_together: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_together_within_column ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_together_within_column ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_together_within_column: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_together_within_line ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_together_within_line ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_together_within_line: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_together_within_page ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_together_within_page ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_together_within_page: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_next ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_next ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_next: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_next_within_column ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_next_within_column ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_next_within_column: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_next_within_line ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_next_within_line ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_next_within_line: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_next_within_page ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_next_within_page ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_next_within_page: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_previous ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_previous ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_previous: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_previous_within_column ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_previous_within_column ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_previous_within_column: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_previous_within_line ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_previous_within_line ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_previous_within_line: 
+
+
+<!-- ##### FUNCTION fo_context_get_keep_with_previous_within_page ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_keep_with_previous_within_page ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_keep_with_previous_within_page: 
+
+
+<!-- ##### FUNCTION fo_context_get_letter_value ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_letter_value ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_letter_value: 
+
+
+<!-- ##### FUNCTION fo_context_get_linefeed_treatment ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_linefeed_treatment ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_linefeed_treatment: 
+
+
+<!-- ##### FUNCTION fo_context_get_line_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_line_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_line_height: 
+
+
+<!-- ##### FUNCTION fo_context_get_line_stacking_strategy ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_line_stacking_strategy ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_line_stacking_strategy: 
+
+
+<!-- ##### FUNCTION fo_context_get_margin ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_margin ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_margin: 
+
+
+<!-- ##### FUNCTION fo_context_get_margin_bottom ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_margin_bottom ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_margin_bottom: 
+
+
+<!-- ##### FUNCTION fo_context_get_margin_left ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_margin_left ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_margin_left: 
+
+
+<!-- ##### FUNCTION fo_context_get_margin_right ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_margin_right ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_margin_right: 
+
+
+<!-- ##### FUNCTION fo_context_get_margin_top ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_margin_top ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_margin_top: 
+
+
+<!-- ##### FUNCTION fo_context_get_master_name ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_master_name ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_master_name: 
+
+
+<!-- ##### FUNCTION fo_context_get_master_reference ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_master_reference ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_master_reference: 
+
+
+<!-- ##### FUNCTION fo_context_get_media_usage ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_media_usage ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_media_usage: 
+
+
+<!-- ##### FUNCTION fo_context_get_number_columns_repeated ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_number_columns_repeated ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_number_columns_repeated: 
+
+
+<!-- ##### FUNCTION fo_context_get_number_columns_spanned ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_number_columns_spanned ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_number_columns_spanned: 
+
+
+<!-- ##### FUNCTION fo_context_get_number_rows_spanned ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_number_rows_spanned ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_number_rows_spanned: 
+
+
+<!-- ##### FUNCTION fo_context_get_orphans ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_orphans ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_orphans: 
+
+
+<!-- ##### FUNCTION fo_context_get_overflow ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_overflow ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_overflow: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_after ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_after ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_after: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_after_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_after_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_after_length: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_after_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_after_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_after_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_before ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_before ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_before: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_before_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_before_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_before_length: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_before_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_before_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_before_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_bottom ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_bottom ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_bottom: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_end ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_end ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_end: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_end_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_end_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_end_length: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_end_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_end_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_end_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_left ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_left ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_left: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_right ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_right ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_right: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_start ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_start ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_start: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_start_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_start_length ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_start_length: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_start_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_start_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_start_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_padding_top ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_padding_top ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_padding_top: 
+
+
+<!-- ##### FUNCTION fo_context_get_page_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_page_height ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_page_height: 
+
+
+<!-- ##### FUNCTION fo_context_get_page_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_page_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_page_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_provisional_distance_between_starts ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_provisional_distance_between_starts ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_provisional_distance_between_starts: 
+
+
+<!-- ##### FUNCTION fo_context_get_provisional_label_separation ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_provisional_label_separation ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_provisional_label_separation: 
+
+
+<!-- ##### FUNCTION fo_context_get_ref_id ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_ref_id ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_ref_id: 
+
+
+<!-- ##### FUNCTION fo_context_get_region_name ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_region_name ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_region_name: 
+
+
+<!-- ##### FUNCTION fo_context_get_role ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_role ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_role: 
+
+
+<!-- ##### FUNCTION fo_context_get_scaling ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_scaling ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_scaling: 
+
+
+<!-- ##### FUNCTION fo_context_get_scaling_method ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_scaling_method ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_scaling_method: 
+
+
+<!-- ##### FUNCTION fo_context_get_score_spaces ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_score_spaces ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_score_spaces: 
+
+
+<!-- ##### FUNCTION fo_context_get_source_document ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_source_document ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_source_document: 
+
+
+<!-- ##### FUNCTION fo_context_get_space_after ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_after ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_after: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_after_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_after_minimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_after_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_after_optimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_after_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_after_maximum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_after_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_after_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_after_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_after_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_space_before ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_before ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_before: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_before_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_before_minimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_before_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_before_optimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_before_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_before_maximum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_before_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_before_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_before_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_before_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_space_end ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_end ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_end: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_end_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_end_minimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_end_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_end_optimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_end_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_end_maximum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_end_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_end_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_end_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_end_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_space_start ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_start ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_start: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_start_minimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_start_minimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_start_optimum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_start_optimum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_start_maximum ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_start_maximum: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_start_precedence ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_start_precedence: 
+
+
+<!-- ##### FUNCTION fo_context_set_space_start_condity ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_space_start_condity: 
+
+
+<!-- ##### FUNCTION fo_context_get_span ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_span ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_span: 
+
+
+<!-- ##### FUNCTION fo_context_get_src ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_src ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_src: 
+
+
+<!-- ##### FUNCTION fo_context_get_start_indent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_start_indent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_start_indent: 
+
+
+<!-- ##### FUNCTION fo_context_get_table_layout ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_table_layout ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_table_layout: 
+
+
+<!-- ##### FUNCTION fo_context_get_text_align ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_text_align ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_text_align: 
+
+
+<!-- ##### FUNCTION fo_context_get_text_indent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_text_indent ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_text_indent: 
+
+
+<!-- ##### FUNCTION fo_context_get_unicode_bidi ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_unicode_bidi ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_unicode_bidi: 
+
+
+<!-- ##### FUNCTION fo_context_get_white_space_collapse ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_white_space_collapse ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_white_space_collapse: 
+
+
+<!-- ##### FUNCTION fo_context_get_white_space_treatment ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_white_space_treatment ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_white_space_treatment: 
+
+
+<!-- ##### FUNCTION fo_context_get_widows ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_widows ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_widows: 
+
+
+<!-- ##### FUNCTION fo_context_get_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_width ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_width: 
+
+
+<!-- ##### FUNCTION fo_context_get_wrap_option ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_wrap_option ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_wrap_option: 
+
+
+<!-- ##### FUNCTION fo_context_get_writing_mode ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_context_set_writing_mode ##### -->
+<para>
+
+</para>
+
+@fo_context: 
+@new_writing_mode: 
+
+

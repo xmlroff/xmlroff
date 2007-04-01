@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-flow-name
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyFlowName ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyFlowNameClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_flow_name_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_flow_name_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

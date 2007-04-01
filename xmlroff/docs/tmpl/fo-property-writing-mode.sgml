@@ -1,0 +1,77 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-writing-mode
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyWritingMode ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyWritingModeClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_writing_mode_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_writing_mode_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_writing_mode_to_bpd ##### -->
+<para>
+
+</para>
+
+@writing_mode: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_writing_mode_to_ipd ##### -->
+<para>
+
+</para>
+
+@writing_mode: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_writing_mode_to_sd ##### -->
+<para>
+
+</para>
+
+@writing_mode: 
+@error: 
+@Returns: 
+
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-white-space-collapse
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyWhiteSpaceCollapse ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyWhiteSpaceCollapseClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_white_space_collapse_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_white_space_collapse_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

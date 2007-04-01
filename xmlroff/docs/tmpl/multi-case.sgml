@@ -1,0 +1,99 @@
+<!-- ##### SECTION Title ##### -->
+Fomulti-case
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoMultiCase ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoMultiCaseClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_multi_case_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_case_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+
+<!-- ##### FUNCTION fo_multi_case_set_id ##### -->
+<para>
+
+</para>
+
+@fo_multi_case: 
+@new_id: 
+
+
+<!-- ##### FUNCTION fo_multi_case_get_id ##### -->
+<para>
+
+</para>
+
+@fo_multi_case: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_case_set_role ##### -->
+<para>
+
+</para>
+
+@fo_multi_case: 
+@new_role: 
+
+
+<!-- ##### FUNCTION fo_multi_case_get_role ##### -->
+<para>
+
+</para>
+
+@fo_multi_case: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_multi_case_set_source_document ##### -->
+<para>
+
+</para>
+
+@fo_multi_case: 
+@new_source_document: 
+
+
+<!-- ##### FUNCTION fo_multi_case_get_source_document ##### -->
+<para>
+
+</para>
+
+@fo_multi_case: 
+@Returns: 
+
+

@@ -1,0 +1,97 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-provisional-distance-between-starts
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumProvisionalDistanceBetweenStarts ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_PROVISIONAL_DISTANCE_BETWEEN_STARTS_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_PROVISIONAL_DISTANCE_BETWEEN_STARTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyProvisionalDistanceBetweenStarts ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyProvisionalDistanceBetweenStartsClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

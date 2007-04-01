@@ -1,0 +1,51 @@
+<!-- ##### SECTION Title ##### -->
+fo-inline-fo
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_INLINE_FO_IFACE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### STRUCT FoInlineFo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoInlineFoIface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_inline_fo_get_text_attr_list ##### -->
+<para>
+
+</para>
+
+@fo_inline_fo: 
+@fo_doc: 
+@text: 
+@attr_glist: 
+@debug_level: 
+
+

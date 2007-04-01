@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-margin-right
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyMarginRight ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyMarginRightClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_margin_right_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_margin_right_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-before-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderBeforeColor ##### -->
+<para>
+The #FoPropertyBorderBeforeColor structure represents one instance of the
+'border-before-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderBeforeColorClass ##### -->
+<para>
+The #FoPropertyBorderBeforeColorClass structure represents the type of
+the 'border-before-color' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_before_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_before_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

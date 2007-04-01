@@ -1,0 +1,28 @@
+<!-- ##### SECTION Title ##### -->
+fo-table-header-area
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION fo_table_header_area_new2 ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+@error: 
+<!-- # Unused Parameters # -->
+@fo_node: 
+
+

@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+Fostring
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoString ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoStringClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_string_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_string_set_value ##### -->
+<para>
+
+</para>
+
+@string: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_string_get_value ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
+
+

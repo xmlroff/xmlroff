@@ -1,0 +1,156 @@
+<!-- ##### SECTION Title ##### -->
+config
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO HAVE_DLFCN_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_INTTYPES_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_MEMORY_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_POPT_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_STDINT_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_STDLIB_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_STRINGS_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_STRING_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_SYS_STAT_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_SYS_TYPES_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO HAVE_UNISTD_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LIBFO_DEBUG ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PACKAGE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PACKAGE_BUGREPORT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PACKAGE_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PACKAGE_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PACKAGE_TARNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PACKAGE_VERSION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO STDC_HEADERS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO VERSION ##### -->
+<para>
+
+</para>
+
+
+

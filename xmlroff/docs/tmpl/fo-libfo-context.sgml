@@ -1,0 +1,184 @@
+<!-- ##### SECTION Title ##### -->
+FoLibfoContext
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM FoEnumFormat ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FORMAT_UNKNOWN: 
+@FO_ENUM_FORMAT_AUTO: 
+@FO_ENUM_FORMAT_PDF: 
+@FO_ENUM_FORMAT_POSTSCRIPT: 
+@FO_ENUM_FORMAT_SVG: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_FORMAT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM FoEnumFontEmbed ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_EMBED_INVALID: 
+@FO_ENUM_FONT_EMBED_ALL: 
+@FO_ENUM_FONT_EMBED_NONBASE: 
+@FO_ENUM_FONT_EMBED_NONE: 
+
+<!-- ##### FUNCTION fo_enum_font_embed_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_EMBED ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoLibfoContextClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_continue_after_error ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_set_continue_after_error ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@continue_after_error: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_format ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_set_format ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@format: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_font_embed ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_set_font_embed ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@font_embed: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_validation ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_set_validation ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@validation: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_warning_mode ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_set_warning_mode ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@warning_mode: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_get_debug_mode ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_libfo_context_set_debug_mode ##### -->
+<para>
+
+</para>
+
+@libfo_context: 
+@debug_mode: 
+
+

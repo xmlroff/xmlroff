@@ -1,0 +1,102 @@
+/* Fo
+ * fo-xsl-formatter.c: Object type for libxslt XSLT processor
+ *
+ * Copyright (C) 2006 Sun Microsystems
+ *
+ * $Id: libfo-compat.c.tmpl,v 1.3 2006/09/06 10:13:30 tonygraham Exp $
+ *
+ * See COPYING for the status of this software.
+ */
+
+#include "libfo/fo-xml-doc-private.h"
+#include "libfo/libfo-compat.h"
+#include "libfo/fo-xslt-transformer.h"
+#include <libxml/xmlversion.h>
+#include <libxml/xmlmemory.h>
+#include <libxml/debugXML.h>
+#include <libxml/HTMLtree.h>
+#include <libxslt/xslt.h>
+#include <libxslt/xsltInternals.h>
+#include <libxslt/transform.h>
+#include <libxslt/xsltutils.h>
+
+const char *libfo_compat_error_messages [] = {
+  N_("libfo-compat error")
+};
+
+static const gchar* stylesheet =
+REPLACE_ME;
+
+/**
+ * libfo_compat_get_stylesheet:
+ *
+ * Get the built-in compatibility stylesheet as a single, rather long
+ * string.
+ * 
+ * Return value: The built-in stylesheet.
+ **/
+const gchar*
+libfo_compat_get_stylesheet (void)
+{
+  return stylesheet;
+}
+
+/**
+ * libfo_compat_make_compatible:
+ * @result_tree:   Result of previous parse or transformation.
+ * @libfo_context: #FoLibfoContext.
+ * @error:         Indication of any error that occurred.
+ * 
+ * Make @result_tree compatible with libfo by applying the built-in
+ * copy of the 'libfo-compat.xsl' stylesheet.
+ *
+ * Return value: A new result tree.
+ **/
+FoXmlDoc *
+libfo_compat_make_compatible (FoXmlDoc       *result_tree,
+			      FoLibfoContext *libfo_context,
+			      GError        **error)
+{
+  FoXmlDoc *compatible_result;
+  GError *tmp_error = NULL;
+  gchar* base = NULL;
+
+  g_return_val_if_fail (result_tree != NULL, NULL);
+
+  base = fo_xml_doc_get_base (result_tree);
+
+  FoXmlDoc *stylesheet_doc = fo_xml_doc_new_from_string (stylesheet,
+							 base,
+							 NULL,
+							 libfo_context,
+							 &tmp_error);
+
+  g_message (base);
+
+  if (tmp_error != NULL)
+    {
+      g_propagate_error (error,
+			 tmp_error);
+      return NULL;
+    }
+
+  compatible_result = fo_xslt_transformer_do_transform (result_tree,
+							stylesheet_doc,
+							libfo_context,
+							&tmp_error);
+  
+  fo_xml_doc_set_base (compatible_result,
+		       base);
+  g_free (base);
+
+  fo_xml_doc_unref (stylesheet_doc);
+
+  if (tmp_error != NULL)
+    {
+      g_propagate_error (error,
+			 tmp_error);
+      return NULL;
+    }
+
+  return compatible_result;
+}

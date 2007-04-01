@@ -1,0 +1,69 @@
+<section id="backends">
+<sectioninfo>
+<title>FoDoc and xmlroff Backends</title>
+<subtitle>Backends</subtitle>
+<abstract><para>Backends for writing xmlroff output</para></abstract>
+</sectioninfo>
+
+<section>
+<title>Backends</title>
+
+<para>xmlroff is built with one or more backends that do the work of
+writing the output file, e.g., PostScript or PDF output.</para>
+
+<para>The backends are based on other open source graphics libraries
+that handle the details of the file formats.  xmlroff could have been
+written to natively write PostScript, PDF, etc., but there's little
+point doing that when libraries for doing that already exist (or now
+exist, since, for example, the Cairo library on which the Cairo
+backend is based is much newer than xmlroff).</para>
+
+<para>The key requirement for a backend is that it is possible to
+render Pango layouts using the backend.</para>
+
+</section>
+
+<section>
+<title>Yet Another PostScript Clone (YAPC)</title>
+
+<para>Graphics libraries seemingly all implement some variation on the
+PostScript imaging model:</para>
+
+<variablelist>
+<varlistentry>
+<term>Drawing is done a an active "point"</term>
+    <listitem><para>The "point" has a position, and you can move the
+    "point" to an absolute or relative position on the drawing surface.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>There are a number of primitive graphic operations</term>
+    <listitem><para>Primitive operations exist for moving the point,
+    drawing lines, arcs, and rectangles, and translating the origin of
+    the coordinate system.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>Drawing is stateful</term>
+    <listitem><para>You can set, for example, the stroke colour, and
+    that colour will be used by other drawing operations until you
+    change it again.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>Graphic states can be saved on a stack</term>
+    <listitem><para>Graphic states can be saved and restored so you
+    can, for example, save the state, change the stroke colour, draw
+    something, then restore the state and, by doing so, restore the previous stroke
+    colour, etc.</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>Along with their similarities, graphic libraries have their
+differences.  xmlroff hides the differences between backends by
+implementing an abstract FoDoc object type that has functions for the
+graphic operations that xmlroff uses.  Each backend is
+implemented as a subtype of FoDoc.</para>
+
+<para>So, as you would expect, FoDoc is yet another PostScript
+clone.</para>
+
+</section>
+</section>

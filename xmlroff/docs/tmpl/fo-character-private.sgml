@@ -1,0 +1,306 @@
+<!-- ##### SECTION Title ##### -->
+FoCharacter
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:alignment-adjust ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:alignment-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:baseline-shift ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:character ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:dominant-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:font-family ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:font-stretch ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:font-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:font-variant ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:font-weight ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:line-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:score-spaces ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:space-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoCharacter:space-start ##### -->
+<para>
+
+</para>
+

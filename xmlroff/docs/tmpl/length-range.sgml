@@ -1,0 +1,122 @@
+<!-- ##### SECTION Title ##### -->
+Folength-range
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumLengthRange ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_LENGTH_RANGE_AUTO: 
+
+<!-- ##### MACRO FO_LENGTH_RANGE ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### STRUCT FoLengthRange ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoLengthRangeClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_length_range_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_new_auto ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_get_minimum ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_get_optimum ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_get_maximum ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_resolve ##### -->
+<para>
+
+</para>
+
+@shortform: 
+@minimum: 
+@optimum: 
+@maximum: 
+@hundred_percent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_range_resolve_allow_auto ##### -->
+<para>
+
+</para>
+
+@shortform: 
+@minimum: 
+@optimum: 
+@maximum: 
+@hundred_percent: 
+@error: 
+@Returns: 
+
+

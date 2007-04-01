@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-bottom-width
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderBottomWidth ##### -->
+<para>
+The #FoPropertyBorderBottomWidth structure represents one instance of the
+'border-bottom-width' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderBottomWidthClass ##### -->
+<para>
+The #FoPropertyBorderBottomWidthClass structure represents the type of
+the 'border-bottom-width' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_bottom_width_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_bottom_width_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

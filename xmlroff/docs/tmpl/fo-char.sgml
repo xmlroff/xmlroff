@@ -1,0 +1,62 @@
+<!-- ##### SECTION Title ##### -->
+fo-char
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoChar ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoChar:value ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoCharClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_char_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_char_new_with_value ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_char_get_value ##### -->
+<para>
+
+</para>
+
+@fo_char: 
+@Returns: 
+
+

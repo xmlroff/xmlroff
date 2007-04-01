@@ -1,0 +1,57 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-line-height
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyLineHeight ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyLineHeightClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_line_height_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_line_height_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_line_height_resolve ##### -->
+<para>
+
+</para>
+
+@line_height: 
+@font_size: 
+@Returns: 
+
+

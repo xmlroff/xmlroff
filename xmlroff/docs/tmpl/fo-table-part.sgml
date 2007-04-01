@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+fo-table-part
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoTablePart ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoTablePartClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_table_part_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_part_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+

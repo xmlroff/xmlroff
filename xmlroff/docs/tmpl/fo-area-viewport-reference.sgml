@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+FoAreaViewportReference
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaViewportReference ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaViewportReferenceClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_viewport_reference_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

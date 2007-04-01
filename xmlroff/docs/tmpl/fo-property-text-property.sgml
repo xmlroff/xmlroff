@@ -1,0 +1,58 @@
+<!-- ##### SECTION Title ##### -->
+FoPropertyTextPropertyIface
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_PROPERTY_TEXT_PROPERTY_IFACE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### STRUCT FoPropertyTextProperty ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyTextPropertyIface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_text_property_new_attr ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_text_property_new_attr_from_context ##### -->
+<para>
+
+</para>
+
+@property: 
+@context: 
+@Returns: 
+
+

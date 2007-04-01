@@ -1,0 +1,81 @@
+<!-- $Id: xmlroff.fo,v 1.15 2006/04/16 20:26:06 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow
+        flow-name="xsl-region-body"
+        font-size="10pt">
+        <fo:block space-after="12pt"><fo:inline font-weight="bold" font-family="mono">xmlroff</fo:inline> &#x2013; xmlroff XSL Formatter</fo:block>
+        <fo:block space-after="12pt">xmlroff is a fast, free, high-quality, multi-platform XSL formatter that aims to excel at DocBook formatting and that integrates easily with other programs and with scripting languages.</fo:block>
+        <fo:block>See <fo:inline font-family="mono">http://xmlroff.org/</fo:inline>.</fo:block>
+        <fo:block space-before="18pt" space-after="12pt" font-weight="bold">Usage:</fo:block>
+        <fo:block start-indent="12pt" space-after="12pt" font-family="mono"><fo:inline font-weight="bold">xmlroff</fo:inline> [-v?] [--compat] [-] [-o <fo:inline font-style="italic">output-file</fo:inline>] [-w <fo:inline font-style="italic">warning-mode</fo:inline>] [-d <fo:inline font-style="italic">debug-mode</fo:inline>] [--compat-stylesheet] [--continue] [--format (auto|pdf|postscript)] [--backend (cairo|gp)] <fo:inline font-style="italic">&lt;xml></fo:inline> [<fo:inline font-style="italic">&lt;stylesheet></fo:inline>]</fo:block>
+        <fo:table inline-progression-dimension="100%" table-layout="fixed">
+      <fo:table-column column-width="45%"/>
+      <fo:table-column column-width="55%"/>
+      <fo:table-body>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">-v</fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Show version information.</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">-?</fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Show help message.</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">--compat</fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Make the input compatible with xmlroff.</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">--compat-stylesheet</fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Output the compatibility stylesheet then exit.</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">-o <fo:inline font-style="italic">output-file</fo:inline></fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Output file.  Default is <fo:inline font-family="mono">layout.pdf</fo:inline>.</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">-w <fo:inline font-style="italic">warning-mode</fo:inline></fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Warning mode.  See <fo:inline font-family="mono">fo-utils.h</fo:inline>.</fo:block></fo:table-cell>
+        </fo:table-row>
+        <fo:table-row>
+          <fo:table-cell><fo:block font-family="mono">-d <fo:inline font-style="italic">debug-mode</fo:inline></fo:block></fo:table-cell>
+          <fo:table-cell><fo:block>Debug mode.  See <fo:inline font-family="mono">fo-utils.h</fo:inline>.</fo:block></fo:table-cell>
+        </fo:table-row>
+      <fo:table-row>
+        <fo:table-cell><fo:block font-family="mono">--continue</fo:block></fo:table-cell>
+        <fo:table-cell><fo:block>Continue after any formatting errors, if possible.</fo:block></fo:table-cell>
+      </fo:table-row>
+      <fo:table-row>
+        <fo:table-cell><fo:block font-family="mono">--format (auto|pdf|postscript)</fo:block></fo:table-cell>
+        <fo:table-cell><fo:block>Format of the output file.  The default is <fo:inline font-family="mono">auto</fo:inline>, which selects the format based on the extension of the output filename.</fo:block></fo:table-cell>
+      </fo:table-row>
+      <fo:table-row>
+        <fo:table-cell><fo:block font-family="mono">--backend (cairo|gp)</fo:block></fo:table-cell>
+        <fo:table-cell><fo:block>Use the Cairo or GNOME Print backend to produce the output file.  The default is <fo:inline font-family="mono">gp</fo:inline>.</fo:block></fo:table-cell>
+      </fo:table-row>
+      <fo:table-row>
+	<fo:table-cell><fo:block font-family="mono" font-style="italic">&lt;xml></fo:block></fo:table-cell>
+        <fo:table-cell><fo:block>Input XML file.</fo:block></fo:table-cell>
+      </fo:table-row>
+      <fo:table-row>
+	<fo:table-cell><fo:block font-family="mono" font-style="italic">&lt;stylesheet></fo:block></fo:table-cell>
+        <fo:table-cell><fo:block>XSL stylesheet file.  Necessary when <fo:inline font-style="italic">&lt;xml></fo:inline> is not in the FO vocabulary.</fo:block></fo:table-cell>
+      </fo:table-row>
+    </fo:table-body>
+  </fo:table>
+  </fo:flow>
+</fo:page-sequence>
+</fo:root>

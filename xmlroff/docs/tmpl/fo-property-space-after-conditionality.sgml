@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-space-after-conditionality
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertySpaceAfterCondity ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertySpaceAfterCondityClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_space_after_condity_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_space_after_condity_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

@@ -1,0 +1,147 @@
+<!-- ##### SECTION Title ##### -->
+FoObject
+
+<!-- ##### SECTION Short_Description ##### -->
+FoObject is wonderful
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+FoObject is really wonderful.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoObject ##### -->
+<para>
+FoObject is wonderful, too.
+
+</para>
+
+
+<!-- ##### STRUCT FoObjectClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@debug_dump: 
+@debug_sprintf: 
+@print_sprintf: 
+@log_error: 
+@log_warning: 
+@log_debug: 
+@log_or_propagate_error: 
+@maybe_propagate_error: 
+@hash_func: 
+@equal_func: 
+
+<!-- ##### FUNCTION fo_object_new ##### -->
+<para>
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_object_debug_dump ##### -->
+<para>
+
+</para>
+
+@object: 
+@depth: 
+
+
+<!-- ##### FUNCTION fo_object_debug_sprintf ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_object_sprintf ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_object_log_error ##### -->
+<para>
+
+</para>
+
+@object: 
+@error: 
+
+
+<!-- ##### FUNCTION fo_object_log_warning ##### -->
+<para>
+
+</para>
+
+@object: 
+@warning: 
+
+
+<!-- ##### FUNCTION fo_object_log_debug ##### -->
+<para>
+
+</para>
+
+@object: 
+@debug: 
+
+
+<!-- ##### FUNCTION fo_object_log_or_propagate_error ##### -->
+<para>
+
+</para>
+
+@fo_object: 
+@dest: 
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_object_maybe_propagate_error ##### -->
+<para>
+
+</para>
+
+@fo_object: 
+@dest: 
+@src: 
+@continue_after_error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_object_hash ##### -->
+<para>
+
+</para>
+
+@object: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_object_equal ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@error: 
+@Returns: 
+
+

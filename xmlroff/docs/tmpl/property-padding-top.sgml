@@ -1,0 +1,97 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-padding-top
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumPaddingTop ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_PADDING_TOP_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_PADDING_TOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyPaddingTop ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyPaddingTopClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_padding_top_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_padding_top_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_padding_top_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_padding_top_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_padding_top_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_padding_top_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

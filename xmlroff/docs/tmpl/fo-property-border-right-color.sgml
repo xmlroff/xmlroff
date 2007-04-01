@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-right-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderRightColor ##### -->
+<para>
+The #FoPropertyBorderRightColor structure represents one instance of the
+'border-right-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderRightColorClass ##### -->
+<para>
+The #FoPropertyBorderRightColorClass structure represents the type of
+the 'border-right-color' XSL property.
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_right_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_right_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

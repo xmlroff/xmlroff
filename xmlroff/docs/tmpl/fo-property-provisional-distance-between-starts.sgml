@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-provisional-distance-between-starts
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyProvisionalDistanceBetweenStarts ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyProvisionalDistanceBetweenStartsClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_provisional_distance_between_starts_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

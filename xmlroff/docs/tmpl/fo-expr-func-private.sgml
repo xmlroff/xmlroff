@@ -1,0 +1,266 @@
+<!-- ##### SECTION Title ##### -->
+fo-expr-func-private
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION fo_expr_func_abs ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_add ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_body_start ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_ceiling ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_div ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_floor ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_from_nearest_specified_value ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_from_parent ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_from_table_column ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_inherited_property_value ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_label_end ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_max ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_min ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_mod ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_mul ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_pcw ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_pcw_prop ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_pcw_prop_fixed ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_expr_func_rgb ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_round ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_sub ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+
+<!-- ##### FUNCTION fo_expr_func_url ##### -->
+<para>
+
+</para>
+
+@context: 
+@nargs: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@pctxt: 
+
+

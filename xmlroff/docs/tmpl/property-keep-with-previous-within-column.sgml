@@ -1,0 +1,83 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-keep-with-previous-within-column
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoPropertyKeepWithPreviousWithinColumn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyKeepWithPreviousWithinColumnClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_column_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_column_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_column_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_column_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_column_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_with_previous_within_column_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

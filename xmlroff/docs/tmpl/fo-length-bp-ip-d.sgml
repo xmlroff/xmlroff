@@ -1,0 +1,77 @@
+<!-- ##### SECTION Title ##### -->
+FoLengthBpIpD
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoLengthBpIpD ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoLengthBpIpD:length-bpd ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoLengthBpIpD:length-ipd ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoLengthBpIpDClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_length_bp_ip_d_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_bp_ip_d_new_with_value ##### -->
+<para>
+
+</para>
+
+@length_bpd: 
+@length_ipd: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_bp_ip_d_get_length_bpd ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_bp_ip_d_get_length_ipd ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+

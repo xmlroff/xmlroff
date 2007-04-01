@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+border-top
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderTop ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderTopClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_top_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_top_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

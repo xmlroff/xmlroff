@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+fo-layout-gp
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoLayoutGP ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoLayoutGPClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_layout_gp_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_gp_new_from_fo_doc ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+

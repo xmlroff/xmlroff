@@ -1,0 +1,62 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-font-variant
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_VARIANT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_enum_font_variant_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### STRUCT FoPropertyFontVariant ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyFontVariantClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_font_variant_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_font_variant_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

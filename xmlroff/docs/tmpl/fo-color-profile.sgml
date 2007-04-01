@@ -1,0 +1,57 @@
+<!-- ##### SECTION Title ##### -->
+fo-color-profile
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoColorProfile ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoColorProfileClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_color_profile_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_profile_get_src ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_profile_set_src ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_src: 
+
+

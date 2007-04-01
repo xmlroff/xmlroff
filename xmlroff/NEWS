@@ -1,0 +1,157 @@
+Changes between 0.3.99 and 0.4.0
+
+* Easier to build using bundled PangoXSL
+
+Changes between 0.3.98 and 0.3.99
+
+* xmlroff manpage in DocBook XML (Oliver Kiddle)
+* Cairo backend is less experimental
+* Added Cairo backend SVG output that is really experimental
+* Added handling of base for relative URIs when '--compat' is used
+* Handles 'auto' for page width and height (1159713)
+* Reworked checking for popt (1207495)
+
+Changes between 0.3.9 and 0.3.98
+
+* Added '--compat' option for running compatibility stylesheet
+* Added experimental Cairo backend
+* Added '-w' option for setting warning mode
+* Added handling empty fo:wrapper
+* Simplified creating FoXmlDoc and running XSLT transformations
+* Removed support for SGML catalogs
+
+Changes between 0.3.8 and 0.3.9
+
+* Added 'extent'
+
+Changes between 0.3.7 and 0.3.8
+
+* Corrected endless loop if area won't fit on page
+* Added handling 'overflow' property of fo:region-body
+* xmlroff stops at first error instead of continuing
+
+Changes between 0.3.6 and 0.3.7
+
+* Corrected placement of fo:external-graphic if not first on line
+* Added setting pixels-per-inch (for graphics without intrinsic size)
+  as configure option
+* Working on averting endless loop if area won't fit on page.
+
+Changes between 0.3.5 and 0.3.6
+
+* Resolves relative URIs for fo:external-graphic 'src' property values
+  (Stefan Seefeld)
+* Added 'content-type' to libfo-compat.xsl
+* Stopped requiring 'content-height' and 'content-width'
+* Supporting percentages for 'content-height' and 'content-width'
+* Improved Cygwin support (Gerrit Haase)
+
+Changes between 0.3.4 and 0.3.5
+
+* fo:external-graphic works (but requires 'content-height' and
+  'content-width')
+* Stopped removing 'fo:external-graphic' in libfo-compat.xsl (Tim Waugh)
+* Able to build in separate directory (Matthew Daniel)
+* Default 'auto' output format determines format from output file extension
+* Added conformance section to documentation
+
+Changes between 0.3.3 and 0.3.4
+
+* Add '--format' parameter for PDF or PostScript output
+* Reduced memory leakage
+* Partially re-implemented fo:external-graphic support
+* Corrected whitespace handling in libfo-compat.xsl (Tim Waugh)
+* Corrected "url()" handling
+* 86% symbol docs coverage
+
+Changes between 0.3.2 and 0.3.3
+
+* Added support for 'border', 'border-left', 'border-right',
+  'border-top', 'border-bottom', 'border-style', 'border-width', and
+  'border-color' properties (Julian Rosse)
+* Removed border-related properties and 'padding' from libfo-compat.xsl
+* Corrected whitespace handling in libfo-compat.xsl
+* Added removal of more unsupported properties in libfo-compat.xsl
+* Corrected drawing 'dashed', 'dotted', 'groove', and 'hidden' border
+  styles
+* Partially re-implemented fo:external-graphic support
+* Build fixes to work with latest GCC (Tim Waugh)
+
+Changes between 0.3.1 and 0.3.2
+
+* Added support for X11 colour names as 'color' keywords
+* Removed rewriting of 'color' and similar properties' from
+  libfo-compat.xsl
+* Improved documentation
+* Minor bug fixes
+
+Changes between 0.3.0 and 0.3.1
+
+* Improved documentation
+* Minor bug fixes
+
+Changes between 0.2.8 and 0.3.0
+
+* No more PDFlib backend
+* Uses PangoXSL, not PangoPDF
+* 'libfo-compat.xsl' stylesheet for ensuring compatibility of FO files
+
+Changes between 0.2.7 and 0.2.8
+
+* xmlroff-specific INSTALL file (Fabio Arciniegas)
+* Defaults to not building PDFlib backend
+
+Changes between 0.2.6 and 0.2.7:
+
+* Fixed bug where fo:block repeated when broken over a page
+* Supports .length and .conditionality on padding properties
+* Installs more headers that are now used in libfo-examples
+* Stopped segfaulting on unsupported properties (Charles Bozeman)
+
+Changes between 0.2.5 and 0.2.6:
+
+* Fixed bug in recognising predefined region names
+* Moved more enumeration tokens to fo-enum.[ch]
+* 85% symbol docs coverage
+
+Changes between 0.2.4 and 0.2.5:
+
+* Added 'padding' shorthand property
+* Fixed bug in 'gp' backend colour calculations
+* All properties now created using fo_property_new_from_expression()
+* Most property-specific enumerations moved to fo-enum.[ch]
+* 84% documentation comment coverage
+
+Changes between 0.2.3 and 0.2.4:
+
+* Defaults to using 'gp' backend instead of 'pdflib' backend
+* Added warning for when table-layout="fixed" is specified but width
+  property isn't
+* Added support for building with libtool 1.5 (Dave Malcolm)
+* Added	xmlroff.spec.in for use with rpmbuild (Tim Waugh)
+* Numerous bug fixes
+* 81% documentation comment coverage
+
+Changes between 0.2.2 and 0.2.3:
+
+* Builds without PDFlib when using --disable-pdflib configure switch
+* Builds without GNOME Print when using --disable-gp configure switch
+* 'Basic' interface usable from other programs/libraries
+* 80% documentation comment coverage
+
+Changes between 0.2.1 and 0.2.2:
+
+* Build fixes for handling dependency on libxml2 [Charles Bozeman]
+* Minor property code improvements
+* Increased documentation comment coverage
+
+Changes between 0.2.0 and 0.2.1:
+
+* Add FoPropertyTextPropertyIface interface for getting PangoAttribute
+  from inline properties of FoInlineFoIface formatting objects
+* Build fixes for use with statically linked fontconfig
+* Put common color property validation in fo-property-util.[ch]
+
+What is new in xmlroff 0.2.0:
+
+* Initial public release

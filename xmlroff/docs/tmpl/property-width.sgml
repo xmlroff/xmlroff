@@ -1,0 +1,98 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-width
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumWidth ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_WIDTH_AUTO: 
+@FO_ENUM_WIDTH_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_WIDTH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyWidth ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyWidthClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_width_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_width_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_width_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_width_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_width_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_width_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

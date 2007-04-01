@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+fo-area-table-footer
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaTableFooter ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaTableFooterClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_table_footer_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

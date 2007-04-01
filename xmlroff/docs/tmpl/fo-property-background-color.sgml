@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-background-color
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBackgroundColor ##### -->
+<para>
+The #FoPropertyBackgroundColor structure represents one instance of the
+'background-color' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBackgroundColorClass ##### -->
+<para>
+The #FoPropertyBackgroundColorClass structure represents the type of
+the 'background-color' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_background_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_background_color_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

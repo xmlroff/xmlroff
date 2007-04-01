@@ -1,0 +1,40 @@
+<!-- ##### SECTION Title ##### -->
+fo-table-border-fo-private
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoTableBorderFoIface ##### -->
+<para>
+
+</para>
+
+@g_iface: 
+@get_background_color: 
+@get_border_after_color: 
+@get_border_after_precedence: 
+@get_border_after_style: 
+@get_border_after_width: 
+@get_border_before_color: 
+@get_border_before_precedence: 
+@get_border_before_style: 
+@get_border_before_width: 
+@get_border_end_color: 
+@get_border_end_precedence: 
+@get_border_end_style: 
+@get_border_end_width: 
+@get_border_start_color: 
+@get_border_start_precedence: 
+@get_border_start_style: 
+@get_border_start_width: 
+

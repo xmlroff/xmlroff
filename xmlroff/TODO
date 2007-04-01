@@ -1,0 +1,45 @@
+xmlroff TODO
+
+Convert 'proportional-column-width' datatype to compound datatype
+
+   It would be simpler if the 'proportional-column-width' datatype was
+   a compound datatype with 'length' and 'proportional' components.
+   This would reduce the calculations done when a table has no columns
+   with proportional width.
+
+Convert fo-expr-context-private.h _get_ functions to macros
+
+   Macros were turned into functions when the header file was going to
+   be publicly visible, but since it is now private to the expression
+   parsing code, the functions could easily be made into macros again.
+
+Merge all enumeration tokens into one large GEnum
+
+   Since, in principle, a property can get its value from almost any
+   other property type by using inherited-property-value(),
+   from-parent(), from-nearest-specified-value(), or
+   from-table-column(), maybe all enumeration tokens should be in one
+   large GEnum, with a property required to check that a particular
+   value from another property is valid for the current property.
+
+   Maybe this doesn't fit with the current practise of turning
+   enumeration tokens into resolved values straight away.
+
+Remove 'context' parameter from _resolve_enum() functions
+
+   The FoContext is unnecessary once none of the _resolve_enum()
+   functions handle the 'inherit' keyword.
+
+   This will also affect _validate() functions of properties, since
+   they will also no longer need a 'context' parameter.
+
+Convert property value calculations to use functions in fo-datatype.h
+
+   Calculations involving property datatype's values can be simplified
+   by using the functions in fo-datatype.h.
+
+Update remaining formatting objects and properties to match current
+spec-dump
+
+   This is a never-ending process while the spec-dump stylesheets are
+   being continually tweaked.

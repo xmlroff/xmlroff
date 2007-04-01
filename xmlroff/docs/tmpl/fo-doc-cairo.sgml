@@ -1,0 +1,50 @@
+<!-- ##### SECTION Title ##### -->
+FoDocCairo
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoDocCairo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoDocCairoClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_doc_cairo_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_doc_cairo_open_file ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@filename: 
+@libfo_context: 
+@error: 
+
+

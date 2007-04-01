@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-block-fo-private
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoBlockFoIface ##### -->
+<para>
+
+</para>
+
+@g_iface: 
+@get_background_color: 
+@get_border_after_color: 
+@get_border_after_style: 
+@get_border_after_width: 
+@get_border_before_color: 
+@get_border_before_style: 
+@get_border_before_width: 
+@get_border_end_color: 
+@get_border_end_style: 
+@get_border_end_width: 
+@get_border_start_color: 
+@get_border_start_style: 
+@get_border_start_width: 
+@get_keep_together: 
+@get_keep_with_next: 
+@get_keep_with_previous: 
+@get_padding_after: 
+@get_padding_before: 
+@get_padding_end: 
+@get_padding_start: 
+@get_space_before: 
+@get_space_after: 
+@get_start_indent: 
+@get_end_indent: 
+

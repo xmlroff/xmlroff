@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-baseline-shift
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBaselineShift ##### -->
+<para>
+The #FoPropertyBaselineShift structure represents one instance of the
+'baseline-shift' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBaselineShiftClass ##### -->
+<para>
+The #FoPropertyBaselineShiftClass structure represents the type of
+the 'baseline-shift' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_baseline_shift_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_baseline_shift_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

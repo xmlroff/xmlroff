@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-alignment-adjust
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyAlignmentAdjust ##### -->
+<para>
+The #FoPropertyAlignmentAdust structure represents one instance of the
+'alignment-adjust' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyAlignmentAdjustClass ##### -->
+<para>
+The #FoPropertyAlignmentAdjustClass structure represents the type of
+the 'alignment-adjust' property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_adjust_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

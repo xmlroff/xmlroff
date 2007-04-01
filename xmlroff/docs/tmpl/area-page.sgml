@@ -1,0 +1,162 @@
+<!-- ##### SECTION Title ##### -->
+Foarea-page
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoAreaPage ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaPageClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_page_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_page_number ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_page_number: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_page_number ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_page_width ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_page_width: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_page_width ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_page_height ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_page_height: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_page_height ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_top ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_top: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_top ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_bottom ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_bottom: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_bottom ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_left ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_left: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_left ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_page_set_margin_right ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@new_margin_right: 
+
+
+<!-- ##### FUNCTION fo_area_page_get_margin_right ##### -->
+<para>
+
+</para>
+
+@fo_area_page: 
+@Returns: 
+
+

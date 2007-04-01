@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+Fowrapper
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoWrapper ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoWrapperClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_wrapper_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_wrapper_set_id ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_id: 
+
+
+<!-- ##### FUNCTION fo_wrapper_get_id ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+

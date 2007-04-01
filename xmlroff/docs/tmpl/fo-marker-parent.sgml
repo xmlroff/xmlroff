@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+fo-marker-parent
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoMarkerParent ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoMarkerParentClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_marker_parent_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_marker_parent_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+

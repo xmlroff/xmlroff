@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-block-progression-dimension
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBlockProgressionDimension ##### -->
+<para>
+The #FoPropertyBlockProgressionDimension structure represents one instance of the
+'block-progression-dimension' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBlockProgressionDimensionClass ##### -->
+<para>
+The #FoPropertyBlockProgressionDimensionClass structure represents the type of
+the 'block-progression-dimension' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_block_progression_dimension_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_block_progression_dimension_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

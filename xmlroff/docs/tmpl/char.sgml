@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+Fochar
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoChar ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoCharClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_char_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_char_set_value ##### -->
+<para>
+
+</para>
+
+@fo_char: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_char_get_value ##### -->
+<para>
+
+</para>
+
+@fo_char: 
+@Returns: 
+
+

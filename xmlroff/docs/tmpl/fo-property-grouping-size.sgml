@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-grouping-size
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyGroupingSize ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyGroupingSizeClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_grouping_size_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_grouping_size_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

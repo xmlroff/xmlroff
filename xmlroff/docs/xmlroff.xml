@@ -1,0 +1,150 @@
+<?xml version='1.0'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<refentry id="xmlroff.1">
+
+<refmeta>
+  <refentrytitle>xmlroff</refentrytitle>
+  <manvolnum>1</manvolnum>
+</refmeta>
+<refnamediv>
+  <refname>xmlroff</refname>
+  <refpurpose>XSL formatter</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <cmdsynopsis>
+    <command>xmlroff</command>
+    <arg><option>-o <replaceable>output-file</replaceable></option></arg>
+    <arg><option>-d <replaceable>debug-mode</replaceable></option></arg>
+    <arg><option>-v</option></arg>
+    <arg><option>-w <replaceable>warning-mode</replaceable></option></arg>
+    <arg><option>-?</option></arg>
+    <arg><option>--catalogs</option></arg>
+    <arg><option>--compat</option></arg>
+    <arg><option>--compat-stylesheet</option></arg>
+    <arg>
+      <option>--format</option>
+      <group choice="req"><arg>auto</arg><arg>pdf</arg><arg>postscript</arg></group>
+    </arg>
+    <arg>
+      <option>--backend</option>
+      <group choice="req"><arg>gp</arg><arg>cairo</arg></group>
+    </arg>
+    <arg><option>--continue</option></arg>
+    <arg><option>--novalid</option></arg>
+    <arg choice="plain"><replaceable>file</replaceable></arg>
+    <arg choice="opt"><replaceable>stylesheet</replaceable></arg>
+  </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+  <title>Description</title>
+
+  <para>xmlroff is a free, fast and high-quality XSL formatter that is
+  useful for DocBook formatting. It produces PDF or PostScript output.
+  It integrates easily with other programs and with scripting
+  languages.</para>
+  
+  <para>xmlroff processes the XML-FO <replaceable>file</replaceable>.
+  The xml file can optionally be first transformed via a specified XSLT
+  <replaceable>stylesheet</replaceable>.</para>
+</refsect1>
+
+
+<refsect1>
+  <title>Options</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><option>-v</option></term>
+      <listitem>
+        <para>Show version information.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>-?</option></term>
+      <listitem>
+        <para>Show help message.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>-o</option> <replaceable>output-file</replaceable></term>
+      <listitem>
+	<para>Specify output filename. If this option is not specified,
+        a default of <filename>layout.pdf</filename> will be used.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>-d</option> <replaceable>debug-mode</replaceable></term>
+      <listitem>
+        <para>Specify debug mode.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>-w</option> <replaceable>warning-mode</replaceable></term>
+      <listitem>
+        <para>Specify warning mode.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--catalogs</option></term>
+      <listitem>
+	<para>Use SGML catalog files pointed to by
+	<envar>SGML_CATALOG_FILES</envar> instead of XML catalogs from
+	<filename>/etc/xml/catalog</filename>.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--format</option> <group choice="req"><arg>auto</arg><arg>pdf</arg><arg>postscript</arg></group></term>
+      <listitem>
+	<para>Specify format of the output file. The default is auto
+	which selects the format based on the extension of the output
+	filename.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--backend</option> <group choice="req"><arg>gp</arg><arg>cairo</arg></group></term>
+      <listitem>
+	<para>Specify backend used to produce the output file. The
+        default is GNOME print (gp).</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--compat</option></term>
+      <listitem>
+	<para>Pre-processes the input file with an internal
+	compatibility stylesheet.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--compat-stylesheet</option></term>
+      <listitem>
+	<para>Prints the internal
+	compatibility stylesheet then exits.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--continue</option></term>
+      <listitem>
+	<para>Continue after any formatting errors.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</refsect1>
+
+<refsect1>
+  <title>See Also</title>
+
+  <para><citerefentry><refentrytitle>xsltproc</refentrytitle><manvolnum>1</manvolnum></citerefentry></para>
+</refsect1>
+
+<refsect1>
+  <title>Author</title>
+
+  <para>Tony Graham <email>tonygraham@users.sourceforge.net</email></para>
+</refsect1>
+
+</refentry>
+

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-role
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyRole ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyRoleClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_role_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_role_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

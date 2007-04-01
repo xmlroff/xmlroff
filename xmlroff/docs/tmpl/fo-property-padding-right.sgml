@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-padding-right
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyPaddingRight ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyPaddingRightClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_padding_right_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_padding_right_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

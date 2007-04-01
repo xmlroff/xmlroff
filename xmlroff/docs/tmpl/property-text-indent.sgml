@@ -1,0 +1,97 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-text-indent
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumTextIndent ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_TEXT_INDENT_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_TEXT_INDENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyTextIndent ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyTextIndentClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_text_indent_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_text_indent_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_text_indent_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_text_indent_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_text_indent_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_text_indent_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

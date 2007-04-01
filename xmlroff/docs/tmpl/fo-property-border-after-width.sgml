@@ -1,0 +1,49 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-border-after-width
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyBorderAfterWidth ##### -->
+<para>
+The #FoPropertyBorderAfterWidth structure represents one instance of the
+'border-after-width' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderAfterWidthClass ##### -->
+<para>
+The #FoPropertyBorderAfterWidthClass structure represents the type of
+the 'border-after-width' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_after_width_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_after_width_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

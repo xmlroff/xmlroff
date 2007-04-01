@@ -1,0 +1,101 @@
+<!-- ##### SECTION Title ##### -->
+Foarea-layout
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoAreaLayout ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaLayoutClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_layout_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_layout_new_from_block ##### -->
+<para>
+
+</para>
+
+@block: 
+@context: 
+@parent_area: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_layout_set_layout ##### -->
+<para>
+
+</para>
+
+@fo_area_layout: 
+@new_layout: 
+
+
+<!-- ##### FUNCTION fo_area_layout_get_layout ##### -->
+<para>
+
+</para>
+
+@fo_area_layout: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_layout_set_line_first ##### -->
+<para>
+
+</para>
+
+@fo_area_layout: 
+@line_first: 
+
+
+<!-- ##### FUNCTION fo_area_layout_get_line_first ##### -->
+<para>
+
+</para>
+
+@fo_area_layout: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_area_layout_set_line_last ##### -->
+<para>
+
+</para>
+
+@fo_area_layout: 
+@line_last: 
+
+
+<!-- ##### FUNCTION fo_area_layout_get_line_last ##### -->
+<para>
+
+</para>
+
+@fo_area_layout: 
+@Returns: 
+
+

@@ -1,0 +1,5 @@
+libfo-compat.c
+s-libfo-compat-c
+Makefile
+Makefile.in
+*.loT

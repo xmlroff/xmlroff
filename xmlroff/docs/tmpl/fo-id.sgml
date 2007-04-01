@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+fo-id
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoId ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoId:value ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoIdClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_id_new_with_value ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_id_get_value ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+

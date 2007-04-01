@@ -1,0 +1,192 @@
+<!-- ##### SECTION Title ##### -->
+fo-table-border-fo
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FO_TABLE_BORDER_FO_IFACE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### STRUCT FoTableBorderFo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoTableBorderFoIface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_background_color ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_after_color ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_after_precedence ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_after_style ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_after_width ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_before_color ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_before_precedence ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_before_style ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_before_width ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_end_color ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_end_precedence ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_end_style ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_end_width ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_start_color ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_start_precedence ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_start_style ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_border_fo_get_border_start_width ##### -->
+<para>
+
+</para>
+
+@fo_table_border_fo: 
+@Returns: 
+
+

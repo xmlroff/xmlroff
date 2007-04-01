@@ -1,0 +1,83 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-keep-together-within-column
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoPropertyKeepTogetherWithinColumn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyKeepTogetherWithinColumnClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_keep_together_within_column_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

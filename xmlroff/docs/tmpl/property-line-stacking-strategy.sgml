@@ -1,0 +1,100 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-line-stacking-strategy
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumLineStackingStrategy ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_LINE_STACKING_STRATEGY_LINE_HEIGHT: 
+@FO_ENUM_LINE_STACKING_STRATEGY_FONT_HEIGHT: 
+@FO_ENUM_LINE_STACKING_STRATEGY_MAX_HEIGHT: 
+@FO_ENUM_LINE_STACKING_STRATEGY_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_LINE_STACKING_STRATEGY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyLineStackingStrategy ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyLineStackingStrategyClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_line_stacking_strategy_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_line_stacking_strategy_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_line_stacking_strategy_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_line_stacking_strategy_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_line_stacking_strategy_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_line_stacking_strategy_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

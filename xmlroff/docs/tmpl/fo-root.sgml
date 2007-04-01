@@ -1,0 +1,57 @@
+<!-- ##### SECTION Title ##### -->
+fo-root
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoRoot ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoRootClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_root_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_root_get_media_usage ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_root_set_media_usage ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_media_usage: 
+
+

@@ -1,0 +1,153 @@
+<!-- ##### SECTION Title ##### -->
+Folist-item-label
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoListItemLabel ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoListItemLabelClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_list_item_label_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_update_from_context ##### -->
+<para>
+
+</para>
+
+@fo: 
+@context: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_set_id ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@new_id: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_get_id ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_set_keep_together_within_column ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@new_keep_together_within_column: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_get_keep_together_within_column ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_set_keep_together_within_line ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@new_keep_together_within_line: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_get_keep_together_within_line ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_set_keep_together_within_page ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@new_keep_together_within_page: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_get_keep_together_within_page ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_set_role ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@new_role: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_get_role ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_set_source_document ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@new_source_document: 
+
+
+<!-- ##### FUNCTION fo_list_item_label_get_source_document ##### -->
+<para>
+
+</para>
+
+@fo_list_item_label: 
+@Returns: 
+
+

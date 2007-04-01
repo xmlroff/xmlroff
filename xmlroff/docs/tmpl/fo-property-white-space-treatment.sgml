@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-white-space-treatment
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyWhiteSpaceTreatment ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyWhiteSpaceTreatmentClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_white_space_treatment_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_white_space_treatment_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

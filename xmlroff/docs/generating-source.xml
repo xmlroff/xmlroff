@@ -1,0 +1,116 @@
+<section id="generating-source">
+<sectioninfo>
+<title>Generating Source</title>
+<subtitle>Generating Source</subtitle>
+<abstract><para>Generating source code</para></abstract>
+</sectioninfo>
+
+<section>
+<title>Generating Source</title>
+
+<para>The stylesheets in the 'spec-dump' package are used to generate C source and header files from the XML for the XSL 1.0 Recommendation.</para>
+
+<para>The generated files are not guaranteed to be drop-in replacements for the existing xmlroff source code and header files, since many of the xmlroff source code and header files have had manual modifications.</para>
+
+<para>You should use Emacs's ediff or some other diff/merge utility to compare the generated file and the existing version and only change what should be changed.</para>
+
+<para>The exception are the .c and .h files created for a property that has just been added to dump-info.xml: since the property's files didn't exist before, you can just copy the generated files to the xmlroff source code.</para>
+
+</section>
+
+<section>
+<title>Files</title>
+
+<para>The significant files are:</para>
+
+<variablelist>
+<varlistentry>
+<term>ChangeLog</term>
+    <listitem><para>Change log for the stylesheets, etc.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>README</term>
+    <listitem><para>README file</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>conversion-lib.xsl</term>
+    <listitem><para>Stylesheet with common templates</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>dump-info.xml</term>
+    <listitem><para>XML file controlling output</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo-all-property-h-dump.xsl</term>
+    <listitem><para>Stylesheet for dumping fo-all-property.h</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo-context-dump.xsl</term>
+    <listitem><para>Stylesheet for dumping fo-context.[ch]</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo-object-dump.xsl</term>
+    <listitem><para>Stylesheet for dumping fo-*.c and fo-*{-private}?.h</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo-property-object-dump.xsl</term>
+    <listitem><para>Stylesheet for dumping fo-property-*.[ch]</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>Makefile.am</term>
+    <listitem><para>Automake file</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>xmlroff-property-decl-dump.xsl</term>
+    <listitem><para>Stylesheet for dumping entity declarations for property documentation files</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>xmlroff-property-ref-dump.xsl</term>
+    <listitem><para>Stylesheet for dumping entity references for property documentation files</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>Any other XSL files are evolutionary dead ends.</para>
+
+</section>
+
+<section>
+<title>Make targets</title>
+
+<variablelist>
+<varlistentry>
+<term>make</term>
+    <listitem><para>Makes fo-context.[ch], fo/fo-*.c, fo/fo-*{-private}?.h, and property/fo-property-*.[ch].</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make all</term>
+    <listitem><para>As above.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make fo-context-dump</term>
+    <listitem><para>Makes fo-context.[ch].</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make fo-object-dump</term>
+    <listitem><para>Makes fo/fo-*.c, fo/fo-*{-private}?.h.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make fo-property-object-dump</term>
+    <listitem><para>Makes property/fo-property-*.[ch].</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make fo-all-property-h-dump</term>
+    <listitem><para>Makes property/fo-all-property.h.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make property-entity-decl-dump</term>
+    <listitem><para>Makes xmlroff-property-decl.ent.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>make property-entity-ref-dump</term>
+    <listitem><para>Makes xmlroff-property-ref.ent.</para></listitem>
+</varlistentry>
+</variablelist>
+
+  </section>
+</section>

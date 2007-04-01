@@ -1,0 +1,124 @@
+<!-- ##### SECTION Title ##### -->
+FoFontDesc
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoFontDesc ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoFontDescClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_FONT_DESC_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_font_desc_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoFontDescError ##### -->
+<para>
+
+</para>
+
+@FO_FONT_DESC_ERROR_FAILED: 
+
+<!-- ##### FUNCTION fo_font_desc_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_font_desc_copy ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_font_desc_set_family ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@family: 
+
+
+<!-- ##### FUNCTION fo_font_desc_set_size ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@size: 
+
+
+<!-- ##### FUNCTION fo_font_desc_set_style ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@style: 
+
+
+<!-- ##### FUNCTION fo_font_desc_set_stretch ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@stretch: 
+
+
+<!-- ##### FUNCTION fo_font_desc_set_variant ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@variant: 
+
+
+<!-- ##### FUNCTION fo_font_desc_set_weight ##### -->
+<para>
+
+</para>
+
+@font_desc: 
+@weight: 
+
+

@@ -1,0 +1,160 @@
+<section id="debugging">
+<sectioninfo>
+<title>Debugging xmlroff</title>
+<abstract><para>Debugging xmlroff</para></abstract>
+</sectioninfo>
+
+<section>
+<title>Command Line</title>
+
+<section>
+<title>-d2 command line switch dumps FO tree</title>
+
+<para>Each node shows its type [FoTree], its address [0x82a0698], and its reference count [1].</para>
+
+<para>Values of the node's properties (GObject properties, which mostly correspond to XSL properties) are shown indented underneath the node information.</para>
+
+<para>Properties of the node's parent type (and that type's parent type, etc.) are shown indented relative to the properties of the node's type.</para>
+
+<programlisting>[xmlroff]$ ./xmlroff -d2 xmlroff.fo
+(process:16930): libfo-DEBUG: FoTree (0x82a0698 : 1)
+(process:16930): libfo-DEBUG:     default-master:   0x82c7530
+(process:16930): libfo-DEBUG:     master-name hash:
+(process:16930): libfo-DEBUG:       first : 0x82c7530
+(process:16930): libfo-DEBUG:     page-sequence-master-name hash:
+(process:16930): libfo-DEBUG:         generate-reference-area: FALSE
+(process:16930): libfo-DEBUG:         allow-mixed-content: FALSE
+(process:16930): libfo-DEBUG:         element: (nil)
+(process:16930): libfo-DEBUG:         context: 0x82a6d48
+(process:16930): libfo-DEBUG:         areas:
+(process:16930): libfo-DEBUG:           0x82c6a40
+(process:16930): libfo-DEBUG:   root (0x82c6c00 : 1)
+(process:16930): libfo-DEBUG:       media-usage (0x82bd838 : 72)
+(process:16930): libfo-DEBUG:           FoEnum (0x82be270 : 2) : auto
+(process:16930): libfo-DEBUG:         generate-reference-area: FALSE
+(process:16930): libfo-DEBUG:         allow-mixed-content: FALSE
+(process:16930): libfo-DEBUG:         element: 0x82a8e68
+(process:16930): libfo-DEBUG:         context: 0x82dfd48
+(process:16930): libfo-DEBUG:         areas:
+(process:16930): libfo-DEBUG:           (none)
+...</programlisting>
+
+</section>
+
+<section>
+<title>-d4 command line switch dumps area tree</title>
+
+<programlisting>[xmlroff]$ ./xmlroff -d4 xmlroff.fo
+(process:16932): libfo-DEBUG: FoAreaTree (0x82c6a40 : 1)
+(process:16932): libfo-DEBUG:     context: 0x82c6a90
+(process:16932): libfo-DEBUG:       is-first:              true
+(process:16932): libfo-DEBUG:       prev-part:             (null)
+(process:16932): libfo-DEBUG:       is-last:               true
+(process:16932): libfo-DEBUG:       next-part:             (null)
+(process:16932): libfo-DEBUG:       next-x:                0 pt
+(process:16932): libfo-DEBUG:       next-y:                0 pt
+(process:16932): libfo-DEBUG:       available-width:       0 pt
+(process:16932): libfo-DEBUG:       available-height:      0 pt
+(process:16932): libfo-DEBUG:       child-available-ipdim: 0 pt
+(process:16932): libfo-DEBUG:       child-available-bpdim: 0 pt
+(process:16932): libfo-DEBUG:       generated-by:          (null)
+(process:16932): libfo-DEBUG:       reference:             (null)
+(process:16932): libfo-DEBUG:       page:                  (null)
+(process:16932): libfo-DEBUG:   FoAreaPage (0x82e4300 : 2)
+(process:16932): libfo-DEBUG:       page-number:   1
+(process:16932): libfo-DEBUG:       page-width:    576 pt
+(process:16932): libfo-DEBUG:       page-height:   792 pt
+(process:16932): libfo-DEBUG:       margin-top:    72 pt
+(process:16932): libfo-DEBUG:       margin-bottom: 72 pt
+(process:16932): libfo-DEBUG:       margin-left:   72 pt
+(process:16932): libfo-DEBUG:       margin-right:  72 pt
+(process:16932): libfo-DEBUG:           bpd: 3
+(process:16932): libfo-DEBUG:           ipd: 1
+(process:16932): libfo-DEBUG:           sd:  4
+(process:16932): libfo-DEBUG:             x:              0 pt
+(process:16932): libfo-DEBUG:             y:              0 pt
+(process:16932): libfo-DEBUG:             width:          0 pt
+(process:16932): libfo-DEBUG:             height:         0 pt
+...</programlisting>
+
+</section>
+
+<section>
+<title>-d8 command line switch dumps PangoAttribute information</title>
+
+<programlisting>[xmlroff]$ ./xmlroff -d8 xmlroff.fo
+(process:16933): libfo-DEBUG: get_text_attr_list:: block text: 'xmlroff ? Sun xmlroff XSL Formatter'
+(process:16933): libfo-DEBUG: get_text_attr_list:: attr_glist: 0x82aa650
+(process:16933): libfo-DEBUG: get_text_attr_list:: attr_glist length: 26
+(process:16933): libfo-DEBUG: dump_attr_list:: String:
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 0; end: 7
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 7; end: 37
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 37; end: 2147483647
+(process:16933): libfo-DEBUG: dump_attr_list:: Font family:
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 0; end: 7; family: mono
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 7; end: 37; family: sans-serif
+(process:16933): libfo-DEBUG: dump_attr_list:: Font size:
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 0; end: 7; size: 10
+(process:16933): libfo-DEBUG: dump_attr_list:: start: 7; end: 37; size: 10
+...</programlisting>
+
+</section>
+
+</section>
+
+<section>
+<title>Using GDB or other debugger</title>
+
+<section>
+<title>Statically link xmlroff</title>
+
+<para>GDB, at least, has more to work with when you build a statically linked xmlroff executable.</para>
+
+<para>Add --enable-static --disable-shared to the configure.in (or autogen.sh if building from CVS) command line.</para>
+
+<para>You may also need to to the same when building PangoXSL and Pango.</para>
+
+</section>
+
+<section>
+<title>Break on g_log</title>
+
+<para>If you are getting an error message and you can't work out what's causing it, break on g_log so you break just before the message is emitted.</para>
+
+<para>After the break, you can go up several stack frames to where g_error (or similar) is called.</para>
+
+<para>By going up enough stack frames, you can usually work out what property or what FO experienced the error.</para>
+
+<para>Note that you should enable g_log again if you are going to interactively call any functions that use g_log.</para>
+
+</section>
+
+<section>
+<title>Functions useful when debugging interatively</title>
+
+<variablelist>
+<varlistentry>
+<term>fo_object_sprintf(object)</term>
+    <listitem><para>The 'nice' printout of the object.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo_object_debug_sprintf(object)</term>
+    <listitem><para>The 'nice' printout of the object plus its adress and reference count.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo_object_debug_dump(object,indent)</term>
+    <listitem><para>Dump everything about the object and its descendants (if it's part of a tree, that is).</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo_node_path_to_root_sprintf(node)</term>
+    <listitem><para>Print XPath-like locator for node.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>fo_node_debug_dump_tree(node)</term>
+    <listitem><para>Dumps just the FoNode objects, not their properties, in the tree rooted at node.</para></listitem>
+</varlistentry>
+</variablelist>
+</section>
+
+  </section>
+</section>

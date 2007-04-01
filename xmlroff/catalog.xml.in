@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+<!--  XML Catalog file for libfo library of the xmlroff XSL
+      Formatter. If you are already using an XML catalog, you can just
+      include this one by adding an entry like this to your XML
+      catalog file, editing the path to match the location of your
+      Website installation:
+
+    <nextCatalog catalog="@prefix@/share/xml/libfo-@VERSION@/catalog.xml" />
+-->
+
+<!-- Rewrite rules for the whole tree -->
+
+<rewriteURI uriStartString="http://xmlroff.org/release/libfo/@VERSION@/"
+            rewritePrefix="./"/>
+
+<rewriteURI uriStartString="http://xmlroff.org/release/libfo/current/"
+            rewritePrefix="./"/>
+
+<!-- You can also put entries like these into your main catalog.xml
+     file to map web URLs to local paths to avoid pulling xmlroff and
+     libfo files over the web.  Change the '@datadir@/xml' path to
+     match the location on your local system.  -->
+
+<!-- Map web references to libfo files -->
+<!--
+  <rewriteURI
+    uriStartString="http://xmlroff/release/libfo/current/"
+    rewritePrefix="@prefix@/share/xml/libfo-@VERSION@/"/>
+-->
+
+</catalog>

@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+fo-property-linefeed-treatment
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoPropertyLinefeedTreatment ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoPropertyLinefeedTreatmentClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_linefeed_treatment_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_linefeed_treatment_get_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

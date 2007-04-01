@@ -1,0 +1,41 @@
+<!-- ##### SECTION Title ##### -->
+fo-page-sequence-area
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION fo_page_sequence_area_new ##### -->
+<para>
+
+</para>
+
+@fo_node: 
+@fo_doc: 
+@parent_area: 
+@new_area: 
+@debug_level: 
+<!-- # Unused Parameters # -->
+@fo_pango_context: 
+@context: 
+
+
+<!-- ##### FUNCTION fo_page_sequence_area_new2 ##### -->
+<para>
+
+</para>
+
+@fo_node: 
+@context: 
+@error: 
+
+

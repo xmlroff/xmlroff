@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+fo-area-tree
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoAreaTree ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoAreaTreeClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_area_tree_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

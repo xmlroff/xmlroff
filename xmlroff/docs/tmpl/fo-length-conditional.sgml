@@ -1,0 +1,124 @@
+<!-- ##### SECTION Title ##### -->
+fo-length-conditional
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoLengthCond ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG FoLengthCond:conditionality ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoLengthCond:length ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoLengthCondClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_length_cond_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_cond_new_with_value ##### -->
+<para>
+
+</para>
+
+@length: 
+@condity: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_cond_new_from_length ##### -->
+<para>
+
+</para>
+
+@length: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_cond_get_length ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_cond_set_length ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@new_length: 
+
+
+<!-- ##### FUNCTION fo_length_cond_get_condity ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_cond_set_condity ##### -->
+<para>
+
+</para>
+
+@datatype: 
+@new_condity: 
+
+
+<!-- ##### FUNCTION fo_length_cond_get_length_cond_zero ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_length_cond_resolve ##### -->
+<para>
+
+</para>
+
+@shortform: 
+@length: 
+@condity: 
+@error: 
+@Returns: 
+
+

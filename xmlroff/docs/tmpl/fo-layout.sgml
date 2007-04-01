@@ -1,0 +1,198 @@
+<!-- ##### SECTION Title ##### -->
+FoLayout
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoLayout ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoLayoutClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_LAYOUT_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_layout_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoLayoutError ##### -->
+<para>
+
+</para>
+
+@FO_LAYOUT_ERROR_FAILED: 
+
+<!-- ##### STRUCT FoRectangle ##### -->
+<para>
+
+</para>
+
+@x: 
+@y: 
+@width: 
+@height: 
+
+<!-- ##### FUNCTION fo_layout_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_new_from_fo_doc ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_copy ##### -->
+<para>
+
+</para>
+
+@src: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_set_attributes ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@attr_glist: 
+
+
+<!-- ##### FUNCTION fo_layout_set_text ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@text: 
+
+
+<!-- ##### FUNCTION fo_layout_set_width ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@width: 
+
+
+<!-- ##### FUNCTION fo_layout_set_font_desc ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@desc: 
+
+
+<!-- ##### FUNCTION fo_layout_set_alignment ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@alignment: 
+
+
+<!-- ##### FUNCTION fo_layout_set_indent ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@indent: 
+
+
+<!-- ##### FUNCTION fo_layout_set_justify ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@justify: 
+
+
+<!-- ##### FUNCTION fo_layout_get_line_count ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_layout_get_extents ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@logical_rect: 
+
+
+<!-- ##### FUNCTION fo_layout_get_line_extents ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@line_index: 
+@logical_rect: 
+
+
+<!-- ##### FUNCTION fo_layout_set_line_height ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@line_height: 
+
+
+<!-- ##### FUNCTION fo_layout_set_line_stacking_strategy ##### -->
+<para>
+
+</para>
+
+@fo_layout: 
+@line_stacking_strategy: 
+
+

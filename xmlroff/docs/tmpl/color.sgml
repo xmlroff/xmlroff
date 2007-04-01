@@ -1,0 +1,247 @@
+<!-- ##### SECTION Title ##### -->
+Focolor
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoColor ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoColorClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_color_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### ENUM FoColorKeyword ##### -->
+<para>
+
+</para>
+
+@FO_COLOR_KEYWORD_AQUA: 
+@FO_COLOR_KEYWORD_BLACK: 
+@FO_COLOR_KEYWORD_BLUE: 
+@FO_COLOR_KEYWORD_FUCHSIA: 
+@FO_COLOR_KEYWORD_GRAY: 
+@FO_COLOR_KEYWORD_GREEN: 
+@FO_COLOR_KEYWORD_LIME: 
+@FO_COLOR_KEYWORD_MAROON: 
+@FO_COLOR_KEYWORD_NAVY: 
+@FO_COLOR_KEYWORD_OLIVE: 
+@FO_COLOR_KEYWORD_PURPLE: 
+@FO_COLOR_KEYWORD_RED: 
+@FO_COLOR_KEYWORD_SILVER: 
+@FO_COLOR_KEYWORD_TEAL: 
+@FO_COLOR_KEYWORD_WHITE: 
+@FO_COLOR_KEYWORD_YELLOW: 
+
+<!-- ##### MACRO FO_COLOR_COMPONENT_MAX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION fo_color_set_red ##### -->
+<para>
+
+</para>
+
+@color: 
+@new_red: 
+
+
+<!-- ##### FUNCTION fo_color_get_red ##### -->
+<para>
+
+</para>
+
+@color: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_set_green ##### -->
+<para>
+
+</para>
+
+@color: 
+@new_green: 
+
+
+<!-- ##### FUNCTION fo_color_get_green ##### -->
+<para>
+
+</para>
+
+@color: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_set_blue ##### -->
+<para>
+
+</para>
+
+@color: 
+@new_blue: 
+
+
+<!-- ##### FUNCTION fo_color_get_blue ##### -->
+<para>
+
+</para>
+
+@color: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_black ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_silver ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_gray ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_white ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_maroon ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_red ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_purple ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_fuchsia ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_green ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_lime ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_olive ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_yellow ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_navy ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_blue ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_teal ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_color_get_color_aqua ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

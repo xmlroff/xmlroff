@@ -1,0 +1,57 @@
+<!-- ##### SECTION Title ##### -->
+fo-error
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT FoError ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoErrorClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_error_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_error_new_with_value ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_error_get_value ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+

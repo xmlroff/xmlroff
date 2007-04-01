@@ -1,0 +1,942 @@
+2006-02-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.9 ===
+
+	* NEWS: Updated for 0.3.9.
+
+2006-02-23  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* expr/.cvsignore, fo/.cvsignore, libfo/.cvsignore,
+	util/.cvsignore, datatype/.cvsignore, area/.cvsignore: Added
+	.cvsignore files so 'cvs diff' ignores more auto-generated files.
+
+	* area/fo-area-page.h: Removed trailing comma from FoAreaPageError
+	definition.
+
+	* fo/Makefile.am, fo/fo-fo.h: Added FO_DISABLE_DEPRECATED around
+	deprecated fo_fo_area_new().
+
+2006-02-22  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.fo: Updated to use current SourceForge project
+	definition.
+
+	* result-to-fo.c: Corrected a parameter name in a doc comment.
+
+	* datatype/fo-length-bp-ip-d.h: Cosmetic changes only.
+
+	* libfo/fo-libfo-basic.c:
+	(fo_libfo_context_close) Setting libfo_context to NULL.
+
+	* libfo/fo-libfo-context.c, libfo/fo-libfo-context.h: Corrected
+	parameter name in prototype and comment.
+
+2006-02-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Added mention that compatibility info is in xmlroff
+	manual.
+
+	* property/fo-property-extent.c: Corrected initial value.
+
+2006-01-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-node.c, fo-object.c, fo-object.h, result-to-fo.c: Added
+	fo_object_maybe_propagate_error().
+
+	* fo/fo-fo.c, fo/fo-static-content.c, fo/fo-table-part.c,
+	result-to-fo.h: Added 'continue_after_error' to
+	FoPropertyResolveContext.
+
+	* fo-context-private.h, fo-context.c, fo-context.h,
+	fo/fo-region-after-private.h, fo/fo-region-after.c,
+	fo/fo-region-after.h, fo/fo-region-before-private.h,
+	fo/fo-region-before.c, fo/fo-region-before.h,
+	fo/fo-region-end-private.h, fo/fo-region-end.c,
+	fo/fo-region-end.h, fo/fo-region-start-private.h,
+	fo/fo-region-start.c, fo/fo-region-start.h, property/Makefile.am,
+	property/fo-all-property.h, property/fo-property-extent.c,
+	property/fo-property-extent.h: Added 'extent' property.  Updated
+	to match current spec-dump.
+
+2005-12-14  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/fo-block-layout.c, fo/fo-fo-private.h, fo/fo-fo.c,
+	fo/fo-fo.h, fo/fo-static-content.c, fo/fo-table-part.c,
+	libfo/fo-libfo-context.c, libfo/fo-libfo-context.h,
+	libfo/fo-xsl-formatter.c, result-to-fo.c, result-to-fo.h,
+	xmlroff.c, xmlroff.fo: Added option for continuing processing
+	after formatting errors, but haven't yet made it do anything.
+
+2005-12-13  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Upped version to 0.3.9.
+
+2005-12-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.8 ===
+
+	* NEWS: Updated for 0.3.8.
+
+	* xmlroff.c: Changed some error handling from g_message() to
+	g_error().
+
+	* fo/fo-fo.c, result-to-fo.c: Turned some
+	fo_object_log_or_propagate_error() calls into g_propagate_error()
+	(for the moment, at least).
+
+	* fo-node.c: Added fo_node_log_or_propagate_error().
+
+	* fo/fo-root.c: Minor corrections to an error message.
+
+	* fo/fo-table.c: Made fo_table_span_info_debug_dump() non-static
+	since prototype is in fo-table.h.
+
+	* property/fo-property-display-align.c,
+	property/fo-property-display-align.h,
+	property/fo-property-height.c, property/fo-property-height.h,
+	property/fo-property-score-spaces.c,
+	property/fo-property-score-spaces.h,
+	property/fo-property-source-document.c,
+	property/fo-property-source-document.h,
+	property/fo-property-wrap-option.c,
+	property/fo-property-wrap-option.h: Updated to remove
+	property-specific enums and to match current spec-dump.
+
+2005-11-23  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* result-to-fo.c, fo/fo-fo.c: Connected together more error
+	reporting and propagating errors.
+
+	* fo/fo-flow.c: Added error if 'flow-name' is NULL.  Updated to
+	match current spec-dump.
+
+	* fo-object.c, fo-object.h: Added log_or_propagate_error class
+	method.
+
+	* fo-node.h: Added comments about FoNode and FoNodeClass structs.
+
+	* datatype/fo-length.h: Updated copyright years.
+
+	* fo/fo-static-content.c, fo/fo-static-content.h: Updated to match
+	current spec-dump.
+
+	* fo/fo-flow-private.h, fo/fo-flow.h: Updated to match current
+	spec-dump.
+
+	* fo/fo-fo.h: Added FO_FO_ERROR_DATATYPE_NULL error type.
+
+2005-11-20  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area-spanning-table-cell.c, area/fo-area-table-cell.c,
+	area/fo-area-table-continuation.c, area/fo-area-table.c,
+	area/fo-area.c: Added extra 'return_child->next_part != NULL'
+	condition when finding which child area to return after a split.
+
+	* area-to-pdf.c: Changed 'overflow' values for which to clip
+	region-body.
+
+	* result-to-fo.c: Added more comments and doc comments.
+
+	* fo/fo-table-part.c, fo/fo-table.c, fo/fo-tree.c: Added doc
+	comments.
+
+2005-11-10  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area-page.c, area/fo-area-page.h: Added
+	fo_area_page_error_quark, etc., and made message when child area
+	overflows into a warning, not g_critical message.
+
+	* fo-node.c: Added fo_node_log_warning().
+
+2005-11-09  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area-to-pdf.c: Added clipping of FoAreaViewportReference if
+	'overflow' property value is not 'visible'.
+
+	* area/fo-area-page.c: Now setting available height of area that
+	can't be split.
+
+2005-11-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Upped version to 0.3.8.
+
+	* area/fo-area-page.c: Added setting size and position of
+	unsplittable FoAreaViewportReference.
+
+	* datatype/fo-id.c, datatype/fo-id.h: Added
+	fo_id_new_with_value().  Added doc comments.
+
+	* datatype/fo-length-bp-ip-d.c: Fixed a doc comment.
+
+	* fo/fo-repeatable-page-master-alternatives.c,
+	fo/fo-repeatable-page-master-alternatives.h: Updated to match
+	current spec-dump.
+
+	* fo/Makefile.am,
+	fo/fo-repeatable-page-master-alternatives-private.h: Added
+	fo-repeatable-page-master-alternatives-private.h.
+
+	* libfo/fo-layout.c: Doc comment changes/additions.
+
+	* property/fo-property-overflow.c,
+	property/fo-property-overflow.h: Updated to match current
+	spec-dump.
+
+2005-11-03  Stefan Seefeld
+
+	* libfo-compat.xsl: Fix typos.
+
+2005-11-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.7 ===
+
+	* NEWS: Updated for 0.3.7.
+
+	* area/fo-area-viewport-reference.c: Removed unnecessary #includes.
+
+	* area/fo-area-viewport-reference-private.h: Added a #include.
+
+	* area/fo-area-page.c: Removed unused variables and #include.
+
+	* Makefile.am: Added 'srpm' target for making SRPM.
+
+	* configure.in, libfo/fo-doc-gp.c: Added --disable-clip configure
+	option to turn off clipping in fo-doc-gp.c.
+
+2005-10-11  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-compat.xsl: Added changing all keeps below a threshold
+	value to 'auto' since numeric keeps currently not supported.
+
+	* libfo/fo-doc-gp.c: More futzing with PANGO_SCALE so images
+	appear in right place.
+
+2005-10-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area-page.c: Working on averting endless loop if area
+	won't fit on page.
+
+	* configure.in, datatype/fo-length.c, libfo/fo-doc-gp.c: Added
+	PIXEL_PER_INCH to configure.in so it appears in config.h.
+
+	* area/fo-area-list-item.c, area/fo-area-private.h,
+	area/fo-area.c: Started adding split_after_height() and
+	split_after_height_check() functions.
+
+	* datatype/fo-uri-specification.c: Removed unnecessary statement
+	left over from creating file by copying another file.
+
+	* libfo/fo-doc-private.h: Removed unnecessary includes.
+
+	* util/fo-hash-table.c, util/fo-pixbuf.c: Updated doc comments.
+
+	* area/fo-area-area.c: Reformatted.
+
+	* area/fo-area-table.c: Renamed some variables to make them easier
+	to read.
+
+2005-09-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* util/Makefile.am, libfo/fo-doc-gp.c, util/fo-image-private.h,
+	util/fo-image.c, util/fo-pixbuf.c, util/fo-pixbuf.h: Added
+	FoPixbuf interface for getting GdkPixbuf from images instead of
+	using fo-image-private.h.
+
+	* configure.in: Upped version to 0.3.7.
+
+	* .cvsignore: List of files to ignore when doing 'cvs diff', etc.
+
+2005-09-12  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.6 ===
+
+	* libfo/fo-doc-commands.h, libfo/fo-doc-gp.c, libfo/fo-doc.c:
+	Removed unused fo_doc_open_image_file() and fo_doc_close_image().
+
+	* libfo/fo-font-desc.c: Removed unused fo_font_desc_init prototype.
+
+	* util/fo-image.c: Doc comment change.
+
+2005-09-11  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* NEWS: Updated for 0.3.6.
+
+	* result-to-fo.c: Added setting base URI for
+	fo:external-graphic. (Stefan Seefeld)
+
+	* util/fo-image.c, util/fo-image.h: Changed all 'url' to 'uri'.
+	Added base URI for resolving relative URI values. (Stefan Seefeld)
+
+	* fo/fo-external-graphic-private.h, fo/fo-external-graphic.c,
+	fo/fo-external-graphic.h: Added 'base-URI' property and new
+	constructor for setting base URI. (Stefan Seefeld)
+
+	* libfo-compat.xsl: Added removing 'content-type' properties.
+
+	* datatype/fo-string.c: Cosmetic changes only.
+
+2005-09-09  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* util/fo-image.c: (fo_image_get_height) Removed creating height
+	instance variable here (as had already been done for width).
+
+	* util/fo-image.c: Changed to determining width and height when
+	URL is set and unreffing them when FoImage is finalized.
+
+	* libfo/fo-doc-gp.c, fo/fo-external-graphic-private.h,
+	fo/fo-external-graphic.c: Added scaling image from computed image
+	area width and height.
+
+2005-09-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* util/fo-image.c: Corrected fo_image_get_pixbuf() name.
+
+	* libfo/fo-doc-gp.c: Changed fo_doc_gp_place_image() to match
+	fo_doc_place_image() changes.  Stopped division by PANGO_SCALE
+	that was putting images in wrong places.
+
+	* fo/fo-external-graphic.c, libfo/fo-doc-commands.h,
+	libfo/fo-doc-private.h, libfo/fo-doc.c: (fo_doc_gp_place_image)
+	Change to use FoImage parameter.  Changed from 'scale' parameter
+	to 'xscale' and 'yscale'.
+
+	* fo/fo-external-graphic-private.h: Added 'xscale' and 'yscale'
+	for passing to fo_doc_place_image().
+
+	* fo/fo-multi-switch.h: Corrected filename in initial comment.
+
+2005-09-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* datatype/fo-length.c: Removed parentheses to stop multiplying
+	pixels by zero.
+
+	* expr/fo-expr-eval.c, datatype/fo-length.c, datatype/fo-length.h:
+	Added fo_length_new_from_pixels().
+
+	* fo/fo-external-graphic-private.h, fo/fo-external-graphic.c:
+	Started adding use of FoImage so can implement
+	content-width/height properly.
+
+	* fo/fo-root.c: Added FO_OBJECT() cast to quieten compiler.
+
+	* fo/fo-tree.c: Added a g_free().
+
+	* property/fo-property-src.c: Removed unused variables.
+
+	* util/Makefile.am, util/fo-image-private.h, util/fo-image.c,
+	util/fo-image.h: Added FoImage for representing images.
+
+	* util/fo-hash-table.c: Minor changes to doc comments.
+
+2005-08-23  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am, configure.in: Added PLATFORM_WIN32 and added all
+	libraries to libfo_0_3_la_LIBADD for cygwin support. (Gerrit
+	Haase)
+
+	* libfo/fo-layout.c: (fo_layout_fo_rectangle_to_pango_rectangle)
+	Removed unused function.
+
+	* property/fo-property-font-weight.c: Made enumeration tokens
+	evaluate to integers.
+
+	* fo/fo-multi-case-private.h, fo/fo-multi-case.c,
+	fo/fo-multi-case.h, fo/fo-multi-toggle-private.h,
+	fo/fo-multi-toggle.c, fo/fo-multi-toggle.h,
+	fo/fo-repeatable-page-master-reference-private.h,
+	fo/fo-repeatable-page-master-reference.c,
+	fo/fo-repeatable-page-master-reference.h: Updated to match latest
+	spec-dump to avoid compiler warnings.
+
+2005-08-18  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* area/fo-area.h: Added some doc comments.
+
+	* configure.in: Upped version to 0.3.6.
+
+	* fo/fo-multi-switch-private.h, fo/fo-multi-switch.c,
+	fo/fo-multi-switch.h: Updated to match latest spec-dump.
+
+	* xmlroff.fo: Minor text changes.
+
+	* area/fo-area-layout.c, fo/fo-bidi-override.c,
+	property/fo-property-font-weight.c,
+	property/fo-property-font-weight.h,
+	property/fo-property-text-align.c,
+	property/fo-property-text-align.h,
+	property/fo-property-unicode-bidi.c,
+	property/fo-property-unicode-bidi.h, property/fo-property-width.c,
+	property/fo-property-width.h, property/fo-property-writing-mode.c,
+	property/fo-property-writing-mode.h: Updated to use common
+	FoEnumEnum enums instead of property-specific enums.
+
+2005-08-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.5 ===
+
+	* libfo/fo-doc-gp.c: Restored clipping of layouts.
+
+2005-08-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* NEWS: Updated for 0.3.5.
+
+	* fo/fo-fo.c: Added some doc comments.
+
+2005-08-14  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am: Added '$(srcdir)' to includes in $(INCLUDES) so can
+	build in separate 'object directory'. (Matthew Daniel)
+
+	* property/fo-property-role.c, property/fo-property-role.h:
+	Updated to match latest spec-dump.
+
+2005-07-30  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.fo: Added introductory paragraph.  Added 'auto' option
+	for '--format'.
+
+2005-07-29  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c: Added a comment.
+
+2005-07-20  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-compat.xsl: Stopped removing fo:external-graphic. (Tim
+	Waugh)
+
+2005-07-10  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c: Finally got external graphics working okay.
+
+2005-07-09  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c: Added initial support for 'auto' output
+	format.
+
+	* INSTALL.in: Added explanation of result of 'xmlroff xmlroff.fo'.
+
+	* README: Updated dependencies.
+
+	* configure.in: Upped version to 0.3.5.
+
+2005-07-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.4 ===
+
+	* libfo-compat.xsl: Changed to removing all fo:external-graphic.
+	
+2005-07-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* NEWS: Updated for 0.3.4.
+
+	* libfo/fo-libfo-context.c, libfo/fo-libfo-context.h: Added
+	(unusable) SVG output format.
+
+	* datatype/fo-uri-specification.c: Added some doc comments.
+
+	* expr/fo-expr-eval.c: Stopped compiler error about return value
+	from void function.
+
+	* libfo/fo-doc-gp.c: Equating 'auto' format to 'pdf' for now.
+
+2005-07-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp-private.h, libfo/fo-doc-gp.c: Added setting
+	output format from FoLibfoContext.  Removed some testing code.
+
+	* fo/fo-external-graphic.c: Stopped offsetting image by
+	content-height when placing image.
+
+	* expr/fo-expr-eval.c: Corrected handling of quoted URLs.
+
+	* xmlroff.fo: Added '--format' option.
+
+	* libfo-compat.xsl: Removed munging of URLs in 'src' attributes.
+
+2005-06-27  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* expr/fo-expr-env.c: Removed 'url' from list of functions.
+
+	* expr/fo-expr-eval.c, expr/fo-expr-eval.h: Added handling
+	'url(...)' instead of treating as a function.
+
+	* expr/fo-expr-func.c, datatype/fo-uri-specification.c,
+	datatype/fo-uri-specification.h: Changed to use
+	fo_uri_specification_new_with_value().
+
+	* libfo/fo-doc-gp-private.h, libfo/fo-doc-gp.c, libfo/fo-doc-gp.h:
+	Trying to implement image rendering.
+
+	* libfo/fo-libfo-context.c, libfo/fo-libfo-context.h: Added
+	FO_ENUM_FORMAT_AUTO.
+
+	* libfo/fo-libfo-basic.c, libfo/fo-doc-private.h, libfo/fo-doc.c,
+	libfo/fo-doc.h: Added a FoLibfoContext argument to
+	fo_doc_open_file().
+
+	* xmlroff.c: Added '-format' parameter for setting output file
+	format.
+
+	* libfo/Makefile.am, libfo-0.3.pc.in, configure.in, Makefile.am:
+	Added dependency on GdkPixbuf for handling external graphics.
+
+2005-06-13  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* result-to-fo.c: Removed a commented-out #include.
+
+	* area/fo-area-table-cell.c: Added workaround for '-0' max_height
+	values.
+
+	* datatype/fo-integer.c: Added getting integer value from FoNumber
+	datatype.  Really should be a fo_datatype_get_integer_value()
+	function.
+
+	* property/fo-property-src.c, property/fo-property-src.h:
+	Whitespace and copyright year changes only.
+
+	* libfo-compat.xsl: Added template to quote unquoted content of
+	'url(...)' in 'src' properties.
+
+2005-06-12  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-compat.xsl: Added 'background-image' to set of unsupported
+	properties.
+
+	* libfo-compat.xsl: Fix for whitespace handling (Tim Waugh).
+
+2005-05-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/fo-property-font-family.c, property/fo-property-id.c,
+	property/fo-property-inline-progression-dimension.c,
+	libfo/fo-font-desc.c, property/fo-property-dominant-baseline.c,
+	fo/fo-block-area.c, fo-context-util.c, result-to-fo.c: Fixed
+	memory leaks.
+
+	* property/fo-property-keep-with-next.c,
+	property/fo-property-keep-with-previous.c,
+	property/fo-property-keep-together.c, datatype/fo-keep.h,
+	datatype/fo-length-range.c, datatype/fo-length-range.h,
+	fo/fo-table.c, area/fo-area-spanning-table-cell.c,
+	area/fo-area-table-cell.c, area/fo-area-table-continuation.c,
+	area/fo-area-table.c, datatype/fo-keep.c, area/fo-area-area.c:
+	Changed FoKeep and FoLengthRange to use FoEnum enums.
+
+	* configure.in: Upped version to 0.3.4.
+
+2005-05-01  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.3 ===
+
+	* NEWS: Updated for 0.3.3.
+
+	* fo-context-util.c: Added a g_object_unref() to try to solve a
+	memory leak.  No effect.
+
+	* fo-object.c: Minor changes to fo_object_sprintf() and
+	fo_object_debug_sprintf() messages.
+
+	* libfo-compat.xsl: Removed border-related template rules since
+	border shorthands now supported by xmlroff.
+
+2005-04-25  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* expr/fo-expr-eval.c: Added handling 'border' property
+	expressions with one to three tokens.  Reindented two functions.
+
+	* libfo/fo-xsl-formatter.c: Corrected initial comment.
+
+	* fo/fo-root.c: Forcing 'media-usage' value to 'paginate' since
+	that's all that's supported.
+
+	* property/fo-property-util.c: fo_property_util_resolve_wsc_enum()
+	returns FoWsc, not individual component since its type can be
+	ambiguous.
+
+2005-04-07  Julian Rosse  <gnome@themidnightrebellion.com>
+
+	* fo-context.c, fo-context.h, fo-context-private.h,
+	fo-context-util.c, property/Makefile.am,
+	property/fo-all-property.h, property/fo-property-border.c,
+	property/fo-property-border.h,
+	property/fo-property-border-left.c,
+	property/fo-property-border-left.h,
+	property/fo-property-border-right.c,
+	property/fo-property-border-right.h,
+	property/fo-property-border-top.c,
+	property/fo-property-border-top.h,
+	property/fo-property-border-bottom.c,
+	property/fo-property-border-bottom.h,
+	property/fo-property-eval.c:
+	Added code for 'border', 'border-left', 'border-right', 'border-top',
+	and 'border-bottom' properties.
+
+2005-03-31  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-doc-gp.c: Added fo_doc_gp_do_callbacks(),
+	fo_doc_gp_do_line_callbacks(), and fo_doc_gp_do_run_callbacks() to
+	handle PangoXSL 'callback' attributes after GNOME Print has
+	rendered the text of the layout.
+
+	* fo/fo-root.c: Added fo_root_resolve_media_usage() to force
+	acceptable 'media-usage' value.
+
+	* fo/fo-fo.c, fo/fo-fo.h: Added FO_FO_ERROR_DATATYPE_REPLACE error
+	message.
+
+	* fo/fo-external-graphic.c: Commented out a g_assert_not_reached()
+	since is reached by half-implemented graphics support.
+
+	* expr/fo-expr-eval.c: Moved an fo_expr_context_push_stack() to
+	stop warnings.
+
+2005-03-20  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* datatype/fo-wsc.c: Allowed FoWsc components to be NULL.
+
+2005-03-18  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-compat.xsl: Removed message about normalizing text nodes.
+
+	* libfo-compat.xsl: Removed 'text()' template rule that did
+	normalize-space() on all text.  It has been unneeded since
+	addition of <xsl:preserve-space>.
+
+2005-03-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* expr/fo-expr-eval.c: Partially completed evaluating
+	width-style-color expressions.
+
+	* property/fo-property-util.c: Added checking specific width and
+	style enums when validating width and style.
+
+	* libfo-compat.xsl: Added removal of many more unsupported
+	properties.
+
+2005-03-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Added note about compatibility and libfo-compat.xsl.
+
+	* area-to-pdf.c: Corrected (hopefully) drawing of 'dash',
+	'dotted', and 'groove' border styles.
+
+	* fo-context-util.c (fo_context_util_border_resolve): Handling
+	'hidden' style equivalent to 'none' (but will be different for
+	tables!).
+
+2005-03-15  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-compat.xsl: Added 'margin' to set of properties removed by
+	stylesheet.
+
+	* expr/fo-expr-eval.c: Moved a fo_expr_context_push_stack() to
+	where it is needed.
+
+	* libfo/fo-doc-gp.c (fo_doc_gp_setdash): Set segment count to zero
+	when solid.
+
+2005-03-11  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Zeroed interface age and binary age since FoObject
+	changed.
+
+	* xmlroff.spec.in: Build fixes (Tim Waugh).
+
+	* datatype/fo-tblr.c: Removed some unused includes.
+
+	* property/fo-property-util.h, expr/fo-expr-eval.h,
+	property/fo-property-util.c, expr/fo-expr-eval.c,
+	datatype/Makefile.am, fo-all-datatype.h, datatype/fo-wsc.c,
+	datatype/fo-wsc.h: Added FoWsc datatype for 'width-style-color'
+	for 'border' shorthands.
+
+2005-03-10  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/fo-property.c, datatype/fo-length-bp-ip-d.c,
+	datatype/fo-length-conditional.c, datatype/fo-length-range.c,
+	datatype/fo-length.c, datatype/fo-name.c, datatype/fo-number.c,
+	datatype/fo-pcw.c, datatype/fo-percentage.c, datatype/fo-space.c,
+	datatype/fo-string.c, datatype/fo-tblr.c, datatype/fo-unknown.c,
+	datatype/fo-uri-specification.c, fo/fo-fo.c,
+	datatype/fo-boolean.c, datatype/fo-char.c, datatype/fo-color.c,
+	datatype/fo-enum.c, datatype/fo-error.c, datatype/fo-expression.c,
+	datatype/fo-id.c, datatype/fo-integer.c, datatype/fo-keep.c,
+	area/fo-area.c, fo-object.h, fo-node.c, fo-object.c, fo-token.c:
+	Renamed FoObject.sprintf to print_sprintf to avoid problems when
+	compiling with -D_FORTIFY_SOURCE=2.
+
+	* fo-context.c, fo-context.h, fo-context-private.h,
+	fo-context-util.c, property/Makefile.am,
+	property/fo-all-property.h, property/fo-property-border-style.c,
+	property/fo-property-border-style.h,
+	property/fo-property-border-width.c,
+	property/fo-property-border-width.h, property/fo-property-eval.c:
+	Added 'border-style' and 'border-width' properties (Julian Rosse).
+
+	* Makefile.am: Made XML data directory track the xmlroff version
+	number.
+
+	* libfo-compat.xsl: Rewrote message for '@height' template so
+	message is correct no matter which attribute is being matched,
+	making it easier to add more unsupported properties that will be
+	stripped.
+
+	* libfo-compat.xsl: Added xsl:preserve-space for all FOs with
+	#PCDATA in their content model.  Removed 'padding' template since
+	'padding' supported by xmlroff.  Added
+	'fo:region-body/@region-name' template rule (Tim Waugh).
+
+2005-03-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* expr/fo-expr-eval.c, expr/fo-expr-eval.h: Added
+	fo_property_eval_border_style() for 'border-style' property.
+
+2005-03-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-context-util.c: fo_context_util_border_resolve(): Added
+	resolving 'border-color' (Julian Rosse).
+
+	* configure.in: Upped version to 0.3.3.
+
+2005-03-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* datatype/fo-pcw.c, datatype/fo-pcw.h, datatype/fo-tblr.c,
+	datatype/fo-tblr.h: Made initial comments a bit more indicative of
+	purpose of datatype.
+
+2005-03-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.2 ===
+
+	* fo/fo-fo.c: fo_fo_validate_content(): Removed unused,
+	out-of-date code.
+
+	* NEWS: Updated for 0.3.2.
+
+2005-02-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* util/Makefile.am: Corrected reference to
+	libfo_util_include_HEADERS.
+
+	* expr/fo-expr-eval.c, expr/fo-expr-eval.h: Added
+	fo_expr_border_color_eval() for 'border-color' shorthand.
+
+	* libfo/fo-libfo-basic.c: Minor comment fixup.
+
+	* property/fo-property-eval.c: Added 'border-color'.
+
+	* property/fo-property-background-color.c,
+	property/fo-property-util.c, property/fo-property-util.h: Moved
+	'background-color' validate and resolve_enum functions to
+	fo-property-util.
+
+	* fo-context.h, property/Makefile.am, property/fo-all-property.h,
+	fo-context-private.h, fo-context.c: Added 'border-color' property.
+
+	* fo/fo-multi-properties-private.h, fo/fo-multi-properties.c,
+	fo/fo-multi-properties.h: Updated to match current spec-dump.
+
+	* Makefile.am: Added 'util' to SUBDIRS and includes.
+
+	* property/fo-property-border-color.c,
+	property/fo-property-border-color.h: 'border-color' property.
+
+2005-02-27  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo/fo-libfo-context.c, libfo/fo-libfo-context.h: Added
+	PostScript as allowed output format.
+
+	* configure.in: Added util/Makefile to AC_OUTPUT().  Escaped a
+	macro name to quieten newer autoconfs.
+
+	* fo-object.c, fo-object.h: Added fo_object_equal() and
+	fo_object_hash() for use with FoHashTable.
+
+	* libfo-compat.xsl: Removed rewriting of @color,
+	@background-color, etc.
+
+	* datatype/fo-color.c, datatype/fo-color.h: Added
+	fo_color_new_with_value() backed by FoHashTable.
+
+	* expr/fo-expr-eval.c, expr/fo-expr-func.c: Using new
+	fo_color_new_with_value().
+
+	* fo/fo-multi-properties.c: Removed some out-of-date casts.
+
+	* libfo/fo-libfo-basic.c: Added some doc comments.
+
+	* property/fo-property-util.c: Added X color name support copied
+	from Pango/GDK/Tk.
+
+	* util/fo-hash-table.c, util/fo-hash-table.h: Hash table object
+	for FoObjects.
+
+	* util/Makefile.am: Makefile.am for 'util' subdirectory.
+
+2005-01-31  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.in: Added INSTALL.in to AC_OUTPUT().  Upped version to
+	0.3.2.
+
+	* INSTALL: Removed since now created from INSTALL.in.
+
+	* INSTALL.in: Added INSTALL.in to create INSTALL with correct
+	version numbers.
+
+2005-01-29  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.1 ===
+
+	* fo/fo-simple-page-master.c: Fixed a compiler warning from
+	out-of-date casting.
+
+	* docs/xmlroff-docs.sgml: Added extra documentation lifted from
+	Wiki pages.
+
+	* docs/Makefile.am: Added missing files to distribution.
+
+2005-01-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* catalog.xml: catalog.xml is created from catalog.xml.in.
+
+2005-01-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* docs/debugging.xml, docs/directory-structure.xml,
+	docs/fo-c-file.xml, docs/generating-source.xml: Documentation
+	lifted from xmlroff Wiki.
+
+	* catalog.xml: Catalog file for libfo-compat.xsl.
+
+	* Makefile.am, configure.in: Upped version to 0.3.1.
+
+	* result-to-fo.c, area/fo-area.c, fo/fo-block-area.c,
+	fo/fo-block-fo.c, fo/fo-list-block.c, fo/fo-table-border-fo.c:
+	Fixed some "FIXME" problems.
+
+2004-10-21  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.0 ===
+
+	* Makefile.am: Added back xmlroff.spec in EXTRA_DIST.
+
+	* xmlroff.spec.in: Minor changes to match xmlroff 0.3.0.
+
+	* Makefile.am: Added libfo-compat.xsl and xmlroff.fo to EXTRA_DIST.
+
+	* libfo-compat.xsl: Stylesheet for reducing FO files to subset
+	supported by libfo.
+
+	* catalog.xml.in: Catalog file for libfo library.
+
+	* INSTALL: Added section about 'libfo-compat.xsl'.
+
+	* Makefile.am: Removed xmlroff_INCLUDES and xmlroff_CFLAGS.  Added
+	xmlroff.fo to xml_DATA.
+
+	* NEWS: Updated for xmlroff 0.3.0.
+
+	* README: Updated name and URL.
+
+	* configure.in: Changed definition of 'ENABLE_GP'.  Added
+	'catalog.xml' to AC_OUTPUT.
+
+	* libfo-0.3.pc.in: Added 'compat_stylesheet' variable.  Added
+	pangoxsl to dependencies.
+
+	* xmlroff.c: Changed definition of '-backend'.  Removed
+	'-compress'.
+
+	* xmlroff.fo: Changed definition of '-backend'.
+
+2004-10-12  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* libfo-0.2.pc.in: Removed since library version is now 0.3.
+
+	* area/fo-area-layout.c: fo_area_layout_resolve_text_align():
+	Added call to pango_layout_set_auto_dir() to turn off auto-dir
+	since it caused more problems than it solved.  Having it now
+	causes problems for 'writing-direction' test, however.
+
+	* libfo/fo-doc-gp.c: fo_doc_gp_render_layout_lines(): Added crop
+	area around lines to be rendered since neither Pango nor GNOME
+	Print supports rendering line ranges.  fo_doc_gp_init(): Commented
+	out call to gnome_print_pango_update_context() that doesn't do
+	anything except cause a warning.
+
+	* docs/xmlroff-docs.sgml, examples/io/gmodule-area-tree.c,
+	examples/io/xmlroff-gmodule.c, examples/io/xmlroff-libfo.c,
+	examples/io/xmlroff-text-tree.c, examples/io/xmlroff-text-tree2.c,
+	libfo/fo-doc.c, libfo/fo-xsl-formatter.c, xmlroff.c: Expunged
+	mentions of PDFlib.
+
+	* examples/io/configure.ac, libfo/Makefile.am,
+	libfo/fo-layout-gp.c, libfo/fo-layout.c, property/Makefile.am,
+	property/fo-property-alignment-adjust.c,
+	property/fo-property-alignment-baseline.c,
+	property/fo-property-background-color.c,
+	property/fo-property-baseline-shift.c,
+	property/fo-property-color.c,
+	property/fo-property-dominant-baseline.c,
+	property/fo-property-font-family.c,
+	property/fo-property-font-size.c,
+	property/fo-property-keep-together-within-line.c,
+	property/fo-property-keep-with-next-within-line.c,
+	property/fo-property-keep-with-previous-within-line.c,
+	property/fo-property-line-height.c, datatype/Makefile.am,
+	docs/Makefile.am, fo/Makefile.am, fo/fo-block-area.c,
+	fo/fo-external-graphic.c, Makefile.am, area/Makefile.am,
+	configure.in, xmlroff.spec.in: Updated for changes from libfo-0.2
+	to libfo-0.3 and pangopdf to pangoxsl.
+
+	* INSTALL: Updated for xmlroff 0.3.0 and PangoXSL 1.6.0.0.
+
+	* ChangeLog.pre-0.3, ChangeLog: Moved old changes out of ChangeLog
+	to ChangeLog.pre-0.3.
+
+2004-10-10  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.fo.in: Removed since unused.
+
+	* libfo/fo-layout-pdflib-private.h, libfo/fo-layout-pdflib.c,
+	libfo/fo-layout-pdflib.h, libfo/fo-doc-pdflib-private.h,
+	libfo/fo-doc-pdflib.c, libfo/fo-doc-pdflib.h: Removed since PDFlib
+	backend is no longer used.
+
+2004-08-26  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff.fo: Re-adding since don't have PDFlib backend anymore.
+
+	* libfo-0.3.pc.in: pkg-config file for libfo-0.3.
+
+	* Makefile.am: Updated to use GNOME Print libs and new PangoPDF
+	lib.
+
+	* configure.in: Updated to use Pango 1.5, libgnomeprint 2.7, and
+	new PangoPDF.  Dropped PDFlib.
+
+	* fo/fo-block-area.c, fo/fo-external-graphic.c: Changed #include
+	to match changed location of pango-xsl-attributes.h.
+
+	* libfo/Makefile.am: Removed PDFlib stuff from libfo/Makefile.am.
+
+	* libfo/fo-layout-gp.c: Commented out functions for attributes not
+	supported by PangoLayout.
+
+	* libfo/fo-doc-gp.c: Changed to use GNOME Print functions for
+	working with Pango.
+
+	* libfo/fo-layout.c, property/fo-property-alignment-adjust.c,
+	property/fo-property-alignment-baseline.c,
+	property/fo-property-background-color.c,
+	property/fo-property-baseline-shift.c,
+	property/fo-property-color.c,
+	property/fo-property-dominant-baseline.c,
+	property/fo-property-font-family.c,
+	property/fo-property-font-size.c,
+	property/fo-property-keep-together-within-line.c,
+	property/fo-property-keep-with-next-within-line.c,
+	property/fo-property-keep-with-previous-within-line.c,
+	property/fo-property-line-height.c: Changed #include to match
+	changed location of pango-xsl-attributes.h.
+
+	* libfo/fo-doc.c: Added cases for three new Pango directions.
+

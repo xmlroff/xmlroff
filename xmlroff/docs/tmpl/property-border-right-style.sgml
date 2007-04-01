@@ -1,0 +1,110 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-border-right-style
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumBorderRightStyle ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_BORDER_RIGHT_STYLE_NONE: 
+@FO_ENUM_BORDER_RIGHT_STYLE_HIDDEN: 
+@FO_ENUM_BORDER_RIGHT_STYLE_DOTTED: 
+@FO_ENUM_BORDER_RIGHT_STYLE_DASHED: 
+@FO_ENUM_BORDER_RIGHT_STYLE_SOLID: 
+@FO_ENUM_BORDER_RIGHT_STYLE_DOUBLE: 
+@FO_ENUM_BORDER_RIGHT_STYLE_GROOVE: 
+@FO_ENUM_BORDER_RIGHT_STYLE_RIDGE: 
+@FO_ENUM_BORDER_RIGHT_STYLE_INSET: 
+@FO_ENUM_BORDER_RIGHT_STYLE_OUTSET: 
+@FO_ENUM_BORDER_RIGHT_STYLE_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_BORDER_RIGHT_STYLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyBorderRightStyle ##### -->
+<para>
+The #FoPropertyBorderRightStyle structure represents one instance of the
+'border-right-style' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyBorderRightStyleClass ##### -->
+<para>
+The #FoPropertyBorderRightStyleClass structure represents the type of
+the 'border-right-style' XSL property.
+
+</para>
+
+
+<!-- ##### FUNCTION fo_property_border_right_style_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_right_style_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_right_style_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_border_right_style_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_right_style_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_border_right_style_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

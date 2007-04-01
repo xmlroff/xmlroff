@@ -1,0 +1,54 @@
+<!-- ##### SECTION Title ##### -->
+Foid
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT FoId ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT FoIdClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fo_id_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_id_set_value ##### -->
+<para>
+
+</para>
+
+@id: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_id_get_value ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+

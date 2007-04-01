@@ -1,0 +1,120 @@
+<!-- ##### SECTION Title ##### -->
+Foproperty-alignment-baseline
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM FoEnumAlignmentBaseline ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_ALIGNMENT_BASELINE_AUTO: 
+@FO_ENUM_ALIGNMENT_BASELINE_BASELINE: 
+@FO_ENUM_ALIGNMENT_BASELINE_BEFORE_EDGE: 
+@FO_ENUM_ALIGNMENT_BASELINE_TEXT_BEFORE_EDGE: 
+@FO_ENUM_ALIGNMENT_BASELINE_MIDDLE: 
+@FO_ENUM_ALIGNMENT_BASELINE_CENTRAL: 
+@FO_ENUM_ALIGNMENT_BASELINE_AFTER_EDGE: 
+@FO_ENUM_ALIGNMENT_BASELINE_TEXT_AFTER_EDGE: 
+@FO_ENUM_ALIGNMENT_BASELINE_IDEOGRAPHIC: 
+@FO_ENUM_ALIGNMENT_BASELINE_ALPHABETIC: 
+@FO_ENUM_ALIGNMENT_BASELINE_HANGING: 
+@FO_ENUM_ALIGNMENT_BASELINE_MATHEMATICAL: 
+@FO_ENUM_ALIGNMENT_BASELINE_INHERIT: 
+
+<!-- ##### MACRO FO_TYPE_ENUM_ALIGNMENT_BASELINE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT FoPropertyAlignmentBaseline ##### -->
+<para>
+The #FoPropertyAlignmentBaseline structure represents one instance of the
+'alignment-baseline' property.
+</para>
+
+
+<!-- ##### STRUCT FoPropertyAlignmentBaselineClass ##### -->
+<para>
+The #FoPropertyAlignmentBaselineClass structure represents the type of
+the 'alignment-baseline' XSL property.
+</para>
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_set_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@new_value: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_get_value ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_new_from_expression ##### -->
+<para>
+
+</para>
+
+@expression: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_new_initial ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_property_alignment_baseline_new_attr ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
