@@ -18,7 +18,7 @@ dnl   xmlroff_binary_age = 0;
 dnl   xmlroff_interface_age = 0;
 
 m4_define([xmlroff_major],0)
-m4_define([xmlroff_minor],4)
+m4_define([xmlroff_minor],5)
 m4_define([xmlroff_micro],0)
 m4_define([xmlroff_interface_age],0)
 
@@ -27,7 +27,7 @@ dnl m4_define([xmlroff_binary_age],m4_eval(100 * xmlroff_minor + xmlroff_micro))
 
 AC_INIT([xmlroff XSL Formatter],
 	xmlroff_major.xmlroff_minor.xmlroff_micro,
-	[http://sourceforge.net/tracker/?group_id=73148],
+	[http://xmlroff.iseer.nl/newticket],
 	xmlroff)
 AM_CONFIG_HEADER(config.h)
 
@@ -508,11 +508,13 @@ building a bundled PangoXSL.
     PKG_CONFIG_PATH=$PANGOXSLDIR
     AC_MSG_CHECKING([PKG_CONFIG_PATH])
     AC_MSG_RESULT([$PKG_CONFIG_PATH])
+    export PKG_CONFIG_PATH
     PKG_CHECK_MODULES(PANGOXSL,
 		      $PANGOXSL_PACKAGES >= $PANGOXSL_REQUIRED_VERSION,
 		      have_pangoxsl=true,
 		      :)
     PKG_CONFIG_PATH=$SAVED_PKG_CONFIG_PATH
+    export PKG_CONFIG_PATH
     if $have_pangoxsl ; then : ; else
           AC_MSG_ERROR([
 *** PangoXSL $PANGOXSL_REQUIRED_VERSION or newer is required.
@@ -629,7 +631,7 @@ libfo/Makefile
 examples/Makefile
 examples/xml2003/Makefile
 util/Makefile
-libfo-0.4.pc
+libfo-0.5.pc
 xmlroff.spec
 catalog.xml
 ])
