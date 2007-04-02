@@ -1,0 +1,26 @@
+04/02/07 10:45:31 tkg [7]
+	* Makefile.am (modified)
+	* README (modified)
+	* area/Makefile.am (modified)
+	* datatype/Makefile.am (modified)
+	* docs/Makefile.am (modified)
+	* fo/Makefile.am (modified)
+	* libfo-0.3.pc.in (deleted)
+	* libfo-0.4.pc.in (deleted)
+	* libfo-0.5.pc.in (added)
+	* libfo/Makefile.am (modified)
+	* property/Makefile.am (modified)
+	* util/Makefile.am (modified)
+	Upped libfo library version to 0.5.
+
+04/02/07 10:42:59 tkg [6]
+	* ChangeLog.pre-0.5 (moved)
+	Moved old changes out of ChangeLog to ChangeLog-pre-0.5.
+
+04/02/07 10:39:48 tkg [5]
+	* configure.in (modified)
+	Upped version to 0.5.0.  Added setting PKG_CONFIG_PATH when
+	configuring to use PangoXSL.
+
+04/01/07 20:38:50 tkg [4]
+	Imported xmlroff 0.4.0.
