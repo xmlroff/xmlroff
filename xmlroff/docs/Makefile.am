@@ -184,7 +184,7 @@ GTKDOC_CFLAGS = \
 	-I$(top_builddir)
 
 GTKDOC_LIBS = \
-	../libfo-0.4.la \
+	../libfo-0.5.la \
 	$(PANGOXSL_LIBS) \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \

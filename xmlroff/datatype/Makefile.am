@@ -12,7 +12,7 @@ LDADDS = @STRIP_BEGIN@	\
 
 noinst_LTLIBRARIES = libfo-datatype.la
 
-libfo_datatype_includedir = $(includedir)/libfo-0.4/datatype
+libfo_datatype_includedir = $(includedir)/libfo-0.5/datatype
 
 libfo_datatype_include_HEADERS = \
 	fo-datatype.h		\

@@ -31,28 +31,28 @@ fo_base_cfiles = \
 	fo-node-private.h
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libfo-0.4.pc
+pkgconfig_DATA = libfo-0.5.pc
 
-lib_LTLIBRARIES = libfo-0.4.la
+lib_LTLIBRARIES = libfo-0.5.la
 
 bin_PROGRAMS = \
 	xmlroff
 
 #-release $(VERSION)
 
-libfo_0_4_la_LDFLAGS = \
+libfo_0_5_la_LDFLAGS = \
 	-version-info $(LT_VERSION_INFO)	\
 	$(no_undefined)
 
-libfo_0_4_includedir = $(includedir)/libfo-0.4
+libfo_0_5_includedir = $(includedir)/libfo-0.5
 
-libfo_0_4_include_HEADERS = \
+libfo_0_5_include_HEADERS = \
 	fo-object.h		\
 	fo-node.h		\
 	fo-context.h
 
-libfo_0_4_la_SOURCES = \
-	$(libfo_0_4_include_HEADERS) \
+libfo_0_5_la_SOURCES = \
+	$(libfo_0_5_include_HEADERS) \
 	$(fo_base_cfiles)	\
 	$(fo_context_cfiles)	\
 	fo-all-area.h		\
@@ -61,7 +61,7 @@ libfo_0_4_la_SOURCES = \
 	area-to-pdf.c		\
 	area-to-pdf.h
 
-libfo_0_4_la_LIBADD = \
+libfo_0_5_la_LIBADD = \
 	util/libfo-util.la		\
 	area/libfo-area.la		\
 	expr/libfo-expr.la		\
@@ -84,7 +84,7 @@ xmlroff_SOURCES = \
 xmlroff_LDFLAGS = -static
 
 xmlroff_LDADD = \
-	libfo-0.4.la \
+	libfo-0.5.la \
 	$(PANGOXSL_LIBS) \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \

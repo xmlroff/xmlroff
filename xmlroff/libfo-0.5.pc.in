@@ -1,8 +1,7 @@
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
-pkgincludedir=@includedir@/libfo-0.4
-#pkgincludedir=@includedir@/libfo-@LT_RELEASE@
+pkgincludedir=@includedir@/libfo-@LT_RELEASE@
 
 enable_cairo=@ENABLE_CAIRO@
 enable_gp=@ENABLE_GP@

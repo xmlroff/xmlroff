@@ -57,7 +57,7 @@ fodoc_headers =			\
 	fo-doc.h		\
 	fo-doc-private.h
 
-libfoincludedir = $(includedir)/libfo-0.4/libfo
+libfoincludedir = $(includedir)/libfo-0.5/libfo
 
 libfoinclude_HEADERS = \
 	$(fodoc_headers)	\
