@@ -1,0 +1,13 @@
+*.stamp
+Makefile
+Makefile.in
+config.h
+config.h.in
+config.log
+config.pl
+config.status
+config.xsl
+configure
+index.html
+testsuccess.xml
+testsuite

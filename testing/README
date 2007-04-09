@@ -1,0 +1,542 @@
+This is the framework of scripts and stylesheets for running the
+xmlroff XSL formatter on a set of test files and working with the test
+results.
+
+This is part of the xmlroff XSL Formatter project.
+
+-----------------------------------------------------------------------
+xmlroff is a fast, free, high-quality, multi-platform XSL formatter
+that aims to excel at DocBook formatting and that integrates easily
+with other programs and with scripting languages.
+
+The xmlroff XSL Formatter is a library -- libfo -- and a command-line
+program -- xmlroff -- for formatting XML according to the XSL 1.0
+Recommendation.
+
+See http://xmlroff.org/.
+-----------------------------------------------------------------------
+
+The version numbers of 'testing' releases are the same as the version
+of xmlroff that is current at the time of the 'spec-dump' release.
+However, any version of this package may be used with any version of
+xmlroff, although using the newest 'testing' version is recommended
+since new versions tend to have bug fixes and ease of use improvements
+and, occasionally, better documentation.
+
+
+Testing xmlroff
+===============
+
+xmlroff testing uses:
+
+ - Test cases from the XSL 1.0 CR test suite, NIST, and xmlroff
+
+   See the xmlroff 'testsuite' package and
+   http://www.w3.org/Style/XSL/TestSuite/.
+
+ - XSLT stylesheet for making shell scripts to run xmlroff on the test
+   cases
+
+ - Perl scripts for running the test scripts and diffing the outputs
+
+ - XSLT stylesheets for making summary and individual test result HTML
+   files
+
+ - Perl CGI script and XSLT stylesheet for optionally updating test
+   result HTML files
+
+
+Requirements
+============
+
+Testing xmlroff requires:
+
+ - Autotools
+
+ - Perl
+
+ - ImageMagick
+
+ - xsltproc
+
+
+Before You Begin
+================
+
+1. Download and install the xmlroff 'testsuite' package from
+   http://xmlroff.org/.
+
+2. Make sure that testsuites.xml refers to the testsuite.xml file in
+   the 'testsuite' package.
+
+3. (Optional) Download and install the DocBook testdocs package from
+   the DocBook SourceForge project.
+
+   Until the DocBook testdocs distribution adds a 'testsuite.xml'
+   file, copy the 'testsuite.xml' file attached to
+   http://sourceforge.net/tracker/index.php?func=detail&aid=1516265&group_id=21935&atid=373750
+   into the docbook-testdocs-1.1 directory.
+
+   Make sure that testsuites.xml refers to the testsuite.xml in the
+   docbook-testdocs-1.1 directory.
+
+4. Run configure to generate the Makefile:
+
+      ./configure
+
+   The parameters for controlling the test are set as configure
+   options.  Use './configure --help' to see the available options.
+
+7. (Optional, Apache-only) Copy *.conf to your Apache2 conf.d
+   directory, e.g., /etc/apache2/conf.d.  Modify the directory name in
+   the .conf files to match where you installed this package.  Restart
+   Apache.
+
+8. (Optional, non-Apache) Install update-results.pl in the cgi-bin of
+   your web server.
+
+9. (Optional) Make sure that your web server can open an 'index.html'
+   file in this directory and that the paths in update-results.pl are
+   correct for your setup.
+
+10. You may need to change the permissions on the current directory
+    and its descendant files and directories so both you and the
+    webserver UID, e.g., 'wwwrun' for Apache2, can create and modify
+    files.
+
+
+Running the tests
+=================
+
+All at once
+-----------
+
+1. Run make:
+
+      make -k
+
+Individual steps
+----------------
+
+1. Run dotests.pl to run the tests:
+
+      perl dotests.pl .
+
+2. Compare results to reference versions and generate PNG versions of
+   files:
+
+      perl png+ref2stereo.pl .
+
+3. Generate an XML summary of the reslts:
+
+      perl testsuccess.pl . > testsuccess.xml
+
+4. Generate HTML reports of the tests and their results:
+
+      make index.html
+
+   To make a 'static' report without the forms for updating results,
+   set the 'static' parameter to 'true()' in config.xsl.
+
+
+Working With the Results
+========================
+
+1. Open index.html in your web browser:
+
+      http://127.0.0.1/path/to/testing/index.html
+
+   or:
+
+      file:///path/to/testing/index.html
+
+2. For any test, you can click on the "Results" link to see individual
+   test results.
+
+3. If you did not create 'static' reports and you have
+   update-results.pl installed correctly, you can update the test
+   results using the form in the individual test result page.
+
+   At present, the test result page is *not* updated to reflect your
+   changes.  The page is only updated if you run testsuccess.xsl
+   again.
+
+
+When the Test Suite Changes
+===========================
+
+1. Re-run test2sh.xsl to update the script that runs the tests:
+
+      xsltproc --novalid test2sh.xsl test2sh.xsl
+
+2. Create a new, temporary test results XML file:
+
+      xsltproc --novalid testsuites2testresults.xsl testsuites.xml > \
+         tmp.xml
+
+3. Merge the generated <testresult> elements for the new tests into
+   the existing testresults.xml file.
+
+   'testresults.xml' is the default name.  If you specified a
+   different filename when you ran 'configure', modify that file.
+
+4. Run the tests, which will now include the new tests.
+
+
+Gory Details
+============
+
+Test Cases
+----------
+
+The XSL Working Group (WG) had to demonstrate that every feature of
+XSL had been implemented before XSL 1.0 advanced from Candidate
+Recommendation (CR) to Proposed Recommendation (PR).
+
+In 2001, the WG and NIST (National Institute of Science and Technology
+in the U.S.) developed a DTD for both test suite descriptions and test
+suite results, and NIST and the XSL formatter implementors contributed
+both test suites and their descriptions.
+
+When working on the XSL 1.0 CR test suite results with Max Froumentin
+of the W3C, we developed a simple, well-formed document type for
+referring to multiple test suite descriptions.
+
+The XSL 1.0 CR test suite was put on the web, and the XSL WG made no
+more use of it.  NIST continued to develop tests and, in mid-2002,
+announced that it had an expanded set of test cases.
+
+The test cases currently available for testing xmlroff are the XSL 1.0
+CR test cases, an interim release of NIST's later test cases, and some
+test cases developed specifically for xmlroff.
+
+
+config.h, config.pl, config.xsl
+-------------------------------
+
+These specify parameters used by the XSLT stylesheets and Perl
+programs that actually do the work.
+
+The other XSLT stylesheets import config.xsl.
+
+You can still override any of these parameters by specifying the
+parameter on the xsltproc command line.
+
+Some of the files that you specify in these parameters won't
+necessarily exist the first time that you run the stylesheets.
+
+
+test2sh.xsl
+-----------
+
+This should be run manually whenever the test cases are modified.
+
+Usage:
+
+   xsltproc --novalid test2sh.xsl test2sh.xsl
+
+The parameters controlling the transformation are set in
+config.xsl:
+
+ - The 'testsuites' parameter is the filename of the XML document
+   referring to multiple test suite descriptions.
+
+The stylesheet expects that the current directory will have a
+subdirectory with the same name as the subdirectory of each of the
+test suite description files referred to by the file referred to by
+the 'testsuites' parameter.  I.e., if 'testsuites.xml' refers to
+'../NIST/testsuite.xml', then test2sh.xsl expects to be able to write
+to a 'NIST' subdirectory of the current directory.
+
+In each subdirectory corresponding to the subdirectories of the
+referred-to test suite descriptions, test2sh.xsl writes a 'test.sh'
+file containing the shell commands to run xmlroff on each test case
+described in the test suite description.
+
+For each test case, test2sh.xsl writes shell commands to:
+
+ - Run xmlroff on the test case input file or files, with output
+   written to a PDF file named after the input file and error and log
+   output written to a .log file also named after the input file.
+
+The 'test.sh' file also runs a simple command-line Perl script on the
+log files to remove process IDs from the messages in the .log files so
+the files can be meaningfully diffed.
+
+
+dotests.pl
+----------
+
+This Perl script executes the shell scripts created by test2sh.xsl.
+
+It could be run nightly as part of a cron job.
+
+Usage:
+
+   perl dotests.pl .
+
+This script is run from the directory containing the subdirectories
+with the test.sh shell scripts.
+
+The Perl script scans the subdirectories of the current directory for
+test.sh files.
+
+In each subdirectory containing a test.sh file, the Perl script:
+
+ - Runs test.sh, with output written to 'test.out' in the current
+   subdirectory.
+
+
+png+ref2stereo.pl
+-----------------
+
+Diff the generated PDF against the corresponding reference PDF in the
+'ref' directory, writing the diff output to the 'diff' directory.
+
+If a PDF file has changed, run ImageMagick's 'convert' program to make
+a PNG file of each page of the PDF and then diff the new PNG with the
+corresponding reference PNG in the 'ref' directory.
+
+Potentially runs ImageMagick's 'composite' program with the 'stereo'
+argument on each generated PNG file for which there is a corresponding
+PNG file in the 'ref' subdirectory.  The output, which is written to a
+like-named file in the 'stereo' subdirectory, shows the differences
+between the generated file and the reference version in the 'ref'
+subdirectory.
+
+The script only runs 'composite' if the 'diff' file size is non-zero
+or missing and the 'diff' file is newer than the PNG, etc.
+
+
+testsuccess.pl
+--------------
+
+This Perl script is run after dotests.pl.
+
+Usage:
+
+   perl testsuccess.pl . > testsuccess.xml
+
+It generates an XML file that lists file names and file sizes of test
+result files.  That XML file is used as input to the XSLT stylesheet
+that generates the HTML reports.  Using this script saves having to
+worry about trying to find and use XSLT processor-specific extensions
+for accessing file details.
+
+testsucess.pl scans the subdirectories containing the test results and
+outputs a well-formed XML document listing the file names and file
+sizes for all the files relating to each PDF file.
+
+
+testresults.xml
+---------------
+
+This is the record of xmlroff's results for each test.  It conforms to
+the DTD from the XSL WG.
+
+This file should have a new entry added to it for every new test case
+added to the test suite.
+
+
+testsuites2testresults.xsl
+--------------------------
+
+This generates a new testresults.xml file from a testsuites.xml file.
+
+Usage:
+
+   xsltproc --novalid testsuites2testresults.xsl testsuites.xml > tmp.xml
+
+The stylesheet doesn't preserve anything from an existing
+testresults.xml file, so it's best to write the output to a temporary
+file and then merge any new entries into an existing testresults.xml
+file.
+
+
+testsuccess.xsl
+---------------
+
+This is run after testsuccess.pl has generated the XML file listing
+the test result file names and file sizes.
+
+It generates HTML reports: one *large* report summarizing all the test
+cases and their results, plus an individual report for each test case.
+
+Usage:
+
+   xsltproc -o testsuccess.html --novalid \
+      testsuccess.xsl testsuccess.xml
+
+The parameters controlling the transformation are set when you run
+'configure'.
+
+ - The 'testsuites' parameter is the filename of the XML document
+   referring to multiple test suite descriptions.
+
+ - The 'testsuccess' parameter is the filename of the XML document
+   generated by testsuccess.pl.
+
+ - The 'testresults' parameter is the filename of the XML document
+   recording the test results.
+
+The summary report and the individual reports include information from
+both the test case description and the xmlroff test results.
+
+The test case description information is obtained by following file
+references in the file referred to by the 'testsuites' parameter to
+individual test suite description files.
+
+The xmlroff test results information is obtained from both
+testresults.xml and testsuccess.xsl.
+
+The summary report is a large table with one row for each test case.
+Each row contains:
+
+ - The test case ID.
+
+ - An indication of the value of the test result attributes from
+   testresults.xml for the test.
+
+ - The test result's descriptive text from testresults.xml.
+
+ - A link to the PDF output, if any.
+
+ - A link to the report HTML for the individual test.
+
+ - An indication of the number of output pages and the types of the
+   result files present.
+
+The individual reports contain:
+
+ - The "path" to the test case
+
+ - The test case information:
+
+    - Test description
+
+    - Which FO is being tested, which could be 'multiple'
+
+    - Input XML file, which could be an FO file
+
+    - Input XSLT stylesheet, if any
+
+    - Sample result file, if any provided by test case author
+
+ - The test result information, as an HTML form so the results can be
+   updated from the individual report:
+
+    - Whether or not the test result agrees with the test case
+      description and/or sample results
+
+    - Whether or not the XSL formatter will in the future support the
+      FOs and properties used in the test
+
+    - Whether or not any differences between the test result and the
+      test case description and/or sample results indicates a problem
+      with interpreting the XSL 1.0 Recommendation
+
+    - Whether or not any differences between the test result and the
+      test case description and/or sample results indicates a problem
+      with the test.
+
+    - Any further textual description
+
+ - For each page in the test result PDF:
+
+    - The PNG for the page
+
+    - If there are differences between the current PNG and the
+      corresponding 'ref' PNG:
+
+       - The PNG for the page from the 'ref' subdirectory
+
+       - The PNG for the 'stereo' composite showing the differences
+         between the two PNGs
+
+    - If, instead, there are no differences between the current PNG
+      and the corresponding 'ref' PNG:
+
+       - text stating 'Reference is identical to current."
+
+Selecting the 'Update' button in the 'Result' form both updates the
+test result information in testresults.xml and copies the current PNG
+files to the 'ref' subdirectory.  Unfortunately, it does not update
+the form because the current XSLT stylesheet generates both the
+summary report and all the individual reports, all of which takes a
+*long* time.  Ideally the summary report and the individual reports
+should be XHTML that can be simply modified, not regenerated, whenever
+a test's results are updated.
+
+The summary report should also be broken into multiple HTML files, one
+or more for each test suite, but that also hasn't been done yet.
+
+
+update-results.pl and update-result.xsl
+---------------------------------------
+
+update-results.pl is the CGI script called when the 'Update' button in
+an individual report is selected.  It modifies testresults.xml using
+the update-result.xsl stylesheet, copies the current test result's PNG
+files to its 'ref' subdirectory, zeroes the corresponding files in the
+'diff' subdirectory, and removes the corresponding files in the
+'stereo' subdirectory.
+
+
+Letting update-results.pl modify files
+--------------------------------------
+
+Allowing the update-results.pl CGI script to modify files is probably
+a security no-no, so it's probably best to use this setup on a machine
+that isn't accessible to the wider Internet.
+
+Suggestions on how to improve the setup are welcome, but the best way
+that has been found so far is:
+
+1. Copy xmlroff-testing.conf to '/etc/apache2/conf.d'.
+
+2. Adjust the paths in the xmlroff-testing.conf copy as necessary to
+   match your setup.
+
+3. Restart apache.
+
+4. Make the group id sticky (i.e., 'chmod g+s ...') for the current
+   directory and all the generated directories.
+ 
+
+A previous method that would require rolling back changes in
+testsuccess.xsl and update-results.pl is:
+
+1. Create a new group, e.g. 'testing'.
+
+2. Make the user id that runs the web server (e.g., 'apache') a member
+   of the group.
+
+3. Make any users who will be running the scripts and stylesheets also
+   members of the group.
+
+4. Change the group id of the generated test result files and report
+   files to the new group.
+
+5. Change the mode of the generated test result files and report files
+   to '664'.
+
+6. Change the group id of the 'testing' directory to the new group.
+
+7. Make the group id sticky (i.e., 'chmod g+s ...') for the current
+   directory and all the generated directories.
+
+It is probably simplest to create the group and just set the sticky
+group id of the 'testing' directory *before* running any of the
+stylesheets or scripts.
+
+
+License
+=======
+
+The stylesheets and other content are licensed under a BSD-style
+license.  See the file COPYING for details.
+
+
+Tony Graham
+tonygraham@users.sourceforge.net
+28 February 2006

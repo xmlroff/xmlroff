@@ -1,0 +1,4 @@
+<testsuites>
+<testsuite href="../testsuite/testsuite.xml"/>
+<!--<testsuite href="../../docbook-testdocs-1.1/testsuite.xml"/>-->
+</testsuites>

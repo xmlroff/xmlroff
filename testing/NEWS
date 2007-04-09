@@ -1,0 +1,61 @@
+Changes between 0.3.99 and 0.4.0:
+
+* Added configure parameter for xsltproc path
+* Fixed some XSLT bugs
+
+Changes between 0.3.9 and 0.3.99:
+
+* Everything is configured from 'configure' command line.
+* Removed 'testing-param.xsl'
+* Added percentages to console output of report summary.
+
+Changes between 0.3.8 and 0.3.9:
+
+* Improved README.
+* Added 'static' parameter to 'testing-param.xsl'.
+
+Changes between 0.3.4 and 0.3.8:
+
+* Modified appearance of main report.
+* Added console output of report summary.
+* Updated README.
+
+Changes between 0.3.1 and 0.3.4:
+
+* Added 'xmlroff-testing.conf' for easy setup when using Apache2.
+* Moved diffing of results from test2sh.pl to png+ref2stereo.pl.
+
+Changes between 0.3.0 and 0.3.1:
+
+* Added 'install' target to build xmlroff-testresults-(version).tar.gz
+* Added option of 'static' reports without HTML forms.
+* Changed to using autotools to configure package.
+
+Changes between 0.2.7 and 0.3.0:
+
+* Runs tests in less than 10% of previous time if no changes in PDF
+  output.
+* Minor improvements to format of individual reports.
+* Now checks log files for diffs.
+
+Changes between 0.2.6 and 0.2.7:
+
+* Convenience changes in makefile.
+
+Changes between 0.2.4 and 0.2.6:
+
+* Added output of count and list of tests with differences.
+
+Changes between 0.2.0 and 0.2.4:
+
+* Not so hardwired to one directory structure.
+* Put common parameters in new 'testing-param.xsl' file.
+* Added 'testsuites2testresults.xsl' for generating initial
+  testresults.xml file.
+* Added sample testsuites.xml file.
+* Added coverage.xsl and identity.xsl.
+* Removed 'Regenerate' button from generated testsuccess.html.
+
+What is new in testing 0.2.0:
+
+* Initial public release
