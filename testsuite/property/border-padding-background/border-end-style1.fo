@@ -1,0 +1,32 @@
+<!-- $Id: border-end-style1.fo,v 1.1 2005/03/15 23:51:47 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test border-end-style property.  All tests with border-end-width="20pt", space-before="12pt"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray">No border</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="none">border-end-style="none"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="hidden">border-end-style="hidden"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="dotted">border-end-style="dotted"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="dashed">border-end-style="dashed"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="solid">border-end-style="solid"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="double">border-end-style="double"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="groove">border-end-style="groove"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="ridge">border-end-style="ridge"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="inset">border-end-style="inset"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-end-width="20pt" border-end-style="outset">border-end-style="outset"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

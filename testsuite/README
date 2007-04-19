@@ -1,0 +1,80 @@
+This is part of the xmlroff XSL Formatter project.
+
+See http://www.xmlroff.org/.
+
+This testsuite is used in conjunction with the 'xmlroff-testing'
+package to test xmlroff.
+
+
+Structure
+=========
+
+The directory structure, and the <testcases> structure in
+testsuite.xml, mostly mirrors the section structure of the XSL 1.0
+Recommendation.  There's also additional 'structure' and 'multiple'
+directories for tests that don't fit into the divisions within the XSL
+spec.
+
+
+testsuite.xml
+=============
+
+This conforms to the DTD for testsuites developed for the Candidate
+Recommendation phase testing of the XSL 1.0 spec.
+
+Every test is described by a <test> element.
+
+<test> elements are grouped into <testcases> elements, which may also
+be grouped into another <testcases> element or the overall <testsuite>
+element.
+
+Every test should have a unique id.
+
+
+Writing a new test
+==================
+
+ - Add the test to testsuite.xml.
+
+ - Test one FO or property per test.
+
+ - Try to include a block of text explaining what the test tests.
+
+ - Try to use yellow and gray for the 'color' and 'background-color'
+   properties (or vice-versa) so you can see the extent of blocks.
+
+ - It's okay to write tests that are expected to fail even when the FO
+   or property is implemented correctly.  Just make sure the
+   description in testsuite.xml makes it clear that the test is
+   expected to fail.
+
+ - Except when testing non-basic properties, use properties from the
+   'basic' conformance level in preference to using shorthands,
+   whenever possible.
+
+   Even when xmlroff supports a shorthand, you don't want to be also
+   testing xmlroff's shorthand support when you're testing another FO
+   or property, plus using 'basic' properties makes the testsuite more
+   useful for other XSL formatters that may not implement the same set
+   of shorthands as xmlroff does.
+
+ - Keep the test simple.
+
+ - If you can't keep the test simple, put it in the 'multiple'
+   directory and testcases.
+
+ - Use 8in x 11in paper size so the result isn't shrunk if it's
+   printed on either A4 or letter size paper.
+
+
+License
+=======
+
+The stylesheets and other content are licensed under a BSD-style
+license.  See the file COPYING for details.
+
+
+Tony Graham
+tonygraham@users.sourceforge.net
+9 March 2005
+

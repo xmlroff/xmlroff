@@ -1,0 +1,49 @@
+<!-- $Id: simple.fo,v 1.2 2004/05/04 09:28:29 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body></fo:region-body>
+        </fo:simple-page-master>
+      </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow
+        flow-name="xsl-region-body">
+        <fo:block
+          break-before="even-page"
+          start-indent="12pt"
+          border-left-style="solid"
+          border-right-style="solid"
+          border-top-style="solid"
+          border-bottom-style="solid"
+          text-align="start" font-family="sans-serif"><fo:character character="T" color="silver" background-color="blue"/>he rain in Spain <fo:inline background-color="silver" baseline-shift="-12pt">falls</fo:inline> mainly on the plain.</fo:block>
+        <fo:block
+          space-before="12pt"
+          space-after="18pt"
+          end-indent="12pt"
+          text-align="start" font-family="sans-serif" font-size="40pt" background-color="yellow" font-style="italic"><fo:inline background-color="blue">Where</fo:inline> is italic? The rain in <fo:inline font-style="normal" background-color="white" font-size="20pt">Spain</fo:inline> falls falls falls <fo:inline background-color="red">mainly on</fo:inline> the plain.</fo:block>
+        <fo:block
+          start-indent="12pt"
+          end-indent="24pt"
+          space-before="12pt"
+          space-after="18pt"
+          break-before="page"
+          break-after="odd-page"
+          border-left-style="solid"
+          border-right-style="solid"
+          border-top-style="solid"
+          border-bottom-style="solid"
+          text-align="start" font-family="sans-serif" font-size="40pt">The rain in <fo:inline font-weight="300" font-size="20pt">Spain</fo:inline> falls <fo:inline background-color="red" color="white">mainly</fo:inline> on the plain.</fo:block>
+        <fo:block
+          break-after="odd-page"
+          text-align="start" font-family="sans-serif" font-size="40pt">The rain in <fo:inline font-family="monospace" font-style="italic" background-color="yellow"  color="blue" font-size="20pt">Spain</fo:inline> falls mainly on the plain.</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

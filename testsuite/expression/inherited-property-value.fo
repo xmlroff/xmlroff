@@ -1,0 +1,25 @@
+<!-- $Id: inherited-property-value.fo,v 1.2 2004/05/04 09:29:29 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          margin-right="1in" margin-left="1in" margin-bottom="1in" margin-top="1in"
+          page-width="21cm" page-height="29.7cm"
+          master-name="first">
+            <fo:region-body region-name="xsl-region-body"></fo:region-body>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first"
+      font-size="10pt">
+      <fo:flow flow-name="xsl-region-body">
+        <fo:block font-size="20pt" font-weight="bold">inherited-property-value()</fo:block>
+        <fo:block>The value of font-size property specified on ancestor page-sequence is 10pt.</fo:block>
+        <fo:block>1. No font-size specified.  Should be 10pt.</fo:block>
+        <fo:block font-size="20pt">2. font-size="20pt".  Should be 20pt.</fo:block>
+        <fo:block font-size="inherited-property-value()">3. font-size="inherited-property-value()".  Should be 10pt.</fo:block>
+        <fo:block font-size="inherited-property-value(font-size)">4. font-size="inherited-property-value(font-size)".  Should be 10pt.</fo:block>
+        <fo:block font-size="inherited-property-value('font-size')">5. font-size="inherited-property-value('font-size')".  Should be 10pt.</fo:block>
+        <fo:block font-size="inherited-property-value(provisional-distance-between-starts) div 2">6. font-size="inherited-property-value(provisional-distance-between-starts) div 2".  Should be 12pt.</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

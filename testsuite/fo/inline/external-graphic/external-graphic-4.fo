@@ -1,0 +1,29 @@
+<!-- $Id: external-graphic-4.fo,v 1.2 2006/08/09 22:07:39 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow
+        flow-name="xsl-region-body"
+        font-size="10pt">
+        <fo:block space-after="12pt" font-size="12pt">Black 384x192 box with content-with="50%" (4 inches x 2 inches at 96dpi, 2 inched by 2 inches at 50% width at 96dpi) in block with yellow background and purple 192x192 box (2 inched by 2 inches at 96dpi) in separate fo:block with gray.</fo:block>
+        <fo:block background-color="yellow"><fo:external-graphic
+            src="url(resources/black-384x192.png)" content-width="50%"
+            background-color="yellow"/></fo:block>
+        <fo:block background-color="gray"><fo:external-graphic
+            src="url(resources/purple-192x192.png)"
+            background-color="yellow"/></fo:block>
+      </fo:flow>
+</fo:page-sequence>
+</fo:root>

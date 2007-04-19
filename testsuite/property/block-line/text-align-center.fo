@@ -1,0 +1,41 @@
+<!-- $Id: text-align-center.fo,v 1.1.1.1 2003/02/12 18:03:09 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+  font-size="40pt" text-align="center">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+        <fo:simple-page-master
+          master-name="second"
+          writing-mode="rl"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow flow-name="xsl-region-body">
+        <fo:block space-after="20pt">Center center center center center center center center center</fo:block>
+        <fo:block>Center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+    <fo:page-sequence
+      master-reference="second">
+      <fo:flow flow-name="xsl-region-body">
+        <fo:block space-after="20pt">Center center center center center center center center center</fo:block>
+        <fo:block>Center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center center</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

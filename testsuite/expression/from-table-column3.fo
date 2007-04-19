@@ -1,0 +1,32 @@
+<!-- $Id: from-table-column3.fo,v 1.1 2004/05/04 09:31:47 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body></fo:region-body>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow
+        flow-name="xsl-region-body">
+        <fo:block>Testing from-table-column(NCName) with a non-inherited property. This should fail.</fo:block>
+        <fo:table inline-progression-dimension="100%" table-layout="fixed">
+          <fo:table-column column-width="100%"/>
+          <fo:table-body>
+            <fo:table-row>
+              <fo:table-cell height="from-table-column(height)">
+                <fo:block>1-1</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+          </fo:table-body>
+        </fo:table>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

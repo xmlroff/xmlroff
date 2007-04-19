@@ -1,0 +1,22 @@
+<!-- $Id: start-indent-percentage.fo,v 1.3 2006/07/28 09:44:52 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      font-size="inherit"
+      margin-right="1in" margin-left="1in" margin-bottom="1in" margin-top="1in"
+      page-width="21cm" page-height="29.7cm"
+      master-name="first">
+      <fo:region-body region-name="xsl-region-body"></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="40pt">
+      <fo:block start-indent="20%" border-left-style="solid" border-right-style="solid">start-indent="20%"</fo:block>
+      <fo:block start-indent="15%" border-left-style="solid" border-right-style="solid">start-indent="15%"</fo:block>
+      <fo:block start-indent="10%" border-left-style="solid" border-right-style="solid">start-indent="10%"</fo:block>
+      <fo:block start-indent="5%" border-left-style="solid" border-right-style="solid">start-indent="5%"</fo:block>
+      <fo:block start-indent="0%" border-left-style="solid" border-right-style="solid">start-indent="0%"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

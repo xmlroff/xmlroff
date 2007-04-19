@@ -1,0 +1,33 @@
+<!-- $Id: border-style1.fo,v 1.1 2005/03/15 23:51:47 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test border-style property with one value.</fo:block>
+      <fo:block>All tests have border-*-width="12pt".</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow" border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt">No border-style</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="none">border-style="none"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="hidden">border-style="hidden"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="dotted">border-style="dotted"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="dashed">border-style="dashed"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="solid">border-style="solid"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="double">border-style="double"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="groove">border-style="groove"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="ridge">border-style="ridge"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="inset">border-style="inset"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="outset">border-style="outset"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

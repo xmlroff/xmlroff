@@ -1,0 +1,24 @@
+<!-- $Id: padding-before1.fo,v 1.2 2004/05/17 11:08:03 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test padding-before property.</fo:block>
+      <fo:block background-color="yellow">No padding</fo:block>
+      <fo:block background-color="gray" padding-before="20pt">padding-before="20pt"</fo:block>
+      <fo:block background-color="yellow" padding-before="20%">padding-before="20%"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

@@ -1,0 +1,80 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" media-usage="auto">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow font-family="sans-serif" flow-name="xsl-region-body" font-size="12pt">
+        <fo:block font-family="sans-serif" font-weight="bold" font-size="20pt">font-size test</fo:block>
+        <fo:block space-after="12pt" font-size="xx-small">
+          <fo:block>xx-small</fo:block>
+            <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="x-small">
+          <fo:block>x-small</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="small">
+          <fo:block>small</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="medium">
+          <fo:block>medium</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="large">
+          <fo:block>large</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="x-large">
+          <fo:block>x-large</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="xx-large">
+          <fo:block>xx-large</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="larger">
+          <fo:block>larger</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="smaller">
+          <fo:block>smaller</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="12pt">
+          <fo:block>12pt</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="200%">
+          <fo:block>200%</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-size="inherit">
+          <fo:block>inherit</fo:block>
+          <fo:block start-indent="12pt" font-size="smaller">smaller <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-size="larger">larger <fo:inline font-size="inherit">(inherit)</fo:inline> <fo:inline font-size="smaller">(smaller)</fo:inline> <fo:inline font-size="larger">(larger)</fo:inline></fo:block>
+        </fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

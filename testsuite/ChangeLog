@@ -1,0 +1,274 @@
+2007-02-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.4.0 ===
+
+	* NEWS: Updated for 0.4.0.
+
+2006-12-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/shorthand/padding4.fo: Added extra text at end of lines
+	so can see effect of end padding.
+
+	* property/shorthand/border3.fo: Changed 'thin' to 'thick' so
+	results more visible.
+
+	* fo/inline/external-graphic/external-graphic-3.fo: Corrected
+	description.
+
+	* configure.ac: Upped version to 0.4.0.
+
+2006-08-09  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.99 ===
+
+	* NEWS: Updated for 0.3.99.
+
+	* fo/inline/external-graphic/external-graphic-2.fo,
+	fo/inline/external-graphic/external-graphic-3.fo,
+	fo/inline/external-graphic/external-graphic-4.fo: Corrected
+	descriptions.
+
+	* expression/from-table-column2.fo: Changed from using 'height' to
+	'font-size' since compatibility stylesheet removes 'height'
+	properties.
+
+	* testsuite.xml: Added new tests and corrected some descriptions.
+
+	* .cvsignore: Files for CVS to ignore.
+
+	* fo/inline/external-graphic/external-graphic-5.fo,
+	fo/inline/external-graphic/external-graphic-6.fo,
+	fo/inline/external-graphic/resources/xmlroff-alpha.png: Testing
+	images with and without transparent background.
+
+	* xmlroff-testsuite.conf: Apache2 configuration file for
+	testsuite.
+
+	* configure.ac: Upped version to 0.3.99.
+
+2006-07-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo/block/block/start-indent-percentage.fo: Corrected text so it
+	refers to correct property.
+
+2005-12-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.8 ===
+
+	* NEWS: Updated for 0.3.8.
+
+	* configure.ac: Upped version to 0.3.8.
+
+	* testsuite.xml: Added new fo:region-body, fo:block, and
+	fo:external-graphic tests.
+
+	* fo/block/block/start-indent-percentage.fo: Added
+	border-right-style to blocks.
+
+	* fo/declaration-pagination-layout/region-body/region-body-overflow1.fo,
+	fo/declaration-pagination-layout/region-body/region-body-overflow2.fo,
+	fo/declaration-pagination-layout/region-body/region-body-overflow3.fo,
+	fo/declaration-pagination-layout/region-body/region-body-overflow4.fo,
+	fo/declaration-pagination-layout/region-body/region-body-overflow5.fo,
+	fo/declaration-pagination-layout/region-body/region-body-overflow6.fo,
+	fo/declaration-pagination-layout/region-body/region-body-overflow7.fo:
+	Tests for fo:region-body.
+
+	* fo/inline/external-graphic/external-graphic-1.fo,
+	fo/inline/external-graphic/external-graphic-2.fo,
+	fo/inline/external-graphic/external-graphic-3.fo,
+	fo/inline/external-graphic/external-graphic-4.fo: Tests for
+	fo:external-graphic.
+
+	* fo/inline/external-graphic/resources/black-192x10.png,
+	fo/inline/external-graphic/resources/black-192x384.png,
+	fo/inline/external-graphic/resources/black-384x10.png,
+	fo/inline/external-graphic/resources/black-384x192.png,
+	fo/inline/external-graphic/resources/purple-192x192.png,
+	fo/inline/external-graphic/resources/xmlroff.png: Graphics used in
+	fo:external-graphic tests.
+
+2005-07-05  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* testsuite.xml: Corrected 'results' attribute value for three
+	border tests.
+
+2005-04-26  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.3 ===
+
+	* NEWS: Updated for 0.3.3.
+
+2005-04-25  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/shorthand/border1.fo, property/shorthand/border2.fo,
+	property/shorthand/border3.fo, testsuite.xml: Added three tests
+	for 'border' property.
+
+2005-03-15  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Added two more notes about writing testcases.
+
+	* configure.ac: Upped version to 0.3.3.
+
+	* property/shorthand/border-style4.fo,
+	property/shorthand/border-style5.fo,
+	property/shorthand/border-width1.fo,
+	property/shorthand/border-width2.fo,
+	property/shorthand/border-width3.fo,
+	property/shorthand/border-width4.fo,
+	property/shorthand/border-width5.fo,
+	property/border-padding-background/border-after-style1.fo,
+	property/border-padding-background/border-before-style1.fo,
+	property/border-padding-background/border-bottom-style1.fo,
+	property/border-padding-background/border-end-style1.fo,
+	property/border-padding-background/border-left-style1.fo,
+	property/border-padding-background/border-right-style1.fo,
+	property/border-padding-background/border-start-style1.fo,
+	property/border-padding-background/border-top-style1.fo,
+	property/shorthand/border-style1.fo,
+	property/shorthand/border-style2.fo,
+	property/shorthand/border-style3.fo, testsuite.xml: Added
+	border-*-style, border-style, and border-width tests.
+
+2005-03-09  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Added sections on structure, testsuites.xml, and writing
+	a new test.
+
+	* property/shorthand/border-color1.fo,
+	property/shorthand/border-color2.fo,
+	property/shorthand/border-color3.fo,
+	property/shorthand/border-color4.fo,
+	property/shorthand/border-color5.fo, testsuite.xml: Added some
+	'border-color' tests.
+
+2005-01-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.1 ===
+
+	* Makefile.am, autogen.sh, makefile, configure.ac: Changed to
+	using autotools.
+
+	* NEWS: Updated for 0.3.1.
+
+	* property/font/font-weight-monospace.fo,
+	structure/element-content.fo: Added XML Declaration.
+
+2004-10-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* makefile: Added AUTHORS and NEWS to file list.  Removed some
+	leftovers from being copied from testing makefile.
+
+	* NEWS: Added 'NEWS'.
+
+	* AUTHORS: Added 'AUTHORS'.
+
+	* README: Changed reference to testing package to
+	'xmlroff-testing' since that's how it appears on SourceForge file
+	download page.
+
+	* expression/from-table-column1.fo: Now state in formatted output
+	what indicates success or failure.
+
+	* testsuite.xml: Removed DOCTYPE declaration.
+
+2004-06-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.7 ===
+
+	* makefile: Makefile for automating making distributions.
+
+	* property/border-padding-background/padding-before2.fo,
+	property/border-padding-background/padding-before3.fo,
+	testsuite.xml: Added tests for padding-before .length and
+	.conditionality support.
+
+2004-05-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* property/border-padding-background/padding-after1.fo,
+	property/border-padding-background/padding-before1.fo,
+	property/border-padding-background/padding-bottom1.fo,
+	property/border-padding-background/padding-end1.fo,
+	property/border-padding-background/padding-left1.fo,
+	property/border-padding-background/padding-right1.fo,
+	property/border-padding-background/padding-start1.fo,
+	property/border-padding-background/padding-top1.fo: Added use of
+	padding value as a percentage.
+
+	* multiple/unsupported-property.fo, testsuite.xml: Added
+	unsupported-property.fo to test behaviour with unsupported
+	properties.
+
+2004-05-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.6 ===
+
+	* testsuite.xml: Modifed profile name, added new tests.
+
+	* expression/from-table-column1.fo,
+	expression/from-table-column2.fo,
+	expression/from-table-column3.fo,
+	expression/from-table-column4.fo,
+	expression/from-table-column5.fo,
+	expression/from-table-column6.fo,
+	expression/from-table-column7.fo,
+	property/border-padding-background/padding-after1.fo,
+	property/border-padding-background/padding-before1.fo,
+	property/border-padding-background/padding-bottom1.fo,
+	property/border-padding-background/padding-end1.fo,
+	property/border-padding-background/padding-left1.fo,
+	property/border-padding-background/padding-right1.fo,
+	property/border-padding-background/padding-start1.fo,
+	property/border-padding-background/padding-top1.fo,
+	property/font/font-size-fail.fo, property/font/font-size.fo,
+	property/font/font-stretch.fo,
+	property/font/font-weight-monospace.fo,
+	property/font/font-weight-sans-serif.fo,
+	property/font/font-weight-serif.fo,
+	property/shorthand/padding1.fo, property/shorthand/padding2.fo,
+	property/shorthand/padding3.fo, property/shorthand/padding4.fo,
+	property/shorthand/padding5.fo, property/shorthand/padding6.fo,
+	property/shorthand/padding7.fo,
+	property/writing-mode/writing-mode.fo: New tests.
+
+	* expression/inherited-property-value.fo: Corrected statement of
+	expected results.  Removed duplicate pages.
+
+	* multiple/simple.fo,
+	property/border-padding-background/background-color1.fo,
+	property/color/color1.fo: Simplified fo:simple-page-master.
+
+2002-06-28  Tony Graham <Tony.Graham@Sun.COM>
+
+	* fo/list/list-1.fo, fo/list/list-2.fo: List test case.
+
+	* structure/element-content.fo: A non-whitespace character where
+	only element content is allowed should cause an error.
+
+	* property/color/color1.fo: Demonstrate support for the 16 color
+	keywords.
+
+	* testsuite.xml: Corrected DOCTYPE.  Added property/color/color1,
+	structure/element-content, and multiple/simple.
+
+	* expression/inherited-property-value.fo: Added text saying what
+	each font-size should be.
+
+	* multiple/simple.fo: Test color, alignment-adjust, and font
+	properties.
+
+2002-01-15  Tony Graham <Tony.Graham@Sun.COM>
+
+	* fo/block/block/start-indent-percentage.fo: Test file for
+	<fo:block start-indent="*%">.
+
+2001-12-18  Tony Graham <Tony.Graham@Sun.COM>
+
+	* expression/inherited-property-value.fo,
+	expression/inherited-property-value.pdf, expression/simple.fo,
+	testsuite.xml: New file.
+
+	* expression/inherited-property-value.fo,
+	expression/inherited-property-value.pdf, expression/simple.fo,
+	testsuite.xml: Sun XSL test suite.

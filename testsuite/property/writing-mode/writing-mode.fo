@@ -1,0 +1,47 @@
+<!-- $Id: writing-mode.fo,v 1.1 2004/05/04 09:31:47 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" media-usage="auto">
+    <fo:layout-master-set>
+      <fo:simple-page-master
+        master-name="first"
+        writing-mode="lr"
+        margin-right="1in"
+        margin-left="1in"
+        margin-bottom="1in"
+        margin-top="1in"
+        page-width="8in"
+        page-height="11in">
+        <fo:region-body></fo:region-body>
+      </fo:simple-page-master>
+      <fo:simple-page-master
+        master-name="second"
+        writing-mode="rl"
+        margin-right="1in"
+        margin-left="1in"
+        margin-bottom="1in"
+        margin-top="1in"
+        page-width="8in"
+        page-height="11in">
+        <fo:region-body></fo:region-body>
+      </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow flow-name="xsl-region-body">
+        <fo:block font-family="sans" font-size="40pt" background-color="yellow">The rain in <fo:bidi-override font-size="20pt" direction="rtl" unicode-bidi="bidi-override">Spain</fo:bidi-override> falls mainly on the plain.</fo:block>
+        <fo:block
+          id="block-2"
+          font-family="sans" font-size="40pt">The rain in <fo:bidi-override font-size="20pt" direction="rtl" unicode-bidi="bidi-override">Spain</fo:bidi-override> falls mainly on the plain.</fo:block>
+        <fo:block font-family="sans" font-size="40pt" background-color="yellow">The rain in &#x202E;Spain&#x202C; falls mainly on the plain.</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+    <fo:page-sequence
+      master-reference="second">
+      <fo:flow flow-name="xsl-region-body">
+        <fo:block font-family="sans" font-size="40pt" background-color="yellow">The rain in <fo:bidi-override font-size="20pt" direction="rtl" unicode-bidi="bidi-override">Spain</fo:bidi-override> falls mainly on the plain.</fo:block>
+        <fo:block
+          id="block-2"
+          font-family="sans" font-size="40pt">The rain in <fo:bidi-override font-size="20pt" direction="rtl" unicode-bidi="bidi-override">Spain</fo:bidi-override> falls mainly on the plain.</fo:block>
+        <fo:block font-family="sans" font-size="40pt" background-color="yellow">The rain in &#x202E;Spain&#x202C; falls mainly on the plain.</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

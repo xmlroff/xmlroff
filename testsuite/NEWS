@@ -1,0 +1,26 @@
+Changes between 0.3.8 and 0.3.99:
+
+* Minor changes to existing tests so results more visible
+
+Changes between 0.3.8 and 0.3.99:
+
+* Added two fo:external-graphic tests.
+* Corrected some tests and test descriptions.
+
+Changes between 0.3.3 and 0.3.8:
+
+* Added tests for fo:block, fo:external-graphic, and fo:region-body.
+
+Changes between 0.3.1 and 0.3.3:
+
+* Added tests for 'border', 'border-width', 'border-style',
+  'border-color', and 'border-*-style' properties.
+* Expanded README.
+
+Changes between 0.3.0 and 0.3.1:
+
+* Using autotools to configure project.
+
+Changes between 0.2.7 and 0.3.0:
+
+* Minor change to 'from-table-column1.fo'.

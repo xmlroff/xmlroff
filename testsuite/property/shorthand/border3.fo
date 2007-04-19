@@ -1,0 +1,27 @@
+<!-- $Id: border3.fo,v 1.2 2006/12/08 16:09:28 menteith Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test border property with three values.</fo:block>
+      <fo:block space-before="12pt" border="gray dashed thick" background-color="yellow">border="gray dashed thick"</fo:block>
+      <fo:block space-before="12pt" border="gray thick dashed" background-color="yellow">border="gray thick dashed"</fo:block>
+      <fo:block space-before="12pt" border="dashed gray thick" background-color="yellow">border="dashed gray thick"</fo:block>
+      <fo:block space-before="12pt" border="dashed thick gray" background-color="yellow">border="dashed thick gray"</fo:block>
+      <fo:block space-before="12pt" border="thick dashed gray" background-color="yellow">border="thick dashed gray"</fo:block>
+      <fo:block space-before="12pt" border="thick gray dashed" background-color="yellow">border="thick gray dashed"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

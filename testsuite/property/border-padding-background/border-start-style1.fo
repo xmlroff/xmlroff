@@ -1,0 +1,32 @@
+<!-- $Id: border-start-style1.fo,v 1.1 2005/03/15 23:51:47 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test border-start-style property.  All tests with border-start-width="20pt", space-before="12pt"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray">No border</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="none">border-start-style="none"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="hidden">border-start-style="hidden"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="dotted">border-start-style="dotted"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="dashed">border-start-style="dashed"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="solid">border-start-style="solid"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="double">border-start-style="double"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="groove">border-start-style="groove"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="ridge">border-start-style="ridge"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="inset">border-start-style="inset"</fo:block>
+      <fo:block space-before="12pt" color="yellow" background-color="gray" border-start-width="20pt" border-start-style="outset">border-start-style="outset"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

@@ -1,0 +1,80 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" media-usage="auto">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow font-family="sans-serif" flow-name="xsl-region-body" font-size="12pt">
+        <fo:block font-family="sans-serif" font-weight="bold" font-size="20pt">font-stretch test</fo:block>
+        <fo:block space-after="12pt" font-stretch="ultra-condensed">
+          <fo:block>ultra-condensed</fo:block>
+            <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="extra-condensed">
+          <fo:block>extra-condensed</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="condensed">
+          <fo:block>condensed</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="semi-condensed">
+          <fo:block>semi-condensed</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="normal">
+          <fo:block>normal</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="semi-expanded">
+          <fo:block>semi-expanded</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="expanded">
+          <fo:block>expanded</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="extra-expanded">
+          <fo:block>extra-expanded</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="ultra-expanded">
+          <fo:block>ultra-expanded</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="wider">
+          <fo:block>wider</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="narrower">
+          <fo:block>narrower</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-stretch="inherit">
+          <fo:block>inherit</fo:block>
+          <fo:block start-indent="12pt" font-stretch="narrower">narrower <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-stretch="wider">wider <fo:inline font-stretch="inherit">(inherit)</fo:inline> <fo:inline font-stretch="narrower">(narrower)</fo:inline> <fo:inline font-stretch="wider">(wider)</fo:inline></fo:block>
+        </fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

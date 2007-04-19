@@ -1,0 +1,24 @@
+<!-- $Id: border-color4.fo,v 1.1 2005/03/09 11:37:11 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test border-color property with four values.</fo:block>
+      <fo:block>All tests have border-*-width="5pt" and border-*-style="solid".</fo:block>
+      <fo:block border-left-width="5pt" border-right-width="5pt" border-top-width="5pt" border-bottom-width="5pt" border-left-style="solid" border-right-style="solid" border-top-style="solid" border-bottom-style="solid" background-color="yellow">No border-color</fo:block>
+      <fo:block background-color="gray"  border-left-width="5pt" border-right-width="5pt" border-top-width="5pt" border-bottom-width="5pt" border-left-style="solid" border-right-style="solid" border-top-style="solid" border-bottom-style="solid" border-color="red green blue fuchsia">border-color="red green blue fuchsia"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

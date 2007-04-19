@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" media-usage="auto">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow font-family="monospace" flow-name="xsl-region-body" font-size="12pt">
+        <fo:block font-family="sans-serif" font-weight="bold" font-size="20pt">font-weight test</fo:block>
+        <fo:block font-family="sans-serif" space-after="12pt" font-weight="bold">Note: Most systems won't have every weight of the 'monospace' font.</fo:block>
+        <fo:block space-after="12pt" font-weight="normal">
+          <fo:block >normal</fo:block>
+            <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="bold">
+          <fo:block>bold</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="bolder">
+          <fo:block>bolder</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="lighter">
+          <fo:block>lighter</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="100">
+          <fo:block>100</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="200">
+          <fo:block>200</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="300">
+          <fo:block>300</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="400">
+          <fo:block>400</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" keep-together.within-page="force"
+          font-weight="500">
+          <fo:block>500</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="600">
+          <fo:block>600</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="700">
+          <fo:block>700</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="800">
+          <fo:block>800</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+        <fo:block space-after="12pt" font-weight="900">
+          <fo:block>900</fo:block>
+          <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+          <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
+        </fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

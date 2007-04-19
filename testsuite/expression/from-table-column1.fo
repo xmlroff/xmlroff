@@ -1,0 +1,29 @@
+<!-- $Id: from-table-column1.fo,v 1.2 2004/10/08 16:22:10 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body></fo:region-body>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow
+        flow-name="xsl-region-body">
+        <fo:block
+          font-size="20pt">Testing from-table-column() with expressions that should fail because they are used on FOs that are not descendants of fo:table-cell.</fo:block>
+        <fo:block
+          font-family="from-table-column()"
+          font-size="40pt">This should fail: 40pt text if fail, 20pt text if succeed.</fo:block>
+        <fo:block
+          font-family="from-table-column(font-family)"
+          font-size="40pt">This should also fail: 40pt text if fail, 20pt text if succeed.</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>

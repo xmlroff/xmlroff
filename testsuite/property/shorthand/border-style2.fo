@@ -1,0 +1,25 @@
+<!-- $Id: border-style2.fo,v 1.1 2005/03/15 23:51:47 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="20pt">
+      <fo:block>Test border-style property with two values.</fo:block>
+      <fo:block>All tests have border-*-width="12pt".</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow" border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt">No border-style</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="solid groove">border-style="solid groove"</fo:block>
+      <fo:block space-before="12pt" color="gray" background-color="yellow"  border-left-width="12pt" border-right-width="12pt" border-top-width="12pt" border-bottom-width="12pt" border-style="double inset">border-style="double inset"</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
