@@ -19,7 +19,7 @@
   
   <xsl:import href="coverage.xsl"/>
 
-  <xsl:output method="html" indent="no" encoding="ISO-8859-1"/>
+  <xsl:output method="html" indent="no" encoding="UTF-8"/>
 
   <xsl:strip-space elements="*"/>
 
@@ -84,7 +84,6 @@
         </title>
         <style type="text/css">
           body { background-color: white}
-          h2 { background-color: yellow}
     td.full {background-color: green; color: white; text-align: center}
     td.future {background-color: palegreen; text-align: center}
     td.differ {background-color: yellow; text-align: center}
@@ -92,7 +91,14 @@
     td.spec {background-color: red; text-align: center}
     td.other {background-color: white; text-align: center}
     td.not-yet-verified {background-color: silver; text-align: center}
-    tr.coloured {background-color: #EEEEFF}
+    tr.coloured {background-color: #DDEEFF}
+    .coloured2 {background-color: #CCDDFF}
+    .coloured2 {border-top: 3pt solid white}
+    .coloured3 {background-color: #BBCCFF}
+    .coloured3 {border-top: 6pt solid white}
+    .coloured4 {background-color: #99BBFF}
+    .coloured4 {border-top: 18pt solid white}
+    .coloured5 {background-color: #99AAFF}
     tr.diff {background-color: #FFEEEE}
         </style>
       </head>
@@ -132,19 +138,19 @@
     <xsl:message>Not verified: <xsl:value-of select="$not-verified-results-count"/> (<xsl:value-of select="$not-verified-results-percent"/>)</xsl:message>
     <xsl:message>Total:        <xsl:value-of select="$total-results-count"/></xsl:message>
 
-    <h2>
+    <h2 class="coloured5">
       <a name="{$testsuite-id}">
         <xsl:value-of select="@profile"/>
       </a>
     </h2>
     <table width="95%" style="text-align: center; align: center">
-      <tr style="background-color: #DDDDFF">
+      <tr>
         <td class="full">Full</td>
         <td class="differ">Issues</td>
         <xsl:if test="$not-verified-results-count">
           <td class="not-yet-verified">Not yet verified</td>
         </xsl:if>
-        <td>Total</td>
+        <td class="coloured2" style="border-style: none">Total</td>
       </tr>
       <tr class="coloured">
         <td><xsl:value-of select="$full-results-count"/></td>
@@ -179,7 +185,7 @@
       <table style="margin-top: 12pt; margin-bottom: 12pt">
         <xsl:variable name="tests-with-differences" select="count($testsuccess-node/directory/pdf/diff[*[@size != 0]])"/>
         <xsl:message><xsl:value-of select="$tests-with-differences"/> tests with differences</xsl:message>
-        <tr style="background-color: #DDDDFF">
+        <tr class="coloured2">
           <td><xsl:value-of select="$tests-with-differences"/> tests with differences</td>
         </tr>
         <xsl:if test="$tests-with-differences > 0">
@@ -213,25 +219,25 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr>
-      <td colspan="5" style="background-color: yellow">
+      <td colspan="5" class="coloured4">
         <h2>
           <a name="{$my-testcases-id}">
             <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
           </a>
         </h2>
       </td>
-      <td style="background-color: yellow">
+      <td class="coloured4">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-      <td>
 <!--
+      <td>
         <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
--->
       </td>
+-->
     </tr>
 
     <xsl:apply-templates>
@@ -250,25 +256,25 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr>
-      <td colspan="5" style="background-color: goldenrod">
+      <td colspan="5" class="coloured3">
         <h3>
           <a name="{$my-testcases-id}">
             <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
           </a>
         </h3>
       </td>
-      <td style="background-color: goldenrod">
+      <td class="coloured3">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-      <td>
 <!--
+      <td>
         <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
--->
       </td>
+-->
     </tr>
 
     <xsl:apply-templates>
@@ -287,25 +293,25 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr>
-      <td colspan="5" style="background-color: khaki">
+      <td colspan="5" class="coloured2">
         <h4>
           <a name="{$my-testcases-id}">
             <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
           </a>
         </h4>
       </td>
-      <td style="background-color: khaki">
+      <td class="coloured2">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-      <td>
 <!--
+      <td>
         <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
--->
       </td>
+-->
     </tr>
 
     <xsl:apply-templates>
@@ -481,17 +487,19 @@
             <xsl:value-of select="$id"/>
           </title>
           <style type="text/css">
+    .coloured {background-color: #DDEEFF}
+    .coloured2 {background-color: #CCDDFF}
+    .coloured3 {background-color: #BBCCFF}
             body { background-color: grey}
             h1 { background-color: white}
             h2 { background-color: yellow}
-	    td.png-title { background-color: yellow}
 	    span.png-title { font-size: 150%; font-weight: bold}
             tr.per-page-banner { background-color: yellow}
             <xsl:call-template name="coverage-styles"/>
           </style>
         </head>
         <body>
-          <h1>
+          <h1 class="coloured">
             <xsl:for-each select="$results/ancestor::*/@base">
               <xsl:value-of select="."/>
               <xsl:text>/</xsl:text>
@@ -504,7 +512,7 @@
           <table>
             <tr>
               <th rowspan="2" style="background-color: white">Test</th>
-              <td colspan="4" style="background-color: yellow"><xsl:value-of select="$test"/></td>
+              <td colspan="4" class="coloured2"><xsl:value-of select="$test"/></td>
             </tr>
             <tr>
               <td style="background-color: white">
@@ -604,7 +612,7 @@
           <table>
             <xsl:for-each select="$pdf/pwd/png">
               <xsl:variable name="name" select="@name"/>
-              <tr class="per-page-banner">
+              <tr class="coloured3">
                 <td>
                   <a name="page{position()}">
                     <span class="png-title">
