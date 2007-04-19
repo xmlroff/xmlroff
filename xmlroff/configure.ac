@@ -100,7 +100,7 @@ fi
 #
 # Checks for GLib
 #
-GLIB_REQUIRED_VERSION=2.4.0
+GLIB_REQUIRED_VERSION=2.6.0
 
 AM_PATH_GLIB_2_0($GLIB_REQUIRED_VERSION, :,
   AC_MSG_ERROR([
@@ -361,8 +361,8 @@ AH_TEMPLATE([ENABLE_CAIRO],
 
 AC_ARG_ENABLE(cairo,
 	      AC_HELP_STRING([--enable-cairo],
-			     [build Cairo output capability (default=no)]),
-	      enable_cairo_arg="$enableval", enable_cairo_arg=no)
+			     [build Cairo output capability (default=yes)]),
+	      enable_cairo_arg="$enableval", enable_cairo_arg=yes)
 
 if test "x$enable_cairo_arg" != "xyes" ; then
   enable_cairo_arg=no
@@ -420,13 +420,14 @@ fi
 #
 # Checks for Pango
 #
-PANGO_PACKAGES="$GNOMEPRINT_REQUIRES"
-PANGO_REQUIRED_VERSION=1.6
-CAIRO_PANGO_REQUIRED_VERSION=1.10
+PANGO_PACKAGES=
+PANGO_REQUIRED_VERSION=1.10
 
+if $enable_gp ; then
+   PANGO_PACKAGES="$GNOMEPRINT_REQUIRES"
+fi
 if $enable_cairo ; then
-   PANGO_PACKAGES="$GNOMEPRINT_REQUIRES pangocairo"
-   PANGO_REQUIRED_VERSION=$CAIRO_PANGO_REQUIRED_VERSION
+   PANGO_PACKAGES="$PANGO_PACKAGES pangocairo"
 fi
 have_pango=false
 
