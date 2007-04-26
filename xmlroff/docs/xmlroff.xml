@@ -135,6 +135,12 @@
 </refsect1>
 
 <refsect1>
+  <title>Reporting Bugs</title>
+
+  <para>Report bugs to <email>xmlroff-list@xmlroff.org</email>.</para>
+</refsect1>
+
+<refsect1>
   <title>See Also</title>
 
   <para><citerefentry><refentrytitle>xsltproc</refentrytitle><manvolnum>1</manvolnum></citerefentry></para>
@@ -143,7 +149,7 @@
 <refsect1>
   <title>Author</title>
 
-  <para>Tony Graham <email>tonygraham@users.sourceforge.net</email></para>
+  <para>Tony Graham <email>Tony.Graham of MenteithConsulting dot com</email></para>
 </refsect1>
 
 </refentry>
