@@ -8,12 +8,12 @@
  * See COPYING for the status of this software.
  */
 
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "fo/fo-block-fo.h"
 #include "area/fo-area-graphic.h"
 #include "fo/fo-external-graphic-private.h"
 #include "property/fo-property-text-property.h"
 #include "libfo/fo-doc-commands.h"
+#include "libfo/libfo-pango.h"
 
 /* ORC = U+FFFC
  *     = 1111 1111 1111 1100 (UTF-16)
@@ -119,7 +119,7 @@ fo_external_graphic_get_text_attr_list (FoFo    *fo_inline_fo,
 			 g_cclosure_marshal_VOID__VOID);
 
   pango_attr =
-    pango_attr_callback_new (closure);
+    libfo_pango_attr_callback_new (closure);
   pango_attr->start_index = start_index;
   pango_attr->end_index = end_index;
   my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
@@ -130,11 +130,13 @@ fo_external_graphic_get_text_attr_list (FoFo    *fo_inline_fo,
   pango_attr->end_index = end_index;
   my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
 
+  /*
   pango_attr =
     fo_property_text_property_new_attr (fo_external_graphic->line_height);
   pango_attr->start_index = start_index;
   pango_attr->end_index = end_index;
   my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
+  */
 
   if (FO_IS_COLOR (fo_property_get_value (fo_external_graphic->background_color)))
     {
@@ -145,6 +147,7 @@ fo_external_graphic_get_text_attr_list (FoFo    *fo_inline_fo,
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
     }
 
+  /*
   pango_attr =
     fo_property_text_property_new_attr (fo_external_graphic->alignment_adjust);
   pango_attr->start_index = start_index;
@@ -175,6 +178,7 @@ fo_external_graphic_get_text_attr_list (FoFo    *fo_inline_fo,
   pango_attr->start_index = start_index;
   pango_attr->end_index = end_index;
   my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
+  */
 
   *attr_glist = g_list_concat (my_attr_glist,
 			       *attr_glist);

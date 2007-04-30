@@ -662,13 +662,13 @@ fo_bidi_override_get_text_attr_list (FoFo *fo_inline_fo,
 								fo_bidi_override->font_weight,
 								start_index,
 								end_index));
-
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_bidi_override->line_height);
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
-
+      */
       pango_attr =
 	fo_property_text_property_new_attr (fo_bidi_override->color);
       pango_attr->start_index = start_index;

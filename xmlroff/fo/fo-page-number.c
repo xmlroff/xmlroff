@@ -1533,11 +1533,13 @@ fo_page_number_get_text_attr_list (FoFo *fo_inline_fo,
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
 
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_page_number->line_height);
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
+      */
 
       if (FO_IS_COLOR (fo_property_get_value (fo_page_number->background_color)))
 	{
@@ -1548,6 +1550,7 @@ fo_page_number_get_text_attr_list (FoFo *fo_inline_fo,
 	  my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
 	}
 
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_page_number->alignment_adjust);
       pango_attr->start_index = start_index;
@@ -1578,6 +1581,7 @@ fo_page_number_get_text_attr_list (FoFo *fo_inline_fo,
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
+      */
     }
 
   *attr_glist = g_list_concat (my_attr_glist,

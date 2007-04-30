@@ -9,12 +9,13 @@
  */
 
 #include <string.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
+/*
 #include "property/fo-property-text-property.h"
+*/
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-alignment-baseline.h"
 
@@ -44,8 +45,10 @@ static FoDatatype* fo_property_alignment_baseline_resolve_enum (const gchar *tok
 static FoDatatype* fo_property_alignment_baseline_validate (FoDatatype *datatype,
                                                             FoContext  *context,
                                                             GError    **error);
+/*
 PangoAttribute * fo_property_alignment_baseline_new_attr (FoProperty *property);
 static void fo_property_alignment_baseline_text_property_init (FoPropertyTextPropertyIface *iface);
+*/
 
 static const gchar class_name[] = "alignment-baseline";
 static gpointer parent_class;
@@ -79,20 +82,23 @@ fo_property_alignment_baseline_get_type (void)
 	NULL		/* value_table */
       };
 
+      /*
       static const GInterfaceInfo fo_property_text_property_info =
       {
-	(GInterfaceInitFunc) fo_property_alignment_baseline_text_property_init, /* interface_init */
+	(GInterfaceInitFunc) fo_property_alignment_baseline_text_property_init, / * interface_init * /
         NULL,
         NULL
       };
-
+      */
       object_type = g_type_register_static (FO_TYPE_PROPERTY,
                                             class_name,
                                             &object_info, 0);
 
+      /*
       g_type_add_interface_static (object_type,
                                    FO_TYPE_PROPERTY_TEXT_PROPERTY,
                                    &fo_property_text_property_info);
+      */
     }
 
   return object_type;
@@ -159,11 +165,13 @@ fo_property_alignment_baseline_finalize (GObject *object)
  * 
  * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
+/*
 void
 fo_property_alignment_baseline_text_property_init (FoPropertyTextPropertyIface *iface)
 {
   iface->new_attr = fo_property_alignment_baseline_new_attr;
 }
+*/
 
 /**
  * fo_property_alignment_baseline_new:
@@ -378,6 +386,7 @@ fo_property_alignment_baseline_get_initial (void)
  * Return value: A #PangoBaseline value, which could be
  * #PANGO_BASELINE_INVALID.
  **/
+/*
 static PangoBaseline
 fo_property_alignment_baseline_to_pango_baseline (FoEnumEnum baseline)
 {
@@ -411,7 +420,7 @@ fo_property_alignment_baseline_to_pango_baseline (FoEnumEnum baseline)
       return PANGO_BASELINE_INVALID;
     }
 }
-
+*/
 /**
  * fo_property_alignment_baseline_new_attr:
  * @property: #FoProperty from which to create a PangoAttribute.
@@ -420,6 +429,7 @@ fo_property_alignment_baseline_to_pango_baseline (FoEnumEnum baseline)
  * 
  * Return value: New #PangoAttribute.
  **/
+/*
 PangoAttribute*
 fo_property_alignment_baseline_new_attr (FoProperty *property)
 {
@@ -432,3 +442,4 @@ fo_property_alignment_baseline_new_attr (FoProperty *property)
 
   return pango_attr_alignment_baseline_new (pango_alignment_baseline);
 }
+*/

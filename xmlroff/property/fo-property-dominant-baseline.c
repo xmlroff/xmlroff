@@ -9,12 +9,13 @@
  */
 
 #include <string.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
+/*
 #include "property/fo-property-text-property.h"
+*/
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-font-style.h"
 #include "property/fo-property-dominant-baseline.h"
@@ -38,7 +39,6 @@ struct _FoPropertyDominantBaselineClass
 static void fo_property_dominant_baseline_init         (FoPropertyDominantBaseline      *property_dominant_baseline);
 static void fo_property_dominant_baseline_class_init   (FoPropertyDominantBaselineClass *klass);
 static void fo_property_dominant_baseline_finalize     (GObject       *object);
-static void fo_property_dominant_baseline_text_property_init (FoPropertyTextPropertyIface *iface);
 
 static FoDatatype* fo_property_dominant_baseline_resolve_enum (const gchar *token,
                                                                FoContext   *context,
@@ -46,9 +46,11 @@ static FoDatatype* fo_property_dominant_baseline_resolve_enum (const gchar *toke
 static FoDatatype* fo_property_dominant_baseline_validate (FoDatatype *datatype,
                                                            FoContext  *context,
                                                            GError    **error);
+/*
+static void fo_property_dominant_baseline_text_property_init (FoPropertyTextPropertyIface *iface);
 PangoAttribute * fo_property_dominant_baseline_new_attr_from_context (FoProperty *property,
 								      FoContext  *context);
-
+*/
 static const gchar class_name[] = "dominant-baseline";
 static gpointer parent_class;
 
@@ -80,21 +82,22 @@ fo_property_dominant_baseline_get_type (void)
         (GInstanceInitFunc) fo_property_dominant_baseline_init,
 	NULL		/* value_table */
       };
-
+      /*
       static const GInterfaceInfo fo_property_text_property_info =
       {
-	(GInterfaceInitFunc) fo_property_dominant_baseline_text_property_init, /* interface_init */
+	(GInterfaceInitFunc) fo_property_dominant_baseline_text_property_init, / * interface_init * /
         NULL,
         NULL
       };
-
+      */
       object_type = g_type_register_static (FO_TYPE_PROPERTY,
                                             class_name,
                                             &object_info, 0);
-
+      /*
       g_type_add_interface_static (object_type,
                                    FO_TYPE_PROPERTY_TEXT_PROPERTY,
                                    &fo_property_text_property_info);
+      */
     }
 
   return object_type;
@@ -161,11 +164,13 @@ fo_property_dominant_baseline_finalize (GObject *object)
  * 
  * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
+/*
 void
 fo_property_dominant_baseline_text_property_init (FoPropertyTextPropertyIface *iface)
 {
   iface->new_attr_from_context = fo_property_dominant_baseline_new_attr_from_context;
 }
+*/
 
 /**
  * fo_property_dominant_baseline_new:
@@ -379,6 +384,7 @@ fo_property_dominant_baseline_get_initial (void)
  * Return value: A #PangoBaseline value, which could be
  * #PANGO_BASELINE_INVALID.
  **/
+/*
 static PangoBaseline
 fo_property_dominant_baseline_to_pango_baseline (FoEnumEnum baseline)
 {
@@ -416,7 +422,7 @@ fo_font_style_to_pango_style (gint font_style)
 {
   gint pango_font_style = PANGO_STYLE_NORMAL;
 
-  /* Pango doesn't support 'backslant' styles */
+  / * Pango doesn't support 'backslant' styles * /
   if (font_style == FO_ENUM_FONT_STYLE_ITALIC)
     {
       pango_font_style = PANGO_STYLE_ITALIC;
@@ -428,6 +434,7 @@ fo_font_style_to_pango_style (gint font_style)
 
   return pango_font_style;
 }
+*/
 
 /**
  * fo_property_dominant_baseline_new_attr_from_context:
@@ -438,6 +445,7 @@ fo_font_style_to_pango_style (gint font_style)
  * 
  * Return value: New #PangoAttribute for @property.
  **/
+/*
 PangoAttribute*
 fo_property_dominant_baseline_new_attr_from_context (FoProperty *property,
 						     FoContext  *context)
@@ -483,3 +491,4 @@ fo_property_dominant_baseline_new_attr_from_context (FoProperty *property,
       return pango_attr_db_reset_size_new (TRUE);
     }
 }      
+*/

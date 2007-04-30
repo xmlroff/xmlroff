@@ -9,7 +9,6 @@
  */
 
 #include <pango/pango.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "libfo/fo-utils.h"
 #include "fo-object.h"
 #include "libfo/fo-layout-gp-private.h"

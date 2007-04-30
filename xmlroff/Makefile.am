@@ -1,7 +1,7 @@
 # libfo and xmlroff Makefile.am
 # $Id: Makefile.am,v 1.34 2006/12/07 05:31:51 menteith Exp $
 
-SUBDIRS = pangoxsl libfo area fo datatype property expr util . examples docs
+SUBDIRS = libfo area fo datatype property expr util . examples docs
 
 if PLATFORM_WIN32
 no_undefined = -no-undefined

@@ -8,7 +8,6 @@
  * See Copying for the status of this software.
  */
 
-#include <pangoxsl/pango-xsl-attributes.h>
 #include <fo-inline-fo.h>
 #include <fo-area-area.h>
 #include <fo-area-layout.h>
@@ -132,13 +131,13 @@ fo_block_area_get_text_attr_list2 (FoFo    *parent_fo,
 								start_index,
 								end_index),
 		       *attr_glist);
-
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_block->line_height);
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       *attr_glist = g_list_prepend (*attr_glist, pango_attr);
-
+      */
       pango_attr =
 	fo_property_text_property_new_attr (fo_block->color);
       pango_attr->start_index = start_index;
@@ -153,7 +152,7 @@ fo_block_area_get_text_attr_list2 (FoFo    *parent_fo,
 	  pango_attr->end_index = end_index;
 	  *attr_glist = g_list_prepend (*attr_glist, pango_attr);
 	}
-
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_block->keep_together_within_line);
       pango_attr->start_index = start_index;
@@ -171,6 +170,7 @@ fo_block_area_get_text_attr_list2 (FoFo    *parent_fo,
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       *attr_glist = g_list_prepend (*attr_glist, pango_attr);
+      */
     }
 
 #if defined(LIBFO_DEBUG) && 0

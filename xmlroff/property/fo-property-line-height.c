@@ -9,12 +9,13 @@
  */
 
 #include <string.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
+/*
 #include "property/fo-property-text-property.h"
+*/
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-line-height.h"
 
@@ -39,7 +40,6 @@ struct _FoPropertyLineHeightClass
 static void fo_property_line_height_init         (FoPropertyLineHeight      *property_line_height);
 static void fo_property_line_height_class_init   (FoPropertyLineHeightClass *klass);
 static void fo_property_line_height_finalize     (GObject       *object);
-static void fo_property_line_height_text_property_init (FoPropertyTextPropertyIface *iface);
 
 static FoDatatype* fo_property_line_height_resolve_enum (const gchar *token,
                                                          FoContext   *context,
@@ -47,8 +47,10 @@ static FoDatatype* fo_property_line_height_resolve_enum (const gchar *token,
 static FoDatatype* fo_property_line_height_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
+/*
+static void fo_property_line_height_text_property_init (FoPropertyTextPropertyIface *iface);
 static PangoAttribute * fo_property_line_height_new_attr (FoProperty *property);
-
+*/
 static const gchar class_name[] = "line-height";
 static gpointer parent_class;
 
@@ -80,21 +82,22 @@ fo_property_line_height_get_type (void)
         (GInstanceInitFunc) fo_property_line_height_init,
 	NULL		/* value_table */
       };
-
+      /*
       static const GInterfaceInfo fo_property_text_property_info =
       {
-	(GInterfaceInitFunc) fo_property_line_height_text_property_init, /* interface_init */
+	(GInterfaceInitFunc) fo_property_line_height_text_property_init, / * interface_init * /
         NULL,
         NULL
       };
-
+      */
       object_type = g_type_register_static (FO_TYPE_PROPERTY,
                                             class_name,
                                             &object_info, 0);
-
+      /*
       g_type_add_interface_static (object_type,
                                    FO_TYPE_PROPERTY_TEXT_PROPERTY,
                                    &fo_property_text_property_info);
+      */
     }
 
   return object_type;
@@ -161,11 +164,13 @@ fo_property_line_height_finalize (GObject *object)
  * 
  * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
+/*
 void
 fo_property_line_height_text_property_init (FoPropertyTextPropertyIface *iface)
 {
   iface->new_attr = fo_property_line_height_new_attr;
 }
+*/
 
 /**
  * fo_property_line_height_new:
@@ -434,6 +439,7 @@ fo_property_line_height_resolve (FoProperty *line_height,
  * 
  * Return value: New #PangoAttribute.
  **/
+/*
 PangoAttribute*
 fo_property_line_height_new_attr (FoProperty *property)
 {
@@ -447,3 +453,4 @@ fo_property_line_height_new_attr (FoProperty *property)
 
   return pango_attr_line_height_new (pango_line_height);
 }
+*/

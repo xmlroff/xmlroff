@@ -13,7 +13,6 @@
 #include <cairo/cairo-ps.h>
 #include <cairo/cairo-svg.h>
 #include <pango/pango.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include <libgnomeprint/gnome-print-job.h>
 #include <libgnomeprint/gnome-print-pango.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -23,6 +22,7 @@
 #include "libfo/fo-doc-cairo-private.h"
 #include "libfo/fo-doc-commands.h"
 #include "libfo/fo-layout-cairo-private.h"
+#include "libfo/libfo-pango.h"
 #include "datatype/fo-color.h"
 #include <string.h>
 
@@ -1085,7 +1085,7 @@ fo_doc_cairo_do_run_callbacks (cairo_t *cr,
       PangoAttribute *attr = extra_attrs_list->data;
       PangoAttrType attr_type = attr->klass->type;
 
-      if (attr_type == pango_attr_callback_get_type ())
+      if (attr_type == libfo_pango_attr_callback_get_type ())
 	{
 	  GValue values[1] = { { 0, } };
 
@@ -1103,7 +1103,7 @@ fo_doc_cairo_do_run_callbacks (cairo_t *cr,
 			   x / PANGO_SCALE,
 			   y / PANGO_SCALE);
 
-	  g_closure_invoke (((GClosure *) pango_attr_callback_get_callback(attr)),
+	  g_closure_invoke (((GClosure *) libfo_pango_attr_callback_get_callback(attr)),
 			     NULL,
 			     1,
 			     values,

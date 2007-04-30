@@ -13,7 +13,6 @@
 
 #include "fo-layout.h"
 #include <pango/pango.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 
 G_BEGIN_DECLS
 
@@ -39,9 +38,9 @@ struct _FoLayoutClass
 };
 
 PangoLayout * fo_layout_get_pango_layout (FoLayout *fo_layout);
-
+/*
 PangoLineStackingStrategy fo_layout_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum line_stacking_strategy);
-
+*/
 G_END_DECLS
 
 #endif /* !__FO_LAYOUT_PRIVATE_H__ */

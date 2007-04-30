@@ -9,7 +9,6 @@
  */
 
 #include <string.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"

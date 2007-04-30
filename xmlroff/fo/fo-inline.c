@@ -1686,13 +1686,13 @@ fo_inline_get_text_attr_list (FoFo *fo_inline_fo,
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
-
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_inline->line_height);
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
-
+      */
       pango_attr =
 	fo_property_text_property_new_attr (fo_inline->color);
       pango_attr->start_index = start_index;
@@ -1707,7 +1707,7 @@ fo_inline_get_text_attr_list (FoFo *fo_inline_fo,
 	  pango_attr->end_index = end_index;
 	  my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
 	}
-
+      /*
       pango_attr =
 	fo_property_text_property_new_attr (fo_inline->alignment_adjust);
       pango_attr->start_index = start_index;
@@ -1744,6 +1744,7 @@ fo_inline_get_text_attr_list (FoFo *fo_inline_fo,
       pango_attr->start_index = start_index;
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
+      */
     }
 
   *attr_glist = g_list_concat (my_attr_glist,

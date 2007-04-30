@@ -9,12 +9,12 @@
  */
 
 #include <pango/pango.h>
-#include <pangoxsl/pango-xsl-attributes.h>
 #include "libfo/fo-utils.h"
 #include "fo-object.h"
 #include "libfo/fo-layout-private.h"
 #include "libfo/fo-doc-private.h"
 #include "libfo/fo-font-desc-private.h"
+#include "libfo-pango.h"
 
 const char *fo_layout_error_messages [] = {
   N_("FoLayout error")
@@ -461,6 +461,7 @@ fo_layout_set_line_height (FoLayout *fo_layout,
  * Return value: The #PangoLineStackingStrategy corresponding to
  * @line_stacking_strategy.
  **/
+/*
 PangoLineStackingStrategy
 fo_layout_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum line_stacking_strategy)
 {
@@ -476,7 +477,7 @@ fo_layout_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum lin
       return PANGO_LINE_STACKING_STRATEGY_INVALID;
     }
 }
-
+*/
 /**
  * fo_layout_set_line_stacking_strategy:
  * @fo_layout:              #FoLayout.
@@ -720,6 +721,8 @@ fo_layout_debug_dump (FoObject *object,
   }
   while (pango_attr_iterator_next(iterator));
 
+  /* Commenting out attributes that were in PangoXSL. */
+  /*
   iterator = pango_attr_list_get_iterator(attr_list);
   g_log (G_LOG_DOMAIN,
 	     G_LOG_LEVEL_DEBUG,
@@ -753,7 +756,7 @@ fo_layout_debug_dump (FoObject *object,
     }
   }
   while (pango_attr_iterator_next(iterator));
-
+  */
   iterator = pango_attr_list_get_iterator(attr_list);
   g_log (G_LOG_DOMAIN,
 	     G_LOG_LEVEL_DEBUG,
@@ -823,17 +826,19 @@ fo_layout_debug_dump (FoObject *object,
   do {
     pango_attr_iterator_range(iterator, &start, &end);
     if ((attr = pango_attr_iterator_get (iterator,
-					 pango_attr_callback_get_type()))) {
+					 libfo_pango_attr_callback_get_type()))) {
       g_log (G_LOG_DOMAIN,
 	     G_LOG_LEVEL_DEBUG,
 	     "dump_attr_list:: start: %d; end: %d; pointer: %p",
 	     start,
 	     end,
-	     pango_attr_callback_get_callback (attr));
+	     libfo_pango_attr_callback_get_callback (attr));
     }
   }
   while (pango_attr_iterator_next(iterator));
 
+  /* Commenting out attributes that were in PangoXSL. */
+  /*
   iterator = pango_attr_list_get_iterator(attr_list);
   g_log (G_LOG_DOMAIN,
 	     G_LOG_LEVEL_DEBUG,
@@ -946,5 +951,6 @@ fo_layout_debug_dump (FoObject *object,
       }
   }
   while (pango_attr_iterator_next(iterator));
+  */
 }
 
