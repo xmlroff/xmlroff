@@ -8,7 +8,6 @@
  * See Copyright for the status of this software.
  */
 
-#include <pango/pango.h>
 #include <libfo/fo-utils.h>
 #include <libfo/fo-doc.h>
 #include <fo-flow.h>
