@@ -72,7 +72,9 @@ libfo_libfo_la_SOURCES =	\
 	fo-xml-doc.c		\
 	fo-xml-node.c		\
 	fo-xslt-transformer.c	\
-	libfo-compat.c
+	libfo-compat.c		\
+	libfo-pango.c		\
+	libfo-pango.h
 
 libfo_fodoc_la_SOURCES =	\
 	$(CAIRO_sources)	\
