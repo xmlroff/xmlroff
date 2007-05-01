@@ -27,7 +27,7 @@ dnl m4_define([xmlroff_binary_age],m4_eval(100 * xmlroff_minor + xmlroff_micro))
 
 AC_INIT([xmlroff XSL Formatter],
 	xmlroff_major.xmlroff_minor.xmlroff_micro,
-	[http://xmlroff.iseer.nl/newticket],
+	[http://xmlroff.org/newticket],
 	xmlroff)
 AM_CONFIG_HEADER(config.h)
 
@@ -72,18 +72,6 @@ else
     LIBFO_DEBUG=0
 fi
 AC_SUBST(LIBFO_DEBUG)
-
-# Search for Popt in a common location.
-# Popt is needed for xmlroff executable but not for libfo.
-#
-AC_CHECK_HEADERS(popt.h)
-SAVED_LIBS=$LIBS
-LIBS=
-AC_CHECK_LIB(popt, poptGetContext)
-POPT_LIBS=$LIBS
-LIBS=$SAVED_LIBS
-AC_SUBST(POPT_CFLAGS)
-AC_SUBST(POPT_LIBS)
 
 #
 # Find pkg-config
