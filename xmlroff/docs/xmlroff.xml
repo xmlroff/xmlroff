@@ -48,7 +48,7 @@
   languages.</para>
   
   <para>xmlroff processes the XML-FO <replaceable>file</replaceable>.
-  The xml file can optionally be first transformed via a specified XSLT
+  An arbitrary XML file can optionally be first transformed via a specified XSLT
   <replaceable>stylesheet</replaceable>.</para>
 </refsect1>
 
@@ -91,7 +91,7 @@
     <varlistentry>
       <term><option>--catalogs</option></term>
       <listitem>
-	<para>Use SGML catalog files pointed to by
+	<para>Use SGML catalog files pointed to by 
 	<envar>SGML_CATALOG_FILES</envar> instead of XML catalogs from
 	<filename>/etc/xml/catalog</filename>.</para>
       </listitem>
