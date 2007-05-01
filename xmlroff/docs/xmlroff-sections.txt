@@ -9150,6 +9150,7 @@ FO_DOC_GP_GET_CLASS
 
 <SECTION>
 <FILE>libfo-compat</FILE>
+<TITLE>LibFO compatibility stylesheet</TITLE>
 LIBFO_COMPAT_ERROR
 libfo_compat_error_quark
 LibfoCompatError
@@ -9158,7 +9159,17 @@ libfo_compat_make_compatible
 </SECTION>
 
 <SECTION>
+<FILE>libfo-pango</FILE>
+<TITLE>Additional Pango attributes needed by LibFO</TITLE>
+LibfoPangoAttrPointer
+libfo_pango_attr_callback_get_callback
+libfo_pango_attr_callback_get_type
+libfo_pango_attr_callback_new
+</SECTION>
+
+<SECTION>
 <FILE>fo-xslt-transformer</FILE>
+<TITLE>FoXsltTransformer</TITLE>
 fo_xslt_transformer_do_transform
 FO_XSLT_TRANSFORMER_ERROR
 FoXsltTransformerError
