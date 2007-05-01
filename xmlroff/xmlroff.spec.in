@@ -8,8 +8,6 @@ URL:		http://xmlroff.org/
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	libgnomeprint22-devel
-BuildRequires:	pangoxsl-devel
-BuildRequires:	popt-devel
 
 %description
 This package contains an XSL-FO processing tool.
@@ -41,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xml/libfo-*/
 
 %changelog
+* Tue May 01 2007 Tony Graham <Tony.Graham@MenteithConsulting.com> 0.5.0-0.1
+- Removed dependencies on pangoxsl-devel and popt-devel.
+
 * Sun Jul 02 2006 Tony Graham <tonygraham@users.sourceforge.net> 0.3.99-0.1
 - Added dependency on popt-devel.
 
