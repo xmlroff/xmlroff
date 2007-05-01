@@ -3,12 +3,12 @@
 <!-- XSLT stylesheet to bring an XSL FO document into compatibility
      with the capabilities of the libfo library of the xmlroff XSL
      Formatter. -->
-<!-- $Id: libfo-compat.xsl,v 1.20 2006/03/21 23:31:39 tonygraham Exp $ -->
 
 <!-- Author: Tony Graham <tonygraham@users.sourceforge.net> -->
 
 <!--
      Copyright (c) 2003-2006 Sun Microsystems. All Rights Reserved.
+     Copyright (c) 2007 Menteith Consulting
 
      Redistribution and use in source and binary forms, with or without
      modification, are permitted provided that the following conditions are
@@ -61,12 +61,12 @@
   </xsl:template>
   
   <xsl:template match="text()">
-    <xsl:if test="contains(' &#xA;',substring(.,1,1))">
+    <xsl:if test="contains(' &#x9;&#xA;',substring(.,1,1))">
       <xsl:text> </xsl:text>
     </xsl:if>
     <xsl:value-of select="normalize-space()"/>
     <xsl:if test="string-length() > 1 and
-                  contains(' &#xA;',substring(.,string-length(),1))">
+                  contains(' &#x9;&#xA;',substring(.,string-length(),1))">
       <xsl:text> </xsl:text>
     </xsl:if>
   </xsl:template>
