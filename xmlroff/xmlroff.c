@@ -11,7 +11,7 @@
 #include "config.h"
 #include <stdlib.h>
 #include <string.h>
-#include <popt.h>
+#include <locale.h>
 #include <libfo/fo-libfo.h>
 #include <libfo/libfo-compat.h>
 #if ENABLE_CAIRO
@@ -97,11 +97,18 @@ exit_if_error (GError *error)
     }
 }
 
+static void
+usage (void)
+{
+  g_print (_("Usage: %s xml-file [stylesheet]\n"), PACKAGE);
+  exit (1);
+}
+
 int
 main (int          argc,
       const char **argv)
 {
-  poptContext optCon;   /* context for parsing command-line options */
+  GOptionContext *ctx;   /* context for parsing command-line options */
   FoLibfoContext *libfo_context;
   FoXmlDoc *xml_doc = NULL;
   FoXmlDoc *stylesheet_doc = NULL;
@@ -124,108 +131,135 @@ main (int          argc,
   gint continue_after_error = 0;
   gint novalid = 0;
   gint version = 0;
-  gboolean popt_error = FALSE;
+  gchar** files = NULL;
+  gboolean goption_success = FALSE;
 
-  const struct poptOption optionsTable[] = {
+  const GOptionEntry options[] = {
     { "out-file",
       'o',
-      POPT_ARG_STRING,
-      &out_file,
       0,
+      G_OPTION_ARG_STRING,
+      &out_file,
       _("Output file"),
       _("filename")
     },
     { "debug",
       'd',
-      POPT_ARG_INT,
-      &debug_mode,
       0,
+      G_OPTION_ARG_INT,
+      &debug_mode,
       _("Debug mode"),
       _("integer")
     },
-    /*
+    /* To be used when control of font embedding works:
     { "embed",
-      '\0',
-      POPT_ARG_STRING,
-      &embed_string,
       0,
+      0,
+      G_OPTION_ARG_STRING,
+      &embed_string,
       _("Font embedding mode"),
       _("{none|nonbase|all}")
     },
     */
     { "novalid",
-      '\0',
-      POPT_ARG_NONE,
-      &novalid,
       0,
+      0,
+      G_OPTION_ARG_NONE,
+      &novalid,
       _("Skip the DTD loading phase"),
       NULL
     },
     { "compat",
-      '\0',
-      POPT_ARG_NONE,
-      &compat,
       0,
+      0,
+      G_OPTION_ARG_NONE,
+      &compat,
       _("Make the input compatible with xmlroff"),
       NULL
     },
     { "compat-stylesheet",
-      '\0',
-      POPT_ARG_NONE,
-      &compat_stylesheet,
       0,
+      0,
+      G_OPTION_ARG_NONE,
+      &compat_stylesheet,
       _("Output the compatibility stylesheet then exit"),
       NULL
     },
     { "continue",
-      '\0',
-      POPT_ARG_NONE,
-      &continue_after_error,
       0,
+      0,
+      G_OPTION_ARG_NONE,
+      &continue_after_error,
       _("Continue after any formatting errors"),
       NULL
     },
     { "version",
       'v',
-      POPT_ARG_NONE,
-      &version,
       0,
+      G_OPTION_ARG_NONE,
+      &version,
       _("Print version number"),
       NULL
     },
     { "backend",
-      '\0',
-      POPT_ARG_STRING,
-      &backend_string,
       0,
+      0,
+      G_OPTION_ARG_STRING,
+      &backend_string,
       _("Backend to use"),
       _("{cairo|gp}")
     },
     { "format",
-      '\0',
-      POPT_ARG_STRING,
-      &format_string,
       0,
+      0,
+      G_OPTION_ARG_STRING,
+      &format_string,
       _("Format of output file"),
       _("{auto|pdf|postscript|svg}")
     },
     { "warn",
       'w',
-      POPT_ARG_INT,
-      &warning_mode,
       0,
+      G_OPTION_ARG_INT,
+      &warning_mode,
       _("Warning mode"),
       _("integer")
     },
-    POPT_AUTOHELP
-    { NULL, '\0', 0, NULL, 0, NULL, NULL}
+    { G_OPTION_REMAINING,
+      0,
+      0,
+      G_OPTION_ARG_FILENAME_ARRAY,
+      &files,
+      NULL,
+      _("file [stylesheet]")
+    },
+    {NULL}
   };
 
-  optCon = poptGetContext (NULL, argc, argv, optionsTable, 0);
-  /* FIXME: Support xml-stylesheet PI in xml-file */
-  poptSetOtherOptionHelp (optCon, _("xml-file [stylesheet]"));
+  /* Recommended for use with GOption so filenames in correct
+     encoding. */
+  setlocale (LC_ALL, "");
 
-  poptGetNextOpt (optCon);
+  /* FIXME: Support xml-stylesheet PI in xml-file */
+  ctx = g_option_context_new (NULL);
+  /* FIXME: Need configure to check for g_option_context_set_summary().
+  g_option_context_set_summary(ctx,
+    "xmlroff is a free, fast and high-quality XSL formatter that is\n"
+    "useful for DocBook formatting. It produces PDF or PostScript output.\n"
+    "It integrates easily with other programs and with scripting\n"
+    "languages.\n\n"
+    "xmlroff processes the XML-FO 'file', or an arbitrary\n"
+    "XML file can optionally be first transformed via a specified XSLT\n"
+    "'stylesheet'.");
+  */
+  g_option_context_add_main_entries (ctx, options, PACKAGE);
+  goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
+  g_option_context_free(ctx);
+ 
+  if (goption_success != TRUE)
+    {
+      usage();
+    }
 
   if (compat_stylesheet != 0)
     {
@@ -233,18 +267,40 @@ main (int          argc,
       exit (0);
     }
 
-  fo_libfo_init ();
-  libfo_context = fo_libfo_context_new ();
-
-  fo_libfo_context_set_warning_mode (libfo_context,
-				     warning_mode);
-
   if (version != 0)
     {
       g_print (_("%s\nSubmit bug reports to %s\n"),
 	       PACKAGE_STRING,
 	       PACKAGE_BUGREPORT);
+      if (files == NULL)
+	{
+	  /* Nothing to do if just asking for version. */
+	  exit (0);
+	}
     }
+
+  if ((files == NULL) ||
+      (files[0] == NULL))
+    {
+      usage();
+    }
+  else
+    {
+      xml_file = files[0];
+    }
+
+  if (files[1] != NULL)
+    {
+      xslt_file = files[1];
+    }
+
+  if (files[2] != NULL)
+    {
+      usage();
+    }
+
+  fo_libfo_init ();
+  libfo_context = fo_libfo_context_new ();
 
   if (embed_string != NULL)
     {
@@ -262,10 +318,10 @@ main (int          argc,
 	}
       else
 	{
-	  popt_error = TRUE;
+	  goption_success = FALSE;
 	}
 
-      if (popt_error != TRUE)
+      if (goption_success == TRUE)
 	{
 	  fo_libfo_context_set_font_embed (libfo_context,
 					   embed_mode);
@@ -305,10 +361,10 @@ main (int          argc,
     }
   else
     {
-      popt_error = TRUE;
+      goption_success = FALSE;
     }
 
-  if (popt_error != TRUE)
+  if (goption_success == TRUE)
     {
       fo_libfo_context_set_format (libfo_context,
 				   format_mode);
@@ -319,8 +375,12 @@ main (int          argc,
 #if ENABLE_GP
       fo_doc = init_fo_doc_gp (out_file, libfo_context);
 #else
+#if ENABLE_CAIRO
+      fo_doc = init_fo_doc_cairo (out_file, libfo_context);
+#else
       g_critical ("No output type is supported by this build of libfo.");
-      popt_error = TRUE;
+      goption_success = FALSE;
+#endif /* ENABLE_CAIRO */
 #endif /* ENABLE_GP */
     }
   else if (strcmp (backend_string, "cairo") == 0)
@@ -334,7 +394,7 @@ main (int          argc,
   else
     {
       g_critical ("Unrecognised output type: '%s'", backend_string);
-      popt_error = TRUE;
+      goption_success = FALSE;
     }
 
   if (debug_mode != FO_DEBUG_NONE)
@@ -343,39 +403,14 @@ main (int          argc,
 				       debug_mode);
     }
 
-      fo_libfo_context_set_warning_mode (libfo_context,
-					 warning_mode);
+  fo_libfo_context_set_warning_mode (libfo_context,
+				     warning_mode);
 
-  if (poptPeekArg (optCon))
+  if (goption_success == FALSE)
     {
-      xml_file = poptGetArg (optCon);
-    }
-  else
-    {
-      if (version != 0)
-	{
-	  exit (0);
-	}
-      else
-	{
-	  popt_error = TRUE;
-	}
-    }
-
-  if (poptPeekArg (optCon))
-    {
-      xslt_file = poptGetArg (optCon);
-    }
-
-  if (poptPeekArg (optCon))
-    {
-      popt_error = TRUE;
-    }
-
-  if (popt_error == TRUE)
-    {
-      poptPrintUsage(optCon, stderr, 0);
-      exit (1);
+      g_warning ("%s\n", error->message);
+      g_error_free (error);
+      exit(1);
     }
 
   if (xslt_file != NULL)
@@ -446,8 +481,6 @@ main (int          argc,
   g_object_unref (fo_xsl_formatter);
   g_object_unref (fo_doc);
   fo_libfo_shutdown ();
-
-  poptFreeContext (optCon);
 
   return(0);
 }
