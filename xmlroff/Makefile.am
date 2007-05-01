@@ -10,7 +10,7 @@ endif
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\"	\
 	$(LIBXSLT_CFLAGS)	\
-	$(POPT_CFLAGS)		\
+	$(GLIB_CFLAGS)		\
 	-I$(srcdir)/area	\
 	-I$(srcdir)/expr	\
 	-I$(srcdir)/fo		\
