@@ -12,7 +12,7 @@ See http://xmlroff.org/.
 
 To test xmlroff:
 
-   ./xmlroff xmlroff.fo
+   ./xmlroff docs/xmlroff.fo
 
 PDF output is written to layout.pdf.
 
@@ -26,7 +26,7 @@ Compatibility
 Details of the compatibility with the XSL 1.0 Specification of the
 current xmlroff version is shown in the xmlroff manual (see
 './docs/html/index.html') and on the xmlroff website at
-http://xmlroff.org/conformance.html.
+http://xmlroff.org/.
 
 Use the libfo-compat.xsl stylesheet (both built into xmlroff and
 installed when you installed xmlroff) to remove some of the formatting
@@ -49,7 +49,7 @@ To get the location of the installed libfo-compat.xsl stylesheet:
 Dependencies
 ============
 
-libfo depends on GNOME Print, GDK, Pango, PangoXSL, libxml2, libxslt,
+libfo depends on GNOME Print, GDK, Pango, Cairo, libxml2, libxslt,
 GLib, and GObject.
 
 xmlroff distributions include a bundled copy of PangoXSL so you don't
@@ -59,8 +59,6 @@ If you are compiling the Cairo backend, libfo also depends on Cairo
 and on Pango 1.10 or later.
 
 Building libfo additionally requires Perl.
-
-The xmlroff executable additionally depends on popt.
 
 See the xmlroff website for further details.
 
@@ -82,9 +80,9 @@ Mailing List
 ============
 
 xmlroff and libfo are discussed on the
-xmlroff-list@lists.sourceforge.net mailing list.  See
-http://lists.sourceforge.net/lists/listinfo/xmlroff-list
+xmlroff-list@xmlroff.org mailing list.  See
+http://lists.xmlroff.org/mailman/listinfo/xmlroff-list
 
 Tony Graham
-tonygraham@users.sourceforge.net
-30 May 2006
+Tony Graham of MenteithConsulting com
+1 May 2007
