@@ -100,7 +100,7 @@ exit_if_error (GError *error)
 static void
 usage (void)
 {
-  g_print (_("Usage: %s xml-file [stylesheet]\n"), PACKAGE);
+  g_print (_("Usage: %s file [stylesheet]\n"), PACKAGE);
   exit (1);
 }
 
@@ -127,7 +127,8 @@ main (int          argc,
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
   gint compat_stylesheet = 0;
-  gint compat = 0;
+  gint compat = 1;
+  gint nocompat = 0;
   gint continue_after_error = 0;
   gint novalid = 0;
   gint version = 0;
@@ -143,14 +144,6 @@ main (int          argc,
       _("Output file"),
       _("filename")
     },
-    { "debug",
-      'd',
-      0,
-      G_OPTION_ARG_INT,
-      &debug_mode,
-      _("Debug mode"),
-      _("integer")
-    },
     /* To be used when control of font embedding works:
     { "embed",
       0,
@@ -161,6 +154,30 @@ main (int          argc,
       _("{none|nonbase|all}")
     },
     */
+    { "format",
+      0,
+      0,
+      G_OPTION_ARG_STRING,
+      &format_string,
+      _("Format of output file"),
+      _("{auto|pdf|postscript|svg}")
+    },
+    { "backend",
+      0,
+      0,
+      G_OPTION_ARG_STRING,
+      &backend_string,
+      _("Backend to use"),
+      _("{cairo|gp}")
+    },
+    { "continue",
+      0,
+      0,
+      G_OPTION_ARG_NONE,
+      &continue_after_error,
+      _("Continue after any formatting errors"),
+      NULL
+    },
     { "novalid",
       0,
       0,
@@ -169,12 +186,20 @@ main (int          argc,
       _("Skip the DTD loading phase"),
       NULL
     },
-    { "compat",
+    { "(no)compat",
       0,
       0,
       G_OPTION_ARG_NONE,
       &compat,
-      _("Make the input compatible with xmlroff"),
+      _("Do or do not preprocess with compatibility stylesheet (default is 'compat')"),
+      NULL
+    },
+    { "nocompat",
+      0,
+      G_OPTION_FLAG_HIDDEN,
+      G_OPTION_ARG_NONE,
+      &nocompat,
+      _("Do not use compatibility stylesheet"),
       NULL
     },
     { "compat-stylesheet",
@@ -185,14 +210,6 @@ main (int          argc,
       _("Output the compatibility stylesheet then exit"),
       NULL
     },
-    { "continue",
-      0,
-      0,
-      G_OPTION_ARG_NONE,
-      &continue_after_error,
-      _("Continue after any formatting errors"),
-      NULL
-    },
     { "version",
       'v',
       0,
@@ -201,28 +218,20 @@ main (int          argc,
       _("Print version number"),
       NULL
     },
-    { "backend",
-      0,
-      0,
-      G_OPTION_ARG_STRING,
-      &backend_string,
-      _("Backend to use"),
-      _("{cairo|gp}")
-    },
-    { "format",
-      0,
-      0,
-      G_OPTION_ARG_STRING,
-      &format_string,
-      _("Format of output file"),
-      _("{auto|pdf|postscript|svg}")
-    },
     { "warn",
       'w',
       0,
       G_OPTION_ARG_INT,
       &warning_mode,
       _("Warning mode"),
+      _("integer")
+    },
+    { "debug",
+      'd',
+      0,
+      G_OPTION_ARG_INT,
+      &debug_mode,
+      _("Debug mode"),
       _("integer")
     },
     { G_OPTION_REMAINING,
@@ -292,11 +301,11 @@ main (int          argc,
   if (files[1] != NULL)
     {
       xslt_file = files[1];
-    }
 
-  if (files[2] != NULL)
-    {
-      usage();
+      if (files[2] != NULL)
+	{
+	  usage();
+	}
     }
 
   fo_libfo_init ();
