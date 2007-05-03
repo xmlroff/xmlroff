@@ -2,8 +2,7 @@
  * xmlroff.c: Demonstration command line XSL formatter program
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- *
- * $Id: xmlroff.c,v 1.22 2006/04/16 20:28:57 tonygraham Exp $
+ * Copyright (C) 2007 Menteith Consulting
  *
  * See COPYING for the status of this software.
  */
@@ -22,6 +21,45 @@
 #endif
 #include "libfo/libfo-compat.h"
 
+typedef enum
+{
+  XMLROFF_ERROR_FAILED,
+  XMLROFF_ERROR_NO_FILE,	    /* No input file specified */
+  XMLROFF_ERROR_ADDITIONAL_PARAM,   /* Unexpected additional parameter */
+  XMLROFF_ERROR_UNSUPPORTED_FORMAT, /* Unsupported output format */
+  XMLROFF_ERROR_UNSUPPORTED_BACKEND,/* Unsupported backend */
+  XMLROFF_ERROR_NO_BACKEND,         /* No backend type by this libfo */
+  XMLROFF_ERROR_LAST
+} XmlroffError;
+
+const char *xmlroff_error_messages [] = {
+  N_("xmlroff error"),
+  N_("No input file specified."),
+  N_("Unexpected additional parameter: '%s'"),
+  N_("Unsupported output format: '%s'"),
+  N_("Unsupported backend: '%s'"),
+  N_("No backend type is supported by this build of libfo.")
+};
+
+#define XMLROFF_ERROR xmlroff_error_quark ()
+
+/**
+ * xmlroff_error_quark:
+ * 
+ * Get the error quark for xmlroff.
+ *
+ * If the quark does not yet exist, create it.
+ * 
+ * Return value: Quark associated with xmlroff errors.
+ **/
+static GQuark
+xmlroff_error_quark (void)
+{
+  static GQuark quark = 0;
+  if (quark == 0)
+    quark = g_quark_from_static_string ("xmlroff error");
+  return quark;
+}
 static FoDoc *
 init_fo_doc_cairo (const gchar    *out_file,
 		   FoLibfoContext *libfo_context)
@@ -97,16 +135,9 @@ exit_if_error (GError *error)
     }
 }
 
-static void
-usage (void)
-{
-  g_print (_("Usage: %s file [stylesheet]\n"), PACKAGE);
-  exit (1);
-}
-
 int
-main (int          argc,
-      const char **argv)
+main (gint    argc,
+      gchar **argv)
 {
   GOptionContext *ctx;   /* context for parsing command-line options */
   FoLibfoContext *libfo_context;
@@ -121,17 +152,18 @@ main (int          argc,
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
   const gchar *format_string = NULL;
+  /*
   const gchar *embed_string = NULL;
   FoEnumFontEmbed embed_mode = FO_ENUM_FONT_EMBED_INVALID;
+  */
   FoEnumFormat format_mode = FO_ENUM_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
-  gint compat_stylesheet = 0;
-  gint compat = 1;
-  gint nocompat = 0;
-  gint continue_after_error = 0;
-  gint novalid = 0;
-  gint version = 0;
+  gboolean compat_stylesheet = FALSE;
+  gboolean compat = TRUE;
+  gboolean continue_after_error = FALSE;
+  gboolean validation = TRUE;
+  gboolean version = FALSE;
   gchar** files = NULL;
   gboolean goption_success = FALSE;
 
@@ -180,25 +212,27 @@ main (int          argc,
     },
     { "novalid",
       0,
-      0,
+      G_OPTION_FLAG_REVERSE,
       G_OPTION_ARG_NONE,
-      &novalid,
+      &validation,
       _("Skip the DTD loading phase"),
       NULL
     },
-    { "(no)compat",
+    { "compat",
       0,
       0,
       G_OPTION_ARG_NONE,
       &compat,
-      _("Do or do not preprocess with compatibility stylesheet (default is 'compat')"),
+      /* Describe both --compat and --nocompat since --nocompat is hidden. */
+      _("Do or do not ('--nocompat') preprocess with compatibility stylesheet "
+	"(default is '--compat')"),
       NULL
     },
     { "nocompat",
       0,
-      G_OPTION_FLAG_HIDDEN,
+      G_OPTION_FLAG_HIDDEN | G_OPTION_FLAG_REVERSE,
       G_OPTION_ARG_NONE,
-      &nocompat,
+      &compat,
       _("Do not use compatibility stylesheet"),
       NULL
     },
@@ -242,7 +276,7 @@ main (int          argc,
       NULL,
       _("file [stylesheet]")
     },
-    {NULL}
+    {NULL, 0, 0, 0, NULL, NULL, NULL}
   };
 
   /* Recommended for use with GOption so filenames in correct
@@ -263,14 +297,13 @@ main (int          argc,
   */
   g_option_context_add_main_entries (ctx, options, PACKAGE);
   goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
-  g_option_context_free(ctx);
  
-  if (goption_success != TRUE)
+  if (goption_success == FALSE)
     {
-      usage();
+      goto option_error;
     }
 
-  if (compat_stylesheet != 0)
+  if (compat_stylesheet == TRUE)
     {
       printf (libfo_compat_get_stylesheet ());
       exit (0);
@@ -291,7 +324,12 @@ main (int          argc,
   if ((files == NULL) ||
       (files[0] == NULL))
     {
-      usage();
+      g_set_error(&error,
+		  XMLROFF_ERROR,
+		  XMLROFF_ERROR_NO_FILE,
+		  xmlroff_error_messages [XMLROFF_ERROR_NO_FILE]);
+		  
+      goto option_error;
     }
   else
     {
@@ -304,13 +342,20 @@ main (int          argc,
 
       if (files[2] != NULL)
 	{
-	  usage();
+	  g_set_error(&error,
+		      XMLROFF_ERROR,
+		      XMLROFF_ERROR_ADDITIONAL_PARAM,
+		      xmlroff_error_messages [XMLROFF_ERROR_ADDITIONAL_PARAM],
+		      files[2]);
+		  
+	  goto option_error;
 	}
     }
 
   fo_libfo_init ();
   libfo_context = fo_libfo_context_new ();
 
+  /*
   if (embed_string != NULL)
     {
       if (strcmp (embed_string, "none") == 0)
@@ -336,19 +381,13 @@ main (int          argc,
 					   embed_mode);
 	}
     }
+  */
 
+  fo_libfo_context_set_validation (libfo_context,
+				   validation);
 
-  if (novalid == 0)
-    {
-      fo_libfo_context_set_validation (libfo_context,
-				       FALSE);
-    }
-
-  if (continue_after_error != 0)
-    {
-      fo_libfo_context_set_continue_after_error (libfo_context,
-						 TRUE);
-    }
+  fo_libfo_context_set_continue_after_error (libfo_context,
+					     continue_after_error);
 
   /* Need to do 'format' before 'backend'. */
   if ((format_string == NULL) ||
@@ -370,7 +409,13 @@ main (int          argc,
     }
   else
     {
-      goption_success = FALSE;
+      g_set_error(&error,
+		  XMLROFF_ERROR,
+		  XMLROFF_ERROR_UNSUPPORTED_FORMAT,
+		  xmlroff_error_messages [XMLROFF_ERROR_UNSUPPORTED_FORMAT],
+		  format_string);
+		  
+      goto option_error;
     }
 
   if (goption_success == TRUE)
@@ -387,8 +432,12 @@ main (int          argc,
 #if ENABLE_CAIRO
       fo_doc = init_fo_doc_cairo (out_file, libfo_context);
 #else
-      g_critical ("No output type is supported by this build of libfo.");
-      goption_success = FALSE;
+      g_set_error(&error,
+		  XMLROFF_ERROR,
+		  XMLROFF_ERROR_NO_BACKEND,
+		  xmlroff_error_messages [XMLROFF_ERROR_NO_BACKEND]);
+		  
+      goto option_error;
 #endif /* ENABLE_CAIRO */
 #endif /* ENABLE_GP */
     }
@@ -402,9 +451,17 @@ main (int          argc,
     }
   else
     {
-      g_critical ("Unrecognised output type: '%s'", backend_string);
-      goption_success = FALSE;
+      g_set_error(&error,
+		  XMLROFF_ERROR,
+		  XMLROFF_ERROR_UNSUPPORTED_BACKEND,
+		  xmlroff_error_messages [XMLROFF_ERROR_UNSUPPORTED_BACKEND],
+		  backend_string);
+		  
+      goto option_error;
     }
+
+  /* Finished with parsing command-line arguments. */
+  g_option_context_free(ctx);
 
   if (debug_mode != FO_DEBUG_NONE)
     {
@@ -415,15 +472,10 @@ main (int          argc,
   fo_libfo_context_set_warning_mode (libfo_context,
 				     warning_mode);
 
-  if (goption_success == FALSE)
-    {
-      g_warning ("%s\n", error->message);
-      g_error_free (error);
-      exit(1);
-    }
-
   if (xslt_file != NULL)
     {
+      /* When there is an XSLT file specified, need to
+	 use an FoXsltTransformer before formatting result. */
       xml_doc = fo_xml_doc_new_from_filename (xml_file,
 					      libfo_context,
 					      &error);
@@ -447,6 +499,8 @@ main (int          argc,
     }
   else
     {
+      /* When there is no XSLT file specified, the XML file
+	 is expected to be in the FO vocabulary, so just use it. */
       result_tree = fo_xml_doc_new_from_filename (xml_file,
 						  libfo_context,
 						  &error);
@@ -454,10 +508,12 @@ main (int          argc,
       exit_if_error (error);
     }
 
-  if (compat != 0)
+  /* Maybe make the FO XML document safe for libfo to process. */
+  if (compat == TRUE)
     {
       FoXmlDoc *old_result_tree = result_tree;
 
+      /* Remove or rewrite what libfo can't yet handle. */
       result_tree = libfo_compat_make_compatible (old_result_tree,
 						  libfo_context,
 						  &error);
@@ -492,4 +548,24 @@ main (int          argc,
   fo_libfo_shutdown ();
 
   return(0);
+
+ option_error:
+  /* To get to here, there must be an error in command-line arguments. */
+
+  if (error != NULL)
+    {
+      g_print ("%s\n\n",
+	       error->message);
+      g_error_free (error);
+    }
+
+  /* Desperate effort to output the usage message. */
+  gint fake_argc = 2;
+  gchar *fake_argv[] = {"xmlroff", "--help"};
+  gchar **fake_argv_ptr = &fake_argv;
+  g_option_context_parse (ctx, &fake_argc, &fake_argv_ptr, NULL);
+  g_option_context_free(ctx);
+
+  exit (1);
+
 }
