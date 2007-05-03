@@ -1,9 +1,8 @@
 /* Fo
- * fo-xsl-formatter.c: Object type for libxslt XSLT processor
+ * libfo-compat.c: LibFo compatibility processing
  *
  * Copyright (C) 2006 Sun Microsystems
- *
- * $Id: libfo-compat.c.tmpl,v 1.3 2006/09/06 10:13:30 tonygraham Exp $
+ * Copyright (C) 2007 Menteith Consulting
  *
  * See COPYING for the status of this software.
  */
@@ -70,8 +69,6 @@ libfo_compat_make_compatible (FoXmlDoc       *result_tree,
 							 NULL,
 							 libfo_context,
 							 &tmp_error);
-
-  g_message (base);
 
   if (tmp_error != NULL)
     {
