@@ -1,6 +1,6 @@
 @VERSION@ Beginner's Installation Notes             MINI-HOWTO
 ----------------------------------------------------------
-Fabio Arciniegas
+Fabio Arciniegas, Tony Graham
 
 Contents
 --------
@@ -55,52 +55,29 @@ The process is ideally very simple:
 
 1. download xmlroff
 2. Install the dependencies
-3. Run ./configure twice
-4. run make
-5. run make install
+3. run make
+4. run make install (as root)
 
 Instead of providing a generalized version of those steps, assuming
- you know how to build C programs in linux (that is the goal general
- install notes are for), I will assume that you have a typical modern
- workstation configuration and don't know much about building
- software from scratch on linux.
+you know how to build C programs in linux (that is the goal general
+install notes are for), I will assume that you have a typical modern
+workstation configuration and don't know much about building
+software from scratch on linux.
 
-Download pangoxsl and xmlroff
------------------------------
-Get the	xmlroff source from:
-http://xmlroff.org/
-
-You will find a standard page with a download link that goes to
-SourceForge. In SourceForge look for the following links:
-
-For pangoxsl: pangoxsl-1.6.0.1.tar.gz
-http://prdownloads.sourceforge.net/pangopdf/pangoxsl-1.6.0.1.tar.gz?download
-
-For xmlroff: xmlroff-@VERSION@.tar.gz
-http://prdownloads.sourceforge.net/xmlroff/xmlroff-@VERSION@.tar.gz?download
-
-For xmlroff you will find other packages in the same page
-(e.g. examples of how to use xmlroff as a library), don't concern
-yourself with them just now, the goal is to get xmlroff running as a
-command line successfully.
-
-Beginning with xmlroff-0.3.98, xmlroff-@VERSION@.tar.gz includes a
-bundled copy of PangoXSL.  You can also get the pangoxsl source from:
-http://pangopdf.sourceforge.net/
-
+Download xmlroff
+----------------
+Get the	xmlroff source from http://xmlroff.org/
 
 
 Installing dependencies
 -----------------------
 xmlroff depends on a number of packages: libgnomeprint, pango,
-pangoxsl, libxml2, libxslt, GTK2, GLib and GObject.
+cairo, libxml2, libxslt, GTK2, GLib and GObject.
 
-The xmlroff site contains particular versions needed for each package
-and links to their particular sites. If you go to each site you will
-find source versions of each package. I recommend you DON'T use this,
-instead, use your package manager utility (most systems nowadays have
-KPackage installed as part of the standard KDE environment) to install
-the most recent packaged versions of each software. 
+I recommend you use your package manager utility (most systems
+nowadays have KPackage installed as part of the standard KDE
+environment) to install the most recent packaged versions of each
+software.
 
 When you are installing the packages, you will notice that next to
 some of them, there are similar packages with the '-dev' (or '-devel')
@@ -114,26 +91,27 @@ Building xmlroff
 
 Now, untar xmlroff :
 
-tar zxvf xmlroff-@VERSION@.tar.gz
+   tar zxvf xmlroff-@VERSION@.tar.gz
 
 Now you should be ready. Inside the xmlroff directory do these
-four: 
+three: 
  
-./configure
+   ./configure
 
-./configure
+   make
 
-make
+   make install
 
-make install
+When building from a Subversion checkout, use './autogen.sh' instead
+of './configure'.
 
-(The two './configure' are required because of how xmlroff bundles a
-copy of PangoXSL.)
 
 TESTING
 -------
 
-xmlroff xmlroff.fo 
+Format the man page for xmlroff:
+
+   xmlroff docs/xmlroff.fo 
 
 The result is written to layout.pdf.
 
@@ -145,25 +123,40 @@ xmlroff includes a 'libfo-compat.xsl' stylesheet that you can run on
 your FO files to help ensure that they use only the subset of the XSL
 specification that xmlroff supports.
 
+The stylesheet is built in to xmlroff, and the compatibility
+processing is enabled by default.
+
 'libfo-compat.xsl' attempts to rewrite or remove elements and
 attributes that cause problems for xmlroff.  The formatted result may
 not be what you expect, but you are more likely to get formatted
-output if you do run 'libfo-compat.xsl' on problematic files.
+output if you do run the compatibility processing on problematic
+files.
 
-If you supply a 'verbose' parameter with a non-false value, the
-stylesheet prints status messages explaining what is being modified.
+To turn off the compatibility processing, use the '--nocompat' option.
 
-'libfo-compat.xsl' typically installs in /usr/share/xml/libfo-@VERSION@ or
-/usr/local/share/xml/libfo-@VERSION@.  There are three ways to refer to
-the stylesheet on the xsltproc command line:
+xmlroff prints a copy of the built-in stylesheet when you use the
+'--compat-stylesheet' option, plus when you install xmlroff,
+'libfo-compat.xsl' typically installs in
+/usr/share/xml/libfo-@VERSION@ or /usr/local/share/xml/libfo-@VERSION@.
+
+There are many ways to use the stylesheet:
 
  - Directly using xmlroff
+
+      xmlroff in.fo
+
+   or
 
       xmlroff --compat in.fo
 
  - Directly using xsltproc
 
       xsltproc /usr/share/xml/libfo-@VERSION@/libfo-compat.xsl in.fo > out.fo
+
+ - Directly using xmlroff and xsltproc
+
+      xmlroff --compat-stylesheet > libfo-compat.xsl
+      xsltproc libfo-compat.xsl in.fo > out.fo
 
  - Using XML catalogs
 
@@ -181,7 +174,8 @@ the stylesheet on the xsltproc command line:
    The pkg-config file for libfo defines a variable for the location
    of 'libfo-compat.xsl':
 
-      xsltproc `pkg-config --variable=compat_stylesheet libfo-0.4` in.fo > out.fo
+      xsltproc `pkg-config --variable=compat_stylesheet libfo-0.5` in.fo > out.fo
 
-----------------------------------------------------------------------
-$Id: INSTALL.in,v 1.3 2006/05/30 14:38:11 tonygraham Exp $
+When you supply a 'verbose' parameter with a non-false value when
+using 'libfo-compat.xsl' with xsltproc, the stylesheet prints status
+messages explaining what is being modified.

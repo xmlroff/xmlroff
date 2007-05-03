@@ -10,7 +10,7 @@ Recommendation.
 
 See http://xmlroff.org/.
 
-To test xmlroff:
+To test xmlroff, format the xmlroff man page:
 
    ./xmlroff docs/xmlroff.fo
 
@@ -29,13 +29,12 @@ current xmlroff version is shown in the xmlroff manual (see
 http://xmlroff.org/.
 
 Use the libfo-compat.xsl stylesheet (both built into xmlroff and
-installed when you installed xmlroff) to remove some of the formatting
-objects and properties that cause problems when using xmlroff.
+installed when you installed xmlroff) to remove or rewrite some of the
+formatting objects and properties that cause problems when using
+xmlroff.
 
-To invoke the built-in libfo-compat.xsl stylesheet when running
-xmlroff:
-
-   xmlroff --compat xmlroff.fo
+The built-in libfo-compat.xsl stylesheet is enabled by default when
+running xmlroff.
 
 To write a copy of the built-in libfo-compat.xsl stylesheet:
 
@@ -45,18 +44,16 @@ To get the location of the installed libfo-compat.xsl stylesheet:
 
    pkg-config --variable=compat_stylesheet libfo-0.5
 
+To disable compatibility processing:
+
+   xmlroff --nocompat in.fo
+
 
 Dependencies
 ============
 
 libfo depends on GNOME Print, GDK, Pango, Cairo, libxml2, libxslt,
 GLib, and GObject.
-
-xmlroff distributions include a bundled copy of PangoXSL so you don't
-have to download it separately.
-
-If you are compiling the Cairo backend, libfo also depends on Cairo
-and on Pango 1.10 or later.
 
 Building libfo additionally requires Perl.
 
@@ -79,10 +76,16 @@ license.  See the file COPYING for details.
 Mailing List
 ============
 
-xmlroff and libfo are discussed on the
+See http://xmlroff.org/wiki/MailingLists.
+
+xmlroff and libfo are discussed and releases are announced on the
 xmlroff-list@xmlroff.org mailing list.  See
 http://lists.xmlroff.org/mailman/listinfo/xmlroff-list
 
+Releases are also announced on the
+xmlroff-announce@xmlroff.org mailing list.  See
+http://lists.xmlroff.org/mailman/listinfo/xmlroff-announce
+
+
 Tony Graham
-Tony Graham of MenteithConsulting com
 1 May 2007

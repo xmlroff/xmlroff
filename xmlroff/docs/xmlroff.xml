@@ -16,26 +16,43 @@
 <refsynopsisdiv>
   <cmdsynopsis>
     <command>xmlroff</command>
-    <arg><option>-o <replaceable>output-file</replaceable></option></arg>
-    <arg><option>-d <replaceable>debug-mode</replaceable></option></arg>
-    <arg><option>-v</option></arg>
-    <arg><option>-w <replaceable>warning-mode</replaceable></option></arg>
-    <arg><option>-?</option></arg>
-    <arg><option>--catalogs</option></arg>
-    <arg><option>--compat</option></arg>
-    <arg><option>--compat-stylesheet</option></arg>
-    <arg>
-      <option>--format</option>
-      <group choice="req"><arg>auto</arg><arg>pdf</arg><arg>postscript</arg></group>
+    <arg>-o <replaceable>output-file</replaceable></arg>
+    <arg>--format
+      <group choice="req">
+        <arg choice="plain">auto</arg>
+        <arg choice="plain">pdf</arg>
+        <arg choice="plain">postscript</arg>
+      </group>
     </arg>
-    <arg>
-      <option>--backend</option>
-      <group choice="req"><arg>gp</arg><arg>cairo</arg></group>
+    <arg>--backend <group choice="req">
+      <arg choice="plain">gp</arg>
+      <arg choice="plain">cairo</arg>
+    </group>
     </arg>
-    <arg><option>--continue</option></arg>
-    <arg><option>--novalid</option></arg>
+    <arg>--continue</arg>
+    <group choice="opt">
+      <arg choice="plain">-?</arg>
+      <arg choice="plain">--help</arg>
+    </group>
+    <group choice="opt">
+      <arg choice="plain">--compat</arg>
+      <arg choice="plain">--nocompat</arg>
+    </group>
+    <arg>--compat-stylesheet</arg>
+    <group choice="opt">
+      <arg choice="plain">--valid</arg>
+      <arg choice="plain">--novalid</arg>
+    </group>
+    <group choice="opt">
+      <arg choice="plain">-v</arg>
+      <arg choice="plain">--version</arg>
+    </group>
+    <arg>-w <replaceable>warning-mode</replaceable></arg>
+    <arg>-d <replaceable>debug-mode</replaceable></arg>
     <arg choice="plain"><replaceable>file</replaceable></arg>
-    <arg choice="opt"><replaceable>stylesheet</replaceable></arg>
+    <arg choice="opt">
+      <replaceable>stylesheet</replaceable>
+    </arg>
   </cmdsynopsis>
 </refsynopsisdiv>
 
@@ -65,6 +82,7 @@
     </varlistentry>
     <varlistentry>
       <term><option>-?</option></term>
+      <term><option>--help</option></term>
       <listitem>
         <para>Show help message.</para>
       </listitem>
@@ -89,15 +107,7 @@
       </listitem>
     </varlistentry>
     <varlistentry>
-      <term><option>--catalogs</option></term>
-      <listitem>
-	<para>Use SGML catalog files pointed to by 
-	<envar>SGML_CATALOG_FILES</envar> instead of XML catalogs from
-	<filename>/etc/xml/catalog</filename>.</para>
-      </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term><option>--format</option> <group choice="req"><arg>auto</arg><arg>pdf</arg><arg>postscript</arg></group></term>
+      <term><option>--format <group choice="req"><arg choice="plain">auto</arg><arg choice="plain">pdf</arg><arg choice="plain">postscript</arg></group></option></term>
       <listitem>
 	<para>Specify format of the output file. The default is auto
 	which selects the format based on the extension of the output
@@ -105,7 +115,7 @@
       </listitem>
     </varlistentry>
     <varlistentry>
-      <term><option>--backend</option> <group choice="req"><arg>gp</arg><arg>cairo</arg></group></term>
+      <term><option>--backend</option> <group choice="req"><arg choice="plain">gp</arg><arg choice="plain">cairo</arg></group></term>
       <listitem>
 	<para>Specify backend used to produce the output file. The
         default is GNOME print (gp).</para>
@@ -113,9 +123,10 @@
     </varlistentry>
     <varlistentry>
       <term><option>--compat</option></term>
+      <term><option>--nocompat</option></term>
       <listitem>
-	<para>Pre-processes the input file with an internal
-	compatibility stylesheet.</para>
+	<para>Do or do not pre-processes the input file with an internal
+	compatibility stylesheet.  Default is <literal>--compat</literal>.</para>
       </listitem>
     </varlistentry>
     <varlistentry>
@@ -129,6 +140,13 @@
       <term><option>--continue</option></term>
       <listitem>
 	<para>Continue after any formatting errors.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term><option>--valid</option></term>
+      <term><option>--novalid</option></term>
+      <listitem>
+	<para>Do or do not load the DTD.  Default is <literal>--novalid</literal>.</para>
       </listitem>
     </varlistentry>
   </variablelist>
@@ -149,7 +167,7 @@
 <refsect1>
   <title>Author</title>
 
-  <para>Tony Graham <email>Tony.Graham of MenteithConsulting dot com</email></para>
+  <para>Tony Graham</para>
 </refsect1>
 
 </refentry>
