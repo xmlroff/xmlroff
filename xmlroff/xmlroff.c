@@ -162,7 +162,7 @@ main (gint    argc,
   gboolean compat_stylesheet = FALSE;
   gboolean compat = TRUE;
   gboolean continue_after_error = FALSE;
-  gboolean validation = TRUE;
+  gboolean validation = FALSE;
   gboolean version = FALSE;
   gchar** files = NULL;
   gboolean goption_success = FALSE;
@@ -210,21 +210,13 @@ main (gint    argc,
       _("Continue after any formatting errors"),
       NULL
     },
-    { "novalid",
-      0,
-      G_OPTION_FLAG_REVERSE,
-      G_OPTION_ARG_NONE,
-      &validation,
-      _("Skip the DTD loading phase"),
-      NULL
-    },
     { "compat",
       0,
       0,
       G_OPTION_ARG_NONE,
       &compat,
       /* Describe both --compat and --nocompat since --nocompat is hidden. */
-      _("Do or do not ('--nocompat') preprocess with compatibility stylesheet "
+      _("Do ('--compat') or do not ('--nocompat') preprocess with compatibility stylesheet "
 	"(default is '--compat')"),
       NULL
     },
@@ -242,6 +234,24 @@ main (gint    argc,
       G_OPTION_ARG_NONE,
       &compat_stylesheet,
       _("Output the compatibility stylesheet then exit"),
+      NULL
+    },
+    { "valid",
+      0,
+      0,
+      G_OPTION_ARG_NONE,
+      &validation,
+      /* Describe both --valid and --novalid since --novalid is hidden. */
+      _("Do ('--valid') or do not ('--novalid') load the DTD "
+	"(default is '--novalid')"),
+      NULL
+    },
+    { "novalid",
+      0,
+      G_OPTION_FLAG_HIDDEN | G_OPTION_FLAG_REVERSE,
+      G_OPTION_ARG_NONE,
+      &validation,
+      _("Skip the DTD loading phase"),
       NULL
     },
     { "version",
