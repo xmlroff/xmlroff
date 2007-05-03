@@ -1,11 +1,10 @@
 /* Fo
- * fo-xsl-formatter.h: Boxed object type for libfo XSL formatter
+ * libfo-compat.h: LibFo compatibility processing
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting
  *
- * $Id: libfo-compat.h,v 1.1 2006/04/16 20:31:26 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __LIBFO_COMPAT_H__
@@ -25,7 +24,7 @@ typedef enum
 } LibfoCompatError;
 
 const gchar* libfo_compat_get_stylesheet  (void);
-FoXmlDoc *   libfo_compat_make_compatible (FoXmlDoc        *result_tree,
+FoXmlDoc *   libfo_compat_make_compatible (FoXmlDoc       *result_tree,
 					   FoLibfoContext *libfo_context,
 					   GError        **error);
 
