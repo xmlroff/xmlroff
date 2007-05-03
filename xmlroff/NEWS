@@ -1,3 +1,9 @@
+Changes between 0.4.0 and 0.5.0
+
+* Does not require PangoXSL (#4)
+* Uses GOption instead of popt (#8, Satoru SATOH)
+* Defaults to using compatibility stylesheet (#24)
+
 Changes between 0.3.99 and 0.4.0
 
 * Easier to build using bundled PangoXSL
