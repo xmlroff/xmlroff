@@ -1,3 +1,157 @@
+05/03/07 19:44:49 tkg [37]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for xmlroff 0.5.0.
+
+05/03/07 19:38:13 tkg [36]
+	* trunk/xmlroff/INSTALL.in (modified)
+	* trunk/xmlroff/README (modified)
+	* trunk/xmlroff/docs/xmlroff.xml (modified)
+	Updated for xmlroff 0.5.0.
+
+05/03/07 19:36:33 tkg [35]
+	* trunk/xmlroff/libfo/libfo-compat.h (modified)
+	Cosmetic changes only.
+
+05/03/07 19:35:47 tkg [34]
+	* trunk/xmlroff/libfo/libfo-compat.c.tmpl (modified)
+	Removed a debuging message.
+
+05/03/07 19:34:36 tkg [33]
+	* trunk/xmlroff/xmlroff.c (modified)
+	Added '--valid' option since was impossible to require DTD.
+
+05/03/07 11:32:38 tkg [32]
+	* trunk/xmlroff/xmlroff.c (modified)
+	Reworked options error-handling, added more comments.
+
+05/02/07 15:11:43 tkg [31]
+	* trunk/xmlroff/AUTHORS (modified)
+	Removed email address since out-of-date spam-bait.
+
+05/02/07 15:09:03 tkg [30]
+	* trunk/xmlroff/README (modified)
+	Updated for xmlroff 0.5.0.
+
+05/02/07 15:05:09 tkg [29]
+	* trunk/xmlroff/xmlroff.c (modified)
+	Fix bug with handling one filename.  Added --nocompat option.
+	Reordered options so hopefully most popular first in help output.
+
+05/01/07 14:28:05 tkg [28]
+	* trunk/xmlroff/xmlroff.spec.in (modified)
+	Removed dependencies on pangoxsl-devel and popt-devel.
+
+05/01/07 11:56:18 tkg [27]
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Added libfo-pango and libfo-compat to docs.
+
+05/01/07 11:21:55 tkg [26]
+	* trunk/xmlroff/libfo-compat.xsl (modified)
+	Added normalising tabs.
+
+05/01/07 11:21:10 tkg [25]
+	* trunk/xmlroff/COPYING (modified)
+	Added Menteith Consulting to copyrights.
+
+05/01/07 11:20:35 tkg [24]
+	* trunk/xmlroff/docs/xmlroff.xml (modified)
+	Reworded second paragraph in description.
+
+05/01/07 11:19:17 tkg [23]
+	* trunk/xmlroff/Makefile.am (modified)
+	Removed dependency on popt.
+
+05/01/07 11:18:15 tkg [22]
+	* trunk/xmlroff/xmlroff.c (modified)
+	Changed from using popt to using GOption based on patch by Satoru
+	SATOH.  Reorganised option checking sequence.  Closes #8.
+
+05/01/07 11:13:49 tkg [21]
+	* trunk/xmlroff/configure.ac (modified)
+	Removed checking for popt.  Changed bug reporting address.
+
+04/30/07 19:32:36 tkg [20]
+	* trunk/xmlroff/Makefile.am (modified)
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/fo/fo-bidi-override.c (modified)
+	* trunk/xmlroff/fo/fo-block-area.c (modified)
+	* trunk/xmlroff/fo/fo-character.c (modified)
+	* trunk/xmlroff/fo/fo-external-graphic-area.c (modified)
+	* trunk/xmlroff/fo/fo-inline-container.c (modified)
+	* trunk/xmlroff/fo/fo-inline.c (modified)
+	* trunk/xmlroff/fo/fo-instream-foreign-object.c (modified)
+	* trunk/xmlroff/fo/fo-leader.c (modified)
+	* trunk/xmlroff/fo/fo-page-number-citation.c (modified)
+	* trunk/xmlroff/fo/fo-page-number.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-layout-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-layout-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-layout-private.h (modified)
+	* trunk/xmlroff/libfo/fo-layout.c (modified)
+	* trunk/xmlroff/property/fo-property-alignment-adjust.c (modified)
+	* trunk/xmlroff/property/fo-property-alignment-baseline.c (modified)
+	* trunk/xmlroff/property/fo-property-background-color.c (modified)
+	* trunk/xmlroff/property/fo-property-baseline-shift.c (modified)
+	* trunk/xmlroff/property/fo-property-color.c (modified)
+	* trunk/xmlroff/property/fo-property-dominant-baseline.c (modified)
+	* trunk/xmlroff/property/fo-property-font-family.c (modified)
+	* trunk/xmlroff/property/fo-property-font-size.c (modified)
+	* trunk/xmlroff/property/fo-property-font-weight.c (modified)
+	* trunk/xmlroff/property/fo-property-keep-together-within-line.c (modified)
+	* trunk/xmlroff/property/fo-property-keep-with-next-within-line.c (modified)
+	* trunk/xmlroff/property/fo-property-keep-with-previous-within-line.c (modified)
+	* trunk/xmlroff/property/fo-property-line-height.c (modified)
+	Removed dependency on PangoXSL.  Closes #4.
+
+04/30/07 19:30:03 tkg [19]
+	* trunk/xmlroff/fo/fo-flow-area.h (modified)
+	Removed unnecessary include of Pango.
+
+04/30/07 19:27:41 tkg [18]
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/libfo-pango.c (added)
+	* trunk/xmlroff/libfo/libfo-pango.h (added)
+	Reimplemented 'callback' attribute without PangoXSL.
+
+04/30/07 19:24:05 tkg [17]
+	* trunk/xmlroff/autogen.sh (modified)
+	Made executable.
+
+04/26/07 19:51:03 tkg [16]
+	* trunk/xmlroff/docs/xmlroff.xml (modified)
+	Updated contact email and added 'Reporting Bugs' section.
+
+04/19/07 19:38:11 tkg [15]
+	* trunk/xmlroff/configure.ac (modified)
+	Upped required GLib version to 2.6.0 and Pango to 1.10.  Defaulting
+	to enabling Cairo backend.
+
+04/02/07 22:00:47 tkg [11]
+	* trunk/xmlroff/libfo-0.5.pc.in (modified)
+	Removed a lingering 0.4 reference.
+
+04/02/07 10:58:09 tkg [10]
+	* trunk/xmlroff/.cvsignore (deleted)
+	* trunk/xmlroff/area/.cvsignore (deleted)
+	* trunk/xmlroff/datatype/.cvsignore (deleted)
+	* trunk/xmlroff/docs/.cvsignore (deleted)
+	* trunk/xmlroff/expr/.cvsignore (deleted)
+	* trunk/xmlroff/fo/.cvsignore (deleted)
+	* trunk/xmlroff/libfo/.cvsignore (deleted)
+	* trunk/xmlroff/property/.cvsignore (deleted)
+	* trunk/xmlroff/util/.cvsignore (deleted)
+	Removing .cvsignore files.
+
+04/02/07 10:56:18 tkg [9]
+	* trunk/xmlroff/configure.ac (moved)
+	Changing to more up-to-date filename.
+
+04/02/07 10:49:43 tkg [8]
+	* trunk/xmlroff/ChangeLog (added)
+	ChangeLog.
+
 04/02/07 10:45:31 tkg [7]
 	* Makefile.am (modified)
 	* README (modified)
