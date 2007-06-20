@@ -13,8 +13,6 @@
 #include <cairo/cairo-ps.h>
 #include <cairo/cairo-svg.h>
 #include <pango/pango.h>
-#include <libgnomeprint/gnome-print-job.h>
-#include <libgnomeprint/gnome-print-pango.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "area/fo-area-area.h"
 #include "area/fo-area-layout.h"
