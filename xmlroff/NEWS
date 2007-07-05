@@ -1,6 +1,6 @@
 Changes between 0.5.0 and 0.5.1
 
-* Reorganised source code directories
+* Reorganised source code directories (#2)
 * Removed CVS/RCS keywords since now using Subversion
 * Fixed compilation error when GNOME Print not installed (#34, Matti
   Hämäläinen)
