@@ -2,14 +2,13 @@
  * fo-xml-doc.c: Boxed object type for libxml2 xmlDoc document
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xml-doc.c,v 1.6 2006/07/26 14:23:00 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <libxml/xmlIO.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-xml-doc-private.h"
 
 extern int xmlLoadExtDtdDefaultValue;

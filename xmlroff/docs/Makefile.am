@@ -19,8 +19,8 @@ MKDB_OPTIONS=--sgml-mode --output-format=xml
 FIXXREF_OPTIONS=
 
 # Used for dependencies
-HFILE_GLOB=$(top_srcdir)/*.h $(top_srcdir)/*/*.h
-CFILE_GLOB=$(top_srcdir)/*.c $(top_srcdir)/*/*.c
+HFILE_GLOB=$(top_srcdir)/libfo/*.h $(top_srcdir)/libfo/*/*.h
+CFILE_GLOB=$(top_srcdir)/xmlroff/*.c $(top_srcdir)/libfo/*.c $(top_srcdir)/libfo/*/*.c
 
 # Headers to ignore
 IGNORE_HFILES=					\
@@ -184,7 +184,7 @@ GTKDOC_CFLAGS = \
 	-I$(top_builddir)
 
 GTKDOC_LIBS = \
-	../libfo-0.5.la \
+	../libfo/libfo-0.5.la \
 	$(PANGOXSL_LIBS) \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \

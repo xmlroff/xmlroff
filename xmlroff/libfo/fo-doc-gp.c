@@ -2,10 +2,9 @@
  * fo-doc-gp.c: 'GNOME Print'-specific child type of FoDoc
  *
  * Copyright (C) 2001-2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc-gp.c,v 1.30 2006/07/22 20:13:09 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include "config.h"
@@ -16,10 +15,10 @@
 #include "area/fo-area-area.h"
 #include "area/fo-area-layout.h"
 #include "util/fo-pixbuf.h"
-#include "libfo/fo-doc-gp-private.h"
-#include "libfo/fo-doc-commands.h"
-#include "libfo/fo-layout-gp-private.h"
-#include "libfo/libfo-pango.h"
+#include "fo-doc-gp-private.h"
+#include "fo-doc-commands.h"
+#include "fo-layout-gp-private.h"
+#include "libfo-pango.h"
 #include "datatype/fo-color.h"
 #include <string.h>
 

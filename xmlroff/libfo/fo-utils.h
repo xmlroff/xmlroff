@@ -2,10 +2,9 @@
  * fo-utils.h: Utilities for internal functions and modules
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-utils.h,v 1.7 2006/03/28 11:03:48 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_UTILS_H__

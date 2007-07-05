@@ -2,10 +2,9 @@
  * fo-font-desc-private.h: Boxed object type for FontDesc
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-font-desc-private.h,v 1.2 2004/03/30 22:38:26 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_FONT_DESC_PRIVATE_H__

@@ -2,10 +2,9 @@
  * fo-doc-cairo.h: libfo output document based on Cairo.
  *
  * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc-cairo.h,v 1.1 2006/03/07 23:35:29 tonygraham Exp $
- *
- * See COPYING for the status of this software.
+ * !See COPYING for the status of this software.
  */
 
 #ifndef __FO_DOC_CAIRO_H__

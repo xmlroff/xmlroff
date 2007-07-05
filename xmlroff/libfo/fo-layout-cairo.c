@@ -2,18 +2,17 @@
  * fo-layout-cairo.c: Object type for PangoCairoLayout
  *
  * Copyright (C) 2003-2006 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-layout-cairo.c,v 1.1 2006/03/07 23:35:29 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <pango/pango.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-object.h"
-#include "libfo/fo-layout-cairo-private.h"
-#include "libfo/fo-doc-private.h"
-#include "libfo/fo-font-desc-private.h"
+#include "fo-layout-cairo-private.h"
+#include "fo-doc-private.h"
+#include "fo-font-desc-private.h"
 
 static void fo_layout_cairo_class_init (FoLayoutCairoClass *klass);
 static void fo_layout_cairo_finalize   (GObject       *object);

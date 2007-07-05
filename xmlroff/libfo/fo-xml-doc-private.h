@@ -2,10 +2,9 @@
  * fo-xml-doc-private.h: Boxed object type for libxml2 xmlDoc document
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xml-doc-private.h,v 1.2 2006/04/16 20:39:42 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_XML_DOC_PRIVATE_H__

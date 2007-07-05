@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * See COPYING for the status of this software.
+ * !See COPYING for the status of this software.
  */
 
 #include "libfo-pango.h"

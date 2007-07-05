@@ -2,10 +2,9 @@
  * fo-doc-gp-private.h: Wrapper for libfo output document
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc-gp-private.h,v 1.4 2005/07/05 17:34:30 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_DOC_GP_PRIVATE_H__
@@ -13,8 +12,8 @@
 
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>
-#include "libfo/fo-doc-gp.h"
-#include "libfo/fo-doc-private.h"
+#include <libfo/fo-doc-gp.h>
+#include <libfo/fo-doc-private.h>
 
 G_BEGIN_DECLS
 

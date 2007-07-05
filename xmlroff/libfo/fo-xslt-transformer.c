@@ -2,10 +2,9 @@
  * fo-xslt-transformer.c: Boxed object type for libxslt XSLT processor
  *
  * Copyright (C) 2003-2006 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xslt-transformer.c,v 1.7 2006/08/07 15:26:29 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <libxslt/xslt.h>

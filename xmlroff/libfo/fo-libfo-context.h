@@ -2,10 +2,9 @@
  * fo-libfo-context.h: 'FoLibfoContext' object type
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-libfo-context.h,v 1.14 2006/04/16 20:35:13 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LIBFO_CONTEXT_H__

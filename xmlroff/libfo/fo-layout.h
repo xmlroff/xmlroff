@@ -2,10 +2,9 @@
  * fo-layout.h: Object type for PangoLayout
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-layout.h,v 1.4 2004/05/02 22:42:00 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LAYOUT_H__
@@ -18,7 +17,7 @@ typedef struct _FoLayoutClass FoLayoutClass;
 
 #include <libfo/fo-font-desc.h>
 #include <libfo/fo-doc.h>
-#include <datatype/fo-enum.h>
+#include <libfo/datatype/fo-enum.h>
 
 G_BEGIN_DECLS
 

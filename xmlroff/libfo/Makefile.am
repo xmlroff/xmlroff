@@ -1,21 +1,20 @@
 ## Process this file with automake to produce Makefile.in
 
+SUBDIRS = area fo datatype property expr util .
+
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
 	$(LIBXSLT_CFLAGS)	\
 	$(PANGOXSL_CFLAGS)	\
-	$(PANGO_CFLAGS)		\
-	-I$(top_srcdir)		\
-	-I$(top_srcdir)/area	\
-	-I$(top_srcdir)/fo	\
-	-I$(top_srcdir)/property	\
-	-I$(top_srcdir)/datatype
+	$(PANGO_CFLAGS)
 
 LDADDS = @STRIP_BEGIN@	\
 	@GLIB_LIBS@	\
 @STRIP_END@
 
 noinst_LTLIBRARIES = libfo-libfo.la libfo-fodoc.la
+
+lib_LTLIBRARIES = libfo-0.5.la
 
 if ENABLE_GP
 GP_headers = fo-doc-gp.h fo-doc-gp-private.h fo-layout-gp.h fo-layout-gp-private.h
@@ -47,7 +46,6 @@ libfo_headers =			\
 	fo-xml-node-private.h	\
 	fo-xml-node.h		\
 	fo-xsl-formatter.h	\
-	fo-xsl-formatter.c	\
 	fo-xslt-transformer.h	\
 	libfo-compat.h
 
@@ -59,10 +57,6 @@ fodoc_headers =			\
 
 libfoincludedir = $(includedir)/libfo-0.5/libfo
 
-libfoinclude_HEADERS = \
-	$(fodoc_headers)	\
-	$(libfo_headers)
-
 libfo_libfo_la_SOURCES =	\
 	$(libfo_headers)	\
 	fo-font-desc.c		\
@@ -72,6 +66,7 @@ libfo_libfo_la_SOURCES =	\
 	fo-xml-doc.c		\
 	fo-xml-node.c		\
 	fo-xslt-transformer.c	\
+	fo-xsl-formatter.c	\
 	libfo-compat.c		\
 	libfo-pango.c		\
 	libfo-pango.h
@@ -85,6 +80,51 @@ libfo_fodoc_la_SOURCES =	\
 
 libfo_fodoc_la_CFLAGS = $(PANGOXSL_CFLAGS) $(PANGO_CFLAGS) $(GNOMEPRINT_CFLAGS) $(GDKPIXBUF_CFLAGS)
 libfo_fodoc_la_LIBADD = $(PANGOXSL_LIBS) $(PANGO_LIBS) $(GNOMEPRINT_LIBS) $(GDKPIXBUF_LIBS)
+
+fo_context_cfiles= \
+	fo-context.c		\
+	fo-context-private.h	\
+	fo-context-util.c	\
+	fo-context-util.h
+
+fo_base_cfiles = \
+	fo-object.c		\
+	fo-node.c		\
+	fo-node-private.h
+
+libfo_0_5_la_LDFLAGS = \
+	-version-info $(LT_VERSION_INFO)	\
+	$(no_undefined)
+
+libfo_0_5_includedir = $(includedir)/libfo-0.5
+
+libfo_0_5_include_HEADERS = \
+	fo-object.h		\
+	fo-node.h		\
+	fo-context.h
+
+libfo_0_5_la_SOURCES = \
+	$(libfo_0_5_include_HEADERS) \
+	$(fo_base_cfiles)	\
+	$(fo_context_cfiles)	\
+	area-to-pdf.c		\
+	area-to-pdf.h
+
+libfo_0_5_la_LIBADD = \
+	util/libfo-util.la		\
+	area/libfo-area.la		\
+	expr/libfo-expr.la		\
+	fo/libfo-fo.la			\
+	datatype/libfo-datatype.la	\
+	property/libfo-property.la	\
+	property/libfo-text-property.la	\
+	libfo-libfo.la		\
+	libfo-fodoc.la		\
+	$(PANGOXSL_LIBS)		\
+	$(PANGO_LIBS)			\
+	$(GNOMEPRINT_LIBS) 		\
+	$(LIBXSLT_LIBS)			\
+	$(FREETYPE_LIBS)
 
 libfo-compat.c: s-libfo-compat-c
 	@true

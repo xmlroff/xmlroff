@@ -2,10 +2,9 @@
  * fo-doc.h: Wrapper for libfo output document
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc.h,v 1.7 2006/03/08 00:14:13 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_DOC_H__

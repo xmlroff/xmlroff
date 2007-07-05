@@ -19,7 +19,7 @@ dnl   xmlroff_interface_age = 0;
 
 m4_define([xmlroff_major],0)
 m4_define([xmlroff_minor],5)
-m4_define([xmlroff_micro],0)
+m4_define([xmlroff_micro],1)
 m4_define([xmlroff_interface_age],0)
 
 m4_define([xmlroff_binary_age],0)
@@ -40,7 +40,8 @@ AC_SUBST(LT_RELEASE,"xmlroff_major.xmlroff_minor")
 AC_SUBST(LT_VERSION_INFO,"lt_current:lt_revision:lt_age")
 AC_SUBST(LT_CURRENT_MINUS_AGE,m4_eval(lt_current - lt_age))
 
-AC_CONFIG_SRCDIR(fo-object.c)
+AC_CONFIG_SRCDIR(xmlroff.spec.in)
+AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
 
@@ -505,18 +506,19 @@ CFLAGS="$CFLAGS $GLIB_CFLAGS"
 AC_OUTPUT([
 INSTALL
 Makefile 
-area/Makefile
-datatype/Makefile
 docs/Makefile
-expr/Makefile
-fo/Makefile
-property/Makefile
-libfo/Makefile
 examples/Makefile
 examples/xml2003/Makefile
-util/Makefile
+libfo/Makefile
+libfo/area/Makefile
+libfo/datatype/Makefile
+libfo/expr/Makefile
+libfo/fo/Makefile
+libfo/property/Makefile
+libfo/util/Makefile
 libfo-0.5.pc
 xmlroff.spec
+xmlroff/Makefile
 catalog.xml
 ])
 
@@ -527,7 +529,3 @@ if $enable_gp     ; then fo_doc_subtypes="$fo_doc_subtypes 'GNOME Print'"; fi
 echo "
 Configuration:
   Enabled FoDoc subtypes:$fo_doc_subtypes"
-
-echo "
-Now type 'make' to compile xmlroff.
-"

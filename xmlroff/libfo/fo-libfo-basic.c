@@ -2,16 +2,15 @@
  * fo-libfo-basic.c: 'Basic' (i.e., simple) high-level interface to libfo
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-libfo-basic.c,v 1.11 2006/04/16 20:35:59 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
-#include "libfo/fo-libfo-basic.h"
-#include "libfo/fo-libfo.h"
-#include "libfo/fo-doc.h"
-#include <area-to-pdf.h>
+#include "fo-libfo-basic.h"
+#include "fo-libfo.h"
+#include "fo-doc.h"
+#include "area-to-pdf.h"
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 

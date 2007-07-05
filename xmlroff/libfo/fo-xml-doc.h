@@ -2,10 +2,9 @@
  * fo-xml-doc.h: Boxed object type for libxml2 xmlDoc document
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xml-doc.h,v 1.5 2006/07/26 14:23:00 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_XML_DOC_H__

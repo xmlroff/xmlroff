@@ -2,22 +2,21 @@
  * fo-doc-commands.h: Commands for an FoDoc
  *
  * Copyright (C) 2001-2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc-commands.h,v 1.4 2006/03/08 00:32:43 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_DOC_COMMANDS_H__
 #define __FO_DOC_COMMANDS_H__
 
 #include <libfo/fo-doc.h>
-#include <datatype/fo-datatype.h>
+#include <libfo/datatype/fo-datatype.h>
 #include <libfo/fo-utils.h>
 #include <libfo/fo-libfo-context.h>
 #include <libfo/fo-font-desc.h>
-#include <util/fo-image.h>
-#include <area/fo-area.h>
+#include <libfo/util/fo-image.h>
+#include <libfo/area/fo-area.h>
 
 G_BEGIN_DECLS
 

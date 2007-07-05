@@ -2,10 +2,9 @@
  * fo-libfo-basic.h: 'Basic' (i.e., simple) high-level interface to libfo
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-libfo-basic.h,v 1.3 2003/05/16 11:00:15 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LIBFO_BASIC_H__

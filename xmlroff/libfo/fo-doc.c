@@ -2,22 +2,21 @@
  * fo-doc.c: Wrapper for libfo output document
  *
  * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc.c,v 1.17 2006/07/03 08:20:22 tonygraham Exp $
- *
- * See COPYING for the status of this software.
+ * !See COPYING for the status of this software.
  */
 
 #include "config.h"
 #include <string.h>
-#include "libfo/fo-utils.h"
-#include "libfo/fo-doc-private.h"
-#include "libfo/fo-doc-commands.h"
+#include "fo-utils.h"
+#include "fo-doc-private.h"
+#include "fo-doc-commands.h"
 #if ENABLE_CAIRO
-#include <libfo/fo-doc-cairo.h>
+#include "fo-doc-cairo.h"
 #endif
 #if ENABLE_GP
-#include <libfo/fo-doc-gp.h>
+#include "fo-doc-gp.h"
 #endif
 #include "datatype/fo-color.h"
 #include <pango/pango.h>
@@ -25,8 +24,8 @@
 #include <pango/pangoft2.h>
 #include <pango/pango-context.h>
 #endif
-#include "libfo/fo-font-desc-private.h"
-#include "libfo/fo-libfo-context.h"
+#include "fo-font-desc-private.h"
+#include "fo-libfo-context.h"
 
 const char *fo_doc_error_messages [] = {
   N_("FoDoc error"),

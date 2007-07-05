@@ -111,7 +111,7 @@ TESTING
 
 Format the man page for xmlroff:
 
-   xmlroff docs/xmlroff.fo 
+   xmlroff/xmlroff docs/xmlroff.fo 
 
 The result is written to layout.pdf.
 
@@ -119,9 +119,9 @@ The result is written to layout.pdf.
 ENSURING COMPATIBILITY
 ----------------------
 
-xmlroff includes a 'libfo-compat.xsl' stylesheet that you can run on
-your FO files to help ensure that they use only the subset of the XSL
-specification that xmlroff supports.
+The xmlroff distribution includes a 'libfo-compat.xsl' stylesheet that
+you can run on your FO files to help ensure that they use only the
+subset of the XSL specification that xmlroff supports.
 
 The stylesheet is built in to xmlroff, and the compatibility
 processing is enabled by default.

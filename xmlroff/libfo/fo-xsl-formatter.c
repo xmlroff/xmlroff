@@ -2,21 +2,20 @@
  * fo-xsl-formatter.c: Object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xsl-formatter.c,v 1.14 2006/04/16 20:38:50 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "libfo/fo-utils.h"
-#include "libfo/fo-xml-doc-private.h"
-#include "libfo/fo-xml-node-private.h"
-#include "libfo/fo-doc-private.h"
-#include "libfo/fo-doc-gp.h"
-#include "libfo/fo-xsl-formatter.h"
+#include "fo-utils.h"
+#include "fo-xml-doc-private.h"
+#include "fo-xml-node-private.h"
+#include "fo-doc-private.h"
+#include "fo-doc-gp.h"
+#include "fo-xsl-formatter.h"
 #include "fo/fo-fo-private.h"
-#include "fo-all-fo.h"
+#include "fo/fo-all-fo.h"
 #include "property/fo-property-eval.h"
 #include "area/fo-area.h"
 #include "area/fo-area-tree.h"

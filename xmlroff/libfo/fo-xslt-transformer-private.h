@@ -2,10 +2,9 @@
  * fo-xslt-transformer-private: Boxed object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xslt-transformer-private.h,v 1.2 2006/05/28 23:11:45 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_XSLT_TRANSFORMER_PRIVATE_H__

@@ -2,10 +2,9 @@
  * fo-layout.h: Object type for PangoLayout
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-layout-gp.h,v 1.1 2003/05/23 15:29:28 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LAYOUT_GP_H__

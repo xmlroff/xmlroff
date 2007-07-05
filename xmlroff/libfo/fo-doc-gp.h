@@ -2,10 +2,9 @@
  * fo-doc-gp.h: Wrapper for libfo output document
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc-gp.h,v 1.5 2005/06/27 00:19:42 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_DOC_GP_H__

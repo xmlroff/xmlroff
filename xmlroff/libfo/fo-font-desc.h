@@ -2,10 +2,9 @@
  * fo-font-desc.c: Boxed object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-font-desc.h,v 1.2 2003/05/23 16:53:29 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_FONT_DESC_H__

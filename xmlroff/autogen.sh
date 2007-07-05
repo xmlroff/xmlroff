@@ -8,7 +8,7 @@ ORIGDIR=`pwd`
 cd $srcdir
 PROJECT=xmlroff
 TEST_TYPE=-f
-FILE=xmlroff.c
+FILE=xmlroff/xmlroff.c
 
 DIE=0
 

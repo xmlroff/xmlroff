@@ -2,10 +2,9 @@
  * fo-xml-node.h: Boxed object type for libxml2 xmlNode nodeument
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xml-node.h,v 1.3 2006/04/16 20:35:13 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_XML_NODE_H__

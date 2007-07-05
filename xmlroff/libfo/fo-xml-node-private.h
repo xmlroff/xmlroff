@@ -2,10 +2,9 @@
  * fo-xml-node-private.h: Boxed object type for libxml2 xmlNode
  *
  * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xml-node-private.h,v 1.2 2006/04/07 11:05:33 tonygraham Exp $
- *
- * See COPYING for the status of this software.
+ * !See COPYING for the status of this software.
  */
 
 #ifndef __FO_XML_NODE_PRIVATE_H__

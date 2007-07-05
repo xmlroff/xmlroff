@@ -2,14 +2,13 @@
  * fo-xml-node.c: Boxed object type for libxml2 xmlNode nodeument
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-xml-node.c,v 1.2 2006/04/16 20:35:13 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <libxml/xmlIO.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-xml-node-private.h"
 
 extern int xmlLoadExtDtdDefaultValue;

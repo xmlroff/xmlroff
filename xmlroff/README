@@ -12,7 +12,7 @@ See http://xmlroff.org/.
 
 To test xmlroff, format the xmlroff man page:
 
-   ./xmlroff docs/xmlroff.fo
+   xmlroff/xmlroff docs/xmlroff.fo
 
 PDF output is written to layout.pdf.
 
@@ -88,4 +88,4 @@ http://lists.xmlroff.org/mailman/listinfo/xmlroff-announce
 
 
 Tony Graham
-1 May 2007
+4 July 2007

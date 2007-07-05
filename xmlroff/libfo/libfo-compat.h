@@ -4,7 +4,7 @@
  * Copyright (C) 2003 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting
  *
- * See COPYING for the status of this software.
+ * !See COPYING for the status of this software.
  */
 
 #ifndef __LIBFO_COMPAT_H__

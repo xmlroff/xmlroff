@@ -2,10 +2,9 @@
  * fo-doc-cairo.c: libfo output document based on Cairo.
  *
  * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-doc-cairo.c,v 1.8 2006/08/07 14:25:19 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include "config.h"
@@ -17,10 +16,10 @@
 #include "area/fo-area-area.h"
 #include "area/fo-area-layout.h"
 #include "util/fo-pixbuf.h"
-#include "libfo/fo-doc-cairo-private.h"
-#include "libfo/fo-doc-commands.h"
-#include "libfo/fo-layout-cairo-private.h"
-#include "libfo/libfo-pango.h"
+#include "fo-doc-cairo-private.h"
+#include "fo-doc-commands.h"
+#include "fo-layout-cairo-private.h"
+#include "libfo-pango.h"
 #include "datatype/fo-color.h"
 #include <string.h>
 

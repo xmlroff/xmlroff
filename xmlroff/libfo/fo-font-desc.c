@@ -2,13 +2,12 @@
  * fo-font-desc.c: Object type for a font description
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-font-desc.c,v 1.6 2006/03/08 00:22:30 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-object.h"
 #include "fo-font-desc-private.h"
 #include "fo-libfo-context.h"

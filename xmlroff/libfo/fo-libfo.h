@@ -2,10 +2,9 @@
  * fo-libfo.h: High-level interface to libfo
  *
  * Copyright (C) 2003 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-libfo.h,v 1.5 2003/05/16 11:52:36 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LIBFO_H__

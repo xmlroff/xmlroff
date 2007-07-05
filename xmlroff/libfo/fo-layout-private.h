@@ -2,10 +2,9 @@
  * fo-layout-private.h: Object type for PangoLayout
  *
  * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: fo-layout-private.h,v 1.4 2006/03/08 00:21:52 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LAYOUT_PRIVATE_H__
