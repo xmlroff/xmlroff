@@ -54,6 +54,11 @@ test $TEST_TYPE $FILE || {
 	exit 1
 }
 
+test -d config || {
+	echo "Creating AC_CONFIG_AUX_DIR, \`config'."
+	mkdir config
+}
+
 if test -z "$*"; then
 	echo "I am going to run ./configure with no arguments - if you wish "
         echo "to pass any to it, please specify them on the $0 command line."
