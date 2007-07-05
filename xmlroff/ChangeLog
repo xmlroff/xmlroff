@@ -1,3 +1,19 @@
+07/05/07 12:25:31 tkg [42]
+	Reorganised source code directories.
+
+06/20/07 12:15:06 tkg [41]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	Removed unnecessary includes of GNOME Print headers that stopped
+	build when compiling without GNOME Print installed.
+
+	Closes #34.
+
+Released xmlroff 0.5.0
+
+05/03/07 19:52:28 tkg [38]
+	* trunk/xmlroff/ChangeLog (modified)
+	Updated for xmlroff 0.5.0.
+
 05/03/07 19:44:49 tkg [37]
 	* trunk/xmlroff/NEWS (modified)
 	Updated for xmlroff 0.5.0.
