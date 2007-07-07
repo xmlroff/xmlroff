@@ -17,7 +17,7 @@ See http://xmlroff.org/.
 -----------------------------------------------------------------------
 
 The version numbers of 'testing' releases are the same as the version
-of xmlroff that is current at the time of the 'spec-dump' release.
+of xmlroff that is current at the time of the 'testing' release.
 However, any version of this package may be used with any version of
 xmlroff, although using the newest 'testing' version is recommended
 since new versions tend to have bug fixes and ease of use improvements
@@ -87,6 +87,8 @@ Before You Begin
    The parameters for controlling the test are set as configure
    options.  Use './configure --help' to see the available options.
 
+   (If starting from a Subversion checkout, run './autogen.sh'.)
+
 7. (Optional, Apache-only) Copy *.conf to your Apache2 conf.d
    directory, e.g., /etc/apache2/conf.d.  Modify the directory name in
    the .conf files to match where you installed this package.  Restart
@@ -136,7 +138,7 @@ Individual steps
       make index.html
 
    To make a 'static' report without the forms for updating results,
-   set the 'static' parameter to 'true()' in config.xsl.
+   use the '--disable-form' option when running configure.
 
 
 Working With the Results
@@ -538,5 +540,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-tonygraham@users.sourceforge.net
-28 February 2006
+7 July 2007
