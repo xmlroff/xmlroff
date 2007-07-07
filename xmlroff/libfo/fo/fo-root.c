@@ -295,7 +295,6 @@ fo_root_resolve_media_usage (FoFo      *fo,
 {
   FoProperty *media_usage = fo_context_get_media_usage (current_context);
   FoDatatype *datatype = NULL;
-  GError *tmp_error;
 
   if (media_usage != NULL)
     {
@@ -318,24 +317,24 @@ fo_root_resolve_media_usage (FoFo      *fo,
     {
       FoEnumEnum value = fo_enum_get_value (datatype);
 
-      if ((value == FO_ENUM_ENUM_AUTO) ||
-          (value == FO_ENUM_ENUM_BOUNDED_IN_ONE_DIMENSION) ||
-          (value == FO_ENUM_ENUM_UNBOUNDED))
+      if (value != FO_ENUM_ENUM_PAGINATE)
 	{
 	  FoDatatype *new_datatype =  g_object_ref (fo_enum_get_enum_by_nick ("paginate"));
 	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
 	  gchar *new_datatype_sprintf = fo_object_sprintf (new_datatype);
+	  GError *datatype_warning =
+	    g_error_new (FO_FO_ERROR,
+			 FO_FO_ERROR_DATATYPE_REPLACE,
+			 _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE_REPLACE]),
+			 "media-usage",
+			 datatype_sprintf,
+			 g_type_name (G_TYPE_FROM_INSTANCE (datatype)),
+			 new_datatype_sprintf,
+			 g_type_name (G_TYPE_FROM_INSTANCE (new_datatype)));
 
-	  tmp_error = g_error_new (FO_FO_ERROR,
-				   FO_FO_ERROR_DATATYPE_REPLACE,
-				   _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE_REPLACE]),
-				   "fo-root",
-				   datatype_sprintf,
-				   g_type_name (G_TYPE_FROM_INSTANCE (datatype)),
-				   new_datatype_sprintf,
-				   g_type_name (G_TYPE_FROM_INSTANCE (new_datatype)));
 	  fo_object_log_warning (FO_OBJECT (fo),
-				 &tmp_error);
+				 &datatype_warning);
+
 	  g_free (datatype_sprintf);
 	  g_free (new_datatype_sprintf);
 
