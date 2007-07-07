@@ -4,8 +4,8 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testing framework],
-	[0.4.0],
-	[http://sourceforge.net/tracker/?group_id=73148],
+	[0.5.1],
+	[http://xmlroff.org/newticket],
 	xmlroff-testing)
 AC_CONFIG_SRCDIR([configure.ac])
 AM_INIT_AUTOMAKE
@@ -196,7 +196,7 @@ AC_SUBST(TESTSUITES)
 #
 # XSL processor.
 #
-xsl_processor_default=/usr/local/src/xslfo/xmlroff/xmlroff
+xsl_processor_default=/usr/local/src/xslfo/xmlroff/xmlroff/xmlroff
 AC_ARG_WITH(xsl_processor,
 	    AC_HELP_STRING([--with-xsl-processor],
 			   [Full path to XSL processor to test.]),
