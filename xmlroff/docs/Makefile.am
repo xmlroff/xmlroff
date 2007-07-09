@@ -204,7 +204,7 @@ GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 #	done
 
 xmlroff.fo:	xmlroff.xml ../libfo-compat.xsl
-	xsltproc http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl $< > xmlroff.tmp
+	xsltproc http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl xmlroff.xml > xmlroff.tmp
 	xsltproc ../libfo-compat.xsl xmlroff.tmp > xmlroff.fo
 	rm -f xmlroff.tmp
 
