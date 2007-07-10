@@ -998,7 +998,7 @@ fo_property_util_resolve_color_enum (const gchar *token,
 }
 
 /**
- * fo_property_util_resolve_color_enum:
+ * fo_property_util_resolve_color_transparent_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
