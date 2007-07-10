@@ -1,3 +1,29 @@
+07/10/07 19:45:08 tkg [50]
+	* trunk/xmlroff/libfo/property/fo-property-util.c (modified)
+	Corrected function name in a comment.
+
+07/09/07 19:49:39 tkg [49]
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Changed '$<' to 'xmlroff.xml' in 'xmlroff.fo' rule since was causing
+	problems for FreeBSD.
+
+07/07/07 20:29:38 tkg [46]
+	* trunk/xmlroff/libfo/fo/fo-root.c (modified)
+	Modified fo_root_resolve_media_usage() to make it more obvious that
+	unexpected value is signalled wih a warning, not an error.
+
+07/05/07 23:32:55 tkg [45]
+	* trunk/xmlroff/autogen.sh (modified)
+	Added creating 'config' if it doesn't exist.
+
+07/05/07 13:37:10 tkg [44]
+	* trunk/xmlroff/NEWS (modified)
+	Added reference to #2 to "Reorganised source code directories" item.
+
+07/05/07 13:14:33 tkg [43]
+	* trunk/xmlroff/ChangeLog (modified)
+	Updated for xmlroff 0.5.1.
+
 07/05/07 12:25:31 tkg [42]
 	Reorganised source code directories.
 
