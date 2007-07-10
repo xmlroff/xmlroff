@@ -57,7 +57,7 @@
           <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
           <fo:block start-indent="12pt" font-weight="bolder">bolder <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
         </fo:block>
-        <fo:block space-after="12pt" keep-together.within-page="force"
+        <fo:block space-after="12pt" keep-together.within-page="always"
           font-weight="500">
           <fo:block>500</fo:block>
           <fo:block start-indent="12pt" font-weight="lighter">lighter <fo:inline font-weight="inherit">(inherit)</fo:inline> <fo:inline font-weight="lighter">(lighter)</fo:inline> <fo:inline font-weight="bolder">(bolder)</fo:inline></fo:block>
