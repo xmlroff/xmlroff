@@ -5,7 +5,7 @@
   <testcases profile="expression" base="expression">
     
     <testresult id="expression1" results="expression1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected.  Too many assertion failure messages.</testresult>
+    <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected.  Too many assertion failure messages.  Ticket #17.</testresult>
     <testresult id="from-table-column2" results="from-table-column2.pdf" agreement="full" specproblem="no" testproblem="yes">Unexpected assertion failure.</testresult>
     <testresult id="from-table-column3" results="from-table-column3.pdf" agreement="issues" specproblem="no" testproblem="no">Does not fail.</testresult>
     <testresult id="from-table-column4" results="from-table-column4.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
@@ -36,8 +36,8 @@
         <testresult id="external-graphic-2" results="external-graphic-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
         <testresult id="external-graphic-3" results="external-graphic-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
         <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="full" specproblem="no" testproblem="no"/>
-        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
-        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="issues" specproblem="no" testproblem="no">No graphic.</testresult>
+        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="full" specproblem="no" testproblem="no"></testresult>
+        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="issues" specproblem="no" testproblem="no">No graphic.  PDF blows up Evince, convert, etc.</testresult>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
@@ -97,12 +97,12 @@
     <testcases profile="float" base="float">
     </testcases>
     <testcases profile="font" base="font">
-      <testresult id="font-size" results="font-size.pdf" agreement="issues" specproblem="no" testproblem="no">Segfaults.</testresult>
+      <testresult id="font-size" results="font-size.pdf" agreement="issues" specproblem="no" testproblem="yes">Lots of area overflow messages.  Should be broken into multiple tests with more explanation of expected result.</testresult>
       <testresult id="font-size-fail" results="font-size-fail.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="font-stretch" results="font-stretch.pdf" agreement="issues" specproblem="no" testproblem="no">No apparent effect.  May be problem with font not available in range of widths.</testresult>
-      <testresult id="font-weight-sans-serif" results="font-weight-sans-serif.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct given range of font weights available on this machine.</testresult>
-      <testresult id="font-weight-serif" results="font-weight-serif.pdf" agreement="issues" specproblem="no" testproblem="no">Segfaults.</testresult>
-      <testresult id="font-weight-monospace" results="font-weight-monospace.pdf" agreement="issues" specproblem="no" testproblem="yes">Segfaults</testresult>
+      <testresult id="font-stretch" results="font-stretch.pdf" agreement="issues" specproblem="no" testproblem="yes">No apparent effect.  May be problem with font not available in range of widths.  Lots of area overflow messages.  Should be broken into multiple tests with more explanation of expected result.</testresult>
+      <testresult id="font-weight-sans-serif" results="font-weight-sans-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Appears correct given range of font weights available on this machine.  Should be broken into multiple tests with more explanation of expected result.</testresult>
+      <testresult id="font-weight-serif" results="font-weight-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Appears correct given range of font weights available on this machine.  Should be broken into multiple tests with more explanation of expected result.</testresult>
+      <testresult id="font-weight-monospace" results="font-weight-monospace.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected result.</testresult>
     </testcases>
     <testcases profile="hyphenation" base="hyphenation">
     </testcases>
@@ -154,21 +154,21 @@
     <testcases profile="table" base="table">
     </testcases>
     <testcases profile="writing-mode" base="writing-mode">
-      <testresult id="writing-mode" results="writing-mode.pdf" agreement="issues" specproblem="no" testproblem="no">Totally messed up.</testresult>
+      <testresult id="writing-mode" results="writing-mode.pdf" agreement="issues" specproblem="no" testproblem="yes">Test should be split into multiple tests with some explanation of intended results.</testresult>
     </testcases>
 
   </testcases>
 
   <testcases profile="structure" base="structure">
     
-    <testresult id="element-content" results="element-content.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+    <testresult id="element-content" results="element-content.pdf" agreement="full" specproblem="no" testproblem="no">Dumps core.  Ticket #20.</testresult>
 
   </testcases>
 
   <testcases profile="multiple" base="multiple">
 
     <testresult id="simple" results="simple.pdf" agreement="issues" specproblem="no" testproblem="no">Don\'t know if extent of background behind fo:character is correct.</testresult>
-    <testresult id="unsupported-property" results="unsupported-property.pdf" agreement="full" specproblem="no" testproblem="yes">This works okay, but still cases in real documents where unsupported property is reported as \'null\'.</testresult>
+    <testresult id="unsupported-property" results="unsupported-property.pdf" agreement="issues" specproblem="no" testproblem="yes">No message.</testresult>
 
   </testcases>
   </testcases>
@@ -229,7 +229,6 @@
     <testresult id="bookinfo.001" results="bookinfo.001.pdf" agreement="issues" specproblem="no" testproblem="no">Page number references do not work.</testresult>
     <testresult id="bridgehead.001" results="bridgehead.001.pdf" agreement="issues" specproblem="no" testproblem="no">Page number references do not work.</testresult>
     <testresult id="calloutlist.001" results="calloutlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callout graphics in callout list.  Callout graphics very low.</testresult>
-ChangeLog
     <testresult id="chapter.001" results="chapter.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
     <testresult id="classsynopsis.001" results="classsynopsis.001.pdf" agreement="issues" specproblem="no" testproblem="no">Strange handling of whitespace.</testresult>
     <testresult id="draft.001" results="draft.001.pdf" agreement="issues" specproblem="no" testproblem="no">No draft indication.  Lots of Child area overflows parent area messages.</testresult>
