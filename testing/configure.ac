@@ -7,6 +7,8 @@ AC_INIT([xmlroff XSL Formatter testing framework],
 	[0.5.1],
 	[http://xmlroff.org/newticket],
 	xmlroff-testing)
+
+AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_SRCDIR([configure.ac])
 AM_INIT_AUTOMAKE
 
@@ -196,10 +198,10 @@ AC_SUBST(TESTSUITES)
 #
 # XSL processor.
 #
-xsl_processor_default=/usr/local/src/xslfo/xmlroff/xmlroff/xmlroff
+xsl_processor_default=../xmlroff/xmlroff/xmlroff
 AC_ARG_WITH(xsl_processor,
 	    AC_HELP_STRING([--with-xsl-processor],
-			   [Full path to XSL processor to test.]),
+			   [Path to XSL processor to test.]),
 	    xsl_processor="$withval", :)
 if test "x$with_xsl_processor" = "x" ; then
   XSL_PROCESSOR=$xsl_processor_default
