@@ -1,3 +1,9 @@
+Changes between 0.4.0 and 0.5.1:
+
+* --with-xsl-processor default is '../xmlroff/xmlroff/xmlroff'
+* Updated README
+* Changed colours used in generated HTML
+
 Changes between 0.3.99 and 0.4.0:
 
 * Added configure parameter for xsltproc path
