@@ -27,7 +27,9 @@ EXTRA_DIST = \
 	testsuites2testresults.xsl	\
 	update-result.xsl		\
 	update-results.pl		\
-	xmlroff-testing.conf
+	xmlroff-testing.conf		\
+	xmlroff-testing-cairo-pdf.conf	\
+	xmlroff-testing-cairo-ps.conf
 
 noinst_HEADERS = \
 	$(REPORT_HTML) \
