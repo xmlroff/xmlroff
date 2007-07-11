@@ -1,0 +1,50 @@
+07/11/07 13:30:49 tkg [66]
+	* trunk/testing/testresults.xml (modified)
+	Updated for xmlroff 0.5.1.  Removed DocBook results.
+
+07/11/07 13:29:43 tkg [65]
+	* trunk/testing/cairo-pdf-results.xml (modified)
+	Updated for xmlroff 0.5.1.  Removed DocBook results.
+
+07/11/07 13:28:52 tkg [64]
+	* trunk/testing/cairo-ps-results.xml (modified)
+	Updated for xmlroff 0.5.1.  Removed DocBook results.
+
+07/11/07 11:49:11 tkg [63]
+	* trunk/testing/configure.ac (modified)
+	Minor changes to some help strings for consistency with other help
+	strings.
+
+07/11/07 11:44:10 tkg [62]
+	* trunk/testing/ChangeLog.pre-0.5 (copied)
+	Moved old changes out of ChangeLog to ChangeLog.pre-0.5.
+
+07/11/07 11:42:30 tkg [61]
+	* trunk/testing/NEWS (modified)
+	Updated for 0.5.1.
+
+07/11/07 11:42:04 tkg [60]
+	* trunk/testing/testresults.xml (modified)
+	Updated for xmlroff 0.5.1.
+
+07/11/07 11:40:24 tkg [59]
+	* trunk/testing/configure.ac (modified)
+	Using relative path for --with-xsl-processor default.  Putting
+	configure auxiliary files in 'config'.
+
+07/11/07 11:39:25 tkg [58]
+	* trunk/testing/autogen.sh (modified)
+	Putting configure auxiliary files in 'config'.
+
+07/07/07 21:02:14 tkg [48]
+	* trunk/testing/configure.ac (modified)
+	Updated for 0.5.1.
+
+07/07/07 20:42:49 tkg [47]
+	* trunk/testing/README (modified)
+	Added info about autogen.sh and --disable-form 'configure' option.
+	Fixed a typo.
+
+04/19/07 19:35:34 tkg [14]
+	* trunk/testing/testsuccess.xsl (modified)
+	Changed colours used in generated HTML.
