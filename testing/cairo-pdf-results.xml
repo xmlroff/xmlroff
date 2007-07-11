@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- $Id: cairo-pdf-results.xml,v 1.2 2006/08/22 20:03:43 tonygraham Exp $ -->
-<testsuite profile="xmlroff with PDF output"><testcases base="testsuite" profile="xmlroff Test Suite">
+<testsuite profile="Cairo PDF"><testcases base="testsuite" profile="xmlroff Test Suite">
   
   <testcases profile="expression" base="expression">
     
     <testresult id="expression1" results="expression1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
-    <testresult id="from-table-column2" results="from-table-column2.pdf" agreement="issues" specproblem="no" testproblem="no">No message in log.</testresult>
-    <testresult id="from-table-column3" results="from-table-column3.pdf" agreement="issues" specproblem="no" testproblem="no">Does not fail.</testresult>
-    <testresult id="from-table-column4" results="from-table-column4.pdf" agreement="issues" specproblem="no" testproblem="no">Does not fail.</testresult>
-    <testresult id="from-table-column5" results="from-table-column5.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
-    <testresult id="from-table-column6" results="from-table-column6.pdf" agreement="issues" specproblem="no" testproblem="no">Fails with null property value</testresult>
-    <testresult id="from-table-column7" results="from-table-column7.pdf" agreement="full" specproblem="no" testproblem="yes">Formatted output and log messages not very informative.</testresult>
+    <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected. Too many assertion failure messages.</testresult>
+    <testresult id="from-table-column2" results="from-table-column2.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected.  Error message should say why.</testresult>
+    <testresult id="from-table-column3" results="from-table-column3.pdf" agreement="issues" specproblem="no" testproblem="no">Error message should say why failed.</testresult>
+    <testresult id="from-table-column4" results="from-table-column4.pdf" agreement="issues" specproblem="no" testproblem="no">Error message should say why failed.</testresult>
+    <testresult id="from-table-column5" results="from-table-column5.pdf" agreement="issues" specproblem="no" testproblem="no">Error message should say why failed.</testresult>
+    <testresult id="from-table-column6" results="from-table-column6.pdf" agreement="issues" specproblem="no" testproblem="no">Error message should say why failed.</testresult>
+    <testresult id="from-table-column7" results="from-table-column7.pdf" agreement="issues" specproblem="no" testproblem="no">Error message should say why failed.</testresult>
   </testcases>
   <testcases profile="fo" base="fo">
     <testcases profile="block" base="block">
@@ -21,28 +20,28 @@
     </testcases>
     <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
       <testcases profile="region-body" base="region-body">
-        <testresult id="region-body-overflow1" results="region-body-overflow1.pdf" agreement="full" specproblem="no" testproblem="no">Treated as \'auto\' in accordance with XSL 1.0 spec.</testresult>
+        <testresult id="region-body-overflow1" results="region-body-overflow1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow2" results="region-body-overflow2.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow3" results="region-body-overflow3.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="region-body-overflow4" results="region-body-overflow4.pdf" agreement="full" specproblem="no" testproblem="no">Treated as \'auto\' in accordance with XSL 1.0 spec.</testresult>
-      <testresult id="region-body-overflow5" results="region-body-overflow5.pdf" agreement="full" specproblem="no" testproblem="no">Treated as \'auto\' in accordance with XSL 1.0 spec.</testresult>
+      <testresult id="region-body-overflow4" results="region-body-overflow4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="region-body-overflow5" results="region-body-overflow5.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow6" results="region-body-overflow6.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow7" results="region-body-overflow7.pdf" agreement="full" specproblem="no" testproblem="no"/>
     </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
-        <testresult id="external-graphic-1" results="external-graphic-1.pdf" agreement="issues" specproblem="no" testproblem="no">No graphic.</testresult>
-        <testresult id="external-graphic-2" results="external-graphic-2.pdf" agreement="issues" specproblem="no" testproblem="no">Background but no graphic.</testresult>
-        <testresult id="external-graphic-3" results="external-graphic-3.pdf" agreement="issues" specproblem="no" testproblem="no">No graphics.</testresult>
-        <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="full" specproblem="no" testproblem="no">No black graphic.  Purple graphic shows as yellow.</testresult>
-        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
-        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-1" results="external-graphic-1.pdf" agreement="issues" specproblem="no" testproblem="no">Yellow below part of graphic.</testresult>
+        <testresult id="external-graphic-2" results="external-graphic-2.pdf" agreement="issues" specproblem="no" testproblem="no">Extra yellow behind graphics.  Purple is not purple.</testresult>
+        <testresult id="external-graphic-3" results="external-graphic-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="issues" specproblem="no" testproblem="no">Weird.</testresult>
+        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="issues" specproblem="no" testproblem="no">Cairo backend not rendering PNG file properly.  Ticket #42.</testresult>
+        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
-      <testresult id="list-1" results="list1-1.pdf" agreement="issues" specproblem="no" testproblem="no">No output.  No errors logged.</testresult>
-      <testresult id="list-2" results="list1-2.pdf" agreement="issues" specproblem="no" testproblem="no">No output.  No errors logged.</testresult>
+      <testresult id="list-1" results="list-1.pdf" agreement="issues" specproblem="no" testproblem="no">Wrong.</testresult>
+      <testresult id="list-2" results="list-2.pdf" agreement="issues" specproblem="no" testproblem="no">Wrong.</testresult>
     </testcases>
     <testcases profile="other" base="other">
     </testcases>
@@ -57,29 +56,29 @@
     <testcases profile="accessability" base="accessability">
     </testcases>
     <testcases profile="block-line" base="block-line">
-      <testresult id="text-align-start" results="text-align-start.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not take up space.  Text extent/clipping problems.</testresult>
-      <testresult id="text-align-center" results="text-align-center.pdf" agreement="issues" specproblem="no" testproblem="no">Text extent/clipping problems.</testresult>
-      <testresult id="text-align-end" results="text-align-end.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not be included.  Clipping is wrong: lines may be printing further apart than Pango believes them to be.</testresult>
-      <testresult id="text-align-justify" results="text-align-justify.pdf" agreement="issues" specproblem="no" testproblem="no">Text extent/clipping problems.  Justify is not supported by Pango.</testresult>
-      <testresult id="text-align-inside" results="text-align-inside.pdf" agreement="issues" specproblem="no" testproblem="no">Text clipping problem.</testresult>
-      <testresult id="text-align-outside" results="text-align-outside.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not show.  Only first paragraph alignment is correct.  Text extent/clipping problems.</testresult>
-      <testresult id="text-align-left" results="text-align-left.pdf" agreement="issues" specproblem="no" testproblem="no">Text clipping issues.</testresult>
-      <testresult id="text-align-right" results="text-align-right.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not take up space.  Text extent/clipping problems.</testresult>
+      <testresult id="text-align-start" results="text-align-start.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Whitespace at end of line takes up space.</testresult>
+      <testresult id="text-align-center" results="text-align-center.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="text-align-end" results="text-align-end.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Whitespace at end of line takes up space.</testresult>
+      <testresult id="text-align-justify" results="text-align-justify.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Pango does not justify.</testresult>
+      <testresult id="text-align-inside" results="text-align-inside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="text-align-outside" results="text-align-outside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Whitespace at end of line takes up space.</testresult>
+      <testresult id="text-align-left" results="text-align-left.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="text-align-right" results="text-align-right.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Whitespace at end of line takes up space.</testresult>
     </testcases>
     <testcases profile="border-padding-background" base="border-padding-background">
       <testresult id="background-color1" results="background-color1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-left-style1" results="border-left-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-right-style1" results="border-right-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-top-style1" results="border-top-style1.pdf" agreement="issues" specproblem="no" testproblem="no">No dotted or dashed styles.</testresult>
-      <testresult id="border-bottom-style1" results="border-bottom-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-before-style1" results="border-before-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Missing dotted and dashed styles.</testresult>
-      <testresult id="border-after-style1" results="border-after-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-start-style1" results="border-start-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-end-style1" results="border-end-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-after-style1" results="border-after-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Hidden should take up space.  No dotted, dashed, etc.</testresult>
+      <testresult id="border-before-style1" results="border-before-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-bottom-style1" results="border-bottom-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-end-style1" results="border-end-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-left-style1" results="border-left-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-right-style1" results="border-right-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-start-style1" results="border-start-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-top-style1" results="border-top-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
       <testresult id="padding-after1" results="padding-after1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="padding-before1" results="padding-before1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="padding-before2" results="padding-before2.pdf" agreement="issues" specproblem="no" testproblem="no">.conditionality not working.</testresult>
-      <testresult id="padding-before3" results="padding-before3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-before2" results="padding-before2.pdf" agreement="issues" specproblem="no" testproblem="no">Not discarding.</testresult>
+      <testresult id="padding-before3" results="padding-before3.pdf" agreement="issues" specproblem="no" testproblem="no">Not discarding.</testresult>
       <testresult id="padding-bottom1" results="padding-bottom1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="padding-end1" results="padding-end1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="padding-left1" results="padding-left1.pdf" agreement="full" specproblem="no" testproblem="no"/>
@@ -97,12 +96,12 @@
     <testcases profile="float" base="float">
     </testcases>
     <testcases profile="font" base="font">
-      <testresult id="font-size" results="font-size.pdf" agreement="issues" specproblem="no" testproblem="no">Segfaults.</testresult>
-      <testresult id="font-size-fail" results="font-size-fail.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="font-stretch" results="font-stretch.pdf" agreement="issues" specproblem="no" testproblem="no">No apparent effect.  May be problem with font not available in range of widths.</testresult>
-      <testresult id="font-weight-sans-serif" results="font-weight-sans-serif.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct given range of font weights available on this machine.</testresult>
-      <testresult id="font-weight-serif" results="font-weight-serif.pdf" agreement="issues" specproblem="no" testproblem="no">Segfaults.</testresult>
-      <testresult id="font-weight-monospace" results="font-weight-monospace.pdf" agreement="issues" specproblem="no" testproblem="yes">Segfaults</testresult>
+      <testresult id="font-size" results="font-size.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-size-fail" results="font-size-fail.pdf" agreement="issues" specproblem="no" testproblem="no">Dumps core.</testresult>
+      <testresult id="font-stretch" results="font-stretch.pdf" agreement="full" specproblem="no" testproblem="yes">No apparent effect.  Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-weight-sans-serif" results="font-weight-sans-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-weight-serif" results="font-weight-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-weight-monospace" results="font-weight-monospace.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
     </testcases>
     <testcases profile="hyphenation" base="hyphenation">
     </testcases>
@@ -126,18 +125,18 @@
     </testcases>
     <testcases profile="shorthand" base="shorthand">
       <testresult id="border1" results="border1.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border2" results="border2.pdf" agreement="issues" specproblem="no" testproblem="no">No top dotted borders.</testresult>
-      <testresult id="border3" results="border3.pdf" agreement="issues" specproblem="no" testproblem="no">No dotted or dashed top borders.</testresult>
+      <testresult id="border2" results="border2.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border3" results="border3.pdf" agreement="issues" specproblem="no" testproblem="no">All missing.</testresult>
       <testresult id="border-color1" results="border-color1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="border-color2" results="border-color2.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="border-color3" results="border-color3.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="border-color4" results="border-color4.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="border-color5" results="border-color5.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-style1" results="border-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Missing top border for dotted and dashed styles.</testresult>
-      <testresult id="border-style2" results="border-style2.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-style3" results="border-style3.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-style4" results="border-style4.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="border-style5" results="border-style5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-style1" results="border-style1.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-style2" results="border-style2.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-style3" results="border-style3.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-style4" results="border-style4.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
+      <testresult id="border-style5" results="border-style5.pdf" agreement="issues" specproblem="no" testproblem="no">Several missing.</testresult>
       <testresult id="border-width1" results="border-width1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="border-width2" results="border-width2.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="border-width3" results="border-width3.pdf" agreement="full" specproblem="no" testproblem="no"/>
@@ -146,201 +145,29 @@
       <testresult id="padding1" results="padding1.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="padding2" results="padding2.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="padding3" results="padding3.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="padding4" results="padding4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding4" results="padding4.pdf" agreement="issues" specproblem="no" testproblem="no">Space at end of line takes up space.</testresult>
       <testresult id="padding5" results="padding5.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="padding6" results="padding6.pdf" agreement="issues" specproblem="no" testproblem="no">Padding on nested blocks appears to not work.</testresult>
+      <testresult id="padding6" results="padding6.pdf" agreement="issues" specproblem="no" testproblem="no">Wrong.</testresult>
       <testresult id="padding7" results="padding7.pdf" agreement="full" specproblem="no" testproblem="no"/>
     </testcases>
     <testcases profile="table" base="table">
     </testcases>
     <testcases profile="writing-mode" base="writing-mode">
-      <testresult id="writing-mode" results="writing-mode.pdf" agreement="issues" specproblem="no" testproblem="no">Totally messed up.</testresult>
+      <testresult id="writing-mode" results="writing-mode.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
     </testcases>
 
   </testcases>
 
   <testcases profile="structure" base="structure">
     
-    <testresult id="element-content" results="element-content.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+    <testresult id="element-content" results="element-content.pdf" agreement="full" specproblem="no" testproblem="yes">Fails as expected.  FO file should say why it should fail.</testresult>
 
   </testcases>
 
   <testcases profile="multiple" base="multiple">
 
-    <testresult id="simple" results="simple.pdf" agreement="issues" specproblem="no" testproblem="no">Don\'t know if extent of background behind fo:character is correct.</testresult>
-    <testresult id="unsupported-property" results="unsupported-property.pdf" agreement="full" specproblem="no" testproblem="yes">This works okay, but still cases in real documents where unsupported property is reported as \'null\'.  No warnings in log.</testresult>
+    <testresult id="simple" results="simple.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    <testresult id="unsupported-property" results="unsupported-property.pdf" agreement="issues" specproblem="no" testproblem="no">No error message.</testresult>
 
-  </testcases>
-  </testcases>
-
-  <testcases base="docbook-testdocs-1.1" profile="DocBook testdocs Test Suite">
-  
-  <testcases profile="i18n" base="i18n">
-    
-    <testresult id="book" results="book.pdf" agreement="issues" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="af" results="af.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="ca" results="ca.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="cs" results="cs.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct</testresult>
-    <testresult id="da" results="da.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct</testresult>
-    <testresult id="de" results="de.pdf" agreement="issues" specproblem="no" testproblem="no">Text clipping issues.</testresult>
-    <testresult id="el" results="el.pdf" agreement="issues" specproblem="no" testproblem="no">Greek text is widely spaced.</testresult>
-    <testresult id="en" results="en.pdf" agreement="issues" specproblem="no" testproblem="no">Space at beginning of paragraphs because of newline after para start tag in XML.  This is common to all i18n tests.</testresult>
-    <testresult id="es" results="es.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="et" results="et.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="eu" results="eu.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="fi" results="fi.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="fr" results="fr.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct</testresult>
-    <testresult id="hu" results="hu.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="id" results="id.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="it" results="it.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="ja" results="ja.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="ko" results="ko.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="nl" results="nl.pdf" agreement="issues" specproblem="no" testproblem="no">Text clipping problems.</testresult>
-    <testresult id="nn" results="nn.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="no" results="no.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="pl" results="pl.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="pt_br" results="pt_br.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="pt" results="pt.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="ro" results="ro.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="ru" results="ru.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="sk" results="sk.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="sl" results="sl.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="sr" results="sr.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="sv" results="sv.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="th" results="th.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="tr" results="tr.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="uk" results="uk.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="xh" results="xh.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="zh_cn" results="zh_cn.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-    <testresult id="zh_tw" results="zh_tw.pdf" agreement="full" specproblem="no" testproblem="no">Text appears correct.</testresult>
-  </testcases>
-
-  <testcases profile="tests" base="tests">
-    <testresult id="admonitions.001" results="admonitions.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="article.001" results="article.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="article.002" results="article.002.pdf" agreement="full" specproblem="no" testproblem="yes">Test refers to itself by wrong name.</testresult>
-    <testresult id="bibliography.001" results="bibliography.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="bibliography.002" results="bibliography.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="blockquote.001" results="blockquote.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="book.001" results="book.001.pdf" agreement="issues" specproblem="no" testproblem="no">Is there a reason why text before any first section is more closely spaced?</testresult>
-    <testresult id="book.002" results="book.002.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page references.  Text extent/clipping problems.</testresult>
-    <testresult id="book.003" results="book.003.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page references.  Text extent/clipping problems.</testresult>
-    <testresult id="bookinfo.001" results="bookinfo.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="bridgehead.001" results="bridgehead.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page references.</testresult>
-    <testresult id="calloutlist.001" results="calloutlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">Space for callout graphics but no callout graphics.</testresult>
-ChangeLog
-    <testresult id="chapter.001" results="chapter.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="classsynopsis.001" results="classsynopsis.001.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace problems.</testresult>
-    <testresult id="draft.001" results="draft.001.pdf" agreement="issues" specproblem="no" testproblem="no">No draft indication.  No forward page number references.  Text extent/clipping problems.</testresult>
-    <testresult id="emphasis.001" results="emphasis.001.pdf" agreement="issues" specproblem="no" testproblem="no">No strikethrough.  No underline.</testresult>
-    <testresult id="epigraph.001" results="epigraph.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="equation.001" results="equation.001.pdf" agreement="issues" specproblem="no" testproblem="no">Blank page.</testresult>
-    <testresult id="equation.002" results="equation.002.pdf" agreement="issues" specproblem="no" testproblem="no">Blank page.</testresult>
-    <testresult id="equation.003" results="equation.003.pdf" agreement="issues" specproblem="no" testproblem="no">Blank page.</testresult>
-    <testresult id="example.001" results="example.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="extensions.001" results="extensions.001.pdf" agreement="issues" specproblem="no" testproblem="no">No line breaks.  No callout graphics.</testresult>
-    <testresult id="extensions.002" results="extensions.002.pdf" agreement="issues" specproblem="no" testproblem="no">No inserted text.</testresult>
-    <testresult id="extensions.003" results="extensions.003.pdf" agreement="issues" specproblem="no" testproblem="no">No line breaks.  No line numbers.</testresult>
-    <testresult id="extensions.004" results="extensions.004.pdf" agreement="issues" specproblem="no" testproblem="no">No source inserted into document.</testresult>
-    <testresult id="figure.001" results="figure.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="footnote.001" results="footnote.001.pdf" agreement="issues" specproblem="no" testproblem="no">No footnote.  No forward page number references.</testresult>
-    <testresult id="footnote.002" results="footnote.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="footnote.003" results="footnote.003.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="formalpara.001" results="formalpara.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="formalpara.002" results="formalpara.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="glossary.001" results="glossary.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="imagelib.001" results="imagelib.001.pdf" agreement="issues" specproblem="no" testproblem="no">Unexpected assertion.</testresult>
-    <testresult id="indexterm.001" results="indexterm.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.  ZWSP is not ZW.</testresult>
-    <testresult id="indexterm.002" results="indexterm.002.pdf" agreement="issues" specproblem="no" testproblem="no">ZWSP is not ZW.  No forward page number references.  Page numbers restart for appendix.</testresult>
-    <testresult id="informalequation-mml.001" results="informalequation-mml.001.pdf" agreement="issues" specproblem="no" testproblem="no">No mml support.  XML and XSL should still show in report.</testresult>
-    <testresult id="informaltable.001" results="informaltable.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.002" results="informaltable.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.003" results="informaltable.003.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.004" results="informaltable.004.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.005" results="informaltable.005.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.006" results="informaltable.006.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.007" results="informaltable.007.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.008" results="informaltable.008.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.009" results="informaltable.009.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.010" results="informaltable.010.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.011" results="informaltable.011.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.012" results="informaltable.012.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.013" results="informaltable.013.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="informaltable.014" results="informaltable.014.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="inline.001" results="inline.001.pdf" agreement="issues" specproblem="no" testproblem="no">No red.  No forward page number cross-references.</testresult>
-    <testresult id="itemizedlist.001" results="itemizedlist.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="itemizedlist.002" results="itemizedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No bullets.</testresult>
-    <testresult id="itemizedlist.003" results="itemizedlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">No bullets.</testresult>
-    <testresult id="link.001" results="link.001.pdf" agreement="issues" specproblem="no" testproblem="no">Question marks for link without content.</testresult>
-    <testresult id="literallayout.001" results="literallayout.001.pdf" agreement="issues" specproblem="no" testproblem="no">No line breaks.</testresult>
-    <testresult id="literallayout.002" results="literallayout.002.pdf" agreement="issues" specproblem="no" testproblem="no">No line breaks.</testresult>
-    <testresult id="literallayout.003" results="literallayout.003.pdf" agreement="issues" specproblem="no" testproblem="no">No linebreaks.</testresult>
-    <testresult id="lot.001" results="lot.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="mathml.001" results="mathml.001.pdf" agreement="issues" specproblem="no" testproblem="no">No equation</testresult>
-    <testresult id="mediaobject.001" results="mediaobject.001.pdf" agreement="issues" specproblem="no" testproblem="no">Reaches code that should not be reached.</testresult>
-    <testresult id="methodsynopsis.001" results="methodsynopsis.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Whitespace problem.  Extra comma from stylesheet.</testresult>
-    <testresult id="note.001" results="note.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="olink.001" results="olink.001.pdf" agreement="issues" specproblem="no" testproblem="no">No link.</testresult>
-    <testresult id="orderedlist.001" results="orderedlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list item numbers.</testresult>
-    <testresult id="orderedlist.002" results="orderedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No list bullets or numbers.</testresult>
-    <testresult id="procedure.001" results="procedure.001.pdf" agreement="issues" specproblem="no" testproblem="no">No step numbers.</testresult>
-    <testresult id="procedure.002" results="procedure.002.pdf" agreement="issues" specproblem="no" testproblem="no">No step numbers.</testresult>
-    <testresult id="procedure.003" results="procedure.003.pdf" agreement="issues" specproblem="no" testproblem="no">No step number.</testresult>
-    <testresult id="productionset.001" results="productionset.001.pdf" agreement="issues" specproblem="no" testproblem="no">Assertion failures.</testresult>
-    <testresult id="productionset.002" results="productionset.002.pdf" agreement="issues" specproblem="no" testproblem="no">Assertion failures.</testresult>
-    <testresult id="productionset.003" results="productionset.003.pdf" agreement="issues" specproblem="no" testproblem="no">Assertion failures.</testresult>
-    <testresult id="productionset.004" results="productionset.004.pdf" agreement="issues" specproblem="no" testproblem="no">Assertion failures.</testresult>
-    <testresult id="productionset.005" results="productionset.005.pdf" agreement="issues" specproblem="no" testproblem="no">Assertion failures.</testresult>
-    <testresult id="programlisting.001" results="programlisting.001.pdf" agreement="issues" specproblem="no" testproblem="no">No line breaks.</testresult>
-    <testresult id="programlisting.002" results="programlisting.002.pdf" agreement="issues" specproblem="no" testproblem="no">No programlisting text.</testresult>
-    <testresult id="programlisting.003" results="programlisting.003.pdf" agreement="issues" specproblem="no" testproblem="no">No linebreaks.</testresult>
-    <testresult id="programlistingco.001" results="programlistingco.001.pdf" agreement="issues" specproblem="no" testproblem="no">No line breaks.  No callout graphics.</testresult>
-    <testresult id="programlistingco.002" results="programlistingco.002.pdf" agreement="issues" specproblem="no" testproblem="no">No programlisting text.</testresult>
-    <testresult id="qandaset.001" results="qandaset.001.pdf" agreement="issues" specproblem="no" testproblem="no">No q or a indicators.</testresult>
-    <testresult id="qandaset.002" results="qandaset.002.pdf" agreement="issues" specproblem="no" testproblem="no">No q or a indicators.</testresult>
-    <testresult id="qandaset.003" results="qandaset.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="refentry.001" results="refentry.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="refentry.002" results="refentry.002.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="refentry.003" results="refentry.003.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="refentry.004" results="refentry.004.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="reference.001" results="reference.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="revhistory.001" results="revhistory.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="screen.001" results="screen.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callout graphics.</testresult>
-    <testresult id="sect1.001" results="sect1.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="sect1.002" results="sect1.002.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="section.001" results="section.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.  Spacing is probably off.</testresult>
-    <testresult id="section.002" results="section.002.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="section.003" results="section.003.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="segmentedlist.001" results="segmentedlist.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="segmentedlist.002" results="segmentedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">Expression evaluation resulted in an error.</testresult>
-    <testresult id="set.001" results="set.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="stamp.001" results="stamp.001.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping and/or graphic size problem.</testresult>
-    <testresult id="stamp.002" results="stamp.002.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.003" results="stamp.003.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.004" results="stamp.004.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.005" results="stamp.005.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
-    <testresult id="stamp.006" results="stamp.006.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.007" results="stamp.007.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.008" results="stamp.008.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.009" results="stamp.009.pdf" agreement="issues" specproblem="no" testproblem="no">No graphic.</testresult>
-    <testresult id="stamp.010" results="stamp.010.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="stamp.011" results="stamp.011.pdf" agreement="issues" specproblem="no" testproblem="no">Reaches code that should not be reached.</testresult>
-    <testresult id="stamp.012" results="stamp.012.pdf" agreement="issues" specproblem="no" testproblem="no">Reaches code that should not be reached.</testresult>
-    <testresult id="svg.001" results="svg.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
-    <testresult id="svg.002" results="svg.002.pdf" agreement="issues" specproblem="no" testproblem="no">No graphic.</testresult>
-    <testresult id="table.001" results="table.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="table.002" results="table.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="table.003" results="table.003.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="table.004" results="table.004.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="table.005" results="table.005.pdf" agreement="issues" specproblem="no" testproblem="no">No landscape table.</testresult>
-    <testresult id="table.006" results="table.006.pdf" agreement="issues" specproblem="no" testproblem="yes">Fixed table layout not selected correctly by stylesheet.</testresult>
-    <testresult id="toc.001" results="toc.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="ulink.001" results="ulink.001.pdf" agreement="issues" specproblem="no" testproblem="no">No hyphens.</testresult>
-    <testresult id="variablelist.001" results="variablelist.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="variablelist.002" results="variablelist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No methodsynopsis.</testresult>
-    <testresult id="variablelist.003" results="variablelist.003.pdf" agreement="issues" specproblem="no" testproblem="no">No terms.</testresult>
-    <testresult id="variablelist.004" results="variablelist.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
-    <testresult id="xref.001" results="xref.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward page number references.</testresult>
-    <testresult id="xrefstyle.001" results="xrefstyle.001.pdf" agreement="issues" specproblem="no" testproblem="no">Short and long self-references are identical.</testresult>
   </testcases>
 </testcases></testsuite>
