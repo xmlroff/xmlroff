@@ -9,6 +9,7 @@ cd $srcdir
 PROJECT=xmlroff-testing
 TEST_TYPE=-f
 FILE=ChangeLog
+AC_CONFIG_AUX_DIR=config
 
 DIE=0
 
@@ -35,6 +36,11 @@ fi
 test $TEST_TYPE $FILE || {
 	echo "You must run this script in the top-level $PROJECT directory"
 	exit 1
+}
+
+test -d config || {
+	echo "Creating AC_CONFIG_AUX_DIR, \`$AC_CONFIG_AUX_DIR'."
+	mkdir config
 }
 
 if test -z "$*"; then
