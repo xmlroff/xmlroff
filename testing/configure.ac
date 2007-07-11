@@ -82,7 +82,7 @@ else
 fi
 AC_DEFINE_UNQUOTED(DEBUG,
 		   $DEBUG,
-		   [1 enables debugging messages.  2 or greater enables more verbose output. (default is 0)])
+		   [1 enables debugging messages.  2 or greater enables more verbose output. (default=0)])
 
 #
 # Default stylesheet, if any, to use with tests that don't specify
@@ -91,7 +91,7 @@ AC_DEFINE_UNQUOTED(DEBUG,
 default_stylesheet_default=0
 AC_ARG_WITH(default_stylesheet,
 	    AC_HELP_STRING([--with-default-stylesheet],
-			   [Full path to default stylesheet used in tests. (default is no stylesheet)]),
+			   [Full path to default stylesheet used in tests. (default=no stylesheet)]),
 	    default_stylesheet="$withval", :)
 if test "x$with_default_stylesheet" = "x" ; then
   DEFAULT_STYLESHEET=$default_stylesheet_default
@@ -100,7 +100,7 @@ else
 fi
 AC_DEFINE_UNQUOTED(DEFAULT_STYLESHEET,
 	           $DEFAULT_STYLESHEET,
-	           [Full path to default stylesheet, if any.  Set to false value if no default.])
+	           [Full path to default stylesheet, if any.  (default=false)])
 
 #
 # Whether or not to output form for updating results interactively.
@@ -165,7 +165,7 @@ AC_SUBST(TESTSUCCESS)
 test_results_default=testresults.xml
 AC_ARG_WITH(test_results,
 	    AC_HELP_STRING([--with-test-results],
-			   [Filename of test results XML file. (default is testresults.xml)]),
+			   [Filename of test results XML file. (default=testresults.xml)]),
 	    test_results="$withval", :)
 if test "x$with_test_results" = "x" ; then
   TEST_RESULTS=$test_results_default
@@ -183,7 +183,7 @@ AC_SUBST(TEST_RESULTS)
 testsuites_default=testsuites.xml
 AC_ARG_WITH(testsuites,
 	    AC_HELP_STRING([--with-testsuites],
-			   [Filename of testsuites XML file that references individual 'testsuite.xml' files from one or more test suites. (default is testsuites.xml)]),
+			   [Filename of testsuites XML file that references individual 'testsuite.xml' files from one or more test suites. (default=testsuites.xml)]),
 	    testsuites="$withval", :)
 if test "x$with_testsuites" = "x" ; then
   TESTSUITES=$testsuites_default
