@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testsuite profile="xmlroff Test Suite">
-  
+
   <testcases profile="expression" base="expression">
-    
-    <test id="expression1" fo="multiple" xml="inherited-property-value.fo" results="inherited-property-value.pdf">Use inherited-property-value() in expressions for font-size property, including using function with property other than font-size and using as part of a larger expression.</test>
-    <test id="from-table-column1" fo="multiple" xml="from-table-column1.fo">Testing from-table-column() with expressions that should fail because they are used on FOs that are not descendants of fo:table-cell.</test>
-    <test id="from-table-column2" fo="multiple" xml="from-table-column2.fo">Testing from-table-column() with a non-inherited property. This should fail.</test>
-    <test id="from-table-column3" fo="multiple" xml="from-table-column3.fo">Testing from-table-column(NCName) with a non-inherited property. This should fail.</test>
-    <test id="from-table-column4" fo="multiple" xml="from-table-column4.fo">Testing from-table-column(NCName) with bogus property name. This should fail.</test>
-    <test id="from-table-column5" fo="multiple" xml="from-table-column5.fo">Testing column-number="from-table-column()". This should fail.</test>
-    <test id="from-table-column6" fo="multiple" xml="from-table-column6.fo">Testing font-size="from-table-column(font-size)".</test>
-    <test id="from-table-column7" fo="multiple" xml="from-table-column7.fo">Testing font-size="from-table-column()" when no corresponding fo:table-column. This should fail.</test>
+
+    <test id="expression1" fo="multiple" xml="inherited-property-value.fo" results="results/expression1.pdf">Use inherited-property-value() in expressions for font-size property, including using function with property other than font-size and using as part of a larger expression.</test>
+    <test id="from-table-column1" fo="multiple" xml="from-table-column1.fo">from-table-column() with expressions that should fail because they are used on FOs that are not descendants of fo:table-cell.</test>
+    <test id="from-table-column2" fo="multiple" xml="from-table-column2.fo">from-table-column() with a non-inherited property. This should fail.</test>
+    <test id="from-table-column3" fo="multiple" xml="from-table-column3.fo">from-table-column(NCName) with a non-inherited property. This should fail.</test>
+    <test id="from-table-column4" fo="multiple" xml="from-table-column4.fo">from-table-column(NCName) with bogus property name. This should fail.</test>
+    <test id="from-table-column5" fo="multiple" xml="from-table-column5.fo">column-number="from-table-column()". This should fail.</test>
+    <test id="from-table-column6" fo="multiple" xml="from-table-column6.fo">font-size="from-table-column(font-size)".</test>
+    <test id="from-table-column7" fo="multiple" xml="from-table-column7.fo">font-size="from-table-column()" when no corresponding fo:table-column. This should fail.</test>
   </testcases>
   <testcases profile="fo" base="fo">
     <testcases profile="block" base="block">
       <testcases profile="block" base="block">
         <test id="start-indent-percentage" fo="block"
     xml="start-indent-percentage.fo"
-    results="start-indent-percentage.pdf">Test start-indent percentage.</test>
+    results="results/start-indent-percentage.pdf">start-indent percentage.</test>
       </testcases>
     </testcases>
     <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
       <testcases profile="region-body" base="region-body">
         <test id="region-body-overflow1" fo="region-body" xml="region-body-overflow1.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow unspecified.</test>
+      results="results/region-body-overflow1.pdf">800pt "I" with overflow unspecified.</test>
       <test id="region-body-overflow2" fo="region-body" xml="region-body-overflow2.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow="visible".</test>
+      results="results/region-body-overflow2.pdf">800pt "I" with overflow="visible".</test>
       <test id="region-body-overflow3" fo="region-body" xml="region-body-overflow3.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow="hidden".</test>
+      results="results/region-body-overflow3.pdf">800pt "I" with overflow="hidden".</test>
       <test id="region-body-overflow4" fo="region-body" xml="region-body-overflow4.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow="scroll".</test>
+      results="results/region-body-overflow4.pdf">800pt "I" with overflow="scroll".</test>
       <test id="region-body-overflow5" fo="region-body" xml="region-body-overflow5.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow="error-if-overflow".</test>
+      results="results/region-body-overflow5.pdf">800pt "I" with overflow="error-if-overflow".</test>
       <test id="region-body-overflow6" fo="region-body" xml="region-body-overflow6.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow="auto".</test>
+      results="results/region-body-overflow6.pdf">800pt "I" with overflow="auto".</test>
       <test id="region-body-overflow7" fo="region-body" xml="region-body-overflow7.fo"
-      results="region-body-overflow1.pdf">800pt "I" with overflow="inherit".</test>
+      results="results/region-body-overflow7.pdf">800pt "I" with overflow="inherit".</test>
     </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
-        <test id="external-graphic-1" fo="external-graphic" xml="external-graphic-1.fo">Testing external-graphic.</test>
+        <test id="external-graphic-1" fo="external-graphic" xml="external-graphic-1.fo" results="results/external-graphic-1.pdf">external-graphic.</test>
         <test id="external-graphic-2" fo="external-graphic"
-    xml="external-graphic-2.fo">Two graphics should be formatted next
+    xml="external-graphic-2.fo" results="results/external-graphic-2.pdf">Two graphics should be formatted next
     to each other with no gap.</test>
         <test id="external-graphic-3" fo="external-graphic"
-    xml="external-graphic-3.fo">Two graphics should be formatted next
+    xml="external-graphic-3.fo" results="results/external-graphic-3.pdf">Two graphics should be formatted next
     to each other with no gap.</test>
         <test id="external-graphic-4" fo="external-graphic"
-    xml="external-graphic-4.fo">content-width as percentage and no
+    xml="external-graphic-4.fo" results="results/external-graphic-4.pdf">content-width as percentage and no
     specified content-height.</test>
         <test id="external-graphic-5" fo="external-graphic"
-    xml="external-graphic-5.fo">"xmlroff XSL formatter" image.</test>
+    xml="external-graphic-5.fo" results="results/external-graphic-5.pdf">"xmlroff XSL formatter" image.</test>
         <test id="external-graphic-6" fo="external-graphic"
-    xml="external-graphic-6.fo">"xmlroff XSL formatter" image with transparent background in fo:external-graphic with yellow background.</test>
+    xml="external-graphic-6.fo" results="results/external-graphic-6.pdf">"xmlroff XSL formatter" image with transparent background in fo:external-graphic with yellow background.</test>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
-      <test id="list-1" fo="multiple" xml="list-1.fo">Testing lists.</test>
-      <test id="list-2" fo="multiple" xml="list-2.fo">Testing lists.</test>
+      <test id="list-1" fo="multiple" xml="list-1.fo">lists.</test>
+      <test id="list-2" fo="multiple" xml="list-2.fo">lists.</test>
     </testcases>
     <testcases profile="other" base="other">
     </testcases>
@@ -73,52 +73,52 @@
     <testcases profile="accessability" base="accessability">
     </testcases>
     <testcases profile="block-line" base="block-line">
-      <test id="text-align-start" fo="block" xml="text-align-start.fo" results="text-align-start.pdf">Use text-align="start" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-center" fo="block" xml="text-align-center.fo" results="text-align-center.pdf">Use text-align="center" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-end" fo="block" xml="text-align-end.fo" results="text-align-end.pdf">Use text-align="end" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-justify" fo="block" xml="text-align-justify.fo" results="text-align-justify.pdf">Use text-align="justify" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-inside" fo="block" xml="text-align-inside.fo" results="text-align-inside.pdf">Use text-align="inside" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-outside" fo="block" xml="text-align-outside.fo" results="text-align-outside.pdf">Use text-align="outside" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-left" fo="block" xml="text-align-left.fo" results="text-align-left.pdf">Use text-align="left" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
-      <test id="text-align-right" fo="block" xml="text-align-right.fo" results="text-align-right.pdf">Use text-align="right" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-start" fo="block" xml="text-align-start.fo" results="results/text-align-start.pdf">Use text-align="start" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-center" fo="block" xml="text-align-center.fo" results="results/text-align-center.pdf">Use text-align="center" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-end" fo="block" xml="text-align-end.fo" results="results/text-align-end.pdf">Use text-align="end" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-justify" fo="block" xml="text-align-justify.fo" results="results/text-align-justify.pdf">Use text-align="justify" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-inside" fo="block" xml="text-align-inside.fo" results="results/text-align-inside.pdf">Use text-align="inside" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-outside" fo="block" xml="text-align-outside.fo" results="results/text-align-outside.pdf">Use text-align="outside" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-left" fo="block" xml="text-align-left.fo" results="results/text-align-left.pdf">Use text-align="left" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="text-align-right" fo="block" xml="text-align-right.fo" results="results/text-align-right.pdf">Use text-align="right" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
     </testcases>
     <testcases profile="border-padding-background" base="border-padding-background">
-      <test id="background-color1" fo="multiple" xml="background-color1.fo" results="background-color1.pdf">Test background-color property with the 16 named colors.</test>
-      <test id="border-after-style1" fo="multiple" xml="border-after-style1.fo"      results="border-after-style1.pdf">Test border-after-style property.</test>
-      <test id="border-before-style1" fo="multiple" xml="border-before-style1.fo"      results="border-before-style1.pdf">Test border-before-style property.</test>
-      <test id="border-bottom-style1" fo="multiple" xml="border-bottom-style1.fo"      results="border-bottom-style1.pdf">Test border-bottom-style property.</test>
-      <test id="border-end-style1" fo="multiple" xml="border-end-style1.fo"      results="border-end-style1.pdf">Test border-end-style property.</test>
-      <test id="border-left-style1" fo="multiple" xml="border-left-style1.fo" results="border-left-style1.pdf">Test border-left-style property.</test>
-      <test id="border-right-style1" fo="multiple" xml="border-right-style1.fo"      results="border-right-style1.pdf">Test border-right-style property.</test>
-      <test id="border-start-style1" fo="multiple" xml="border-start-style1.fo"      results="border-start-style1.pdf">Test border-start-style property.</test>
-      <test id="border-top-style1" fo="multiple" xml="border-top-style1.fo"      results="border-top-style1.pdf">Test border-top-style property.</test>
+      <test id="background-color1" fo="multiple" xml="background-color1.fo" results="results/background-color1.pdf">background-color property with the 16 named colors.</test>
+      <test id="border-after-style1" fo="multiple" xml="border-after-style1.fo"      results="results/border-after-style1.pdf">border-after-style property.</test>
+      <test id="border-before-style1" fo="multiple" xml="border-before-style1.fo"      results="results/border-before-style1.pdf">border-before-style property.</test>
+      <test id="border-bottom-style1" fo="multiple" xml="border-bottom-style1.fo"      results="results/border-bottom-style1.pdf">border-bottom-style property.</test>
+      <test id="border-end-style1" fo="multiple" xml="border-end-style1.fo"      results="results/border-end-style1.pdf">border-end-style property.</test>
+      <test id="border-left-style1" fo="multiple" xml="border-left-style1.fo" results="results/border-left-style1.pdf">border-left-style property.</test>
+      <test id="border-right-style1" fo="multiple" xml="border-right-style1.fo"      results="results/border-right-style1.pdf">border-right-style property.</test>
+      <test id="border-start-style1" fo="multiple" xml="border-start-style1.fo"      results="results/border-start-style1.pdf">border-start-style property.</test>
+      <test id="border-top-style1" fo="multiple" xml="border-top-style1.fo"      results="results/border-top-style1.pdf">border-top-style property.</test>
       <test id="padding-after1" fo="multiple" xml="padding-after1.fo"
-      results="padding-after1.pdf">Test padding-after property.</test>
+      results="results/padding-after1.pdf">padding-after property.</test>
       <test id="padding-before1" fo="multiple" xml="padding-before1.fo"
-      results="padding-before1.pdf">Test padding-before property.</test>
+      results="results/padding-before1.pdf">padding-before property.</test>
       <test id="padding-before2" fo="multiple" xml="padding-before2.fo"
-      results="padding-before2.pdf">Test .length and .conditionality
+      results="results/padding-before2.pdf">.length and .conditionality
       components of padding-before property.</test>
       <test id="padding-before3" fo="multiple" xml="padding-before3.fo"
-      results="padding-before3.pdf">Test .conditionality of
+      results="results/padding-before3.pdf">.conditionality of
       padding-before when leading edge in a reference area.</test>
       <test id="padding-bottom1" fo="multiple" xml="padding-bottom1.fo"
-      results="padding-bottom1.pdf">Test padding-bottom property.</test>
+      results="results/padding-bottom1.pdf">padding-bottom property.</test>
       <test id="padding-end1" fo="multiple" xml="padding-end1.fo"
-      results="padding-end1.pdf">Test padding-end property.</test>
+      results="results/padding-end1.pdf">padding-end property.</test>
       <test id="padding-left1" fo="multiple" xml="padding-left1.fo"
-      results="padding-left1.pdf">Test padding-left property.</test>
+      results="results/padding-left1.pdf">padding-left property.</test>
       <test id="padding-right1" fo="multiple" xml="padding-right1.fo"
-      results="padding-right1.pdf">Test padding-right property.</test>
+      results="results/padding-right1.pdf">padding-right property.</test>
       <test id="padding-start1" fo="multiple" xml="padding-start1.fo"
-      results="padding-start1.pdf">Test padding-start property.</test>
+      results="results/padding-start1.pdf">padding-start property.</test>
       <test id="padding-top1" fo="multiple" xml="padding-top1.fo"
-      results="padding-top1.pdf">Test padding-top property.</test>
+      results="results/padding-top1.pdf">padding-top property.</test>
     </testcases>
     <testcases profile="character" base="character">
     </testcases>
     <testcases profile="color" base="color">
-      <test id="color1" fo="multiple" xml="color1.fo" results="color1.pdf">Demonstrate support for the 16 color keywords</test>
+      <test id="color1" fo="multiple" xml="color1.fo" results="results/color1.pdf">Demonstrate support for the 16 color keywords</test>
     </testcases>
     <testcases profile="dynamic" base="dynamic">
     </testcases>
@@ -126,25 +126,25 @@
     </testcases>
     <testcases profile="font" base="font">
       <test id="font-size" fo="block" xml="font-size.fo"
-      results="font-size.pdf">Demonstrate support for the
+      results="results/font-size.pdf">Demonstrate support for the
       'font-size' property.</test>
       <test id="font-size-fail" fo="block"
       xml="font-size-fail.fo">Demonstrate catching the failure
       conditions for the 'font-size' property.</test>
       <test id="font-stretch" fo="block" xml="font-stretch.fo"
-      results="font-size.pdf">Demonstrate support for the
+      results="results/font-size.pdf">Demonstrate support for the
       'font-stretch' property.</test>
       <test id="font-weight-sans-serif" fo="block"
       xml="font-weight-sans-serif.fo"
-      results="font-weight-sans-serif.pdf">Demonstrate support for the
+      results="results/font-weight-sans-serif.pdf">Demonstrate support for the
       'font-weight' property.  Note that most systems will not have
       every weight for the 'sans-serif' font.</test>
       <test id="font-weight-serif" fo="block" xml="font-weight-serif.fo"
-      results="font-weight-serif.pdf">Demonstrate support for the
+      results="results/font-weight-serif.pdf">Demonstrate support for the
       'font-weight' property.  Note that most systems will not have
       every weight for the '-serif' font.</test>
       <test id="font-weight-monospace" fo="block" xml="font-weight-monospace.fo"
-      results="font-weight-monospace.pdf">Demonstrate support for the
+      results="results/font-weight-monospace.pdf">Demonstrate support for the
       'font-weight' property.  Note that most systems will not have
       every weight for the 'monospace' font.</test>
     </testcases>
@@ -170,55 +170,55 @@
     </testcases>
     <testcases profile="shorthand" base="shorthand">
       <test id="border1" fo="multiple" xml="border1.fo"
-      results="border1.pdf">Test border property with one value.</test>
+      results="results/border1.pdf">border property with one value.</test>
       <test id="border2" fo="multiple" xml="border2.fo"
-      results="border2.pdf">Test border property with two values.</test>
+      results="results/border2.pdf">border property with two values.</test>
       <test id="border3" fo="multiple" xml="border3.fo"
-      results="border3.pdf">Test border property with three values.</test>
+      results="results/border3.pdf">border property with three values.</test>
       <test id="border-color1" fo="multiple" xml="border-color1.fo"
-      results="border-color1.pdf">Test border-color property with one value.</test>
+      results="results/border-color1.pdf">border-color property with one value.</test>
       <test id="border-color2" fo="multiple" xml="border-color2.fo"
-      results="border-color2.pdf">Test border-color property with two values.</test>
+      results="results/border-color2.pdf">border-color property with two values.</test>
       <test id="border-color3" fo="multiple" xml="border-color3.fo"
-      results="border-color3.pdf">Test border-color property with three values.</test>
+      results="results/border-color3.pdf">border-color property with three values.</test>
       <test id="border-color4" fo="multiple" xml="border-color4.fo"
-      results="border-color4.pdf">Test border-color property with four values.</test>
+      results="results/border-color4.pdf">border-color property with four values.</test>
       <test id="border-color5" fo="multiple" xml="border-color5.fo"
-      results="border-color5.pdf">Test border-color property overridden by four border-*-color values.</test>
+      results="results/border-color5.pdf">border-color property overridden by four border-*-color values.</test>
       <test id="border-style1" fo="multiple" xml="border-style1.fo"
-      results="border-style1.pdf">Test border-style property with one value.</test>
+      results="results/border-style1.pdf">border-style property with one value.</test>
       <test id="border-style2" fo="multiple" xml="border-style2.fo"
-      results="border-style2.pdf">Test border-style property with two values.</test>
+      results="results/border-style2.pdf">border-style property with two values.</test>
       <test id="border-style3" fo="multiple" xml="border-style3.fo"
-      results="border-style3.pdf">Test border-style property with three values.</test>
+      results="results/border-style3.pdf">border-style property with three values.</test>
       <test id="border-style4" fo="multiple" xml="border-style4.fo"
-      results="border-style4.pdf">Test border-style property with four values.</test>
+      results="results/border-style4.pdf">border-style property with four values.</test>
       <test id="border-style5" fo="multiple" xml="border-style5.fo"
-      results="border-style5.pdf">Test border-style property overridden by four border-*-style values.</test>
+      results="results/border-style5.pdf">border-style property overridden by four border-*-style values.</test>
       <test id="border-width1" fo="multiple" xml="border-width1.fo"
-      results="border-width1.pdf">Test border-width property with one value.</test>
+      results="results/border-width1.pdf">border-width property with one value.</test>
       <test id="border-width2" fo="multiple" xml="border-width2.fo"
-      results="border-width2.pdf">Test border-width property with two values.</test>
+      results="results/border-width2.pdf">border-width property with two values.</test>
       <test id="border-width3" fo="multiple" xml="border-width3.fo"
-      results="border-width3.pdf">Test border-width property with three values.</test>
+      results="results/border-width3.pdf">border-width property with three values.</test>
       <test id="border-width4" fo="multiple" xml="border-width4.fo"
-      results="border-width4.pdf">Test border-width property with four values.</test>
+      results="results/border-width4.pdf">border-width property with four values.</test>
       <test id="border-width5" fo="multiple" xml="border-width5.fo"
-      results="border-width5.pdf">Test border-width property overridden by four border-*-width values.</test>
+      results="results/border-width5.pdf">border-width property overridden by four border-*-width values.</test>
       <test id="padding1" fo="multiple" xml="padding1.fo"
-      results="padding1.pdf">Test padding property with one value.</test>
+      results="results/padding1.pdf">padding property with one value.</test>
       <test id="padding2" fo="multiple" xml="padding2.fo"
-      results="padding2.pdf">Test padding property with two values.</test>
+      results="results/padding2.pdf">padding property with two values.</test>
       <test id="padding3" fo="multiple" xml="padding3.fo"
-      results="padding3.pdf">Test padding property with three values.</test>
+      results="results/padding3.pdf">padding property with three values.</test>
       <test id="padding4" fo="multiple" xml="padding4.fo"
-      results="padding4.pdf">Test padding property with four values.</test>
+      results="results/padding4.pdf">padding property with four values.</test>
       <test id="padding5" fo="multiple" xml="padding5.fo"
-      results="padding5.pdf">Test padding property with one percentage value.</test>
+      results="results/padding5.pdf">padding property with one percentage value.</test>
       <test id="padding6" fo="multiple" xml="padding6.fo"
-      results="padding6.pdf">Test padding property with two percentage values.</test>
+      results="results/padding6.pdf">padding property with two percentage values.</test>
       <test id="padding7" fo="multiple" xml="padding7.fo"
-      results="padding7.pdf">Test padding property with two percentage values.</test>
+      results="results/padding7.pdf">padding property with two percentage values.</test>
     </testcases>
     <testcases profile="table" base="table">
     </testcases>
@@ -230,16 +230,16 @@
   </testcases>
 
   <testcases profile="structure" base="structure">
-    
+
     <test id="element-content" fo="multiple" xml="element-content.fo">A non-whitespace character where only element content is allowed should cause an error.</test>
 
   </testcases>
 
   <testcases profile="multiple" base="multiple">
 
-    <test id="simple" fo="multiple" xml="simple.fo">Test color, alignment-adjust, and font properties.</test>
+    <test id="simple" fo="multiple" xml="simple.fo">color, alignment-adjust, and font properties.</test>
     <test id="unsupported-property" fo="multiple"
-    xml="unsupported-property.fo">Test handling of an unsupported property.</test>
+    xml="unsupported-property.fo">Handling of an unsupported property.</test>
 
   </testcases>
 </testsuite>
