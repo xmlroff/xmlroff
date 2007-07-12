@@ -1,3 +1,9 @@
+Changes between 0.3.99 and 0.5.1:
+
+* Corrected wrong keep-together.within-line enumeration tokens (#18)
+* Updated logo used by external-graphic-5 (#12)
+* Added 'results' PDFs where xmlroff produces correct results
+
 Changes between 0.3.8 and 0.3.99:
 
 * Minor changes to existing tests so results more visible

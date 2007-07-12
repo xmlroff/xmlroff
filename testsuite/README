@@ -1,9 +1,26 @@
-This is part of the xmlroff XSL Formatter project.
-
-See http://www.xmlroff.org/.
-
 This testsuite is used in conjunction with the 'xmlroff-testing'
 package to test xmlroff.
+
+This is part of the xmlroff XSL Formatter project.
+
+-----------------------------------------------------------------------
+xmlroff is a fast, free, high-quality, multi-platform XSL formatter
+that aims to excel at DocBook formatting and that integrates easily
+with other programs and with scripting languages.
+
+The xmlroff XSL Formatter is a library -- libfo -- and a command-line
+program -- xmlroff -- for formatting XML according to the XSL 1.0
+Recommendation.
+
+See http://xmlroff.org/.
+-----------------------------------------------------------------------
+
+The version numbers of 'testsuite' releases are the same as the
+version of xmlroff that is current at the time of the 'testsuite'
+release.  However, any version of this package may be used with any
+version of xmlroff, although using the newest 'testsuite' version is
+recommended since new versions tend to have more tests, bug fixes and,
+occasionally, better documentation.
 
 
 Structure
@@ -75,6 +92,5 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-tonygraham@users.sourceforge.net
-9 March 2005
+12 July 2007
 
