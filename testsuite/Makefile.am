@@ -6,4 +6,5 @@ EXTRA_DIST = \
 
 dist-hook:
 	(tar cf - `find . -name \*.fo` | (cd $(distdir) ; tar xf -))
+	(tar cf - `find . -name \*.pdf` | (cd $(distdir) ; tar xf -))
 
