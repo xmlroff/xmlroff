@@ -1,0 +1,44 @@
+07/12/07 10:40:11 tkg [77]
+	* trunk/testsuite/ChangeLog.pre-0.5 (moved)
+	Moved old changes out of ChangeLog to ChangeLog.pre-0.5.
+
+07/12/07 10:38:50 tkg [76]
+	* trunk/testsuite/Makefile.am (modified)
+	Added PDF files to distribution.
+
+07/12/07 10:33:15 tkg [75]
+	* trunk/testsuite/.cvsignore (deleted)
+	Unneeded.
+
+07/12/07 10:32:17 tkg [74]
+	Added many results files.
+
+07/12/07 10:30:58 tkg [73]
+	* trunk/testsuite/AUTHORS (modified)
+	* trunk/testsuite/COPYING (modified)
+	* trunk/testsuite/NEWS (modified)
+	* trunk/testsuite/README (modified)
+	* trunk/testsuite/configure.ac (modified)
+	Updated for 0.5.1.
+
+07/12/07 10:29:39 tkg [72]
+	* trunk/testsuite/testsuite.xml (modified)
+	Prefixed 'results/' to @results values.  Removed 'Test' and 'Testing'
+	verbiage from descriptions.
+
+07/10/07 20:35:31 tkg [54]
+	* trunk/testsuite/property/font/font-weight-monospace.fo (modified)
+	* trunk/testsuite/property/font/font-weight-sans-serif.fo (modified)
+	* trunk/testsuite/property/font/font-weight-serif.fo (modified)
+	Corrected keep-together.within-page value to 'always'.
+
+07/10/07 20:34:43 tkg [53]
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.png (modified)
+	Updated logo.  Fixes #12.
+
+07/10/07 20:33:59 tkg [52]
+	* trunk/testsuite/autogen.sh (modified)
+	Made executable.
+
+04/19/07 13:30:44 tkg [13]
+	xmlroff testsuite.
