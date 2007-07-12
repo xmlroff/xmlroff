@@ -91,13 +91,14 @@
     td.spec {background-color: red; text-align: center}
     td.other {background-color: white; text-align: center}
     td.not-yet-verified {background-color: silver; text-align: center}
-    tr.coloured {background-color: #DDEEFF}
+    .coloured {background-color: #DDEEFF}
+    td.coloured {border-top: 3pt solid white}
     .coloured2 {background-color: #CCDDFF}
-    .coloured2 {border-top: 3pt solid white}
+    td.coloured2 {border-top: 3pt solid white}
     .coloured3 {background-color: #BBCCFF}
-    .coloured3 {border-top: 6pt solid white}
+    td.coloured3 {border-top: 6pt solid white}
     .coloured4 {background-color: #99BBFF}
-    .coloured4 {border-top: 18pt solid white}
+    td.coloured4 {border-top: 18pt solid white}
     .coloured5 {background-color: #99AAFF}
     tr.diff {background-color: #FFEEEE}
         </style>
@@ -301,6 +302,43 @@
         </h4>
       </td>
       <td class="coloured2">
+        <xsl:call-template name="nav-table">
+          <xsl:with-param name="top-id" select="$testsuite-id"/>
+        </xsl:call-template>
+      </td>
+<!--
+      <td>
+        <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
+          <input type="submit" name="submit" value="Regenerate"/>
+        </form>
+      </td>
+-->
+    </tr>
+
+    <xsl:apply-templates>
+      <xsl:with-param name="testsuite-id" select="$testsuite-id"/>
+      <xsl:with-param name="top-testcases-id" select="$top-testcases-id"/>
+      <xsl:with-param name="results-top-base" select="$results-top-base"/>
+    </xsl:apply-templates>
+  </xsl:template>
+
+  <xsl:template match="testcases/testcases/testcases/testcases">
+    <xsl:param name="my-testcases-id"
+      select="translate(normalize-space(@profile), ' ', '-')"/>
+    <xsl:param name="testsuite-id"/>
+    <xsl:param name="top-testcases-id"
+      select="$my-testcases-id"/>
+    <xsl:param name="results-top-base" select="@base"/>
+
+    <tr>
+      <td colspan="5" class="coloured">
+        <h4>
+          <a name="{$my-testcases-id}">
+            <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
+          </a>
+        </h4>
+      </td>
+      <td class="coloured">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
