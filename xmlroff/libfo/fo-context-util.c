@@ -482,6 +482,7 @@ fo_context_util_spaces_resolve (FoContext *context,
   g_return_if_fail (context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (context));
 
+  /* space-before */
   shorthand =
     context->space_before != NULL ?
     fo_property_get_value (context->space_before) : NULL;
@@ -520,11 +521,15 @@ fo_context_util_spaces_resolve (FoContext *context,
 						   space,
 						   NULL);
       fo_context_set_space_before (context, new_space_before);
-      g_object_unref (space);
       g_object_unref (new_space_before);
     }
   else
-    fo_context_set_space_before (context, NULL);
+    {
+      fo_context_set_space_before (context, NULL);
+    }
+
+  g_object_unref (space);
+  space = NULL;
 
   fo_context_set_space_before_minimum (context, NULL);
   fo_context_set_space_before_optimum (context, NULL);
@@ -532,6 +537,7 @@ fo_context_util_spaces_resolve (FoContext *context,
   fo_context_set_space_before_precedence (context, NULL);
   fo_context_set_space_before_condity (context, NULL);
 
+  /* space-after */
   shorthand =
     context->space_after ?
     fo_property_get_value (context->space_after) : NULL;
@@ -567,11 +573,15 @@ fo_context_util_spaces_resolve (FoContext *context,
 						  space,
 						  NULL);
       fo_context_set_space_after (context, new_space_after);
-      g_object_unref (space);
       g_object_unref (new_space_after);
     }
   else
-    fo_context_set_space_after (context, NULL);
+    {
+      fo_context_set_space_after (context, NULL);
+    }
+
+  g_object_unref (space);
+  space = NULL;
 
   fo_context_set_space_after_minimum (context, NULL);
   fo_context_set_space_after_optimum (context, NULL);
@@ -579,6 +589,7 @@ fo_context_util_spaces_resolve (FoContext *context,
   fo_context_set_space_after_precedence (context, NULL);
   fo_context_set_space_after_condity (context, NULL);
 
+  /* space-start */
   shorthand =
     context->space_start ?
     fo_property_get_value (context->space_start) : NULL;
@@ -614,12 +625,17 @@ fo_context_util_spaces_resolve (FoContext *context,
 						  space,
 						  NULL);
       fo_context_set_space_start (context, new_space_start);
-      g_object_unref (space);
       g_object_unref (new_space_start);
     }
   else
-    fo_context_set_space_start (context, NULL);
+    {
+      fo_context_set_space_start (context, NULL);
+    }
 
+  g_object_unref (space);
+  space = NULL;
+
+  /* space-end */
   shorthand =
     context->space_end ?
     fo_property_get_value (context->space_end) : NULL;
@@ -655,12 +671,15 @@ fo_context_util_spaces_resolve (FoContext *context,
 						space,
 						NULL);
       fo_context_set_space_end (context, new_space_end);
-      g_object_unref (space);
       g_object_unref (new_space_end);
     }
   else
-    fo_context_set_space_end (context, NULL);
+    {
+      fo_context_set_space_end (context, NULL);
+    }
 
+  g_object_unref (space);
+  space = NULL;
 }
 
 /**
