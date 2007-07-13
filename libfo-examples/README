@@ -1,0 +1,74 @@
+This directory includes examples of using the libfo library from the
+xmlroff XSL Formatter.
+
+See http://xmlroff.org/.
+
+All of these example programs accept the same or similar command-line
+arguments as xmlroff itself.  All of them will display their usage in
+response to the '--help' command-line parameter.
+
+xmlroff-basic
+-------------
+
+xmlroff-basic demonstrates the 'basic' interface to libfo that does
+not use either GObject or FoObject.
+
+xmlroff-init2
+-------------
+
+xmlroff-init2 demonstrates using the 'basic' interface with your own
+memory allocation functions.
+
+xmlroff-libfo
+-------------
+
+xmlroff-libfo demonstrates using libfo through the finer granularity
+FoXslFormatter (and FoLibfoContext, FoXsltTransformer, and FoXmlDoc)
+objects.
+
+xmlroff-text-tree
+-----------------
+
+xmlroff-text-tree demonstrates accessing the FO tree as FoNode
+objects.
+
+xmlroff-text-tree2
+------------------
+
+xmlroff-text-tree2 demonstrates accessing the area tree as GObjects.
+
+xmlroff-gmodule
+---------------
+
+xmlroff-gmodule and gmodule-area-tree demonstrate using a loadable
+module that accesses the area tree as GObjects.  You need to run 'make
+install' to install gmodule-area-tree.so (or use the one in the .libs
+directory) for it to work.
+
+Example:
+
+   make install
+   ./xmlroff-gmodule --module /usr/local/lib/libfo-examples/gmodule-area-tree.so <xml>
+
+or:
+
+   ./xmlroff-gmodule --module .libs/gmodule-area-tree.so <xml>
+
+
+License
+=======
+
+These examples are licensed under the terms of a BSD-style license.
+See the file COPYING for details.
+
+
+Mailing List
+============
+
+xmlroff and libfo are discussed on the
+xmlroff-list@lists.sourceforge.net mailing list.  See
+http://lists.sourceforge.net/lists/listinfo/xmlroff-list
+
+Tony Graham
+tonygraham@users.sourceforge.net
+20 October 2004

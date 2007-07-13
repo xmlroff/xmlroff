@@ -1,0 +1,19 @@
+Changes between 0.2.7 and 0.3.0:
+
+* Removed support for PDFlib backend of xmlroff
+
+Changes between 0.2.3.1 and 0.2.7:
+
+* Added xmlroff-gmodule.c and gmodule-area-tree.c to demonstrate
+* loading a loadable module that can access FO and area trees.
+* Added xmlroff-text-tree.c and xmlroff-text-tree2.c to demonstrate
+  accessing FO and area trees after initial formatting.
+* Changed to use GnomePrint backend as default.
+
+Changes between 0.2.3 and 0.2.3.1:
+
+* Added xmlroff-libfo.c to distribution.
+
+What is new in libfo-examples 0.2.3:
+
+* Initial public release

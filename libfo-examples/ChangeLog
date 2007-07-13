@@ -1,0 +1,116 @@
+2004-10-20  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.0 ===
+
+	* configure.ac: Changed to refer to 'GNOME Print backend of
+	xmlroff', not PangoPDF.
+
+	* NEWS: Updated for libfo-examples 0.3.0.
+
+	* gmodule-area-tree.c, xmlroff-basic.c, xmlroff-gmodule.c,
+	xmlroff-libfo.c, xmlroff-text-tree.c, xmlroff-text-tree2.c:
+	Removed '-compress' param.  Improved initial comments.  Stopped
+	some compiler warnings.
+
+	* README: Added xmlroff-gmodule usage examples.  Added titles.
+
+2004-10-12  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* gmodule-area-tree.c, xmlroff-gmodule.c, xmlroff-libfo.c,
+	xmlroff-text-tree.c, xmlroff-text-tree2.c: Expunged mentions of
+	PDFlib.
+
+	* configure.ac: Updated for changes from libfo-0.3 to libfo-0.3,
+	pangopdf to pangoxsl.
+
+2004-06-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.7 ===
+
+	* README: Updated for xmlroff-text-tree, xmlroff-text-tree2,
+	xmlroff-gmodule, and gmodule-area-tree.
+
+	* NEWS: Updated for 0.2.7.
+
+	* xmlroff-text-tree.c: Removed a cast to stop a compiler warning.
+
+	* configure.ac: Added check for gmodule-2.0.
+
+	* autogen.sh: Changed project name to 'libfo-examples'.
+
+	* Makefile.am: Added items for xmlroff-gmodule,
+	xmlroff-text-tree2, and gmodule-area-tree.
+
+	* gmodule-area-tree.c, xmlroff-gmodule.c: Demonstration of a
+	separate loadable module that shows area tree.
+
+	* xmlroff-text-tree2.c: Displays area tree using on
+	g_object_get_property() to access tree.
+
+2004-05-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.ac: Changed long description.  Upped version to 0.2.7.
+	Added check for GTK+ and for libfo backends.
+
+	* autogen.sh: Added support for libtool 1.5*.
+
+	* Makefile.am, xmlroff-text-tree.c: Added xmlroff-text-tree.c to
+	demonstrate accessing FO tree as GObjects.
+
+	* README: Modified project name, changed homepage to
+	http://www.xmlroff.org/.
+
+2003-07-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff-libfo.c: Changed to default to gp backend.  Updated
+	fo_xsl_formatter unref style.
+
+2003-07-18  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Updated for re-inclusion of xmlroff-libfo.
+
+	* xmlroff-libfo.c: Updated to use fo_xsl_formatter_draw() instead
+	of fo_area_to_pdf().
+
+	* Makefile.am: Added xmlroff-libfo back as Make target.
+
+2003-07-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.2.3.1 ===
+
+	* configure.ac: Increased version number to 0.2.3.1. since
+	xmlroff-libfo.c added to dist.
+
+	* Makefile.am: Corrected G_LOG_DOMAIN symbol to 'libfo-examples'.
+
+2003-07-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* autogen.sh, configure.ac: Corrected project name to
+	'libfo-examples' since now separate project.
+
+	* Makefile.am: Updated for use as separate project not in
+	subdirectory of xmlroff project.
+
+	* xmlroff-libfo.c: Updated to match real 'xmlroff' but can't
+	compile in absence of some headers.
+
+	* xmlroff-basic.c, xmlroff-init2.c: Updated initial comment,
+	stopped allowing one-dash parameters.
+
+	* AUTHORS, autogen.sh, ChangeLog, configure.ac, COPYING, NEWS,
+	README: New files.
+
+2003-05-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff-libfo.c: Added 'libfo/' to (possibly new) '#include
+	<fo-doc*.h>'.
+
+2003-03-25  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* xmlroff-libfo.c: Changes to match FoDoc/FoDocPDFLIB and
+	FoLibfoContext changes.
+
+2003-03-19  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am, xmlroff-basic.c, xmlroff-init2.c, xmlroff-libfo.c:
+	Added examples of using top-level interfaces to libfo.
