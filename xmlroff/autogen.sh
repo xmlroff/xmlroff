@@ -9,6 +9,7 @@ cd $srcdir
 PROJECT=xmlroff
 TEST_TYPE=-f
 FILE=xmlroff/xmlroff.c
+AC_CONFIG_AUX_DIR=config
 
 DIE=0
 
@@ -55,7 +56,7 @@ test $TEST_TYPE $FILE || {
 }
 
 test -d config || {
-	echo "Creating AC_CONFIG_AUX_DIR, \`config'."
+	echo "Creating AC_CONFIG_AUX_DIR, \`$AC_CONFIG_AUX_DIR'."
 	mkdir config
 }
 
