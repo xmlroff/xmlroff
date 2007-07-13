@@ -85,8 +85,6 @@ libfo_compat_make_compatible (FoXmlDoc       *result_tree,
 		       base);
   g_free (base);
 
-  fo_xml_doc_unref (stylesheet_doc);
-
   if (tmp_error != NULL)
     {
       g_propagate_error (error,

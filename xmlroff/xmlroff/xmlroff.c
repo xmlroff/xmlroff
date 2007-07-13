@@ -485,7 +485,7 @@ main (gint    argc,
   if (xslt_file != NULL)
     {
       /* When there is an XSLT file specified, need to
-	 use an FoXsltTransformer before formatting result. */
+	 do a transform before formatting result. */
       xml_doc = fo_xml_doc_new_from_filename (xml_file,
 					      libfo_context,
 					      &error);
@@ -504,7 +504,6 @@ main (gint    argc,
       exit_if_error (error);
 
       fo_xml_doc_unref (xml_doc);
-      fo_xml_doc_unref (stylesheet_doc);
     }
   else
     {
@@ -517,7 +516,7 @@ main (gint    argc,
       exit_if_error (error);
     }
 
-  /* Maybe make the FO XML document safe for libfo to process. */
+  /* Maybe make the FO XML document is safe for libfo to process. */
   if (compat == TRUE)
     {
       FoXmlDoc *old_result_tree = result_tree;

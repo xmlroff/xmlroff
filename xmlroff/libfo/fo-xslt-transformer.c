@@ -43,12 +43,23 @@ fo_xslt_transformer_error_quark (void)
 }
 
 
+/**
+ * fo_xslt_transformer_do_transform:
+ * @xml_doc:        Input document.
+ * @stylesheet_doc: Stylesheet document.
+ * @error:          Indication of any error that occurred.
+ * 
+ * Apply @stylesheet_doc to @xml_doc and return the result.
+ *
+ * Frees @stylesheet_doc.
+ *
+ * Return value: A new result tree that is freed by the caller.
+ **/
 FoXmlDoc *
 fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 				  FoXmlDoc          *stylesheet_doc,
 				  GError           **error)
 {
-  xsltStylesheetPtr stylesheet;
   FoXmlDoc *result_tree = NULL;
 
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
@@ -72,7 +83,7 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
       return NULL;
     }
 
-  stylesheet =
+  xsltStylesheetPtr stylesheet =
     xsltParseStylesheetDoc (fo_xml_doc_get_xml_doc (stylesheet_doc));
 
   if (stylesheet == NULL)
@@ -86,10 +97,7 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
     }
   else
     {
-      xmlDocPtr result_doc;
-      gchar *base = NULL;
-
-      result_doc =
+      xmlDocPtr result_doc =
 	xsltApplyStylesheet(stylesheet,
 			    fo_xml_doc_get_xml_doc (xml_doc),
 			    NULL);
@@ -104,7 +112,9 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 	  return NULL;
 	}
 
-      base = fo_xml_doc_get_base (xml_doc);
+      xsltFreeStylesheet (stylesheet);
+
+      gchar *base = fo_xml_doc_get_base (xml_doc);
 
       result_tree = fo_xml_doc_new ();
       fo_xml_doc_set_xml_doc (result_tree,
