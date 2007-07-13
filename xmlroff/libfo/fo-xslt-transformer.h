@@ -1,5 +1,5 @@
 /* Fo
- * fo-xslt-transformer.c: Boxed object type for libxslt XSLT processor
+ * fo-xslt-transformer.h: Boxed object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
