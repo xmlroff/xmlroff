@@ -646,6 +646,7 @@ fo_simple_page_master_validate (FoFo      *fo,
       g_print ("Master name: %s\n", master_name);
       */
       fo_tree_master_name_add (tree, master_name, fo);
+      g_free (master_name);
     }
   else
     {

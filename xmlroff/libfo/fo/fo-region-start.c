@@ -879,6 +879,7 @@ fo_region_start_validate (FoFo      *fo,
       fo_simple_page_master_region_name_add (simple_page_master,
 					     region_name,
 					     fo);
+      g_free (region_name);
     }
   else
     {
