@@ -79,7 +79,6 @@ libfo_compat_make_compatible (FoXmlDoc       *result_tree,
 
   compatible_result = fo_xslt_transformer_do_transform (result_tree,
 							stylesheet_doc,
-							libfo_context,
 							&tmp_error);
   
   fo_xml_doc_set_base (compatible_result,

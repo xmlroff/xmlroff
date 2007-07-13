@@ -46,12 +46,10 @@ fo_xslt_transformer_error_quark (void)
 FoXmlDoc *
 fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 				  FoXmlDoc          *stylesheet_doc,
-				  FoLibfoContext    *libfo_context,
 				  GError           **error)
 {
   xsltStylesheetPtr stylesheet;
   FoXmlDoc *result_tree = NULL;
-  GError *tmp_error = NULL;
 
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 

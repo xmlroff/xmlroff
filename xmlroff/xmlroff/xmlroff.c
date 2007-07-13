@@ -500,7 +500,6 @@ main (gint    argc,
 
       result_tree = fo_xslt_transformer_do_transform (xml_doc,
 						      stylesheet_doc,
-						      libfo_context,
 						      &error);
       exit_if_error (error);
 

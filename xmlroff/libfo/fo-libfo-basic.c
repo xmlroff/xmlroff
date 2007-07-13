@@ -250,7 +250,6 @@ fo_libfo_format (FoLibfoContext *libfo_context,
       result =
 	fo_xml_doc_ref (fo_xslt_transformer_do_transform (xml_doc,
 							  stylesheet_doc,
-							  libfo_context,
 							  &tmp_error));
 
       if (tmp_error != NULL)

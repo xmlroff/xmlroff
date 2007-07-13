@@ -11,7 +11,7 @@
 #define __FO_XSLT_TRANSFORMER_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/fo-libfo-context.h>
+#include <libfo/fo-xml-doc.h>
 
 G_BEGIN_DECLS
 
@@ -29,7 +29,6 @@ typedef enum
 
 FoXmlDoc * fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 					     FoXmlDoc          *stylesheet_doc,
-					     FoLibfoContext    *libfo_context,
 					     GError           **error);
 
 G_END_DECLS
