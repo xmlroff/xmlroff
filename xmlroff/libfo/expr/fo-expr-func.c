@@ -226,19 +226,20 @@ fo_expr_func_floor (FoExprContext *context,
   return fo_datatype_floor (arg);
 }
 
-static const gchar*
+static gchar*
 opt_arg_to_property_name (FoExprContext *context,
 			  gint           nargs,
 			  GError       **error)
 {
   FoDatatype *arg = NULL;
-  const gchar *property_name = NULL;
+  gchar *property_name = NULL;
 
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
   if (nargs == 0)
     {
-      property_name = fo_expr_context_get_property_name (context);
+      property_name =
+	g_strdup (fo_expr_context_get_property_name (context));
     }
   else if (nargs == 1)
     {
@@ -306,7 +307,7 @@ fo_expr_func_from_nearest_specified_value (FoExprContext *context,
   FoProperty *property = NULL;
   FoDatatype *result_datatype = NULL;
   GError *error = NULL;
-  const gchar *property_name = NULL;
+  gchar *property_name = NULL;
 
   property_name = opt_arg_to_property_name (context,
 					    nargs,
@@ -314,6 +315,11 @@ fo_expr_func_from_nearest_specified_value (FoExprContext *context,
 
   if (error != NULL)
     {
+      if (property_name != NULL)
+	{
+	  g_free (property_name);
+	}
+
       result_datatype =
 	fo_expr_eval_propagate_error (context,
 				      error);
@@ -336,6 +342,8 @@ fo_expr_func_from_nearest_specified_value (FoExprContext *context,
 				    FO_EXPR_EVAL_ERROR_INVALID_PROPERTY);
 	}
     }
+
+  g_free (property_name);
 
   return result_datatype;
 }
@@ -1079,7 +1087,7 @@ FoDatatype*
 fo_expr_func_pcw_prop_fixed (FoExprContext *context,
 			     gint           nargs)
 {
-  FoFo *current_fo = NULL;
+  const FoFo *current_fo = NULL;
   FoFo *table = NULL;
   FoDatatype *arg = NULL;
   FoDatatype *result_datatype = NULL;
