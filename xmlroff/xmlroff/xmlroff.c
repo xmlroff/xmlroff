@@ -19,7 +19,6 @@
 #if ENABLE_GP
 #include <libfo/fo-doc-gp.h>
 #endif
-#include <libfo/libfo-compat.h>
 
 typedef enum
 {
@@ -152,10 +151,6 @@ main (gint    argc,
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
   const gchar *format_string = NULL;
-  /*
-  const gchar *embed_string = NULL;
-  FoEnumFontEmbed embed_mode = FO_ENUM_FONT_EMBED_INVALID;
-  */
   FoEnumFormat format_mode = FO_ENUM_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
@@ -176,16 +171,6 @@ main (gint    argc,
       _("Output file"),
       _("filename")
     },
-    /* To be used when control of font embedding works:
-    { "embed",
-      0,
-      0,
-      G_OPTION_ARG_STRING,
-      &embed_string,
-      _("Font embedding mode"),
-      _("{none|nonbase|all}")
-    },
-    */
     { "format",
       0,
       0,
@@ -365,34 +350,6 @@ main (gint    argc,
   fo_libfo_init ();
   libfo_context = fo_libfo_context_new ();
 
-  /*
-  if (embed_string != NULL)
-    {
-      if (strcmp (embed_string, "none") == 0)
-	{
-	  embed_mode = FO_ENUM_FONT_EMBED_NONE;
-	}
-      else if (strcmp (embed_string, "nonbase") == 0)
-	{
-	  embed_mode = FO_ENUM_FONT_EMBED_NONBASE;
-	}
-      else if (strcmp (embed_string, "all") == 0)
-	{
-	  embed_mode = FO_ENUM_FONT_EMBED_ALL;
-	}
-      else
-	{
-	  goption_success = FALSE;
-	}
-
-      if (goption_success == TRUE)
-	{
-	  fo_libfo_context_set_font_embed (libfo_context,
-					   embed_mode);
-	}
-    }
-  */
-
   fo_libfo_context_set_validation (libfo_context,
 				   validation);
 
@@ -516,7 +473,8 @@ main (gint    argc,
       exit_if_error (error);
     }
 
-  /* Maybe make the FO XML document is safe for libfo to process. */
+  /* Maybe make sure the FO XML document is safe for libfo to
+     process. */
   if (compat == TRUE)
     {
       FoXmlDoc *old_result_tree = result_tree;
