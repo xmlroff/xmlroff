@@ -210,21 +210,17 @@ fo_static_content_new (void)
 }
 
 void
-fo_static_content_children_properties_resolve (FoFo       *this_fo,
-					       FoArea     *this_fo_parent_area,
-					       FoArea    **new_area,
-					       GHashTable *prop_eval_hash,
-					       FoDoc      *fo_doc,
-					       gboolean    continue_after_error,
+fo_static_content_children_properties_resolve (FoFo         *this_fo,
+					       FoArea       *this_fo_parent_area,
+					       FoArea      **new_area,
+					       GHashTable   *prop_eval_hash,
+					       FoDoc        *fo_doc,
+					       gboolean      continue_after_error,
 					       FoDebugFlag   debug_level,
 					       FoWarningFlag warning_mode,
 					       GError      **error)
 {
-  FoNode *fo_node;
-  GError *tmp_error = NULL;
-  FoArea *area = NULL;
   FoArea *this_fo_area = NULL;
-  FoArea *child_fo_parent_area;
   FoFoAreaNew2Context area_new2_context;
   FoPropertyResolveContext prop_context;
 
@@ -268,8 +264,6 @@ gboolean
 fo_static_content_validate_content (FoFo    *fo,
                                     GError **error)
 {
-  GError *tmp_error = NULL;
-
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);

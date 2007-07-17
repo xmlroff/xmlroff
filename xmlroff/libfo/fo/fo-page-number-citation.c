@@ -1212,7 +1212,7 @@ gboolean
 fo_page_number_citation_validate_content (FoFo    *fo,
                                           GError **error)
 {
-  GError *tmp_error = NULL;
+  /*GError *tmp_error = NULL;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_PAGE_NUMBER_CITATION (fo), TRUE);
@@ -1504,12 +1504,11 @@ fo_page_number_citation_debug_dump_properties (FoFo *fo,
  **/
 void
 fo_page_number_citation_get_text_attr_list (FoFo    *fo_inline_fo,
-					    FoDoc   *fo_doc,
+					    FoDoc   *fo_doc G_GNUC_UNUSED,
 					    GString *text,
 					    GList  **attr_glist,
-					    guint    debug_level)
+					    guint    debug_level G_GNUC_UNUSED)
 {
-  FoNode *fo_child_node;
   FoPageNumberCitation *fo_page_number_citation;
   PangoAttribute *pango_attr;
   GList *my_attr_glist = NULL;

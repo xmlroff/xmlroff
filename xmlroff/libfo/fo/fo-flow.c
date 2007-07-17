@@ -102,7 +102,6 @@ fo_flow_class_init (FoFlowClass *klass)
   fofo_class->validate2 = fo_flow_validate;
   fofo_class->update_from_context = fo_flow_update_from_context;
   fofo_class->debug_dump_properties = fo_flow_debug_dump_properties;
-  fofo_class->area_new = fo_flow_area_new;
   fofo_class->area_new2 = fo_flow_area_new2;
 
   g_object_class_install_property
@@ -221,8 +220,6 @@ gboolean
 fo_flow_validate_content (FoFo    *fo,
                           GError **error)
 {
-  GError *tmp_error = NULL;
-
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_FLOW (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);

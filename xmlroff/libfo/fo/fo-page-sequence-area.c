@@ -26,7 +26,7 @@ fo_page_sequence_area_new (FoFo    *fo_node,
 			   FoDoc   *fo_doc,
 			   FoArea  *parent_area,
 			   FoArea **new_area,
-			   guint    debug_level)
+			   guint    debug_level G_GNUC_UNUSED)
 {
   FoFo *page_master;
   FoProperty *writing_mode;

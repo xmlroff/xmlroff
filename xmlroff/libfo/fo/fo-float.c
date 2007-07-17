@@ -30,7 +30,6 @@ struct _FoFloatClass
   
 };
 
-static void fo_float_init        (FoFloat      *fo_float);
 static void fo_float_class_init  (FoFloatClass *klass);
 static void fo_float_set_property (GObject         *object,
                                   guint            prop_id,
@@ -62,7 +61,7 @@ fo_float_get_type (void)
         NULL,           /* class_data */
         sizeof (FoFloat),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_float_init,
+        NULL,		/* instance_init */
 	NULL		/* value_table */
       };
       
@@ -85,11 +84,6 @@ fo_float_get_type (void)
 }
 
 static void
-fo_float_init (FoFloat *fo_float)
-{
-}
-
-static void
 fo_float_class_init (FoFloatClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -102,8 +96,6 @@ fo_float_class_init (FoFloatClass *klass)
   object_class->get_property = fo_float_get_property;
 
   FO_FO_CLASS (klass)->debug_dump_properties = fo_float_debug_dump_properties;
-  FO_FO_CLASS (klass)->update_from_context = fo_float_update_from_context;
-
 }
 
 static void
@@ -120,7 +112,7 @@ fo_float_finalize (GObject *object)
 static void
 fo_float_set_property (GObject         *object,
                          guint            prop_id,
-                         const GValue    *value,
+                         const GValue    *value G_GNUC_UNUSED,
                          GParamSpec      *pspec)
 {
   FoFloat *fo_float;
@@ -138,7 +130,7 @@ fo_float_set_property (GObject         *object,
 static void
 fo_float_get_property (GObject         *object,
                          guint            prop_id,
-                         GValue          *value,
+                         GValue          *value G_GNUC_UNUSED,
                          GParamSpec      *pspec)
 {
   FoFloat *fo_float;
@@ -164,14 +156,6 @@ FoFo*
 fo_float_new (void)
 {
   return FO_FO (g_object_new (fo_float_get_type (), NULL));
-}
-
-void
-fo_float_update_from_context (FoFo *fo, FoContext *context)
-{
-  g_return_if_fail (fo != NULL);
-  g_return_if_fail (FO_IS_FLOAT (fo));
-
 }
 
 void

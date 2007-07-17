@@ -161,7 +161,9 @@ fo_tree_new (void)
 }
 
 static void
-fo_tree_free_hash_key (gpointer key, gpointer value, gpointer user_data)
+fo_tree_free_hash_key (gpointer key,
+		       gpointer value G_GNUC_UNUSED,
+		       gpointer user_data G_GNUC_UNUSED)
 {
   g_free (key);
 }

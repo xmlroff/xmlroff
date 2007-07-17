@@ -17,11 +17,6 @@
 
 G_BEGIN_DECLS
 
-void fo_flow_area_new (FoFo    *fo,
-		       FoDoc   *fo_doc,
-		       FoArea  *parent_area,
-		       FoArea **new_area,
-		       guint    debug_level);
 void fo_flow_area_new2 (FoFo                *fo,
 			FoFoAreaNew2Context *context,
 			GError             **error);

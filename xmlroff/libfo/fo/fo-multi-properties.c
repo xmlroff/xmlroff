@@ -257,7 +257,7 @@ gboolean
 fo_multi_properties_validate_content (FoFo    *fo,
                                       GError **error)
 {
-  GError *tmp_error = NULL;
+  /*GError *tmp_error = NULL;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_MULTI_PROPERTIES (fo), TRUE);

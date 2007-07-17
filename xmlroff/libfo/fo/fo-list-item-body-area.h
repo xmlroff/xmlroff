@@ -16,11 +16,6 @@
 
 G_BEGIN_DECLS
 
-void fo_list_item_body_area_new (FoFo    *fo,
-				 FoDoc   *fo_doc,
-				 FoArea  *parent_area,
-				 FoArea **new_area,
-				 guint    debug_level);
 void fo_list_item_body_area_new2 (FoFo                *fo_node,
 				  FoFoAreaNew2Context *context,
 				  GError             **error);

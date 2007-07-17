@@ -414,8 +414,8 @@ fo_simple_page_master_new (void)
  **/
 static void
 fo_simple_page_master_free_hash_key (gpointer key,
-				     gpointer value,
-				     gpointer user_data)
+				     gpointer value G_GNUC_UNUSED,
+				     gpointer user_data G_GNUC_UNUSED)
 {
   g_free (key);
 }

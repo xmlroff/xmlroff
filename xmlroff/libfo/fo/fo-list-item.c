@@ -236,7 +236,6 @@ fo_list_item_class_init (FoListItemClass *klass)
   fofo_class->validate2 = fo_list_item_validate;
   fofo_class->update_from_context = fo_list_item_update_from_context;
   fofo_class->debug_dump_properties = fo_list_item_debug_dump_properties;
-  fofo_class->area_new = fo_list_item_area_new;
   fofo_class->area_new2 = fo_list_item_area_new2;
 
   g_object_class_install_property
@@ -1198,7 +1197,7 @@ gboolean
 fo_list_item_validate_content (FoFo    *fo,
                                GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_LIST_ITEM (fo), TRUE);

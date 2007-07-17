@@ -324,13 +324,15 @@ fo_table_init (FoTable *fo_table)
  * Implements #GBaseInitFunc for #FoTableClass.
  **/
 void
-fo_table_base_class_init (FoTableClass *klass)
+fo_table_base_class_init (FoTableClass *klass G_GNUC_UNUSED)
 {
   FoExprEnv *proportional_env;
   FoExprEnv *proportional_fixed_env;
 
   fixed_env_list = fo_expr_env_list_new ();
 
+  /* Only table-related properties can use
+     proportional-column-width(). */
   proportional_env = fo_expr_env_new ();
   fo_expr_env_register_func (proportional_env,
 			     "proportional-column-width",
@@ -354,8 +356,9 @@ fo_table_base_class_init (FoTableClass *klass)
  * Implements #GBaseFinalizeFunc for #FoTableClass.
  **/
 void
-fo_table_base_class_finalize (FoTableClass *klass)
+fo_table_base_class_finalize (FoTableClass *klass G_GNUC_UNUSED)
 {
+  /* FIXME: Free the environments here. */
 }
 
 /**
@@ -1584,8 +1587,8 @@ fo_table_error_quark (void)
  **/
 static void
 fo_table_free_hash_key (gpointer key,
-			gpointer value,
-			gpointer user_data)
+			gpointer value G_GNUC_UNUSED,
+			gpointer user_data G_GNUC_UNUSED)
 {
   g_free (key);
 }

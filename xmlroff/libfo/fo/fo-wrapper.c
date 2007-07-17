@@ -273,10 +273,7 @@ fo_wrapper_validate_content (FoFo    *fo,
                              GError **error)
 {
   GError *tmp_error = NULL;
-  gboolean is_not_pcdata_or_inline = FALSE;
   gboolean is_not_pcdata_inline_block_neutral = FALSE;
-  gboolean is_not_block_or_whitespace = FALSE;
-  gboolean has_wrapper = FALSE;
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_WRAPPER (fo), TRUE);

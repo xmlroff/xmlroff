@@ -11,13 +11,14 @@
 #include "area/fo-area-reference.h"
 #include "area/fo-area-viewport-reference.h"
 #include "fo-region-body-private.h"
+#include "property/fo-property-writing-mode.h"
 
 void
 fo_region_body_area_new (FoFo    *fo,
-			 FoDoc   *fo_doc,
-			 FoArea  *parent_area,
+			 FoDoc   *fo_doc G_GNUC_UNUSED,
+			 FoArea  *parent_area G_GNUC_UNUSED,
 			 FoArea **new_area,
-			 guint    debug_level)
+			 guint    debug_level G_GNUC_UNUSED)
 {
   FoProperty *writing_mode;
 

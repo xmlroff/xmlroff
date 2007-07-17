@@ -11,7 +11,6 @@
 #define __FO_MARKER_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/fo-context.h>
 #include <libfo/fo/fo-fo.h>
 
 G_BEGIN_DECLS
@@ -27,11 +26,8 @@ typedef struct _FoMarkerClass FoMarkerClass;
 #define FO_MARKER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_MARKER, FoMarkerClass))
 
 
-GType         fo_marker_get_type      (void) G_GNUC_CONST;
-FoFo *fo_marker_new (void);
-
-void fo_marker_update_from_context (FoFo *fo,
-				   FoContext *context);
+GType   fo_marker_get_type (void) G_GNUC_CONST;
+FoFo  * fo_marker_new      (void);
 
 G_END_DECLS
 

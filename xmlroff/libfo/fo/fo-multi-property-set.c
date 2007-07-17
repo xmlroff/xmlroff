@@ -19,7 +19,6 @@ enum {
   PROP_ID
 };
 
-static void fo_multi_property_set_init        (FoMultiPropertySet      *fo_multi_property_set);
 static void fo_multi_property_set_class_init  (FoMultiPropertySetClass *klass);
 static void fo_multi_property_set_set_property (GObject         *object,
                                   guint            prop_id,
@@ -68,7 +67,8 @@ fo_multi_property_set_get_type (void)
         NULL,           /* class_data */
         sizeof (FoMultiPropertySet),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_multi_property_set_init,
+        NULL,		/* instance_init */
+	NULL		/* value_table */
       };
       
       object_type = g_type_register_static (FO_TYPE_FO,
@@ -77,17 +77,6 @@ fo_multi_property_set_get_type (void)
     }
   
   return object_type;
-}
-
-/**
- * fo_multi_property_set_init:
- * @fo_multi_property_set: FoMultiPropertySet object to initialise
- * 
- * Implements GInstanceInitFunc for FoMultiPropertySet
- **/
-void
-fo_multi_property_set_init (FoMultiPropertySet *fo_multi_property_set)
-{
 }
 
 /**
@@ -230,14 +219,14 @@ gboolean
 fo_multi_property_set_validate_content (FoFo    *fo,
                                         GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_MULTI_PROPERTY_SET (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
 
   return FALSE;
-
+  /*
  error:
   tmp_error = g_error_new (FO_FO_ERROR,
 			   FO_FO_ERROR_INVALID_CONTENT,
@@ -247,6 +236,7 @@ fo_multi_property_set_validate_content (FoFo    *fo,
   return fo_object_log_or_propagate_error (FO_OBJECT (fo),
 					   error,
 					   tmp_error);
+  */
 }
 
 /**

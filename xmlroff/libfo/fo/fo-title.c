@@ -935,7 +935,7 @@ gboolean
 fo_title_validate_content (FoFo    *fo,
                            GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_TITLE (fo), TRUE);

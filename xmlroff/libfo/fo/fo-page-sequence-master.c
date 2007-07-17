@@ -23,7 +23,6 @@ enum {
   PROP_MASTER_NAME
 };
 
-static void fo_page_sequence_master_init        (FoPageSequenceMaster      *fo_page_sequence_master);
 static void fo_page_sequence_master_class_init  (FoPageSequenceMasterClass *klass);
 static void fo_page_sequence_master_set_property (GObject         *object,
                                   guint            prop_id,
@@ -71,7 +70,7 @@ fo_page_sequence_master_get_type (void)
         NULL,           /* class_data */
         sizeof (FoPageSequenceMaster),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_page_sequence_master_init,
+        NULL,		/* instance_init */
 	NULL		/* value_table */
       };
       
@@ -81,17 +80,6 @@ fo_page_sequence_master_get_type (void)
     }
   
   return object_type;
-}
-
-/**
- * fo_page_sequence_master_init:
- * @fo_page_sequence_master: FoPageSequenceMaster object to initialise
- * 
- * Implements GInstanceInitFunc for FoPageSequenceMaster
- **/
-void
-fo_page_sequence_master_init (FoPageSequenceMaster *fo_page_sequence_master)
-{
 }
 
 /**

@@ -28,7 +28,7 @@
 
 static void
 fo_external_graphic_callback_test (gpointer data1,
-				   gpointer data2)
+				   gpointer data2 G_GNUC_UNUSED)
 {
   FoExternalGraphic *external_graphic;
   gfloat xscale;
@@ -74,7 +74,7 @@ fo_external_graphic_get_text_attr_list (FoFo    *fo_inline_fo,
 					FoDoc   *fo_doc,
 					GString *text,
 					GList  **attr_glist,
-					guint    debug_level)
+					guint    debug_level G_GNUC_UNUSED)
 {
   FoNode *fo_child_node;
   FoExternalGraphic *fo_external_graphic;

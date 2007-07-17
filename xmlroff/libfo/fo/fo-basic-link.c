@@ -1128,7 +1128,7 @@ gboolean
 fo_basic_link_validate_content (FoFo    *fo,
                                 GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_BASIC_LINK (fo), TRUE);
@@ -1436,7 +1436,9 @@ fo_basic_link_get_text_attr_list (FoFo    *fo_inline_fo,
 
   if (start_index != end_index)
     {
-      PangoAttribute *pango_attr;
+      /* FIXME: what is supposed to happen here? */
+
+      PangoAttribute *pango_attr G_GNUC_UNUSED;
 
     }
 

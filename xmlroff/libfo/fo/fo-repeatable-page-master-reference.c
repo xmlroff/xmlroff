@@ -214,7 +214,7 @@ gboolean
 fo_repeatable_page_master_reference_validate_content (FoFo    *fo,
                                                       GError **error)
 {
-  GError *tmp_error = NULL;
+  /*GError *tmp_error = NULL;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_REPEATABLE_PAGE_MASTER_REFERENCE (fo), TRUE);

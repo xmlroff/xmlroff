@@ -58,7 +58,6 @@ enum {
   PROP_UNICODE_BIDI
 };
 
-static void fo_bidi_override_init        (FoBidiOverride      *fo_bidi_override);
 static void fo_bidi_override_class_init  (FoBidiOverrideClass *klass);
 static void fo_bidi_override_inline_fo_init (FoInlineFoIface *iface);
 static void fo_bidi_override_set_property (GObject         *object,
@@ -112,7 +111,7 @@ fo_bidi_override_get_type (void)
         NULL,           /* class_data */
         sizeof (FoBidiOverride),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_bidi_override_init,
+        NULL,		/* instance_init */
 	NULL		/* value_table */
       };
       
@@ -132,17 +131,6 @@ fo_bidi_override_get_type (void)
     }
   
   return object_type;
-}
-
-/**
- * fo_bidi_override_init:
- * @fo_bidi_override: FoBidiOverride object to initialise
- * 
- * Implements GInstanceInitFunc for FoBidiOverride
- **/
-void
-fo_bidi_override_init (FoBidiOverride *fo_bidi_override)
-{
 }
 
 /**
@@ -451,14 +439,14 @@ gboolean
 fo_bidi_override_validate_content (FoFo    *fo,
                                    GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_BIDI_OVERRIDE (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
 
   return FALSE;
-
+  /*
  error:
   tmp_error = g_error_new (FO_FO_ERROR,
 			   FO_FO_ERROR_INVALID_CONTENT,
@@ -468,6 +456,7 @@ fo_bidi_override_validate_content (FoFo    *fo,
   return fo_object_log_or_propagate_error (FO_OBJECT (fo),
 					   error,
 					   tmp_error);
+  */
 }
 
 /**

@@ -30,7 +30,6 @@ struct _FoRetrieveMarkerClass
   
 };
 
-static void fo_retrieve_marker_init        (FoRetrieveMarker      *fo_retrieve_marker);
 static void fo_retrieve_marker_class_init  (FoRetrieveMarkerClass *klass);
 static void fo_retrieve_marker_set_property (GObject         *object,
                                   guint            prop_id,
@@ -62,7 +61,8 @@ fo_retrieve_marker_get_type (void)
         NULL,           /* class_data */
         sizeof (FoRetrieveMarker),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_retrieve_marker_init,
+        NULL,		/* instance_init */
+	NULL		/* value_table */
       };
       
       static const GInterfaceInfo fo_neutral_fo_info =
@@ -81,11 +81,6 @@ fo_retrieve_marker_get_type (void)
     }
   
   return object_type;
-}
-
-static void
-fo_retrieve_marker_init (FoRetrieveMarker *fo_retrieve_marker)
-{
 }
 
 static void
@@ -117,10 +112,10 @@ fo_retrieve_marker_finalize (GObject *object)
 
 
 static void
-fo_retrieve_marker_set_property (GObject         *object,
-                         guint            prop_id,
-                         const GValue    *value,
-                         GParamSpec      *pspec)
+fo_retrieve_marker_set_property (GObject     *object,
+				 guint        prop_id,
+				 const GValue *value G_GNUC_UNUSED,
+				 GParamSpec   *pspec)
 {
   FoRetrieveMarker *fo_retrieve_marker;
 
@@ -135,10 +130,10 @@ fo_retrieve_marker_set_property (GObject         *object,
 }
 
 static void
-fo_retrieve_marker_get_property (GObject         *object,
-                         guint            prop_id,
-                         GValue          *value,
-                         GParamSpec      *pspec)
+fo_retrieve_marker_get_property (GObject    *object,
+				 guint       prop_id,
+				 GValue     *value G_GNUC_UNUSED,
+				 GParamSpec *pspec)
 {
   FoRetrieveMarker *fo_retrieve_marker;
 
@@ -166,7 +161,8 @@ fo_retrieve_marker_new (void)
 }
 
 void
-fo_retrieve_marker_update_from_context (FoFo *fo, FoContext *context)
+fo_retrieve_marker_update_from_context (FoFo      *fo,
+					FoContext *context G_GNUC_UNUSED)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_RETRIEVE_MARKER (fo));
@@ -174,7 +170,8 @@ fo_retrieve_marker_update_from_context (FoFo *fo, FoContext *context)
 }
 
 void
-fo_retrieve_marker_debug_dump_properties (FoFo *fo, gint depth)
+fo_retrieve_marker_debug_dump_properties (FoFo *fo,
+					  gint  depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
 

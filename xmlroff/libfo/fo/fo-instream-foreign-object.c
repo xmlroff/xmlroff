@@ -1272,7 +1272,7 @@ gboolean
 fo_instream_foreign_object_validate_content (FoFo    *fo,
                                              GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_INSTREAM_FOREIGN_OBJECT (fo), TRUE);

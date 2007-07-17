@@ -25,11 +25,8 @@ typedef struct _FoFloatClass FoFloatClass;
 #define FO_FLOAT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_FLOAT, FoFloatClass))
 
 
-GType         fo_float_get_type      (void) G_GNUC_CONST;
-FoFo *fo_float_new (void);
-
-void fo_float_update_from_context (FoFo *fo,
-				   FoContext *context);
+GType   fo_float_get_type (void) G_GNUC_CONST;
+FoFo  * fo_float_new      (void);
 
 G_END_DECLS
 

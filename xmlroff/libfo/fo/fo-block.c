@@ -285,7 +285,6 @@ void
 fo_block_class_init (FoBlockClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  FoFoClass *fofo_class = FO_FO_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 

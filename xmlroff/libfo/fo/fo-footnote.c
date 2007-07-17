@@ -22,7 +22,6 @@ enum {
   PROP_SOURCE_DOCUMENT
 };
 
-static void fo_footnote_init        (FoFootnote      *fo_footnote);
 static void fo_footnote_class_init  (FoFootnoteClass *klass);
 static void fo_footnote_set_property (GObject         *object,
                                   guint            prop_id,
@@ -70,7 +69,7 @@ fo_footnote_get_type (void)
         NULL,           /* class_data */
         sizeof (FoFootnote),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_footnote_init,
+        NULL,		/* instance_init */
 	NULL		/* value_table */
       };
       
@@ -90,17 +89,6 @@ fo_footnote_get_type (void)
     }
   
   return object_type;
-}
-
-/**
- * fo_footnote_init:
- * @fo_footnote: FoFootnote object to initialise
- * 
- * Implements GInstanceInitFunc for FoFootnote
- **/
-void
-fo_footnote_init (FoFootnote *fo_footnote)
-{
 }
 
 /**
@@ -256,14 +244,14 @@ gboolean
 fo_footnote_validate_content (FoFo    *fo,
                               GError **error)
 {
-  GError *tmp_error;
+  /*GError *tmp_error;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_FOOTNOTE (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
 
   return FALSE;
-
+  /*
  error:
   tmp_error = g_error_new (FO_FO_ERROR,
 			   FO_FO_ERROR_INVALID_CONTENT,
@@ -273,6 +261,7 @@ fo_footnote_validate_content (FoFo    *fo,
   return fo_object_log_or_propagate_error (FO_OBJECT (fo),
 					   error,
 					   tmp_error);
+  */
 }
 
 /**

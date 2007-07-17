@@ -86,7 +86,7 @@ void
 fo_inline_fo_get_text_attr_list_default (FoFo    *fo_inline_fo,
 					 FoDoc   *fo_doc,
 					 GString *text,
-					 GList  **attr_glist,
+					 GList  **attr_glist G_GNUC_UNUSED,
 					 guint    debug_level)
 {
   FoNode *fo_child_node;

@@ -301,7 +301,7 @@ gboolean
 fo_page_sequence_validate_content (FoFo    *fo,
                                    GError **error)
 {
-  GError *tmp_error = NULL;
+  /*GError *tmp_error = NULL;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_PAGE_SEQUENCE (fo), TRUE);

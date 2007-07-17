@@ -29,16 +29,7 @@ struct _FoMarkerClass
   
 };
 
-static void fo_marker_init        (FoMarker      *fo_marker);
 static void fo_marker_class_init  (FoMarkerClass *klass);
-static void fo_marker_set_property (GObject         *object,
-                                  guint            prop_id,
-                                  const GValue    *value,
-                                  GParamSpec      *pspec);
-static void fo_marker_get_property   (GObject         *object,
-                                       guint            prop_id,
-                                       GValue          *value,
-                                       GParamSpec      *pspec);
 static void fo_marker_finalize    (GObject           *object);
 static void fo_marker_debug_dump_properties (FoFo *fo, gint depth);
 
@@ -61,7 +52,7 @@ fo_marker_get_type (void)
         NULL,           /* class_data */
         sizeof (FoMarker),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_marker_init,
+        NULL,		/* instance_init */
 	NULL		/* value_table */
       };
       
@@ -74,11 +65,6 @@ fo_marker_get_type (void)
 }
 
 static void
-fo_marker_init (FoMarker *fo_marker)
-{
-}
-
-static void
 fo_marker_class_init (FoMarkerClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -87,13 +73,8 @@ fo_marker_class_init (FoMarkerClass *klass)
   
   object_class->finalize = fo_marker_finalize;
 
-  object_class->set_property = fo_marker_set_property;
-  object_class->get_property = fo_marker_get_property;
-
   FO_FO_CLASS (klass)->debug_dump_properties = fo_marker_debug_dump_properties;
-  FO_FO_CLASS (klass)->update_from_context = fo_marker_update_from_context;
   FO_FO_CLASS (klass)->allow_mixed_content = TRUE;
-
 }
 
 static void
@@ -107,42 +88,6 @@ fo_marker_finalize (GObject *object)
 }
 
 
-static void
-fo_marker_set_property (GObject         *object,
-                         guint            prop_id,
-                         const GValue    *value,
-                         GParamSpec      *pspec)
-{
-  FoMarker *fo_marker;
-
-  fo_marker = FO_MARKER (object);
-
-  switch (prop_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-
-static void
-fo_marker_get_property (GObject         *object,
-                         guint            prop_id,
-                         GValue          *value,
-                         GParamSpec      *pspec)
-{
-  FoMarker *fo_marker;
-
-  fo_marker = FO_MARKER (object);
-
-  switch (prop_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-
 /**
  * fo_marker_new:
  * 
@@ -153,19 +98,13 @@ fo_marker_get_property (GObject         *object,
 FoFo*
 fo_marker_new (void)
 {
-  return FO_FO (g_object_new (fo_marker_get_type (), NULL));
+  return FO_FO (g_object_new (fo_marker_get_type (),
+			      NULL));
 }
 
 void
-fo_marker_update_from_context (FoFo *fo, FoContext *context)
-{
-  g_return_if_fail (fo != NULL);
-  g_return_if_fail (FO_IS_MARKER (fo));
-
-}
-
-void
-fo_marker_debug_dump_properties (FoFo *fo, gint depth)
+fo_marker_debug_dump_properties (FoFo *fo,
+				 gint  depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
 

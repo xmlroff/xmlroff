@@ -16,7 +16,6 @@ enum {
   PROP_0
 };
 
-static void     fo_marker_parent_base_init        (FoMarkerParentClass *klass);
 static void     fo_marker_parent_class_init       (FoMarkerParentClass *klass);
 static void     fo_marker_parent_finalize         (GObject             *object);
 static gboolean fo_marker_parent_validate_content (FoFo                *fo,
@@ -35,7 +34,7 @@ fo_marker_parent_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoMarkerParentClass),
-        (GBaseInitFunc) fo_marker_parent_base_init,
+        (GBaseInitFunc) NULL,
         (GBaseFinalizeFunc) NULL,
         (GClassInitFunc) fo_marker_parent_class_init,
         NULL,           /* class_finalize */
@@ -53,19 +52,6 @@ fo_marker_parent_get_type (void)
     }
 
   return object_type;
-}
-
-/**
- * fo_marker_parent_base_init:
- * @klass: #FoMarkerParentClass base class object to initialise.
- * 
- * Implements #GBaseInitFunc for #FoMarkerParent.
- **/
-void
-fo_marker_parent_base_init (FoMarkerParentClass *klass)
-{
-  FoFoClass *fo_fo_class = FO_FO_CLASS (klass);
-
 }
 
 /**
@@ -195,9 +181,7 @@ gboolean
 fo_marker_parent_validate_content (FoFo    *fo,
 				   GError **error)
 {
-  GError *tmp_error;
   gboolean parent_result = FALSE;
-  gboolean is_not_pcdata_inline_block_neutral = FALSE;
 
   g_return_val_if_fail (FO_IS_MARKER_PARENT (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
@@ -209,22 +193,9 @@ fo_marker_parent_validate_content (FoFo    *fo,
       return parent_result;
     }
 
-  /*
-  gchar *object_sprintf;
-  object_sprintf = fo_object_debug_sprintf (fo);
-
-  g_log(G_LOG_DOMAIN,
-	G_LOG_LEVEL_DEBUG,
-	 "%s",
-	 object_sprintf);
-
-  g_free (object_sprintf);
-  */
-
   if (fo_node_n_children (FO_NODE (fo)) != 0)
     {
       FoNode *child_node = fo_node_first_child (FO_NODE (fo));
-      FoFo *use_parent = fo;
 
       while (child_node)
 	{

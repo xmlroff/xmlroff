@@ -1421,10 +1421,10 @@ fo_character_debug_dump_properties (FoFo *fo,
  **/
 void
 fo_character_get_text_attr_list (FoFo *fo_inline_fo,
-				 FoDoc   *fo_doc,
+				 FoDoc   *fo_doc G_GNUC_UNUSED,
 				 GString *text,
 				 GList **attr_glist,
-				 guint debug_level)
+				 guint debug_level G_GNUC_UNUSED)
 {
   FoCharacter *fo_character;
   GList *my_attr_glist = NULL;
