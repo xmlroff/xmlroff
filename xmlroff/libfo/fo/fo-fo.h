@@ -106,9 +106,9 @@ void       fo_fo_area_new    (FoFo    *fo,
 			      guint    debug_level);
 #endif /* FO_DISABLE_DEPRECATED */
 
-void       fo_fo_area_new2   (FoFo *fo,
+void       fo_fo_area_new2   (FoFo                *fo,
 			      FoFoAreaNew2Context *context,
-			      GError **error);
+			      GError             **error);
 void fo_fo_trim_whitespace_children (FoFo *fo);
 /* "validate_content" functions for use with fo_node_traverse() */
 gboolean fo_fo_validate_content_empty (FoFo *fo,
@@ -117,13 +117,13 @@ gboolean fo_fo_validate_content_block_plus (FoFo *fo,
 					    GError **error);
 #if 0
 /* "validate_content" functions for use with fo_node_children_foreach() */
-void fo_fo_validate_pcdata_or_inline (FoNode *fo_node,
+void fo_fo_validate_pcdata_or_inline (FoNode   *fo_node,
 				      gboolean *is_not_pcdata_inline);
-void fo_fo_validate_block_or_whitespace (FoNode *fo_node,
+void fo_fo_validate_block_or_whitespace (FoNode   *fo_node,
 					 gboolean *is_not_block_or_whitespace);
 #endif
-void fo_fo_validate_pcdata_inline_block_neutral (FoNode *fo_node,
-						 gboolean *is_not_pcdata_inline_block_neutral);
+void fo_fo_validate_pcdata_inline_block_neutral (FoNode  *fo_node,
+						 gpointer data);
 FoFoAreaIterator* fo_fo_get_area_iterator      (FoFo *fo);
 FoArea*           fo_fo_area_iterator_get_area (const FoFoAreaIterator *iterator);
 gboolean          fo_fo_area_iterator_next     (FoFoAreaIterator *iterator);
