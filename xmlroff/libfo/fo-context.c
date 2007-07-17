@@ -206,27 +206,6 @@ static void fo_context_property_slist_foreach (gpointer   property,
 static void fo_context_debug_dump             (FoObject  *object,
 					       gint       depth);
 
-static FoProperty* fo_context_get_space_before_minimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_before_optimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_before_maximum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_before_condity (FoContext *fo_context);
-static FoProperty* fo_context_get_space_before_precedence (FoContext *fo_context);
-static FoProperty* fo_context_get_space_after_minimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_after_optimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_after_maximum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_after_condity (FoContext *fo_context);
-static FoProperty* fo_context_get_space_after_precedence (FoContext *fo_context);
-static FoProperty* fo_context_get_space_end_minimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_end_optimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_end_maximum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_end_condity (FoContext *fo_context);
-static FoProperty* fo_context_get_space_end_precedence (FoContext *fo_context);
-static FoProperty* fo_context_get_space_start_minimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_start_optimum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_start_maximum (FoContext *fo_context);
-static FoProperty* fo_context_get_space_start_condity (FoContext *fo_context);
-static FoProperty* fo_context_get_space_start_precedence (FoContext *fo_context);
-
 static gpointer parent_class;
 
 /**
@@ -9217,23 +9196,6 @@ fo_context_set_space_after (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_after_minimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-after-minimum" property of @fo_context.
- *
- * Return value: The "space-after-minimum" property value.
-**/
-FoProperty *
-fo_context_get_space_after_minimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_after_minimum;
-}
-
-/**
  * fo_context_set_space_after_minimum:
  * @fo_context: The #FoContext object.
  * @new_space_after_minimum: The new "space-after-minimum" property value.
@@ -9258,23 +9220,6 @@ fo_context_set_space_after_minimum (FoContext *fo_context,
     }
   fo_context->space_after_minimum = new_space_after_minimum;
   /*g_object_notify (G_OBJECT (fo_context), "space-after-minimum");*/
-}
-
-/**
- * fo_context_get_space_after_optimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-after-optimum" property of @fo_context.
- *
- * Return value: The "space-after-optimum" property value.
-**/
-FoProperty *
-fo_context_get_space_after_optimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_after_optimum;
 }
 
 /**
@@ -9305,23 +9250,6 @@ fo_context_set_space_after_optimum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_after_maximum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-after-maximum" property of @fo_context.
- *
- * Return value: The "space-after-maximum" property value.
-**/
-FoProperty *
-fo_context_get_space_after_maximum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_after_maximum;
-}
-
-/**
  * fo_context_set_space_after_maximum:
  * @fo_context: The #FoContext object.
  * @new_space_after_maximum: The new "space-after-maximum" property value.
@@ -9349,23 +9277,6 @@ fo_context_set_space_after_maximum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_after_precedence:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-after-precedence" property of @fo_context.
- *
- * Return value: The "space-after-precedence" property value.
-**/
-FoProperty *
-fo_context_get_space_after_precedence (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_after_precedence;
-}
-
-/**
  * fo_context_set_space_after_precedence:
  * @fo_context: The #FoContext object.
  * @new_space_after_precedence: The new "space-after-precedence" property value.
@@ -9390,23 +9301,6 @@ fo_context_set_space_after_precedence (FoContext *fo_context,
     }
   fo_context->space_after_precedence = new_space_after_precedence;
   /*g_object_notify (G_OBJECT (fo_context), "space-after-precedence");*/
-}
-
-/**
- * fo_context_get_space_after_condity:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-after-conditionality" property of @fo_context.
- *
- * Return value: The "space-after-conditionality" property value.
-**/
-FoProperty *
-fo_context_get_space_after_condity (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_after_condity;
 }
 
 /**
@@ -9481,23 +9375,6 @@ fo_context_set_space_before (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_before_minimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-before-minimum" property of @fo_context.
- *
- * Return value: The "space-before-minimum" property value.
-**/
-FoProperty *
-fo_context_get_space_before_minimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_before_minimum;
-}
-
-/**
  * fo_context_set_space_before_minimum:
  * @fo_context: The #FoContext object.
  * @new_space_before_minimum: The new "space-before-minimum" property value.
@@ -9522,23 +9399,6 @@ fo_context_set_space_before_minimum (FoContext *fo_context,
     }
   fo_context->space_before_minimum = new_space_before_minimum;
   /*g_object_notify (G_OBJECT (fo_context), "space-before-minimum");*/
-}
-
-/**
- * fo_context_get_space_before_optimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-before-optimum" property of @fo_context.
- *
- * Return value: The "space-before-optimum" property value.
-**/
-FoProperty *
-fo_context_get_space_before_optimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_before_optimum;
 }
 
 /**
@@ -9569,23 +9429,6 @@ fo_context_set_space_before_optimum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_before_maximum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-before-maximum" property of @fo_context.
- *
- * Return value: The "space-before-maximum" property value.
-**/
-FoProperty *
-fo_context_get_space_before_maximum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_before_maximum;
-}
-
-/**
  * fo_context_set_space_before_maximum:
  * @fo_context: The #FoContext object.
  * @new_space_before_maximum: The new "space-before-maximum" property value.
@@ -9613,23 +9456,6 @@ fo_context_set_space_before_maximum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_before_precedence:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-before-precedence" property of @fo_context.
- *
- * Return value: The "space-before-precedence" property value.
-**/
-FoProperty *
-fo_context_get_space_before_precedence (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_before_precedence;
-}
-
-/**
  * fo_context_set_space_before_precedence:
  * @fo_context: The #FoContext object.
  * @new_space_before_precedence: The new "space-before-precedence" property value.
@@ -9654,23 +9480,6 @@ fo_context_set_space_before_precedence (FoContext *fo_context,
     }
   fo_context->space_before_precedence = new_space_before_precedence;
   /*g_object_notify (G_OBJECT (fo_context), "space-before-precedence");*/
-}
-
-/**
- * fo_context_get_space_before_condity:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-before-conditionality" property of @fo_context.
- *
- * Return value: The "space-before-conditionality" property value.
-**/
-FoProperty *
-fo_context_get_space_before_condity (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_before_condity;
 }
 
 /**
@@ -9745,23 +9554,6 @@ fo_context_set_space_end (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_end_minimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-end-minimum" property of @fo_context.
- *
- * Return value: The "space-end-minimum" property value.
-**/
-FoProperty *
-fo_context_get_space_end_minimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_end_minimum;
-}
-
-/**
  * fo_context_set_space_end_minimum:
  * @fo_context: The #FoContext object.
  * @new_space_end_minimum: The new "space-end-minimum" property value.
@@ -9786,23 +9578,6 @@ fo_context_set_space_end_minimum (FoContext *fo_context,
     }
   fo_context->space_end_minimum = new_space_end_minimum;
   /*g_object_notify (G_OBJECT (fo_context), "space-end-minimum");*/
-}
-
-/**
- * fo_context_get_space_end_optimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-end-optimum" property of @fo_context.
- *
- * Return value: The "space-end-optimum" property value.
-**/
-FoProperty *
-fo_context_get_space_end_optimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_end_optimum;
 }
 
 /**
@@ -9833,23 +9608,6 @@ fo_context_set_space_end_optimum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_end_maximum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-end-maximum" property of @fo_context.
- *
- * Return value: The "space-end-maximum" property value.
-**/
-FoProperty *
-fo_context_get_space_end_maximum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_end_maximum;
-}
-
-/**
  * fo_context_set_space_end_maximum:
  * @fo_context: The #FoContext object.
  * @new_space_end_maximum: The new "space-end-maximum" property value.
@@ -9877,23 +9635,6 @@ fo_context_set_space_end_maximum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_end_precedence:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-end-precedence" property of @fo_context.
- *
- * Return value: The "space-end-precedence" property value.
-**/
-FoProperty *
-fo_context_get_space_end_precedence (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_end_precedence;
-}
-
-/**
  * fo_context_set_space_end_precedence:
  * @fo_context: The #FoContext object.
  * @new_space_end_precedence: The new "space-end-precedence" property value.
@@ -9918,23 +9659,6 @@ fo_context_set_space_end_precedence (FoContext *fo_context,
     }
   fo_context->space_end_precedence = new_space_end_precedence;
   /*g_object_notify (G_OBJECT (fo_context), "space-end-precedence");*/
-}
-
-/**
- * fo_context_get_space_end_condity:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-end-conditionality" property of @fo_context.
- *
- * Return value: The "space-end-conditionality" property value.
-**/
-FoProperty *
-fo_context_get_space_end_condity (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_end_condity;
 }
 
 /**
@@ -10009,23 +9733,6 @@ fo_context_set_space_start (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_start_minimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-start-minimum" property of @fo_context.
- *
- * Return value: The "space-start-minimum" property value.
-**/
-FoProperty *
-fo_context_get_space_start_minimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_start_minimum;
-}
-
-/**
  * fo_context_set_space_start_minimum:
  * @fo_context: The #FoContext object.
  * @new_space_start_minimum: The new "space-start-minimum" property value.
@@ -10050,23 +9757,6 @@ fo_context_set_space_start_minimum (FoContext *fo_context,
     }
   fo_context->space_start_minimum = new_space_start_minimum;
   /*g_object_notify (G_OBJECT (fo_context), "space-start-minimum");*/
-}
-
-/**
- * fo_context_get_space_start_optimum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-start-optimum" property of @fo_context.
- *
- * Return value: The "space-start-optimum" property value.
-**/
-FoProperty *
-fo_context_get_space_start_optimum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_start_optimum;
 }
 
 /**
@@ -10097,23 +9787,6 @@ fo_context_set_space_start_optimum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_start_maximum:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-start-maximum" property of @fo_context.
- *
- * Return value: The "space-start-maximum" property value.
-**/
-FoProperty *
-fo_context_get_space_start_maximum (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_start_maximum;
-}
-
-/**
  * fo_context_set_space_start_maximum:
  * @fo_context: The #FoContext object.
  * @new_space_start_maximum: The new "space-start-maximum" property value.
@@ -10141,23 +9814,6 @@ fo_context_set_space_start_maximum (FoContext *fo_context,
 }
 
 /**
- * fo_context_get_space_start_precedence:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-start-precedence" property of @fo_context.
- *
- * Return value: The "space-start-precedence" property value.
-**/
-FoProperty *
-fo_context_get_space_start_precedence (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_start_precedence;
-}
-
-/**
  * fo_context_set_space_start_precedence:
  * @fo_context: The #FoContext object.
  * @new_space_start_precedence: The new "space-start-precedence" property value.
@@ -10182,23 +9838,6 @@ fo_context_set_space_start_precedence (FoContext *fo_context,
     }
   fo_context->space_start_precedence = new_space_start_precedence;
   /*g_object_notify (G_OBJECT (fo_context), "space-start-precedence");*/
-}
-
-/**
- * fo_context_get_space_start_condity:
- * @fo_context: The @FoContext object.
- * 
- * Gets the "space-start-conditionality" property of @fo_context.
- *
- * Return value: The "space-start-conditionality" property value.
-**/
-FoProperty *
-fo_context_get_space_start_condity (FoContext *fo_context)
-{
-  g_return_val_if_fail (fo_context != NULL, NULL);
-  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
-
-  return fo_context->space_start_condity;
 }
 
 /**

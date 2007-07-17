@@ -453,7 +453,7 @@ fo_doc_cairo_begin_page (FoDoc   *fo_doc,
 
       fo_doc_cairo->current_filename =
 	g_strdup_printf ("%*s.%02d%s",
-			 (g_strrstr (fo_doc_cairo->base_filename, ".") -
+			 (int) (g_strrstr (fo_doc_cairo->base_filename, ".") -
 			  fo_doc_cairo->base_filename),
 			 fo_doc_cairo->base_filename,
 			 fo_doc_cairo->output_sequence,
@@ -1014,10 +1014,10 @@ fo_doc_cairo_fill_stroke (FoDoc *fo_doc)
 static void
 fo_doc_cairo_place_image (FoDoc   *fo_doc,
 			  FoImage *fo_image,
-			  gdouble  x,
-			  gdouble  y,
-			  gdouble  xscale,
-			  gdouble  yscale)
+			  gdouble  x G_GNUC_UNUSED,
+			  gdouble  y G_GNUC_UNUSED,
+			  gdouble  xscale G_GNUC_UNUSED,
+			  gdouble  yscale G_GNUC_UNUSED)
 {
   cairo_surface_t *surface;
   GdkPixbuf *pixbuf = g_object_ref (fo_pixbuf_get_pixbuf (fo_image));
@@ -1040,19 +1040,21 @@ fo_doc_cairo_place_image (FoDoc   *fo_doc,
   */
   if (has_alpha)
     {
-      surface = cairo_image_surface_create_for_data ((char *)raw_image,
-						     CAIRO_FORMAT_ARGB32,
-						     width,
-						     height,
-						     rowstride);
+      surface =
+	cairo_image_surface_create_for_data ((unsigned char *)raw_image,
+					     CAIRO_FORMAT_ARGB32,
+					     width,
+					     height,
+					     rowstride);
     }
   else
     {
-      surface = cairo_image_surface_create_for_data ((char *)raw_image,
-						     CAIRO_FORMAT_RGB24,
-						     width,
-						     height,
-						     rowstride);
+      surface =
+	cairo_image_surface_create_for_data ((unsigned char *)raw_image,
+					     CAIRO_FORMAT_RGB24,
+					     width,
+					     height,
+					     rowstride);
     }
 
   /*
@@ -1084,7 +1086,7 @@ fo_doc_cairo_do_run_callbacks (cairo_t *cr,
 
       if (attr_type == libfo_pango_attr_callback_get_type ())
 	{
-	  GValue values[1] = { { 0, } };
+	  GValue values[1] = { { 0, { {0}, {0} } } };
 
 	  g_value_init (&values[0], G_TYPE_POINTER);
 	  g_value_set_pointer (&values[0], cr);

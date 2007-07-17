@@ -116,17 +116,6 @@ fo_libfo_shutdown (void)
   return TRUE;
 }
 
-void
-fo_libfo_context_set (FoLibfoContext *libfo_context,
-		      const gchar    *key,
-		      const FoValue  *value)
-{
-  g_return_if_fail (FO_IS_LIBFO_CONTEXT (libfo_context));
-  g_return_if_fail (g_enum_get_value (g_type_class_peek (FO_TYPE_ENUM_TYPE),
-				      value->type) != NULL);
-
-}
-
 /**
  * fo_libfo_context_close:
  * @libfo_context: #FoLibfoContext to close.

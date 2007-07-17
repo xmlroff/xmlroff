@@ -153,7 +153,7 @@ fo_layout_gp_new_from_fo_doc (FoDoc *fo_doc)
  **/
 void
 fo_layout_gp_set_line_height (FoLayout *fo_layout,
-				  gfloat    line_height)
+			      gfloat    line_height G_GNUC_UNUSED)
 {
   g_return_if_fail (FO_IS_LAYOUT_GP (fo_layout));
 
@@ -171,7 +171,7 @@ fo_layout_gp_set_line_height (FoLayout *fo_layout,
  **/
 void
 fo_layout_gp_set_line_stacking_strategy (FoLayout *fo_layout,
-					 FoEnumEnum line_stacking_strategy)
+					 FoEnumEnum line_stacking_strategy G_GNUC_UNUSED)
 {
   g_return_if_fail (FO_IS_LAYOUT_GP (fo_layout));
 

@@ -209,7 +209,7 @@ fo_xml_doc_new_from_string (const gchar    *curr,
   
   FoXmlDoc *fo_xml_doc = fo_xml_doc_new ();
 
-  fo_xml_doc->xml_doc = xmlReadDoc (curr,
+  fo_xml_doc->xml_doc = xmlReadDoc ((xmlChar *) curr,
 				    URL, 
 				    encoding, 
 				    context_to_libxml2_options (libfo_context));
@@ -358,8 +358,8 @@ fo_xml_doc_get_base (FoXmlDoc *fo_xml_doc)
 
   g_return_val_if_fail (fo_xml_doc != NULL, NULL);
 
-  base = xmlNodeGetBase (NULL,
-			 (xmlNodePtr) fo_xml_doc->xml_doc);
+  base = (gchar *) xmlNodeGetBase (NULL,
+				   (xmlNodePtr) fo_xml_doc->xml_doc);
 
   return_base = g_strdup (base);
 

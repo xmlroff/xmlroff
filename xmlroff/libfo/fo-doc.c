@@ -272,9 +272,9 @@ fo_doc_new (void)
 
 void
 fo_doc_open_file_default (FoDoc          *fo_doc,
-			  const gchar    *filename,
-			  FoLibfoContext *libfo_context,
-			  GError        **error)
+			  const gchar    *filename G_GNUC_UNUSED,
+			  FoLibfoContext *libfo_context G_GNUC_UNUSED,
+			  GError        **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -536,9 +536,9 @@ fo_doc_set_base_dir (FoDoc      *fo_doc,
  **/
 void
 fo_doc_begin_page_default (FoDoc   *fo_doc,
-			   gdouble  width,
-			   gdouble  height,
-			   GError **error)
+			   gdouble  width G_GNUC_UNUSED,
+			   gdouble  height G_GNUC_UNUSED,
+			   GError **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -644,7 +644,7 @@ fo_doc_get_fill_color (FoDoc        *fo_doc)
  **/
 void
 fo_doc_set_fill_color_default (FoDoc        *fo_doc,
-			       FoDatatype   *color)
+			       FoDatatype   *color G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -714,7 +714,7 @@ fo_doc_get_stroke_color (FoDoc        *fo_doc)
  **/
 void
 fo_doc_set_stroke_color_default (FoDoc        *fo_doc,
-				 FoDatatype   *color)
+				 FoDatatype   *color G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -783,7 +783,7 @@ fo_doc_get_line_cap (FoDoc        *fo_doc)
  **/
 void
 fo_doc_set_line_cap_default (FoDoc        *fo_doc,
-			     FoDocLineCap  line_cap)
+			     FoDocLineCap  line_cap G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -852,7 +852,7 @@ fo_doc_get_line_join (FoDoc        *fo_doc)
  **/
 void
 fo_doc_set_line_join_default (FoDoc        *fo_doc,
-			      FoDocLineJoin line_join)
+			      FoDocLineJoin line_join G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -921,7 +921,7 @@ fo_doc_get_line_width (FoDoc        *fo_doc)
  **/
 void
 fo_doc_set_line_width_default (FoDoc        *fo_doc,
-			       gdouble        line_width)
+			       gdouble        line_width G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -963,8 +963,8 @@ fo_doc_set_line_width (FoDoc        *fo_doc,
  **/
 void
 fo_doc_set_dash_default (FoDoc        *fo_doc,
-			 gdouble        b,
-			 gdouble        w)
+			 gdouble        b G_GNUC_UNUSED,
+			 gdouble        w G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1011,8 +1011,8 @@ fo_doc_set_dash (FoDoc        *fo_doc,
  **/
 void
 fo_doc_translate_default (FoDoc        *fo_doc,
-			  gdouble        x,
-			  gdouble        y)
+			  gdouble        x G_GNUC_UNUSED,
+			  gdouble        y G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1139,8 +1139,8 @@ fo_doc_restore (FoDoc        *fo_doc)
  **/
 void
 fo_doc_line_to_default (FoDoc        *fo_doc,
-			gdouble        x,
-			gdouble        y)
+			gdouble        x G_GNUC_UNUSED,
+			gdouble        y G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1178,8 +1178,8 @@ fo_doc_line_to (FoDoc        *fo_doc,
  **/
 void
 fo_doc_move_to_default (FoDoc        *fo_doc,
-			gdouble        x,
-			gdouble        y)
+			gdouble        x G_GNUC_UNUSED,
+			gdouble        y G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1219,10 +1219,10 @@ fo_doc_move_to (FoDoc        *fo_doc,
  **/
 void
 fo_doc_line_stroked_default (FoDoc *fo_doc,
-			     gdouble x0,
-			     gdouble y0,
-			     gdouble x1,
-			     gdouble y1)
+			     gdouble x0 G_GNUC_UNUSED,
+			     gdouble y0 G_GNUC_UNUSED,
+			     gdouble x1 G_GNUC_UNUSED,
+			     gdouble y1 G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1269,10 +1269,10 @@ fo_doc_line_stroked (FoDoc *fo_doc,
  **/
 void
 fo_doc_rect_stroked_default (FoDoc        *fo_doc,
-			     gdouble        x,
-			     gdouble        y,
-			     gdouble        width,
-			     gdouble        height)
+			     gdouble        x G_GNUC_UNUSED,
+			     gdouble        y G_GNUC_UNUSED,
+			     gdouble        width G_GNUC_UNUSED,
+			     gdouble        height G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1318,10 +1318,10 @@ fo_doc_rect_stroked (FoDoc        *fo_doc,
  **/
 void
 fo_doc_rect_filled_default (FoDoc        *fo_doc,
-			     gdouble        x,
-			     gdouble        y,
-			     gdouble        width,
-			     gdouble        height)
+			     gdouble        x G_GNUC_UNUSED,
+			     gdouble        y G_GNUC_UNUSED,
+			     gdouble        width G_GNUC_UNUSED,
+			     gdouble        height G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1458,11 +1458,11 @@ fo_doc_fill_stroke (FoDoc *fo_doc)
  **/
 void
 fo_doc_place_image_default (FoDoc   *fo_doc,
-			    FoImage *image,
-			    gdouble   x,
-			    gdouble   y,
-			    gdouble   xscale,
-			    gdouble   yscale)
+			    FoImage *image G_GNUC_UNUSED,
+			    gdouble   x G_GNUC_UNUSED,
+			    gdouble   y G_GNUC_UNUSED,
+			    gdouble   xscale G_GNUC_UNUSED,
+			    gdouble   yscale G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1512,9 +1512,9 @@ fo_doc_place_image (FoDoc   *fo_doc,
  **/
 void
 fo_doc_render_layout_lines_default (FoDoc   *fo_doc,
-				    FoArea  *area_layout,
-				    gdouble   x,
-				    gdouble   y)
+				    FoArea  *area_layout G_GNUC_UNUSED,
+				    gdouble   x G_GNUC_UNUSED,
+				    gdouble   y G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -1558,9 +1558,9 @@ fo_doc_render_layout_lines (FoDoc   *fo_doc,
  **/
 void
 fo_doc_render_layout_default (FoDoc   *fo_doc,
-			      FoArea  *area_layout,
-			      gdouble   x,
-			      gdouble   y)
+			      FoArea  *area_layout G_GNUC_UNUSED,
+			      gdouble   x G_GNUC_UNUSED,
+			      gdouble   y G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,

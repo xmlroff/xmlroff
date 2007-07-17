@@ -468,47 +468,61 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 	  gint len = strlen (fo_doc_gp->base_filename);
 	  if (g_ascii_strncasecmp (&(fo_doc_gp->base_filename)[len-4], ".pdf", 4) == 0)
 	    {
-	      if (!gnome_print_config_set (fo_doc_gp->config, "Printer", "PDF"))
+	      if (!gnome_print_config_set (fo_doc_gp->config,
+					   (guchar *) "Printer",
+					   (guchar *) "PDF"))
 		{
-		  fprintf (stderr, "gnome_print_config_set Printer-PDF");
+		  fprintf (stderr,
+			   "gnome_print_config_set Printer-PDF");
 		}
 	    }
 	  else if (g_ascii_strncasecmp (&(fo_doc_gp->base_filename)[len-3], ".ps", 3) == 0)
 	    {
-	      if (!gnome_print_config_set (fo_doc_gp->config, "Printer", "GENERIC"))
+	      if (!gnome_print_config_set (fo_doc_gp->config,
+					   (guchar *) "Printer",
+					   (guchar *) "GENERIC"))
 		{
-		  fprintf (stderr, "gnome_print_config_set Printer-POSTSCRIPT");
+		  fprintf (stderr,
+			   "gnome_print_config_set Printer-POSTSCRIPT");
 		}
 	    }
 	}
       else if (fo_doc_gp->format == FO_ENUM_FORMAT_PDF)
 	{
-	  if (!gnome_print_config_set (fo_doc_gp->config, "Printer", "PDF"))
+	  if (!gnome_print_config_set (fo_doc_gp->config,
+				       (guchar *) "Printer",
+				       (guchar *) "PDF"))
 	    {
 	      fprintf (stderr, "gnome_print_config_set Printer-PDF");
 	    }
 	}
       else if (fo_doc_gp->format == FO_ENUM_FORMAT_POSTSCRIPT)
 	{
-	  if (!gnome_print_config_set (fo_doc_gp->config, "Printer", "GENERIC"))
+	  if (!gnome_print_config_set (fo_doc_gp->config,
+				       (guchar *) "Printer",
+				       (guchar *) "GENERIC"))
 	    {
-	      fprintf (stderr, "gnome_print_config_set Printer-POSTSCRIPT");
+	      fprintf (stderr,
+		       "gnome_print_config_set Printer-POSTSCRIPT");
 	    }
 	}
       else if (fo_doc_gp->format == FO_ENUM_FORMAT_SVG)
 	{
-	  if (!gnome_print_config_set (fo_doc_gp->config, "Settings.Engine.Backend.Driver", "gnome-print-svg"))
+	  if (!gnome_print_config_set (fo_doc_gp->config,
+				       (guchar *) "Settings.Engine.Backend.Driver",
+				       (guchar *) "gnome-print-svg"))
 	    {
-	      fprintf (stderr, "gnome_print_config_set Printer-SVG");
+	      fprintf (stderr,
+		       "gnome_print_config_set Printer-SVG");
 	    }
 	}
 
       gnome_print_config_set_length (fo_doc_gp->config,
-				     GNOME_PRINT_KEY_PAPER_WIDTH,
+				     (guchar *) GNOME_PRINT_KEY_PAPER_WIDTH,
 				     width,
 				     GNOME_PRINT_PS_UNIT);
       gnome_print_config_set_length (fo_doc_gp->config,
-				     GNOME_PRINT_KEY_PAPER_HEIGHT,
+				     (guchar *) GNOME_PRINT_KEY_PAPER_HEIGHT,
 				     height,
 				     GNOME_PRINT_PS_UNIT);
 
@@ -551,11 +565,11 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
       g_object_unref (fo_doc_gp->job);
 
       gnome_print_config_set_length (new_config,
-				     GNOME_PRINT_KEY_PAPER_WIDTH,
+				     (guchar *) GNOME_PRINT_KEY_PAPER_WIDTH,
 				     width,
 				     GNOME_PRINT_PS_UNIT);
       gnome_print_config_set_length (new_config,
-				     GNOME_PRINT_KEY_PAPER_HEIGHT,
+				     (guchar *) GNOME_PRINT_KEY_PAPER_HEIGHT,
 				     height,
 				     GNOME_PRINT_PS_UNIT);
 
@@ -586,7 +600,7 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 
       fo_doc_gp->current_filename =
 	g_strdup_printf ("%*s.%02d%s",
-			 (g_strrstr (fo_doc_gp->base_filename, ".") -
+			 (int) (g_strrstr (fo_doc_gp->base_filename, ".") -
 			  fo_doc_gp->base_filename),
 			 fo_doc_gp->base_filename,
 			 fo_doc_gp->output_sequence,
@@ -1104,8 +1118,8 @@ fo_doc_gp_fill_stroke (FoDoc *fo_doc)
 static void
 fo_doc_gp_place_image (FoDoc   *fo_doc,
 		       FoImage *fo_image,
-		       gdouble   x,
-		       gdouble   y,
+		       gdouble   x G_GNUC_UNUSED,
+		       gdouble   y G_GNUC_UNUSED,
 		       gdouble   xscale,
 		       gdouble   yscale)
 {
@@ -1134,9 +1148,17 @@ fo_doc_gp_place_image (FoDoc   *fo_doc,
 		     width * xscale * 72 / PIXELS_PER_INCH,
 		     height * yscale * 72 / PIXELS_PER_INCH);
   if (has_alpha)
-    gnome_print_rgbaimage (FO_DOC_GP (fo_doc)->context, (char *)raw_image, width, height, rowstride);
+    gnome_print_rgbaimage (FO_DOC_GP (fo_doc)->context,
+			   (guchar *)raw_image,
+			   width,
+			   height,
+			   rowstride);
   else
-    gnome_print_rgbimage (FO_DOC_GP (fo_doc)->context, (char *)raw_image, width, height, rowstride);
+    gnome_print_rgbimage (FO_DOC_GP (fo_doc)->context,
+			  (guchar *)raw_image,
+			  width,
+			  height,
+			  rowstride);
   /*
   gnome_print_grestore (FO_DOC_GP (fo_doc)->context);
   */
@@ -1164,7 +1186,7 @@ fo_doc_gp_do_run_callbacks (GnomePrintContext *context,
 
       if (attr_type == libfo_pango_attr_callback_get_type ())
 	{
-	  GValue values[1] = { { 0, } };
+	  GValue values[1] = { { 0, { {0}, {0} } } };
 
 	  g_value_init (&values[0], G_TYPE_POINTER);
 	  g_value_set_pointer (&values[0], context);
@@ -1230,8 +1252,8 @@ fo_doc_gp_do_line_callbacks (GnomePrintContext *context,
 static void
 fo_doc_gp_do_callbacks (GnomePrintContext *context,
 			PangoLayout       *layout,
-			guint              line_first,
-			guint              line_last,
+			gint               line_first,
+			gint               line_last,
 			gint               x,
 			gint               y)
 {
@@ -1240,7 +1262,7 @@ fo_doc_gp_do_callbacks (GnomePrintContext *context,
   g_return_if_fail (context != NULL);
   g_return_if_fail (PANGO_IS_LAYOUT (layout));
   g_return_if_fail (line_last >= line_first &&
-		    line_last <= g_slist_length (pango_layout_get_lines (layout)) - 1);
+		    line_last <= (gint) g_slist_length (pango_layout_get_lines (layout)) - 1);
 
   iter = pango_layout_get_iter (layout);
 
@@ -1308,7 +1330,7 @@ fo_doc_gp_render_layout_lines (FoDoc   *fo_doc,
 
   gdouble y1 = y;
 
-  guint line_first = fo_area_layout_get_line_first (area_layout);
+  gint line_first = fo_area_layout_get_line_first (area_layout);
   if (line_first > 0)
     {
       y1 =
@@ -1316,7 +1338,7 @@ fo_doc_gp_render_layout_lines (FoDoc   *fo_doc,
 					    line_first - 1);
     }
 
-  guint line_last = fo_area_layout_get_line_last (area_layout);
+  gint line_last = fo_area_layout_get_line_last (area_layout);
   gdouble y2 =
       y1 - fo_area_layout_get_line_height (area_layout,
 					   line_last);

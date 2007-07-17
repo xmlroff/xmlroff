@@ -251,7 +251,7 @@ fo_node_get_property (GObject        *object,
 void
 fo_node_set_property (GObject      *object,
 		      guint         param_id,
-		      const GValue *value,
+		      const GValue *value G_GNUC_UNUSED,
 		      GParamSpec   *pspec)
 {
   switch (param_id)
@@ -517,7 +517,7 @@ fo_node_get_child_by_name (FoNode      *node,
  * Dumps (i.e., logs messages with 'DEBUG' severity) the node path
  * from @node to the root of the #FoNode tree containing @node.
  **/
-static void
+void
 fo_node_dump_path_to_root (FoNode *node)
 {
   FoNode *use_node;

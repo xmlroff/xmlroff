@@ -425,8 +425,8 @@ fo_layout_get_pango_layout (FoLayout *fo_layout)
  * Set the 'line-height' of @fo_layout to @line_height.
  **/
 void
-fo_layout_set_line_height_default (FoLayout *fo_layout,
-				   gfloat    line_height)
+fo_layout_set_line_height_default (FoLayout *fo_layout G_GNUC_UNUSED,
+				   gfloat    line_height G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -486,8 +486,8 @@ fo_layout_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum lin
  * @line_stacking_strategy.
  **/
 void
-fo_layout_set_line_stacking_strategy_default (FoLayout  *fo_layout,
-					      FoEnumEnum line_stacking_strategy)
+fo_layout_set_line_stacking_strategy_default (FoLayout  *fo_layout G_GNUC_UNUSED,
+					      FoEnumEnum line_stacking_strategy G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
@@ -536,28 +536,9 @@ static const char* stretch[] = {
   "Ultra expanded"
 };
 
-static const char* baseline[] = {
-  "Invalid",
-  "Auto",
-  "Reset Size",
-  "Alphabetic",
-  "Ideographic",
-  "Hanging",
-  "Mathematical",
-  "Central",
-  "Middle",
-  "Text Before Edge",
-  "Text After Edge",
-  "Before Edge",
-  "After Edge",
-  "Length",
-  "Use Script",
-  "Baseline"
-};
-
 void
 fo_layout_debug_dump (FoObject *object,
-		      gint      depth)
+		      gint      depth G_GNUC_UNUSED)
 {
   FoLayout *fo_layout;
   gint start, end;

@@ -630,7 +630,7 @@ fo_object_equal_func_default (gconstpointer a,
  **/
 guint
 fo_object_hash        (FoObject *object,
-		       GError  **error)
+		       GError  **error G_GNUC_UNUSED)
 {
   g_return_val_if_fail (object != NULL, 0);
   g_return_val_if_fail (FO_IS_OBJECT (object), 0);
@@ -651,7 +651,7 @@ fo_object_hash        (FoObject *object,
 gboolean
 fo_object_equal       (FoObject *a,
 		       FoObject *b,
-		       GError  **error)
+		       GError  **error G_GNUC_UNUSED)
 {
   g_return_val_if_fail (a != NULL, FALSE);
   g_return_val_if_fail (FO_IS_OBJECT (a), FALSE);

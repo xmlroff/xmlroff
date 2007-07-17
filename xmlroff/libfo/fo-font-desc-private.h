@@ -18,6 +18,6 @@ G_BEGIN_DECLS
 
 PangoFontDescription * fo_font_desc_get_font_description (const FoFontDesc *fo_font_desc);
 void fo_font_desc_set_font_description (FoFontDesc *fo_font_desc,
-					const PangoFontDescription *desc);
+					PangoFontDescription *desc);
 
 #endif /* !__FO_FONT_DESC_PRIVATE_H__ */
