@@ -203,7 +203,7 @@ fo_expr_env_list_new (void)
  **/
 static void
 fo_expr_env_list_free_item (gpointer data,
-			    gpointer user_data)
+			    gpointer user_data G_GNUC_UNUSED)
 {
   fo_expr_env_unref ((FoExprEnv *) data);
 }

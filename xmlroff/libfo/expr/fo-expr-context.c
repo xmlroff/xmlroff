@@ -166,7 +166,7 @@ new_stack (FoExprContext *context)
 
 static void
 dump_stack_item (gpointer data,
-		 gpointer user_data)
+		 gpointer user_data G_GNUC_UNUSED)
 {
   fo_object_debug_dump (data, 0);
 }
@@ -184,7 +184,7 @@ fo_expr_context_debug_dump_stack (FoExprContext *context)
 
 static void
 free_stack_item (gpointer data,
-		 gpointer user_data)
+		 gpointer user_data G_GNUC_UNUSED)
 {
   g_object_unref (data);
 }
