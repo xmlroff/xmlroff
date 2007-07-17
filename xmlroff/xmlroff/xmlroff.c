@@ -279,6 +279,7 @@ main (gint    argc,
   setlocale (LC_ALL, "");
 
   /* FIXME: Support xml-stylesheet PI in xml-file */
+
   ctx = g_option_context_new (NULL);
   /* FIXME: Need configure to check for g_option_context_set_summary().
   g_option_context_set_summary(ctx,
@@ -292,7 +293,10 @@ main (gint    argc,
   */
   g_option_context_add_main_entries (ctx, options, PACKAGE);
   goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
- 
+  /* Finished with parsing command-line arguments. */
+  g_option_context_free(ctx);
+  ctx = NULL;
+
   if (goption_success == FALSE)
     {
       goto option_error;
@@ -427,9 +431,6 @@ main (gint    argc,
       goto option_error;
     }
 
-  /* Finished with parsing command-line arguments. */
-  g_option_context_free(ctx);
-
   if (debug_mode != FO_DEBUG_NONE)
     {
       fo_libfo_context_set_debug_mode (libfo_context,
@@ -528,7 +529,9 @@ main (gint    argc,
   /* Desperate effort to output the usage message. */
   gint fake_argc = 2;
   gchar *fake_argv[] = {"xmlroff", "--help"};
-  gchar **fake_argv_ptr = &fake_argv;
+  gchar **fake_argv_ptr = fake_argv;
+  ctx = g_option_context_new (NULL);
+  g_option_context_add_main_entries (ctx, options, PACKAGE);
   g_option_context_parse (ctx, &fake_argc, &fake_argv_ptr, NULL);
   g_option_context_free(ctx);
 
