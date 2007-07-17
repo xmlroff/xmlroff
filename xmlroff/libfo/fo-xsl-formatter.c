@@ -320,12 +320,12 @@ fo_xml_element_node_to_fo_node (xmlNodePtr node,
 {
   FoFo *fo_node = NULL;
   gboolean ok = FALSE;
-  xmlChar *name;
+  gchar *name;
 
   g_return_val_if_fail (node != NULL, NULL);
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-  name = (xmlChar*) node->name;
+  name = (gchar *) node->name;
 
   /* Hand-built parsing of node name to determine FoFo type. */
   switch (name[0]) {
@@ -650,7 +650,8 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
     {
     case XML_ELEMENT_NODE:
       if ((node->ns != NULL) &&
-	  (strcmp (node->ns->href, XSL_FO_NAMESPACE) == 0 ))
+	  (strcmp ((gchar *) node->ns->href,
+		   XSL_FO_NAMESPACE) == 0 ))
 	{
 	  fo_node = fo_xml_element_node_to_fo_node (node,
 						    &tmp_error);
@@ -700,7 +701,7 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
       break;
     case XML_TEXT_NODE:
       {
-	xmlChar *text = xmlNodeGetContent (node);
+	gchar *text = (gchar *) xmlNodeGetContent (node);
 
 	if (fo_fo_get_allow_mixed_content (parent_fo))
 	  {
@@ -713,7 +714,7 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
 	  }
 	else
 	  {
-	    xmlChar *text_ptr = text;
+	    gchar *text_ptr = text;
 	    gboolean whitespace_only = TRUE;
 
 	    while (*text_ptr)
