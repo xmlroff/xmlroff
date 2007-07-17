@@ -24,8 +24,6 @@ enum {
 };
 
 static void fo_length_range_init         (FoLengthRange      *length_range);
-static void fo_length_range_base_class_init (FoLengthRangeClass *klass);
-static void fo_length_range_base_class_finalize (FoLengthRangeClass *klass);
 static void fo_length_range_class_init   (FoLengthRangeClass *klass);
 static void fo_length_range_set_property (GObject       *object,
 					  guint          prop_id,
@@ -514,7 +512,7 @@ fo_length_range_resolve (FoDatatype *shortform,
 			 FoDatatype *optimum,
 			 FoDatatype *maximum,
 			 gfloat      hundred_percent,
-			 GError    **error)
+			 GError    **error G_GNUC_UNUSED)
 {
   FoDatatype *use_length_range = NULL;
   gfloat use_shortform_value;
@@ -719,7 +717,7 @@ fo_length_range_resolve_allow_auto (FoDatatype *shortform,
 				    FoDatatype *optimum,
 				    FoDatatype *maximum,
 				    gfloat      hundred_percent,
-				    GError    **error)
+				    GError    **error G_GNUC_UNUSED)
 {
   FoDatatype *use_length_range = NULL;
   FoDatatype *use_optimum;

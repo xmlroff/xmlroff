@@ -530,7 +530,7 @@ fo_keep_resolve (FoDatatype *shortform,
 		 FoDatatype *within_line,
 		 FoDatatype *within_column,
 		 FoDatatype *within_page,
-		 GError **error)
+		 GError **error G_GNUC_UNUSED)
 {
   FoDatatype *use_keep;
 

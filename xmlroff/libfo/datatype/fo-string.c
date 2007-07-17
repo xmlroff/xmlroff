@@ -148,7 +148,7 @@ fo_string_finalize (GObject *object)
   if (string->value != NULL)
     {
       g_free(string->value);
-      string->value == NULL;
+      string->value = NULL;
     }
 
   G_OBJECT_CLASS (parent_class)->finalize (object);

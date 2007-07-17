@@ -605,7 +605,7 @@ fo_space_resolve (FoDatatype *shortform,
 		  FoDatatype *precedence,
 		  FoDatatype *condity,
 		  gfloat hundred_percent,
-		  GError **error)
+		  GError **error G_GNUC_UNUSED)
 {
   FoDatatype *use_space = NULL;
   gfloat use_shortform = 0.0;
