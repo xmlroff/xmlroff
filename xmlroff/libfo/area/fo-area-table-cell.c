@@ -158,8 +158,8 @@ fo_area_table_cell_debug_dump_properties (FoArea *area,
  * next-y properties accordingly.
  **/
 void
-fo_area_table_cell_size_adjust (FoArea *area,
-				gpointer data)
+fo_area_table_cell_size_adjust (FoArea  *area,
+				gpointer data G_GNUC_UNUSED)
 {
   FoArea *table_cell;
 
@@ -195,8 +195,8 @@ fo_area_table_cell_size_adjust (FoArea *area,
  * 
  **/
 void
-fo_area_table_cell_set_or_split (FoArea *area,
-				 gpointer data)
+fo_area_table_cell_set_or_split (FoArea  *area,
+				 gpointer data G_GNUC_UNUSED)
 {
   FoArea *table_cell;
   gfloat table_cell_child_available_bpdim;

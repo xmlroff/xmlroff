@@ -175,8 +175,8 @@ fo_area_table_continuation_debug_dump_properties (FoArea *area,
  * next-y properties accordingly.
  **/
 void
-fo_area_table_continuation_size_adjust (FoArea *area,
-					gpointer data)
+fo_area_table_continuation_size_adjust (FoArea  *area,
+					gpointer data G_GNUC_UNUSED)
 {
   FoArea *table_continuation;
 
@@ -212,8 +212,8 @@ fo_area_table_continuation_size_adjust (FoArea *area,
  * 
  **/
 void
-fo_area_table_continuation_set_or_split (FoArea *area,
-					 gpointer data)
+fo_area_table_continuation_set_or_split (FoArea  *area,
+					 gpointer data G_GNUC_UNUSED)
 {
   FoArea *table_continuation;
   gfloat table_continuation_child_available_bpdim;

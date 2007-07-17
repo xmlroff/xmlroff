@@ -24,7 +24,6 @@ struct _FoAreaTreeClass
   
 };
 
-static void fo_area_tree_init        (FoAreaTree      *area_tree);
 static void fo_area_tree_class_init  (FoAreaTreeClass *klass);
 static void fo_area_tree_finalize    (GObject           *object);
 static void fo_area_tree_debug_dump_properties (FoArea *area,
@@ -49,7 +48,7 @@ fo_area_tree_get_type (void)
         NULL,           /* class_data */
         sizeof (FoAreaTree),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_area_tree_init,
+        NULL,		/* instance_init */
 	NULL		/* value_table */
       };
       
@@ -59,17 +58,6 @@ fo_area_tree_get_type (void)
     }
   
   return object_type;
-}
-
-/**
- * fo_area_tree_init:
- * @media_usage: #FoAreaTree object to initialise.
- * 
- * Implements #GInstanceInitFunc for #FoAreaTree.
- **/
-void
-fo_area_tree_init (FoAreaTree *area_tree)
-{
 }
 
 /**

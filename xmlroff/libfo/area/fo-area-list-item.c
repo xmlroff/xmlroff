@@ -82,6 +82,8 @@ fo_area_list_item_class_init (FoAreaListItemClass *klass)
   FO_AREA_CLASS (klass)->size_request = fo_area_list_item_size_request;
   FO_AREA_CLASS (klass)->split_before_height = fo_area_list_item_split_before_height;
   FO_AREA_CLASS (klass)->split_before_height_check = fo_area_list_item_split_before_height_check;
+  FO_AREA_CLASS (klass)->split_after_height = fo_area_list_item_split_after_height;
+  FO_AREA_CLASS (klass)->split_after_height_check = fo_area_list_item_split_after_height_check;
 
 }
 

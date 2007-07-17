@@ -164,9 +164,9 @@ fo_area_spanning_table_cell_debug_dump_heights (FoArea *fo_area)
  * Function to test how property value change signals work.
  **/
 static void
-fo_area_spanning_table_cell_signal_test (FoArea *signallee,
-					 GParamSpec *param,
-					 FoArea *signaller)
+fo_area_spanning_table_cell_signal_test (FoArea     *signallee,
+					 GParamSpec *param G_GNUC_UNUSED,
+					 FoArea     *signaller G_GNUC_UNUSED)
 {
   gfloat old_real_available_height;
   gfloat new_real_available_height;

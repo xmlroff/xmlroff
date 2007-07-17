@@ -170,8 +170,8 @@ fo_area_table_get_header (FoArea *table)
  * next-y properties accordingly.
  **/
 void
-fo_area_table_size_adjust (FoArea *area,
-			   gpointer data)
+fo_area_table_size_adjust (FoArea  *area,
+			   gpointer data G_GNUC_UNUSED)
 {
   FoArea *table;
 
@@ -207,8 +207,8 @@ fo_area_table_size_adjust (FoArea *area,
  * 
  **/
 void
-fo_area_table_set_or_split (FoArea *area,
-			    gpointer data)
+fo_area_table_set_or_split (FoArea  *area,
+			    gpointer data G_GNUC_UNUSED)
 {
   FoArea *table;
   gfloat table_child_available_bpdim;

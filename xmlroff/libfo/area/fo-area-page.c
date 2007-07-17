@@ -749,8 +749,8 @@ fo_area_page_last_leaf (FoArea *area)
 }
 
 static gboolean
-fo_area_page_vr_adjust (FoArea *area,
-			gpointer data)
+fo_area_page_vr_adjust (FoArea  *area,
+			gpointer data G_GNUC_UNUSED)
 {
   FoArea *parent = fo_area_parent (area);
 

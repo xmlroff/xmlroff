@@ -1146,7 +1146,7 @@ fo_area_debug_dump_properties (FoArea *area, gint depth)
  **/
 void
 fo_area_draw (FoArea  *area,
-	      gpointer output)
+	      gpointer output G_GNUC_UNUSED)
 {
   g_return_if_fail (area != NULL);
 
@@ -1602,7 +1602,8 @@ fo_area_split_before_height (FoArea *area, gfloat height)
  * Return value: NULL, indicating that @area was not split.
  **/
 FoArea*
-fo_area_split_before_height_default (FoArea *area, gfloat height)
+fo_area_split_before_height_default (FoArea *area,
+				     gfloat  height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_before_height' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1638,7 +1639,7 @@ fo_area_split_before_height_check (FoArea *area, gfloat height)
  **/
 gboolean
 fo_area_split_before_height_check_default (FoArea *area,
-					   gfloat height)
+					   gfloat height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_before_height_check' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1672,7 +1673,8 @@ fo_area_split_after_height (FoArea *area, gfloat height)
  * Return value: NULL, indicating that @area was not split.
  **/
 FoArea*
-fo_area_split_after_height_default (FoArea *area, gfloat height)
+fo_area_split_after_height_default (FoArea *area,
+				    gfloat  height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_after_height' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1708,7 +1710,7 @@ fo_area_split_after_height_check (FoArea *area, gfloat height)
  **/
 gboolean
 fo_area_split_after_height_check_default (FoArea *area,
-					   gfloat height)
+					  gfloat  height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_after_height_check' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1849,8 +1851,8 @@ fo_area_accumulate_height (FoArea *area,
  * next-y properties accordingly.
  **/
 void
-fo_area_size_adjust (FoArea *area,
-		     gpointer data)
+fo_area_size_adjust (FoArea  *area,
+		     gpointer data G_GNUC_UNUSED)
 {
   FoArea *parent = fo_area_parent (area);
 
@@ -1886,8 +1888,8 @@ fo_area_size_adjust (FoArea *area,
  * 
  **/
 void
-fo_area_set_or_split (FoArea *area,
-		      gpointer data)
+fo_area_set_or_split (FoArea  *area,
+		      gpointer data G_GNUC_UNUSED)
 {
   FoArea *parent = fo_area_parent (area);
   gfloat child_available_bpdim = fo_area_get_child_available_bpdim (parent);
