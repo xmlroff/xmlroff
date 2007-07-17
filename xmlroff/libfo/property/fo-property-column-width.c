@@ -212,10 +212,10 @@ fo_property_column_width_resolve_enum (const gchar *token,
  **/
 FoDatatype*
 fo_property_column_width_resolve_percent (gdouble            percentage,
-					  const FoDatatype  *font_size,
+					  const FoDatatype  *font_size G_GNUC_UNUSED,
 					  const FoFo        *fo_node,
-					  const FoContext   *context,
-					  GError           **error)
+					  const FoContext   *context G_GNUC_UNUSED,
+					  GError           **error G_GNUC_UNUSED)
 {
   FoFo *table;
   FoFoAreaIterator *iterator;

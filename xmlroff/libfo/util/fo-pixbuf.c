@@ -116,7 +116,7 @@ fo_pixbuf_set_pixbuf (FoImage   *fo_image,
 
 void
 fo_pixbuf_set_pixbuf_default (FoImage   *fo_image,
-			      GdkPixbuf *pixbuf)
+			      GdkPixbuf *pixbuf G_GNUC_UNUSED)
 {
   g_return_if_fail (FO_IS_PIXBUF (fo_image));
 

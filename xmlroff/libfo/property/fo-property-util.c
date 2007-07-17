@@ -1406,10 +1406,10 @@ fo_property_util_resolve_condity_enum (const gchar *token,
  */
 FoDatatype *
 fo_property_util_resolve_ipdim_percent (gdouble           percentage,
-					const FoDatatype *font_size,
+					const FoDatatype *font_size G_GNUC_UNUSED,
 					const FoFo       *fo_node,
-					const FoContext  *context,
-					GError          **error)
+					const FoContext  *context G_GNUC_UNUSED,
+					GError          **error G_GNUC_UNUSED)
 {
   FoFoAreaIterator *iterator;
   FoArea *fo_area;

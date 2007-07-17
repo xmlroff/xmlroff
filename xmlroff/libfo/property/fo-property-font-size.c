@@ -144,7 +144,7 @@ fo_property_font_size_init (FoPropertyFontSize *font_size)
  * Implements #GBaseInitFunc for #FoPropertyFontSizeClass.
  **/
 void
-fo_property_font_size_base_init (FoPropertyFontSizeClass *klass)
+fo_property_font_size_base_init (FoPropertyFontSizeClass *klass G_GNUC_UNUSED)
 {
   xx_small =
     fo_length_new_with_value (FO_FONT_SIZE_XX_SMALL);
@@ -174,7 +174,7 @@ fo_property_font_size_base_init (FoPropertyFontSizeClass *klass)
  * Implements #GBaseFinalizeFunc for #FoPropertyFontSizeClass.
  **/
 void
-fo_property_font_size_base_finalize (FoPropertyFontSizeClass *klass)
+fo_property_font_size_base_finalize (FoPropertyFontSizeClass *klass G_GNUC_UNUSED)
 {
   g_object_unref (xx_small);
   g_object_unref (x_small);

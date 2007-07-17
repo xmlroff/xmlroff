@@ -197,7 +197,7 @@ void
 fo_hash_table_insert (FoHashTable *fo_hash_table,
 		      FoObject    *key,
 		      FoObject    *value,
-		      GError     **error)
+		      GError     **error G_GNUC_UNUSED)
 {
   g_return_if_fail (fo_hash_table != NULL);
   g_return_if_fail (FO_IS_HASH_TABLE (fo_hash_table));
@@ -223,7 +223,7 @@ void
 fo_hash_table_replace (FoHashTable *fo_hash_table,
 		       FoObject    *key,
 		       FoObject    *value,
-		       GError     **error)
+		       GError     **error G_GNUC_UNUSED)
 {
   g_return_if_fail (fo_hash_table != NULL);
   g_return_if_fail (FO_IS_HASH_TABLE (fo_hash_table));
@@ -249,7 +249,7 @@ fo_hash_table_replace (FoHashTable *fo_hash_table,
 gboolean
 fo_hash_table_remove (FoHashTable *fo_hash_table,
 		      FoObject   *key,
-		      GError   **error)
+		      GError   **error G_GNUC_UNUSED)
 {
   g_return_val_if_fail (fo_hash_table != NULL, FALSE);
   g_return_val_if_fail (FO_IS_HASH_TABLE (fo_hash_table), FALSE);
@@ -273,7 +273,7 @@ fo_hash_table_remove (FoHashTable *fo_hash_table,
 FoObject *
 fo_hash_table_lookup (FoHashTable *fo_hash_table,
 		      FoObject    *key,
-		      GError     **error)
+		      GError     **error G_GNUC_UNUSED)
 {
   g_return_val_if_fail (fo_hash_table != NULL, NULL);
   g_return_val_if_fail (FO_IS_HASH_TABLE (fo_hash_table), NULL);

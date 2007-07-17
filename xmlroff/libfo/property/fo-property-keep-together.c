@@ -100,7 +100,7 @@ fo_property_keep_together_init (FoPropertyKeepTogether *keep_together)
  * Implements #GBaseInitFunc for #FoPropertyKeepTogetherClass.
  **/
 void
-fo_property_keep_together_base_init (FoPropertyKeepTogetherClass *klass)
+fo_property_keep_together_base_init (FoPropertyKeepTogetherClass *klass G_GNUC_UNUSED)
 {
   enum_auto =
     g_object_new (FO_TYPE_ENUM,
@@ -125,7 +125,7 @@ fo_property_keep_together_base_init (FoPropertyKeepTogetherClass *klass)
  * Implements #GBaseFinalizeFunc for #FoPropertyKeepTogetherClass.
  **/
 void
-fo_property_keep_together_base_finalize (FoPropertyKeepTogetherClass *klass)
+fo_property_keep_together_base_finalize (FoPropertyKeepTogetherClass *klass G_GNUC_UNUSED)
 {
   g_object_unref (enum_auto);
   g_object_unref (enum_always);

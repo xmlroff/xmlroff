@@ -137,7 +137,7 @@ fo_property_font_style_init (FoPropertyFontStyle *font_style)
  * Implements #GBaseInitFunc for #FoPropertyFontStyleClass.
  **/
 void
-fo_property_font_style_base_init (FoPropertyFontStyleClass *klass)
+fo_property_font_style_base_init (FoPropertyFontStyleClass *klass G_GNUC_UNUSED)
 {
   enum_normal =
     g_object_new (FO_TYPE_ENUM,
@@ -176,7 +176,7 @@ fo_property_font_style_base_init (FoPropertyFontStyleClass *klass)
  * Implements #GBaseFinalizeFunc for #FoPropertyFontStyleClass.
  **/
 void
-fo_property_font_style_base_finalize (FoPropertyFontStyleClass *klass)
+fo_property_font_style_base_finalize (FoPropertyFontStyleClass *klass G_GNUC_UNUSED)
 {
   g_object_unref (enum_normal);
   g_object_unref (enum_italic);

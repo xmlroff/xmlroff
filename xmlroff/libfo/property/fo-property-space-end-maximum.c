@@ -172,10 +172,6 @@ fo_property_space_end_maximum_validate (FoDatatype *datatype,
                                            FoContext  *context,
                                            GError    **error)
 {
-  FoDatatype *new_datatype;
-  GError     *tmp_error = NULL;
-  gchar      *token;
-
   g_return_val_if_fail (datatype != NULL, NULL);
   g_return_val_if_fail (FO_IS_DATATYPE (datatype), NULL);
   g_return_val_if_fail (context != NULL, NULL);

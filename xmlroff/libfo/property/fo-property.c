@@ -356,8 +356,8 @@ fo_property_set_value_default (FoProperty *property,
  * Return value: 
  **/
 FoDatatype*
-fo_property_resolve_enum_default (const gchar *token,
-				  FoContext   *context,
+fo_property_resolve_enum_default (const gchar *token G_GNUC_UNUSED,
+				  FoContext   *context G_GNUC_UNUSED,
 				  GError     **error)
 {
   g_warning ("This property doesn't have any enumerated values.\n");
@@ -385,10 +385,10 @@ fo_property_resolve_enum_default (const gchar *token,
  **/
 FoDatatype*
 fo_property_resolve_percent_default (gdouble            percentage,
-				     const FoDatatype  *font_size,
-				     const FoFo        *fo_node,
-				     const FoContext   *context,
-				     GError           **err)
+				     const FoDatatype  *font_size G_GNUC_UNUSED,
+				     const FoFo        *fo_node G_GNUC_UNUSED,
+				     const FoContext   *context G_GNUC_UNUSED,
+				     GError           **err G_GNUC_UNUSED)
 {
   FoDatatype *percentage_datatype;
 
@@ -421,7 +421,7 @@ fo_property_new_from_string (FoPropertyClass *property_class,
 			     const gchar *expr,
 			     FoContext   *context,
 			     FoProperty    *current_font_size,
-			     FoFo *fo_node,
+			     FoFo *fo_node G_GNUC_UNUSED,
 			     GError **error)
 {
   FoProperty *property;

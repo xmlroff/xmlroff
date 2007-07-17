@@ -100,7 +100,7 @@ fo_property_keep_with_previous_init (FoPropertyKeepWithPrevious *keep_with_previ
  * Implements #GBaseInitFunc for #FoPropertyKeepWithPreviousClass.
  **/
 void
-fo_property_keep_with_previous_base_init (FoPropertyKeepWithPreviousClass *klass)
+fo_property_keep_with_previous_base_init (FoPropertyKeepWithPreviousClass *klass G_GNUC_UNUSED)
 {
   enum_auto =
     g_object_new (FO_TYPE_ENUM,
@@ -125,7 +125,7 @@ fo_property_keep_with_previous_base_init (FoPropertyKeepWithPreviousClass *klass
  * Implements #GBaseFinalizeFunc for #FoPropertyKeepWithPreviousClass.
  **/
 void
-fo_property_keep_with_previous_base_finalize (FoPropertyKeepWithPreviousClass *klass)
+fo_property_keep_with_previous_base_finalize (FoPropertyKeepWithPreviousClass *klass G_GNUC_UNUSED)
 {
   g_object_unref (enum_auto);
   g_object_unref (enum_always);

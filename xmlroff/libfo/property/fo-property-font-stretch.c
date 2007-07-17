@@ -152,7 +152,7 @@ fo_property_font_stretch_init (FoPropertyFontStretch *font_stretch)
  * Implements #GBaseInitFunc for #FoPropertyFontStretchClass.
  **/
 void
-fo_property_font_stretch_base_init (FoPropertyFontStretchClass *klass)
+fo_property_font_stretch_base_init (FoPropertyFontStretchClass *klass G_GNUC_UNUSED)
 {
   enum_normal =
     g_object_new (FO_TYPE_ENUM,
@@ -240,7 +240,7 @@ fo_property_font_stretch_base_init (FoPropertyFontStretchClass *klass)
  * Implements #GBaseFinalizeFunc for #FoPropertyFontStretchClass.
  **/
 void
-fo_property_font_stretch_base_finalize (FoPropertyFontStretchClass *klass)
+fo_property_font_stretch_base_finalize (FoPropertyFontStretchClass *klass G_GNUC_UNUSED)
 {
   g_object_unref (enum_normal);
   g_object_unref (enum_wider);

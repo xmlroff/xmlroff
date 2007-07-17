@@ -133,7 +133,7 @@ fo_property_font_variant_init (FoPropertyFontVariant *font_variant)
  * Implements #GBaseInitFunc for #FoPropertyFontVariantClass.
  **/
 void
-fo_property_font_variant_base_init (FoPropertyFontVariantClass *klass)
+fo_property_font_variant_base_init (FoPropertyFontVariantClass *klass G_GNUC_UNUSED)
 {
   enum_normal =
     g_object_new (FO_TYPE_ENUM,
@@ -158,7 +158,7 @@ fo_property_font_variant_base_init (FoPropertyFontVariantClass *klass)
  * Implements #GBaseFinalizeFunc for #FoPropertyFontVariantClass.
  **/
 void
-fo_property_font_variant_base_finalize (FoPropertyFontVariantClass *klass)
+fo_property_font_variant_base_finalize (FoPropertyFontVariantClass *klass G_GNUC_UNUSED)
 {
   g_object_unref (enum_normal);
   g_object_unref (enum_small_caps);

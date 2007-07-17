@@ -93,7 +93,6 @@ fo_property_type_condity_init (FoPropertyTypeCondity *type_condity)
 void
 fo_property_type_condity_base_init (FoPropertyTypeCondityClass *klass)
 {
-  FoObjectClass *fo_object_class = FO_OBJECT_CLASS (klass);
   FoPropertyClass *fo_property_class = FO_PROPERTY_CLASS (klass);
 
   fo_property_class->is_inherited = FALSE;
@@ -176,13 +175,9 @@ fo_property_type_condity_new (void)
  **/
 FoDatatype*
 fo_property_type_condity_validate (FoDatatype *datatype,
-                                           FoContext  *context,
-                                           GError    **error)
+				   FoContext  *context,
+				   GError    **error)
 {
-  FoDatatype *new_datatype;
-  GError     *tmp_error = NULL;
-  gchar      *token;
-
   g_return_val_if_fail (datatype != NULL, NULL);
   g_return_val_if_fail (FO_IS_DATATYPE (datatype), NULL);
   g_return_val_if_fail (context != NULL, NULL);

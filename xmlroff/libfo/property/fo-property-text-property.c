@@ -140,7 +140,7 @@ fo_property_text_property_new_attr_from_context (FoProperty *property,
  **/
 PangoAttribute*
 fo_property_text_property_new_attr_from_context_default (FoProperty *property,
-							 FoContext  *context)
+							 FoContext  *context G_GNUC_UNUSED)
 {
   g_return_val_if_fail (property != NULL, NULL);
   g_return_val_if_fail (FO_IS_PROPERTY_TEXT_PROPERTY (property), NULL);

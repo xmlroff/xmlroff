@@ -209,8 +209,6 @@ fo_property_space_start_validate (FoDatatype *datatype,
                                 GError    **error)
 {
   FoDatatype *new_datatype;
-  GError     *tmp_error = NULL;
-  gchar      *token;
 
   g_return_val_if_fail (datatype != NULL, NULL);
   g_return_val_if_fail (FO_IS_DATATYPE (datatype), NULL);
