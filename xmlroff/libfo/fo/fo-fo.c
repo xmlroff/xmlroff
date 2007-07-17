@@ -277,7 +277,7 @@ fo_fo_finalize (GObject *object)
 void
 fo_fo_set_property (GObject      *object,
 		    guint         param_id,
-		    const GValue *value,
+		    const GValue *value G_GNUC_UNUSED,
 		    GParamSpec   *pspec)
 {
   G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -658,8 +658,8 @@ fo_fo_sprintf (FoObject *object)
  * 'update_from_context' function.
  **/
 void
-fo_fo_update_from_context_default (FoFo *fo,
-				   FoContext *context)
+fo_fo_update_from_context_default (FoFo      *fo,
+				   FoContext *context G_GNUC_UNUSED)
 {
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
@@ -703,8 +703,8 @@ fo_fo_update_from_context (FoFo      *fo_fo,
  * Return value: FALSE
  **/
 gboolean
-fo_fo_validate_content_default (FoFo *fo,
-				GError **error)
+fo_fo_validate_content_default (FoFo    *fo G_GNUC_UNUSED,
+				GError **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -788,7 +788,7 @@ void
 fo_fo_validate2_default (FoFo *fo,
 			 FoContext *current_context,
 			 FoContext *parent_context,
-			 GError   **error)
+			 GError   **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -1045,7 +1045,8 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
       xmlAttrPtr number_columns_spanned_attr = NULL;
       xmlAttrPtr number_rows_spanned_attr = NULL;
 
-      column_number_attr = xmlHasProp (element, "column-number");
+      column_number_attr = xmlHasProp (element,
+				       (xmlChar *) "column-number");
       if (column_number_attr)
 	{
 	  FoTypeFunc type_func =
@@ -1055,7 +1056,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  FoPropertyClass *property_class =
 	    g_type_class_ref (type_func());
 
-	  const xmlChar *property_expression =
+	  const gchar *property_expression = (const gchar *)
 	    xmlNodeGetContent ((xmlNodePtr) column_number_attr);
 
 	  FoProperty *column_number =
@@ -1082,7 +1083,8 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	}
 
       number_columns_spanned_attr =
-	xmlHasProp (element, "number-columns-spanned");
+	xmlHasProp (element,
+		    (xmlChar *) "number-columns-spanned");
       if (number_columns_spanned_attr)
 	{
 	  FoTypeFunc type_func =
@@ -1092,7 +1094,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  FoPropertyClass *property_class =
 	    g_type_class_ref (type_func());
 
-	  const xmlChar *property_expression =
+	  const gchar *property_expression = (const gchar *)
 	    xmlNodeGetContent ((xmlNodePtr) number_columns_spanned_attr);
 
 	  FoProperty *number_columns_spanned =
@@ -1118,7 +1120,10 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 						    number_columns_spanned);
 	}
 
-      number_rows_spanned_attr = xmlHasProp (element, "number-rows-spanned");
+      number_rows_spanned_attr =
+	xmlHasProp (element,
+		    (xmlChar *) "number-rows-spanned");
+
       if (number_rows_spanned_attr)
 	{
 	  FoTypeFunc type_func =
@@ -1128,7 +1133,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  FoPropertyClass *property_class =
 	    g_type_class_ref (type_func());
 
-	  const xmlChar *property_expression =
+	  const gchar *property_expression = (const gchar *)
 	    xmlNodeGetContent ((xmlNodePtr) number_rows_spanned_attr);
 
 	  FoProperty *number_rows_spanned =
@@ -1171,9 +1176,11 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 
   /* Handle the 'font-size' property first since it's value is part of
      the context for evaluating all other properties. */
-  if (xmlHasProp (element, "font-size"))
+  if (xmlHasProp (element, (xmlChar *) "font-size"))
     {
-      xmlAttrPtr font_size_attr = xmlHasProp (element, "font-size");
+      xmlAttrPtr font_size_attr =
+	xmlHasProp (element,
+		    (xmlChar *) "font-size");
 
       FoTypeFunc type_func =
 	g_hash_table_lookup (prop_eval_hash,
@@ -1182,9 +1189,12 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
       FoPropertyClass *property_class =
 	g_type_class_ref (type_func());
 
+      const gchar *property_expression = (const gchar *)
+	xmlNodeGetContent ((xmlNodePtr) font_size_attr);
+
       font_size =
 	fo_property_new_from_expr (property_class,
-				   xmlNodeGetContent ((xmlNodePtr) font_size_attr),
+				   property_expression,
 				   parent_context,
 				   NULL,
 				   fo_fo,
@@ -1214,13 +1224,14 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
       FoProperty *property = NULL;
 
       /* Skip processing attributes that have already been handled. */
-      if (strcmp (xslAttrListIteratorName (iterator), "font-size") == 0 ||
+      if (strcmp ((gchar *) xslAttrListIteratorName (iterator),
+		  "font-size") == 0 ||
 	  (FO_IS_TABLE_CELL (fo_fo) &&
-	   (strcmp (xslAttrListIteratorName (iterator),
+	   (strcmp ((gchar *) xslAttrListIteratorName (iterator),
 		    "column-number") == 0 ||
-	    strcmp (xslAttrListIteratorName (iterator),
+	    strcmp ((gchar *) xslAttrListIteratorName (iterator),
 		    "number-columns-spanned") == 0 ||
-	    strcmp (xslAttrListIteratorName (iterator),
+	    strcmp ((gchar *) xslAttrListIteratorName (iterator),
 		    "number-rows-spanned") == 0)))
 	{
 	  if (xslAttrListIteratorNext (iterator))
@@ -1243,9 +1254,12 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  property_class =
 	    g_type_class_ref (type_func());
 
+	  const gchar *property_expression =
+	    (const gchar *) xslAttrListIteratorValue (iterator);
+
 	  property =
 	    fo_property_new_from_expr (property_class,
-				       xslAttrListIteratorValue (iterator),
+				       property_expression,
 				       parent_context,
 				       font_size ? font_size : NULL,
 				       fo_fo,
@@ -1557,10 +1571,10 @@ fo_fo_area_new (FoFo    *fo,
  **/
 static void
 fo_fo_area_new_default (FoFo    *fo,
-			FoDoc   *fo_doc,
-			FoArea  *parent_area,
+			FoDoc   *fo_doc G_GNUC_UNUSED,
+			FoArea  *parent_area G_GNUC_UNUSED,
 			FoArea **new_area,
-			guint    debug_level)
+			guint    debug_level G_GNUC_UNUSED)
 {
   *new_area = NULL;
 
@@ -1594,9 +1608,9 @@ void fo_fo_area_new2 (FoFo *fo,
 				     error);
 }
 
-void fo_fo_area_new2_default (FoFo *fo,
-			      FoFoAreaNew2Context *context,
-			      GError **error)
+void fo_fo_area_new2_default (FoFo *fo G_GNUC_UNUSED,
+			      FoFoAreaNew2Context *context G_GNUC_UNUSED,
+			      GError **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -1812,16 +1826,17 @@ fo_fo_validate_block_or_whitespace (FoNode *fo_node,
 
 /**
  * fo_fo_validate_pcdata_inline_block_neutral:
- * @fo_node:                            #FoFo to validate
- * @is_not_pcdata_inline_block_neutral: Pointer to #gboolean storing result
+ * @fo_node: #FoFo to validate
+ * @data:    Pointer to #gboolean storing result
  * 
  * Validates that the content of @fo_node is only ##PCDATA or #FoInline or
  * #FoNeutral formatting objects.
  **/
 void
-fo_fo_validate_pcdata_inline_block_neutral (FoNode *fo_node,
-					    gboolean *is_not_pcdata_inline_block_neutral)
+fo_fo_validate_pcdata_inline_block_neutral (FoNode  *fo_node,
+					    gpointer data)
 {
+  gboolean *is_not_pcdata_inline_block_neutral = (gboolean *) data;
   if (!FO_IS_INLINE_FO (FO_FO (fo_node)) &&
       !FO_IS_NEUTRAL_FO (FO_FO (fo_node)) &&
       !FO_IS_BLOCK_FO (FO_FO (fo_node)))
