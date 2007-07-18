@@ -53,9 +53,6 @@ struct _FoLibfoContext
 {
   FoObject parent_instance;
 
-  FoValue        *xml;
-  FoValue        *xslt;
-  FoValue        *output;
   gboolean        validation;
   FoEnumFormat    format;
   FoEnumFontEmbed font_embed;

@@ -11,7 +11,6 @@
 #define __FO_LIBFO_CONTEXT_H__
 
 #include <libfo/fo-utils.h>
-#include "libfo/fo-libfo-basic.h"
 
 G_BEGIN_DECLS
 
@@ -45,12 +44,11 @@ GType fo_enum_font_embed_get_type (void);
 #define FO_LIBFO_CONTEXT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_LIBFO_CONTEXT, FoLibfoContextClass))
 
 
-/* typedef struct _FoLibfoContext      FoLibfoContext; */
+typedef struct _FoLibfoContext FoLibfoContext;
 typedef struct _FoLibfoContextClass FoLibfoContextClass;
 
 GType            fo_libfo_context_get_type (void) G_GNUC_CONST;
-/* fo_libfo_context_new() prototype is in fo-libfo-basic.h */
-/* FoLibfoContext * fo_libfo_context_new      (void); */
+FoLibfoContext * fo_libfo_context_new (void);
 
 FoEnumFormat    fo_libfo_context_get_format               (FoLibfoContext *libfo_context);
 void            fo_libfo_context_set_format               (FoLibfoContext *libfo_context,
