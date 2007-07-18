@@ -52,7 +52,7 @@ fo_area_c_files = \
 	fo-wrapper-block-area.c \
 	fo-wrapper-block-area.h
 
-libfo_fo_includedir = $(includedir)/libfo-0.5/fo
+libfo_fo_includedir = $(includedir)/libfo-0.5/libfo/fo
 
 libfo_fo_include_HEADERS = \
 	fo-fo.h

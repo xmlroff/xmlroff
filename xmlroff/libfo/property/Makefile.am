@@ -13,7 +13,7 @@ LDADDS = @STRIP_BEGIN@	\
 # properties that depend on Pango.
 noinst_LTLIBRARIES = libfo-property.la libfo-text-property.la
 
-libfo_property_includedir = $(includedir)/libfo-0.5/property
+libfo_property_includedir = $(includedir)/libfo-0.5/libfo/property
 
 libfo_property_include_HEADERS = \
 	fo-property.h

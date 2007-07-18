@@ -12,7 +12,7 @@ LDADDS = @STRIP_BEGIN@	\
 
 noinst_LTLIBRARIES = libfo-area.la
 
-libfo_area_includedir = $(includedir)/libfo-0.5/area
+libfo_area_includedir = $(includedir)/libfo-0.5/libfo/area
 
 libfo_area_include_HEADERS = \
 	fo-area.h

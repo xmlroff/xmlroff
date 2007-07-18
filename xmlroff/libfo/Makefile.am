@@ -55,6 +55,10 @@ fodoc_headers =			\
 	fo-doc.h		\
 	fo-doc-private.h
 
+libfoinclude_HEADERS = \
+	$(fodoc_headers)        \
+	$(libfo_headers)
+
 libfoincludedir = $(includedir)/libfo-0.5/libfo
 
 libfo_libfo_la_SOURCES =	\
@@ -96,7 +100,7 @@ libfo_0_5_la_LDFLAGS = \
 	-version-info $(LT_VERSION_INFO)	\
 	$(no_undefined)
 
-libfo_0_5_includedir = $(includedir)/libfo-0.5
+libfo_0_5_includedir = $(includedir)/libfo-0.5/libfo
 
 libfo_0_5_include_HEADERS = \
 	fo-object.h		\
