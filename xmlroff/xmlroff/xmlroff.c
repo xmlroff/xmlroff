@@ -273,10 +273,6 @@ main (gint    argc,
     {NULL, 0, 0, 0, NULL, NULL, NULL}
   };
 
-  /* Recommended for use with GOption so filenames in correct
-     encoding. */
-  setlocale (LC_ALL, "");
-
   /* FIXME: Support xml-stylesheet PI in xml-file */
 
   ctx = g_option_context_new (NULL);
