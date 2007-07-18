@@ -20,7 +20,6 @@ main (gint    argc,
       gchar **argv)
 {
   GOptionContext *ctx;   /* context for parsing command-line options */
-  FoLibfoContext *libfo_context;
   GError *error = NULL;
   gchar *out_file = "layout.pdf";
   const gchar *xml_file = NULL;
@@ -108,10 +107,7 @@ main (gint    argc,
 
   fo_libfo_init ();
 
-  libfo_context = fo_libfo_context_new ();
-
-  fo_libfo_format (libfo_context,
-		   xml_file,
+  fo_libfo_format (xml_file,
 		   xslt_file,
 		   out_file,
 		   &error);
@@ -125,7 +121,6 @@ main (gint    argc,
       exit (1);
     }
 
-  fo_libfo_context_close (libfo_context);
   fo_libfo_shutdown ();
 
   return (0);
