@@ -6,8 +6,7 @@ INCLUDES = \
 	$(LIBFO_CFLAGS)
 
 LDADD = \
-	$(LIBFO_LIBS)	\
-	$(POPT_LIBS)
+	$(LIBFO_LIBS)
 
 ADJUST_MODULES=gmodule-area-tree.la
 
