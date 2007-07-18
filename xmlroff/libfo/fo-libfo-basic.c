@@ -14,25 +14,6 @@
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 
-GType
-fo_enum_type_get_type (void)
-{
-  static GType etype = 0;
-  if (etype == 0)
-    {
-      static const GEnumValue values[] = {
-        { FO_ENUM_TYPE_CHAR, "FO_ENUM_TYPE_CHAR", "char" },
-        { FO_ENUM_TYPE_INT, "FO_ENUM_TYPE_INT", "int" },
-        { FO_ENUM_TYPE_FILE, "FO_ENUM_TYPE_FILE", "file" },
-        { 0, NULL, NULL }
-      };
-      etype = g_enum_register_static ("FoEnumType", values);
-    }
-  return etype;
-}
-
-#define FO_TYPE_ENUM_TYPE fo_enum_format_get_type ()
-
 const char *fo_libfo_basic_error_messages [] = {
   N_("FoLibfo error"),
   N_("Unknown file format"),
@@ -116,19 +97,6 @@ fo_libfo_shutdown (void)
   return TRUE;
 }
 
-/**
- * fo_libfo_context_close:
- * @libfo_context: #FoLibfoContext to close.
- * 
- * Closes @libfo_context and sets it to %NULL.
- **/
-void
-fo_libfo_context_close (FoLibfoContext *libfo_context)
-{
-  g_object_unref (libfo_context);
-  libfo_context = NULL;
-}
-
 static void
 fo_basic_bubble_up_error (GError     **dest,
 			  GQuark       new_domain,
@@ -180,8 +148,7 @@ fo_basic_bubble_up_error (GError     **dest,
 }
 
 gboolean
-fo_libfo_format (FoLibfoContext *libfo_context,
-		 const gchar    *xml,
+fo_libfo_format (const gchar    *xml,
 		 const gchar    *xslt,
 		 const gchar    *out,
 		 GError        **error)
@@ -193,14 +160,12 @@ fo_libfo_format (FoLibfoContext *libfo_context,
   FoDoc *fo_doc;
   FoAreaToPDFData fo_area_to_pdf_data = {NULL, 0};
   GError *tmp_error = NULL;
-  gint debug_mode;
 
-  g_return_val_if_fail (FO_IS_LIBFO_CONTEXT (libfo_context), FALSE);
   g_return_val_if_fail (xml != NULL, FALSE);
   g_return_val_if_fail (out != NULL, FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-  debug_mode = fo_libfo_context_get_debug_mode (libfo_context);
+  FoLibfoContext *libfo_context = fo_libfo_context_new ();
 
   xml_doc = fo_xml_doc_new_from_filename (xml,
 					  libfo_context,
@@ -290,22 +255,14 @@ fo_libfo_format (FoLibfoContext *libfo_context,
       return FALSE;
     }
 
-  if (debug_mode & FO_DEBUG_FO)
-    fo_object_debug_dump (fo_xsl_formatter_get_fo_tree (fo_xsl_formatter),
-			  0);
-
-  if (debug_mode & FO_DEBUG_AREA)
-    fo_object_debug_dump (fo_xsl_formatter_get_area_tree (fo_xsl_formatter),
-			  0);
-
   fo_area_to_pdf_data.fo_doc = fo_doc;
-  fo_area_to_pdf_data.debug_level = debug_mode;
 
   fo_area_tree_to_pdf (FO_AREA (fo_xsl_formatter_get_area_tree (fo_xsl_formatter)),
 		       &fo_area_to_pdf_data);
 
   g_object_unref (fo_xsl_formatter);
   g_object_unref (fo_doc);
+  g_object_unref (libfo_context);
   fo_libfo_shutdown ();
 
   return TRUE;

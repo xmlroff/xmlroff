@@ -29,23 +29,6 @@ GQuark fo_libfo_basic_error_quark (void) G_GNUC_CONST;
 
 extern const gchar *fo_libfo_basic_error_messages[FO_LIBFO_BASIC_ERROR_LAST];
 
-typedef enum {
-    FO_ENUM_TYPE_CHAR,
-    FO_ENUM_TYPE_INT,
-    FO_ENUM_TYPE_FILE
-} FoEnumType;
-
-typedef struct _FoValue {
-  FoEnumType	type;
-  union {
-    const gchar	*s;
-    gint         i;
-    const FILE  *fp;
-  } u;
-} FoValue;
-
-typedef struct _FoLibfoContext FoLibfoContext;
-
 gboolean         fo_libfo_init (void);
 
 typedef  gpointer (*FoMalloc)      (gsize    n_bytes);
@@ -59,12 +42,7 @@ gboolean         fo_libfo_init2 (FoMalloc  fo_malloc,
 
 gboolean         fo_libfo_shutdown (void);
 
-FoLibfoContext * fo_libfo_context_new (void);
-
-void             fo_libfo_context_close (FoLibfoContext *libfo_context);
-
-gboolean         fo_libfo_format (FoLibfoContext *libfo_context,
-				  const gchar    *xml,
+gboolean         fo_libfo_format (const gchar    *xml,
 				  const gchar    *xslt,
 				  const gchar    *out,
 				  GError        **error);
