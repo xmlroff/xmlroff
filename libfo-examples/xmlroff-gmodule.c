@@ -6,18 +6,20 @@
  * demonstration just shows the FO and area trees.
  *
  * Copyright (C) 2001-2004 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: xmlroff-gmodule.c,v 1.3 2004/10/20 23:34:07 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include "config.h"
 #include <gmodule.h>
 #include <stdlib.h>
 #include <string.h>
-#include <popt.h>
 #include <libfo/fo-libfo.h>
+#include <libfo/libfo-compat.h>
+#if ENABLE_CAIRO
+#include <libfo/fo-doc-cairo.h>
+#endif
 #if ENABLE_GP
 #include <libfo/fo-doc-gp.h>
 #endif
@@ -27,7 +29,8 @@ typedef void (*ModuleAdjust) (GObject *fo_tree,
 			      GObject *area_tree);
 
 static FoDoc *
-init_fo_doc_gp (const gchar *out_file)
+init_fo_doc_gp (const gchar       *out_file,
+		   FoLibfoContext *libfo_context)
 {
   FoDoc *fo_doc = NULL;
   GError *error = NULL;
@@ -37,14 +40,12 @@ init_fo_doc_gp (const gchar *out_file)
 
   fo_doc_open_file (fo_doc,
 		    out_file,
+		    libfo_context,
 		    &error);
 
   if (error != NULL)
     {
-      g_critical ("%s:: %s",
-		  g_quark_to_string (error->domain),
-		  error->message);
-      g_error_free (error);
+      g_message ("Error: %s", error->message);
       exit (1);
     }
 #else
@@ -55,15 +56,51 @@ init_fo_doc_gp (const gchar *out_file)
   return fo_doc;
 }
 
-int
-main (int          argc,
-      const char **argv)
+static FoDoc *
+init_fo_doc_cairo (const gchar    *out_file,
+		   FoLibfoContext *libfo_context)
 {
-  poptContext optCon;   /* context for parsing command-line options */
-  FoLibfoContext *libfo_context;
+  FoDoc *fo_doc = NULL;
+  GError *error = NULL;
+
+#if ENABLE_CAIRO
+  fo_doc = fo_doc_cairo_new ();
+
+  fo_doc_open_file (fo_doc,
+		    out_file,
+		    libfo_context,
+		    &error);
+
+  if (error != NULL)
+    {
+      g_message ("Error: %s", error->message);
+      exit (1);
+    }
+#else
+  g_critical ("Output using Cairo is not supported by this build of libfo.");
+  exit (1);
+#endif /* ENABLE_CAIRO */
+
+  return fo_doc;
+}
+
+static void
+exit_if_error (GError *error)
+{
+  if (error != NULL)
+    {
+      g_message ("Error: %s", error->message);
+      exit (1);
+    }
+}
+
+int
+main (gint    argc,
+      gchar **argv)
+{
+  GOptionContext *ctx;   /* context for parsing command-line options */
   FoXmlDoc *xml_doc = NULL;
   FoXmlDoc *result_tree = NULL;
-  FoXsltTransformer *fo_xslt_transformer = NULL;
   FoXslFormatter *fo_xsl_formatter;
   FoDoc *fo_doc = NULL;
   GError *error = NULL;
@@ -71,229 +108,187 @@ main (int          argc,
   const gchar *xml_file = NULL;
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
-  gchar *module_string = NULL;
-  FoDebugFlag debug_mode = FO_DEBUG_NONE;
-  gint catalog = 0;
-  gint novalid = 0;
-  gint version = 0;
-  gboolean popt_error = FALSE;
+  const gchar *module_string = NULL;
+  gboolean version = FALSE;
+  gchar** files = NULL;
+  gboolean goption_success = FALSE;
 
-  const struct poptOption optionsTable[] = {
+  const GOptionEntry options[] = {
     { "out-file",
       'o',
-      POPT_ARG_STRING,
+      0,
+      G_OPTION_ARG_STRING,
       &out_file,
-      0,
-      _("Output file"),
-      _("filename")
-    },
-    { "debug",
-      'd',
-      POPT_ARG_INT,
-      &debug_mode,
-      0,
-      _("Debug mode"),
-      _("integer")
-    },
-    { "catalogs",
-      '\0',
-      POPT_ARG_NONE,
-      &catalog,
-      0,
-      _("Use SGML catalogs from $SGML_CATALOG_FILES instead of XML catalogs from file:///etc/xml/catalog"),
-      NULL
-    },
-    { "novalid",
-      '\0',
-      POPT_ARG_NONE,
-      &novalid,
-      0,
-      _("Skip the DTD loading phase"),
-      NULL
+      "Output file",
+      "filename"
     },
     { "version",
       'v',
-      POPT_ARG_NONE,
-      &version,
       0,
-      _("Print version number"),
+      G_OPTION_ARG_NONE,
+      &version,
+      "Print version number",
       NULL
     },
     { "backend",
-      '\0',
-      POPT_ARG_STRING,
-      &backend_string,
       0,
-      _("Pango backend"),
-      _("{gp}")
+      0,
+      G_OPTION_ARG_STRING,
+      &backend_string,
+      _("Backend to use"),
+      _("{cairo|gp}")
     },
     { "module",
-      '\0',
-      POPT_ARG_STRING,
-      &module_string,
       0,
+      0,
+      G_OPTION_ARG_STRING,
+      &module_string,
       _("GModule to load"),
       _("filename")
     },
-    POPT_AUTOHELP
-    { NULL, '\0', 0, NULL, 0, NULL, NULL}
+    { G_OPTION_REMAINING,
+      0,
+      0,
+      G_OPTION_ARG_FILENAME_ARRAY,
+      &files,
+      NULL,
+      "file [stylesheet]"
+    },
+    {NULL, 0, 0, 0, NULL, NULL, NULL}
   };
 
-  optCon = poptGetContext (NULL, argc, argv, optionsTable, 0);
-  poptSetOtherOptionHelp (optCon, "xml-file [stylesheet]");
+  ctx = g_option_context_new (NULL);
+  g_option_context_add_main_entries (ctx, options, PACKAGE);
+  goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
+  /* Finished with parsing command-line arguments. */
+  g_option_context_free(ctx);
+  ctx = NULL;
 
-  poptGetNextOpt (optCon);
-
-  fo_libfo_init ();
-  libfo_context = fo_libfo_context_new ();
+  if (goption_success == FALSE)
+    {
+      exit (1);
+    }
 
   if (version != 0)
     {
       g_print ("%s\nSubmit bug reports to %s\n",
 	       PACKAGE_STRING,
 	       PACKAGE_BUGREPORT);
+      if (files == NULL)
+	{
+	  /* Nothing to do if just asking for version. */
+	  exit (0);
+	}
     }
 
-  if (novalid == 0)
+  if ((files == NULL) ||
+      (files[0] == NULL))
     {
-      fo_libfo_context_set_validation (libfo_context,
-				       FALSE);
+      g_print ("No input file specified.\n");
+		  
+      exit (1);
     }
-
-
-  if (catalog != 0)
+  else
     {
-      fo_libfo_context_set_sgml_catalogs (libfo_context,
-					  TRUE);
+      xml_file = files[0];
     }
+
+  if (files[1] != NULL)
+    {
+      xslt_file = files[1];
+
+      if (files[2] != NULL)
+	{
+	  g_print("Unexpected additional parameter: '%s'\n",
+		      files[2]);
+		  
+	  exit (1);
+	}
+    }
+
+  fo_libfo_init ();
+
+  FoLibfoContext *libfo_context = fo_libfo_context_new ();
 
   if (backend_string == NULL)
     {
 #if ENABLE_GP
-      fo_doc = init_fo_doc_gp (out_file);
+      fo_doc = init_fo_doc_gp (out_file,
+			       libfo_context);
 #else
-      g_critical ("No output type is supported by this build of libfo.");
-      popt_error = TRUE;
+#if ENABLE_CAIRO
+      fo_doc = init_fo_doc_cairo (out_file,
+				  libfo_context);
+#else
+      g_message ("No backend type is supported by this build of libfo.");
+      exit (1);
+#endif /* ENABLE_CAIRO */
 #endif /* ENABLE_GP */
     }
-#if ENABLE_GP
+  else if (strcmp (backend_string, "cairo") == 0)
+    {
+      fo_doc = init_fo_doc_cairo (out_file,
+				  libfo_context);
+    }
   else if (strcmp (backend_string, "gp") == 0)
     {
-      fo_doc = init_fo_doc_gp (out_file);
-    }
-#endif /* ENABLE_GP */
-  else
-    {
-      g_critical ("Unrecognised output type: '%s'", backend_string);
-      popt_error = TRUE;
-    }
-
-  if (debug_mode != FO_DEBUG_NONE)
-    {
-      fo_libfo_context_set_debug_mode (libfo_context,
-				       debug_mode);
-    }
-
-  if (poptPeekArg (optCon))
-    {
-      xml_file = poptGetArg (optCon);
+      fo_doc = init_fo_doc_gp (out_file,
+			       libfo_context);
     }
   else
     {
-      if (version != 0)
-	{
-	  exit (0);
-	}
-      else
-	{
-	  popt_error = TRUE;
-	}
-    }
-
-  if (poptPeekArg (optCon))
-    {
-      xslt_file = poptGetArg (optCon);
-    }
-
-  if (poptPeekArg (optCon))
-    {
-      popt_error = TRUE;
-    }
-
-  if (popt_error == TRUE)
-    {
-      poptPrintUsage(optCon, stderr, 0);
-      exit (1);
-    }
-
-  if (error != NULL)
-    {
-      g_critical ("%s:: %s",
-		  g_quark_to_string (error->domain),
-		  error->message);
-      g_error_free (error);
+      g_message ("Unsupported output format: '%s'",
+		 backend_string);
       exit (1);
     }
 
   if (xslt_file != NULL)
     {
-      xml_doc = fo_xml_doc_new ();
-      fo_xml_doc_set_filename (xml_doc,
-			       xml_file);
+      /* When there is an XSLT file specified, need to
+	 do a transform before formatting result. */
+      xml_doc = fo_xml_doc_new_from_filename (xml_file,
+					      libfo_context,
+					      &error);
 
-      fo_xml_doc_parse (xml_doc,
-			libfo_context,
-			&error);
+      exit_if_error (error);
 
-      if (error != NULL)
-	{
-	  g_critical ("%s:: %s",
-		      g_quark_to_string (error->domain),
-		      error->message);
-	  g_error_free (error);
-	  exit (1);
-	}
+      FoXmlDoc *stylesheet_doc =
+	fo_xml_doc_new_from_filename (xslt_file,
+				      libfo_context,
+				      &error);
 
-      fo_xslt_transformer = fo_xslt_transformer_new ();
-      fo_xslt_transformer_set_filename (fo_xslt_transformer,
-					xslt_file);
-      fo_xslt_transformer_set_xml_doc (fo_xslt_transformer,
-				       xml_doc);
-      fo_xslt_transformer_transform (fo_xslt_transformer,
-				    libfo_context,
-				    &error);
-      if (error != NULL)
-	{
-	  g_critical ("%s:: %s",
-		      g_quark_to_string (error->domain),
-		      error->message);
-	  g_error_free (error);
-	  exit (1);
-	}
+      exit_if_error (error);
+
+      result_tree = fo_xslt_transformer_do_transform (xml_doc,
+						      stylesheet_doc,
+						      &error);
+      exit_if_error (error);
 
       fo_xml_doc_unref (xml_doc);
-      result_tree =
-	fo_xml_doc_ref (fo_xslt_transformer_get_result (fo_xslt_transformer));
-      fo_xslt_transformer_unref (fo_xslt_transformer);
     }
   else
     {
-      result_tree = fo_xml_doc_new ();
-      fo_xml_doc_set_filename (result_tree,
-			       xml_file);
-      fo_xml_doc_parse (result_tree,
-			libfo_context,
-			&error);
+      /* When there is no XSLT file specified, the XML file
+	 is expected to be in the FO vocabulary, so just use it. */
+      result_tree = fo_xml_doc_new_from_filename (xml_file,
+						  libfo_context,
+						  &error);
 
-      if (error != NULL)
-	{
-	  g_critical ("%s:: %s",
-		      g_quark_to_string (error->domain),
-		      error->message);
-	  g_error_free (error);
-	  exit (1);
-	}
+      exit_if_error (error);
     }
+
+  /* Maybe make sure the FO XML document is safe for libfo to
+     process. */
+  FoXmlDoc *old_result_tree = result_tree;
+
+  /* Remove or rewrite what libfo can't yet handle. */
+  result_tree = libfo_compat_make_compatible (old_result_tree,
+					      libfo_context,
+					      &error);
+
+  fo_xml_doc_unref (old_result_tree);
+
+  exit_if_error (error);
 
   fo_xsl_formatter = fo_xsl_formatter_new ();
 
@@ -363,8 +358,6 @@ main (int          argc,
   g_object_unref (fo_xsl_formatter);
   g_object_unref (fo_doc);
   fo_libfo_shutdown ();
-
-  poptFreeContext (optCon);
 
   return(0);
 }

@@ -4,14 +4,14 @@
  * This loadable module works with xmlroff-gmodule.
  *
  * Copyright (C) 2001-2004 Sun Microsystems
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * $Id: gmodule-area-tree.c,v 1.3 2004/10/20 23:34:07 tonygraham Exp $
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #define GTK_ENABLE_BROKEN
 #include "config.h"
+#include <stdlib.h>
 #include <libfo/fo-libfo.h>
 #include <gtk/gtk.h>
 #if ENABLE_GP
@@ -86,9 +86,14 @@ init_fo_doc_gp (const gchar *out_file)
 #if ENABLE_GP
   fo_doc = fo_doc_gp_new ();
 
+  FoLibfoContext *libfo_context = fo_libfo_context_new ();
+
   fo_doc_open_file (fo_doc,
 		    out_file,
+		    libfo_context,
 		    &error);
+
+  g_object_unref (libfo_context);
 
   if (error != NULL)
     {
