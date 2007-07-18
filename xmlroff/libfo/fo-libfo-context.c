@@ -81,6 +81,7 @@ enum {
   PROP_WARNING_MODE
 };
 
+static void fo_libfo_context_init (FoLibfoContext      *libfo_context);
 static void fo_libfo_context_class_init   (FoLibfoContextClass *klass);
 static void fo_libfo_context_get_property (GObject         *object,
 					   guint            prop_id,
@@ -118,7 +119,7 @@ fo_libfo_context_get_type (void)
         NULL,           /* class_data */
         sizeof (FoLibfoContext),
         0,              /* n_preallocs */
-	NULL,		/* instance_init */
+	(GInstanceInitFunc) fo_libfo_context_init,
 	NULL		/* value_table */
       };
 
@@ -128,6 +129,20 @@ fo_libfo_context_get_type (void)
     }
 
   return object_type;
+}
+
+/**
+ * fo_libfo_context_init:
+ * @libfo_context: #FoLibfoContext object to initialise.
+ * 
+ * Implements #GInstanceInitFunc for #FoLibfoContext.
+ *
+ * Initialises format to %FO_ENUM_FORMAT_AUTO.
+ **/
+void
+fo_libfo_context_init (FoLibfoContext *libfo_context)
+{
+  libfo_context->format = FO_ENUM_FORMAT_AUTO;
 }
 
 /**

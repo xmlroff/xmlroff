@@ -291,7 +291,8 @@ fo_doc_open_file_default (FoDoc          *fo_doc,
  * @libfo_context: #FoLibfoContext containing extra info.
  * @error:         Information about any error that occurred.
  * 
- * 
+ *
+ * No reference to @libfo_context is kept.
  **/
 void
 fo_doc_open_file (FoDoc          *fo_doc,

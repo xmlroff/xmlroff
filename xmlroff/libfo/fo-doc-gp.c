@@ -373,6 +373,8 @@ fo_doc_gp_get_context (FoDoc *fo_doc)
  * @error:         #GError that is set if an error occurs.
  * 
  * Open @filename as the output file for @fo_doc.
+ *
+ * No reference to @libfo_context is kept.
  **/
 void
 fo_doc_gp_open_file (FoDoc          *fo_doc,
@@ -515,6 +517,11 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 	      fprintf (stderr,
 		       "gnome_print_config_set Printer-SVG");
 	    }
+	}
+      else
+	{
+	      fprintf (stderr,
+		       "Unknown output format");
 	}
 
       gnome_print_config_set_length (fo_doc_gp->config,

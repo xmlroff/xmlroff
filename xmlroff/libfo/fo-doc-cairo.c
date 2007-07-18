@@ -274,6 +274,8 @@ fo_doc_cairo_new (void)
  * @error:         #GError that is set if an error occurs.
  * 
  * Open @filename as the output file for @fo_doc.
+ *
+ * No reference to @libfo_context is kept.
  **/
 void
 fo_doc_cairo_open_file (FoDoc          *fo_doc,
