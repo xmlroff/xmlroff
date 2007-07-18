@@ -141,7 +141,6 @@ main (gint    argc,
   GOptionContext *ctx;   /* context for parsing command-line options */
   FoLibfoContext *libfo_context;
   FoXmlDoc *xml_doc = NULL;
-  FoXmlDoc *stylesheet_doc = NULL;
   FoXmlDoc *result_tree = NULL;
   FoXslFormatter *fo_xsl_formatter;
   FoDoc *fo_doc = NULL;
@@ -450,9 +449,10 @@ main (gint    argc,
 
       exit_if_error (error);
 
-      stylesheet_doc = fo_xml_doc_new_from_filename (xslt_file,
-						     libfo_context,
-						     &error);
+      FoXmlDoc *stylesheet_doc =
+	fo_xml_doc_new_from_filename (xslt_file,
+				      libfo_context,
+				      &error);
 
       exit_if_error (error);
 
