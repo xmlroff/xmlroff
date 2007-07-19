@@ -208,9 +208,17 @@ if test "x$with_xsl_processor" = "x" ; then
 else
   XSL_PROCESSOR=$with_xsl_processor
 fi
+AC_MSG_CHECKING([for XSL processor])
+if test -f "$XSL_PROCESSOR" ; then
+  AC_MSG_RESULT($XSL_PROCESSOR)
+else
+  AC_MSG_ERROR([
+*** XSL processor "$XSL_PROCESSOR" does not exist.
+  ])
+fi
 AC_DEFINE_UNQUOTED(XSL_PROCESSOR,
 	           "$XSL_PROCESSOR",
-	           [Full path to XSL processor to test.])
+	           [Path to XSL processor to test.])
 AC_SUBST(XSL_PROCESSOR)
 
 #
@@ -256,7 +264,7 @@ fi
 AC_PATH_PROG(XSLTPROC, $XSLTPROC, no)
 AC_DEFINE_UNQUOTED(XSLTPROC,
 	           "$XSLTPROC",
-	           [Full path to XSLT processor to test.])
+	           [Full path to xsltproc XSLT processor for transforming reports.])
 AC_SUBST(XSLTPROC)
 if test "x$XSLTPROC" = "xno" ; then
   AC_MSG_ERROR([
