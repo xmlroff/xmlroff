@@ -19,8 +19,8 @@ int
 main (gint    argc,
       gchar **argv)
 {
-  GOptionContext *ctx;   /* context for parsing command-line options */
   GError *error = NULL;
+  /* Variables set from command-line options. */
   gchar *out_file = "layout.pdf";
   const gchar *xml_file = NULL;
   const gchar *xslt_file = NULL;
@@ -56,7 +56,7 @@ main (gint    argc,
     {NULL, 0, 0, 0, NULL, NULL, NULL}
   };
 
-  ctx = g_option_context_new (NULL);
+   GOptionContext *ctx = g_option_context_new (NULL);
   g_option_context_add_main_entries (ctx, options, PACKAGE);
   goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
   /* Finished with parsing command-line arguments. */

@@ -14,12 +14,9 @@
 #include <stdlib.h>
 #include <libfo/fo-libfo.h>
 #include <gtk/gtk.h>
-#if ENABLE_GP
-#include <libfo/fo-doc-gp.h>
-#endif
 
-void close_application( GtkWidget *widget,
-                        gpointer   data )
+void close_application( GtkWidget *widget G_GNUC_UNUSED,
+                        gpointer   data G_GNUC_UNUSED)
 {
        gtk_main_quit ();
 }
@@ -77,52 +74,15 @@ insert_tree (GtkWidget *text,
     }
 }
 
-static FoDoc *
-init_fo_doc_gp (const gchar *out_file)
-{
-  FoDoc *fo_doc = NULL;
-  GError *error = NULL;
-
-#if ENABLE_GP
-  fo_doc = fo_doc_gp_new ();
-
-  FoLibfoContext *libfo_context = fo_libfo_context_new ();
-
-  fo_doc_open_file (fo_doc,
-		    out_file,
-		    libfo_context,
-		    &error);
-
-  g_object_unref (libfo_context);
-
-  if (error != NULL)
-    {
-      g_critical ("%s:: %s",
-		  g_quark_to_string (error->domain),
-		  error->message);
-      g_error_free (error);
-      exit (1);
-    }
-#else
-  g_critical ("Output using GNOME Print is not supported by this build of libfo.");
-  exit (1);
-#endif /* ENABLE_GP */
-
-  return fo_doc;
-}
-
 void
-adjust (GObject *fo_tree,
+adjust (GObject *fo_tree G_GNUC_UNUSED,
 	GObject *area_tree)
 {
-  GError *error = NULL;
   GtkWidget *window;
   GtkWidget *box1;
   GtkWidget *box2;
   GtkWidget *hbox;
   GtkWidget *button;
-  GtkWidget *check;
-  GtkWidget *separator;
   GtkWidget *table;
   GtkWidget *vscrollbar;
   GtkWidget *text;

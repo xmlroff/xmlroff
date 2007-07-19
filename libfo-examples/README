@@ -1,7 +1,27 @@
 This directory includes examples of using the libfo library from the
 xmlroff XSL Formatter.
 
+This is part of the xmlroff XSL Formatter project.
+
+-----------------------------------------------------------------------
+xmlroff is a fast, free, high-quality, multi-platform XSL formatter
+that aims to excel at DocBook formatting and that integrates easily
+with other programs and with scripting languages.
+
+The xmlroff XSL Formatter is a library -- libfo -- and a command-line
+program -- xmlroff -- for formatting XML according to the XSL 1.0
+Recommendation.
+
 See http://xmlroff.org/.
+-----------------------------------------------------------------------
+
+The version numbers of 'libfo-examples' releases are the same as the
+version of xmlroff that is current at the time of the 'libfo-examples'
+release.  However, any version of this package may be used with any
+version of xmlroff with the same 'minor' number, although using the
+newest 'libfo-examples' version is recommended since new versions tend
+to have bug fixes and ease of use improvements and, occasionally,
+better documentation.
 
 All of these example programs accept the same or similar command-line
 arguments as xmlroff itself.  All of them will display their usage in
@@ -23,8 +43,7 @@ xmlroff-libfo
 -------------
 
 xmlroff-libfo demonstrates using libfo through the finer granularity
-FoXslFormatter (and FoLibfoContext, FoXsltTransformer, and FoXmlDoc)
-objects.
+FoXslFormatter (and FoLibfoContext and FoXmlDoc) objects.
 
 xmlroff-text-tree
 -----------------
@@ -65,10 +84,8 @@ See the file COPYING for details.
 Mailing List
 ============
 
-xmlroff and libfo are discussed on the
-xmlroff-list@lists.sourceforge.net mailing list.  See
-http://lists.sourceforge.net/lists/listinfo/xmlroff-list
+xmlroff and libfo are discussed on the xmlroff-list@xmlroff.org
+mailing list.  See http://xmlroff.org/wiki/MailingLists
 
 Tony Graham
-tonygraham@users.sourceforge.net
-20 October 2004
+19 July 2007

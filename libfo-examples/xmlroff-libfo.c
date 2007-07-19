@@ -16,7 +16,6 @@
 #include "config.h"
 #include <stdlib.h>
 #include <string.h>
-#include <locale.h>
 #include <libfo/fo-libfo.h>
 #include <libfo/libfo-compat.h>
 #if ENABLE_CAIRO
@@ -105,8 +104,6 @@ int
 main (gint    argc,
       gchar **argv)
 {
-  GOptionContext *ctx;   /* context for parsing command-line options */
-  FoLibfoContext *libfo_context;
   FoXmlDoc *xml_doc = NULL;
   FoXmlDoc *stylesheet_doc = NULL;
   FoXmlDoc *result_tree = NULL;
@@ -121,8 +118,6 @@ main (gint    argc,
   FoEnumFormat format_mode = FO_ENUM_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
-  gboolean compat_stylesheet = FALSE;
-  gboolean compat = TRUE;
   gboolean continue_after_error = FALSE;
   gboolean validation = FALSE;
   gboolean version = FALSE;
@@ -160,32 +155,6 @@ main (gint    argc,
       G_OPTION_ARG_NONE,
       &continue_after_error,
       _("Continue after any formatting errors"),
-      NULL
-    },
-    { "compat",
-      0,
-      0,
-      G_OPTION_ARG_NONE,
-      &compat,
-      /* Describe both --compat and --nocompat since --nocompat is hidden. */
-      _("Do ('--compat') or do not ('--nocompat') preprocess with compatibility stylesheet "
-	"(default is '--compat')"),
-      NULL
-    },
-    { "nocompat",
-      0,
-      G_OPTION_FLAG_HIDDEN | G_OPTION_FLAG_REVERSE,
-      G_OPTION_ARG_NONE,
-      &compat,
-      _("Do not use compatibility stylesheet"),
-      NULL
-    },
-    { "compat-stylesheet",
-      0,
-      0,
-      G_OPTION_ARG_NONE,
-      &compat_stylesheet,
-      _("Output the compatibility stylesheet then exit"),
       NULL
     },
     { "valid",
@@ -241,11 +210,7 @@ main (gint    argc,
     {NULL, 0, 0, 0, NULL, NULL, NULL}
   };
 
-  /* Recommended for use with GOption so filenames in correct
-     encoding. */
-  setlocale (LC_ALL, "");
-
-  ctx = g_option_context_new (NULL);
+  GOptionContext *ctx = g_option_context_new (NULL);
   g_option_context_add_main_entries (ctx, options, PACKAGE);
   goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
   /* Finished with parsing command-line arguments. */
@@ -254,12 +219,6 @@ main (gint    argc,
   if (goption_success == FALSE)
     {
       exit (1);
-    }
-
-  if (compat_stylesheet == TRUE)
-    {
-      printf (libfo_compat_get_stylesheet ());
-      exit (0);
     }
 
   if (version != 0)
@@ -300,7 +259,8 @@ main (gint    argc,
     }
 
   fo_libfo_init ();
-  libfo_context = fo_libfo_context_new ();
+
+  FoLibfoContext *libfo_context = fo_libfo_context_new ();
 
   fo_libfo_context_set_validation (libfo_context,
 				   validation);
@@ -412,21 +372,17 @@ main (gint    argc,
       exit_if_error (error);
     }
 
-  /* Maybe make sure the FO XML document is safe for libfo to
-     process. */
-  if (compat == TRUE)
-    {
-      FoXmlDoc *old_result_tree = result_tree;
+  /* Make sure the FO XML document is safe for libfo to process. */
+  FoXmlDoc *old_result_tree = result_tree;
 
-      /* Remove or rewrite what libfo can't yet handle. */
-      result_tree = libfo_compat_make_compatible (old_result_tree,
-						  libfo_context,
-						  &error);
+  /* Remove or rewrite what libfo can't yet handle. */
+  result_tree = libfo_compat_make_compatible (old_result_tree,
+					      libfo_context,
+					      &error);
 
-      fo_xml_doc_unref (old_result_tree);
+  fo_xml_doc_unref (old_result_tree);
 
-      exit_if_error (error);
-    }
+  exit_if_error (error);
 
   fo_xsl_formatter = fo_xsl_formatter_new ();
 
