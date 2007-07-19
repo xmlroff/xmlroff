@@ -16,6 +16,13 @@ AC_PROG_CC
 AM_PROG_LIBTOOL
 AC_PROG_INSTALL
 
+dnl
+dnl Debug for TG (-Wall)
+dnl
+if test "`pwd`" = "/usr/local/src/xslfo/libfo-examples" ; then
+    CFLAGS="-Wall -g -O -W "
+fi
+
 # Checks for libraries.
 
 PKG_CHECK_MODULES(LIBFO,
