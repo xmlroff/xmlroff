@@ -1,0 +1,46 @@
+07/19/07 16:24:17 tkg [113]
+	* trunk/libfo-examples/ChangeLog.pre-0.5 (moved)
+	Moved change log since format changing.
+
+07/19/07 16:22:38 tkg [112]
+	* trunk/libfo-examples/AUTHORS (modified)
+	* trunk/libfo-examples/COPYING (modified)
+	* trunk/libfo-examples/NEWS (modified)
+	* trunk/libfo-examples/README (modified)
+	* trunk/libfo-examples/gmodule-area-tree.c (modified)
+	* trunk/libfo-examples/xmlroff-basic.c (modified)
+	* trunk/libfo-examples/xmlroff-init2.c (modified)
+	* trunk/libfo-examples/xmlroff-libfo.c (modified)
+	* trunk/libfo-examples/xmlroff-text-tree.c (modified)
+	* trunk/libfo-examples/xmlroff-text-tree2.c (modified)
+	Updated for xmlroff 0.5.2.  Fixed all compiler warnings.
+
+07/19/07 16:12:19 tkg [111]
+	* trunk/libfo-examples/configure.ac (modified)
+	Added '-Wall' if in tkg's regular location.
+
+07/18/07 21:17:13 tkg [110]
+	* trunk/libfo-examples/gmodule-area-tree.c (modified)
+	* trunk/libfo-examples/xmlroff-gmodule.c (modified)
+	* trunk/libfo-examples/xmlroff-libfo.c (modified)
+	xmlroff-gmodule and xmlroff-libfo now working. Re #30.
+
+07/18/07 14:17:29 tkg [106]
+	* trunk/libfo-examples/xmlroff-basic.c (modified)
+	Matching simplifications in fo-libfo-basic.h.  re #63.
+
+07/18/07 12:35:25 tkg [101]
+	* trunk/libfo-examples/xmlroff-basic.c (modified)
+	Updated for libfo 0.5.2. (see #30)
+
+07/18/07 12:28:23 tkg [100]
+	* trunk/libfo-examples/Makefile.am (modified)
+	Removed references to popt.  See #30.
+
+07/18/07 12:27:38 tkg [99]
+	* trunk/libfo-examples/configure.ac (modified)
+	Removed checking for popt.  Fixed bug in cecking for Cairo backend.
+	Upped version to 0.5.2.
+
+07/13/07 16:36:24 tkg [86]
+	libfo-examples.
