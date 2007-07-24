@@ -10,7 +10,6 @@
 #include "config.h"
 #include <stdlib.h>
 #include <string.h>
-#include <locale.h>
 #include <libfo/fo-libfo.h>
 #include <libfo/libfo-compat.h>
 #if ENABLE_CAIRO
@@ -393,10 +392,12 @@ main (gint    argc,
   if (backend_string == NULL)
     {
 #if ENABLE_GP
-      fo_doc = init_fo_doc_gp (out_file, libfo_context);
+      fo_doc = init_fo_doc_gp (out_file,
+			       libfo_context);
 #else
 #if ENABLE_CAIRO
-      fo_doc = init_fo_doc_cairo (out_file, libfo_context);
+      fo_doc = init_fo_doc_cairo (out_file,
+				  libfo_context);
 #else
       g_set_error(&error,
 		  XMLROFF_ERROR,
