@@ -185,16 +185,14 @@
 
         <!-- Command line to run the XSL processor -->
         <xsl:variable name="command-line">
-          <xsl:value-of select="$use-xsl-processor"/>
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="$XSL_PROCESSOR_FLAGS"/>
-          <xsl:text> -o </xsl:text>
-          <xsl:value-of select="@id"/>
-          <xsl:text>.pdf </xsl:text>
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="$input-xml"/>
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="$input-xsl"/>
+          <xsl:call-template name="select-command-line">
+            <xsl:with-param name="command-patterns" select="$COMMAND_PATTERNS"/>
+            <xsl:with-param name="xsl-processor" select="$use-xsl-processor"/>
+            <xsl:with-param name="xsl-processor-flags" select="$XSL_PROCESSOR_FLAGS"/>
+            <xsl:with-param name="output" select="concat(@id, '.pdf')"/>
+            <xsl:with-param name="input" select="$input-xml"/>
+            <xsl:with-param name="stylesheet" select="$input-xsl"/>
+          </xsl:call-template>
         </xsl:variable>
 
         <!-- Output shell command to echo $command-line. -->
@@ -232,6 +230,175 @@
       <xsl:text>rm -f core&#10;</xsl:text>
       <xsl:text>date&#10;</xsl:text>
     </saxon:output>
+  </xsl:template>
+
+  
+  <!-- Selects the first command-line in $command-patterns where all
+       format strings are replaced by values. -->
+  <xsl:template name="select-command-line">
+    <!-- The patterns, with ';' separating patterns. -->
+    <xsl:param name="command-patterns"/>
+    <!-- String to substitute for '%p'. -->
+    <xsl:param name="xsl-processor"/>
+    <!-- String to substitute for '%c'.  Optional. -->
+    <xsl:param name="xsl-processor-flags"/>
+    <!-- String to substitute for '%o'.  Optional. -->
+    <xsl:param name="output"/>
+    <!-- String to substitute for '%i'. -->
+    <xsl:param name="input"/>
+    <!-- String to substitute for '%s'.  Optional. -->
+    <xsl:param name="stylesheet"/>
+    
+    <xsl:variable name="first-pattern">
+      <xsl:choose>
+        <xsl:when test="contains($command-patterns, ';')">
+          <xsl:value-of
+            select="substring-before($command-patterns, ';')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$command-patterns"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="first-command">
+      <xsl:call-template name="substitute-formats">
+        <xsl:with-param name="command-pattern" select="$first-pattern"/>
+        <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
+        <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
+        <xsl:with-param name="output" select="$output"/>
+        <xsl:with-param name="input" select="$input"/>
+        <xsl:with-param name="stylesheet" select="$stylesheet"/>
+      </xsl:call-template>
+    </xsl:variable>
+    
+    <!-- The command is used only if all formats were replaced. -->
+    <xsl:choose>
+      <xsl:when test="not(contains($first-command, '%'))">
+        <xsl:value-of select="$first-command"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <!-- Recurse with remaining patterns if first command unusable. -->
+        <xsl:call-template name="select-command-line">
+          <xsl:with-param name="command-patterns"
+            select="substring($command-patterns,
+                              string-length($first-pattern) + 2)"/>
+          <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
+          <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
+          <xsl:with-param name="output" select="$output"/>
+          <xsl:with-param name="input" select="$input"/>
+          <xsl:with-param name="stylesheet" select="$stylesheet"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <!-- Replaces format strings, '%p', etc., with specified values,
+       if there is a specified value.  Matches on first format
+       string then recursively calls itself on remainder of
+       $command-pattern. -->
+  <xsl:template name="substitute-formats">
+    <!-- The pattern, possibly containing format strings. -->
+    <xsl:param name="command-pattern"/>
+    <!-- The portion of the command that has already been processed. -->
+    <xsl:param name="before"/>
+    <!-- String to substitute for '%p'. -->
+    <xsl:param name="xsl-processor"/>
+    <!-- String to substitute for '%c'.  Optional. -->
+    <xsl:param name="xsl-processor-flags"/>
+    <!-- String to substitute for '%o'.  Optional. -->
+    <xsl:param name="output"/>
+    <!-- String to substitute for '%i'. -->
+    <xsl:param name="input"/>
+    <!-- String to substitute for '%s'.  Optional. -->
+    <xsl:param name="stylesheet"/>
+    
+    <xsl:choose>
+      <xsl:when test="contains($command-pattern, '%')">
+        <!-- Portion of $command-pattern before first '%'. -->
+        <xsl:variable name="before-format"
+          select="substring-before($command-pattern, '%')"/>
+
+        <!-- Format character following first '%'. -->
+        <xsl:variable name="format-code"
+          select="substring(substring-after($command-pattern, '%'), 1, 1)"/>
+
+        <!-- Portion of $command-pattern after first '%' and its
+             following format-code. -->
+        <xsl:variable name="after-format"
+          select="substring(substring-after($command-pattern, '%'), 2)"/>
+        
+        <!-- String to replace format string.  If there is no
+             replacement for a known format string, reuse the format
+             string as a sign that the command string isn't usable. -->
+        <xsl:variable name="format-replacement">
+          <xsl:choose>
+            <xsl:when test="$format-code = 'i'">
+              <xsl:value-of select="$input"/>
+            </xsl:when>
+            <xsl:when test="$format-code = 'o'">
+              <xsl:choose>
+                <xsl:when test="$output">
+                  <xsl:value-of select="$output"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>%o</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:when test="$format-code = 's'">
+              <xsl:choose>
+                <xsl:when test="$stylesheet">
+                  <xsl:value-of select="$stylesheet"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>%s</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:when test="$format-code = 'c'">
+              <xsl:choose>
+                <xsl:when test="$xsl-processor-flags">
+                  <xsl:value-of select="$xsl-processor-flags"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>%c</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:when test="$format-code = 'p'">
+              <xsl:value-of select="$xsl-processor"/>
+            </xsl:when>
+            <xsl:when test="$format-code = ''">
+              <xsl:message>
+                <xsl:text>Command pattern ends with a '%'</xsl:text>
+              </xsl:message>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:message>
+                <xsl:text>Unknown format code: </xsl:text>
+                <xsl:value-of select="$format-code"/>
+              </xsl:message>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <!-- Recurse for rest of $command-pattern. -->
+        <xsl:call-template name="substitute-formats">
+          <xsl:with-param name="before"
+            select="concat($before, $before-format, $format-replacement)"/>
+          <xsl:with-param name="command-pattern" select="$after-format"/>
+          <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
+          <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
+          <xsl:with-param name="output" select="$output"/>
+          <xsl:with-param name="input" select="$input"/>
+          <xsl:with-param name="stylesheet" select="$stylesheet"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="concat($before, $command-pattern)"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 </xsl:stylesheet>

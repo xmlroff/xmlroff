@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testing framework],
-	[0.5.1],
+	[0.5.2],
 	[http://xmlroff.org/newticket],
 	xmlroff-testing)
 
@@ -83,6 +83,23 @@ fi
 AC_DEFINE_UNQUOTED(DEBUG,
 		   $DEBUG,
 		   [1 enables debugging messages.  2 or greater enables more verbose output. (default=0)])
+
+#
+# Default command patterns
+#
+command_patterns_default="%p -o %o %c %i %s;%p -o %o %c %i;%p -o %o %i"
+AC_ARG_WITH(command_patterns,
+	    AC_HELP_STRING([--with-oommand-patterns],
+			   [Patterns for running processor. (default works for xmlroff)]),
+	    command_patterns="$withval", :)
+if test "x$with_command_patterns" = "x" ; then
+  COMMAND_PATTERNS=$command_patterns_default
+else
+  COMMAND_PATTERNS=$with_command_patterns
+fi
+AC_DEFINE_UNQUOTED(COMMAND_PATTERNS,
+	           "$COMMAND_PATTERNS",
+	           [Patterns for running processor.])
 
 #
 # Default stylesheet, if any, to use with tests that don't specify
