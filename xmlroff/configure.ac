@@ -129,8 +129,8 @@ PKG_CHECK_MODULES(GTK_DOC,
 		  gtk-doc >= $GTK_DOC_MIN_VERSION,
 		  have_gtk_doc=true,
 		  :)
-dnl AM_CONDITIONAL(HAVE_GTK_DOC, $GTKDOC)
-dnl AC_SUBST(HAVE_GTK_DOC)
+AM_CONDITIONAL(HAVE_GTK_DOC, $have_gtk_doc)
+AC_SUBST(HAVE_GTK_DOC, $have_gtk_doc)
 
 AC_CHECK_PROG(DB2HTML, db2html, true, false)
 AM_CONDITIONAL(HAVE_DOCBOOK, $DB2HTML)
@@ -143,7 +143,7 @@ AC_ARG_ENABLE(gtk-doc,
               enable_gtk_doc=no)
 
 if test "x$enable_gtk_doc" = "xyes" ; then
-  if test "x$GTKDOC" = "xtrue" ; then
+  if test "x$have_gtk_doc" = "xtrue" ; then
     enable_gtk_doc=yes
   else
     enable_gtk_doc=no 
