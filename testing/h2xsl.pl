@@ -57,9 +57,9 @@ open(XSLFILE, ">$gBasename.xsl");
 
 print XSLFILE <<EndOfHeader;
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generated from $gHeaderFile by $0. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="1.0">
+  <!-- $gBasename.xsl.  Generated from $gHeaderFile by $0. -->
 EndOfHeader
 
 while (<HEADERFILE>) {
