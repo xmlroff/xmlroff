@@ -1,6 +1,7 @@
-This is the framework of scripts and stylesheets for running the
-xmlroff XSL formatter on a set of test files and working with the test
-results.
+This is the framework of scripts and stylesheets for running any XSL
+formatter on a set of test files and working with the test results.
+
+The default configuration works with the xmlroff XSL Formatter.
 
 This is part of the xmlroff XSL Formatter project.
 
@@ -87,6 +88,8 @@ Before You Begin
    The parameters for controlling the test are set as configure
    options.  Use './configure --help' to see the available options.
 
+   See below for configuring to use an alternative XSL processor.
+
    (If starting from a Subversion checkout, run './autogen.sh'.)
 
 7. (Optional, Apache-only) Copy *.conf to your Apache2 conf.d
@@ -101,10 +104,10 @@ Before You Begin
    file in this directory and that the paths in update-results.pl are
    correct for your setup.
 
-10. You may need to change the permissions on the current directory
-    and its descendant files and directories so both you and the
-    webserver UID, e.g., 'wwwrun' for Apache2, can create and modify
-    files.
+   Note that you may need to change the permissions on the current
+   directory and its descendant files and directories so both you and
+   the webserver UID, e.g., 'wwwrun' for Apache2, can create and
+   modify files.
 
 
 Running the tests
@@ -183,6 +186,78 @@ When the Test Suite Changes
    different filename when you ran 'configure', modify that file.
 
 4. Run the tests, which will now include the new tests.
+
+
+
+Using an Alternative XSL Processor
+==================================
+
+You can test XSL processors other than xmlroff by specifying the
+--with-command-patterns parameter to 'configure'.
+
+The value of --with-command-patterns is a list of one or more command
+patterns, separated by semicolons.
+
+A command pattern is the format of the command to run the XSL
+processor, but with format strings, e.g., '%p', at the points in the
+command where the testing system substitutes values.
+
+The format strings are:
+
+   %p   XSL processor
+
+        Specified by --with-xsl-processor.
+
+   %c   XSL processor flags
+
+        Specified by --with-xsl-processor-flags.
+
+        When --with-xsl-processor-flags is not specified, this format
+        string is not substituted.
+
+   %i   Input XML file
+
+        Taken from the test definition, and potentially different for
+        every test.
+
+   %s   Stylesheet file
+
+        Either taken from the test definition or, when not specified
+        in the test definition and --with-default-stylesheet is
+        specified, the default stylesheet.
+
+        When neither a test nor a default stylesheet is specified,
+        this format string is not substituted.
+
+   %o   Output file
+
+        The filename is determined by the testing module and is (or
+        should be) different for each test.
+
+   %%   Literal '%'
+
+If a command pattern contains unsubstituted format strings, e.g., if
+the pattern contains '%c' but --with-xsl-processor-flags is
+unspecified, then the command pattern is disregarded and the next
+pattern is evaluated.
+
+If none of the command patterns are completely substituted, then
+things will probably not work.
+
+For example, the default command patterns value is:
+
+   %p -o %o %c %i %s;%p -o %o %c %i;%p -o %o %i %s;%p -o %o %i
+
+The first pattern is disregarded when either %c or %s is unevaluated;
+the second, when %c is unevaluated; the third, when %s is unevaluated;
+and the fourth will always be evaluated since it contains no optional
+format strings.
+
+This example shows how to test using the Antenna House XSL Formatter
+on Linux:
+
+   ./configure --with-xsl-processor=/usr/XSLFormatterV41/run.sh \
+      --with-command-patterns="%p -o %o -d %i"
 
 
 Gory Details
@@ -503,7 +578,7 @@ that has been found so far is:
 
 4. Make the group id sticky (i.e., 'chmod g+s ...') for the current
    directory and all the generated directories.
- 
+
 
 A previous method that would require rolling back changes in
 testsuccess.xsl and update-results.pl is:
