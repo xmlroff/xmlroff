@@ -87,10 +87,10 @@ AC_DEFINE_UNQUOTED(DEBUG,
 #
 # Default command patterns
 #
-command_patterns_default="%p -o %o %c %i %s;%p -o %o %c %i;%p -o %o %i"
+command_patterns_default="%p -o %o %c %i %s;%p -o %o %c %i;%p -o %o %i %s;%p -o %o %i"
 AC_ARG_WITH(command_patterns,
-	    AC_HELP_STRING([--with-oommand-patterns],
-			   [Patterns for running processor. (default works for xmlroff)]),
+	    AC_HELP_STRING([--with-command-patterns],
+			   [Patterns for running XSL processor. (default works for xmlroff)]),
 	    command_patterns="$withval", :)
 if test "x$with_command_patterns" = "x" ; then
   COMMAND_PATTERNS=$command_patterns_default
