@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- xmlroff -->
+<!-- xmlroff-testing -->
 <!-- test2sh.xsl -->
-<!-- $Id: test2sh.xsl,v 1.11 2006/08/09 20:16:26 tonygraham Exp $ -->
 <!-- Generate 'test.sh' files for each test suite referred to from
      $testsuites. -->
 <!-- Process with xsltproc, e.g.:
@@ -9,6 +8,7 @@
 -->
 
 <!-- Copyright (C) 2001, 2004 Sun Microsystems -->
+<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -24,6 +24,10 @@
   <xsl:strip-space elements="*"/>
 
   <xsl:param name="debug" select="false()"/>
+
+  <!-- Use an unlikely character as indication of unsubstituted
+       format string.   U+FFFD is REPLACEMENT CHARACTER. -->
+  <xsl:variable name="unsubstituted-indicator">&#xFFFD;</xsl:variable>
 
   <xsl:variable name="testsuite-hrefs"
     select="document($TESTSUITES)/testsuites/testsuite/@href"/>
@@ -187,6 +191,8 @@
         <xsl:variable name="command-line">
           <xsl:call-template name="select-command-line">
             <xsl:with-param name="command-patterns" select="$COMMAND_PATTERNS"/>
+            <!-- Used in error messages only. -->
+            <xsl:with-param name="original-command-patterns" select="$COMMAND_PATTERNS"/>
             <xsl:with-param name="xsl-processor" select="$use-xsl-processor"/>
             <xsl:with-param name="xsl-processor-flags" select="$XSL_PROCESSOR_FLAGS"/>
             <xsl:with-param name="output" select="concat(@id, '.pdf')"/>
@@ -238,11 +244,13 @@
   <xsl:template name="select-command-line">
     <!-- The patterns, with ';' separating patterns. -->
     <xsl:param name="command-patterns"/>
+    <!-- Used in error messages only. -->
+    <xsl:param name="original-command-patterns"/>
     <!-- String to substitute for '%p'. -->
     <xsl:param name="xsl-processor"/>
     <!-- String to substitute for '%c'.  Optional. -->
     <xsl:param name="xsl-processor-flags"/>
-    <!-- String to substitute for '%o'.  Optional. -->
+    <!-- String to substitute for '%o'. -->
     <xsl:param name="output"/>
     <!-- String to substitute for '%i'. -->
     <xsl:param name="input"/>
@@ -274,8 +282,14 @@
     
     <!-- The command is used only if all formats were replaced. -->
     <xsl:choose>
-      <xsl:when test="not(contains($first-command, '%'))">
+      <xsl:when test="not(contains($first-command, $unsubstituted-indicator))">
         <xsl:value-of select="$first-command"/>
+      </xsl:when>
+      <xsl:when test="not(contains($command-patterns, ';'))">
+        <xsl:message>
+          <xsl:text>No resolvable command patterns: </xsl:text>
+          <xsl:value-of select="$original-command-patterns"/>
+        </xsl:message>
       </xsl:when>
       <xsl:otherwise>
         <!-- Recurse with remaining patterns if first command unusable. -->
@@ -283,6 +297,8 @@
           <xsl:with-param name="command-patterns"
             select="substring($command-patterns,
                               string-length($first-pattern) + 2)"/>
+          <xsl:with-param name="original-command-patterns"
+            select="$original-command-patterns"/>
           <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
           <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
           <xsl:with-param name="output" select="$output"/>
@@ -306,7 +322,7 @@
     <xsl:param name="xsl-processor"/>
     <!-- String to substitute for '%c'.  Optional. -->
     <xsl:param name="xsl-processor-flags"/>
-    <!-- String to substitute for '%o'.  Optional. -->
+    <!-- String to substitute for '%o'. -->
     <xsl:param name="output"/>
     <!-- String to substitute for '%i'. -->
     <xsl:param name="input"/>
@@ -337,14 +353,7 @@
               <xsl:value-of select="$input"/>
             </xsl:when>
             <xsl:when test="$format-code = 'o'">
-              <xsl:choose>
-                <xsl:when test="$output">
-                  <xsl:value-of select="$output"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:text>%o</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
+              <xsl:value-of select="$output"/>
             </xsl:when>
             <xsl:when test="$format-code = 's'">
               <xsl:choose>
@@ -352,7 +361,8 @@
                   <xsl:value-of select="$stylesheet"/>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:text>%s</xsl:text>
+                  <xsl:value-of select="$unsubstituted-indicator"/>
+                  <xsl:text>s</xsl:text>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:when>
@@ -362,12 +372,16 @@
                   <xsl:value-of select="$xsl-processor-flags"/>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:text>%c</xsl:text>
+                  <xsl:value-of select="$unsubstituted-indicator"/>
+                  <xsl:text>c</xsl:text>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:when>
             <xsl:when test="$format-code = 'p'">
               <xsl:value-of select="$xsl-processor"/>
+            </xsl:when>
+            <xsl:when test="$format-code = '%'">
+              <xsl:text>%</xsl:text>
             </xsl:when>
             <xsl:when test="$format-code = ''">
               <xsl:message>
