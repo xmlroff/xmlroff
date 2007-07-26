@@ -16,6 +16,8 @@ EXTRA_DIST = \
 	common.xsl			\
 	coverage.xsl			\
 	dotests.pl			\
+	h2pl.pl				\
+	h2xsl.pl			\
 	identity.xsl			\
 	make-success-report.sh		\
 	png+ref2stereo.pl		\
