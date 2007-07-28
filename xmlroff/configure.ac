@@ -177,13 +177,14 @@ AM_CONDITIONAL(ENABLE_GTK_DOC, test "x$enable_gtk_doc" = "xyes")
 LIBXML_PACKAGES="libxml-2.0"
 LIBXML_REQUIRED_VERSION=2.4.3
 
-AC_MSG_CHECKING(for libxml2 libraries >= $LIBXML_REQUIRED_VERSION) 
-if $PKG_CONFIG --atleast-version $LIBXML_REQUIRED_VERSION libxml-2.0 ; then
-      LIBXML_CFLAGS=`$PKG_CONFIG --cflags $LIBXML_PACKAGES`
-      LIBXML_LIBS=`$PKG_CONFIG --libs $LIBXML_PACKAGES`
+have_libxml=false
 
-      AC_MSG_RESULT(yes)
-else
+PKG_CHECK_MODULES(LIBXML,
+		  $LIBXML_PACKAGES >= $LIBXML_REQUIRED_VERSION,
+		  have_libxml=true,
+		  :)
+
+if $have_libxml ; then : ; else
       AC_MSG_ERROR([
 *** libxml $LIBXML_REQUIRED_VERSION or newer is required. The latest version of libxml
 *** is always available from http://www.xmlsoft.org/.
@@ -193,70 +194,26 @@ fi
 AC_SUBST(LIBXML_CFLAGS)
 AC_SUBST(LIBXML_LIBS)
 
-dnl
-dnl The following new parameters were added to offer
-dnl the ability to specify the location of the libxslt
-dnl library during linking and compilation.
-dnl Mathieu Lacage 30/03/2000
-dnl
-LIBXSLT_PREFIX=""
-AC_ARG_WITH(libxslt-prefix,
-            AC_HELP_STRING([--with-libxslt-prefix=[PFX]],
-			   [Specify location of libxslt]),
-	    LIBXSLT_PREFIX=$withval)
-        
-AC_ARG_WITH(libxslt-include-prefix,
-            AC_HELP_STRING([--with-libxslt-include-prefix=[PFX]],
-			   [Specify location of libxslt headers]),
-            LIBXSLT_CFLAGS="-I$withval")
-
-AC_ARG_WITH(libxslt-libs-prefix,
-            AC_HELP_STRING([--with-libxslt-libs-prefix=[PFX]],
-			   [Specify location of libxslt libs]),
-            LIBXSLT_LIBS="-L$withval -lxslt")
-
-
-dnl
-dnl find libxslt
-dnl
-XSLT_CONFIG="xslt-config"
-AC_MSG_CHECKING(for libxslt libraries >= 1.0.3) 
-if test "x$LIBXSLT_PREFIX" != "x"
-then
-	if ${LIBXSLT_PREFIX}/bin/xslt-config --libs print > /dev/null 2>&1
-	then
-		XSLT_CONFIG=${LIBXSLT_PREFIX}/bin/xslt-config
-	else
-		XSLT_CONFIG=xslt-config
-	fi
-fi
-
-AC_DEFUN([VERSION_TO_NUMBER],
-[`$1 | sed -e 's/libxml //' | awk 'BEGIN { FS = "."; } { printf "%d", ([$]1 * 1000 + [$]2) * 1000 + [$]3;}'`])
-
-dnl
-dnl test version and init our variables
-dnl
+#
+# Checks for libxslt
+#
+LIBXSLT_PACKAGES=libxslt
 LIBXSLT_REQUIRED_VERSION=1.0.3
-if test "x$XSLT_CONFIG" != "x"
-then
-	vers=VERSION_TO_NUMBER($XSLT_CONFIG --version)
-	if test "$vers" -ge VERSION_TO_NUMBER(echo $LIBXSLT_REQUIRED_VERSION)
-	then
-		LIBXSLT_LIBS="`$XSLT_CONFIG --libs`"
-		LIBXSLT_CFLAGS="`$XSLT_CONFIG --cflags`"
-		AC_MSG_RESULT(found)
-	else
-		AC_MSG_ERROR([
-You need at least libxslt $LIBXSLT_REQUIRED_VERSION for this version of xmlroff
-])
-	fi
-else
-	AC_MSG_ERROR(Could not find libxslt anywhere, check ftp://xsltsoft.org/.)
+
+have_libxslt=false
+
+PKG_CHECK_MODULES(LIBXSLT,
+		  $LIBXSLT_PACKAGES >= $LIBXSLT_REQUIRED_VERSION,
+		  have_libxslt=true,
+		  :)
+
+if $have_libxslt ; then : ; else
+      AC_MSG_ERROR([
+*** Libxslt $LIBXSLT_REQUIRED_VERSION or newer is required.
+*** Libxslt is available at http://xsltsoft.org/.
+  ])
 fi
 
-
-AC_SUBST(XSLT_CONFIG)
 AC_SUBST(LIBXSLT_LIBS)
 AC_SUBST(LIBXSLT_CFLAGS)
 
