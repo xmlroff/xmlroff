@@ -100,6 +100,23 @@ if $have_glib ; then : ; else
   ])
 fi
 
+# xmlroff.c uses g_option_context_set_summary.  It was introduced in
+# glib 2.12, so need to check for it while minimum required version
+# is less than 2.12.0.
+AH_TEMPLATE([HAVE_G_OPTION_CONTEXT_SET_SUMMARY],
+            [Define to 1 if you have the `g_option_context_set_summary' function.])
+AC_CHECK_LIB([glib-2.0],
+             [g_option_context_set_summary],
+	     have_g_option_context_set_summary=yes)
+if test x$have_g_option_context_set_summary = "xyes" ; then
+  AC_DEFINE(HAVE_G_OPTION_CONTEXT_SET_SUMMARY)
+fi
+dnl Would like to just use AC_CHECK_FUNCS, but you either need to play
+dnl tricks with $LIBS or use AC_CHECK_LIB before using AC_CHECK_FUNCS,
+dnl so it was more obvious to use just AC_CHECK_LIB without AC_CHECK_FUNCS.
+dnl
+dnl AC_CHECK_FUNCS([g_option_context_set_summary])
+
 #GLIB_CFLAGS="-DG_DISABLE_DEPRECATED $GLIB_CFLAGS"
 
 dnl **************************

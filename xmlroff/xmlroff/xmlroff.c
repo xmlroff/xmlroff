@@ -275,7 +275,8 @@ main (gint    argc,
   /* FIXME: Support xml-stylesheet PI in xml-file */
 
   ctx = g_option_context_new (NULL);
-  /* FIXME: Need configure to check for g_option_context_set_summary().
+
+#ifdef HAVE_G_OPTION_CONTEXT_SET_SUMMARY
   g_option_context_set_summary(ctx,
     "xmlroff is a free, fast and high-quality XSL formatter that is\n"
     "useful for DocBook formatting. It produces PDF or PostScript output.\n"
@@ -284,7 +285,8 @@ main (gint    argc,
     "xmlroff processes the XML-FO 'file', or an arbitrary\n"
     "XML file can optionally be first transformed via a specified XSLT\n"
     "'stylesheet'.");
-  */
+#endif /* HAVE_G_OPTION_CONTEXT_SET_SUMMARY */
+
   g_option_context_add_main_entries (ctx, options, PACKAGE);
   goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
   /* Finished with parsing command-line arguments. */
