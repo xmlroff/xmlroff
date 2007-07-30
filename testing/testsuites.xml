@@ -1,4 +1,5 @@
 <testsuites>
 <testsuite href="../testsuite/testsuite.xml"/>
-<!--<testsuite href="../../docbook-testdocs-1.1/testsuite.xml"/>-->
+<!-- Uncomment if testing DocBook testdocs. -->
+<!-- <testsuite href="../testdocs/testsuite.xml"/> -->
 </testsuites>
