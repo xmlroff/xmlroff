@@ -20,7 +20,7 @@
 
 <!-- You can also put entries like these into your main catalog.xml
      file to map web URLs to local paths to avoid pulling xmlroff and
-     libfo files over the web.  Change the '@datadir@/xml' path to
+     libfo files over the web.  Change the '@prefix@/share/xml' path to
      match the location on your local system.  -->
 
 <!-- Map web references to libfo files -->
