@@ -172,30 +172,10 @@ dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test "x$enable_gtk_doc" = "xyes")
 
 #
-# Checks for libxml-2.0
-#
-LIBXML_PACKAGES="libxml-2.0"
-LIBXML_REQUIRED_VERSION=2.4.3
-
-have_libxml=false
-
-PKG_CHECK_MODULES(LIBXML,
-		  $LIBXML_PACKAGES >= $LIBXML_REQUIRED_VERSION,
-		  have_libxml=true,
-		  :)
-
-if $have_libxml ; then : ; else
-      AC_MSG_ERROR([
-*** libxml $LIBXML_REQUIRED_VERSION or newer is required. The latest version of libxml
-*** is always available from http://www.xmlsoft.org/.
-  ])
-fi
-
-AC_SUBST(LIBXML_CFLAGS)
-AC_SUBST(LIBXML_LIBS)
-
-#
 # Checks for libxslt
+#
+# Variables for libxslt will also include values appropriate for
+# libxml2.
 #
 LIBXSLT_PACKAGES=libxslt
 LIBXSLT_REQUIRED_VERSION=1.0.3
