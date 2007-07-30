@@ -334,7 +334,7 @@ fo_string_sprintf (FoObject *object)
  * This saves creation of multiple #FoString objects that all have the
  * value "1".
  * 
- * Return value: 
+ * Return value: #FoString with value "1".
  **/
 FoDatatype*
 fo_string_get_string_one (void)

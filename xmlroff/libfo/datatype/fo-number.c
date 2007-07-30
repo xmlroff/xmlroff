@@ -329,7 +329,7 @@ fo_number_sprintf (FoObject *object)
  * This saves creation of multiple #FoNumber objects that all have the
  * value 1.0.
  * 
- * Return value: 
+ * Return value: #FoNumber with value 1.0.
  **/
 FoDatatype*
 fo_number_get_number_one (void)

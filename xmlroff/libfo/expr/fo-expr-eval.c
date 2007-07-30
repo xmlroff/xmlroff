@@ -1303,8 +1303,12 @@ fo_expr_eval (const gchar         *string,
   FoExprContext *context;
   FoDatatype *result_datatype = NULL;
 
-  g_return_val_if_fail (IS_CHAR (g_utf8_get_char (string)), NULL);
-  g_return_val_if_fail (IS_CHAR (g_utf8_get_char (property_name)), NULL);
+  g_return_val_if_fail (string != NULL &&
+			IS_CHAR (g_utf8_get_char (string)),
+			NULL);
+  g_return_val_if_fail (property_name != NULL &&
+			IS_CHAR (g_utf8_get_char (property_name)),
+			NULL);
   g_return_val_if_fail ((font_size_prop) == NULL ||
 			FO_IS_PROPERTY_FONT_SIZE (font_size_prop),
 			NULL);

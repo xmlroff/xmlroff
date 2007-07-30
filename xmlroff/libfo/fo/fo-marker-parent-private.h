@@ -1,5 +1,5 @@
 /* Fo
- * fo-marker-parent-private.h: Part-level table formatting object
+ * fo-marker-parent-private.h: Formatting object that is parent of possible fo:marker
  *
  * Copyright (C) 2001 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd

@@ -731,16 +731,19 @@ fo_space_resolve (FoDatatype *shortform,
 	  g_assert_not_reached ();
 	}
 
-      fo_space_set_minimum (use_space, MIN (fo_space_get_minimum (use_space),
-					    use_optimum));
+      fo_space_set_minimum (use_space,
+			    MIN (fo_space_get_minimum (use_space),
+				 use_optimum));
       fo_space_set_optimum (use_space, use_optimum);
-      fo_space_set_maximum (use_space, MAX (fo_space_get_maximum (use_space),
-					    use_optimum));
+      fo_space_set_maximum (use_space,
+			    MAX (fo_space_get_maximum (use_space),
+				 use_optimum));
     }
 
   if (precedence != NULL)
     {
-      fo_space_set_precedence (use_space, fo_integer_get_value (precedence));
+      fo_space_set_precedence (use_space,
+			       fo_integer_get_value (precedence));
     }
 
   if (condity != NULL)

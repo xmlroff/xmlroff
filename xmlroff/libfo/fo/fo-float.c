@@ -155,7 +155,8 @@ fo_float_get_property (GObject         *object,
 FoFo*
 fo_float_new (void)
 {
-  return FO_FO (g_object_new (fo_float_get_type (), NULL));
+  return FO_FO (g_object_new (fo_float_get_type (),
+			      NULL));
 }
 
 void

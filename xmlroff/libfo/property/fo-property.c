@@ -534,13 +534,28 @@ fo_property_new_from_expr_default (FoPropertyClass *property_class,
   return property;
 }
 
+/**
+ * fo_property_new_from_expr:
+ * @property_class:    Class of property for which to evaluate expression.
+ * @expr:              Expression to evaluate.
+ * @context:           Current #FoContext.
+ * @current_font_size: Current "font-size" value
+ * @fo_node:           Current FO
+ * @error:             Indication of any error that occurred
+ * 
+ * Evaluates @expr as a value of an instance of @property_class.
+ * The other parameters provide the context for evaluating @expr.
+ * 
+ * Returns: New instance of @property_class, or %NULL if an
+ *          error ocurred.
+ **/
 FoProperty*
 fo_property_new_from_expr (FoPropertyClass *property_class,
-			   const gchar *expr,
-			   FoContext   *context,
-			   FoProperty    *current_font_size,
-			   FoFo *fo_node,
-			   GError **error)
+			   const gchar     *expr,
+			   FoContext       *context,
+			   FoProperty      *current_font_size,
+			   FoFo            *fo_node,
+			   GError         **error)
 {
   g_return_val_if_fail (FO_IS_PROPERTY_CLASS (property_class), NULL);
 
@@ -583,7 +598,7 @@ fo_property_class_is_inherited (FoPropertyClass *property_class)
 
 /**
  * fo_property_is_inherited:
- * @property: 
+ * @property: #FoProperty or subclass of #FoProperty
  * 
  * Indicates whether the XSL property represented by @property is
  * defined in the XSL 1.0 Recommendation as an inherited property.
@@ -617,7 +632,7 @@ fo_property_class_is_shorthand (FoPropertyClass *property_class)
 
 /**
  * fo_property_is_shorthand:
- * @property: 
+ * @property: #FoProperty or a subclass of #FoProperty.
  * 
  * Indicates whether the XSL property represented by @property is
  * defined in the XSL 1.0 Recommendation as a shorthand property.
