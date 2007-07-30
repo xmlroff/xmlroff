@@ -185,13 +185,11 @@ GTKDOC_CFLAGS = \
 
 GTKDOC_LIBS = \
 	../libfo/libfo-0.5.la \
-	$(PANGOXSL_LIBS) \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \
 	$(GDKPIXBUF_LIBS)	\
 	$(FREETYPE_LIBS) \
-	$(LIBXSLT_LIBS) \
-	$(POPT_LIBS)
+	$(LIBXSLT_LIBS)
 
 # Commands for compiling and linking 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)

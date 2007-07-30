@@ -112,8 +112,6 @@
 
 <para>Add --enable-static --disable-shared to the configure.in (or autogen.sh if building from CVS) command line.</para>
 
-<para>You may also need to to the same when building PangoXSL and Pango.</para>
-
 </section>
 
 <section>

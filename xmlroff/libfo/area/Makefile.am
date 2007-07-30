@@ -2,7 +2,6 @@
 
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
-	$(PANGOXSL_CFLAGS)	\
 	$(PANGO_CFLAGS)	\
 	-I..
 

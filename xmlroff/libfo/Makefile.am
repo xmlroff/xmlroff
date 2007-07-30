@@ -5,7 +5,6 @@ SUBDIRS = area fo datatype property expr util .
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
 	$(LIBXSLT_CFLAGS)	\
-	$(PANGOXSL_CFLAGS)	\
 	$(PANGO_CFLAGS)
 
 LDADDS = @STRIP_BEGIN@	\
@@ -82,8 +81,8 @@ libfo_fodoc_la_SOURCES =	\
 	fo-doc.c		\
 	fo-doc-commands.h
 
-libfo_fodoc_la_CFLAGS = $(PANGOXSL_CFLAGS) $(PANGO_CFLAGS) $(GNOMEPRINT_CFLAGS) $(GDKPIXBUF_CFLAGS)
-libfo_fodoc_la_LIBADD = $(PANGOXSL_LIBS) $(PANGO_LIBS) $(GNOMEPRINT_LIBS) $(GDKPIXBUF_LIBS)
+libfo_fodoc_la_CFLAGS = $(PANGO_CFLAGS) $(GNOMEPRINT_CFLAGS) $(GDKPIXBUF_CFLAGS)
+libfo_fodoc_la_LIBADD = $(PANGO_LIBS) $(GNOMEPRINT_LIBS) $(GDKPIXBUF_LIBS)
 
 fo_context_cfiles= \
 	fo-context.c		\
@@ -124,7 +123,6 @@ libfo_0_5_la_LIBADD = \
 	property/libfo-text-property.la	\
 	libfo-libfo.la		\
 	libfo-fodoc.la		\
-	$(PANGOXSL_LIBS)		\
 	$(PANGO_LIBS)			\
 	$(GNOMEPRINT_LIBS) 		\
 	$(LIBXSLT_LIBS)			\

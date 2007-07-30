@@ -23,9 +23,7 @@ xmlroff_LDFLAGS = -static
 
 xmlroff_LDADD = \
 	../libfo/libfo-0.5.la \
-	$(PANGOXSL_LIBS) \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \
 	$(LIBXSLT_LIBS) \
-	$(FREETYPE_LIBS) \
-	$(POPT_LIBS)
+	$(FREETYPE_LIBS)

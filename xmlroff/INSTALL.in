@@ -8,7 +8,6 @@ Contents
 . Introduction
 . Overview of the process
 . Installing dependencies
-. Building and installing pangoxsl
 . Building and installing xmlroff
 . Common Trouble
 . Testing 
@@ -28,7 +27,7 @@ The goal of this document is to provide a concise but useful guide
 to the compilation and installation of xmlroff for beginners on a
 typical modern linux system (such as Debian 9), paying especial
 attention to details which would otherwise rely on knowledge of
-C development under linux.
+C development under Linux.
 
 Experts in the compilation of alpha/beta level software on linux
 platforms will probably want to skip this document. 

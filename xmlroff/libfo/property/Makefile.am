@@ -384,5 +384,5 @@ libfo_text_property_la_SOURCES =	\
 	fo-property-line-height.c	\
 	fo-property-line-height.h
 
-libfo_text_property_la_CFLAGS = $(PANGOXSL_CFLAGS) $(PANGO_CFLAGS)
-libfo_text_property_la_LIBADD = $(PANGOXSL_LIBS) $(PANGO_LIBS)
+libfo_text_property_la_CFLAGS = $(PANGO_CFLAGS)
+libfo_text_property_la_LIBADD = $(PANGO_LIBS)
