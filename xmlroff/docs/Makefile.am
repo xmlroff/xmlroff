@@ -201,8 +201,11 @@ GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 #	  test -f $$f && cp -p $$f $(distdir)/TEXT; \
 #	done
 
+# Location of DocBook XSL stylesheet.
+DOCBOOK_XSL=http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl
+
 xmlroff.fo:	xmlroff.xml ../libfo-compat.xsl
-	xsltproc http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl xmlroff.xml > xmlroff.tmp
+	xsltproc $(DOCBOOK_XSL) xmlroff.xml > xmlroff.tmp
 	xsltproc ../libfo-compat.xsl xmlroff.tmp > xmlroff.fo
 	rm -f xmlroff.tmp
 
