@@ -476,11 +476,21 @@ fo_context_util_spaces_resolve (FoContext *context,
 {
   GError *tmp_error = NULL;
   FoDatatype *space;
-  FoDatatype *shorthand, *minimum, *optimum, *maximum, *precedence, *condity;
+  FoDatatype *shorthand;
+  FoDatatype *minimum;
+  FoDatatype *optimum;
+  FoDatatype *maximum;
+  FoDatatype *precedence;
+  FoDatatype *condity;
   gdouble hundred_percent;
 
   g_return_if_fail (context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (context));
+
+  /* Reference area is same for resolving all space properties. */
+  hundred_percent =
+    reference_area != NULL ?
+    fo_area_get_child_available_bpdim (reference_area): 0.0;
 
   /* space-before */
   shorthand =
@@ -501,9 +511,6 @@ fo_context_util_spaces_resolve (FoContext *context,
   condity =
     context->space_before_condity != NULL ?
     fo_property_get_value (context->space_before_condity) : NULL;
-  hundred_percent =
-    reference_area != NULL ?
-    fo_area_get_child_available_bpdim (reference_area): 0.0;
 
   space = fo_space_resolve (shorthand,
 			    minimum,
@@ -563,7 +570,7 @@ fo_context_util_spaces_resolve (FoContext *context,
 			    maximum,
 			    precedence,
 			    condity,
-			    reference_area ? fo_area_get_child_available_bpdim (reference_area): 0.0,
+			    hundred_percent,
 			    &tmp_error);
 
   if (space != NULL)
@@ -615,7 +622,7 @@ fo_context_util_spaces_resolve (FoContext *context,
 			    maximum,
 			    precedence,
 			    condity,
-			    reference_area ? fo_area_get_child_available_bpdim (reference_area): 0.0,
+			    hundred_percent,
 			    &tmp_error);
 
   if (space != NULL)
@@ -661,7 +668,7 @@ fo_context_util_spaces_resolve (FoContext *context,
 			    maximum,
 			    precedence,
 			    condity,
-			    reference_area ? fo_area_get_child_available_ipdim (reference_area): 0.0,
+			    hundred_percent,
 			    &tmp_error);
 
   if (space != NULL)
