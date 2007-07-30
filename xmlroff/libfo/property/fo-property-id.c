@@ -209,7 +209,6 @@ fo_property_id_validate (FoDatatype *datatype,
                          GError    **error)
 {
   FoDatatype *new_datatype;
-  gchar *token;
 
   g_return_val_if_fail (datatype != NULL, NULL);
   g_return_val_if_fail (FO_IS_DATATYPE (datatype), NULL);
@@ -219,7 +218,7 @@ fo_property_id_validate (FoDatatype *datatype,
 
   if (FO_IS_NAME (datatype))
     {
-      token = fo_name_get_value (datatype);
+      gchar *token = fo_name_get_value (datatype);
 
       new_datatype = g_object_new (FO_TYPE_ID,
 				   "value",
@@ -227,6 +226,7 @@ fo_property_id_validate (FoDatatype *datatype,
 				   NULL);
 
       g_object_unref (datatype);
+      g_free (token);
 
       return new_datatype;
     }

@@ -1008,14 +1008,15 @@ gboolean
 fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 					   gpointer    data)
 {
-  FoPropertyResolveContext *prop_context = (FoPropertyResolveContext *) data;
+  FoPropertyResolveContext *prop_context =
+    (FoPropertyResolveContext *) data;
   xmlNodePtr element;
   xslAttrListIteratorPtr iterator;
   FoProperty *font_size = NULL;
   FoFo *fo_fo;
   GSList *node_properties = NULL;
-  FoContext *current_context;
-  FoContext *parent_context;
+  FoContext *current_context = NULL;
+  FoContext *parent_context = NULL;
   GError *error = NULL;
   FoArea *reference_area = prop_context->reference_area;
   FoWarningFlag warning_mode = prop_context->warning_mode;
@@ -1056,16 +1057,18 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  FoPropertyClass *property_class =
 	    g_type_class_ref (type_func());
 
-	  const gchar *property_expression = (const gchar *)
+	  gchar *property_expression = (gchar *)
 	    xmlNodeGetContent ((xmlNodePtr) column_number_attr);
 
 	  FoProperty *column_number =
 	    fo_property_new_from_expr (property_class,
-				       property_expression,
+				       (const gchar *) property_expression,
 				       parent_context,
 				       NULL,
 				       fo_fo,
 				       &error);
+
+	  xmlFree (property_expression);
 
 	  if (error != NULL)
 	    {
@@ -1094,16 +1097,18 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  FoPropertyClass *property_class =
 	    g_type_class_ref (type_func());
 
-	  const gchar *property_expression = (const gchar *)
+	  gchar *property_expression = (gchar *)
 	    xmlNodeGetContent ((xmlNodePtr) number_columns_spanned_attr);
 
 	  FoProperty *number_columns_spanned =
 	    fo_property_new_from_expr (property_class,
-				       property_expression,
+				       (const gchar *) property_expression,
 				       parent_context,
 				       NULL,
 				       fo_fo,
 				       &error);
+
+	  xmlFree (property_expression);
 
 	  if (error != NULL)
 	    {
@@ -1133,16 +1138,18 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	  FoPropertyClass *property_class =
 	    g_type_class_ref (type_func());
 
-	  const gchar *property_expression = (const gchar *)
+	  gchar *property_expression = (gchar *)
 	    xmlNodeGetContent ((xmlNodePtr) number_rows_spanned_attr);
 
 	  FoProperty *number_rows_spanned =
 	    fo_property_new_from_expr (property_class,
-				       property_expression,
+				       (const gchar *) property_expression,
 				       parent_context,
 				       NULL,
 				       fo_fo,
 				       &error);
+
+	  xmlFree (property_expression);
 
 	  if (error != NULL)
 	    {
@@ -1174,7 +1181,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
       fo_table_cell_resolve_column (fo_fo);
     }
 
-  /* Handle the 'font-size' property first since it's value is part of
+  /* Handle the 'font-size' property first since its value is part of
      the context for evaluating all other properties. */
   if (xmlHasProp (element, (xmlChar *) "font-size"))
     {
@@ -1189,16 +1196,18 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
       FoPropertyClass *property_class =
 	g_type_class_ref (type_func());
 
-      const gchar *property_expression = (const gchar *)
+      gchar *property_expression = (gchar *)
 	xmlNodeGetContent ((xmlNodePtr) font_size_attr);
 
       font_size =
 	fo_property_new_from_expr (property_class,
-				   property_expression,
+				   (const gchar *) property_expression,
 				   parent_context,
 				   NULL,
 				   fo_fo,
 				   &error);
+
+      xmlFree (property_expression);
 
       if (error != NULL)
 	{

@@ -286,7 +286,6 @@ fo_page_sequence_master_validate (FoFo      *fo,
                                   FoContext *parent_context)
 {
   FoFo *tree;
-  gchar *master_name;
 
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_PAGE_SEQUENCE_MASTER (fo));
@@ -296,17 +295,19 @@ fo_page_sequence_master_validate (FoFo      *fo,
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
 
-  master_name =
-    fo_name_get_value (
-    fo_property_get_value (fo_page_sequence_master_get_master_name (fo)));
-
   tree = fo->tree;
 
   if (tree != NULL)
     {
+      gchar *master_name =
+	fo_name_get_value
+	(fo_property_get_value
+	 (fo_page_sequence_master_get_master_name (fo)));
+
       fo_tree_page_sequence_master_name_add (tree,
 					     master_name,
 					     fo);
+      g_free (master_name);
     }
   else
     {
