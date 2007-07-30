@@ -162,18 +162,15 @@
                   <xsl:call-template name="merge-dirnames">
                     <xsl:with-param name="dirname1" select="$data-dir"/>
                     <xsl:with-param name="dirname2">
-                      <xsl:choose>
-                        <xsl:when test="ancestor::*/@base">
+                      <xsl:call-template name="merge-dirnames">
+                        <xsl:with-param name="dirname1">
                           <xsl:for-each select="ancestor::*/@base">
                             <xsl:value-of select="."/>
                             <xsl:text>/</xsl:text>
                           </xsl:for-each>
-                          <xsl:value-of select="@xsl"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                          <xsl:value-of select="@xsl"/>
-                        </xsl:otherwise>
-                      </xsl:choose>
+                        </xsl:with-param>
+                        <xsl:with-param name="dirname2" select="@xsl"/>
+                      </xsl:call-template>
                     </xsl:with-param>
                   </xsl:call-template>
                 </xsl:otherwise>
