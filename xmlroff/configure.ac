@@ -440,11 +440,42 @@ else
     AC_DEFINE(ENABLE_CLIP,0)
 fi
 
+#
+# Check for sufficiently new CUnit
+#
+CUNIT_MIN_VERSION=2.1
+
+have_cunit=false
+PKG_CHECK_MODULES(CUNIT,
+		  cunit >= $CUNIT_MIN_VERSION,
+		  have_cunit=true,
+		  :)
+
+dnl Let people disable the CUnit stuff.
+AC_ARG_ENABLE(cunit,
+	      AC_HELP_STRING([--enable-cunit],
+                             [use CUnit to run unit tests (default=no)]),
+              enable_cunit="$enableval",
+              enable_cunit=no)
+
+if test "x$enable_cunit" = "xyes" ; then
+  if test "x$CUNIT" = "xtrue" ; then
+    enable_cunit=yes
+  else
+    enable_cunit=no 
+  fi
+fi
+
+dnl NOTE: We need to use a separate automake conditional for this
+dnl       to make this work with the tarballs.
+AM_CONDITIONAL(ENABLE_CUNIT, test "x$enable_cunit" = "xyes")
+
 CFLAGS="$CFLAGS $GLIB_CFLAGS"
 
 AC_OUTPUT([
 INSTALL
 Makefile 
+cunit/Makefile
 docs/Makefile
 examples/Makefile
 examples/xml2003/Makefile
