@@ -16,25 +16,30 @@ AM_CONFIG_HEADER(config.h)
 
 ############################################################
 #
-# Symbols that are used in config.xsl.
+# Required programs
 #
 
-#
-# Title used in generated reports.
-#
-title_default="xmlroff Test Results"
-
-AC_ARG_WITH(title,
-	    AC_HELP_STRING([--with-title],
-			   [Title used in generated reports. (default=$title_default)]),
-	      title="$withval", :)
-
-if test "x$with_title" = "x" ; then
-  TITLE=$title_default
+xsltproc_default=xsltproc
+AC_ARG_WITH(xsltproc,
+	    AC_HELP_STRING([--with-xsltproc],
+			   [Full path to xsltproc XSLT processor for transforming reports.]),
+	    xsltproc="$withval", :)
+if test "x$with_xsltproc" = "x" ; then
+  XSLTPROC=$xsltproc_default
 else
-  TITLE=$with_title
+  XSLTPROC=$with_xsltproc
 fi
-AC_DEFINE_UNQUOTED(TITLE,"$TITLE", [Title used in generated reports.])
+AC_PATH_PROG(XSLTPROC, $XSLTPROC, no)
+AC_DEFINE_UNQUOTED(XSLTPROC,
+	           "$XSLTPROC",
+	           [Full path to xsltproc XSLT processor for transforming reports.])
+AC_SUBST(XSLTPROC)
+if test "x$XSLTPROC" = "xno" ; then
+  AC_MSG_ERROR([
+*** xsltproc is required. The latest version of xsltproc
+*** is always available from http://www.xmlsoft.org/.
+  ])
+fi
 
 #
 # ImageMagick 'convert' program.
@@ -59,6 +64,59 @@ if test "x$COMPOSITE" = "xno" ; then
   ])
 fi
 AC_DEFINE_UNQUOTED(COMPOSITE, "$COMPOSITE", [Full path to ImageMagick 'composite' program.])
+
+AC_CHECK_PROGS(PERL, perl5 perl)
+
+############################################################
+#
+# Symbols that are used in config.xsl.
+#
+
+#
+# Filename of test results XML file.
+#
+# Determine it before other config.xsl variables because it
+# may include processing instructions that set the default
+# value for some of the other variables.
+#
+test_results_default=testresults.xml
+AC_ARG_WITH(test_results,
+	    AC_HELP_STRING([--with-test-results],
+			   [Filename of test results XML file. (default=testresults.xml)]),
+	    test_results="$withval", :)
+if test "x$with_test_results" = "x" ; then
+  TEST_RESULTS=$test_results_default
+else
+  TEST_RESULTS=$with_test_results
+fi
+AC_DEFINE_UNQUOTED(TEST_RESULTS,
+	           "$TEST_RESULTS",
+	           [Filename of test results XML file.])
+AC_SUBST(TEST_RESULTS)
+
+xsl_processor_flags_default=
+if test -f "$TEST_RESULTS" ; then
+  xsl_processor_flags_default=["`$PERL -n -e'if(/<\?xt:xsl-processor-options([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  echo ["$PERL -n -e'if(/<\?xt:xsl-processor-options([\^?]+)\?>/) {print \$1;}' $TEST_RESULTS"]
+  AC_MSG_NOTICE("test_results: $TEST_RESULTS; flags: $xsl_processor_flags_default")
+fi
+
+#
+# Title used in generated reports.
+#
+title_default="xmlroff Test Results"
+
+AC_ARG_WITH(title,
+	    AC_HELP_STRING([--with-title],
+			   [Title used in generated reports. (default=$title_default)]),
+	      title="$withval", :)
+
+if test "x$with_title" = "x" ; then
+  TITLE=$title_default
+else
+  TITLE=$with_title
+fi
+AC_DEFINE_UNQUOTED(TITLE,"$TITLE", [Title used in generated reports.])
 
 #
 # Current date.  Meant to be set on the command line.
@@ -177,24 +235,6 @@ AC_DEFINE_UNQUOTED(TESTSUCCESS,
 AC_SUBST(TESTSUCCESS)
 
 #
-# Filename of test results XML file.
-#
-test_results_default=testresults.xml
-AC_ARG_WITH(test_results,
-	    AC_HELP_STRING([--with-test-results],
-			   [Filename of test results XML file. (default=testresults.xml)]),
-	    test_results="$withval", :)
-if test "x$with_test_results" = "x" ; then
-  TEST_RESULTS=$test_results_default
-else
-  TEST_RESULTS=$with_test_results
-fi
-AC_DEFINE_UNQUOTED(TEST_RESULTS,
-	           "$TEST_RESULTS",
-	           [Filename of test results XML file.])
-AC_SUBST(TEST_RESULTS)
-
-#
 # Filename of testsuites XML file.
 #
 testsuites_default=testsuites.xml
@@ -241,7 +281,6 @@ AC_SUBST(XSL_PROCESSOR)
 #
 # XSL processor options.
 #
-xsl_processor_flags_default=
 AC_ARG_WITH(xsl_processor_flags,
 	    AC_HELP_STRING([--with-xsl-processor-flags],
 			   [Flags to pass to the XSL processor.]),
@@ -262,33 +301,6 @@ AC_SUBST(XSL_PROCESSOR_FLAGS)
 PWD=`pwd`
 BASENAME=`basename $PWD`
 AC_DEFINE_UNQUOTED(BASENAME, "$BASENAME", [Current directory.])
-
-############################################################
-#
-# Other required programs
-#
-
-xsltproc_default=xsltproc
-AC_ARG_WITH(xsltproc,
-	    AC_HELP_STRING([--with-xsltproc],
-			   [Full path to xsltproc XSLT processor for transforming reports.]),
-	    xsltproc="$withval", :)
-if test "x$with_xsltproc" = "x" ; then
-  XSLTPROC=$xsltproc_default
-else
-  XSLTPROC=$with_xsltproc
-fi
-AC_PATH_PROG(XSLTPROC, $XSLTPROC, no)
-AC_DEFINE_UNQUOTED(XSLTPROC,
-	           "$XSLTPROC",
-	           [Full path to xsltproc XSLT processor for transforming reports.])
-AC_SUBST(XSLTPROC)
-if test "x$XSLTPROC" = "xno" ; then
-  AC_MSG_ERROR([
-*** xslproc is required. The latest version of xsltproc
-*** is always available from http://www.xmlsoft.org/.
-  ])
-fi
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
