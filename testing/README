@@ -65,21 +65,28 @@ Before You Begin
 ================
 
 1. Download and install the xmlroff 'testsuite' package from
-   http://xmlroff.org/.
+   http://xmlroff.org/ or check it out from the Subversion repository
+   at svn://svn.xmlroff.org/trunk/testing.
 
 2. Make sure that testsuites.xml refers to the testsuite.xml file in
    the 'testsuite' package.
 
-3. (Optional) Download and install the DocBook testdocs package from
-   the DocBook SourceForge project.
+3. (Optional) Checkout the DocBook testdocs module from the Subversion
+   repository of the DocBook SourceForge project, e.g., into
+   '../testdocs'.
 
-   Until the DocBook testdocs distribution adds a 'testsuite.xml'
-   file, copy the 'testsuite.xml' file attached to
-   http://sourceforge.net/tracker/index.php?func=detail&aid=1516265&group_id=21935&atid=373750
-   into the docbook-testdocs-1.1 directory.
+   In the 'testdocs' directory, run 'make-testsuite.pl' from this
+   module to create a usable testsuite.xml file, e.g.:
 
-   Make sure that testsuites.xml refers to the testsuite.xml in the
-   docbook-testdocs-1.1 directory.
+      perl ../testing/make-testsuite.pl \
+         --stylesheet \
+         http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl \
+         . > testsuite.xml
+
+   Make sure that testsuites.xml in this module refers to the
+   testsuite.xml in the 'testdocs' directory.
+
+   DocBook testing is described further in a section below.
 
 4. Run configure to generate the Makefile:
 
@@ -188,7 +195,6 @@ When the Test Suite Changes
 4. Run the tests, which will now include the new tests.
 
 
-
 Using an Alternative XSL Processor
 ==================================
 
@@ -260,6 +266,58 @@ on Linux:
       --with-command-patterns="%p -o %o -d %i"
 
 
+DocBook testdocs
+================
+
+The DocBook SourceForge project maintains a set of test documents.
+
+At the time of this writing, you have to check them out from the
+DocBook Subversion repository if you want to use them:
+
+   svn co \
+      https://docbook.svn.sourceforge.net/svnroot/docbook/trunk/testdocs \
+      testdocs
+
+The testdocs checkout does not include a test definitions file (i.e.,
+a 'testsuite.xml' file) that is needed by this module, so you need to
+make your own.
+
+'make-testsuite.pl' in this module generates a usable 'testsuites.xml'
+that includes a '<testcase>' element for each XML file in
+subdirectories of the specified directory.  Since testdocs currently
+includes some XML files that aren't DocBook files, some of the
+generated test cases will always fail; you can edit those out of the
+generated 'testsuite.xml', but they will be regenerated if you ever
+regenerate the 'testsuite.xml' after updating your testdocs checkout.
+
+The DocBook testdocs need a stylesheet if they are to be formatted
+(which, in a nutshell, is the whole point of DocBook and the DocBook
+SourceForge project).  There are two alternatives for specifying the
+stylesheet:
+
+ - If you are also testing FO documents in the same run, e.g., also
+   testing the xmlroff testsuite, then you need to specify the
+   stylesheet for each testcase by specifying it when running
+   'make-testsuite.pl':
+
+      perl ../testing/make-testsuite.pl \
+         --stylesheet \
+         http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl \
+         . > testsuite.xml
+
+ - Alternatively, if you are testing only DocBook documents, you can
+   specify the DocBook stylesheet as the default stylesheet when
+   congiguring testing:
+
+      perl ../testing/make-testsuite.pl . > testsuite.xml
+      cd ../testing
+      ./configure \
+         --with-default-stylesheet=http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl
+
+   This could be useful if you want to test different versions of the
+   DocBook stylesheets.
+   
+
 Gory Details
 ============
 
@@ -281,13 +339,12 @@ of the W3C, we developed a simple, well-formed document type for
 referring to multiple test suite descriptions.
 
 The XSL 1.0 CR test suite was put on the web.  NIST continued to
-develop tests and, in mid-2002, announced that it had an expanded set
-of test cases.  See
+develop tests and later produced an expanded set of test cases.  See
 http://xw2k.sdct.itl.nist.gov/brady/xml/generate.asp?tech=../../carmelo/XSL.
 
 The test cases currently available for testing xmlroff are the XSL 1.0
-CR test cases, an interim release of NIST's later test cases, and some
-test cases developed specifically for xmlroff.
+CR test cases, the NIST test cases, and some test cases developed
+specifically for xmlroff.
 
 
 config.h, config.pl, config.xsl
@@ -528,7 +585,7 @@ The individual reports contain:
     - Any further textual description
 
    The test result information is usually presented as an HTML form so
-   the results can be updated from the individual report.  Is the
+   the results can be updated from the individual report.  Use the
    --disable-form option of 'configure' to generate reports with
    static tables instead of forms.
 
@@ -633,4 +690,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-7 July 2007
+1 August 2007
