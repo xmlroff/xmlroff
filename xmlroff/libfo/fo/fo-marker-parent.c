@@ -7,8 +7,6 @@
  * See COPYING for the status of this software.
  */
 
-#include "fo-table.h"
-#include "fo-marker-parent.h"
 #include "fo-marker-parent-private.h"
 #include "fo-marker.h"
 
