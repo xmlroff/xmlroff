@@ -1,8 +1,7 @@
 #! /usr/bin/perl
 #
 # Copyright (c) 2001, 2002, 2004 Sun Microsystems
-#
-# $Id: update-results.pl,v 1.10 2007/04/09 20:15:44 menteith Exp $
+# Copyright (c) Menteith Consulting Ltd
 #
 # Perl script to run xsltproc to update one result in 'testresults.xml'.
 #
@@ -27,7 +26,6 @@ $gError = 0;
 
 $gUseComment = param('comment');
 $gUseComment =~ s/\`/\\`/g; #`
-$gUseComment =~ s/'/\\'/g; #'
 $gUseComment =~ s/"/\\"/g; #'
 
 $gXsltprocCommand =
