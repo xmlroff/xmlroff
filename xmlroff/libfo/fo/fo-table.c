@@ -126,9 +126,9 @@ const char *fo_table_error_messages[] = {
   N_("No 'fo:table-column' for column number '%d'."),
   N_("'column-width' expression is not a length: '%s'"),
   N_("No area associated with 'fo:table'."),
-  N_("table-layout=\"fixed\" but using automatic table layout since i-p-d=\"auto\"."),
-  N_("Automatic table layout is not supported."),
-  N_("Spanning table cells fill entire row.")
+  N_("table-layout=\"fixed\" but automatic table layout is specified since i-p-d=\"auto\"."),
+  N_("Spanning table cells fill entire row."),
+  N_("Automatic table layout is not supported.  Falling back to fixed table layout.")
 };
 
 enum {
@@ -290,7 +290,7 @@ fo_table_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "table",
+                                            "FoTable",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_BLOCK_FO,
@@ -1833,7 +1833,7 @@ fo_table_resolve_proportional_widths (FoFo    *fo,
 	}
 
       fixed_sum  = g_object_ref (fo_length_get_length_zero ());
-      proportional_sum  = g_object_ref (fo_pcw_get_pcw_zero ());
+      proportional_sum = g_object_ref (fo_pcw_get_pcw_zero ());
       child_node = fo_node_first_child (FO_NODE (fo_table));
       while (FO_IS_TABLE_COLUMN (child_node))
 	{
@@ -2619,10 +2619,15 @@ fo_table_validate (FoFo      *fo,
 
   if (fo_table->layout_method == FO_ENUM_TABLE_LAYOUT_METHOD_AUTOMATIC)
     {
-      *error =
+      fo_table->layout_method = FO_ENUM_TABLE_LAYOUT_METHOD_FIXED;
+
+      GError *local_error =
 	g_error_new (FO_TABLE_ERROR,
-		     FO_TABLE_ERROR_AUTOMATIC_NOT_SUPPORTED,
-		     fo_table_error_messages[FO_TABLE_ERROR_AUTOMATIC_NOT_SUPPORTED]);
+		     FO_TABLE_ERROR_FALLBACK_TO_FIXED,
+		     fo_table_error_messages[FO_TABLE_ERROR_FALLBACK_TO_FIXED]);
+
+      fo_object_log_warning (FO_OBJECT (fo),
+			     &local_error);
     }
 }
 

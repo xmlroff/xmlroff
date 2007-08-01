@@ -11,9 +11,9 @@
 #define __FO_TABLE_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/fo/fo-fo.h>
+/*#include <libfo/fo/fo-fo.h>
 #include <libfo/property/fo-property.h>
-
+*/
 G_BEGIN_DECLS
 
 typedef enum {
@@ -39,8 +39,8 @@ typedef enum
   FO_TABLE_ERROR_WIDTH_NOT_LENGTH,
   FO_TABLE_ERROR_NO_AREA,
   FO_TABLE_ERROR_FIXED_BUT_AUTO,
-  FO_TABLE_ERROR_AUTOMATIC_NOT_SUPPORTED,
   FO_TABLE_ERROR_SPANNING_CELLS_FILL_ROW,
+  FO_TABLE_ERROR_FALLBACK_TO_FIXED,
   FO_TABLE_ERROR_LAST
 } FoTableError;
 

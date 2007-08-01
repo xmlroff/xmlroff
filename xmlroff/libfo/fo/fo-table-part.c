@@ -7,8 +7,8 @@
  * See COPYING for the status of this software.
  */
 
-#include "fo-table.h"
 #include "fo-table-part.h"
+#include "fo-table.h"
 #include "fo-table-part-private.h"
 #include "fo-table-row.h"
 

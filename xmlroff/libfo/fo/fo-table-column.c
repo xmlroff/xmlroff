@@ -1141,8 +1141,14 @@ fo_table_column_validate (FoFo      *fo,
 		   FO_FO_ERROR_DATATYPE,
 		   _(fo_table_column_error_messages[FO_TABLE_COLUMN_ERROR_FIXED_NO_WIDTH]));
 
-      fo_object_log_error (FO_OBJECT (fo),
-			   error);
+      fo_object_log_warning (FO_OBJECT (fo),
+			     error);
+
+      fo_table_column_set_column_width (fo,
+					FO_PROPERTY (g_object_new (FO_TYPE_PROPERTY_COLUMN_WIDTH,
+								   "value",
+								   fo_string_get_string_one (),
+								   NULL)));
     }
 
   fo_table_column_resolve_column_width (fo);
