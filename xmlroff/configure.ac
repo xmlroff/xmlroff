@@ -459,16 +459,16 @@ AC_ARG_ENABLE(cunit,
               enable_cunit=no)
 
 if test "x$enable_cunit" = "xyes" ; then
-  if test "x$CUNIT" = "xtrue" ; then
-    enable_cunit=yes
+  if test "x$have_cunit" = "xtrue" ; then
+    enable_cunit=true
   else
-    enable_cunit=no 
+    enable_cunit=false 
   fi
 fi
 
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
-AM_CONDITIONAL(ENABLE_CUNIT, test "x$enable_cunit" = "xyes")
+AM_CONDITIONAL(ENABLE_CUNIT, [$enable_cunit])
 
 CFLAGS="$CFLAGS $GLIB_CFLAGS"
 

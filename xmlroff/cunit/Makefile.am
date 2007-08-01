@@ -4,7 +4,9 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
 	$(CUNIT_CFLAGS)
 
-bin_PROGRAMS = test
+if ENABLE_CUNIT
+  bin_PROGRAMS = test
+endif
 
 test_SOURCES = \
 	test.c \
