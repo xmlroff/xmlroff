@@ -1,0 +1,4 @@
+See README for how to configure testing.
+
+This module is not installable.  (Patches so you don't need a separate
+copy for each test configuration would be gratefully accepted.)
