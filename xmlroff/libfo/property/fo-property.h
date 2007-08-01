@@ -63,7 +63,7 @@ typedef FoDatatype* (*FoResolvePercentFunc) (gdouble           percentage,
 					     const FoContext  *context,
 					     GError          **err);
 FoProperty * fo_property_new_from_expr (FoPropertyClass *property_class,
-					const gchar *expression,
+					const gchar *expr,
 					FoContext   *context,
 					FoProperty    *current_font_size,
 					FoFo *fo_node,
