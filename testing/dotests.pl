@@ -1,8 +1,7 @@
 #! /perl5/bin/perl.exe
 #
 # Copyright (c) 2001, 2002 Sun Microsystems
-#
-# $Id: dotests.pl,v 1.6 2006/07/24 16:44:56 tonygraham Exp $
+# Copyright (c) 2007 Menteith Consulting Ltd
 #
 # Perl script to run test scripts
 #
@@ -63,7 +62,7 @@ opendir(TESTS, "$gTestsDir") ||
 
 chdir $gTestsDir;
 
-@lTestDirs = sort(grep(-d && !/^\.+/ && !/^CVS$/, readdir(TESTS)));
+@lTestDirs = sort(grep(-d && !/^\.+/ && !/^(autom4te\.cache|config)$/, readdir(TESTS)));
 
 if ($gVerbose) {
     print STDERR "Test directories::", join(":", @lTestDirs), ":\n";
