@@ -34,13 +34,19 @@
       <xsl:message>testproblem: <xsl:value-of select="$testproblem"/></xsl:message>
       <xsl:message>comment: <xsl:value-of select="$comment"/></xsl:message>
     </xsl:if>
-    <xsl:apply-templates/>
+    <!-- Children may include processing instructions specifying
+         'configure' defaults. -->
+    <xsl:apply-templates select="node()"/>
   </xsl:template>
 
   <xsl:template match="comment()">
     <xsl:comment>
       <xsl:value-of select="."/>
     </xsl:comment>
+  </xsl:template>
+
+  <xsl:template match="processing-instruction()">
+    <xsl:copy-of select="."/>
   </xsl:template>
 
   <xsl:template match="testresult">
@@ -99,7 +105,7 @@
   <xsl:template match="*">
     <xsl:copy>
       <xsl:copy-of select="@*"/>
-      <xsl:apply-templates/>
+      <xsl:apply-templates select="node()"/>
     </xsl:copy>
   </xsl:template>
 
