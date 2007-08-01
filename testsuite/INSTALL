@@ -1,0 +1,8 @@
+No installation is required (or even possible).
+
+You do not need to run 'configure': it is used only when bundling
+distributions into .tar.gz files.
+
+To use this testsuite, just make sure that your testing framework
+(e.g., the xmlroff 'testing' module) can locate the 'testsuite.xml'
+file in this distribution.
