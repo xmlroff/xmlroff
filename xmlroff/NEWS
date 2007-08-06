@@ -1,3 +1,12 @@
+Changes between 0.5.1 and 0.5.2
+
+ * Fixed crash in locales with comma as decimal separator (#49)
+ * Cleaned up all compiler warnings (#51)
+ * >99% reduction in 'permanently lost' memory leaks (#52)
+
+ All xmlroff 0.5.2 tickets are listed at
+ http://xmlroff.org/query?milestone=xmlroff+0.5.2
+
 Changes between 0.5.0 and 0.5.1
 
  * Reorganised source code directories (#2)
