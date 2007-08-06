@@ -42,7 +42,7 @@ static FoDatatype* fo_property_region_name_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "region-name";
+static const gchar class_name[] = "FoPropertyRegionName";
 static gpointer parent_class;
 
 /**

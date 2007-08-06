@@ -145,7 +145,7 @@ fo_region_start_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "region-start",
+                                            "FoRegionStart",
                                             &object_info, 0);
     }
 

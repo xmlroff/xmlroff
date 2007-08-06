@@ -80,7 +80,7 @@ fo_page_sequence_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "page-sequence",
+                                            "FoPageSequence",
                                             &object_info, 0);
     }
 

@@ -40,7 +40,7 @@ static FoDatatype* fo_property_margin_left_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "margin-left";
+static const gchar class_name[] = "FoPropertyMarginLeft";
 static gpointer parent_class;
 
 /**

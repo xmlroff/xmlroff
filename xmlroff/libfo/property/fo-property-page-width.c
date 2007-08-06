@@ -42,7 +42,7 @@ static FoDatatype* fo_property_page_width_validate (FoDatatype *datatype,
                                                     FoContext  *context,
                                                     GError    **error);
 
-static const gchar class_name[] = "page-width";
+static const gchar class_name[] = "FoPropertyPageWidth";
 static gpointer parent_class;
 
 /**

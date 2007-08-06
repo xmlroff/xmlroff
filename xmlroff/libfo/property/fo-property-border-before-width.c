@@ -36,7 +36,7 @@ static void fo_property_border_before_width_init         (FoPropertyBorderBefore
 static void fo_property_border_before_width_class_init   (FoPropertyBorderBeforeWidthClass *klass);
 static void fo_property_border_before_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-before-width";
+static const gchar class_name[] = "FoPropertyBorderBeforeWidth";
 static gpointer parent_class;
 
 /**

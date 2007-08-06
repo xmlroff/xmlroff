@@ -40,7 +40,7 @@ static FoDatatype* fo_property_keep_together_within_page_validate (FoDatatype *d
                                                                    FoContext  *context,
                                                                    GError    **error);
 
-static const gchar class_name[] = "keep-together-within-page";
+static const gchar class_name[] = "FoPropertyKeepTogetherWithinPage";
 static gpointer parent_class;
 
 /**

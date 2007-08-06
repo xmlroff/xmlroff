@@ -36,7 +36,7 @@ static void fo_property_border_top_width_init         (FoPropertyBorderTopWidth 
 static void fo_property_border_top_width_class_init   (FoPropertyBorderTopWidthClass *klass);
 static void fo_property_border_top_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-top-width";
+static const gchar class_name[] = "FoPropertyBorderTopWidth";
 static gpointer parent_class;
 
 /**

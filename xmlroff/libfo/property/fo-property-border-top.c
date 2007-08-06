@@ -37,7 +37,7 @@ static void fo_property_border_top_class_init   (FoPropertyBorderTopClass *klass
 static void fo_property_border_top_finalize     (GObject       *object);
 
 
-static const gchar class_name[] = "border-top";
+static const gchar class_name[] = "FoPropertyBorderTop";
 static gpointer parent_class;
 
 /**

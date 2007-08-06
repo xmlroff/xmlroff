@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_end_minimum_validate (FoDatatype *datatype,
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "space-end-minimum";
+static const gchar class_name[] = "FoPropertySpaceEndMinimum";
 static gpointer parent_class;
 
 /**

@@ -84,7 +84,7 @@ fo_list_item_label_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "list-item-label",
+                                            "FoListItemLabel",
                                             &object_info, 0);
     }
 

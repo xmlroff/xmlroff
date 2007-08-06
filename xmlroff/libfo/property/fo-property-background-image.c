@@ -42,7 +42,7 @@ static FoDatatype* fo_property_background_image_validate (FoDatatype *datatype,
                                                           FoContext  *context,
                                                           GError    **error);
 
-static const gchar class_name[] = "background-image";
+static const gchar class_name[] = "FoPropertyBackgroundImage";
 static gpointer parent_class;
 
 /**

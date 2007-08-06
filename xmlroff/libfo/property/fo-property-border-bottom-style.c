@@ -36,7 +36,7 @@ static void fo_property_border_bottom_style_init         (FoPropertyBorderBottom
 static void fo_property_border_bottom_style_class_init   (FoPropertyBorderBottomStyleClass *klass);
 static void fo_property_border_bottom_style_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-bottom-style";
+static const gchar class_name[] = "FoPropertyBorderBottomStyle";
 static gpointer parent_class;
 
 /**

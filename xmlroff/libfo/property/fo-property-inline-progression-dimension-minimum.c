@@ -40,7 +40,7 @@ static FoDatatype* fo_property_inline_progression_dimension_minimum_validate (Fo
                                                                               FoContext  *context,
                                                                               GError    **error);
 
-static const gchar class_name[] = "inline-progression-dimension-minimum";
+static const gchar class_name[] = "FoPropertyInlineProgressionDimensionMinimum";
 static gpointer parent_class;
 
 /**

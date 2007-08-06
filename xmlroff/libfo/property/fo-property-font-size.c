@@ -65,7 +65,7 @@ static FoDatatype* fo_property_font_size_validate (FoDatatype *datatype,
                                                    GError    **error);
 static PangoAttribute * fo_property_font_size_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "font-size";
+static const gchar class_name[] = "FoPropertyFontSize";
 static gpointer parent_class;
 static FoDatatype *xx_small;
 static FoDatatype *x_small;

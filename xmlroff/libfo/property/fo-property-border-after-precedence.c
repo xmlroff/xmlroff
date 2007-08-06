@@ -40,7 +40,7 @@ static FoDatatype* fo_property_border_after_precedence_validate (FoDatatype *dat
                                                                  FoContext  *context,
                                                                  GError    **error);
 
-static const gchar class_name[] = "border-after-precedence";
+static const gchar class_name[] = "FoPropertyBorderAfterPrecedence";
 static gpointer parent_class;
 
 /**

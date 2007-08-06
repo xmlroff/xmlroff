@@ -36,7 +36,7 @@ static void fo_property_border_end_width_init         (FoPropertyBorderEndWidth 
 static void fo_property_border_end_width_class_init   (FoPropertyBorderEndWidthClass *klass);
 static void fo_property_border_end_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-end-width";
+static const gchar class_name[] = "FoPropertyBorderEndWidth";
 static gpointer parent_class;
 
 /**

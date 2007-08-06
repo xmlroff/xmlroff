@@ -36,7 +36,7 @@ static void fo_property_border_right_color_init         (FoPropertyBorderRightCo
 static void fo_property_border_right_color_class_init   (FoPropertyBorderRightColorClass *klass);
 static void fo_property_border_right_color_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-right-color";
+static const gchar class_name[] = "FoPropertyBorderRightColor";
 static gpointer parent_class;
 
 /**

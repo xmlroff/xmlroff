@@ -43,7 +43,7 @@ static FoDatatype* fo_property_space_after_validate (FoDatatype *datatype,
                                                    FoContext  *context,
                                                    GError    **error);
 
-static const gchar class_name[] = "space-after";
+static const gchar class_name[] = "FoPropertySpaceAfter";
 static gpointer parent_class;
 
 /**

@@ -42,7 +42,7 @@ static FoDatatype * fo_property_white_space_treatment_validate (FoDatatype *data
                                                                 FoContext  *context,
                                                                 GError    **error);
 
-static const gchar class_name[] = "white-space-treatment";
+static const gchar class_name[] = "FoPropertyWhiteSpaceTreatment";
 static gpointer parent_class;
 
 /**

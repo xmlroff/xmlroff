@@ -166,7 +166,7 @@ fo_region_body_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "region-body",
+                                            "FoRegionBody",
                                             &object_info, 0);
     }
 

@@ -40,7 +40,7 @@ static FoDatatype* fo_property_column_number_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "column-number";
+static const gchar class_name[] = "FoPropertyColumnNumber";
 static gpointer parent_class;
 
 /**

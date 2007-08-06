@@ -40,7 +40,7 @@ static void fo_flow_update_from_context (FoFo      *fo,
 static void fo_flow_debug_dump_properties (FoFo *fo,
                                            gint  depth);
 
-static const gchar class_name[] = "flow";
+static const gchar class_name[] = "FoFlow";
 static gpointer parent_class;
 
 /**

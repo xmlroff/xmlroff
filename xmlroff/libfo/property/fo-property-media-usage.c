@@ -42,7 +42,7 @@ static FoDatatype * fo_property_media_usage_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "media-usage";
+static const gchar class_name[] = "FoPropertyMediaUsage";
 static gpointer parent_class;
 
 /**

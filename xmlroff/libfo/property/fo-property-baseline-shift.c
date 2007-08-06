@@ -45,7 +45,7 @@ static FoDatatype* fo_property_baseline_shift_validate (FoDatatype *datatype,
                                                         GError    **error);
 static PangoAttribute * fo_property_baseline_shift_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "baseline-shift";
+static const gchar class_name[] = "FoPropertyBaselineShift";
 static gpointer parent_class;
 
 /**

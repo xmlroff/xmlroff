@@ -192,7 +192,7 @@ fo_table_row_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "table-row",
+                                            "FoTableRow",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_TABLE_BORDER_FO,

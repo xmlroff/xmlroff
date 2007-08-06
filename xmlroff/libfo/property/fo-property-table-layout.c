@@ -42,7 +42,7 @@ static FoDatatype* fo_property_table_layout_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "table-layout";
+static const gchar class_name[] = "FoPropertyTableLayout";
 static gpointer parent_class;
 
 /**

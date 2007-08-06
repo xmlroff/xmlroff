@@ -43,7 +43,7 @@ static FoDatatype* fo_property_grouping_separator_validate (FoDatatype *datatype
                                                             FoContext  *context,
                                                             GError    **error);
 
-static const gchar class_name[] = "grouping-separator";
+static const gchar class_name[] = "FoPropertyGroupingSeparator";
 static gpointer parent_class;
 
 /**

@@ -40,7 +40,7 @@ static FoDatatype* fo_property_number_columns_spanned_validate (FoDatatype *data
                                                                 FoContext  *context,
                                                                 GError    **error);
 
-static const gchar class_name[] = "number-columns-spanned";
+static const gchar class_name[] = "FoPropertyNumberColumnsSpanned";
 static gpointer parent_class;
 
 /**

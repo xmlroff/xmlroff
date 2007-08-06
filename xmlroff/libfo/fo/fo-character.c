@@ -198,7 +198,7 @@ fo_character_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "fo-character",
+                                            "FoCharacter",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_INLINE_FO,

@@ -209,7 +209,7 @@ fo_inline_container_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "inline-container",
+                                            "FoInlineContainer",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_INLINE_FO,

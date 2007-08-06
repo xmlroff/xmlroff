@@ -42,7 +42,7 @@ static FoDatatype * fo_property_writing_mode_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "writing-mode";
+static const gchar class_name[] = "FoPropertyWritingMode";
 static gpointer parent_class;
 
 /**

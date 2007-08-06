@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_start_maximum_validate (FoDatatype *datatyp
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "space-start-maximum";
+static const gchar class_name[] = "FoPropertySpaceStartMaximum";
 static gpointer parent_class;
 
 /**

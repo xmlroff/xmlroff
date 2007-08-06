@@ -42,7 +42,7 @@ static FoDatatype* fo_property_padding_before_length_validate (FoDatatype *datat
                                                                FoContext  *context,
                                                                GError    **error);
 
-static const gchar class_name[] = "padding-before-length";
+static const gchar class_name[] = "FoPropertyPaddingBeforeLength";
 static gpointer parent_class;
 
 /**

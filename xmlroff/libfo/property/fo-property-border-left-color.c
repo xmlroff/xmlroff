@@ -36,7 +36,7 @@ static void fo_property_border_left_color_init         (FoPropertyBorderLeftColo
 static void fo_property_border_left_color_class_init   (FoPropertyBorderLeftColorClass *klass);
 static void fo_property_border_left_color_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-left-color";
+static const gchar class_name[] = "FoPropertyBorderLeftColor";
 static gpointer parent_class;
 
 /**

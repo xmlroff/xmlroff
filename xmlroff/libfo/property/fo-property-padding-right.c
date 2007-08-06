@@ -45,7 +45,7 @@ static FoDatatype* fo_property_padding_right_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "padding-right";
+static const gchar class_name[] = "FoPropertyPaddingRight";
 static gpointer parent_class;
 
 /**

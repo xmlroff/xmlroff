@@ -84,7 +84,7 @@ fo_list_item_body_get_type (void)
       };
       
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "list-item-body",
+                                            "FoListItemBody",
                                             &object_info, 0);
     }
 

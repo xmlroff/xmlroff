@@ -63,7 +63,7 @@ static FoDatatype* fo_property_font_style_validate (FoDatatype *datatype,
                                                     GError    **error);
 static PangoAttribute * fo_property_font_style_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "font-style";
+static const gchar class_name[] = "FoPropertyFontStyle";
 static gpointer parent_class;
 static FoDatatype *enum_normal;
 static FoDatatype *enum_italic;

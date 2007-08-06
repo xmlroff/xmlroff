@@ -33,7 +33,7 @@ struct _FoPropertyPaddingEndCondityClass
 
 static void fo_property_padding_end_condity_class_init   (FoPropertyPaddingEndCondityClass *klass);
 
-static const gchar class_name[] = "padding-end-condity";
+static const gchar class_name[] = "FoPropertyPaddingEndCondity";
 
 /**
  * fo_property_padding_end_condity_get_type:

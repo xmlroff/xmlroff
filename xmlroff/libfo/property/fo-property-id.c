@@ -42,8 +42,7 @@ static FoDatatype * fo_property_id_validate (FoDatatype *datatype,
                                              FoContext  *context,
                                              GError    **error);
 
-/* Minimum name length for a GType is three characters. */
-static const gchar class_name[] = "id_";
+static const gchar class_name[] = "FoPropertyId";
 static gpointer parent_class;
 
 /**

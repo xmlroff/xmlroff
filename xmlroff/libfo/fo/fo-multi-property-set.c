@@ -72,7 +72,7 @@ fo_multi_property_set_get_type (void)
       };
       
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "multi-property-set",
+                                            "FoMultiPropertySet",
                                             &object_info, 0);
     }
   

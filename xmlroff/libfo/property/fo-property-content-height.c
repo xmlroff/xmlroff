@@ -42,7 +42,7 @@ static FoDatatype* fo_property_content_height_validate (FoDatatype *datatype,
                                                         FoContext  *context,
                                                         GError    **error);
 
-static const gchar class_name[] = "content-height";
+static const gchar class_name[] = "FoPropertyContentHeight";
 static gpointer parent_class;
 
 /**

@@ -154,7 +154,7 @@ fo_table_caption_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "table-caption",
+                                            "FoTableCaption",
                                             &object_info, 0);
     }
 

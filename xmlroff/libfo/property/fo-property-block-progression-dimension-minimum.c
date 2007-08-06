@@ -40,7 +40,7 @@ static FoDatatype* fo_property_block_progression_dimension_minimum_validate (FoD
                                                                              FoContext  *context,
                                                                              GError    **error);
 
-static const gchar class_name[] = "block-progression-dimension-minimum";
+static const gchar class_name[] = "FoPropertyBlockProgressionDimensionMinimum";
 static gpointer parent_class;
 
 /**

@@ -37,7 +37,7 @@ static void fo_property_border_class_init   (FoPropertyBorderClass *klass);
 static void fo_property_border_finalize     (GObject       *object);
 
 
-static const gchar class_name[] = "border";
+static const gchar class_name[] = "FoPropertyBorder";
 static gpointer parent_class;
 
 /**

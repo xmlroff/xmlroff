@@ -100,7 +100,7 @@ fo_simple_page_master_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "simple-page-master",
+                                            "FoSimplePageMaster",
                                             &object_info, 0);
     }
 

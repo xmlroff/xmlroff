@@ -42,7 +42,7 @@ static FoDatatype* fo_property_line_stacking_strategy_validate (FoDatatype *data
                                                                 FoContext  *context,
                                                                 GError    **error);
 
-static const gchar class_name[] = "line-stacking-strategy";
+static const gchar class_name[] = "FoPropertyLineStackingStrategy";
 static gpointer parent_class;
 
 /**

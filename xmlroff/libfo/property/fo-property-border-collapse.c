@@ -42,7 +42,7 @@ static FoDatatype* fo_property_border_collapse_validate (FoDatatype *datatype,
                                                          FoContext  *context,
                                                          GError    **error);
 
-static const gchar class_name[] = "border-collapse";
+static const gchar class_name[] = "FoPropertyBorderCollapse";
 static gpointer parent_class;
 
 /**

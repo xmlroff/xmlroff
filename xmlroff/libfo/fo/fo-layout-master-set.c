@@ -55,7 +55,7 @@ fo_layout_master_set_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "layout-master-set",
+                                            "FoLayoutMasterSet",
                                             &object_info, 0);
     }
 

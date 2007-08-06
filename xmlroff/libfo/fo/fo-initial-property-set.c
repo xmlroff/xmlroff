@@ -158,7 +158,7 @@ fo_initial_property_set_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "initial-property-set",
+                                            "FoInitialPropertySet",
                                             &object_info, 0);
     }
 

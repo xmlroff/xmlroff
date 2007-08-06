@@ -41,7 +41,7 @@ static FoDatatype* fo_property_break_after_resolve_enum (const gchar *token,
 static FoDatatype* fo_property_break_after_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
-static const gchar class_name[] = "break-after";
+static const gchar class_name[] = "FoPropertyBreakAfter";
 static gpointer parent_class;
 
 /**

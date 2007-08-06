@@ -49,7 +49,7 @@ static PangoAttribute* fo_property_alignment_adjust_new_attr (FoProperty *proper
 static void fo_property_alignment_adjust_text_property_init (FoPropertyTextPropertyIface *iface);
 */
 
-static const gchar class_name[] = "alignment-adjust";
+static const gchar class_name[] = "FoPropertyAlignmentAdjust";
 static gpointer parent_class;
 
 /**

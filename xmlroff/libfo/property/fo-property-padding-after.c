@@ -45,7 +45,7 @@ static FoDatatype* fo_property_padding_after_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "padding-after";
+static const gchar class_name[] = "FoPropertyPaddingAfter";
 static gpointer parent_class;
 
 /**

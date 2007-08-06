@@ -42,7 +42,7 @@ static FoDatatype * fo_property_ref_id_validate (FoDatatype *datatype,
                                                  FoContext  *context,
                                                  GError    **error);
 
-static const gchar class_name[] = "ref-id";
+static const gchar class_name[] = "FoPropertyRefId";
 static gpointer parent_class;
 
 /**

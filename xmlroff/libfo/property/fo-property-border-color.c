@@ -40,7 +40,7 @@ static FoDatatype * fo_property_border_color_validate (FoDatatype *datatype,
 						       FoContext  *context,
 						       GError    **error);
 
-static const gchar class_name[] = "border-color";
+static const gchar class_name[] = "FoPropertyBorderColor";
 static gpointer parent_class;
 
 /**

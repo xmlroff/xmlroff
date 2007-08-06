@@ -42,7 +42,7 @@ static FoDatatype* fo_property_scaling_method_validate (FoDatatype *datatype,
                                                         FoContext  *context,
                                                         GError    **error);
 
-static const gchar class_name[] = "scaling-method";
+static const gchar class_name[] = "FoPropertyScalingMethod";
 static gpointer parent_class;
 
 /**

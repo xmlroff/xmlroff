@@ -36,7 +36,7 @@ static void fo_property_border_after_width_init         (FoPropertyBorderAfterWi
 static void fo_property_border_after_width_class_init   (FoPropertyBorderAfterWidthClass *klass);
 static void fo_property_border_after_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-after-width";
+static const gchar class_name[] = "FoPropertyBorderAfterWidth";
 static gpointer parent_class;
 
 /**

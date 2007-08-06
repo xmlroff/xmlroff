@@ -42,7 +42,7 @@ static FoDatatype * fo_property_unicode_bidi_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "unicode-bidi";
+static const gchar class_name[] = "FoPropertyUnicodeBidi";
 static gpointer parent_class;
 
 /**

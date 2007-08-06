@@ -42,7 +42,7 @@ static FoDatatype* fo_property_letter_value_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "letter-value";
+static const gchar class_name[] = "FoPropertyLetterValue";
 static gpointer parent_class;
 
 /**

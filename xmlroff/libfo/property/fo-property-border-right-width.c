@@ -36,7 +36,7 @@ static void fo_property_border_right_width_init         (FoPropertyBorderRightWi
 static void fo_property_border_right_width_class_init   (FoPropertyBorderRightWidthClass *klass);
 static void fo_property_border_right_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-right-width";
+static const gchar class_name[] = "FoPropertyBorderRightWidth";
 static gpointer parent_class;
 
 /**

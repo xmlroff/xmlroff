@@ -71,7 +71,7 @@ fo_multi_case_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "multi-case",
+                                            "FoMultiCase",
                                             &object_info, 0);
     }
 

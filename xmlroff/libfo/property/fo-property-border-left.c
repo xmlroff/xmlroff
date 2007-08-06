@@ -37,7 +37,7 @@ static void fo_property_border_left_class_init   (FoPropertyBorderLeftClass *kla
 static void fo_property_border_left_finalize     (GObject       *object);
 
 
-static const gchar class_name[] = "border-left";
+static const gchar class_name[] = "FoPropertyBorderLeft";
 static gpointer parent_class;
 
 /**

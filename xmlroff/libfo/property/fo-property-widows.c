@@ -45,7 +45,7 @@ static FoDatatype* fo_property_widows_validate (FoDatatype *datatype,
                                                 FoContext  *context,
                                                 GError    **error);
 
-static const gchar class_name[] = "widows";
+static const gchar class_name[] = "FoPropertyWidows";
 static gpointer parent_class;
 
 /**

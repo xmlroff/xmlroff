@@ -123,7 +123,7 @@ fo_bidi_override_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "bidi-override",
+                                            "FoBidiOverride",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_INLINE_FO,

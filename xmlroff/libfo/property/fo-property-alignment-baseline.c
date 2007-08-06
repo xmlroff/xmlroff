@@ -49,7 +49,7 @@ PangoAttribute * fo_property_alignment_baseline_new_attr (FoProperty *property);
 static void fo_property_alignment_baseline_text_property_init (FoPropertyTextPropertyIface *iface);
 */
 
-static const gchar class_name[] = "alignment-baseline";
+static const gchar class_name[] = "FoPropertyAlignmentBaseline";
 static gpointer parent_class;
 
 /**

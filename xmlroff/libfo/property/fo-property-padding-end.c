@@ -45,7 +45,7 @@ static FoDatatype* fo_property_padding_end_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "padding-end";
+static const gchar class_name[] = "FoPropertyPaddingEnd";
 static gpointer parent_class;
 
 /**

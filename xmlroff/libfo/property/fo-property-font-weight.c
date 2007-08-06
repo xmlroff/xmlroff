@@ -65,7 +65,7 @@ static FoDatatype * fo_property_font_weight_validate (FoDatatype *datatype,
                                                       GError    **error);
 static PangoAttribute * fo_property_font_weight_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "font-weight";
+static const gchar class_name[] = "FoPropertyFontWeight";
 static gpointer parent_class;
 
 /**

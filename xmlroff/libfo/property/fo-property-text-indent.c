@@ -43,7 +43,7 @@ static FoDatatype* fo_property_text_indent_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "text-indent";
+static const gchar class_name[] = "FoPropertyTextIndent";
 static gpointer parent_class;
 
 /**

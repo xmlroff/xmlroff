@@ -41,7 +41,7 @@ static FoDatatype* fo_property_keep_together_within_column_validate (FoDatatype 
                                                                      FoContext  *context,
                                                                      GError    **error);
 
-static const gchar class_name[] = "keep-together-within-column";
+static const gchar class_name[] = "FoPropertyKeepTogetherWithinColumn";
 static gpointer parent_class;
 
 /**

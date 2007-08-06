@@ -42,7 +42,7 @@ static FoDatatype* fo_property_direction_validate (FoDatatype *datatype,
                                                    FoContext  *context,
                                                    GError    **error);
 
-static const gchar class_name[] = "direction";
+static const gchar class_name[] = "FoPropertyDirection";
 static gpointer parent_class;
 
 /**

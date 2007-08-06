@@ -69,7 +69,7 @@ fo_footnote_body_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "footnote-body",
+                                            "FoFootnoteBody",
                                             &object_info, 0);
     }
 

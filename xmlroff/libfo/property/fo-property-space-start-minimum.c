@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_start_minimum_validate (FoDatatype *datatyp
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "space-start-minimum";
+static const gchar class_name[] = "FoPropertySpaceStartMinimum";
 static gpointer parent_class;
 
 /**

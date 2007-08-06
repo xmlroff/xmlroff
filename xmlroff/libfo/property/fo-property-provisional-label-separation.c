@@ -40,7 +40,7 @@ static FoDatatype* fo_property_provisional_label_separation_validate (FoDatatype
                                                                       FoContext  *context,
                                                                       GError    **error);
 
-static const gchar class_name[] = "provisional-label-separation";
+static const gchar class_name[] = "FoPropertyProvisionalLabelSeparation";
 static gpointer parent_class;
 
 /**

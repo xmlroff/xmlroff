@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_after_maximum_validate (FoDatatype *datatyp
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "space-after-maximum";
+static const gchar class_name[] = "FoPropertySpaceAfterMaximum";
 static gpointer parent_class;
 
 /**

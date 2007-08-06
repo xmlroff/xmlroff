@@ -53,7 +53,7 @@ fo_declarations_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "declarations",
+                                            "FoDeclarations",
                                             &object_info, 0);
     }
 

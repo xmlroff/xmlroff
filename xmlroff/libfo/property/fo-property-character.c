@@ -40,7 +40,7 @@ static FoDatatype* fo_property_character_validate (FoDatatype *datatype,
                                                    FoContext  *context,
                                                    GError    **error);
 
-static const gchar class_name[] = "character";
+static const gchar class_name[] = "FoPropertyCharacter";
 static gpointer parent_class;
 
 /**

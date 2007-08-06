@@ -36,7 +36,7 @@ static void fo_property_border_start_width_init         (FoPropertyBorderStartWi
 static void fo_property_border_start_width_class_init   (FoPropertyBorderStartWidthClass *klass);
 static void fo_property_border_start_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-start-width";
+static const gchar class_name[] = "FoPropertyBorderStartWidth";
 static gpointer parent_class;
 
 /**

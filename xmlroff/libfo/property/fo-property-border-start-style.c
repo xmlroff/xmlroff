@@ -36,7 +36,7 @@ static void fo_property_border_start_style_init         (FoPropertyBorderStartSt
 static void fo_property_border_start_style_class_init   (FoPropertyBorderStartStyleClass *klass);
 static void fo_property_border_start_style_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-start-style";
+static const gchar class_name[] = "FoPropertyBorderStartStyle";
 static gpointer parent_class;
 
 /**

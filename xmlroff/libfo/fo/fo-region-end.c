@@ -145,7 +145,7 @@ fo_region_end_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "region-end",
+                                            "FoRegionEnd",
                                             &object_info, 0);
     }
 

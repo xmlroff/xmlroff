@@ -46,7 +46,7 @@ static FoDatatype* fo_property_keep_together_within_line_validate (FoDatatype *d
 PangoAttribute * fo_property_keep_together_within_line_new_attr (FoProperty *property);
 static void fo_property_keep_together_within_line_text_property_init (FoPropertyTextPropertyIface *iface);
 */
-static const gchar class_name[] = "keep-together-within-line";
+static const gchar class_name[] = "FoPropertyKeepTogetherWithinLine";
 static gpointer parent_class;
 
 /**

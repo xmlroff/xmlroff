@@ -40,7 +40,7 @@ static FoDatatype* fo_property_content_type_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "content-type";
+static const gchar class_name[] = "FoPropertyContentType";
 static gpointer parent_class;
 
 /**

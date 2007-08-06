@@ -146,7 +146,7 @@ fo_region_after_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "region-after",
+                                            "FoRegionAfter",
                                             &object_info, 0);
     }
 

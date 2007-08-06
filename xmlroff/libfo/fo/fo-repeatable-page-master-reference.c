@@ -67,7 +67,7 @@ fo_repeatable_page_master_reference_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "repeatable-page-master-reference",
+                                            "FoRepeatablePageMasterReference",
                                             &object_info, 0);
     }
 

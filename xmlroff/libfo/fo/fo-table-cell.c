@@ -177,7 +177,7 @@ fo_table_cell_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
-                                            "table-cell",
+                                            "FoTableCell",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_TABLE_BORDER_FO,

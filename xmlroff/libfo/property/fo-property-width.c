@@ -42,7 +42,7 @@ static FoDatatype * fo_property_width_validate (FoDatatype *datatype,
                                                 FoContext  *context,
                                                 GError    **error);
 
-static const gchar class_name[] = "width";
+static const gchar class_name[] = "FoPropertyWidth";
 static gpointer parent_class;
 
 /**

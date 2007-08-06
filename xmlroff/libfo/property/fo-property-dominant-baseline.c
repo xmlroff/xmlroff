@@ -50,7 +50,7 @@ static void fo_property_dominant_baseline_text_property_init (FoPropertyTextProp
 PangoAttribute * fo_property_dominant_baseline_new_attr_from_context (FoProperty *property,
 								      FoContext  *context);
 */
-static const gchar class_name[] = "dominant-baseline";
+static const gchar class_name[] = "FoPropertyDominantBaseline";
 static gpointer parent_class;
 
 /**

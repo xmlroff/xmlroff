@@ -40,7 +40,7 @@ static FoDatatype* fo_property_provisional_distance_between_starts_validate (FoD
                                                                              FoContext  *context,
                                                                              GError    **error);
 
-static const gchar class_name[] = "provisional-distance-between-starts";
+static const gchar class_name[] = "FoPropertyProvisionalDistanceBetweenStarts";
 static gpointer parent_class;
 
 /**

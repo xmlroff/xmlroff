@@ -40,7 +40,7 @@ static FoDatatype* fo_property_margin_top_validate (FoDatatype *datatype,
                                                     FoContext  *context,
                                                     GError    **error);
 
-static const gchar class_name[] = "margin-top";
+static const gchar class_name[] = "FoPropertyMarginTop";
 static gpointer parent_class;
 
 /**

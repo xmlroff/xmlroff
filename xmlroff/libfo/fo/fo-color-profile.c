@@ -67,7 +67,7 @@ fo_color_profile_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "color-profile",
+                                            "FoColorProfile",
                                             &object_info, 0);
     }
 

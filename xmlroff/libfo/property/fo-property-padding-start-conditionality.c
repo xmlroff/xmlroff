@@ -33,7 +33,7 @@ struct _FoPropertyPaddingStartCondityClass
 
 static void fo_property_padding_start_condity_class_init   (FoPropertyPaddingStartCondityClass *klass);
 
-static const gchar class_name[] = "padding-start-condity";
+static const gchar class_name[] = "FoPropertyPaddingStartCondity";
 
 /**
  * fo_property_padding_start_condity_get_type:

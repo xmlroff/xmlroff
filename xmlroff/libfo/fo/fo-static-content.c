@@ -76,7 +76,7 @@ fo_static_content_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "static-content",
+                                            "FoStaticContent",
                                             &object_info, 0);
     }
 

@@ -40,7 +40,7 @@ static FoDatatype* fo_property_border_start_precedence_validate (FoDatatype *dat
                                                                  FoContext  *context,
                                                                  GError    **error);
 
-static const gchar class_name[] = "border-start-precedence";
+static const gchar class_name[] = "FoPropertyBorderStartPrecedence";
 static gpointer parent_class;
 
 /**

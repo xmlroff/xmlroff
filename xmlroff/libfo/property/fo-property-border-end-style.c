@@ -36,7 +36,7 @@ static void fo_property_border_end_style_init         (FoPropertyBorderEndStyle 
 static void fo_property_border_end_style_class_init   (FoPropertyBorderEndStyleClass *klass);
 static void fo_property_border_end_style_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-end-style";
+static const gchar class_name[] = "FoPropertyBorderEndStyle";
 static gpointer parent_class;
 
 /**

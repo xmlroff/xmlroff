@@ -157,7 +157,7 @@ fo_title_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "title",
+                                            "FoTitle",
                                             &object_info, 0);
     }
 

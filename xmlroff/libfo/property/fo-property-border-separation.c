@@ -43,7 +43,7 @@ static FoDatatype* fo_property_border_separation_validate (FoDatatype *datatype,
                                                            FoContext  *context,
                                                            GError    **error);
 
-static const gchar class_name[] = "border-separation";
+static const gchar class_name[] = "FoPropertyBorderSeparation";
 static gpointer parent_class;
 
 /**

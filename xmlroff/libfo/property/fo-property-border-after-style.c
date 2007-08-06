@@ -36,7 +36,7 @@ static void fo_property_border_after_style_init         (FoPropertyBorderAfterSt
 static void fo_property_border_after_style_class_init   (FoPropertyBorderAfterStyleClass *klass);
 static void fo_property_border_after_style_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-after-style";
+static const gchar class_name[] = "FoPropertyBorderAfterStyle";
 static gpointer parent_class;
 
 /**

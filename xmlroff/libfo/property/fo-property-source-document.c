@@ -42,7 +42,7 @@ static FoDatatype * fo_property_source_document_validate (FoDatatype *datatype,
                                                           FoContext  *context,
                                                           GError    **error);
 
-static const gchar class_name[] = "source-document";
+static const gchar class_name[] = "FoPropertySourceDocument";
 static gpointer parent_class;
 
 /**

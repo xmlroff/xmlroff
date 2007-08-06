@@ -70,7 +70,7 @@ fo_root_get_type (void)
       };
 
       object_type = g_type_register_static (FO_TYPE_FO,
-                                            "root",
+                                            "FoRoot",
                                             &object_info, 0);
     }
 

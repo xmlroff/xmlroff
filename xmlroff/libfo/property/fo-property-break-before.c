@@ -41,7 +41,7 @@ static FoDatatype* fo_property_break_before_resolve_enum (const gchar *token,
 static FoDatatype* fo_property_break_before_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
-static const gchar class_name[] = "break-before";
+static const gchar class_name[] = "FoPropertyBreakBefore";
 static gpointer parent_class;
 
 /**

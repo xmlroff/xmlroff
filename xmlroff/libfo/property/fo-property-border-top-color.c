@@ -36,7 +36,7 @@ static void fo_property_border_top_color_init         (FoPropertyBorderTopColor 
 static void fo_property_border_top_color_class_init   (FoPropertyBorderTopColorClass *klass);
 static void fo_property_border_top_color_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-top-color";
+static const gchar class_name[] = "FoPropertyBorderTopColor";
 static gpointer parent_class;
 
 /**
