@@ -37,12 +37,3 @@ fo-float
 @Returns: 
 
 
-<!-- ##### FUNCTION fo_float_update_from_context ##### -->
-<para>
-
-</para>
-
-@fo: 
-@context: 
-
-

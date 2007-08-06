@@ -23,6 +23,11 @@ fo-page-sequence-master
 </para>
 
 
+<!-- ##### ARG FoPageSequenceMaster:master-name ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoPageSequenceMasterClass ##### -->
 <para>
 

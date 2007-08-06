@@ -23,6 +23,21 @@ fo-multi-toggle
 </para>
 
 
+<!-- ##### ARG FoMultiToggle:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoMultiToggle:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoMultiToggle:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoMultiToggleClass ##### -->
 <para>
 

@@ -42,15 +42,6 @@ fo-libfo-basic
 @Returns: 
 
 
-<!-- ##### ENUM FoEnumType ##### -->
-<para>
-
-</para>
-
-@FO_ENUM_TYPE_CHAR: 
-@FO_ENUM_TYPE_INT: 
-@FO_ENUM_TYPE_FILE: 
-
 <!-- ##### STRUCT FoLibfoContext ##### -->
 <para>
 
@@ -119,20 +110,11 @@ fo-libfo-basic
 @Returns: 
 
 
-<!-- ##### FUNCTION fo_libfo_context_close ##### -->
-<para>
-
-</para>
-
-@libfo_context: 
-
-
 <!-- ##### FUNCTION fo_libfo_format ##### -->
 <para>
 
 </para>
 
-@libfo_context: 
 @xml: 
 @xslt: 
 @out: 

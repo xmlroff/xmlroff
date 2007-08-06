@@ -24,7 +24,6 @@ FoXsltTransformer
 
 @xml_doc: 
 @stylesheet_doc: 
-@libfo_context: 
 @error: 
 @Returns: 
 

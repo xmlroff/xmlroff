@@ -23,6 +23,21 @@ fo-multi-properties
 </para>
 
 
+<!-- ##### ARG FoMultiProperties:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoMultiProperties:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoMultiProperties:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoMultiPropertiesClass ##### -->
 <para>
 

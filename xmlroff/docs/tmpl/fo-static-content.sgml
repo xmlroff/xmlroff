@@ -23,6 +23,11 @@ fo-static-content
 </para>
 
 
+<!-- ##### ARG FoStaticContent:flow-name ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoStaticContentClass ##### -->
 <para>
 

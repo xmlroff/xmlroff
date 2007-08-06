@@ -23,6 +23,301 @@ fo-list-item
 </para>
 
 
+<!-- ##### ARG FoListItem:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:break-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:break-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:end-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:space-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:space-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItem:start-indent ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoListItemClass ##### -->
 <para>
 

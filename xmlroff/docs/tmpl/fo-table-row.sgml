@@ -23,6 +23,291 @@ fo-table-row
 </para>
 
 
+<!-- ##### ARG FoTableRow:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:block-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:break-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:break-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableRow:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoTableRowClass ##### -->
 <para>
 

@@ -2451,7 +2451,6 @@ FO_EXTERNAL_GRAPHIC_GET_CLASS
 FoFloat
 FoFloatClass
 fo_float_new
-fo_float_update_from_context
 <SUBSECTION Standard>
 FO_FLOAT
 FO_IS_FLOAT
@@ -3617,7 +3616,6 @@ FO_LIST_ITEM_GET_CLASS
 FoMarker
 FoMarkerClass
 fo_marker_new
-fo_marker_update_from_context
 <SUBSECTION Standard>
 FO_MARKER
 FO_IS_MARKER
@@ -9453,7 +9451,6 @@ fo_property_util_validate_wsc
 FoLibfoBasicError
 FO_LIBFO_BASIC_ERROR
 fo_libfo_basic_error_quark
-FoEnumType
 FoLibfoContext
 fo_libfo_init
 FoMalloc
@@ -9462,7 +9459,6 @@ FoFree
 fo_libfo_init2
 fo_libfo_shutdown
 fo_libfo_context_new
-fo_libfo_context_close
 fo_libfo_format
 </SECTION>
 

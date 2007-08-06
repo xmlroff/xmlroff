@@ -23,6 +23,241 @@ fo-region-body
 </para>
 
 
+<!-- ##### ARG FoRegionBody:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:clip ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:display-align ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:end-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:overflow ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:region-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:space-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:space-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:start-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionBody:writing-mode ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoRegionBodyClass ##### -->
 <para>
 

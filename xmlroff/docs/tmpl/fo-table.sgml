@@ -61,8 +61,8 @@ fo-table
 @FO_TABLE_ERROR_WIDTH_NOT_LENGTH: 
 @FO_TABLE_ERROR_NO_AREA: 
 @FO_TABLE_ERROR_FIXED_BUT_AUTO: 
-@FO_TABLE_ERROR_AUTOMATIC_NOT_SUPPORTED: 
 @FO_TABLE_ERROR_SPANNING_CELLS_FILL_ROW: 
+@FO_TABLE_ERROR_FALLBACK_TO_FIXED: 
 @FO_TABLE_ERROR_LAST: 
 
 <!-- ##### STRUCT FoTable ##### -->
@@ -70,6 +70,371 @@ fo-table
 
 </para>
 
+
+<!-- ##### ARG FoTable:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:block-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-collapse ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-separation ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:break-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:break-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:end-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:inline-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:layout-method ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:max-column-number ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:space-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:space-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:start-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:table-layout ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTable:writing-mode ##### -->
+<para>
+
+</para>
 
 <!-- ##### STRUCT FoTableClass ##### -->
 <para>

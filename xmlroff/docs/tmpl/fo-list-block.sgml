@@ -23,6 +23,321 @@ fo-list-block
 </para>
 
 
+<!-- ##### ARG FoListBlock:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:body-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:break-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:break-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:end-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:label-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:provisional-distance-between-starts ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:provisional-label-separation ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:space-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:space-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListBlock:start-indent ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoListBlockClass ##### -->
 <para>
 

@@ -23,6 +23,21 @@ fo-multi-switch
 </para>
 
 
+<!-- ##### ARG FoMultiSwitch:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoMultiSwitch:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoMultiSwitch:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoMultiSwitchClass ##### -->
 <para>
 

@@ -152,7 +152,7 @@ FoProperty is really wonderful.
 </para>
 
 @property_class: 
-@expression: 
+@expr: 
 @context: 
 @current_font_size: 
 @fo_node: 

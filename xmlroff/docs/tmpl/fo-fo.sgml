@@ -316,7 +316,7 @@ Base formatting object object
 </para>
 
 @fo_node: 
-@is_not_pcdata_inline_block_neutral: 
+@data: 
 
 
 <!-- ##### FUNCTION fo_fo_get_area_iterator ##### -->

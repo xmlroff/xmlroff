@@ -23,6 +23,211 @@ fo-table-header
 </para>
 
 
+<!-- ##### ARG FoTableHeader:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableHeader:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoTableHeaderClass ##### -->
 <para>
 

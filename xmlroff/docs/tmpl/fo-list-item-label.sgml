@@ -23,6 +23,41 @@ fo-list-item-label
 </para>
 
 
+<!-- ##### ARG FoListItemLabel:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemLabel:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemLabel:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemLabel:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemLabel:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemLabel:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemLabel:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoListItemLabelClass ##### -->
 <para>
 

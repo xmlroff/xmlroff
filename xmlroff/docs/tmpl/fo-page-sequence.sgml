@@ -23,6 +23,36 @@ fo-page-sequence
 </para>
 
 
+<!-- ##### ARG FoPageSequence:format ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageSequence:grouping-separator ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageSequence:grouping-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageSequence:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageSequence:letter-value ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoPageSequence:master-reference ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoPageSequenceClass ##### -->
 <para>
 

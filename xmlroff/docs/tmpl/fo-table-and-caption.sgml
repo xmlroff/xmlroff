@@ -23,6 +23,306 @@ fo-table-and-caption
 </para>
 
 
+<!-- ##### ARG FoTableAndCaption:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:break-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:break-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:end-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:margin-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:margin-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:margin-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:margin-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:space-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:space-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:start-indent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableAndCaption:text-align ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoTableAndCaptionClass ##### -->
 <para>
 

@@ -23,6 +23,41 @@ fo-list-item-body
 </para>
 
 
+<!-- ##### ARG FoListItemBody:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemBody:keep-together ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemBody:keep-together-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemBody:keep-together-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemBody:keep-together-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemBody:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoListItemBody:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoListItemBodyClass ##### -->
 <para>
 

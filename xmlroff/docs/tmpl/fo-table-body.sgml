@@ -23,6 +23,211 @@ table-body
 </para>
 
 
+<!-- ##### ARG FoTableBody:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableBody:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoTableBodyClass ##### -->
 <para>
 

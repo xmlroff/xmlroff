@@ -23,6 +23,206 @@ fo-region-start
 </para>
 
 
+<!-- ##### ARG FoRegionStart:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:clip ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:display-align ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:extent ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:overflow ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:region-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoRegionStart:writing-mode ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoRegionStartClass ##### -->
 <para>
 

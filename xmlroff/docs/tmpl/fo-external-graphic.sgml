@@ -23,6 +23,341 @@ fo-external-graphic
 </para>
 
 
+<!-- ##### ARG FoExternalGraphic:alignment-adjust ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:alignment-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:base-uri ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:baseline-shift ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:block-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:clip ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:content-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:content-type ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:content-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:display-align ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:dominant-baseline ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:inline-progression-dimension ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-next ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-next-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-next-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-next-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-previous ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-previous-within-column ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-previous-within-line ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:keep-with-previous-within-page ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:line-height ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:overflow ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:padding-top ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:scaling ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:scaling-method ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:source-document ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:space-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:space-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:src ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:text-align ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoExternalGraphic:width ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoExternalGraphicClass ##### -->
 <para>
 

@@ -23,6 +23,16 @@ fo-footnote-body
 </para>
 
 
+<!-- ##### ARG FoFootnoteBody:role ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoFootnoteBody:source-document ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoFootnoteBodyClass ##### -->
 <para>
 

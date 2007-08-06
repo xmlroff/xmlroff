@@ -48,6 +48,221 @@ fo-table-column
 </para>
 
 
+<!-- ##### ARG FoTableColumn:background-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:background-image ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-after-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-after-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-after-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-after-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-before-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-before-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-before-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-before-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-bottom-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-bottom-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-bottom-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-end-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-end-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-end-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-end-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-left-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-left-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-left-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-right-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-right-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-right-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-start-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-start-precedence ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-start-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-start-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-top-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-top-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:border-top-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:column-number ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:column-width ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:number-columns-repeated ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:number-columns-spanned ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:offset ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-after ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-before ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-bottom ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-end ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-left ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-right ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoTableColumn:padding-top ##### -->
+<para>
+
+</para>
+
 <!-- ##### STRUCT FoTableColumnClass ##### -->
 <para>
 
