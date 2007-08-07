@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_end_precedence_validate (FoDatatype *dataty
                                                                  FoContext  *context,
                                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceEndPrecedence";
+static const gchar class_name[] = "space-end-precedence";
 static gpointer parent_class;
 
 /**

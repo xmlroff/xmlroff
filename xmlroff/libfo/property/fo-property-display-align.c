@@ -42,7 +42,7 @@ static FoDatatype * fo_property_display_align_validate (FoDatatype *datatype,
                                                         FoContext  *context,
                                                         GError    **error);
 
-static const gchar class_name[] = "FoPropertyDisplayAlign";
+static const gchar class_name[] = "display-align";
 static gpointer parent_class;
 
 /**

@@ -45,7 +45,7 @@ static FoDatatype* fo_property_padding_left_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "FoPropertyPaddingLeft";
+static const gchar class_name[] = "padding-left";
 static gpointer parent_class;
 
 /**

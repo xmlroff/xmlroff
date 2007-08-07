@@ -42,7 +42,7 @@ static FoDatatype* fo_property_inline_progression_dimension_validate (FoDatatype
                                                                       FoContext  *context,
                                                                       GError    **error);
 
-static const gchar class_name[] = "FoPropertyInlineProgressionDimension";
+static const gchar class_name[] = "inline-progression-dimension";
 static gpointer parent_class;
 
 /**

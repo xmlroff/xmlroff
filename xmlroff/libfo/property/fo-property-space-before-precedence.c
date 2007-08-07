@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_before_precedence_validate (FoDatatype *dat
                                                                  FoContext  *context,
                                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceBeforePrecedence";
+static const gchar class_name[] = "space-before-precedence";
 static gpointer parent_class;
 
 /**

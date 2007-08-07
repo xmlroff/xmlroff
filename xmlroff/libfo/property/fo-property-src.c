@@ -40,7 +40,7 @@ static FoDatatype * fo_property_src_validate (FoDatatype *datatype,
                                               FoContext  *context,
                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertySrc";
+static const gchar class_name[] = "src";
 static gpointer parent_class;
 
 /**

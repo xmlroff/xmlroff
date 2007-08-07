@@ -42,7 +42,7 @@ static FoDatatype * fo_property_white_space_collapse_validate (FoDatatype *datat
                                                                FoContext  *context,
                                                                GError    **error);
 
-static const gchar class_name[] = "FoPropertyWhiteSpaceCollapse";
+static const gchar class_name[] = "white-space-collapse";
 static gpointer parent_class;
 
 /**

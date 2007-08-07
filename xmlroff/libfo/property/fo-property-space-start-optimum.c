@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_start_optimum_validate (FoDatatype *datatyp
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceStartOptimum";
+static const gchar class_name[] = "space-start-optimum";
 static gpointer parent_class;
 
 /**

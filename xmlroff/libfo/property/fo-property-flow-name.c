@@ -40,7 +40,7 @@ static FoDatatype* fo_property_flow_name_validate (FoDatatype *datatype,
                                                    FoContext  *context,
                                                    GError    **error);
 
-static const gchar class_name[] = "FoPropertyFlowName";
+static const gchar class_name[] = "flow-name";
 static gpointer parent_class;
 
 /**

@@ -54,7 +54,7 @@ static FoProperty * fo_property_font_family_new_from_expr (FoPropertyClass *prop
 
 static PangoAttribute * fo_property_font_family_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "FoPropertyFontFamily";
+static const gchar class_name[] = "font-family";
 static gpointer parent_class;
 
 /**

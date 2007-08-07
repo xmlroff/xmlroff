@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_end_maximum_validate (FoDatatype *datatype,
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceEndMaximum";
+static const gchar class_name[] = "space-end-maximum";
 static gpointer parent_class;
 
 /**

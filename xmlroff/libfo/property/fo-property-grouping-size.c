@@ -43,7 +43,7 @@ static FoDatatype* fo_property_grouping_size_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "FoPropertyGroupingSize";
+static const gchar class_name[] = "grouping-size";
 static gpointer parent_class;
 
 /**

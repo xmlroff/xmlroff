@@ -42,7 +42,7 @@ static FoDatatype* fo_property_block_progression_dimension_validate (FoDatatype 
                                                                      FoContext  *context,
                                                                      GError    **error);
 
-static const gchar class_name[] = "FoPropertyBlockProgressionDimension";
+static const gchar class_name[] = "block-progression-dimension";
 static gpointer parent_class;
 
 /**

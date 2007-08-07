@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_after_condity_validate (FoDatatype *datatyp
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceAfterConditionality";
+static const gchar class_name[] = "space-after-conditionality";
 static gpointer parent_class;
 
 /**

@@ -46,7 +46,7 @@ static FoDatatype* fo_property_keep_with_next_within_line_validate (FoDatatype *
 PangoAttribute * fo_property_keep_with_next_within_line_new_attr (FoProperty *property);
 static void fo_property_keep_with_next_within_line_text_property_init (FoPropertyTextPropertyIface *iface);
 */
-static const gchar class_name[] = "FoPropertyKeepWithNextWithinLine";
+static const gchar class_name[] = "keep-with-next-within-line";
 static gpointer parent_class;
 
 /**

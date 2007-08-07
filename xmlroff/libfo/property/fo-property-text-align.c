@@ -42,7 +42,7 @@ static FoDatatype * fo_property_text_align_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "FoPropertyTextAlign";
+static const gchar class_name[] = "text-align";
 static gpointer parent_class;
 
 /**

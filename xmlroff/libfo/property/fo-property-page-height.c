@@ -42,7 +42,7 @@ static FoDatatype* fo_property_page_height_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "FoPropertyPageHeight";
+static const gchar class_name[] = "page-height";
 static gpointer parent_class;
 
 /**

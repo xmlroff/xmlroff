@@ -41,7 +41,7 @@ static FoDatatype* fo_property_number_rows_spanned_validate (FoDatatype *datatyp
                                                              FoContext  *context,
                                                              GError    **error);
 
-static const gchar class_name[] = "FoPropertyNumberRowsSpanned";
+static const gchar class_name[] = "number-rows-spanned";
 static gpointer parent_class;
 
 /**

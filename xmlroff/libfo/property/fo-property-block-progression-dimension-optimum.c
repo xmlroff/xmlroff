@@ -40,7 +40,7 @@ static FoDatatype* fo_property_block_progression_dimension_optimum_validate (FoD
                                                                              FoContext  *context,
                                                                              GError    **error);
 
-static const gchar class_name[] = "FoPropertyBlockProgressionDimensionOptimum";
+static const gchar class_name[] = "block-progression-dimension-optimum";
 static gpointer parent_class;
 
 /**

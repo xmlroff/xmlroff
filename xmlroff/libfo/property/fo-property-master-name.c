@@ -43,7 +43,7 @@ static FoDatatype* fo_property_master_name_validate (FoDatatype *datatype,
                                                      FoContext  *context,
                                                      GError    **error);
 
-static const gchar class_name[] = "FoPropertyMasterName";
+static const gchar class_name[] = "master-name";
 static gpointer parent_class;
 
 /**

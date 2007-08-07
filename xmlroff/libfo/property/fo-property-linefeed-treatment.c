@@ -42,7 +42,7 @@ static FoDatatype * fo_property_linefeed_treatment_validate (FoDatatype *datatyp
                                                              FoContext  *context,
                                                              GError    **error);
 
-static const gchar class_name[] = "FoPropertyLinefeedTreatment";
+static const gchar class_name[] = "linefeed-treatment";
 static gpointer parent_class;
 
 /**

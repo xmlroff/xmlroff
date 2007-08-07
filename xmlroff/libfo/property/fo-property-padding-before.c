@@ -44,7 +44,7 @@ static FoDatatype* fo_property_padding_before_validate (FoDatatype *datatype,
                                                         FoContext  *context,
                                                         GError    **error);
 
-static const gchar class_name[] = "FoPropertyPaddingBefore";
+static const gchar class_name[] = "padding-before";
 static gpointer parent_class;
 
 /**

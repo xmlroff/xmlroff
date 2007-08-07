@@ -40,7 +40,7 @@ static FoDatatype * fo_property_border_width_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "FoPropertyBorderWidth";
+static const gchar class_name[] = "border-width";
 static gpointer parent_class;
 
 /**

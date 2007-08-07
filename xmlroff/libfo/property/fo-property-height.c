@@ -42,7 +42,7 @@ static FoDatatype * fo_property_height_validate (FoDatatype *datatype,
                                                  FoContext  *context,
                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertyHeight";
+static const gchar class_name[] = "height";
 static gpointer parent_class;
 
 /**

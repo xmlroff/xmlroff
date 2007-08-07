@@ -36,7 +36,7 @@ static void fo_property_border_before_style_init         (FoPropertyBorderBefore
 static void fo_property_border_before_style_class_init   (FoPropertyBorderBeforeStyleClass *klass);
 static void fo_property_border_before_style_finalize     (GObject       *object);
 
-static const gchar class_name[] = "FoPropertyBorderBeforeStyle";
+static const gchar class_name[] = "border-before-style";
 static gpointer parent_class;
 
 /**

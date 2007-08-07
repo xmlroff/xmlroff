@@ -61,7 +61,7 @@ static FoDatatype* fo_property_font_variant_validate (FoDatatype *datatype,
                                                       GError    **error);
 static PangoAttribute * fo_property_font_variant_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "FoPropertyFontVariant";
+static const gchar class_name[] = "font-variant";
 static gpointer parent_class;
 static FoDatatype *enum_normal;
 static FoDatatype *enum_small_caps;

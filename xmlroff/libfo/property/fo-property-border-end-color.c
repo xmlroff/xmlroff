@@ -36,7 +36,7 @@ static void fo_property_border_end_color_init         (FoPropertyBorderEndColor 
 static void fo_property_border_end_color_class_init   (FoPropertyBorderEndColorClass *klass);
 static void fo_property_border_end_color_finalize     (GObject       *object);
 
-static const gchar class_name[] = "FoPropertyBorderEndColor";
+static const gchar class_name[] = "border-end-color";
 static gpointer parent_class;
 
 /**

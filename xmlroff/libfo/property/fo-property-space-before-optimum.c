@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_before_optimum_validate (FoDatatype *dataty
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceBeforeOptimum";
+static const gchar class_name[] = "space-before-optimum";
 static gpointer parent_class;
 
 /**

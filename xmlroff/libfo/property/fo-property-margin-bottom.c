@@ -40,7 +40,7 @@ static FoDatatype* fo_property_margin_bottom_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "FoPropertyMarginBottom";
+static const gchar class_name[] = "margin-bottom";
 static gpointer parent_class;
 
 /**

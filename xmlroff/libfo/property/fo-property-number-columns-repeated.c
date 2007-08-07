@@ -44,7 +44,7 @@ static FoDatatype* fo_property_number_columns_repeated_validate (FoDatatype *dat
                                                                  FoContext  *context,
                                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertyNumberColumnsRepeated";
+static const gchar class_name[] = "number-columns-repeated";
 static gpointer parent_class;
 
 /**

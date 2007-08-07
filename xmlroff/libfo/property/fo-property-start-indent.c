@@ -44,7 +44,7 @@ static FoDatatype* fo_property_start_indent_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "FoPropertyStartIndent";
+static const gchar class_name[] = "start-indent";
 static gpointer parent_class;
 
 /**

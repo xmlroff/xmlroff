@@ -42,7 +42,7 @@ static FoDatatype * fo_property_score_spaces_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "FoPropertyScoreSpaces";
+static const gchar class_name[] = "score-spaces";
 static gpointer parent_class;
 
 /**

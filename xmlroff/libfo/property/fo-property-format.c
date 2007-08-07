@@ -43,7 +43,7 @@ static FoDatatype* fo_property_format_validate (FoDatatype *datatype,
                                                 FoContext  *context,
                                                 GError    **error);
 
-static const gchar class_name[] = "FoPropertyFormat";
+static const gchar class_name[] = "format";
 static gpointer parent_class;
 
 /**

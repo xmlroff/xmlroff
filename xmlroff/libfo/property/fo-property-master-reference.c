@@ -43,7 +43,7 @@ static FoDatatype* fo_property_master_reference_validate (FoDatatype *datatype,
                                                           FoContext  *context,
                                                           GError    **error);
 
-static const gchar class_name[] = "FoPropertyMasterReference";
+static const gchar class_name[] = "master-reference";
 static gpointer parent_class;
 
 /**

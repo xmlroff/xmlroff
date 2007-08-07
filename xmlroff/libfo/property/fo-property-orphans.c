@@ -45,7 +45,7 @@ static FoDatatype* fo_property_orphans_validate (FoDatatype *datatype,
                                                  FoContext  *context,
                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertyOrphans";
+static const gchar class_name[] = "orphans";
 static gpointer parent_class;
 
 /**

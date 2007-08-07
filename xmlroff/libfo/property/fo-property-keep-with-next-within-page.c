@@ -40,7 +40,7 @@ static FoDatatype* fo_property_keep_with_next_within_page_validate (FoDatatype *
                                                                     FoContext  *context,
                                                                     GError    **error);
 
-static const gchar class_name[] = "FoPropertyKeepWithNextWithinPage";
+static const gchar class_name[] = "keep-with-next-within-page";
 static gpointer parent_class;
 
 /**

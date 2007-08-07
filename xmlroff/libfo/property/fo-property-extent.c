@@ -40,7 +40,7 @@ static FoDatatype * fo_property_extent_validate (FoDatatype *datatype,
                                                  FoContext  *context,
                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertyExtent";
+static const gchar class_name[] = "extent";
 static gpointer parent_class;
 
 /**

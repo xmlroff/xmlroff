@@ -46,7 +46,7 @@ static FoProperty* fo_property_column_width_new_from_expr (FoPropertyClass *prop
 							   FoFo *fo_node,
 							   GError **error);
 
-static const gchar class_name[] = "FoPropertyColumnWidth";
+static const gchar class_name[] = "column-width";
 static gpointer parent_class;
 
 /**

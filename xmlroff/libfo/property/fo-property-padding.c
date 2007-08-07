@@ -40,7 +40,7 @@ static FoDatatype* fo_property_padding_validate (FoDatatype *datatype,
                                                  FoContext  *context,
                                                  GError    **error);
 
-static const gchar class_name[] = "FoPropertyPadding";
+static const gchar class_name[] = "padding";
 static gpointer parent_class;
 
 /**

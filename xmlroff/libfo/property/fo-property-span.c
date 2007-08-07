@@ -42,7 +42,7 @@ static FoDatatype * fo_property_span_validate (FoDatatype *datatype,
                                                FoContext  *context,
                                                GError    **error);
 
-static const gchar class_name[] = "FoPropertySpan";
+static const gchar class_name[] = "span";
 static gpointer parent_class;
 
 /**

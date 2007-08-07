@@ -42,7 +42,7 @@ static FoDatatype * fo_property_role_validate (FoDatatype *datatype,
                                                FoContext  *context,
                                                GError    **error);
 
-static const gchar class_name[] = "FoPropertyRole";
+static const gchar class_name[] = "role";
 static gpointer parent_class;
 
 /**

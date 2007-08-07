@@ -40,7 +40,7 @@ static FoDatatype* fo_property_space_end_optimum_validate (FoDatatype *datatype,
                                                               FoContext  *context,
                                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertySpaceEndOptimum";
+static const gchar class_name[] = "space-end-optimum";
 static gpointer parent_class;
 
 /**

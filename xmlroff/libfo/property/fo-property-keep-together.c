@@ -38,7 +38,7 @@ static FoDatatype* fo_property_keep_together_validate (FoDatatype *datatype,
                                                        FoContext  *context,
                                                        GError    **error);
 
-static const gchar class_name[] = "FoPropertyKeepTogether";
+static const gchar class_name[] = "keep-together";
 static gpointer parent_class;
 static FoDatatype *enum_auto;
 static FoDatatype *enum_always;

@@ -40,7 +40,7 @@ static void fo_property_background_color_text_property_init (FoPropertyTextPrope
 
 static PangoAttribute * fo_property_background_color_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "FoPropertyBackgroundColor";
+static const gchar class_name[] = "background-color";
 static gpointer parent_class;
 
 /**

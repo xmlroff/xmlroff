@@ -38,7 +38,7 @@ static FoDatatype* fo_property_keep_with_next_validate (FoDatatype *datatype,
                                                         FoContext  *context,
                                                         GError    **error);
 
-static const gchar class_name[] = "FoPropertyKeepWithNext";
+static const gchar class_name[] = "keep-with-next";
 static gpointer parent_class;
 static FoDatatype *enum_auto;
 static FoDatatype *enum_always;

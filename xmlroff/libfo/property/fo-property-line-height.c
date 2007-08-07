@@ -50,7 +50,7 @@ static FoDatatype* fo_property_line_height_validate (FoDatatype *datatype,
 static void fo_property_line_height_text_property_init (FoPropertyTextPropertyIface *iface);
 static PangoAttribute * fo_property_line_height_new_attr (FoProperty *property);
 */
-static const gchar class_name[] = "FoPropertyLineHeight";
+static const gchar class_name[] = "line-height";
 static gpointer parent_class;
 
 /**

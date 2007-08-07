@@ -42,7 +42,7 @@ static FoDatatype * fo_property_wrap_option_validate (FoDatatype *datatype,
                                                       FoContext  *context,
                                                       GError    **error);
 
-static const gchar class_name[] = "FoPropertyWrapOption";
+static const gchar class_name[] = "wrap-option";
 static gpointer parent_class;
 
 /**

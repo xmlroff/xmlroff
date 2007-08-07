@@ -40,7 +40,7 @@ static FoDatatype* fo_property_keep_with_previous_within_column_validate (FoData
                                                                           FoContext  *context,
                                                                           GError    **error);
 
-static const gchar class_name[] = "FoPropertyKeepWithPreviousWithinColumn";
+static const gchar class_name[] = "keep-with-previous-within-column";
 static gpointer parent_class;
 
 /**

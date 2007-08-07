@@ -40,7 +40,7 @@ static void fo_property_color_text_property_init (FoPropertyTextPropertyIface *i
 
 static PangoAttribute * fo_property_color_new_attr (FoProperty *property);
 
-static const gchar class_name[] = "FoPropertyColor";
+static const gchar class_name[] = "color";
 static gpointer parent_class;
 
 /**

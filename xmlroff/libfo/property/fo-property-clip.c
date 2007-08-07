@@ -40,7 +40,7 @@ static FoDatatype* fo_property_clip_validate (FoDatatype *datatype,
                                               FoContext  *context,
                                               GError    **error);
 
-static const gchar class_name[] = "FoPropertyClip";
+static const gchar class_name[] = "clip";
 static gpointer parent_class;
 
 /**

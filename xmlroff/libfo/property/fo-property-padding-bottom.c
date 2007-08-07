@@ -45,7 +45,7 @@ static FoDatatype* fo_property_padding_bottom_validate (FoDatatype *datatype,
                                                         FoContext  *context,
                                                         GError    **error);
 
-static const gchar class_name[] = "FoPropertyPaddingBottom";
+static const gchar class_name[] = "padding-bottom";
 static gpointer parent_class;
 
 /**
