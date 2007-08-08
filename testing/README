@@ -24,9 +24,21 @@ xmlroff, although using the newest 'testing' version is recommended
 since new versions tend to have bug fixes and ease of use improvements
 and, occasionally, better documentation.
 
+1. Testing xmlroff
+2. Requirements
+3. Before you begin
+4. Running the tests
+5. Working with the results
+6. When the test suite changes
+7. Testing an alternative XSL processor
+8. DocBook testdocs
+9. Setting defaults in the test results file
+10. Gory details
+11. License
 
-Testing xmlroff
-===============
+
+1. Testing xmlroff
+==================
 
 xmlroff testing uses:
 
@@ -47,8 +59,8 @@ xmlroff testing uses:
    result HTML files
 
 
-Requirements
-============
+2. Requirements
+===============
 
 Testing xmlroff requires:
 
@@ -61,8 +73,8 @@ Testing xmlroff requires:
  - xsltproc
 
 
-Before You Begin
-================
+3. Before you begin
+===================
 
 1. Download and install the xmlroff 'testsuite' package from
    http://xmlroff.org/ or check it out from the Subversion repository
@@ -95,6 +107,10 @@ Before You Begin
    The parameters for controlling the test are set as configure
    options.  Use './configure --help' to see the available options.
 
+   Processing instructions in the test results document may override
+   the default values of some paramters, but setting parameters as
+   configure options overrides both.
+
    See below for configuring to use an alternative XSL processor.
 
    (If starting from a Subversion checkout, run './autogen.sh'.)
@@ -117,8 +133,8 @@ Before You Begin
    modify files.
 
 
-Running the tests
-=================
+4. Running the tests
+====================
 
 All at once
 -----------
@@ -151,8 +167,8 @@ Individual steps
    use the '--disable-form' option when running configure.
 
 
-Working With the Results
-========================
+5. Working with the results
+===========================
 
 1. Open index.html in your web browser:
 
@@ -174,8 +190,8 @@ Working With the Results
    again.
 
 
-When the Test Suite Changes
-===========================
+6. When the Test Suite Changes
+==============================
 
 1. Re-run test2sh.xsl to update the script that runs the tests:
 
@@ -195,8 +211,8 @@ When the Test Suite Changes
 4. Run the tests, which will now include the new tests.
 
 
-Using an Alternative XSL Processor
-==================================
+7. Testing an Alternative XSL Processor
+=======================================
 
 You can test XSL processors other than xmlroff by specifying the
 --with-command-patterns parameter to 'configure'.
@@ -266,8 +282,8 @@ on Linux:
       --with-command-patterns="%p -o %o -d %i"
 
 
-DocBook testdocs
-================
+8. DocBook testdocs
+===================
 
 The DocBook SourceForge project maintains a set of test documents.
 
@@ -318,8 +334,44 @@ stylesheet:
    DocBook stylesheets.
    
 
-Gory Details
-============
+9. Setting Defaults in the Test Results File
+============================================
+
+Configuring a test run using many non-standard parameters -- e.g. when
+testing an alternative XSL processor or testing a specific xmlroff
+backend and output format -- can make a long 'configure' command line
+that is not so easy to reconstruct.
+
+Also, when you redo a test run with the same parameters, you typically
+want to update the test results from the last run to reflect any
+changes in the test output.
+
+Since the test results are so closely related to the test parameters
+used for the test run, this module supports storing some parameters as
+processing instructions in the test results file and using those
+parameters when setting up to re-run the tests.
+
+The 'configure' options and their corresponding PIs (in the notional
+"xmlroff testing" namespace) are:
+
+ --with-xsl-processor         xt:xsl-processor
+ --with-xsl-processor-flags   xt:xsl-processor-flags
+ --with-command-patterns      xt:command-patterns
+ --with-default-stylesheet    xt:default-stylesheet
+
+The priority for setting a parameter, from lowest to highest, is:
+
+ - Default hardwired into 'configure'
+ - PI in test results XML
+ - 'configure' command-line options
+
+When you run 'configure', the 'configure' script outputs a summary of
+the settable parameters and where the parameter was set ('default',
+'results', or 'option').
+
+
+10. Gory Details
+================
 
 Test Cases
 ----------
@@ -331,7 +383,8 @@ Recommendation (CR) to Proposed Recommendation (PR).
 In 2001, the WG and NIST (National Institute of Science and Technology
 in the U.S.) developed a DTD for both test suite descriptions and test
 suite results, and NIST and the XSL formatter implementors contributed
-both test suites and their descriptions.  See
+both test suites and their descriptions.  The DTD was augmented with
+more attribute valuess for new formatting objects for the XSL 1.1 CR. See
 http://www.w3.org/Style/XSL/TestSuite/.
 
 When working on the XSL 1.0 CR test suite results with Max Froumentin
@@ -682,12 +735,12 @@ group id of the 'testing' directory *before* running any of the
 stylesheets or scripts.
 
 
-License
-=======
+11. License
+===========
 
 The stylesheets and other content are licensed under a BSD-style
 license.  See the file COPYING for details.
 
 
 Tony Graham
-1 August 2007
+8 August 2007
