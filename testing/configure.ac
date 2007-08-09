@@ -354,10 +354,16 @@ AC_SUBST(XSL_PROCESSOR_FLAGS)
 # Current directory
 #
 PWD=`pwd`
+AC_SUBST(PWD)
+
 BASENAME=`basename $PWD`
 AC_DEFINE_UNQUOTED(BASENAME, "$BASENAME", [Current directory.])
+AC_SUBST(BASENAME)
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([
+Makefile
+testing.conf
+])
 AC_OUTPUT
 
 echo "
