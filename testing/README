@@ -85,7 +85,12 @@ Testing xmlroff requires:
 
 3. (Optional) Checkout the DocBook testdocs module from the Subversion
    repository of the DocBook SourceForge project, e.g., into
-   '../testdocs'.
+   '../testdocs':
+
+      cd ..
+      svn co \
+         https://docbook.svn.sourceforge.net/svnroot/docbook/trunk/testdocs \
+         testdocs
 
    In the 'testdocs' directory, run 'make-testsuite.pl' from this
    module to create a usable testsuite.xml file, e.g.:
@@ -98,7 +103,8 @@ Testing xmlroff requires:
    Make sure that testsuites.xml in this module refers to the
    testsuite.xml in the 'testdocs' directory.
 
-   DocBook testing is described further in a section below.
+   DocBook testing is described further in the 'DocBook testdocs'
+   section below (and at http://xmlroff.org/wiki/DocBookTestdocs).
 
 4. Run configure to generate the Makefile:
 
