@@ -63,7 +63,7 @@ $(TEST_RESULTS):
 	$(XSLTPROC) --novalid testsuites2testresults.xsl $(TESTSUITES) > \
 		$(TEST_RESULTS)
 
-testresults.stamp: testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSOR) png+ref2stereo.stamp $(TEST_RESULTS)
+testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSOR) png+ref2stereo.stamp $(TEST_RESULTS)
 	perl testsuccess.pl . > $(TESTSUCCESS)
 	touch $@
 
