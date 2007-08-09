@@ -1,3 +1,10 @@
+Changes between 0.5.1 and 0.5.2:
+
+ * Tests any XSL processor (#16)
+ * Easy testing of DocBook testdocs (#64)
+ * Can save test configuration in test results file (#67)
+ * Added missing Perl scripts (#72)
+
 Changes between 0.4.0 and 0.5.1:
 
  * --with-xsl-processor default is '../xmlroff/xmlroff/xmlroff'
