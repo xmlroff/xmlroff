@@ -1,0 +1,17 @@
+#
+# This configuration file belongs to the xmlroff testing package.
+#
+# This is an generated when you run 'configure'.
+#
+# The alias provides the xmlroff testing results for access by Apache.
+#
+Alias /xmlroff/@BASENAME@ "@PWD@"
+
+<Directory "@PWD@">
+    Options +ExecCGI
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    AddHandler cgi-script .pl
+</Directory>
+
