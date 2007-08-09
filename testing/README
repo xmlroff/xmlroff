@@ -358,6 +358,7 @@ The 'configure' options and their corresponding PIs (in the notional
  --with-xsl-processor-flags   xt:xsl-processor-flags
  --with-command-patterns      xt:command-patterns
  --with-default-stylesheet    xt:default-stylesheet
+ --with-testsuites            xt:testsuites
 
 The priority for setting a parameter, from lowest to highest, is:
 

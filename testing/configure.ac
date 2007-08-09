@@ -72,6 +72,11 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 # Symbols that are used in config.xsl.
 #
 
+# Strings to indicate the source of a setting.
+default_setter="(default)"
+option_setter="(option)"
+results_setter="(results)"
+
 #
 # Filename of test results XML file.
 #
@@ -80,6 +85,7 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 # value for some of the other variables.
 #
 test_results_default=testresults.xml
+test_results_setter=$default_setter
 AC_ARG_WITH(test_results,
 	    AC_HELP_STRING([--with-test-results],
 			   [Filename of test results XML file. (default=testresults.xml)]),
@@ -88,18 +94,12 @@ if test "x$with_test_results" = "x" ; then
   TEST_RESULTS=$test_results_default
 else
   TEST_RESULTS=$with_test_results
+  test_results_setter=$option_setter
 fi
 AC_DEFINE_UNQUOTED(TEST_RESULTS,
 	           "$TEST_RESULTS",
 	           [Filename of test results XML file.])
 AC_SUBST(TEST_RESULTS)
-
-xsl_processor_flags_default=
-if test -f "$TEST_RESULTS" ; then
-  xsl_processor_flags_default=["`$PERL -n -e'if(/<\?xt:xsl-processor-options([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
-  echo ["$PERL -n -e'if(/<\?xt:xsl-processor-options([\^?]+)\?>/) {print \$1;}' $TEST_RESULTS"]
-  AC_MSG_NOTICE("test_results: $TEST_RESULTS; flags: $xsl_processor_flags_default")
-fi
 
 #
 # Title used in generated reports.
@@ -143,9 +143,19 @@ AC_DEFINE_UNQUOTED(DEBUG,
 		   [1 enables debugging messages.  2 or greater enables more verbose output. (default=0)])
 
 #
-# Default command patterns
+# Command patterns to use when running XSL processor.
 #
 command_patterns_default="%p -o %o %c %i %s;%p -o %o %c %i;%p -o %o %i %s;%p -o %o %i"
+command_patterns_setter=$default_setter
+
+# Default mat be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_command_patterns=["`$PERL -n -e'if(/<\?xt:command-patterns\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_command_patterns" != "x" ; then
+    command_patterns_default="$results_command_patterns"
+    command_patterns_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(command_patterns,
 	    AC_HELP_STRING([--with-command-patterns],
 			   [Patterns for running XSL processor. (default works for xmlroff)]),
@@ -154,6 +164,7 @@ if test "x$with_command_patterns" = "x" ; then
   COMMAND_PATTERNS=$command_patterns_default
 else
   COMMAND_PATTERNS=$with_command_patterns
+  command_patterns_setter=$option_setter
 fi
 AC_DEFINE_UNQUOTED(COMMAND_PATTERNS,
 	           "$COMMAND_PATTERNS",
@@ -163,7 +174,17 @@ AC_DEFINE_UNQUOTED(COMMAND_PATTERNS,
 # Default stylesheet, if any, to use with tests that don't specify
 # a stylesheet.
 #
-default_stylesheet_default=0
+default_stylesheet_default=
+default_stylesheet_setter=$default_setter
+
+# Default mat be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_default_stylesheet=["`$PERL -n -e'if(/<\?xt:default-stylesheet\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_default_stylesheet" != "x" ; then
+    default_stylesheet_default="$results_default_stylesheet"
+    default_stylesheet_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(default_stylesheet,
 	    AC_HELP_STRING([--with-default-stylesheet],
 			   [Full path to default stylesheet used in tests. (default=no stylesheet)]),
@@ -172,9 +193,10 @@ if test "x$with_default_stylesheet" = "x" ; then
   DEFAULT_STYLESHEET=$default_stylesheet_default
 else
   DEFAULT_STYLESHEET=$with_default_stylesheet
+  default_stylesheet_setter=$option_setter
 fi
 AC_DEFINE_UNQUOTED(DEFAULT_STYLESHEET,
-	           $DEFAULT_STYLESHEET,
+	           "$DEFAULT_STYLESHEET",
 	           [Full path to default stylesheet, if any.  (default=false)])
 
 #
@@ -238,6 +260,16 @@ AC_SUBST(TESTSUCCESS)
 # Filename of testsuites XML file.
 #
 testsuites_default=testsuites.xml
+testsuites_setter=$default_setter
+
+# Default mat be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_testsuites=["`$PERL -n -e'if(/<\?xt:testsuites\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_testsuites" != "x" ; then
+    testsuites_default="$results_testsuites"
+    testsuites_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(testsuites,
 	    AC_HELP_STRING([--with-testsuites],
 			   [Filename of testsuites XML file that references individual 'testsuite.xml' files from one or more test suites. (default=testsuites.xml)]),
@@ -256,6 +288,16 @@ AC_SUBST(TESTSUITES)
 # XSL processor.
 #
 xsl_processor_default=../xmlroff/xmlroff/xmlroff
+xsl_processor_setter=$default_setter
+
+# Default mat be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_xsl_processor=["`$PERL -n -e'if(/<\?xt:xsl-processor\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_xsl_processor" != "x" ; then
+    xsl_processor_default="$results_xsl_processor"
+    xsl_processor_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(xsl_processor,
 	    AC_HELP_STRING([--with-xsl-processor],
 			   [Path to XSL processor to test.]),
@@ -264,6 +306,7 @@ if test "x$with_xsl_processor" = "x" ; then
   XSL_PROCESSOR=$xsl_processor_default
 else
   XSL_PROCESSOR=$with_xsl_processor
+  xsl_processor_setter=$option_setter
 fi
 AC_MSG_CHECKING([for XSL processor])
 if test -f "$XSL_PROCESSOR" ; then
@@ -279,8 +322,19 @@ AC_DEFINE_UNQUOTED(XSL_PROCESSOR,
 AC_SUBST(XSL_PROCESSOR)
 
 #
-# XSL processor options.
+# XSL processor flags.
 #
+xsl_processor_flags_default=
+xsl_processor_flags_setter=$default_setter
+
+# Default mat be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_xsl_processor_flags=["`$PERL -n -e'if(/<\?xt:xsl-processor-flags\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_xsl_processor_flags" != "x" ; then
+    xsl_processor_flags_default="$results_xsl_processor_flags"
+    xsl_processor_flags_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(xsl_processor_flags,
 	    AC_HELP_STRING([--with-xsl-processor-flags],
 			   [Flags to pass to the XSL processor.]),
@@ -289,6 +343,7 @@ if test "x$with_xsl_processor_flags" = "x" ; then
   XSL_PROCESSOR_FLAGS=$xsl_processor_flags_default
 else
   XSL_PROCESSOR_FLAGS=$with_xsl_processor_flags
+  xsl_processor_flags_setter=$option_setter
 fi
 AC_DEFINE_UNQUOTED(XSL_PROCESSOR_FLAGS,
 	           "$XSL_PROCESSOR_FLAGS",
@@ -306,4 +361,13 @@ AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
 echo "
+Configurable settings (and where set):
+
+command-patterns:    \"$COMMAND_PATTERNS\" $command_patterns_setter
+default-stylesheet:  \"$DEFAULT_STYLESHEET\" $default_stylesheet_setter
+test-results:        \"$TEST_RESULTS\" $test_results_setter
+testsuites:          \"$TESTSUITES\" $testsuites_setter
+xsl-processor:       \"$XSL_PROCESSOR\" $xsl_processor_setter
+xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" $xsl_processor_flags_setter
+
 The 'configure' options that you used are recorded in 'config.log'."
