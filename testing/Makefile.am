@@ -39,10 +39,10 @@ noinst_HEADERS = \
 	config.pl
 
 config.xsl:	config.h h2xsl.pl
-	perl h2xsl.pl $<
+	perl h2xsl.pl config.h
 
 config.pl:	config.h h2pl.pl
-	perl h2pl.pl $<
+	perl h2pl.pl config.h
 
 test2sh.stamp: test2sh.xsl $(TESTING_PARAM) common.xsl config.xsl
 	xsltproc --novalid test2sh.xsl test2sh.xsl
