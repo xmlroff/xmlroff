@@ -6,7 +6,7 @@
     <testresult id="expression1" results="expression1.pdf" agreement="full" specproblem="no" testproblem="no"/>
     <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected.  Too many assertion failure messages.  Ticket #17.</testresult>
     <testresult id="from-table-column2" results="from-table-column2.pdf" agreement="full" specproblem="no" testproblem="yes">Unexpected assertion failure.</testresult>
-    <testresult id="from-table-column3" results="from-table-column3.pdf" agreement="issues" specproblem="no" testproblem="no">Does not fail.</testresult>
+    <testresult id="from-table-column3" results="from-table-column3.pdf" agreement="full" specproblem="no" testproblem="no"/>
     <testresult id="from-table-column4" results="from-table-column4.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
     <testresult id="from-table-column5" results="from-table-column5.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
     <testresult id="from-table-column6" results="from-table-column6.pdf" agreement="issues" specproblem="no" testproblem="no">Fails with null property value</testresult>
@@ -178,13 +178,13 @@
 </testcases>
 <testcases profile="i18n" base="i18n">
 <testresult id="af" results="af.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
-<testresult id="ar" results="ar.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="ar" results="ar.pdf" agreement="issues" specproblem="no" testproblem="no">Should paragraphs be right-aligned?</testresult>
 <testresult id="book" results="book.pdf" agreement="issues" specproblem="no" testproblem="no">No pages for the languages.</testresult>
 <testresult id="ca" results="ca.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="cs" results="cs.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="da" results="da.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="de" results="de.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
-<testresult id="el" results="el.pdf" agreement="issues" specproblem="no" testproblem="no">No Greek font available?</testresult>
+<testresult id="el" results="el.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="en" results="en.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="es" results="es.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="et" results="et.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
@@ -215,7 +215,7 @@
 <testresult id="titlepage-fo" results="titlepage-fo.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
 <testresult id="tr" results="tr.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="uk" results="uk.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
-<testresult id="vi" results="vi.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="vi" results="vi.pdf" agreement="issues" specproblem="no" testproblem="no">No output.  Hangs gs on Ubuntu 7.04.</testresult>
 <testresult id="xh" results="xh.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="zh_cn" results="zh_cn.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
 <testresult id="zh_tw" results="zh_tw.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
@@ -347,7 +347,7 @@
 <testresult id="orderedlist.001" results="orderedlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
 <testresult id="orderedlist.002" results="orderedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
 <testresult id="orderedlist.003" results="orderedlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
-<testresult id="part.001" results="part.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="part.001" results="part.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="personname.001" results="personname.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="procedure.001" results="procedure.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
 <testresult id="procedure.002" results="procedure.002.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
@@ -374,7 +374,7 @@
 <testresult id="refentry.004" results="refentry.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="refentry.005" results="refentry.005.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="refentry.006" results="refentry.006.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
-<testresult id="refentry.007" results="refentry.007.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="refentry.007" results="refentry.007.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="refentry.008" results="refentry.008.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="refentry.009" results="refentry.009.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="refentry.010" results="refentry.010.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
