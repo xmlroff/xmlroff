@@ -420,35 +420,27 @@
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="$pdf/pwd/@count"/>
-              <xsl:choose>
-                <xsl:when test="$pdf/pwd/@count != 0">
-                  <xsl:text>, PNG</xsl:text>
-                </xsl:when>
-              </xsl:choose>
+              <xsl:if test="$pdf/pwd/@count != 0">
+                <xsl:text>, PNG</xsl:text>
+              </xsl:if>
               <xsl:if test="$REFERENCE">
-                <xsl:choose>
-                  <xsl:when test="$pdf/ref/@count != '0'">
-                    <xsl:text>, Ref</xsl:text>
-                  </xsl:when>
-                </xsl:choose>
-                <xsl:choose>
-                  <xsl:when test="$pdf/diff/@count != 0">
-                    <xsl:text>, </xsl:text>
-                    <xsl:choose>
-                      <xsl:when test="$pdf/diff/*[@size != 0]">
-                        <span style="color: white; background-color: red">Diff</span>
-                      </xsl:when>
-                      <xsl:otherwise>
-                        <xsl:text>Diff</xsl:text>
-                      </xsl:otherwise>
-                    </xsl:choose>
-                  </xsl:when>
-                </xsl:choose>
-                <xsl:choose>
-                  <xsl:when test="$pdf/stereo/@count != 0">
-                    <xsl:text>, Stereo</xsl:text>
-                  </xsl:when>
-                </xsl:choose>
+                <xsl:if test="$pdf/ref/@count != '0'">
+                  <xsl:text>, Ref</xsl:text>
+                </xsl:if>
+                <xsl:if test="$pdf/diff/@count != 0">
+                  <xsl:text>, </xsl:text>
+                  <xsl:choose>
+                    <xsl:when test="$pdf/diff/*[@size != 0]">
+                      <span style="color: white; background-color: red">Diff</span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:text>Diff</xsl:text>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:if>
+                <xsl:if test="$pdf/stereo/@count != 0">
+                  <xsl:text>, Stereo</xsl:text>
+                </xsl:if>
               </xsl:if>
             </xsl:otherwise>
           </xsl:choose>
@@ -729,8 +721,8 @@
             </xsl:choose>
           </xsl:attribute>
           <xsl:choose>
-              <xsl:when test="@agreement = 'issues' and . = $not-verified-string">
-                <xsl:text/>&#160;</xsl:when>
+            <xsl:when test="@agreement = 'issues' and . = $not-verified-string">
+              <xsl:text/>&#160;</xsl:when>
             <xsl:when test="@agreement = 'full'">
               <xsl:text>Full</xsl:text>
             </xsl:when>
@@ -755,13 +747,15 @@
           <xsl:attribute name="class">
             <xsl:choose>
               <xsl:when test="@testproblem = 'yes'">
-                <xsl:text/>test</xsl:when>
+                <xsl:text>test</xsl:text>
+	      </xsl:when>
               <xsl:otherwise>other</xsl:otherwise>
             </xsl:choose>
           </xsl:attribute>
           <xsl:choose>
             <xsl:when test="@testproblem = 'yes'">
-              <xsl:text/>Test</xsl:when>
+              <xsl:text>Test</xsl:text>
+	    </xsl:when>
             <xsl:otherwise>&#160;</xsl:otherwise>
           </xsl:choose>
         </td>
@@ -947,17 +941,23 @@ source for this report and <b>does not</b> regenerate this HTML page.
             <xsl:attribute name="class">
               <xsl:choose>
                 <xsl:when test="@agreement = 'issues' and . = $not-verified-string">
-                  <xsl:text/>other</xsl:when>
+                  <xsl:text>other</xsl:text>
+		</xsl:when>
                 <xsl:when test="@agreement = 'full'">
-                  <xsl:text/>full</xsl:when>
-                <xsl:otherwise>differ</xsl:otherwise>
+                  <xsl:text>full</xsl:text>
+		</xsl:when>
+                <xsl:otherwise>
+		  <xsl:text>differ</xsl:text>
+		</xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
             <xsl:choose>
               <xsl:when test="@agreement = 'full'">
                 <xsl:text>Full</xsl:text>
               </xsl:when>
-              <xsl:otherwise>Issues</xsl:otherwise>
+              <xsl:otherwise>
+                <xsl:text>Issues</xsl:text>
+              </xsl:otherwise>
             </xsl:choose>
           </td>
           <td></td>
@@ -975,7 +975,9 @@ source for this report and <b>does not</b> regenerate this HTML page.
               <xsl:when test="not(@futuresupport)">
                 <xsl:text>&#160;</xsl:text>
               </xsl:when>
-              <xsl:otherwise>None</xsl:otherwise>
+              <xsl:otherwise>
+                <xsl:text>None</xsl:text>
+              </xsl:otherwise>
             </xsl:choose>
           </td>
           <td></td>
@@ -986,14 +988,18 @@ source for this report and <b>does not</b> regenerate this HTML page.
             <xsl:attribute name="class">
               <xsl:choose>
                 <xsl:when test="@specproblem = 'yes'">
-                  <xsl:text/>spec</xsl:when>
-            		<xsl:otherwise>other</xsl:otherwise>
-	            </xsl:choose>
-    	      </xsl:attribute>
+                  <xsl:text>spec</xsl:text>
+		</xsl:when>
+            	<xsl:otherwise>other</xsl:otherwise>
+	      </xsl:choose>
+    	    </xsl:attribute>
             <xsl:choose>
               <xsl:when test="@specproblem = 'yes'">
-                <xsl:text/>Yes</xsl:when>
-              <xsl:otherwise>No</xsl:otherwise>
+                <xsl:text>Yes</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>No</xsl:text>
+              </xsl:otherwise>
             </xsl:choose>
           </td>
           <td></td>
@@ -1004,14 +1010,20 @@ source for this report and <b>does not</b> regenerate this HTML page.
             <xsl:attribute name="class">
               <xsl:choose>
                 <xsl:when test="@testproblem = 'yes'">
-                  <xsl:text/>test</xsl:when>
-                <xsl:otherwise>other</xsl:otherwise>
+                  <xsl:text>test</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>other</xsl:text>
+                </xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
             <xsl:choose>
               <xsl:when test="@testproblem = 'yes'">
-                <xsl:text/>Yes</xsl:when>
-              <xsl:otherwise>No</xsl:otherwise>
+                <xsl:text>Yes</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>No</xsl:text>
+              </xsl:otherwise>
             </xsl:choose>
           </td>
           <td></td>
