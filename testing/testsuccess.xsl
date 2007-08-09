@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id: testsuccess.xsl,v 1.15 2007/02/05 18:26:27 menteith Exp $ -->
 <!-- XSL stylesheet to generate testsuccess.html from testresults.xml and
      testsuccess.xml. -->
 <!-- Usage:
@@ -7,6 +6,8 @@
 -->
 
 <!-- Copyright (C) 2001 Sun Microsystems -->
+<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -933,6 +934,7 @@ source for this report and <b>does not</b> regenerate this HTML page.
   </xsl:template>
 
   <xsl:template name="results-static">
+    <xsl:param name="results"/>
     <table bgcolor="white" border="0" cellspacing="0">
       <xsl:for-each select="$results">
         <tr>
@@ -942,13 +944,13 @@ source for this report and <b>does not</b> regenerate this HTML page.
               <xsl:choose>
                 <xsl:when test="@agreement = 'issues' and . = $not-verified-string">
                   <xsl:text>other</xsl:text>
-		</xsl:when>
+                </xsl:when>
                 <xsl:when test="@agreement = 'full'">
                   <xsl:text>full</xsl:text>
-		</xsl:when>
+                </xsl:when>
                 <xsl:otherwise>
-		  <xsl:text>differ</xsl:text>
-		</xsl:otherwise>
+                  <xsl:text>differ</xsl:text>
+                </xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
             <xsl:choose>
