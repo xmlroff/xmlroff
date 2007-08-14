@@ -14,68 +14,14 @@ Fotable-row
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT FoTableRow ##### -->
 <para>
 
 </para>
 
-@parent_instance: 
-@background_color: 
-@block_progression_dimension: 
-@border_after_color: 
-@border_after_precedence: 
-@border_after_style: 
-@border_after_width: 
-@border_before_color: 
-@border_before_precedence: 
-@border_before_style: 
-@border_before_width: 
-@border_bottom_color: 
-@border_bottom_style: 
-@border_bottom_width: 
-@border_end_color: 
-@border_end_precedence: 
-@border_end_style: 
-@border_end_width: 
-@border_left_color: 
-@border_left_style: 
-@border_left_width: 
-@border_right_color: 
-@border_right_style: 
-@border_right_width: 
-@border_start_color: 
-@border_start_precedence: 
-@border_start_style: 
-@border_start_width: 
-@border_top_color: 
-@border_top_style: 
-@border_top_width: 
-@break_after: 
-@break_before: 
-@height: 
-@id: 
-@keep_together: 
-@keep_together_within_column: 
-@keep_together_within_line: 
-@keep_together_within_page: 
-@keep_with_next: 
-@keep_with_next_within_column: 
-@keep_with_next_within_line: 
-@keep_with_next_within_page: 
-@keep_with_previous: 
-@keep_with_previous_within_column: 
-@keep_with_previous_within_line: 
-@keep_with_previous_within_page: 
-@padding_after: 
-@padding_before: 
-@padding_bottom: 
-@padding_end: 
-@padding_left: 
-@padding_right: 
-@padding_start: 
-@padding_top: 
-@role: 
-@source_document: 
 
 <!-- ##### STRUCT FoTableRowClass ##### -->
 <para>
@@ -91,6 +37,15 @@ Fotable-row
 @Returns: 
 
 
+<!-- ##### FUNCTION fo_table_row_get_background_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
 <!-- ##### FUNCTION fo_table_row_set_background_color ##### -->
 <para>
 
@@ -100,7 +55,25 @@ Fotable-row
 @new_background_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_background_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_background_image ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_row_set_background_image ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_background_image: 
+
+
+<!-- ##### FUNCTION fo_table_row_get_block_progression_dimension ##### -->
 <para>
 
 </para>
@@ -118,7 +91,7 @@ Fotable-row
 @new_block_progression_dimension: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_block_progression_dimension ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_after_color ##### -->
 <para>
 
 </para>
@@ -136,7 +109,25 @@ Fotable-row
 @new_border_after_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_after_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_after_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_row_set_border_after_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_after_precedence: 
+
+
+<!-- ##### FUNCTION fo_table_row_get_border_after_style ##### -->
 <para>
 
 </para>
@@ -154,7 +145,7 @@ Fotable-row
 @new_border_after_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_after_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_after_width ##### -->
 <para>
 
 </para>
@@ -172,7 +163,7 @@ Fotable-row
 @new_border_after_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_after_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_before_color ##### -->
 <para>
 
 </para>
@@ -190,7 +181,25 @@ Fotable-row
 @new_border_before_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_before_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_before_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_row_set_border_before_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_before_precedence: 
+
+
+<!-- ##### FUNCTION fo_table_row_get_border_before_style ##### -->
 <para>
 
 </para>
@@ -208,7 +217,7 @@ Fotable-row
 @new_border_before_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_before_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_before_width ##### -->
 <para>
 
 </para>
@@ -226,7 +235,7 @@ Fotable-row
 @new_border_before_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_before_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_bottom_color ##### -->
 <para>
 
 </para>
@@ -244,7 +253,7 @@ Fotable-row
 @new_border_bottom_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_bottom_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_bottom_style ##### -->
 <para>
 
 </para>
@@ -262,7 +271,7 @@ Fotable-row
 @new_border_bottom_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_bottom_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_bottom_width ##### -->
 <para>
 
 </para>
@@ -280,7 +289,7 @@ Fotable-row
 @new_border_bottom_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_bottom_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_end_color ##### -->
 <para>
 
 </para>
@@ -298,7 +307,25 @@ Fotable-row
 @new_border_end_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_end_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_end_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_row_set_border_end_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_end_precedence: 
+
+
+<!-- ##### FUNCTION fo_table_row_get_border_end_style ##### -->
 <para>
 
 </para>
@@ -316,7 +343,7 @@ Fotable-row
 @new_border_end_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_end_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_end_width ##### -->
 <para>
 
 </para>
@@ -334,7 +361,7 @@ Fotable-row
 @new_border_end_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_end_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_left_color ##### -->
 <para>
 
 </para>
@@ -352,7 +379,7 @@ Fotable-row
 @new_border_left_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_left_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_left_style ##### -->
 <para>
 
 </para>
@@ -370,7 +397,7 @@ Fotable-row
 @new_border_left_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_left_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_left_width ##### -->
 <para>
 
 </para>
@@ -388,7 +415,7 @@ Fotable-row
 @new_border_left_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_left_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_right_color ##### -->
 <para>
 
 </para>
@@ -406,7 +433,7 @@ Fotable-row
 @new_border_right_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_right_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_right_style ##### -->
 <para>
 
 </para>
@@ -424,7 +451,7 @@ Fotable-row
 @new_border_right_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_right_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_right_width ##### -->
 <para>
 
 </para>
@@ -442,7 +469,7 @@ Fotable-row
 @new_border_right_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_right_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_start_color ##### -->
 <para>
 
 </para>
@@ -460,7 +487,25 @@ Fotable-row
 @new_border_start_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_start_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_start_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_table_row_set_border_start_precedence ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_border_start_precedence: 
+
+
+<!-- ##### FUNCTION fo_table_row_get_border_start_style ##### -->
 <para>
 
 </para>
@@ -478,7 +523,7 @@ Fotable-row
 @new_border_start_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_start_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_start_width ##### -->
 <para>
 
 </para>
@@ -496,7 +541,7 @@ Fotable-row
 @new_border_start_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_start_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_top_color ##### -->
 <para>
 
 </para>
@@ -514,7 +559,7 @@ Fotable-row
 @new_border_top_color: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_top_color ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_top_style ##### -->
 <para>
 
 </para>
@@ -532,7 +577,7 @@ Fotable-row
 @new_border_top_style: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_top_style ##### -->
+<!-- ##### FUNCTION fo_table_row_get_border_top_width ##### -->
 <para>
 
 </para>
@@ -550,7 +595,7 @@ Fotable-row
 @new_border_top_width: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_border_top_width ##### -->
+<!-- ##### FUNCTION fo_table_row_get_break_after ##### -->
 <para>
 
 </para>
@@ -568,7 +613,7 @@ Fotable-row
 @new_break_after: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_break_after ##### -->
+<!-- ##### FUNCTION fo_table_row_get_break_before ##### -->
 <para>
 
 </para>
@@ -586,7 +631,7 @@ Fotable-row
 @new_break_before: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_break_before ##### -->
+<!-- ##### FUNCTION fo_table_row_get_height ##### -->
 <para>
 
 </para>
@@ -604,7 +649,7 @@ Fotable-row
 @new_height: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_height ##### -->
+<!-- ##### FUNCTION fo_table_row_get_id ##### -->
 <para>
 
 </para>
@@ -622,7 +667,7 @@ Fotable-row
 @new_id: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_id ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_together ##### -->
 <para>
 
 </para>
@@ -640,7 +685,7 @@ Fotable-row
 @new_keep_together: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_together ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_together_within_column ##### -->
 <para>
 
 </para>
@@ -658,7 +703,7 @@ Fotable-row
 @new_keep_together_within_column: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_together_within_column ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_together_within_line ##### -->
 <para>
 
 </para>
@@ -676,7 +721,7 @@ Fotable-row
 @new_keep_together_within_line: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_together_within_line ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_together_within_page ##### -->
 <para>
 
 </para>
@@ -694,7 +739,7 @@ Fotable-row
 @new_keep_together_within_page: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_together_within_page ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_next ##### -->
 <para>
 
 </para>
@@ -712,7 +757,7 @@ Fotable-row
 @new_keep_with_next: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_next ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_next_within_column ##### -->
 <para>
 
 </para>
@@ -730,7 +775,7 @@ Fotable-row
 @new_keep_with_next_within_column: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_next_within_column ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_next_within_line ##### -->
 <para>
 
 </para>
@@ -748,7 +793,7 @@ Fotable-row
 @new_keep_with_next_within_line: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_next_within_line ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_next_within_page ##### -->
 <para>
 
 </para>
@@ -766,7 +811,7 @@ Fotable-row
 @new_keep_with_next_within_page: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_next_within_page ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_previous ##### -->
 <para>
 
 </para>
@@ -784,7 +829,7 @@ Fotable-row
 @new_keep_with_previous: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_previous ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_previous_within_column ##### -->
 <para>
 
 </para>
@@ -802,7 +847,7 @@ Fotable-row
 @new_keep_with_previous_within_column: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_previous_within_column ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_previous_within_line ##### -->
 <para>
 
 </para>
@@ -820,7 +865,7 @@ Fotable-row
 @new_keep_with_previous_within_line: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_previous_within_line ##### -->
+<!-- ##### FUNCTION fo_table_row_get_keep_with_previous_within_page ##### -->
 <para>
 
 </para>
@@ -838,7 +883,7 @@ Fotable-row
 @new_keep_with_previous_within_page: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_keep_with_previous_within_page ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_after ##### -->
 <para>
 
 </para>
@@ -856,7 +901,7 @@ Fotable-row
 @new_padding_after: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_after ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_before ##### -->
 <para>
 
 </para>
@@ -874,7 +919,7 @@ Fotable-row
 @new_padding_before: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_before ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_bottom ##### -->
 <para>
 
 </para>
@@ -892,7 +937,7 @@ Fotable-row
 @new_padding_bottom: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_bottom ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_end ##### -->
 <para>
 
 </para>
@@ -910,7 +955,7 @@ Fotable-row
 @new_padding_end: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_end ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_left ##### -->
 <para>
 
 </para>
@@ -928,7 +973,7 @@ Fotable-row
 @new_padding_left: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_left ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_right ##### -->
 <para>
 
 </para>
@@ -946,7 +991,7 @@ Fotable-row
 @new_padding_right: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_right ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_start ##### -->
 <para>
 
 </para>
@@ -964,7 +1009,7 @@ Fotable-row
 @new_padding_start: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_start ##### -->
+<!-- ##### FUNCTION fo_table_row_get_padding_top ##### -->
 <para>
 
 </para>
@@ -982,7 +1027,7 @@ Fotable-row
 @new_padding_top: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_padding_top ##### -->
+<!-- ##### FUNCTION fo_table_row_get_role ##### -->
 <para>
 
 </para>
@@ -1000,7 +1045,7 @@ Fotable-row
 @new_role: 
 
 
-<!-- ##### FUNCTION fo_table_row_get_role ##### -->
+<!-- ##### FUNCTION fo_table_row_get_source_document ##### -->
 <para>
 
 </para>
@@ -1016,14 +1061,5 @@ Fotable-row
 
 @fo_fo: 
 @new_source_document: 
-
-
-<!-- ##### FUNCTION fo_table_row_get_source_document ##### -->
-<para>
-
-</para>
-
-@fo_fo: 
-@Returns: 
 
 

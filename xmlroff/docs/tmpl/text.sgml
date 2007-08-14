@@ -14,11 +14,64 @@ Fotext
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT FoText ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### ARG FoText:color ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:font-family ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:font-stretch ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:font-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:font-variant ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:font-weight ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:score-spaces ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:value ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoText:whitespace-only ##### -->
+<para>
+
+</para>
 
 <!-- ##### STRUCT FoTextClass ##### -->
 <para>
@@ -183,7 +236,7 @@ Fotext
 
 </para>
 
-@fo_text: 
+@fo_fo: 
 @new_value: 
 
 
@@ -192,7 +245,7 @@ Fotext
 
 </para>
 
-@fo_text: 
+@fo_fo: 
 @Returns: 
 
 
@@ -201,7 +254,7 @@ Fotext
 
 </para>
 
-@fo_text: 
+@fo_fo: 
 @Returns: 
 
 

@@ -14,6 +14,9 @@ Fotitle
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT FoTitle ##### -->
 <para>
 
@@ -34,6 +37,15 @@ Fotitle
 @Returns: 
 
 
+<!-- ##### FUNCTION fo_title_get_background_color ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
 <!-- ##### FUNCTION fo_title_set_background_color ##### -->
 <para>
 
@@ -43,7 +55,25 @@ Fotitle
 @new_background_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_background_color ##### -->
+<!-- ##### FUNCTION fo_title_get_background_image ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_title_set_background_image ##### -->
+<para>
+
+</para>
+
+@fo_fo: 
+@new_background_image: 
+
+
+<!-- ##### FUNCTION fo_title_get_border_after_color ##### -->
 <para>
 
 </para>
@@ -61,7 +91,7 @@ Fotitle
 @new_border_after_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_after_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_after_style ##### -->
 <para>
 
 </para>
@@ -79,7 +109,7 @@ Fotitle
 @new_border_after_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_after_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_after_width ##### -->
 <para>
 
 </para>
@@ -97,7 +127,7 @@ Fotitle
 @new_border_after_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_after_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_before_color ##### -->
 <para>
 
 </para>
@@ -115,7 +145,7 @@ Fotitle
 @new_border_before_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_before_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_before_style ##### -->
 <para>
 
 </para>
@@ -133,7 +163,7 @@ Fotitle
 @new_border_before_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_before_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_before_width ##### -->
 <para>
 
 </para>
@@ -151,7 +181,7 @@ Fotitle
 @new_border_before_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_before_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_bottom_color ##### -->
 <para>
 
 </para>
@@ -169,7 +199,7 @@ Fotitle
 @new_border_bottom_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_bottom_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_bottom_style ##### -->
 <para>
 
 </para>
@@ -187,7 +217,7 @@ Fotitle
 @new_border_bottom_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_bottom_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_bottom_width ##### -->
 <para>
 
 </para>
@@ -205,7 +235,7 @@ Fotitle
 @new_border_bottom_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_bottom_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_end_color ##### -->
 <para>
 
 </para>
@@ -223,7 +253,7 @@ Fotitle
 @new_border_end_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_end_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_end_style ##### -->
 <para>
 
 </para>
@@ -241,7 +271,7 @@ Fotitle
 @new_border_end_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_end_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_end_width ##### -->
 <para>
 
 </para>
@@ -259,7 +289,7 @@ Fotitle
 @new_border_end_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_end_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_left_color ##### -->
 <para>
 
 </para>
@@ -277,7 +307,7 @@ Fotitle
 @new_border_left_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_left_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_left_style ##### -->
 <para>
 
 </para>
@@ -295,7 +325,7 @@ Fotitle
 @new_border_left_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_left_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_left_width ##### -->
 <para>
 
 </para>
@@ -313,7 +343,7 @@ Fotitle
 @new_border_left_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_left_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_right_color ##### -->
 <para>
 
 </para>
@@ -331,7 +361,7 @@ Fotitle
 @new_border_right_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_right_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_right_style ##### -->
 <para>
 
 </para>
@@ -349,7 +379,7 @@ Fotitle
 @new_border_right_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_right_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_right_width ##### -->
 <para>
 
 </para>
@@ -367,7 +397,7 @@ Fotitle
 @new_border_right_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_right_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_start_color ##### -->
 <para>
 
 </para>
@@ -385,7 +415,7 @@ Fotitle
 @new_border_start_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_start_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_start_style ##### -->
 <para>
 
 </para>
@@ -403,7 +433,7 @@ Fotitle
 @new_border_start_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_start_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_start_width ##### -->
 <para>
 
 </para>
@@ -421,7 +451,7 @@ Fotitle
 @new_border_start_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_start_width ##### -->
+<!-- ##### FUNCTION fo_title_get_border_top_color ##### -->
 <para>
 
 </para>
@@ -439,7 +469,7 @@ Fotitle
 @new_border_top_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_top_color ##### -->
+<!-- ##### FUNCTION fo_title_get_border_top_style ##### -->
 <para>
 
 </para>
@@ -457,7 +487,7 @@ Fotitle
 @new_border_top_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_top_style ##### -->
+<!-- ##### FUNCTION fo_title_get_border_top_width ##### -->
 <para>
 
 </para>
@@ -475,7 +505,7 @@ Fotitle
 @new_border_top_width: 
 
 
-<!-- ##### FUNCTION fo_title_get_border_top_width ##### -->
+<!-- ##### FUNCTION fo_title_get_color ##### -->
 <para>
 
 </para>
@@ -493,7 +523,7 @@ Fotitle
 @new_color: 
 
 
-<!-- ##### FUNCTION fo_title_get_color ##### -->
+<!-- ##### FUNCTION fo_title_get_font_family ##### -->
 <para>
 
 </para>
@@ -511,7 +541,7 @@ Fotitle
 @new_font_family: 
 
 
-<!-- ##### FUNCTION fo_title_get_font_family ##### -->
+<!-- ##### FUNCTION fo_title_get_font_size ##### -->
 <para>
 
 </para>
@@ -529,7 +559,7 @@ Fotitle
 @new_font_size: 
 
 
-<!-- ##### FUNCTION fo_title_get_font_size ##### -->
+<!-- ##### FUNCTION fo_title_get_font_stretch ##### -->
 <para>
 
 </para>
@@ -547,7 +577,7 @@ Fotitle
 @new_font_stretch: 
 
 
-<!-- ##### FUNCTION fo_title_get_font_stretch ##### -->
+<!-- ##### FUNCTION fo_title_get_font_style ##### -->
 <para>
 
 </para>
@@ -565,7 +595,7 @@ Fotitle
 @new_font_style: 
 
 
-<!-- ##### FUNCTION fo_title_get_font_style ##### -->
+<!-- ##### FUNCTION fo_title_get_font_variant ##### -->
 <para>
 
 </para>
@@ -583,7 +613,7 @@ Fotitle
 @new_font_variant: 
 
 
-<!-- ##### FUNCTION fo_title_get_font_variant ##### -->
+<!-- ##### FUNCTION fo_title_get_font_weight ##### -->
 <para>
 
 </para>
@@ -601,7 +631,7 @@ Fotitle
 @new_font_weight: 
 
 
-<!-- ##### FUNCTION fo_title_get_font_weight ##### -->
+<!-- ##### FUNCTION fo_title_get_line_height ##### -->
 <para>
 
 </para>
@@ -619,7 +649,7 @@ Fotitle
 @new_line_height: 
 
 
-<!-- ##### FUNCTION fo_title_get_line_height ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_after ##### -->
 <para>
 
 </para>
@@ -637,7 +667,7 @@ Fotitle
 @new_padding_after: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_after ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_before ##### -->
 <para>
 
 </para>
@@ -655,7 +685,7 @@ Fotitle
 @new_padding_before: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_before ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_bottom ##### -->
 <para>
 
 </para>
@@ -673,7 +703,7 @@ Fotitle
 @new_padding_bottom: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_bottom ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_end ##### -->
 <para>
 
 </para>
@@ -691,7 +721,7 @@ Fotitle
 @new_padding_end: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_end ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_left ##### -->
 <para>
 
 </para>
@@ -709,7 +739,7 @@ Fotitle
 @new_padding_left: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_left ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_right ##### -->
 <para>
 
 </para>
@@ -727,7 +757,7 @@ Fotitle
 @new_padding_right: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_right ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_start ##### -->
 <para>
 
 </para>
@@ -745,7 +775,7 @@ Fotitle
 @new_padding_start: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_start ##### -->
+<!-- ##### FUNCTION fo_title_get_padding_top ##### -->
 <para>
 
 </para>
@@ -763,7 +793,7 @@ Fotitle
 @new_padding_top: 
 
 
-<!-- ##### FUNCTION fo_title_get_padding_top ##### -->
+<!-- ##### FUNCTION fo_title_get_role ##### -->
 <para>
 
 </para>
@@ -781,7 +811,7 @@ Fotitle
 @new_role: 
 
 
-<!-- ##### FUNCTION fo_title_get_role ##### -->
+<!-- ##### FUNCTION fo_title_get_source_document ##### -->
 <para>
 
 </para>
@@ -799,7 +829,7 @@ Fotitle
 @new_source_document: 
 
 
-<!-- ##### FUNCTION fo_title_get_source_document ##### -->
+<!-- ##### FUNCTION fo_title_get_space_end ##### -->
 <para>
 
 </para>
@@ -817,7 +847,7 @@ Fotitle
 @new_space_end: 
 
 
-<!-- ##### FUNCTION fo_title_get_space_end ##### -->
+<!-- ##### FUNCTION fo_title_get_space_start ##### -->
 <para>
 
 </para>
@@ -833,14 +863,5 @@ Fotitle
 
 @fo_fo: 
 @new_space_start: 
-
-
-<!-- ##### FUNCTION fo_title_get_space_start ##### -->
-<para>
-
-</para>
-
-@fo_fo: 
-@Returns: 
 
 
