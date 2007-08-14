@@ -1,3 +1,901 @@
+08/14/07 20:56:28 tkg [180]
+	* trunk/xmlroff/configure.ac (modified)
+	Fixed 'configure' shell syntax error when CUnit not enabsed.
+
+08/07/07 22:45:20 tkg [166]
+	* trunk/xmlroff/libfo/property/fo-property-alignment-adjust.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-alignment-baseline.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-background-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-background-image.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-baseline-shift.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-collapse.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-separation.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-break-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-break-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-character.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-clip.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-column-number.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-column-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-content-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-content-type.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-content-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-direction.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-display-align.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-dominant-baseline.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-end-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-extent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-flow-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-family.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-size.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-stretch.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-variant.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-weight.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-format.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-grouping-separator.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-grouping-size.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-id.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together-within-column.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together-within-line.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together-within-page.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next-within-column.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next-within-line.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next-within-page.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous-within-column.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous-within-line.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous-within-page.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-letter-value.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-line-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-line-stacking-strategy.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-linefeed-treatment.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-bottom.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-left.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-right.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-top.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-master-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-master-reference.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-media-usage.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-columns-repeated.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-columns-spanned.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-rows-spanned.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-orphans.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-overflow.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-bottom.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-left.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-right.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-top.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-page-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-page-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-provisional-distance-between-starts.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-provisional-label-separation.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-ref-id.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-region-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-role.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-scaling-method.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-scaling.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-score-spaces.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-source-document.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-span.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-src.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-start-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-table-layout.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-text-align.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-text-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-unicode-bidi.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-white-space-collapse.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-white-space-treatment.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-widows.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-wrap-option.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-writing-mode.c (modified)
+	Reverted property-related fixes for #22.  Reopens #22.
+
+08/06/07 20:56:53 tkg [165]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for 0.5.2.
+
+08/06/07 20:53:01 tkg [164]
+	* trunk/xmlroff/docs/tmpl/fo-basic-link.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-bidi-override.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-block-container.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-block.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-character.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-color-profile.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-conditional-page-master-reference.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-external-graphic.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-float.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-flow.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-fo.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-footnote-body.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-initial-property-set.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-inline-container.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-inline.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-instream-foreign-object.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-leader.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-libfo-basic.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-list-block.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-list-item-body.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-list-item-label.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-list-item.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-marker.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-multi-case.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-multi-properties.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-multi-property-set.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-multi-switch.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-multi-toggle.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-page-number-citation.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-page-number.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-page-sequence-master.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-page-sequence.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-property.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-region-after.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-region-before.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-region-body.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-region-end.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-region-start.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-repeatable-page-master-alternatives.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-repeatable-page-master-reference.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-root.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-simple-page-master.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-single-page-master-reference.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-static-content.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-and-caption.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-body.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-caption.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-cell.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-column.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-footer.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-header.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table-row.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-table.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-title.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-wrapper.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-xslt-transformer.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Updated for 0.5.2.
+
+08/06/07 20:47:32 tkg [163]
+	* trunk/xmlroff/libfo/fo/fo-basic-link.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-bidi-override.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-block-container.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-character.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-color-profile.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-conditional-page-master-reference.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-declarations.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-external-graphic.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-flow.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-footnote-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-initial-property-set.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-inline-container.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-instream-foreign-object.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-layout-master-set.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-leader.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-label.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-case.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-properties.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-property-set.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-switch.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-toggle.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-number-citation.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-number.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence-master.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-after.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-before.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-end.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-start.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-repeatable-page-master-alternatives.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-repeatable-page-master-reference.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-root.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-simple-page-master.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-single-page-master-reference.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-static-content.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-and-caption.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-border-fo.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-caption.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-cell.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-column.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-footer.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-header.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-row.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-title.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-wrapper.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-alignment-adjust.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-alignment-baseline.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-background-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-background-image.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-baseline-shift.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-after-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-before-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-bottom.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-collapse.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-end-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-right.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-separation.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-start-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-top.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-break-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-break-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-character.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-clip.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-color.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-column-number.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-column-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-content-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-content-type.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-content-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-direction.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-display-align.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-dominant-baseline.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-end-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-extent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-flow-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-family.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-size.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-stretch.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-variant.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-weight.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-format.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-grouping-separator.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-grouping-size.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-id.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-inline-progression-dimension.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together-within-column.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together-within-line.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together-within-page.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next-within-column.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next-within-line.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next-within-page.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous-within-column.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous-within-line.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous-within-page.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-letter-value.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-line-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-line-stacking-strategy.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-linefeed-treatment.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-bottom.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-left.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-right.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin-top.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-margin.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-master-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-master-reference.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-media-usage.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-columns-repeated.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-columns-spanned.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-rows-spanned.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-orphans.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-overflow.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-bottom.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-left.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-right.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-top.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-page-height.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-page-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-provisional-distance-between-starts.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-provisional-label-separation.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-ref-id.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-region-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-role.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-scaling-method.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-scaling.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-score-spaces.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-source-document.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-span.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-src.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-start-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-table-layout.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-text-align.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-text-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-unicode-bidi.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-white-space-collapse.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-white-space-treatment.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-widows.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-wrap-option.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-writing-mode.c (modified)
+	Updated class name strings match class structure names so object
+	hierarchy in docs works.  Fixes #22.
+
+08/01/07 22:37:45 tkg [161]
+	* trunk/xmlroff/libfo/property/fo-property.h (modified)
+	Changed 'expression' to 'expr' in fo_property_new_from_expr()
+	prototype to match name in real function and stop gtk-doc warning.
+
+08/01/07 21:15:30 tkg [160]
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/cunit/Makefile.am (modified)
+	Corrected conditional compilation of CUnit tests.
+
+08/01/07 20:55:05 tkg [159]
+	* trunk/xmlroff/libfo/fo/fo-marker-parent.c (modified)
+	No reason to include fo-table.h.
+
+08/01/07 20:29:45 tkg [158]
+	* trunk/xmlroff/libfo/fo/fo-inline.c (modified)
+	Changed string for class name to get object hierarchy in docs working
+	again.  Re #22.
+
+08/01/07 20:06:28 tkg [157]
+	* trunk/xmlroff/libfo/fo/fo-table-column.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-part.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table.h (modified)
+	Added fallback to fixed table layout and proportional column-width if
+	auto is specified.  Re #75.
+
+07/31/07 15:13:59 tkg [146]
+	* trunk/xmlroff/cunit/.deps (deleted)
+	* trunk/xmlroff/cunit/.libs (deleted)
+	* trunk/xmlroff/cunit/Makefile (deleted)
+	* trunk/xmlroff/cunit/Makefile.in (deleted)
+	Removing files that shouldn't have been added.
+
+07/31/07 10:30:54 tkg [145]
+	* trunk/xmlroff/Makefile.am (modified)
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/cunit (added)
+	* trunk/xmlroff/cunit/.deps (added)
+	* trunk/xmlroff/cunit/.deps/test-fo-expr-eval.Po (added)
+	* trunk/xmlroff/cunit/.deps/test.Po (added)
+	* trunk/xmlroff/cunit/.libs (added)
+	* trunk/xmlroff/cunit/.libs/test (added)
+	* trunk/xmlroff/cunit/Makefile (added)
+	* trunk/xmlroff/cunit/Makefile.am (added)
+	* trunk/xmlroff/cunit/Makefile.in (added)
+	* trunk/xmlroff/cunit/test (added)
+	* trunk/xmlroff/cunit/test-fo-expr-eval.c (added)
+	* trunk/xmlroff/cunit/test-fo-expr-eval.h (added)
+	* trunk/xmlroff/cunit/test.c (added)
+	Added CUnit unit testing.
+
+07/30/07 22:42:37 tkg [144]
+	* trunk/xmlroff/NEWS (modified)
+	Made more readable in Trac source browser.
+
+07/30/07 22:34:50 tkg [143]
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Added variable for location fo DocBook FO stylesheet.
+
+07/30/07 13:01:52 tkg [138]
+	* trunk/xmlroff/libfo/fo-context-util.c (modified)
+	Determining 100% bpdim value only once in
+	fo_context_util_spaces_resolve().
+
+07/30/07 12:58:17 tkg [137]
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence-master.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-id.c (modified)
+	Fixed memory leaks.  Re #52.
+
+07/30/07 12:56:16 tkg [136]
+	* trunk/xmlroff/libfo/datatype/fo-number.c (modified)
+	* trunk/xmlroff/libfo/datatype/fo-space.c (modified)
+	* trunk/xmlroff/libfo/datatype/fo-string.c (modified)
+	* trunk/xmlroff/libfo/expr/fo-expr-eval.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-float.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent-private.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent.h (modified)
+	* trunk/xmlroff/libfo/property/fo-property.c (modified)
+	Added or corrected comments and/or modified formatting only.
+
+07/30/07 12:47:29 tkg [135]
+	* trunk/xmlroff/INSTALL.in (modified)
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	* trunk/xmlroff/docs/debugging.xml (modified)
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/area/Makefile.am (modified)
+	* trunk/xmlroff/libfo/fo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/property/Makefile.am (modified)
+	* trunk/xmlroff/xmlroff/Makefile.am (modified)
+	Removed lingering references to PangoXSL.
+
+07/30/07 12:42:22 tkg [134]
+	* trunk/xmlroff/configure.ac (modified)
+	Removed checks for libxml2 since check for libxslt gets everything
+	for libxml2 as well.
+
+07/30/07 12:38:41 tkg [133]
+	* trunk/xmlroff/catalog.xml.in (modified)
+	Changed '@datadir@' to '@prefix@' to avoid warning from 'configure'
+	and so 'catalog.xml' is more readable.
+
+07/30/07 12:36:11 tkg [132]
+	* trunk/xmlroff/install-sh (deleted)
+	Removed install-sh.
+
+07/28/07 21:47:25 tkg [131]
+	* trunk/xmlroff/configure.ac (modified)
+	Updated libxml2 and libxslt checking to use PKG_CHECK_MODULES.
+
+07/28/07 20:18:07 tkg [130]
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Added checking for  to enable extra summary on 'xmlroff --help'.
+	Fixes #26.
+
+07/24/07 06:40:04 tkg [122]
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Removed unused include of locale.h.  Re #49.
+
+07/24/07 06:37:51 tkg [121]
+	* trunk/xmlroff/configure.ac (modified)
+	Got building docs working again. Re #26.
+
+07/23/07 09:50:59 tkg [120]
+	* trunk/xmlroff/configure.ac (modified)
+	Simplifications from asomdai.  Re #26.
+
+07/19/07 21:22:41 tkg [118]
+	* trunk/xmlroff/ChangeLog (modified)
+	Set svn:mime-type.
+
+07/18/07 21:13:50 tkg [109]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-libfo-context.c (modified)
+	Setting default FoLibfoContext output format to 'auto'.  Checking for
+	unknown format in FoDocGP.  Fixes #65.
+
+07/18/07 20:36:47 tkg [108]
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Removed setlocale() call that was causing problems when running in
+	nl.NL_UTF-8 locale on FreeBSD.  Fixes #49.
+
+07/18/07 20:32:31 tkg [107]
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Moved declaration of stylesheet_doc to where it is used.
+
+07/18/07 13:57:44 tkg [105]
+	* trunk/xmlroff/libfo/fo-libfo-context.c (modified)
+	* trunk/xmlroff/libfo/fo-libfo-context.h (modified)
+	Moved FoLibfoConfig definition back form fo-libfo-basic.h since
+	dropped unimplemented setting properties by FoValue.  re #63.
+
+07/18/07 13:55:21 tkg [104]
+	* trunk/xmlroff/libfo/fo-libfo-basic.c (modified)
+	* trunk/xmlroff/libfo/fo-libfo-basic.h (modified)
+	Removed FoValue and FoLibfoContext definition. see #63.
+
+07/18/07 12:50:42 tkg [103]
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/area/Makefile.am (modified)
+	* trunk/xmlroff/libfo/datatype/Makefile.am (modified)
+	* trunk/xmlroff/libfo/fo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/property/Makefile.am (modified)
+	* trunk/xmlroff/libfo/util/Makefile.am (modified)
+	Corrected header instal directories so libfo-examples will work, re
+	#30.
+
+07/18/07 12:48:58 tkg [102]
+	* trunk/xmlroff/libfo-0.5.pc.in (modified)
+	Removed out-of-date dependency on pangoxsl.
+
+07/17/07 20:46:19 tkg [98]
+	* trunk/xmlroff/libfo/fo-context.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-font-desc-private.h (modified)
+	* trunk/xmlroff/libfo/fo-font-desc.c (modified)
+	* trunk/xmlroff/libfo/fo-layout-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-layout-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-layout.c (modified)
+	* trunk/xmlroff/libfo/fo-libfo-basic.c (modified)
+	* trunk/xmlroff/libfo/fo-node.c (modified)
+	* trunk/xmlroff/libfo/fo-object.c (modified)
+	* trunk/xmlroff/libfo/fo-xml-doc.c (modified)
+	Added casts, changed variable types and marked unused parameters as
+	unused to silence compiler warnings. See #51.
+
+07/17/07 20:44:50 tkg [97]
+	* trunk/xmlroff/libfo/fo/fo-basic-link.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-bidi-override.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-block-container.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-character.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-color-profile.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-declarations.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-external-graphic-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-float.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-float.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-flow-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-flow-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-flow.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-footnote-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-footnote.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-initial-property-set.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-inline-container.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-inline-fo.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-inline.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-instream-foreign-object.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-leader.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-block-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-block-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-body-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-body-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-label-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-label-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item-label.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-list-item.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-case.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-properties.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-property-set.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-switch.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-multi-toggle.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-number-citation.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-number.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence-master.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-body-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-repeatable-page-master-reference.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-retrieve-marker.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-simple-page-master.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-single-page-master-reference.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-static-content.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-text.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-title.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-tree.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-wrapper-inline-empty.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-wrapper.c (modified)
+	Removed unused functions, unused parameter, and unused variables and
+	marked other unused parameters as unused to silence compiler
+	warnings. See #51.
+
+07/17/07 20:42:26 tkg [96]
+	* trunk/xmlroff/libfo/area/fo-area-list-item.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-page.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-spanning-table-cell.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-table-cell.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-table-continuation.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-table.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-tree.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area.c (modified)
+	Removed unused functions, removed unused variables to silence
+	compiler warnings. See #51.
+
+07/17/07 20:39:38 tkg [95]
+	* trunk/xmlroff/libfo/property/fo-property-block-progression-dimension-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-separation.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-character.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-column-number.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-column-width.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-end-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-extent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-flow-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-family.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-size.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-stretch.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-variant.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-format.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-grouping-separator.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-grouping-size.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-together.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-next.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-keep-with-previous.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-master-name.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-master-reference.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-columns-spanned.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-number-rows-spanned.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-orphans.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-after-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-before-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-end-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-padding-start-length.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-provisional-distance-between-starts.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-provisional-label-separation.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-ref-id.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-after.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-before.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-end.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-conditionality.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-maximum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-minimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-optimum.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start-precedence.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-space-start.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-start-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-text-indent.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-text-property.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-type-condity.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-util.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-widows.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property.c (modified)
+	* trunk/xmlroff/libfo/util/fo-hash-table.c (modified)
+	* trunk/xmlroff/libfo/util/fo-pixbuf.c (modified)
+	Marked unused parameters as unused.  Removed unused variables. See
+	#51.
+
+07/17/07 20:37:19 tkg [94]
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Fixed compiler warning about fake_argv_ptr. See #51.
+
+07/17/07 20:32:36 tkg [93]
+	* trunk/xmlroff/libfo/fo/fo-fo.h (modified)
+	Corrected type of arguments to
+	fo_fo_validate_pcdata_inline_block_neutral() (#54, Aron Stansvik).
+
+07/17/07 13:54:35 tkg [92]
+	* trunk/xmlroff/libfo/fo-xsl-formatter.c (modified)
+	Changed char type and added casts to fix compiler warnings, fixes
+	#35.
+
+07/17/07 13:44:09 tkg [91]
+	* trunk/xmlroff/libfo/datatype/fo-keep.c (modified)
+	* trunk/xmlroff/libfo/datatype/fo-length-range.c (modified)
+	* trunk/xmlroff/libfo/datatype/fo-space.c (modified)
+	* trunk/xmlroff/libfo/datatype/fo-string.c (modified)
+	Fixed unused parameter and unused function compiler warnings, re #51.
+
+07/17/07 13:39:30 tkg [90]
+	* trunk/xmlroff/libfo/expr/fo-expr-context.c (modified)
+	* trunk/xmlroff/libfo/expr/fo-expr-env.c (modified)
+	Fixed unused parameter compiler warnings, see #51.
+
+07/17/07 13:30:52 tkg [89]
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	Changed fo_fo_validate_pcdata_inline_block_neutral() arg type, fixes
+	#54 (Aran Stansvik).  Fixed other casting and unused parameter
+	compiler warnings, see #51.
+
+07/14/07 13:26:30 tkg [88]
+	* trunk/xmlroff/configure.ac (modified)
+	Upped version to 0.5.2.
+
+07/14/07 13:22:27 tkg [87]
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Removed unused font embedding setting.  Remaved a duplicate #include.
+
+07/13/07 14:00:30 tkg [85]
+	* trunk/xmlroff/libfo/fo-xslt-transformer.c (modified)
+	* trunk/xmlroff/libfo/libfo-compat.c.tmpl (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Fixed a memory leak in fo_xslt_transformer_do_transform() but had to
+	make it free its stylesheet_doc argument for it to work.
+
+07/13/07 09:57:33 tkg [84]
+	* trunk/xmlroff/libfo/fo-libfo-basic.c (modified)
+	* trunk/xmlroff/libfo/fo-xslt-transformer.c (modified)
+	* trunk/xmlroff/libfo/fo-xslt-transformer.h (modified)
+	* trunk/xmlroff/libfo/libfo-compat.c.tmpl (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Corrected causes of compiler warnings from libfo/fo-xslt-
+	transformer.c.
+
+07/13/07 09:29:56 tkg [83]
+	* trunk/xmlroff/libfo/expr/fo-expr-func.c (modified)
+	Reduced memory leakage from opt_arg_to_property_name().  Stopped
+	compiler complaining about 'const' mismatch.
+
+07/13/07 09:22:20 tkg [82]
+	* trunk/xmlroff/libfo/fo/fo-region-after.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-before.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-body.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-end.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-start.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-simple-page-master.c (modified)
+	Reduced memory leaks from region names and master names.
+
+07/13/07 09:20:49 tkg [81]
+	* trunk/xmlroff/libfo/fo-xslt-transformer.h (modified)
+	Corrected typo in initial comment.
+
+07/13/07 09:20:10 tkg [80]
+	* trunk/xmlroff/autogen.sh (modified)
+	Using a variable for AC_CONFIG_AUX_DIR.
+
+07/13/07 09:18:29 tkg [79]
+	* trunk/xmlroff/libfo/fo-context-util.c (modified)
+	Reduce memory leaks in fo_context_util_spaces_resolve().
+
+07/10/07 20:48:53 tkg [55]
+	* trunk/xmlroff/ChangeLog (modified)
+	* trunk/xmlroff/config (deleted)
+	Released xmlroff 0.5.1.
+
+07/10/07 19:57:15 tkg [51]
+	* trunk/xmlroff/NEWS (modified)
+	* trunk/xmlroff/config (added)
+	Released xmlroff 0.5.1.
+
 07/10/07 19:45:08 tkg [50]
 	* trunk/xmlroff/libfo/property/fo-property-util.c (modified)
 	Corrected function name in a comment.
