@@ -1,3 +1,34 @@
+Released libfo-examples 0.5.2
+
+08/16/07 23:20:17 tkg [192]
+	* trunk/libfo-examples/Makefile.am (modified)
+	Corrected 'svn-tag'.
+
+08/16/07 21:13:38 tkg [188]
+	* trunk/libfo-examples/README (modified)
+	Removed mention of installing module.
+
+08/16/07 21:09:50 tkg [187]
+	* trunk/libfo-examples/Makefile.am (modified)
+	Added 'svn-tag' target for making it easy to tag in Subversion
+	repository.
+
+08/16/07 21:06:53 tkg [186]
+	* trunk/libfo-examples/NEWS (modified)
+	Updated for libfo-examples 0.5.2.
+
+08/16/07 21:03:37 tkg [185]
+	* trunk/libfo-examples/INSTALL (added)
+	Module-specific installation (actually, don't install) instructions.
+
+07/19/07 16:34:38 tkg [115]
+	* trunk/libfo-examples/ChangeLog (modified)
+	Set svn:mime-type.
+
+07/19/07 16:27:03 tkg [114]
+	* trunk/libfo-examples/ChangeLog (added)
+	Change log for updating libfo-examples for xmlroff0.5.2.  Fixes #30.
+
 07/19/07 16:24:17 tkg [113]
 	* trunk/libfo-examples/ChangeLog.pre-0.5 (moved)
 	Moved change log since format changing.
