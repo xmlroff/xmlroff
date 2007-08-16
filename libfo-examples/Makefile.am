@@ -76,5 +76,5 @@ svn-tag:
 	-svn mkdir -m"Tagging libfo-examples $(VERSION)." \
 	  svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
 	-svn cp -m"Tagging libfo-examples $(VERSION)." \
-	  svn://svn.xmlroff.org/trunk/xmlroff \
+	  svn://svn.xmlroff.org/trunk/libfo-examples \
 	  svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)/libfo-examples
