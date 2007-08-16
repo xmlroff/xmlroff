@@ -1,5 +1,4 @@
 # libfo-examples Makefile.am
-# $Id: Makefile.am,v 1.6 2004/06/02 10:16:38 tonygraham Exp $
 
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo-examples\"	\
@@ -18,8 +17,7 @@ noinst_PROGRAMS = \
 	xmlroff-text-tree	\
 	xmlroff-text-tree2
 
-module_LTLIBRARIES = $(ADJUST_MODULES)
-moduledir = $(pkglibdir)
+pkglib_LTLIBRARIES = $(ADJUST_MODULES)
 
 xmlroff_basic_SOURCES = \
 	xmlroff-basic.c
@@ -73,3 +71,10 @@ gmodule_area_tree_la_LDFLAGS = \
 gmodule_area_tree_la_LIBADD = \
 	$(LDADD) \
 	$(GTK_LIBS)
+
+svn-tag:
+	-svn mkdir -m"Tagging libfo-examples $(VERSION)." \
+	  svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
+	-svn cp -m"Tagging libfo-examples $(VERSION)." \
+	  svn://svn.xmlroff.org/trunk/xmlroff \
+	  svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)/libfo-examples
