@@ -60,16 +60,10 @@ xmlroff-gmodule
 ---------------
 
 xmlroff-gmodule and gmodule-area-tree demonstrate using a loadable
-module that accesses the area tree as GObjects.  You need to run 'make
-install' to install gmodule-area-tree.so (or use the one in the .libs
-directory) for it to work.
+module that accesses the area tree as GObjects.  You need to use the
+gmodule-area-tree.so in the .libs directory for it to work.
 
 Example:
-
-   make install
-   ./xmlroff-gmodule --module /usr/local/lib/libfo-examples/gmodule-area-tree.so <xml>
-
-or:
 
    ./xmlroff-gmodule --module .libs/gmodule-area-tree.so <xml>
 
@@ -88,4 +82,4 @@ xmlroff and libfo are discussed on the xmlroff-list@xmlroff.org
 mailing list.  See http://xmlroff.org/wiki/MailingLists
 
 Tony Graham
-19 July 2007
+16 August 2007
