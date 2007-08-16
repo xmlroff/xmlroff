@@ -1,0 +1,9 @@
+You do not need to install anything to be able to use these examples.
+
+To build:
+
+   ./configure
+   make -k
+
+(or './autogen.sh' instead of './configure' when building from a
+Subversion checkout).
