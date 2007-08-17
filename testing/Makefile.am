@@ -23,6 +23,7 @@ EXTRA_DIST = \
 	png+ref2stereo.pl		\
 	regenerate-testsuccess.pl	\
 	test2sh.xsl			\
+	testing.conf.in			\
 	testsuccess.pl			\
 	testsuccess.xsl			\
 	testsuites.xml			\
@@ -91,3 +92,13 @@ install-data-local:
 	(tar cf - `find . -name \*.html -o -name \*.png -o -name \*.log -o -name \*.pdf` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
 	(tar cf - $(RESULTS_PACKAGE)-$(VERSION) | gzip -c > $(RESULTS_PACKAGE)-$(VERSION).tar.gz)
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
+
+#
+# Reliably "tag" the Subversion repository to mark the current release.
+#
+svn-tag:
+	-svn mkdir -m"Tag for modules of xmlroff $(VERSION)." \
+	   svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
+	svn cp -m"Tagging xmlroff-testing $(VERSION)." \
+	   svn://svn.xmlroff.org/trunk/testing \
+	   svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)/testing
