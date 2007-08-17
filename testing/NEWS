@@ -2,6 +2,7 @@ Changes between 0.5.1 and 0.5.2:
 
  * Tests any XSL processor (#16)
  * Easy testing of DocBook testdocs (#64)
+ * Checks that XSL processor exists (#40)
  * Can save test configuration in test results file (#67)
  * Added missing Perl scripts (#72)
 
