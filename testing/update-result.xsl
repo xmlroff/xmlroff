@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- xmlroff -->
 <!-- update-result.xsl -->
-<!-- $Id: update-result.xsl,v 1.6 2007/04/09 20:21:27 menteith Exp $ -->
 <!-- Update one result in a 'testresults.xml' file. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
+<!-- Copyright (C) Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"

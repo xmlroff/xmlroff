@@ -2,8 +2,6 @@
 #
 # Copyright (c) 2001, 2002, 2004 Sun Microsystems
 #
-# $Id: png+ref2stereo.pl,v 1.8 2007/02/05 18:22:34 menteith Exp $
-#
 # Perl script to create 'stereo' images of PNG files and their
 # reference versions.
 #
