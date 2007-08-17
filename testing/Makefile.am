@@ -44,7 +44,7 @@ config.xsl:	config.h h2xsl.pl
 config.pl:	config.h h2pl.pl
 	perl h2pl.pl config.h
 
-test2sh.stamp: test2sh.xsl $(TESTING_PARAM) common.xsl config.xsl
+test2sh.stamp: test2sh.xsl $(TESTSUITES) $(TESTING_PARAM) common.xsl config.xsl
 	xsltproc --novalid test2sh.xsl test2sh.xsl
 	touch $@
 
