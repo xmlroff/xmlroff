@@ -89,6 +89,7 @@ dist1:	$(FILES)
 install-data-local:
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
 	mkdir $(RESULTS_PACKAGE)-$(VERSION)
+	cp $(TEST_RESULTS) $(RESULTS_PACKAGE)-$(VERSION)/testresults.xml
 	(tar cf - `find . -name \*.html` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
 	(tar cf - `find . -name \*.png` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
 	(tar cf - `find . -name \*.log` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
