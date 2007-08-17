@@ -89,7 +89,10 @@ dist1:	$(FILES)
 install-data-local:
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
 	mkdir $(RESULTS_PACKAGE)-$(VERSION)
-	(tar cf - `find . -name \*.html -o -name \*.png -o -name \*.log -o -name \*.pdf` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -name \*.html` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -name \*.png` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -name \*.log` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -name \*.pdf` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
 	(tar cf - $(RESULTS_PACKAGE)-$(VERSION) | gzip -c > $(RESULTS_PACKAGE)-$(VERSION).tar.gz)
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
 
