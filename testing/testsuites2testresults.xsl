@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- xmlroff -->
 <!-- testsuites2testresults.xsl -->
-<!-- $Id: testsuites2testresults.xsl,v 1.2 2006/07/24 16:44:56 tonygraham Exp $ -->
-<!-- Generate 'testresults.xml' file from 'testsuite.xml' file. -->
+<!-- Generate 'testresults.xml' file from 'testsuites.xml' file. -->
 <!-- Example usage:
      xsltproc -\-novalid testsuites2testresults.xsl testsuites.xml > testresults.xml
 -->
 
 <!-- Copyright (C) 2004 Sun Microsystems -->
+<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -32,7 +32,7 @@
   <!--<xsl:strip-space elements="*"/>-->
   
   <xsl:template match="/">
-    <testsuite profile="">
+    <testsuite profile="xmlroff with PDF output">
       <xsl:apply-templates select="$testsuite-hrefs"/>
     </testsuite>
   </xsl:template>
