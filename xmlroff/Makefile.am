@@ -32,3 +32,7 @@ EXTRA_DIST = \
 
 srpm:
 	rpmbuild -ts --nodeps $(PACKAGE)-$(VERSION).tar.gz
+
+svn-tag:
+	-svn mkdir -m"Tagging xmlroff $(VERSION)." svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
+	-svn cp -m"Tagging xmlroff $(VERSION)." svn://svn.xmlroff.org/trunk/xmlroff svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)/xmlroff
