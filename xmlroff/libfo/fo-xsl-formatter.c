@@ -202,16 +202,24 @@ fo_xsl_formatter_finalize  (GObject *object)
   fo_xsl_formatter = FO_XSL_FORMATTER (object);
 
   if (fo_xsl_formatter->result_tree != NULL)
-    fo_xml_doc_unref (fo_xsl_formatter->result_tree);
+    {
+      fo_xml_doc_unref (fo_xsl_formatter->result_tree);
+    }
 
   if (fo_xsl_formatter->fo_tree != NULL)
-    g_object_unref (fo_xsl_formatter->fo_tree);
+    {
+      g_object_unref (fo_xsl_formatter->fo_tree);
+    }
 
   if (fo_xsl_formatter->area_tree != NULL)
-    g_object_unref (fo_xsl_formatter->area_tree);
+    {
+      g_object_unref (fo_xsl_formatter->area_tree);
+    }
 
   if (fo_xsl_formatter->fo_doc != NULL)
-    g_object_unref (fo_xsl_formatter->fo_doc);
+    {
+      g_object_unref (fo_xsl_formatter->fo_doc);
+    }
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
