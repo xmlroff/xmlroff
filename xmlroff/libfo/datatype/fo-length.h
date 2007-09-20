@@ -4,13 +4,14 @@
  * Copyright (C) 2001-2005 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_LENGTH_H__
 #define __FO_LENGTH_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/datatype/fo-datatype.h>
 
 G_BEGIN_DECLS
 
@@ -26,7 +27,6 @@ typedef struct _FoLength      FoLength;
 typedef struct _FoLengthClass FoLengthClass;
 
 GType        fo_length_get_type        (void) G_GNUC_CONST;
-FoDatatype * fo_length_new             (void);
 FoDatatype * fo_length_new_with_value  (gdouble     value);
 FoDatatype * fo_length_new_from_pixels (gint        count);
 gdouble      fo_length_get_value       (FoDatatype *length);
@@ -35,8 +35,7 @@ FoDatatype * fo_length_get_length_minus_3pt  (void);
 FoDatatype * fo_length_get_length_zero       (void);
 FoDatatype * fo_length_get_length_3pt        (void);
 FoDatatype * fo_length_get_length_6pt        (void);
-FoDatatype * fo_length_get_length_12         (void);
-FoDatatype * fo_length_get_length_24         (void);
+FoDatatype * fo_length_get_length_24pt       (void);
 FoDatatype * fo_length_get_length_A4_width   (void);
 FoDatatype * fo_length_get_length_A4_height  (void);
 

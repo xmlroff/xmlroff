@@ -55,6 +55,8 @@ struct _FoLengthClass
   FoDatatype *length_zero;
 };
 
+static FoDatatype * fo_length_new             (void);
+
 static void fo_length_init          (FoLength      *length);
 static void fo_length_class_init    (FoLengthClass *klass);
 static void fo_length_set_property  (GObject       *object,
@@ -262,7 +264,7 @@ fo_length_set_property (GObject         *object,
  * 
  * Return value: The new #FoLength.
  **/
-FoDatatype*
+static FoDatatype*
 fo_length_new (void)
 {
   FoDatatype* length;
@@ -481,34 +483,14 @@ fo_length_get_length_6pt (void)
 }
 
 /**
- * fo_length_get_length_12:
- * 
- * Get an #FoLength with the well-known value of 12pt.
- * 
- * Return value: The #FoLength.
- **/
-FoDatatype*
-fo_length_get_length_12 (void)
-{
-  static FoDatatype *length = NULL;
-
-  if (length == NULL)
-    {
-      length = fo_length_new_with_value (12.0);
-    }
-
-  return length;
-}
-
-/**
- * fo_length_get_length_24:
+ * fo_length_get_length_24pt:
  * 
  * Get an #FoLength with the well-known value of 24pt.
  * 
  * Return value: The #FoLength.
  **/
 FoDatatype*
-fo_length_get_length_24 (void)
+fo_length_get_length_24pt (void)
 {
   static FoDatatype *length = NULL;
 
