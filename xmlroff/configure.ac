@@ -63,6 +63,8 @@ if test "`pwd`" = "/usr/local/src/xslfo/xmlroff" ; then
     fi
 dnl    CFLAGS="-Wall -g -O -ansi -pedantic -W -Wunused -Wimplicit -Wreturn-type -Wswitch -Wcomment -Wtrigraphs -Wformat -Wchar-subscripts -Wuninitialized -Wparentheses -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs -Winline "
     CFLAGS="-Wall -g -O -W "
+    # Always build CUnit tests
+    enable_cunit=yes
 fi
 
 if test "$enable_libfo_debug" = "yes" ; then
@@ -446,7 +448,6 @@ fi
 CUNIT_MIN_VERSION=2.1
 
 have_cunit=false
-enable_cunit=false
 PKG_CHECK_MODULES(CUNIT,
 		  cunit >= $CUNIT_MIN_VERSION,
 		  have_cunit=true,
@@ -456,20 +457,20 @@ dnl Let people disable the CUnit stuff.
 AC_ARG_ENABLE(cunit,
 	      AC_HELP_STRING([--enable-cunit],
                              [use CUnit to run unit tests (default=no)]),
-              enable_cunit="$enableval",
-              enable_cunit=no)
+              enable_cunit_arg="$enableval",
+              enable_cunit_arg=no)
 
-if test "x$enable_cunit" = "xyes" ; then
+if test "x$enable_cunit_arg" = "xyes" ; then
   if test "x$have_cunit" = "xtrue" ; then
-    enable_cunit=true
+    build_cunit=true
   else
-    enable_cunit=false 
+    build_cunit=false
   fi
 fi
 
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
-AM_CONDITIONAL(ENABLE_CUNIT, [$enable_cunit])
+AM_CONDITIONAL(ENABLE_CUNIT,$build_cunit)
 
 CFLAGS="$CFLAGS $GLIB_CFLAGS"
 
@@ -500,3 +501,6 @@ if $enable_gp     ; then fo_doc_subtypes="$fo_doc_subtypes 'GNOME Print'"; fi
 echo "
 Configuration:
   Enabled FoDoc subtypes:$fo_doc_subtypes"
+
+echo "  CUnit tests enabled:    $build_cunit"
+
