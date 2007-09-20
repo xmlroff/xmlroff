@@ -23,6 +23,8 @@ enum {
   PROP_MAXIMUM
 };
 
+static FoDatatype * fo_length_range_new                (void);
+
 static void fo_length_range_init         (FoLengthRange      *length_range);
 static void fo_length_range_class_init   (FoLengthRangeClass *klass);
 static void fo_length_range_set_property (GObject       *object,
@@ -245,7 +247,7 @@ fo_length_range_get_property (GObject         *object,
  * 
  * Return value: the new #FoLengthRange.
  **/
-FoDatatype*
+static FoDatatype*
 fo_length_range_new (void)
 {
   FoDatatype *length_range;

@@ -11,6 +11,7 @@
 #define __FO_LENGTH_RANGE_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/datatype/fo-datatype.h>
 
 G_BEGIN_DECLS
 
@@ -26,7 +27,6 @@ typedef struct _FoLengthRange      FoLengthRange;
 typedef struct _FoLengthRangeClass FoLengthRangeClass;
 
 GType        fo_length_range_get_type           (void) G_GNUC_CONST;
-FoDatatype * fo_length_range_new                (void);
 FoDatatype * fo_length_range_new_auto           (void);
 FoDatatype * fo_length_range_new_with_value     (FoDatatype *datatype);
 
