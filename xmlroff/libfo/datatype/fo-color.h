@@ -4,13 +4,14 @@
  * Copyright (C) 2001, 2002 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_COLOR_H__
 #define __FO_COLOR_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/datatype/fo-datatype.h>
 
 G_BEGIN_DECLS
 
@@ -26,7 +27,6 @@ typedef struct _FoColor      FoColor;
 typedef struct _FoColorClass FoColorClass;
 
 GType        fo_color_get_type       (void) G_GNUC_CONST;
-FoDatatype * fo_color_new            (void);
 FoDatatype * fo_color_new_with_value (guint red,
 				      guint green,
 				      guint blue);

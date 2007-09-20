@@ -38,6 +38,8 @@ struct _FoColorClass
   FoHashTable *colors;
 };
 
+static FoDatatype * fo_color_new    (void);
+
 static void fo_color_init           (FoColor      *color);
 static void fo_color_class_init     (FoColorClass *klass);
 static void fo_color_set_property   (GObject      *object,
@@ -48,13 +50,13 @@ static void fo_color_get_property   (GObject      *object,
 				     guint         prop_id,
 				     GValue       *value,
 				     GParamSpec   *pspec);
-static void fo_color_finalize       (GObject      *object);
+static void  fo_color_finalize      (GObject      *object);
 static guint fo_color_hash_func     (gconstpointer v);
 static gint  fo_color_equal_func    (gconstpointer v1,
 				     gconstpointer v2);
 
-FoDatatype * fo_color_copy          (FoDatatype   *datatype);
-gchar*       fo_color_sprintf       (FoObject     *object);
+static FoDatatype * fo_color_copy          (FoDatatype   *datatype);
+static gchar*       fo_color_sprintf       (FoObject     *object);
 
 static void  fo_color_set_red       (FoDatatype   *color,
 				     guint16       new_red);
@@ -280,7 +282,7 @@ fo_color_get_property (GObject         *object,
  * 
  * Return value: the new #FoColor.
  **/
-FoDatatype *
+static FoDatatype *
 fo_color_new (void)
 {
   FoDatatype *color;
@@ -495,7 +497,7 @@ fo_color_set_blue (FoDatatype *color,
  * 
  * Return value: New #FoColor
  **/
-FoDatatype*
+static FoDatatype*
 fo_color_copy (FoDatatype *datatype)
 {
   FoDatatype *fo_color;
@@ -503,12 +505,8 @@ fo_color_copy (FoDatatype *datatype)
   g_return_val_if_fail (datatype != NULL, NULL);
   g_return_val_if_fail (FO_IS_COLOR (datatype), NULL);
 
-  fo_color = fo_color_new ();
-  FO_COLOR (fo_color)->red = FO_COLOR (datatype)->red;
-  FO_COLOR (fo_color)->green = FO_COLOR (datatype)->green;
-  FO_COLOR (fo_color)->blue = FO_COLOR (datatype)->blue;
-
-  return fo_color;
+  /* There is only ever one instance of any color. */
+  return datatype;
 }
 
 /**
@@ -521,7 +519,7 @@ fo_color_copy (FoDatatype *datatype)
  * 
  * Return value: String representation of @object
  **/
-gchar*
+static gchar*
 fo_color_sprintf (FoObject *object)
 {
   g_return_val_if_fail (object != NULL, NULL);
