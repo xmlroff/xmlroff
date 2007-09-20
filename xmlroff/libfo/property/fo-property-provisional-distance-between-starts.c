@@ -90,7 +90,7 @@ void
 fo_property_provisional_distance_between_starts_init (FoPropertyProvisionalDistanceBetweenStarts *provisional_distance_between_starts)
 {
   FO_PROPERTY (provisional_distance_between_starts)->value =
-    g_object_ref (fo_length_get_length_24 ());
+    g_object_ref (fo_length_get_length_24pt ());
 }
 
 /**
