@@ -5,13 +5,17 @@ INCLUDES = \
 	$(CUNIT_CFLAGS)
 
 if ENABLE_CUNIT
-  bin_PROGRAMS = test
+  noinst_PROGRAMS = test
 endif
 
 test_SOURCES = \
 	test.c \
-	test-fo-expr-eval.c\
-	test-fo-expr-eval.h
+	test-fo-color.c	\
+	test-fo-color.h	\
+	test-fo-expr-eval.c	\
+	test-fo-expr-eval.h	\
+	test-fo-length-range.c	\
+	test-fo-length-range.h
 
 #test_LDFLAGS = -static
 

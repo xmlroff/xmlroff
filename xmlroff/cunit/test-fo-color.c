@@ -27,14 +27,13 @@
 
 #include "CUnit/Basic.h"
 #include <libfo/fo-libfo-basic.h>
-#include <libfo/expr/fo-expr-eval.h>
+#include <libfo/datatype/fo-color.h>
 
 /* The suite initialization function.
- * Opens the temporary file used by the tests.
  * Returns zero on success, non-zero otherwise.
  */
 static int
-init_suite_expr (void)
+init_suite (void)
 {
   fo_libfo_init ();
 
@@ -42,11 +41,10 @@ init_suite_expr (void)
 }
 
 /* The suite cleanup function.
- * Closes the temporary file used by the tests.
  * Returns zero on success, non-zero otherwise.
  */
 static int
-clean_suite_expr (void)
+clean_suite (void)
 {
   fo_libfo_shutdown ();
 
@@ -54,31 +52,38 @@ clean_suite_expr (void)
 }
 
 static void
-test_fo_expr_eval(void)
+test_fo_color_copy (void)
 {
-  CU_ASSERT_PTR_NULL (fo_expr_eval ("test",
-				    "test",
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL));
+  guint red = 0x0123;
+  guint green = 0x4567;
+  guint blue = 0x89AB;
+
+  FoDatatype *color1 = 
+    g_object_ref (fo_color_new_with_value (red, green, blue));
+  FoDatatype *color2 =
+    g_object_ref (fo_datatype_copy (color1));
+
+  CU_ASSERT_EQUAL (red, fo_color_get_red (color2));
+  CU_ASSERT_EQUAL (green, fo_color_get_green (color2));
+  CU_ASSERT_EQUAL (blue, fo_color_get_blue (color2));
+
+  g_object_unref (color1);
+  g_object_unref (color2);
 }
 
-static CU_TestInfo test_array1[] = {
-  { "test of fo_expr_eval()", test_fo_expr_eval },
+static CU_TestInfo test_array[] = {
+  { "test copy of FoColor", test_fo_color_copy },
   CU_TEST_INFO_NULL,
 };
 
 static CU_SuiteInfo suites[] = {
-  { "fo-expr-eval", init_suite_expr, clean_suite_expr, test_array1 },
+  { "fo-color", init_suite, clean_suite, test_array },
   CU_SUITE_INFO_NULL,
 };
 
 CU_SuiteInfo *
-test_fo_expr_eval_get_suites()
+test_fo_color_get_suites (void)
 {
   return suites;
 }
+

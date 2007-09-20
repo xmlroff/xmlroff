@@ -27,14 +27,14 @@
 
 #include "CUnit/Basic.h"
 #include <libfo/fo-libfo-basic.h>
-#include <libfo/expr/fo-expr-eval.h>
+#include <libfo/datatype/fo-length.h>
+#include <libfo/datatype/fo-length-range.h>
 
 /* The suite initialization function.
- * Opens the temporary file used by the tests.
  * Returns zero on success, non-zero otherwise.
  */
 static int
-init_suite_expr (void)
+init_suite (void)
 {
   fo_libfo_init ();
 
@@ -42,11 +42,10 @@ init_suite_expr (void)
 }
 
 /* The suite cleanup function.
- * Closes the temporary file used by the tests.
  * Returns zero on success, non-zero otherwise.
  */
 static int
-clean_suite_expr (void)
+clean_suite (void)
 {
   fo_libfo_shutdown ();
 
@@ -54,31 +53,37 @@ clean_suite_expr (void)
 }
 
 static void
-test_fo_expr_eval(void)
+test_fo_length_range_copy (void)
 {
-  CU_ASSERT_PTR_NULL (fo_expr_eval ("test",
-				    "test",
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL,
-				    NULL));
+  FoDatatype *length_range_1 =
+    g_object_ref (fo_length_range_new_with_value (fo_length_get_length_3pt ()));
+  FoDatatype *length_range_2 =
+    g_object_ref (fo_datatype_copy (length_range_1));
+
+  CU_ASSERT_EQUAL (fo_length_get_value (fo_length_get_length_3pt ()),
+		   fo_length_get_value (fo_length_range_get_minimum (length_range_2)));
+  CU_ASSERT_EQUAL (fo_length_get_value (fo_length_get_length_3pt ()),
+		   fo_length_get_value (fo_length_range_get_optimum (length_range_2)));
+  CU_ASSERT_EQUAL (fo_length_get_value (fo_length_get_length_3pt ()),
+		   fo_length_get_value (fo_length_range_get_maximum (length_range_2)));
+
+  g_object_unref (length_range_1);
+  g_object_unref (length_range_2);
 }
 
-static CU_TestInfo test_array1[] = {
-  { "test of fo_expr_eval()", test_fo_expr_eval },
+static CU_TestInfo test_array[] = {
+  { "test copy of FoLengthRange", test_fo_length_range_copy },
   CU_TEST_INFO_NULL,
 };
 
 static CU_SuiteInfo suites[] = {
-  { "fo-expr-eval", init_suite_expr, clean_suite_expr, test_array1 },
+  { "fo-length-range", init_suite, clean_suite, test_array },
   CU_SUITE_INFO_NULL,
 };
 
 CU_SuiteInfo *
-test_fo_expr_eval_get_suites()
+test_fo_length_range_get_suites (void)
 {
   return suites;
 }
+
