@@ -223,7 +223,7 @@ fo_property_column_width_resolve_percent (gdouble            percentage,
   gdouble child_ipdim;
 
   table = FO_FO (fo_node_get_ancestor_or_self_by_name (FO_NODE (fo_node),
-						       "table"));
+						       "FoTable"));
 
   g_assert (table != NULL);
 
