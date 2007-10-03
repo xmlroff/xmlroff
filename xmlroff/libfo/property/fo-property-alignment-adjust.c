@@ -36,7 +36,6 @@ struct _FoPropertyAlignmentAdjustClass
 
 static void fo_property_alignment_adjust_init         (FoPropertyAlignmentAdjust      *property_alignment_adjust);
 static void fo_property_alignment_adjust_class_init   (FoPropertyAlignmentAdjustClass *klass);
-static void fo_property_alignment_adjust_finalize     (GObject       *object);
 
 static FoDatatype* fo_property_alignment_adjust_resolve_enum (const gchar *token,
                                                               FoContext   *context,
@@ -128,8 +127,6 @@ fo_property_alignment_adjust_class_init (FoPropertyAlignmentAdjustClass *klass)
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_alignment_adjust_finalize;
-
   property_class->is_inherited = FALSE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
@@ -138,22 +135,6 @@ fo_property_alignment_adjust_class_init (FoPropertyAlignmentAdjustClass *klass)
     fo_property_alignment_adjust_validate;
   property_class->get_initial =
     fo_property_alignment_adjust_get_initial;
-}
-
-/**
- * fo_property_alignment_adjust_finalize:
- * @object: #FoPropertyAlignmentAdjust object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyAlignmentAdjust.
- **/
-void
-fo_property_alignment_adjust_finalize (GObject *object)
-{
-  FoPropertyAlignmentAdjust *alignment_adjust;
-
-  alignment_adjust = FO_PROPERTY_ALIGNMENT_ADJUST (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 /**
