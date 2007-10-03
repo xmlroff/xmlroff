@@ -134,14 +134,19 @@ fo_tree_finalize (GObject *object)
 			fo_tree_free_hash_key,
 			NULL);
   g_hash_table_destroy (tree->id_hash);
+  tree->id_hash = NULL;
+
   g_hash_table_foreach (tree->master_name_hash,
 			fo_tree_free_hash_key,
 			NULL);
   g_hash_table_destroy (tree->master_name_hash);
+  tree->master_name_hash = NULL;
+
   g_hash_table_foreach (tree->page_sequence_master_name_hash,
 			fo_tree_free_hash_key,
 			NULL);
   g_hash_table_destroy (tree->page_sequence_master_name_hash);
+  tree->page_sequence_master_name_hash = NULL;
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -381,20 +386,27 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 	 "%sdefault-master:   %p",
 	 indent,
 	 fo_tree->default_master);
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 "%smaster-name hash:",
-	 indent);
-  g_hash_table_foreach (fo_tree->master_name_hash,
-			fo_tree_debug_dump_hash,
-			GINT_TO_POINTER (depth + 1));
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 "%spage-sequence-master-name hash:",
-	 indent);
-  g_hash_table_foreach (fo_tree->page_sequence_master_name_hash,
-			fo_tree_debug_dump_hash,
-			GINT_TO_POINTER (depth + 1));
+  if (fo_tree->master_name_hash != NULL)
+    {
+      g_log (G_LOG_DOMAIN,
+	     G_LOG_LEVEL_DEBUG,
+	     "%smaster-name hash:",
+	     indent);
+      g_hash_table_foreach (fo_tree->master_name_hash,
+			    fo_tree_debug_dump_hash,
+			    GINT_TO_POINTER (depth + 1));
+    }
+
+  if (fo_tree->page_sequence_master_name_hash != NULL)
+    {
+      g_log (G_LOG_DOMAIN,
+	     G_LOG_LEVEL_DEBUG,
+	     "%spage-sequence-master-name hash:",
+	     indent);
+      g_hash_table_foreach (fo_tree->page_sequence_master_name_hash,
+			    fo_tree_debug_dump_hash,
+			    GINT_TO_POINTER (depth + 1));
+    }
 
   g_free (indent);
 
