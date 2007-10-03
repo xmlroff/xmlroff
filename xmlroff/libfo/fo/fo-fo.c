@@ -765,6 +765,17 @@ fo_fo_validate (FoFo *fo,
 				     error);
 }
 
+/**
+ * fo_fo_validate_default:
+ * @fo:              #FoFo to validate.
+ * @current_context: #FoContext of @fo.
+ * @parent_context:  #FoContext of parent of @fo.
+ * 
+ * Default validation is to just merge and update contexts.
+ *
+ * This will only be called for #FoFo that do not have either a
+ * _validate2 or _validate function of their own.
+ **/
 void
 fo_fo_validate_default (FoFo *fo,
 			FoContext *current_context,
@@ -784,6 +795,16 @@ fo_fo_validate_default (FoFo *fo,
   */
 }
 
+/**
+ * fo_fo_validate2_default:
+ * @fo:              #FoFo to validate.
+ * @current_context: #FoContext of @fo.
+ * @parent_context:  #FoContext of parent of @fo.
+ * @error:           #GError indicating any error that occurs
+ * 
+ * Default behaviour is to fallback to using the FO's _validate
+ * function.
+ **/
 void
 fo_fo_validate2_default (FoFo *fo,
 			 FoContext *current_context,
@@ -1010,13 +1031,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 {
   FoPropertyResolveContext *prop_context =
     (FoPropertyResolveContext *) data;
-  xmlNodePtr element;
-  xslAttrListIteratorPtr iterator;
-  FoProperty *font_size = NULL;
-  FoFo *fo_fo;
   GSList *node_properties = NULL;
-  FoContext *current_context = NULL;
-  FoContext *parent_context = NULL;
   GError *error = NULL;
   FoArea *reference_area = prop_context->reference_area;
   FoWarningFlag warning_mode = prop_context->warning_mode;
@@ -1032,10 +1047,10 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	     fo_object_debug_sprintf (reference_area));
 #endif
 
-  fo_fo = FO_FO (fo_node);
+  FoFo *fo_fo = FO_FO (fo_node);
 
-  element = fo_xml_node_get_xml_node (fo_fo->element);
-  parent_context =
+  xmlNodePtr element = fo_xml_node_get_xml_node (fo_fo->element);
+  FoContext *parent_context =
     fo_fo_get_context (FO_FO (fo_node_parent (FO_NODE (fo_fo))));
 
   /* Special processing for FOs with special behaviour defined by the
@@ -1183,6 +1198,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 
   /* Handle the 'font-size' property first since its value is part of
      the context for evaluating all other properties. */
+  FoProperty *font_size = NULL;
   if (xmlHasProp (element, (xmlChar *) "font-size"))
     {
       xmlAttrPtr font_size_attr =
@@ -1225,7 +1241,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
     }
 
 
-  iterator = xslAttrListGetIterator (element);
+  xslAttrListIteratorPtr iterator = xslAttrListGetIterator (element);
 
   /* Iterate over the remaining attributes. */
   while (iterator)
@@ -1307,7 +1323,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 
   xslAttrListIteratorDestroy (iterator);
 
-  current_context = fo_context_new ();
+  FoContext *current_context = fo_context_new ();
   if (node_properties != NULL)
     {
       fo_context_update_from_slist (current_context, node_properties);
@@ -1316,7 +1332,7 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 
   fo_context_util_spaces_resolve (current_context, reference_area);
   fo_context_util_length_ranges_resolve (current_context, reference_area);
-  /* Validate property values and property interrations of FO tree. */
+  /* Validate property values and property interactions of FO tree. */
   fo_fo_validate (fo_fo,
 		  current_context,
 		  parent_context,
@@ -1324,9 +1340,8 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 
   if (error != NULL)
     {
-      g_propagate_error (/*FO_OBJECT (fo_fo),*/
-					prop_context->error,
-					error);
+      g_propagate_error (prop_context->error,
+			 error);
       return TRUE;
     }
 
