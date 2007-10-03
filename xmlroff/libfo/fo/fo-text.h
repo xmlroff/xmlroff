@@ -54,7 +54,7 @@ void         fo_text_set_font_weight  (FoFo        *fo_fo,
 FoProperty * fo_text_get_score_spaces (FoFo        *fo_fo);
 void         fo_text_set_score_spaces (FoFo        *fo_fo,
 				       FoProperty  *new_score_spaces);
-gchar*       fo_text_get_value        (FoFo        *fo_fo);
+const gchar* fo_text_get_value        (FoFo        *fo_fo);
 void         fo_text_set_value        (FoFo        *fo_fo,
 				       const gchar *new_value);
 gboolean fo_text_get_whitespace_only (FoFo *fo_fo);

@@ -121,7 +121,14 @@ static void fo_text_get_property   (GObject         *object,
                                        guint            prop_id,
                                        GValue          *value,
                                        GParamSpec      *pspec);
+static gboolean fo_text_resolve_property_attributes (FoNode  *fo_node,
+						     gpointer data);
+
 static void fo_text_finalize    (GObject           *object);
+static void fo_text_validate    (FoFo      *fo,
+				 FoContext *current_context,
+				 FoContext *parent_context,
+				 GError   **error);
 static void fo_text_update_from_context (FoFo *fo,
 					 FoContext *context);
 static void fo_text_debug_dump (FoObject *object, gint depth);
@@ -193,8 +200,9 @@ fo_text_class_init (FoTextClass *klass)
   FO_OBJECT_CLASS (klass)->debug_dump = fo_text_debug_dump;
 
   fo_fo_class->update_from_context = fo_text_update_from_context;
-  /* No properties so no need to resolve property attributes. */
-  fo_fo_class->resolve_property_attributes = NULL;
+  fo_fo_class->resolve_property_attributes =
+    fo_text_resolve_property_attributes;
+  fo_fo_class->validate2 = fo_text_validate;
 
   g_object_class_install_property
     (object_class,
@@ -320,9 +328,9 @@ fo_text_finalize (GObject *object)
  **/
 void
 fo_text_set_property (GObject         *object,
-                         guint            prop_id,
-                         const GValue    *value,
-                         GParamSpec      *pspec)
+		      guint            prop_id,
+		      const GValue    *value,
+		      GParamSpec      *pspec)
 {
   FoFo *fo_text;
 
@@ -373,9 +381,9 @@ fo_text_set_property (GObject         *object,
  **/
 void
 fo_text_get_property (GObject         *object,
-                         guint            prop_id,
-                         GValue          *value,
-                         GParamSpec      *pspec)
+		      guint            prop_id,
+		      GValue          *value,
+		      GParamSpec      *pspec)
 {
   FoFo *fo_text;
 
@@ -405,7 +413,7 @@ fo_text_get_property (GObject         *object,
       g_value_set_object (value, G_OBJECT (fo_text_get_font_weight (fo_text)));
       break;
     case PROP_VALUE:
-      g_value_set_object (value, G_OBJECT (fo_text_get_value (fo_text)));
+      g_value_set_string (value, fo_text_get_value (fo_text));
       break;
     case PROP_WHITESPACE_ONLY:
       g_value_set_boolean (value, fo_text_get_whitespace_only (fo_text));
@@ -430,6 +438,122 @@ fo_text_new (void)
 }
 
 /**
+ * fo_text_resolve_property_attributes:
+ * @fo_node:      #FoFo
+ * @data:         Context within which to resolve property expressions
+ * 
+ * Every #FoFo object was created from a result tree element that is
+ * in the XSL FO namespace.  The object's specified property values
+ * are created from the result tree element's attributes.
+ *
+ * This function evaluates each of the property attributes of the
+ * result tree element for @fo_node.
+ * 
+ * Return value: %FALSE if completed successfully, %TRUE otherwise
+ **/
+gboolean
+fo_text_resolve_property_attributes (FoNode     *fo_node,
+				     gpointer    data)
+{
+  FoPropertyResolveContext *prop_context =
+    (FoPropertyResolveContext *) data;
+  GError *error = NULL;
+  gboolean continue_after_error = prop_context->continue_after_error;
+
+  g_return_val_if_fail (FO_IS_TEXT (fo_node), TRUE);
+  g_return_val_if_fail (prop_context != NULL, TRUE);
+
+  /* FoText is an convenience for not creating lots of FoCharacter
+     FOs.  It doesn't have a context of its own, since all its
+     property values are those of its containing FO.  So there is no
+     current context of the FoText. */
+  fo_fo_validate (FO_FO (fo_node),
+		  NULL,
+		  fo_fo_get_context (FO_FO (fo_node_parent (fo_node))),
+		  &error);
+
+  if (error != NULL)
+    {
+      fo_object_maybe_propagate_error (FO_OBJECT (fo_node),
+				       prop_context->error,
+				       error,
+				       continue_after_error);
+      return TRUE;
+    }
+
+  fo_fo_set_context (FO_FO (fo_node),
+		     fo_fo_get_context (FO_FO (fo_node_parent (fo_node))));
+
+  return FALSE;
+}
+
+/**
+ * fo_text_validate:
+ * @fo:              #FoInline object to validate.
+ * @current_context: #FoContext associated with current object.
+ * @parent_context:  #FoContext associated with parent FO.
+ * @error:           Information about any error that has occurred.
+ * 
+ * Validate and possibly update interrelated property values in
+ * @current_context, then update @fo property values.  Set @error if
+ * an error occurred.
+ **/
+void
+fo_text_validate (FoFo      *fo,
+		  FoContext *current_context,
+		  FoContext *parent_context,
+		  GError   **error)
+{
+  FoText *fo_text;
+
+  g_return_if_fail (fo != NULL);
+  g_return_if_fail (FO_IS_TEXT (fo));
+  g_return_if_fail ((current_context == NULL) ||
+		    FO_IS_CONTEXT (current_context));
+  g_return_if_fail (FO_IS_CONTEXT (parent_context));
+  g_return_if_fail (error == NULL || *error == NULL);
+
+  fo_text = FO_TEXT (fo);
+
+  fo_fo_update_from_context (fo, parent_context);
+
+  FoEnumEnum linefeed_treatment =
+    fo_enum_get_value (fo_property_get_value (fo_context_get_linefeed_treatment (parent_context)));
+
+  if (linefeed_treatment != FO_ENUM_ENUM_PRESERVE)
+    {
+      gchar **strings = g_strsplit_set (fo_text_get_value (fo),
+					 "\n",
+					 -1);
+      gchar *separator = NULL;
+
+      switch (linefeed_treatment)
+	{
+	case FO_ENUM_ENUM_IGNORE:
+	  separator = NULL;
+	  break;
+	case FO_ENUM_ENUM_TREAT_AS_SPACE:
+	  separator = " ";
+	  break;
+	case FO_ENUM_ENUM_TREAT_AS_ZERO_WIDTH_SPACE:
+	  /* ZERO WIDTH SPACE = U+200B */
+	  separator = "\xe2\x80\x8b";
+	  break;
+	default:
+	  g_assert_not_reached ();
+	}
+
+      gchar *new_value = g_strjoinv (separator,
+				     strings);
+
+      fo_text_set_value (fo,
+			 new_value);
+      g_strfreev (strings);
+      g_free (new_value);
+    }
+}
+
+/**
  * fo_text_update_from_context:
  * @fo:      The #FoFo object
  * @context: The #FoContext object from which to update the properties of @fo
@@ -437,8 +561,8 @@ fo_text_new (void)
  * Sets the properties of @fo to the corresponding property values in @context
  **/
 void
-fo_text_update_from_context (FoFo *fo,
-                                  FoContext *context)
+fo_text_update_from_context (FoFo      *fo,
+			     FoContext *context)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_TEXT (fo));
@@ -913,7 +1037,7 @@ fo_text_set_value (FoFo *fo_fo,
  *
  * Return value: The "value" property value
 **/
-gchar*
+const gchar*
 fo_text_get_value (FoFo *fo_fo)
 {
   g_return_val_if_fail (fo_fo != NULL, NULL);
@@ -940,6 +1064,58 @@ fo_text_get_whitespace_only (FoFo *fo_fo)
 }
 
 /**
+ * is_white_space:
+ * @string: the string
+ * 
+ * From http://www.w3.org/TR/xml/#sec-common-syn
+ *
+ * [3]  S ::= (#x20 | #x9 | #xD | #xA)+
+ * 
+ * Return value: TRUE if the current character is an white space character,
+ *               otherwise FALSE
+ **/
+static gboolean
+is_white_space (const gchar *string)
+{
+  return ((*string == '\x20') ||
+	  (*string == '\x09') ||
+	  (*string == '\x0D') ||
+	  (*string == '\x0A'));
+}
+
+/**
+ * is_non_linefeed_white_space:
+ * @string: the string
+ * 
+ * From http://www.w3.org/TR/xml/#sec-common-syn
+ *
+ * [3]  S ::= (#x20 | #x9 | #xD | #xA)+
+ * 
+ * Return value: TRUE if the current character is an white space character,
+ *               otherwise FALSE
+ **/
+static gboolean
+is_non_linefeed_white_space (const gchar *string)
+{
+  return ((*string == '\x20') ||
+	  (*string == '\x09') ||
+	  (*string == '\x0D'));
+}
+
+/**
+ * is_linefeed:
+ * @string: the string
+ * 
+ * Return value: TRUE if the current character is a linefeed character,
+ *               otherwise FALSE
+ **/
+static gboolean
+is_linefeed (const gchar *string)
+{
+  return (*string == '\x0A');
+}
+
+/**
  * fo_text_get_text_attr_list:
  * @fo_inline_fo: The #FoInlineFo object.
  * @fo_doc:       The #FoDoc that will render @fo_inline_fo.
@@ -959,5 +1135,27 @@ fo_text_get_text_attr_list (FoFo *fo_inline_fo,
   g_return_if_fail (fo_inline_fo != NULL);
   g_return_if_fail (FO_IS_TEXT (fo_inline_fo));
 
-  g_string_append (text, fo_text_get_value (fo_inline_fo));
+  FoEnumEnum whitespace_collapse =
+    fo_enum_get_value (fo_property_get_value (fo_context_get_white_space_collapse (fo_fo_get_context (fo_inline_fo))));
+
+  if (whitespace_collapse == FO_ENUM_ENUM_TRUE)
+    {
+      const gchar *string = fo_text_get_value (fo_inline_fo);
+      const gchar *p = string;
+
+      while (*p != '\0')
+	{
+	  if (!(is_non_linefeed_white_space (p) &&
+		(is_white_space (g_utf8_find_prev_char (string, p)) ||
+		 is_linefeed (g_utf8_find_next_char (p, NULL)))))
+	    {
+	      g_string_append_unichar (text, g_utf8_get_char (p));	      
+	    }
+	  p = g_utf8_next_char (p);
+	}
+    }
+  else
+    {
+      g_string_append (text, fo_text_get_value (fo_inline_fo));
+    }
 }

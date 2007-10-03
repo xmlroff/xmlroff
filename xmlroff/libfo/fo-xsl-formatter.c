@@ -714,11 +714,9 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
 	if (fo_fo_get_allow_mixed_content (parent_fo))
 	  {
 	    fo_text = fo_text_new ();
-	    fo_text_set_value (fo_text, text);
-	    fo_fo_update_from_context (fo_text,
-				       fo_fo_get_context (parent_fo));
 	    fo_node_append (FO_NODE (parent_fo),
 			    FO_NODE (fo_text));
+	    fo_text_set_value (fo_text, text);
 	  }
 	else
 	  {
