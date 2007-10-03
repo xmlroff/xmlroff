@@ -281,11 +281,13 @@ fo_block_area_new (FoFo *block,
       end_indent =
 	fo_percentage_get_value (end_indent_datatype) * 0.01 *
 	fo_area_area_get_width (parent_area);
+#if defined(LIBFO_DEBUG) && 0
       g_log (G_LOG_DOMAIN,
 	     G_LOG_LEVEL_DEBUG,
 	     "get_text_attr_list:: end-indent: %f, parent width: %f",
 		 fo_percentage_get_value (end_indent_datatype),
 		 fo_area_area_get_width (parent_area));
+#endif
     }
 
   space_before =
