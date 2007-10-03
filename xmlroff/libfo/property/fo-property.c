@@ -188,6 +188,12 @@ fo_property_finalize (GObject *object)
 
   property = FO_PROPERTY (object);
 
+  if (property->value != NULL)
+    {
+      g_object_unref (property->value);
+      property->value = NULL;
+    }
+
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
