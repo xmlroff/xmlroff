@@ -4,7 +4,7 @@
      with the capabilities of the libfo library of the xmlroff XSL
      Formatter. -->
 
-<!-- Author: Tony Graham <tonygraham@users.sourceforge.net> -->
+<!-- Author: Tony Graham -->
 
 <!--
      Copyright (c) 2003-2006 Sun Microsystems. All Rights Reserved.
@@ -52,25 +52,43 @@
 
   <xsl:param name="verbose" select="false()"/>
   <xsl:param name="keep-threshold" select="20"/>
-  
+
   <xsl:template match="/">
-    <xsl:if test="$verbose">
-      <xsl:message>Stripping all strippable whitespace-only text nodes.</xsl:message>
-    </xsl:if>
     <xsl:apply-templates/>
   </xsl:template>
-  
-  <xsl:template match="text()">
-    <xsl:if test="contains(' &#x9;&#xA;',substring(.,1,1))">
-      <xsl:text> </xsl:text>
-    </xsl:if>
-    <xsl:value-of select="normalize-space()"/>
-    <xsl:if test="string-length() > 1 and
-                  contains(' &#x9;&#xA;',substring(.,string-length(),1))">
-      <xsl:text> </xsl:text>
-    </xsl:if>
+
+  <!--
+  <xsl:template
+    match="text()[ancestor::fo:block]
+                 [(ancestor::fo:block/
+                   ancestor-or-self::*/
+                   @linefeed-treatment[. != 'inherit'])[last()] =
+                   'treat-as-space'] |
+           text()[ancestor::fo:block]
+                 [not(ancestor::fo:block/
+                      ancestor-or-self::*/
+                      @linefeed-treatment[. != 'inherit'])]">
+    <xsl:value-of select="translate(., '&#xA;', ' ')"/>
   </xsl:template>
 
+  <xsl:template
+    match="text()[ancestor::fo:block]
+                 [(ancestor::fo:block/
+                   ancestor-or-self::*/
+                   @linefeed-treatment[. != 'inherit'])[last()] =
+                  'ignore']">
+    <xsl:value-of select="translate(., '&#xA;', '')"/>
+  </xsl:template>
+
+  <xsl:template
+    match="text()[ancestor::fo:block]
+                 [(ancestor::fo:block/
+                   ancestor-or-self::*/
+                   @linefeed-treatment[. != 'inherit'])[last()] =
+                   'treat-as-zero-width-space']">
+    <xsl:value-of select="translate(., '&#xA;', '&#x200B;')"/>
+  </xsl:template>
+-->
   <xsl:template match="fo:list-item-label/text()">
     <xsl:if test="$verbose">
       <xsl:message>Correcting text child of fo:list-item-label by removing text</xsl:message>
@@ -93,38 +111,35 @@
 
   <!-- Unsupported properties to be removed. -->
   <xsl:template match="@background-attachment |
-		       @background-image |
-		       @background-position-horizontal |
-		       @background-position-vertical |
-		       @background-repeat |
-		       @blank-or-not-blank |
-		       @column-count |
-		       @column-gap |
+           @background-image |
+           @background-position-horizontal |
+           @background-position-vertical |
+           @background-repeat |
+           @blank-or-not-blank |
+           @column-count |
+           @column-gap |
            @content-type |
            @extent |
-		       @external-destination |
-		       @font-selection-strategy |
-		       @force-page-count |
-		       @height |
-		       @hyphenate |
-		       @hyphenation-character |
-		       @hyphenation-push-character-count |
-		       @hyphenation-remain-character-count |
-		       @initial-page-number |
-		       @internal-destination |
-		       @language |
-		       @last-line-end-indent |
-		       @leader-alignment |
-		       @leader-pattern |
-		       @leader-pattern-width |
-		       @linefeed-treatment |
-		       @line-height-shift-adjustment |
-		       @margin |
-		       @odd-or-even |
-		       @page-position |
-		       @text-align-last |
-		       @white-space-collapse |
-		       @white-space-treatment">
+           @external-destination |
+           @font-selection-strategy |
+           @force-page-count |
+           @height |
+           @hyphenate |
+           @hyphenation-character |
+           @hyphenation-push-character-count |
+           @hyphenation-remain-character-count |
+           @initial-page-number |
+           @internal-destination |
+           @language |
+           @last-line-end-indent |
+           @leader-alignment |
+           @leader-pattern |
+           @leader-pattern-width |
+           @line-height-shift-adjustment |
+           @margin |
+           @odd-or-even |
+           @page-position |
+           @text-align-last">
     <xsl:if test="$verbose">
       <xsl:message>Removing unsupported '<xsl:value-of select="name()"/>' property.</xsl:message>
     </xsl:if>
@@ -202,7 +217,7 @@
 
   <xsl:template match="fo:simple-page-master[name(child::*[1]) = 'fo:region-before' and
     name(child::*[2]) = 'fo:region-after' and
-		name(child::*[3]) = 'fo:region-body']">
+    name(child::*[3]) = 'fo:region-body']">
     <xsl:if test="$verbose">
       <xsl:message>Correcting 'fo:region-before', 'fo:region-after', and 'fo:region-body' order.</xsl:message>
     </xsl:if>
@@ -213,7 +228,7 @@
       <xsl:apply-templates select="fo:region-after"/>
     </xsl:copy>
   </xsl:template>
-  
+
   <xsl:template match="fo:root[name(child::*[1]) = 'fo:declarations' and
     name(child::*[2]) = 'fo:layout-master-set']">
     <xsl:if test="$verbose">
@@ -226,13 +241,13 @@
       <xsl:apply-templates select="fo:page-sequence"/>
     </xsl:copy>
   </xsl:template>
-  
+
   <xsl:template match="fo:static-content">
     <xsl:if test="$verbose">
       <xsl:message>Removing unsupported 'fo:static-content'.</xsl:message>
     </xsl:if>
   </xsl:template>
-  
+
   <xsl:template match="fo:table[@table-layout='fixed' and not(@width)]">
     <xsl:if test="$verbose">
       <xsl:message>Auto table layout unsupported. Adding 'width' property.</xsl:message>
@@ -264,9 +279,9 @@
       <xsl:attribute name="width">
         <xsl:choose>
           <xsl:when test="count(fo:table-column/@column-width) != 0">
-	    <xsl:if test="$verbose">
-	      <xsl:message>Computing table-width from 'fo:table-column/@column-width' properties.</xsl:message>
-	    </xsl:if>
+            <xsl:if test="$verbose">
+              <xsl:message>Computing table-width from 'fo:table-column/@column-width' properties.</xsl:message>
+            </xsl:if>
             <xsl:for-each select="fo:table-column/@column-width">
               <xsl:value-of select="."/>
               <xsl:if test="position() != last()">
@@ -275,9 +290,9 @@
             </xsl:for-each>
           </xsl:when>
           <xsl:otherwise>
-	    <xsl:if test="$verbose">
-	      <xsl:message>Using 'width="100%"'.</xsl:message>
-	    </xsl:if>
+            <xsl:if test="$verbose">
+              <xsl:message>Using 'width="100%"'.</xsl:message>
+            </xsl:if>
             <xsl:text>100%</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
@@ -293,7 +308,7 @@
     </xsl:if>
     <xsl:apply-templates/>
   </xsl:template>
-  
+
   <xsl:template match="*">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
