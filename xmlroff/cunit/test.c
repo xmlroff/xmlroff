@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include "CUnit/Basic.h"
 #include "test-fo-color.h"
+#include "test-fo-context.h"
 #include "test-fo-expr-eval.h"
 #include "test-fo-length-range.h"
 
@@ -52,6 +53,15 @@ int main ()
     }
 
   error = CU_register_suites (test_fo_color_get_suites());
+  if (error != CUE_SUCCESS)
+    {
+      printf ("%s\n" ,
+	      CU_get_error_msg ());
+      return (error);
+    }
+
+
+  error = CU_register_suites (test_fo_context_get_suites());
   if (error != CUE_SUCCESS)
     {
       printf ("%s\n" ,
