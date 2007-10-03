@@ -195,15 +195,11 @@ fo_block_area_new (FoFo *block,
 		   FoArea **new_area,
 		   guint debug_level)
 {
-  /*FoArea *tmp_new_area;*/
-  /*PangoFontDescription *font_desc;*/
   FoFontDesc *font_desc;
-  /*PangoLayout *pango_layout;*/
   FoLayout *fo_layout;
   FoRectangle logical;
   /* FIXME: should be FO-specific dir enum */
   PangoDirection base_dir;
-  /*PangoAttrList *attr_list;*/
   FoDatatype *start_indent_datatype, *end_indent_datatype;
   gfloat parent_child_available_ipdim;
   gfloat parent_child_available_bpdim;
@@ -227,7 +223,6 @@ fo_block_area_new (FoFo *block,
   g_return_if_fail (FO_IS_DOC (fo_doc));
 
   base_dir = fo_doc_get_base_dir (fo_doc);
-  /*attr_list = pango_attr_list_new ();*/
 
   parent_child_available_ipdim =
     fo_area_get_child_available_ipdim (parent_area);
@@ -368,27 +363,13 @@ fo_block_area_new (FoFo *block,
 
       fo_object_debug_dump (fo_layout, 0);
     }
-  /*
-  if (strlen (fo_text_get_value (FO_TEXT (FO_FO (block)->children))) == 0)
-    {
-      g_log (G_LOG_DOMAIN,
-	     G_LOG_LEVEL_DEBUG,
-	     "get_text_attr_list:: Zero-length text");
-    }
-  */
 
-  /*
-  line_count = pango_layout_get_line_count (pango_layout);
-  */
   line_count = fo_layout_get_line_count (fo_layout);
 
   FO_AREA_LAYOUT (*new_area)->layout = fo_layout;
   FO_AREA_LAYOUT (*new_area)->line_first = 0;
   FO_AREA_LAYOUT (*new_area)->line_last = line_count - 1;
 
-  /*
-  pango_layout_get_extents (pango_layout, NULL, &logical);
-  */
   fo_layout_get_extents (fo_layout,
 			 &logical);
 
