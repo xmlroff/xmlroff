@@ -190,7 +190,6 @@ enum {
   PROP_WRITING_MODE
 };
 
-static void fo_context_init         (FoContext      *context);
 static void fo_context_class_init   (FoContextClass *klass);
 static void fo_context_set_property (GObject        *object,
 				     guint           prop_id,

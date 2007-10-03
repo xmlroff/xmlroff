@@ -500,8 +500,6 @@ fo_color_set_blue (FoDatatype *color,
 static FoDatatype*
 fo_color_copy (FoDatatype *datatype)
 {
-  FoDatatype *fo_color;
-
   g_return_val_if_fail (datatype != NULL, NULL);
   g_return_val_if_fail (FO_IS_COLOR (datatype), NULL);
 

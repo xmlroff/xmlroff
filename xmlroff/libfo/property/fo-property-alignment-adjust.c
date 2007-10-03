@@ -122,7 +122,6 @@ fo_property_alignment_adjust_init (FoPropertyAlignmentAdjust *alignment_adjust)
 void
 fo_property_alignment_adjust_class_init (FoPropertyAlignmentAdjustClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
