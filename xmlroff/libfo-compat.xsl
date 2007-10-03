@@ -57,38 +57,6 @@
     <xsl:apply-templates/>
   </xsl:template>
 
-  <!--
-  <xsl:template
-    match="text()[ancestor::fo:block]
-                 [(ancestor::fo:block/
-                   ancestor-or-self::*/
-                   @linefeed-treatment[. != 'inherit'])[last()] =
-                   'treat-as-space'] |
-           text()[ancestor::fo:block]
-                 [not(ancestor::fo:block/
-                      ancestor-or-self::*/
-                      @linefeed-treatment[. != 'inherit'])]">
-    <xsl:value-of select="translate(., '&#xA;', ' ')"/>
-  </xsl:template>
-
-  <xsl:template
-    match="text()[ancestor::fo:block]
-                 [(ancestor::fo:block/
-                   ancestor-or-self::*/
-                   @linefeed-treatment[. != 'inherit'])[last()] =
-                  'ignore']">
-    <xsl:value-of select="translate(., '&#xA;', '')"/>
-  </xsl:template>
-
-  <xsl:template
-    match="text()[ancestor::fo:block]
-                 [(ancestor::fo:block/
-                   ancestor-or-self::*/
-                   @linefeed-treatment[. != 'inherit'])[last()] =
-                   'treat-as-zero-width-space']">
-    <xsl:value-of select="translate(., '&#xA;', '&#x200B;')"/>
-  </xsl:template>
--->
   <xsl:template match="fo:list-item-label/text()">
     <xsl:if test="$verbose">
       <xsl:message>Correcting text child of fo:list-item-label by removing text</xsl:message>
