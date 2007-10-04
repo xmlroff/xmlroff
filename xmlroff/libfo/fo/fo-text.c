@@ -1077,10 +1077,11 @@ fo_text_get_whitespace_only (FoFo *fo_fo)
 static gboolean
 is_white_space (const gchar *string)
 {
-  return ((*string == '\x20') ||
-	  (*string == '\x09') ||
-	  (*string == '\x0D') ||
-	  (*string == '\x0A'));
+  return ((string != NULL) &&
+	  ((*string == ' ') ||
+	   (*string == '\t') ||
+	   (*string == '\r') ||
+	   (*string == '\n')));
 }
 
 /**
@@ -1097,9 +1098,10 @@ is_white_space (const gchar *string)
 static gboolean
 is_non_linefeed_white_space (const gchar *string)
 {
-  return ((*string == '\x20') ||
-	  (*string == '\x09') ||
-	  (*string == '\x0D'));
+  return ((string != NULL) &&
+	  ((*string == ' ') ||
+	   (*string == '\t') ||
+	   (*string == '\r')));
 }
 
 /**
@@ -1112,7 +1114,8 @@ is_non_linefeed_white_space (const gchar *string)
 static gboolean
 is_linefeed (const gchar *string)
 {
-  return (*string == '\x0A');
+  return ((string != NULL) &&
+	  (*string == '\n'));
 }
 
 /**
@@ -1126,11 +1129,11 @@ is_linefeed (const gchar *string)
  * Gets the text of the inline FO and its associated list of #PangoAttribute.
  **/
 void
-fo_text_get_text_attr_list (FoFo *fo_inline_fo,
+fo_text_get_text_attr_list (FoFo    *fo_inline_fo,
 			    FoDoc   *fo_doc G_GNUC_UNUSED,
 			    GString *text,
-			    GList **attr_glist G_GNUC_UNUSED,
-			    guint debug_level G_GNUC_UNUSED)
+			    GList  **attr_glist G_GNUC_UNUSED,
+			    guint    debug_level G_GNUC_UNUSED)
 {
   g_return_if_fail (fo_inline_fo != NULL);
   g_return_if_fail (FO_IS_TEXT (fo_inline_fo));
