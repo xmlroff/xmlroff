@@ -1147,7 +1147,7 @@ fo_table_column_validate (FoFo      *fo,
       fo_table_column_set_column_width (fo,
 					FO_PROPERTY (g_object_new (FO_TYPE_PROPERTY_COLUMN_WIDTH,
 								   "value",
-								   fo_string_get_string_one (),
+								   fo_string_new_with_value ("proportional-column-width(1)"),
 								   NULL)));
     }
 
