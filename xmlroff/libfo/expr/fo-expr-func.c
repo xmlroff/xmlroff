@@ -1069,7 +1069,7 @@ fo_expr_func_pcw_prop (FoExprContext *context,
 }
 
 /**
- * fo_expr_func_pcw_prop_func:
+ * fo_expr_func_pcw_prop_fixed:
  * @context: The expression context
  * @nargs:   Number of arguments provided in the function call
  *
