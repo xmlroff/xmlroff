@@ -841,10 +841,6 @@ fo_region_after_validate (FoFo      *fo,
                           FoContext *parent_context,
                           GError   **error)
 {
-  FoFo *simple_page_master = NULL;
-  FoDatatype *region_name_datatype = NULL;
-  gchar *region_name;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_REGION_AFTER (fo));
   g_return_if_fail (FO_IS_CONTEXT (current_context));
@@ -853,14 +849,17 @@ fo_region_after_validate (FoFo      *fo,
 
   fo_context_util_border_resolve (current_context, parent_context);
   fo_context_util_paddings_resolve (current_context, parent_context);
-  fo_context_util_margins_indents_resolve (fo, current_context, parent_context);
+  fo_context_util_margins_indents_resolve (fo,
+					   current_context,
+					   parent_context);
   fo_context_util_margins_resolve (current_context, parent_context);
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
 
-  region_name_datatype =
+  FoDatatype *region_name_datatype =
     fo_property_get_value (fo_region_after_get_region_name (fo));
 
+  gchar *region_name = NULL;
   if (region_name_datatype != NULL)
     {
       region_name =
@@ -868,22 +867,35 @@ fo_region_after_validate (FoFo      *fo,
     }
   else
     {
+      /* Need a freeable string because g_free() needed
+	 if name had come from fo_name_get_value(). */
       region_name = g_strdup ("xsl-region-after");
+
+      /* Also set the 'region-name' property to its default. */
+      region_name_datatype =
+	fo_name_new_with_value (region_name);
+      FoProperty *region_name_prop =
+	fo_property_region_name_new ();
+      fo_property_set_value (region_name_prop,
+			     region_name_datatype);
+      fo_region_after_set_region_name (fo,
+				       region_name_prop);
     }
 
-    simple_page_master = FO_FO (fo_node_parent (FO_NODE (fo)));
+  FoFo *simple_page_master = FO_FO (fo_node_parent (FO_NODE (fo)));
 
   if (simple_page_master != NULL)
     {
       fo_simple_page_master_region_name_add (simple_page_master,
 					     region_name,
 					     fo);
-      g_free (region_name);
     }
   else
     {
       g_assert_not_reached();
     }
+
+  g_free (region_name);
 }
 
 /**
