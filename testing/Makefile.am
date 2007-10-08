@@ -11,6 +11,8 @@ TESTING_PARAM=config.xsl
 RESULTS_PACKAGE=xmlroff-testresults
 
 EXTRA_DIST = \
+	bottom-left.png			\
+	bottom-right.png		\
 	cairo-pdf-results.xml		\
 	cairo-ps-results.xml		\
 	common.xsl			\
@@ -28,6 +30,8 @@ EXTRA_DIST = \
 	testsuccess.xsl			\
 	testsuites.xml			\
 	testsuites2testresults.xsl	\
+	top-left.png			\
+	top-right.png			\
 	update-result.xsl		\
 	update-results.pl		\
 	xmlroff-testing.conf		\
@@ -79,14 +83,9 @@ clean:
 
 #find . \( -name diff -o -name ref -prune  -exec true \; -o \( -name \*.png -o -name \*.log -o -name \*.pdf \) -exec ls {} \; \)
 
-dist1:	$(FILES)
-	-rm -rf $(PACKAGE)-$(VERSION)
-	mkdir $(PACKAGE)-$(VERSION)
-	(tar cf - $(FILES) | (cd $(PACKAGE)-$(VERSION) ; tar xf -))
-	(tar cf - $(PACKAGE)-$(VERSION) | gzip -c > $(PACKAGE)-$(VERSION).tar.gz)
-	-rm -rf $(PACKAGE)-$(VERSION)
-
-install-data-local:
+dist-results:
+	rm $(REPORT_HTML)
+	$(MAKE) REPORT_PARAM='--param FORM "false()" $(REPORT_PARAM)' $(REPORT_HTML)
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
 	mkdir $(RESULTS_PACKAGE)-$(VERSION)
 	cp $(TEST_RESULTS) $(RESULTS_PACKAGE)-$(VERSION)/testresults.xml
