@@ -83,16 +83,19 @@ clean:
 
 #find . \( -name diff -o -name ref -prune  -exec true \; -o \( -name \*.png -o -name \*.log -o -name \*.pdf \) -exec ls {} \; \)
 
+# Make a bundle of the results.
+# Use 'static' version of the reports and do not
+# include reference or stereo versions of the results.
 dist-results:
 	rm $(REPORT_HTML)
-	$(MAKE) REPORT_PARAM='--param FORM "false()" $(REPORT_PARAM)' $(REPORT_HTML)
+	$(MAKE) REPORT_PARAM='--param FORM "false()" --param REFERENCE "false()"' $(REPORT_HTML)
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
 	mkdir $(RESULTS_PACKAGE)-$(VERSION)
 	cp $(TEST_RESULTS) $(RESULTS_PACKAGE)-$(VERSION)/testresults.xml
-	(tar cf - `find . -name \*.html` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
-	(tar cf - `find . -name \*.png` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
-	(tar cf - `find . -name \*.log` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
-	(tar cf - `find . -name \*.pdf` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -maxdepth 2 -name \*.html` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -maxdepth 2 -name \*.png` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -maxdepth 2 -name \*.log` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
+	(tar cf - `find . -maxdepth 2 -name \*.pdf` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
 	(tar cf - $(RESULTS_PACKAGE)-$(VERSION) | gzip -c > $(RESULTS_PACKAGE)-$(VERSION).tar.gz)
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
 
