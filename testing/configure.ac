@@ -5,7 +5,7 @@ AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testing framework],
 	[0.5.3],
-	[http://xmlroff.org/newticket],
+	[http://xmlroff.org/newticket?component=testing],
 	xmlroff-testing)
 
 AC_CONFIG_AUX_DIR(config)
