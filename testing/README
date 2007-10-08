@@ -29,12 +29,13 @@ and, occasionally, better documentation.
 3. Before you begin
 4. Running the tests
 5. Working with the results
-6. When the test suite changes
-7. Testing an alternative XSL processor
-8. DocBook testdocs
-9. Setting defaults in the test results file
-10. Gory details
-11. License
+6. Bundling the test results
+7. When the test suite changes
+8. Testing an alternative XSL processor
+9. DocBook testdocs
+10. Setting defaults in the test results file
+11. Gory details
+12. License
 
 
 1. Testing xmlroff
@@ -196,7 +197,27 @@ Individual steps
    again.
 
 
-6. When the Test Suite Changes
+6. Bundling the test results
+============================
+
+1. Run the 'dist-results' target:
+
+      make -k dist-results
+
+   This regenerates the HTML output with 'static' reports and bundles
+   all the reports and associated output and image files into a
+   gzipped tar archive.
+
+   The reports, when unbundled, can be viewed but not modified.
+
+   The individual reports contain links to their input XML and XSLT
+   files, and relative links will only work when the reports and the
+   testsuites used when running the tests are installed in the same
+   locations relative to each other as they were when the tests were
+   run and the reports were generated.
+
+
+7. When the Test Suite Changes
 ==============================
 
 1. Re-run test2sh.xsl to update the script that runs the tests:
@@ -217,7 +238,7 @@ Individual steps
 4. Run the tests, which will now include the new tests.
 
 
-7. Testing an Alternative XSL Processor
+8. Testing an Alternative XSL Processor
 =======================================
 
 You can test XSL processors other than xmlroff by specifying the
@@ -288,7 +309,7 @@ on Linux:
       --with-command-patterns="%p -o %o -d %i"
 
 
-8. DocBook testdocs
+9. DocBook testdocs
 ===================
 
 The DocBook SourceForge project maintains a set of test documents.
@@ -340,8 +361,8 @@ stylesheet:
    DocBook stylesheets.
    
 
-9. Setting Defaults in the Test Results File
-============================================
+10. Setting Defaults in the Test Results File
+=============================================
 
 Configuring a test run using many non-standard parameters -- e.g. when
 testing an alternative XSL processor or testing a specific xmlroff
@@ -365,6 +386,7 @@ The 'configure' options and their corresponding PIs (in the notional
  --with-command-patterns      xt:command-patterns
  --with-default-stylesheet    xt:default-stylesheet
  --with-testsuites            xt:testsuites
+ --with-trac                  xt:trac
 
 The priority for setting a parameter, from lowest to highest, is:
 
@@ -377,7 +399,7 @@ the settable parameters and where the parameter was set ('default',
 'results', or 'option').
 
 
-10. Gory Details
+11. Gory Details
 ================
 
 Test Cases
@@ -583,6 +605,12 @@ The parameters controlling the transformation are set when you run
  - '--disable-reference' disables including the reference and stereo
    images in individual reports
 
+ - '--with-trac' sets the base URL for linking from ticket references
+   (e.g., '#21') in test result descriptions to tickets in a Trac
+   (e.g., http://xmlroff.org/ticket/21).
+
+   '--without-trac' disables creating links for ticket references.
+
 The summary report and the individual reports include information from
 both the test case description and the xmlroff test results.
 
@@ -607,8 +635,8 @@ Each row contains:
 
  - A link to the report HTML for the individual test.
 
- - An indication of the number of output pages and the types of the
-   result files present.
+ - An indication of the number of output pages and, when individual
+   reports are being produced, the types of the result files present.
 
 The individual reports contain:
 
@@ -742,7 +770,7 @@ group id of the 'testing' directory *before* running any of the
 stylesheets or scripts.
 
 
-11. License
+12. License
 ===========
 
 The stylesheets and other content are licensed under a BSD-style
@@ -750,4 +778,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-8 August 2007
+8 October 2007
