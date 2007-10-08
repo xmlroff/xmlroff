@@ -11,8 +11,8 @@
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:import href="config.xsl"/>
@@ -49,7 +49,7 @@
     <xsl:param name="top-id"/>
 
     <xsl:if test="$up-id or $top-id">
-      <table align="right">
+      <table align="right" class="navtable">
         <tr>
           <td align="right">
             <xsl:if test="$up-id">
@@ -65,7 +65,7 @@
   </xsl:template>
 
   <xsl:variable name="page-title">
-    <xsl:text/>XSL Test Suite: <xsl:value-of select="$TITLE"/>
+    <xsl:value-of select="$TITLE"/>
   </xsl:variable>
 
   <xsl:template match="/">
@@ -85,6 +85,7 @@
         </title>
         <style type="text/css">
           body { background-color: white}
+          .summary {text-align: center; align: center; margin-top:12pt; margin-left: auto; margin-right: auto}
     td.full {background-color: green; color: white; text-align: center}
     td.future {background-color: palegreen; text-align: center}
     td.differ {background-color: yellow; text-align: center}
@@ -93,15 +94,28 @@
     td.other {background-color: white; text-align: center}
     td.not-yet-verified {background-color: silver; text-align: center}
     .coloured {background-color: #DDEEFF}
-    td.coloured {border-top: 3pt solid white}
+    td.testcases4 {border-top: 3pt solid white; border-bottom: solid white; vertical-align: middle}
     .coloured2 {background-color: #CCDDFF}
-    td.coloured2 {border-top: 3pt solid white}
+    td.testcases3 {border-top: 3pt solid white; border-bottom: solid white}
     .coloured3 {background-color: #BBCCFF}
-    td.coloured3 {border-top: 6pt solid white}
+    td.testcases2 {border-top: 6pt solid white; border-bottom: solid white}
     .coloured4 {background-color: #99BBFF}
-    td.coloured4 {border-top: 18pt solid white}
+    td.coloured4 {border-top: 18pt solid white; vertical-align: middle}
     .coloured5 {background-color: #99AAFF}
     tr.diff {background-color: #FFEEEE}
+    .right {background-image: url("top-right.png"); background-repeat: no-repeat; background-position: right top;}
+    .left {background-image: url("top-left.png"); background-repeat: no-repeat; background-position: left top;}
+    .last.right {background-image: url("bottom-right.png"); background-position: right bottom;}
+    .last.left {background-image: url("bottom-left.png"); background-position: left bottom;}
+    @media screen {
+    h2, h3, h4 {margin: 6pt}
+    }
+    .test-id {margin-left: 6pt}
+    @media print {
+    .summary {border: solid thin black}
+    .summary td {border: solid thin black }
+    .navtable {display: none}
+  }
         </style>
       </head>
       <body>
@@ -140,12 +154,18 @@
     <xsl:message>Not verified: <xsl:value-of select="$not-verified-results-count"/> (<xsl:value-of select="$not-verified-results-percent"/>)</xsl:message>
     <xsl:message>Total:        <xsl:value-of select="$total-results-count"/></xsl:message>
 
-    <h2 class="coloured5">
-      <a name="{$testsuite-id}">
-        <xsl:value-of select="@profile"/>
-      </a>
-    </h2>
-    <table width="95%" style="text-align: center; align: center">
+     <table width="100%" class="coloured5">
+       <tr>
+         <td>
+          <h2>
+            <a name="{$testsuite-id}">
+              <xsl:value-of select="@profile"/>
+            </a>
+          </h2>
+        </td>
+      </tr>
+    </table>
+    <table width="95%" class="summary">
       <tr>
         <td class="full">Full</td>
         <td class="differ">Issues</td>
@@ -183,7 +203,7 @@
         <td>100%</td>
       </tr>
     </table>
-    <xsl:if test="$REFERENCE">
+    <xsl:if test="$REFERENCE and $OUTPUT_INDIVIDUAL = 'yes'">
       <table style="margin-top: 12pt; margin-bottom: 12pt">
         <xsl:variable name="tests-with-differences" select="count($testsuccess-node/directory/pdf/diff[*[@size != 0]])"/>
         <xsl:message><xsl:value-of select="$tests-with-differences"/> tests with differences</xsl:message>
@@ -205,7 +225,7 @@
         </xsl:if>
       </table>
     </xsl:if>
-    <table>
+    <table style="border-collapse: collapse">
       <xsl:apply-templates>
         <xsl:with-param name="testsuite-id" select="$testsuite-id"/>
       </xsl:apply-templates>
@@ -221,14 +241,14 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr>
-      <td colspan="5" class="coloured4">
-        <h2>
+      <td colspan="5" class="coloured4 left">
+        <h2 class="testcases">
           <a name="{$my-testcases-id}">
-            <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
+            <xsl:value-of select="@profile"/>
           </a>
         </h2>
       </td>
-      <td class="coloured4">
+      <td class="coloured4 right">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
@@ -257,15 +277,15 @@
       select="$my-testcases-id"/>
     <xsl:param name="results-top-base" select="@base"/>
 
-    <tr>
-      <td colspan="5" class="coloured3">
+    <tr class="coloured3">
+      <td colspan="5" class="testcases2  left">
         <h3>
           <a name="{$my-testcases-id}">
-            <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
+            <xsl:value-of select="@profile"/>
           </a>
         </h3>
       </td>
-      <td class="coloured3">
+      <td class="testcases2 right">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
@@ -295,14 +315,20 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr>
-      <td colspan="5" class="coloured2">
+      <xsl:attribute name="class">
+        <xsl:text>coloured2</xsl:text>
+        <xsl:if test="not(*)">
+          <xsl:text> last left</xsl:text>
+        </xsl:if>
+      </xsl:attribute>
+      <td colspan="5" class="testcases3 left">
         <h4>
           <a name="{$my-testcases-id}">
-            <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
+            <xsl:value-of select="@profile"/>
           </a>
         </h4>
       </td>
-      <td class="coloured2">
+      <td class="testcases3 right">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
@@ -331,15 +357,15 @@
       select="$my-testcases-id"/>
     <xsl:param name="results-top-base" select="@base"/>
 
-    <tr>
-      <td colspan="5" class="coloured">
+    <tr class="coloured">
+      <td colspan="5" class="testcases4 left">
         <h4>
           <a name="{$my-testcases-id}">
-            <xsl:text/>Test Cases: <xsl:value-of select="@profile"/>
+            <xsl:value-of select="@profile"/>
           </a>
         </h4>
       </td>
-      <td class="coloured">
+      <td class="testcases4 right">
         <xsl:call-template name="nav-table">
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
@@ -366,15 +392,35 @@
     <xsl:param name="results-top-base" select="(ancestor::*/@base)[1]"/>
 
     <xsl:variable name="testresult-id"
-      select="concat('result-', $top-testcases-id, '-', translate(normalize-space(@id), ' ', '-'))"/>
+      select="concat('result-',
+                     $top-testcases-id,
+                     '-',
+                     translate(normalize-space(@id), ' ', '-'))"/>
     <xsl:variable name="id" select="@id"/>
     <xsl:variable name="results" select="@results"/>
+    <xsl:variable name="pdf-name">
+      <xsl:for-each select="$testsuccess-node">
+        <xsl:value-of
+          select="key('PDF', $results)[ancestor::*/@name =
+                                         $results/ancestor::*/@base]/@name"/>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:variable name="pdf-size">
+      <xsl:for-each select="$testsuccess-node">
+        <xsl:value-of
+          select="key('PDF', $results)[ancestor::*/@name =
+                                         $results/ancestor::*/@base]/@size"/>
+      </xsl:for-each>
+    </xsl:variable>
     <tr>
-      <xsl:if test="count(preceding-sibling::*) mod 2 = 1">
+      <xsl:if test="count(following-sibling::*) mod 2 = 0">
         <xsl:attribute name="class">coloured</xsl:attribute>
       </xsl:if>
       <td>
-        <a name="{$testresult-id}">
+        <xsl:if test="not(following-sibling::testresult)">
+          <xsl:attribute name="class">last left</xsl:attribute>
+        </xsl:if>
+        <a name="{$testresult-id}" class="test-id">
           <xsl:value-of select="$id"/>
         </a>
       </td>
@@ -382,10 +428,11 @@
         <xsl:call-template name="attribute-table"/>
       </td>
       <td>
-        <xsl:copy-of select="*|text()"/>
+        <!-- Process any text describing the test results. -->
+        <xsl:apply-templates/>
       </td>
       <td>
-        <xsl:if test="@results != ''">
+        <xsl:if test="$pdf-name != '' and $pdf-size != 0">
           <a>
             <xsl:attribute name="href">
               <xsl:if test="ancestor::testcases/@base">
@@ -399,48 +446,64 @@
         </xsl:if>
       </td>
       <td>
-        <xsl:for-each select="$testsuccess-node">
-          <xsl:variable name="pdf" select="key('PDF', $results)[ancestor::*/@name = $results/ancestor::*/@base]"/>
-          <xsl:value-of select="$pdf"/>
-          <a href="{($results/ancestor::*/@base)}/{$id}.html" target="_blank">Results</a>
-          <xsl:call-template name="results-doc">
-            <xsl:with-param name="pdf" select="$pdf"/>
-            <xsl:with-param name="results" select="$results/.."/>
-            <xsl:with-param name="results-top-base" select="$results-top-base"/>
-            <xsl:with-param name="id" select="$id"/>
-          </xsl:call-template>
-        </xsl:for-each>
+        <xsl:if test="$OUTPUT_INDIVIDUAL = 'yes'">
+          <xsl:for-each select="$testsuccess-node">
+            <xsl:variable name="pdf"
+              select="key('PDF', $results)[ancestor::*/@name =
+                                             $results/ancestor::*/@base]"/>
+            <a href="{($results/ancestor::*/@base)}/{$id}.html" target="_blank">Results</a>
+            <xsl:call-template name="results-doc">
+              <xsl:with-param name="pdf" select="$pdf"/>
+              <xsl:with-param name="results" select="$results/.."/>
+              <xsl:with-param name="results-top-base" select="$results-top-base"/>
+              <xsl:with-param name="id" select="$id"/>
+            </xsl:call-template>
+          </xsl:for-each>
+        </xsl:if>
       </td>
       <td>
+        <xsl:if test="not(following-sibling::testresult)">
+          <xsl:attribute name="class">last right</xsl:attribute>
+        </xsl:if>
         <xsl:for-each select="$testsuccess-node">
-          <xsl:variable name="pdf" select="key('PDF', $results)[ancestor::*/@name = $results/ancestor::*/@base]"/>
-          <xsl:value-of select="$pdf"/>
+          <xsl:variable name="pdf"
+            select="key('PDF', $results)[ancestor::*/@name =
+                                           $results/ancestor::*/@base]"/>
           <xsl:choose>
             <xsl:when test="not($pdf) or $pdf/@size = 0">
               <xsl:text>No output</xsl:text>
             </xsl:when>
             <xsl:otherwise>
+              <!-- Number of pages in the PDF. -->
               <xsl:value-of select="$pdf/pwd/@count"/>
-              <xsl:if test="$pdf/pwd/@count != 0">
-                <xsl:text>, PNG</xsl:text>
-              </xsl:if>
-              <xsl:if test="$REFERENCE">
-                <xsl:if test="$pdf/ref/@count != '0'">
-                  <xsl:text>, Ref</xsl:text>
+              <!-- Output the other info only if can view individual reports. -->
+              <xsl:if test="$OUTPUT_INDIVIDUAL = 'yes'">
+                <!-- Are there PNG files from this run? -->
+                <xsl:if test="$pdf/pwd/@count != 0">
+                  <xsl:text>, PNG</xsl:text>
                 </xsl:if>
-                <xsl:if test="$pdf/diff/@count != 0">
-                  <xsl:text>, </xsl:text>
-                  <xsl:choose>
-                    <xsl:when test="$pdf/diff/*[@size != 0]">
-                      <span style="color: white; background-color: red">Diff</span>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:text>Diff</xsl:text>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:if>
-                <xsl:if test="$pdf/stereo/@count != 0">
-                  <xsl:text>, Stereo</xsl:text>
+                <!-- Are there reference PNGs against which to compare? -->
+                <xsl:if test="$REFERENCE">
+                  <xsl:if test="$pdf/ref/@count != '0'">
+                    <xsl:text>, Ref</xsl:text>
+                  </xsl:if>
+                  <!-- If so, are there also diff files? -->
+                  <xsl:if test="$pdf/diff/@count != 0">
+                    <xsl:text>, </xsl:text>
+                    <!-- Do the diff files indicate that there are differences? -->
+                    <xsl:choose>
+                      <xsl:when test="$pdf/diff/*[@size != 0]">
+                        <span style="color: white; background-color: red">Diff</span>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:text>Diff</xsl:text>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:if>
+                  <!-- Are there 'stereo' PNGs showing the differences? -->
+                  <xsl:if test="$pdf/stereo/@count != 0">
+                    <xsl:text>, Stereo</xsl:text>
+                  </xsl:if>
                 </xsl:if>
               </xsl:if>
             </xsl:otherwise>
@@ -504,8 +567,7 @@
       </xsl:for-each>
     </xsl:variable>
 
-    <xsl:if test="$OUTPUT_INDIVIDUAL = 'yes'">
-      <saxon:output href="./{$results-top-base}/{$id}.html" encoding="UTF-8">
+    <exsl:document href="./{$results-top-base}/{$id}.html" encoding="UTF-8">
       <html>
         <head>
           <title>
@@ -599,7 +661,14 @@
               <th rowspan="2" style="background-color: white">Result</th>
               <td style="background-color: white">
                 <b>PDF </b>
-                <a href="{$id}.pdf"><xsl:value-of select="$id"/>.pdf</a>
+                <xsl:choose>
+                  <xsl:when test="$pdf and $pdf/@size != 0">
+                    <a href="{$id}.pdf"><xsl:value-of select="$id"/>.pdf</a>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:text>No output</xsl:text>
+                  </xsl:otherwise>
+                </xsl:choose>
               </td>
               <td colspan="1" style="background-color: white">
                 <b>Log </b>
@@ -704,12 +773,67 @@
           </table>
         </body>
       </html>
-    </saxon:output>
-    </xsl:if>
+    </exsl:document>
+  </xsl:template>
+
+  <xsl:template name="add-links">
+    <xsl:param name="string" select="."/>
+    <xsl:choose>
+      <xsl:when test="not(contains($string, '#'))">
+        <xsl:value-of select="$string"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="substring-before($string, '#')"/>
+        <xsl:call-template name="do-link">
+          <xsl:with-param name="string"
+            select="substring-after($string, '#')"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="do-link">
+    <xsl:param name="string"/>
+    <xsl:param name="ticket-number" select="''"/>
+    <xsl:choose>
+      <xsl:when test="($string = '') and ($ticket-number = '')">
+        <xsl:text>#</xsl:text>
+      </xsl:when>
+      <xsl:when test="($string = '') and ($ticket-number != '')">
+        <a href="{$TRAC}/ticket/{$ticket-number}">
+          <xsl:text>#</xsl:text>
+          <xsl:value-of select="$ticket-number"/>
+        </a>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:choose>
+          <xsl:when test="translate(substring($string, 1, 1),
+                                    '0123456789',
+                                    '') = ''">
+            <xsl:call-template name="do-link">
+              <xsl:with-param name="string"
+                select="substring($string, 2)"/>
+              <xsl:with-param name="ticket-number"
+                select="concat($ticket-number,
+                               substring($string, 1, 1))"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <a href="{$TRAC}/ticket/{$ticket-number}">
+              <xsl:text>#</xsl:text>
+              <xsl:value-of select="$ticket-number"/>
+            </a>
+            <xsl:call-template name="add-links">
+              <xsl:with-param name="string" select="$string"/>
+            </xsl:call-template>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template name="attribute-table">
-    <table border="1" width="100%">
+      <table border="1" width="100%">
       <tr>
         <td align="center" width="33%">
           <xsl:attribute name="class">
@@ -1033,11 +1157,23 @@ source for this report and <b>does not</b> regenerate this HTML page.
         <tr>
           <td style="background-color: white">Further info:</td>
           <td style="background-color: white" colspan="2">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
           </td>
         </tr>
       </xsl:for-each>
     </table>
   </xsl:template>
 
+  <xsl:template match="text()">
+    <!-- Makes ticket references in text into links to Trac
+         tickets unless the feature is disabled. -->
+    <xsl:choose>
+      <xsl:when test="$TRAC != 'no'">
+        <xsl:call-template name="add-links"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="."/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 </xsl:stylesheet>
