@@ -113,6 +113,8 @@ foreach $gTestDir (@lTestDirs) {
 	}
 
 	if (-e "ref/$lPDFFile") {
+	    # 'diff' needs to ignore the 'CreationDate' line since
+	    # it change each time the test is run.
 	    system "diff -N -a -I \"^/ID\" -I \"^/CreationDate\" ref/$lPDFFile $lPDFFile 1>diff/$lPDFFile 2>>diff/$lPDFFile";
 	    if ($? >> 8 > 2) {
 		$gError++;
@@ -123,6 +125,13 @@ foreach $gTestDir (@lTestDirs) {
 	$lCmpRc = 0xffff & system "cmp -s diff/$lPDFFile diff/$lPDFFile.bak";
 
 	if (!-e "$lBasename.00.png" || $lCmpRc != 0) {
+	    # The previous run may have produced more pages
+	    # than the current run, which can lead to odd results
+	    # from a mix of old and new PNG files, so delete
+	    # all the old PNG files.
+	    if (-e "$lBasename.00.png") {
+		unlink(glob("$lBasename.*.png"));
+	    }
 	    $rc = 0xffff & system "convert -depth 8 -type palette $lPDFFile $lBasename.%02d.png";
 	    if ($rc != 0) {
 		$gError++;
