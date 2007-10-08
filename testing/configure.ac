@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testing framework],
-	[0.5.2],
+	[0.5.3],
 	[http://xmlroff.org/newticket],
 	xmlroff-testing)
 
@@ -351,6 +351,28 @@ AC_DEFINE_UNQUOTED(XSL_PROCESSOR_FLAGS,
 AC_SUBST(XSL_PROCESSOR_FLAGS)
 
 #
+# Location of Trac
+#
+# Ticket numbers refer to tickets in this Trac
+#
+trac_default=http://xmlroff.org
+trac_setter=$default_setter
+AC_ARG_WITH(trac,
+	    AC_HELP_STRING([--with-trac],
+			   [URL of Trac to which ticket numbers refer. (default=http://xmlroff.org)]),
+	    trac="$withval", :)
+if test "x$with_trac" = "x" ; then
+  TRAC=$trac_default
+else
+  TRAC=$with_trac
+  trac_setter=$option_setter
+fi
+AC_DEFINE_UNQUOTED(TRAC,
+	           "$TRAC",
+	           [URL of Trac to which ticket numbers refer.])
+AC_SUBST(TRAC)
+
+#
 # Current directory
 #
 PWD=`pwd`
@@ -375,5 +397,6 @@ test-results:        \"$TEST_RESULTS\" $test_results_setter
 testsuites:          \"$TESTSUITES\" $testsuites_setter
 xsl-processor:       \"$XSL_PROCESSOR\" $xsl_processor_setter
 xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" $xsl_processor_flags_setter
+trac:                \"$TRAC\" $trac_setter
 
 The 'configure' options that you used are recorded in 'config.log'."
