@@ -148,7 +148,7 @@ AC_DEFINE_UNQUOTED(DEBUG,
 command_patterns_default="%p -o %o %c %i %s;%p -o %o %c %i;%p -o %o %i %s;%p -o %o %i"
 command_patterns_setter=$default_setter
 
-# Default mat be overridden by a PI in the results document.
+# Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
   results_command_patterns=["`$PERL -n -e'if(/<\?xt:command-patterns\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_command_patterns" != "x" ; then
@@ -177,7 +177,7 @@ AC_DEFINE_UNQUOTED(COMMAND_PATTERNS,
 default_stylesheet_default=
 default_stylesheet_setter=$default_setter
 
-# Default mat be overridden by a PI in the results document.
+# Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
   results_default_stylesheet=["`$PERL -n -e'if(/<\?xt:default-stylesheet\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_default_stylesheet" != "x" ; then
@@ -262,7 +262,7 @@ AC_SUBST(TESTSUCCESS)
 testsuites_default=testsuites.xml
 testsuites_setter=$default_setter
 
-# Default mat be overridden by a PI in the results document.
+# Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
   results_testsuites=["`$PERL -n -e'if(/<\?xt:testsuites\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_testsuites" != "x" ; then
@@ -290,7 +290,7 @@ AC_SUBST(TESTSUITES)
 xsl_processor_default=../xmlroff/xmlroff/xmlroff
 xsl_processor_setter=$default_setter
 
-# Default mat be overridden by a PI in the results document.
+# Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
   results_xsl_processor=["`$PERL -n -e'if(/<\?xt:xsl-processor\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_xsl_processor" != "x" ; then
@@ -327,7 +327,7 @@ AC_SUBST(XSL_PROCESSOR)
 xsl_processor_flags_default=
 xsl_processor_flags_setter=$default_setter
 
-# Default mat be overridden by a PI in the results document.
+# Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
   results_xsl_processor_flags=["`$PERL -n -e'if(/<\?xt:xsl-processor-flags\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_xsl_processor_flags" != "x" ; then
@@ -357,6 +357,15 @@ AC_SUBST(XSL_PROCESSOR_FLAGS)
 #
 trac_default=http://xmlroff.org
 trac_setter=$default_setter
+
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_trac=["`$PERL -n -e'if(/<\?xt:trac\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_trac" != "x" ; then
+    trac_default="$results_trac"
+    trac_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(trac,
 	    AC_HELP_STRING([--with-trac],
 			   [URL of Trac to which ticket numbers refer. (default=http://xmlroff.org)]),
