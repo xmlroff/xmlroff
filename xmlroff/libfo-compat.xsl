@@ -52,9 +52,65 @@
 
   <xsl:param name="verbose" select="false()"/>
   <xsl:param name="keep-threshold" select="20"/>
+  
+  <xsl:template match="text()[normalize-space() = '']">
+    <xsl:variable name="previous-is-inline">
+      <xsl:choose>
+        <xsl:when test="preceding-sibling::*[1]">
+          <xsl:call-template name="is-inline">
+            <xsl:with-param name="fo" select="preceding-sibling::*[1]"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>no</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
 
-  <xsl:template match="/">
-    <xsl:apply-templates/>
+    <xsl:variable name="following-is-inline">
+      <xsl:choose>
+        <xsl:when test="following-sibling::*[1]">
+          <xsl:call-template name="is-inline">
+            <xsl:with-param name="fo" select="following-sibling::*[1]"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>no</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:if test="$previous-is-inline = 'yes' or $following-is-inline = 'yes'">
+      <xsl:value-of select="."/>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template name="is-inline">
+    <xsl:param name="fo"/>
+    
+    <xsl:variable name="local-name" select="local-name($fo)"/>
+    <xsl:choose>
+      <xsl:when
+        test="$local-name = 'bidi-override' or
+        $local-name = 'character' or
+        $local-name = 'external-graphic' or
+        $local-name = 'instream-foreign-object' or
+        $local-name = 'inline' or
+        $local-name = 'inline-container' or
+        $local-name = 'leader' or
+        $local-name = 'page-number' or
+        $local-name = 'page-number-citation' or
+        $local-name = 'page-number-citation-last' or
+        $local-name = 'scaling-value-citation' or
+        $local-name = 'basic-link' or
+        $local-name = 'multi-toggle' or
+        $local-name = 'index-page-citation-list'
+        $local-name = 'multi-switch' or
+        $local-name = 'multi-properties' or
+        $local-name = 'index-range-begin' or
+        $local-name = 'index-range-end' or
+        $local-name = 'wrapper' or
+        $local-name = 'retrieve-marker' or
+        $local-name = 'float' or
+        $local-name = 'footnote'">yes</xsl:when>
+      <xsl:otherwise>no</xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="fo:list-item-label/text()">
