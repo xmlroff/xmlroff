@@ -1,3 +1,43 @@
+10/11/07 20:01:05 tkg [260]
+	* trunk/testsuite/multiple/minimal.fo (added)
+	The most minimal file that will format.
+
+10/11/07 19:59:33 tkg [259]
+	* trunk/testsuite/property/block-line/linefeed-treatment-1.fo (added)
+	* trunk/testsuite/property/block-line/linefeed-treatment-2.fo (added)
+	* trunk/testsuite/property/block-line/linefeed-treatment-3.fo (added)
+	* trunk/testsuite/property/block-line/linefeed-treatment-4.fo (added)
+	* trunk/testsuite/property/block-line/linefeed-treatment-5.fo (added)
+	* trunk/testsuite/property/block-line/linefeed-treatment-6.fo (added)
+	* trunk/testsuite/property/block-line/linefeed-treatment-7.fo (added)
+	* trunk/testsuite/property/block-line/white-space-collapse-1.fo (added)
+	* trunk/testsuite/testsuite.xml (modified)
+	Added new tests for 'linefeed-treatment' and 'white-space-collapse'.
+
+10/11/07 19:57:52 tkg [258]
+	* trunk/testsuite/Makefile.am (modified)
+	Added 'svn-tag' rule.
+
+10/11/07 19:56:00 tkg [257]
+	* trunk/testsuite/configure.ac (modified)
+	Upped version to 0.5.3.
+
+10/04/07 21:03:01 tkg [235]
+	* trunk/testsuite/structure/element-content.fo (modified)
+	Removed a misplaced 'a'.
+
+08/01/07 16:22:29 tkg [155]
+	* trunk/testsuite/INSTALL (added)
+	testsuite-specific INSTALL file.  Closes #71.
+
+07/19/07 21:23:57 tkg [119]
+	* trunk/testsuite/ChangeLog (modified)
+	Set svn:mime-type.
+
+07/12/07 10:42:29 tkg [78]
+	* trunk/testsuite/ChangeLog (added)
+	Change log.
+
 07/12/07 10:40:11 tkg [77]
 	* trunk/testsuite/ChangeLog.pre-0.5 (moved)
 	Moved old changes out of ChangeLog to ChangeLog.pre-0.5.
