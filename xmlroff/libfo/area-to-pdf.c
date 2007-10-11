@@ -310,7 +310,7 @@ fo_pdf_draw_border_dotted (FoDoc *fo_doc,
 		       ABS (coords->y1delta),
 		       ABS (coords->y1delta));
       fo_doc_set_line_width (fo_doc,
-			     coords->y1delta);
+			     ABS (coords->y1delta));
 
       fo_doc_move_to (fo_doc,
 		      coords->x1,
@@ -365,7 +365,7 @@ fo_pdf_draw_border_dashed (FoDoc *fo_doc,
 		       ABS (coords->y1delta) * 3,
 		       ABS (coords->y1delta) * 3);
       fo_doc_set_line_width (fo_doc,
-			     coords->y1delta);
+			     ABS (coords->y1delta));
 
       fo_doc_move_to (fo_doc,
 		      coords->x1,
@@ -444,7 +444,7 @@ fo_pdf_draw_border_ridge (FoDoc *fo_doc,
 			  FoDatatype *color,
 			  FoPdfOneBorderCoords *coords)
 {
-  fo_doc_set_dash (fo_doc, 0, 0);
+  fo_doc_set_dash (fo_doc, 0.0, 0.0);
 
   fo_pdf_clip_to_coords (fo_doc, coords);
 
@@ -498,7 +498,7 @@ fo_pdf_draw_border_inset (FoDoc *fo_doc,
 			  FoDatatype *color,
 			  FoPdfOneBorderCoords *coords)
 {
-  fo_doc_set_dash (fo_doc, 0, 0);
+  fo_doc_set_dash (fo_doc, 0.0, 0.0);
 
   fo_pdf_clip_to_coords (fo_doc, coords);
 
@@ -552,7 +552,7 @@ fo_pdf_draw_border_outset (FoDoc *fo_doc,
 			   FoDatatype *color,
 			   FoPdfOneBorderCoords *coords)
 {
-  fo_doc_set_dash (fo_doc, 0, 0);
+  fo_doc_set_dash (fo_doc, 0.0, 0.0);
 
   fo_pdf_clip_to_coords (fo_doc, coords);
 
