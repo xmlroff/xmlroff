@@ -65,6 +65,16 @@
     <testcases profile="out-of-line" base="out-of-line">
     </testcases>
     <testcases profile="table" base="table">
+      <testcases profile="table" base="table">
+        <test id="table-1" fo="multiple"
+    xml="table-1.fo" results="results/table-1.pdf">Single-cell table.</test>
+        <test id="table-2" fo="multiple"
+    xml="table-2.fo" results="results/table-2.pdf">Single-cell table, fixed table layout.</test>
+        <test id="table-3" fo="multiple"
+    xml="table-3.fo" results="results/table-3.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%".</test>
+        <test id="table-4" fo="multiple"
+    xml="table-4.fo" results="results/table-4.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%", fo:table-column.</test>
+      </testcases>
     </testcases>
   </testcases>
   <testcases profile="property" base="property">
@@ -73,6 +83,13 @@
     <testcases profile="accessability" base="accessability">
     </testcases>
     <testcases profile="block-line" base="block-line">
+      <test id="linefeed-treatment-1" fo="block" xml="linefeed-treatment-1.fo" results="results/linefeed-treatment-1.pdf">linefeed-treatment="ignore"</test>
+      <test id="linefeed-treatment-2" fo="block" xml="linefeed-treatment-2.fo" results="results/linefeed-treatment-2.pdf">linefeed-treatment="preserve"</test>
+      <test id="linefeed-treatment-3" fo="block" xml="linefeed-treatment-3.fo" results="results/linefeed-treatment-3.pdf">linefeed-treatment="treat-as-space"</test>
+      <test id="linefeed-treatment-4" fo="block" xml="linefeed-treatment-4.fo" results="results/linefeed-treatment-4.pdf">linefeed-treatment="treat-as-zero-width-space"</test>
+      <test id="linefeed-treatment-5" fo="block" xml="linefeed-treatment-5.fo" results="results/linefeed-treatment-5.pdf">linefeed-treatment="inherit"</test>
+      <test id="linefeed-treatment-6" fo="block" xml="linefeed-treatment-6.fo" results="results/linefeed-treatment-6.pdf">linefeed-treatment unspecified"</test>
+      <test id="linefeed-treatment-7" fo="block" xml="linefeed-treatment-7.fo" results="results/linefeed-treatment-7.pdf">linefeed-treatment="inherit", inherited value is "preserve"</test>
       <test id="text-align-start" fo="block" xml="text-align-start.fo" results="results/text-align-start.pdf">Use text-align="start" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
       <test id="text-align-center" fo="block" xml="text-align-center.fo" results="results/text-align-center.pdf">Use text-align="center" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
       <test id="text-align-end" fo="block" xml="text-align-end.fo" results="results/text-align-end.pdf">Use text-align="end" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
@@ -81,6 +98,7 @@
       <test id="text-align-outside" fo="block" xml="text-align-outside.fo" results="results/text-align-outside.pdf">Use text-align="outside" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
       <test id="text-align-left" fo="block" xml="text-align-left.fo" results="results/text-align-left.pdf">Use text-align="left" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
       <test id="text-align-right" fo="block" xml="text-align-right.fo" results="results/text-align-right.pdf">Use text-align="right" with fo:block elements generating areas that fit within a page and that break across pages for both writing-mode="lr" and writing-mode="rl".</test>
+      <test id="white-space-collapse-1" fo="block" xml="white-space-collapse-1.fo" results="results/white-space-collapse-1.pdf">linefeed-treatment="ignore"</test>
     </testcases>
     <testcases profile="border-padding-background" base="border-padding-background">
       <test id="background-color1" fo="multiple" xml="background-color1.fo" results="results/background-color1.pdf">background-color property with the 16 named colors.</test>
@@ -237,6 +255,7 @@
 
   <testcases profile="multiple" base="multiple">
 
+    <test id="minimal" fo="multiple" xml="minimal.fo">Minimal FO file.</test>
     <test id="simple" fo="multiple" xml="simple.fo">color, alignment-adjust, and font properties.</test>
     <test id="unsupported-property" fo="multiple"
     xml="unsupported-property.fo">Handling of an unsupported property.</test>

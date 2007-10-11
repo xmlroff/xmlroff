@@ -1,0 +1,23 @@
+<!-- $Id: text-align-center.fo,v 1.1.1.1 2003/02/12 18:03:09 tonygraham Exp $ -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow flow-name="xsl-region-body" linefeed-treatment="preserve">
+        <fo:block font-weight="bold">linefeed-treatment="inherit", inherited value is "preserve"</fo:block>
+        <fo:block space-after="12pt">Result should be "a" and "b" with a line break between them.</fo:block>
+        <fo:block background-color="yellow" linefeed-treatment="inherit">a&#xA;b</fo:block>
+      </fo:flow>
+    </fo:page-sequence>
+</fo:root>
