@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testsuite],
-	[0.5.1],
+	[0.5.3],
 	[http://xmlroff.org/newticket?component=testsuite],
 	xmlroff-testsuite)
 AC_CONFIG_SRCDIR([configure.ac])
