@@ -100,7 +100,7 @@
         $local-name = 'scaling-value-citation' or
         $local-name = 'basic-link' or
         $local-name = 'multi-toggle' or
-        $local-name = 'index-page-citation-list'
+        $local-name = 'index-page-citation-list' or
         $local-name = 'multi-switch' or
         $local-name = 'multi-properties' or
         $local-name = 'index-range-begin' or
