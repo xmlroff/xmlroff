@@ -227,8 +227,10 @@ fo_character_class_init (FoCharacterClass *klass)
   object_class->get_property = fo_character_get_property;
   object_class->set_property = fo_character_set_property;
 
-  fofo_class->validate_content =   fo_fo_validate_content_empty;
-  fofo_class->validate2 = fo_character_validate;
+  fofo_class->validate_content =
+    fo_fo_validate_content_empty;
+  fofo_class->validate2 =
+    fo_character_validate;
   fofo_class->update_from_context = fo_character_update_from_context;
   fofo_class->debug_dump_properties = fo_character_debug_dump_properties;
 
@@ -727,9 +729,68 @@ fo_character_inline_fo_init (FoInlineFoIface *iface)
 void
 fo_character_finalize (GObject *object)
 {
-  FoCharacter *fo_character;
+  FoFo *fo = FO_FO (object);
 
-  fo_character = FO_CHARACTER (object);
+  /* Release references to all property objects. */
+  fo_character_set_alignment_adjust (fo, NULL);
+  fo_character_set_alignment_baseline (fo, NULL);
+  fo_character_set_background_color (fo, NULL);
+  fo_character_set_background_image (fo, NULL);
+  fo_character_set_baseline_shift (fo, NULL);
+  fo_character_set_border_after_color (fo, NULL);
+  fo_character_set_border_after_style (fo, NULL);
+  fo_character_set_border_after_width (fo, NULL);
+  fo_character_set_border_before_color (fo, NULL);
+  fo_character_set_border_before_style (fo, NULL);
+  fo_character_set_border_before_width (fo, NULL);
+  fo_character_set_border_bottom_color (fo, NULL);
+  fo_character_set_border_bottom_style (fo, NULL);
+  fo_character_set_border_bottom_width (fo, NULL);
+  fo_character_set_border_end_color (fo, NULL);
+  fo_character_set_border_end_style (fo, NULL);
+  fo_character_set_border_end_width (fo, NULL);
+  fo_character_set_border_left_color (fo, NULL);
+  fo_character_set_border_left_style (fo, NULL);
+  fo_character_set_border_left_width (fo, NULL);
+  fo_character_set_border_right_color (fo, NULL);
+  fo_character_set_border_right_style (fo, NULL);
+  fo_character_set_border_right_width (fo, NULL);
+  fo_character_set_border_start_color (fo, NULL);
+  fo_character_set_border_start_style (fo, NULL);
+  fo_character_set_border_start_width (fo, NULL);
+  fo_character_set_border_top_color (fo, NULL);
+  fo_character_set_border_top_style (fo, NULL);
+  fo_character_set_border_top_width (fo, NULL);
+  fo_character_set_character (fo, NULL);
+  fo_character_set_color (fo, NULL);
+  fo_character_set_dominant_baseline (fo, NULL);
+  fo_character_set_font_family (fo, NULL);
+  fo_character_set_font_size (fo, NULL);
+  fo_character_set_font_stretch (fo, NULL);
+  fo_character_set_font_style (fo, NULL);
+  fo_character_set_font_variant (fo, NULL);
+  fo_character_set_font_weight (fo, NULL);
+  fo_character_set_id (fo, NULL);
+  fo_character_set_keep_with_next (fo, NULL);
+  fo_character_set_keep_with_next_within_column (fo, NULL);
+  fo_character_set_keep_with_next_within_line (fo, NULL);
+  fo_character_set_keep_with_next_within_page (fo, NULL);
+  fo_character_set_keep_with_previous (fo, NULL);
+  fo_character_set_keep_with_previous_within_column (fo, NULL);
+  fo_character_set_keep_with_previous_within_line (fo, NULL);
+  fo_character_set_keep_with_previous_within_page (fo, NULL);
+  fo_character_set_line_height (fo, NULL);
+  fo_character_set_padding_after (fo, NULL);
+  fo_character_set_padding_before (fo, NULL);
+  fo_character_set_padding_bottom (fo, NULL);
+  fo_character_set_padding_end (fo, NULL);
+  fo_character_set_padding_left (fo, NULL);
+  fo_character_set_padding_right (fo, NULL);
+  fo_character_set_padding_start (fo, NULL);
+  fo_character_set_padding_top (fo, NULL);
+  fo_character_set_score_spaces (fo, NULL);
+  fo_character_set_space_end (fo, NULL);
+  fo_character_set_space_start (fo, NULL);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -1153,7 +1214,7 @@ FoFo*
 fo_character_new (void)
 {
   return FO_FO (g_object_new (fo_character_get_type (),
-			      NULL));
+                              NULL));
 }
 
 /**
@@ -1189,6 +1250,40 @@ fo_character_validate (FoFo      *fo,
   fo_character_set_line_height (fo,
 				fo_property_line_height_resolve (fo_character->line_height,
 								 fo_character->font_size));
+  FoEnumEnum linefeed_treatment =
+    fo_enum_get_value (fo_property_get_value (fo_context_get_linefeed_treatment (current_context)));
+
+  const gchar *character =
+    fo_char_get_value (fo_property_get_value (fo_character_get_character (fo)));
+  if (fo_inline_fo_is_linefeed (character) &&
+      linefeed_treatment != FO_ENUM_ENUM_PRESERVE)
+    {
+      FoProperty *new_character_prop = NULL;
+
+      switch (linefeed_treatment)
+	{
+	case FO_ENUM_ENUM_IGNORE:
+	  new_character_prop = NULL;
+	  break;
+	case FO_ENUM_ENUM_TREAT_AS_SPACE:
+	  new_character_prop = g_object_new (FO_TYPE_PROPERTY_CHARACTER,
+					     "value",
+					     fo_char_get_char_space (),
+					     NULL);
+	  break;
+	case FO_ENUM_ENUM_TREAT_AS_ZERO_WIDTH_SPACE:
+	  new_character_prop = g_object_new (FO_TYPE_PROPERTY_CHARACTER,
+					     "value",
+					     fo_char_get_char_zws (),
+					     NULL);
+	  break;
+	default:
+	  g_assert_not_reached ();
+	}
+
+      fo_character_set_character (fo,
+				  new_character_prop);
+    }
 }
 
 /**
@@ -1420,34 +1515,37 @@ fo_character_debug_dump_properties (FoFo *fo,
  * Gets the text of the inline FO and its associated list of #PangoAttribute.
  **/
 void
-fo_character_get_text_attr_list (FoFo *fo_inline_fo,
+fo_character_get_text_attr_list (FoFo    *fo_inline_fo,
 				 FoDoc   *fo_doc G_GNUC_UNUSED,
 				 GString *text,
-				 GList **attr_glist,
-				 guint debug_level G_GNUC_UNUSED)
+				 GList  **attr_glist,
+				 guint    debug_level G_GNUC_UNUSED)
 {
-  FoCharacter *fo_character;
-  GList *my_attr_glist = NULL;
-  gint start_index, end_index;
-
   g_return_if_fail (fo_inline_fo != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_inline_fo));
 
-  fo_character = FO_CHARACTER (fo_inline_fo);
+  FoCharacter *fo_character = FO_CHARACTER (fo_inline_fo);
+  FoProperty *character_prop = fo_character_get_character (fo_inline_fo);
 
-  start_index = text->len;
+  /* The character may have been a linefeed that was discarded. */
+  if (character_prop == NULL)
+    {
+      return;
+    }
+
+  gint start_index = text->len;
 
   g_string_append (text,
-		   fo_char_get_value (fo_property_get_value (fo_character->character)));
+		   fo_char_get_value (fo_property_get_value (character_prop)));
 
-  end_index = text->len;
+  gint end_index = text->len;
 
   if (start_index != end_index)
     {
       PangoAttribute *pango_attr;
 
-      my_attr_glist =
-	g_list_concat (my_attr_glist,
+      GList *my_attr_glist =
+	g_list_concat (NULL,
 		       fo_property_common_font_get_pango_attrs (fo_character->font_family,
 								fo_character->font_size,
 								fo_character->font_stretch,
@@ -1518,10 +1616,10 @@ fo_character_get_text_attr_list (FoFo *fo_inline_fo,
       pango_attr->end_index = end_index;
       my_attr_glist = g_list_prepend (my_attr_glist, pango_attr);
       */
+      *attr_glist = g_list_concat (my_attr_glist,
+				   *attr_glist);
     }
 
-  *attr_glist = g_list_concat (my_attr_glist,
-			       *attr_glist);
 }
 
 /**
@@ -1558,7 +1656,8 @@ fo_character_set_alignment_adjust (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_ALIGNMENT_ADJUST (new_alignment_adjust));
+  g_return_if_fail ((new_alignment_adjust == NULL) ||
+		    FO_IS_PROPERTY_ALIGNMENT_ADJUST (new_alignment_adjust));
 
   if (new_alignment_adjust != NULL)
     {
@@ -1606,7 +1705,8 @@ fo_character_set_alignment_baseline (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_ALIGNMENT_BASELINE (new_alignment_baseline));
+  g_return_if_fail ((new_alignment_baseline == NULL) ||
+		    FO_IS_PROPERTY_ALIGNMENT_BASELINE (new_alignment_baseline));
 
   if (new_alignment_baseline != NULL)
     {
@@ -1654,7 +1754,8 @@ fo_character_set_background_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
+  g_return_if_fail ((new_background_color == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
 
   if (new_background_color != NULL)
     {
@@ -1702,7 +1803,8 @@ fo_character_set_background_image (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
+  g_return_if_fail ((new_background_image == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
 
   if (new_background_image != NULL)
     {
@@ -1750,7 +1852,8 @@ fo_character_set_baseline_shift (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BASELINE_SHIFT (new_baseline_shift));
+  g_return_if_fail ((new_baseline_shift == NULL) ||
+		    FO_IS_PROPERTY_BASELINE_SHIFT (new_baseline_shift));
 
   if (new_baseline_shift != NULL)
     {
@@ -1798,7 +1901,8 @@ fo_character_set_border_after_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
+  g_return_if_fail ((new_border_after_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
 
   if (new_border_after_color != NULL)
     {
@@ -1846,7 +1950,8 @@ fo_character_set_border_after_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
+  g_return_if_fail ((new_border_after_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
 
   if (new_border_after_style != NULL)
     {
@@ -1894,7 +1999,8 @@ fo_character_set_border_after_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
+  g_return_if_fail ((new_border_after_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
 
   if (new_border_after_width != NULL)
     {
@@ -1942,7 +2048,8 @@ fo_character_set_border_before_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
+  g_return_if_fail ((new_border_before_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
 
   if (new_border_before_color != NULL)
     {
@@ -1990,7 +2097,8 @@ fo_character_set_border_before_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
+  g_return_if_fail ((new_border_before_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
 
   if (new_border_before_style != NULL)
     {
@@ -2038,7 +2146,8 @@ fo_character_set_border_before_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
+  g_return_if_fail ((new_border_before_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
 
   if (new_border_before_width != NULL)
     {
@@ -2086,7 +2195,8 @@ fo_character_set_border_bottom_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
+  g_return_if_fail ((new_border_bottom_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
 
   if (new_border_bottom_color != NULL)
     {
@@ -2134,7 +2244,8 @@ fo_character_set_border_bottom_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
+  g_return_if_fail ((new_border_bottom_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
 
   if (new_border_bottom_style != NULL)
     {
@@ -2182,7 +2293,8 @@ fo_character_set_border_bottom_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
+  g_return_if_fail ((new_border_bottom_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
 
   if (new_border_bottom_width != NULL)
     {
@@ -2230,7 +2342,8 @@ fo_character_set_border_end_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
+  g_return_if_fail ((new_border_end_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
 
   if (new_border_end_color != NULL)
     {
@@ -2278,7 +2391,8 @@ fo_character_set_border_end_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
+  g_return_if_fail ((new_border_end_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
 
   if (new_border_end_style != NULL)
     {
@@ -2326,7 +2440,8 @@ fo_character_set_border_end_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
+  g_return_if_fail ((new_border_end_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
 
   if (new_border_end_width != NULL)
     {
@@ -2374,7 +2489,8 @@ fo_character_set_border_left_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
+  g_return_if_fail ((new_border_left_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
 
   if (new_border_left_color != NULL)
     {
@@ -2422,7 +2538,8 @@ fo_character_set_border_left_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
+  g_return_if_fail ((new_border_left_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
 
   if (new_border_left_style != NULL)
     {
@@ -2470,7 +2587,8 @@ fo_character_set_border_left_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
+  g_return_if_fail ((new_border_left_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
 
   if (new_border_left_width != NULL)
     {
@@ -2518,7 +2636,8 @@ fo_character_set_border_right_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
+  g_return_if_fail ((new_border_right_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
 
   if (new_border_right_color != NULL)
     {
@@ -2566,7 +2685,8 @@ fo_character_set_border_right_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
+  g_return_if_fail ((new_border_right_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
 
   if (new_border_right_style != NULL)
     {
@@ -2614,7 +2734,8 @@ fo_character_set_border_right_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
+  g_return_if_fail ((new_border_right_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
 
   if (new_border_right_width != NULL)
     {
@@ -2662,7 +2783,8 @@ fo_character_set_border_start_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
+  g_return_if_fail ((new_border_start_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
 
   if (new_border_start_color != NULL)
     {
@@ -2710,7 +2832,8 @@ fo_character_set_border_start_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
+  g_return_if_fail ((new_border_start_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
 
   if (new_border_start_style != NULL)
     {
@@ -2758,7 +2881,8 @@ fo_character_set_border_start_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
+  g_return_if_fail ((new_border_start_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
 
   if (new_border_start_width != NULL)
     {
@@ -2806,7 +2930,8 @@ fo_character_set_border_top_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
+  g_return_if_fail ((new_border_top_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
 
   if (new_border_top_color != NULL)
     {
@@ -2854,7 +2979,8 @@ fo_character_set_border_top_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
+  g_return_if_fail ((new_border_top_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
 
   if (new_border_top_style != NULL)
     {
@@ -2902,7 +3028,8 @@ fo_character_set_border_top_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
+  g_return_if_fail ((new_border_top_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
 
   if (new_border_top_width != NULL)
     {
@@ -2950,7 +3077,8 @@ fo_character_set_character (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_CHARACTER (new_character));
+  g_return_if_fail ((new_character == NULL) ||
+		    FO_IS_PROPERTY_CHARACTER (new_character));
 
   if (new_character != NULL)
     {
@@ -2998,7 +3126,8 @@ fo_character_set_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_COLOR (new_color));
+  g_return_if_fail ((new_color == NULL) ||
+		    FO_IS_PROPERTY_COLOR (new_color));
 
   if (new_color != NULL)
     {
@@ -3046,7 +3175,8 @@ fo_character_set_dominant_baseline (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_DOMINANT_BASELINE (new_dominant_baseline));
+  g_return_if_fail ((new_dominant_baseline == NULL) ||
+		    FO_IS_PROPERTY_DOMINANT_BASELINE (new_dominant_baseline));
 
   if (new_dominant_baseline != NULL)
     {
@@ -3094,7 +3224,8 @@ fo_character_set_font_family (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_FONT_FAMILY (new_font_family));
+  g_return_if_fail ((new_font_family == NULL) ||
+		    FO_IS_PROPERTY_FONT_FAMILY (new_font_family));
 
   if (new_font_family != NULL)
     {
@@ -3142,7 +3273,8 @@ fo_character_set_font_size (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_FONT_SIZE (new_font_size));
+  g_return_if_fail ((new_font_size == NULL) ||
+		    FO_IS_PROPERTY_FONT_SIZE (new_font_size));
 
   if (new_font_size != NULL)
     {
@@ -3190,7 +3322,8 @@ fo_character_set_font_stretch (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_FONT_STRETCH (new_font_stretch));
+  g_return_if_fail ((new_font_stretch == NULL) ||
+		    FO_IS_PROPERTY_FONT_STRETCH (new_font_stretch));
 
   if (new_font_stretch != NULL)
     {
@@ -3238,7 +3371,8 @@ fo_character_set_font_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_FONT_STYLE (new_font_style));
+  g_return_if_fail ((new_font_style == NULL) ||
+		    FO_IS_PROPERTY_FONT_STYLE (new_font_style));
 
   if (new_font_style != NULL)
     {
@@ -3286,7 +3420,8 @@ fo_character_set_font_variant (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_FONT_VARIANT (new_font_variant));
+  g_return_if_fail ((new_font_variant == NULL) ||
+		    FO_IS_PROPERTY_FONT_VARIANT (new_font_variant));
 
   if (new_font_variant != NULL)
     {
@@ -3334,7 +3469,8 @@ fo_character_set_font_weight (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_FONT_WEIGHT (new_font_weight));
+  g_return_if_fail ((new_font_weight == NULL) ||
+		    FO_IS_PROPERTY_FONT_WEIGHT (new_font_weight));
 
   if (new_font_weight != NULL)
     {
@@ -3382,7 +3518,8 @@ fo_character_set_id (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_ID (new_id));
+  g_return_if_fail ((new_id == NULL) ||
+		    FO_IS_PROPERTY_ID (new_id));
 
   if (new_id != NULL)
     {
@@ -3430,7 +3567,8 @@ fo_character_set_keep_with_next (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT (new_keep_with_next));
+  g_return_if_fail ((new_keep_with_next == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT (new_keep_with_next));
 
   if (new_keep_with_next != NULL)
     {
@@ -3478,7 +3616,8 @@ fo_character_set_keep_with_next_within_column (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_COLUMN (new_keep_with_next_within_column));
+  g_return_if_fail ((new_keep_with_next_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_COLUMN (new_keep_with_next_within_column));
 
   if (new_keep_with_next_within_column != NULL)
     {
@@ -3526,7 +3665,8 @@ fo_character_set_keep_with_next_within_line (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_LINE (new_keep_with_next_within_line));
+  g_return_if_fail ((new_keep_with_next_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_LINE (new_keep_with_next_within_line));
 
   if (new_keep_with_next_within_line != NULL)
     {
@@ -3574,7 +3714,8 @@ fo_character_set_keep_with_next_within_page (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_PAGE (new_keep_with_next_within_page));
+  g_return_if_fail ((new_keep_with_next_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_PAGE (new_keep_with_next_within_page));
 
   if (new_keep_with_next_within_page != NULL)
     {
@@ -3622,7 +3763,8 @@ fo_character_set_keep_with_previous (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS (new_keep_with_previous));
+  g_return_if_fail ((new_keep_with_previous == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS (new_keep_with_previous));
 
   if (new_keep_with_previous != NULL)
     {
@@ -3670,7 +3812,8 @@ fo_character_set_keep_with_previous_within_column (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_COLUMN (new_keep_with_previous_within_column));
+  g_return_if_fail ((new_keep_with_previous_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_COLUMN (new_keep_with_previous_within_column));
 
   if (new_keep_with_previous_within_column != NULL)
     {
@@ -3718,7 +3861,8 @@ fo_character_set_keep_with_previous_within_line (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_LINE (new_keep_with_previous_within_line));
+  g_return_if_fail ((new_keep_with_previous_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_LINE (new_keep_with_previous_within_line));
 
   if (new_keep_with_previous_within_line != NULL)
     {
@@ -3766,7 +3910,8 @@ fo_character_set_keep_with_previous_within_page (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE (new_keep_with_previous_within_page));
+  g_return_if_fail ((new_keep_with_previous_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE (new_keep_with_previous_within_page));
 
   if (new_keep_with_previous_within_page != NULL)
     {
@@ -3814,7 +3959,8 @@ fo_character_set_line_height (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_LINE_HEIGHT (new_line_height));
+  g_return_if_fail ((new_line_height == NULL) ||
+		    FO_IS_PROPERTY_LINE_HEIGHT (new_line_height));
 
   if (new_line_height != NULL)
     {
@@ -3862,7 +4008,8 @@ fo_character_set_padding_after (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
+  g_return_if_fail ((new_padding_after == NULL) ||
+		    FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
 
   if (new_padding_after != NULL)
     {
@@ -3910,7 +4057,8 @@ fo_character_set_padding_before (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
+  g_return_if_fail ((new_padding_before == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
 
   if (new_padding_before != NULL)
     {
@@ -3958,7 +4106,8 @@ fo_character_set_padding_bottom (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
+  g_return_if_fail ((new_padding_bottom == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
 
   if (new_padding_bottom != NULL)
     {
@@ -4006,7 +4155,8 @@ fo_character_set_padding_end (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_END (new_padding_end));
+  g_return_if_fail ((new_padding_end == NULL) ||
+		    FO_IS_PROPERTY_PADDING_END (new_padding_end));
 
   if (new_padding_end != NULL)
     {
@@ -4054,7 +4204,8 @@ fo_character_set_padding_left (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
+  g_return_if_fail ((new_padding_left == NULL) ||
+		    FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
 
   if (new_padding_left != NULL)
     {
@@ -4102,7 +4253,8 @@ fo_character_set_padding_right (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
+  g_return_if_fail ((new_padding_right == NULL) ||
+		    FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
 
   if (new_padding_right != NULL)
     {
@@ -4150,7 +4302,8 @@ fo_character_set_padding_start (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_START (new_padding_start));
+  g_return_if_fail ((new_padding_start == NULL) ||
+		    FO_IS_PROPERTY_PADDING_START (new_padding_start));
 
   if (new_padding_start != NULL)
     {
@@ -4198,7 +4351,8 @@ fo_character_set_padding_top (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
+  g_return_if_fail ((new_padding_top == NULL) ||
+		    FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
 
   if (new_padding_top != NULL)
     {
@@ -4246,7 +4400,8 @@ fo_character_set_score_spaces (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_SCORE_SPACES (new_score_spaces));
+  g_return_if_fail ((new_score_spaces == NULL) ||
+		    FO_IS_PROPERTY_SCORE_SPACES (new_score_spaces));
 
   if (new_score_spaces != NULL)
     {
@@ -4294,7 +4449,8 @@ fo_character_set_space_end (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_SPACE_END (new_space_end));
+  g_return_if_fail ((new_space_end == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END (new_space_end));
 
   if (new_space_end != NULL)
     {
@@ -4342,7 +4498,8 @@ fo_character_set_space_start (FoFo *fo_fo,
 
   g_return_if_fail (fo_character != NULL);
   g_return_if_fail (FO_IS_CHARACTER (fo_character));
-  g_return_if_fail (FO_IS_PROPERTY_SPACE_START (new_space_start));
+  g_return_if_fail ((new_space_start == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START (new_space_start));
 
   if (new_space_start != NULL)
     {
