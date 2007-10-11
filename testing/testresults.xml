@@ -15,7 +15,7 @@
   <testcases profile="fo" base="fo">
     <testcases profile="block" base="block">
       <testcases profile="block" base="block">
-        <testresult id="start-indent-percentage" results="start-indent-percentage.pdf" agreement="full" specproblem="no" testproblem="no" futuresupport="full"/>
+        <testresult id="start-indent-percentage" results="start-indent-percentage.pdf" agreement="full" specproblem="no" testproblem="no"/>
       </testcases>
     </testcases>
     <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
@@ -62,6 +62,13 @@
     <testcases profile="accessability" base="accessability">
     </testcases>
     <testcases profile="block-line" base="block-line">
+      <testresult id="linefeed-treatment-1" results="linefeed-treatment-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-2" results="linefeed-treatment-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-3" results="linefeed-treatment-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-4" results="linefeed-treatment-4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-5" results="linefeed-treatment-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-6" results="linefeed-treatment-6.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-7" results="linefeed-treatment-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="text-align-start" results="text-align-start.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not take up space.</testresult>
       <testresult id="text-align-center" results="text-align-center.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="text-align-end" results="text-align-end.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not be included.</testresult>
@@ -70,6 +77,7 @@
       <testresult id="text-align-outside" results="text-align-outside.pdf" agreement="issues" specproblem="no" testproblem="no">No longer works correctly.  Whitespace at end of line should not show.</testresult>
       <testresult id="text-align-left" results="text-align-left.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="text-align-right" results="text-align-right.pdf" agreement="issues" specproblem="no" testproblem="no">Whitespace at end of line should not take up space.</testresult>
+      <testresult id="white-space-collapse-1" results="white-space-collapse-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
     </testcases>
     <testcases profile="border-padding-background" base="border-padding-background">
       <testresult id="background-color1" results="background-color1.pdf" agreement="full" specproblem="no" testproblem="no"/>
@@ -102,7 +110,7 @@
     <testcases profile="float" base="float">
     </testcases>
     <testcases profile="font" base="font">
-      <testresult id="font-size" results="font-size.pdf" agreement="issues" specproblem="no" testproblem="yes">Too much vertical space. #96.</testresult>
+      <testresult id="font-size" results="font-size.pdf" agreement="issues" specproblem="no" testproblem="yes">Too little vertical space. #96.</testresult>
       <testresult id="font-size-fail" results="font-size-fail.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="font-stretch" results="font-stretch.pdf" agreement="issues" specproblem="no" testproblem="yes">No apparent effect.  May be problem with font not available in range of widths.  Should be broken into multiple tests with more explanation of expected result.</testresult>
       <testresult id="font-weight-sans-serif" results="font-weight-sans-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Appears correct given range of font weights available on this machine.  Should be broken into multiple tests with more explanation of expected result.</testresult>
@@ -159,7 +167,7 @@
     <testcases profile="table" base="table">
     </testcases>
     <testcases profile="writing-mode" base="writing-mode">
-      <testresult id="writing-mode" results="writing-mode.pdf" agreement="issues" specproblem="no" testproblem="yes">Test should be split into multiple tests with some explanation of intended results.</testresult>
+      <testresult id="writing-mode" results="writing-mode.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
     </testcases>
 
   </testcases>
