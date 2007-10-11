@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-block-progression-dimension-minimum
+block-progression-dimension.minimum
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-block-progression-dimension-minimum
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBlockProgressionDimensionMinimum ##### -->
 <para>
-The #FoPropertyBlockProgressionDimensionMinimum structure represents one instance of the
-'block-progression-dimension.minimum' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBlockProgressionDimensionMinimumClass ##### -->
 <para>
-The #FoPropertyBlockProgressionDimensionMinimum structure represents one instance of the
-'block-progression-dimension.minimum' property.
+
 </para>
 
 

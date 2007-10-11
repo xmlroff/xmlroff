@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-alignment-baseline
+alignment-baseline
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-alignment-baseline
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyAlignmentBaseline ##### -->
 <para>
-The #FoPropertyAlignmentBaseline structure represents one instance of the
-'alignment-baseline' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyAlignmentBaselineClass ##### -->
 <para>
-The #FoPropertyAlignmentBaselineClass structure represents the type of
-the 'alignment-baseline' XSL property.
+
 </para>
 
 

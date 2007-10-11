@@ -927,9 +927,10 @@ FO_BOOLEAN_GET_CLASS
 <TITLE>FoChar</TITLE>
 FoChar
 FoCharClass
-fo_char_new
 fo_char_new_with_value
 fo_char_get_value
+fo_char_get_char_space
+fo_char_get_char_zws
 <SUBSECTION Standard>
 FO_CHAR
 FO_IS_CHAR
@@ -945,7 +946,6 @@ FO_CHAR_GET_CLASS
 <TITLE>FoColor</TITLE>
 FoColor
 FoColorClass
-fo_color_new
 fo_color_new_with_value
 FO_COLOR_COMPONENT_MAX
 fo_color_get_red
@@ -1205,7 +1205,6 @@ FO_LENGTH_RANGE
 FoLengthRange
 FoLengthRangeClass
 fo_length_range_get_type
-fo_length_range_new
 fo_length_range_new_auto
 fo_length_range_new_with_value
 fo_length_range_get_minimum
@@ -1228,7 +1227,6 @@ FO_LENGTH_RANGE_GET_CLASS
 <TITLE>FoLength</TITLE>
 FoLength
 FoLengthClass
-fo_length_new
 fo_length_new_with_value
 fo_length_new_from_pixels
 fo_length_get_value
@@ -1237,8 +1235,7 @@ fo_length_get_length_minus_3pt
 fo_length_get_length_zero
 fo_length_get_length_3pt
 fo_length_get_length_6pt
-fo_length_get_length_12
-fo_length_get_length_24
+fo_length_get_length_24pt
 fo_length_get_length_A4_height
 fo_length_get_length_A4_width
 fo_length_get_width_thin
@@ -2820,6 +2817,9 @@ FO_INLINE_FO_IFACE
 FoInlineFo
 FoInlineFoIface
 fo_inline_fo_get_text_attr_list
+fo_inline_fo_is_linefeed
+fo_inline_fo_is_non_linefeed_white_space
+fo_inline_fo_is_white_space
 <SUBSECTION Standard>
 FO_INLINE_FO
 FO_IS_INLINE_FO

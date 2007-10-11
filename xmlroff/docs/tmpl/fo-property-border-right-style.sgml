@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-right-style
+border-right-style
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-right-style
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderRightStyle ##### -->
 <para>
-The #FoPropertyBorderRightStyle structure represents one instance of the
-'border-right-style' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderRightStyleClass ##### -->
 <para>
-The #FoPropertyBorderRightStyleClass structure represents the type of
-the 'border-right-style' XSL property.
 
 </para>
 

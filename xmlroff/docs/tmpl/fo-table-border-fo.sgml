@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-table-border-fo
+FoTableBorderFoIface
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-table-border-fo
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

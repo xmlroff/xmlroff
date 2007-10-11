@@ -2,23 +2,25 @@
 FoObject
 
 <!-- ##### SECTION Short_Description ##### -->
-FoObject is wonderful
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-FoObject is really wonderful.
+
 </para>
+
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
+
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoObject ##### -->
 <para>
-FoObject is wonderful, too.
 
 </para>
 
@@ -42,6 +44,7 @@ FoObject is wonderful, too.
 
 <!-- ##### FUNCTION fo_object_new ##### -->
 <para>
+
 </para>
 
 @Returns: 

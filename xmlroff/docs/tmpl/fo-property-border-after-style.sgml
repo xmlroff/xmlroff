@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-after-style
+border-after-style
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-border-after-style
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderAfterStyle ##### -->
 <para>
-The #FoPropertyBorderAfterStyle structure represents one instance of the
-'border-after-style' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderAfterStyleClass ##### -->
 <para>
-The #FoPropertyBorderAfterStyleClass structure represents the type of
-the 'border-after-style' XSL property.
+
 </para>
 
 

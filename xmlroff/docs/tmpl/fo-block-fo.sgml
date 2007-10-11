@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-block-fo
+FoBlockFoIface
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-block-fo
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

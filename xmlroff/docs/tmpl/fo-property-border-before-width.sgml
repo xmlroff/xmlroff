@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-before-width
+border-before-width
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-border-before-width
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderBeforeWidth ##### -->
 <para>
-The #FoPropertyBorderBeforeWidth structure represents one instance of the
-'border-before-width' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderBeforeWidthClass ##### -->
 <para>
-The #FoPropertyBorderBeforeWidthClass structure represents the type of
-the 'border-before-width' XSL property.
+
 </para>
 
 

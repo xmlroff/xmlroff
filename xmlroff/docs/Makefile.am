@@ -7,7 +7,7 @@ DOC_MODULE=xmlroff
 DOC_MAIN_SGML_FILE=xmlroff-docs.sgml
 
 # The directory containing the source code. Relative to $(srcdir)
-DOC_SOURCE_DIR=..
+DOC_SOURCE_DIR=../libfo
 
 # Extra options to supply to gtkdoc-scan
 SCAN_OPTIONS=--deprecated-guards="FO_DISABLE_DEPRECATED"

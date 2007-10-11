@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-inline-fo
+FoInlineFoIface
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-inline-fo
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -47,5 +49,32 @@ fo-inline-fo
 @text: 
 @attr_glist: 
 @debug_level: 
+
+
+<!-- ##### FUNCTION fo_inline_fo_is_linefeed ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_inline_fo_is_non_linefeed_white_space ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_inline_fo_is_white_space ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
 
 

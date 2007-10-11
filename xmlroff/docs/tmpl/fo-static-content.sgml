@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-static-content
+static-content
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-static-content
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

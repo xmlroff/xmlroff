@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-inline-progression-dimension-minimum
+inline-progression-dimension.minimum
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-inline-progression-dimension-minimum
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

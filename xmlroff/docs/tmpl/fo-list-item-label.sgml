@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-list-item-label
+list-item-label
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-list-item-label
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-source-document
+source-document
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-source-document
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

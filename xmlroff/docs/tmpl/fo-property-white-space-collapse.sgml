@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-white-space-collapse
+white-space-collapse
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-white-space-collapse
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

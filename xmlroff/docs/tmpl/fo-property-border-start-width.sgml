@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-start-width
+border-start-width
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-start-width
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderStartWidth ##### -->
 <para>
-The #FoPropertyBorderStartWidth structure represents one instance of the
-'border-start-width' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderStartWidthClass ##### -->
 <para>
-The #FoPropertyBorderStartWidthClass structure represents the type of
-the 'border-start-width' XSL property.
 
 </para>
 

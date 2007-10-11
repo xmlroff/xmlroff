@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-block-progression-dimension-maximum
+block-progression-dimension.maximum
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-block-progression-dimension-maximum
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBlockProgressionDimensionMaximum ##### -->
 <para>
-The #FoPropertyBlockProgressionDimensionMaximum structure represents one instance of the
-'block-progression-dimension.maximum' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBlockProgressionDimensionMaximumClass ##### -->
 <para>
-The #FoPropertyBlockProgressionDimensionMaximumClass structure represents the type of
-the 'block-progression-dimension.maximum' XSL property.
+
 </para>
 
 

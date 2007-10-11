@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-break-after
+break-after
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-break-after
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

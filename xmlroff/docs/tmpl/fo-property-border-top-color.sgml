@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-top-color
+border-top-color
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-top-color
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderTopColor ##### -->
 <para>
-The #FoPropertyBorderTopColor structure represents one instance of the
-'border-top-color' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderTopColorClass ##### -->
 <para>
-The #FoPropertyBorderTopColorClass structure represents the type of
-the 'border-top-color' XSL property.
 
 </para>
 

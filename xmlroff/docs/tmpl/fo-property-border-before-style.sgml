@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-before-style
+border-before-style
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-border-before-style
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderBeforeStyle ##### -->
 <para>
-The #FoPropertyBorderBeforeStyle structure represents one instance of the
-'border-before-style' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderBeforeStyleClass ##### -->
 <para>
-The #FoPropertyBorderBeforeStyleClass structure represents the type of
-the 'border-before-style' XSL property.
+
 </para>
 
 

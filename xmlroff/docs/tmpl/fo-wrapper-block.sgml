@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-wrapper-block
+FoWrapperBlock
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-wrapper-block
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

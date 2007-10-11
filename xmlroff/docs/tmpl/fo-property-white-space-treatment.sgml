@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-white-space-treatment
+white-space-treatment
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-white-space-treatment
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-block-layout
+FoBlockLayout
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-block-layout
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-color
+FoColor
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-color
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -42,14 +44,6 @@ fo-color
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION fo_color_new ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION fo_color_new_with_value ##### -->

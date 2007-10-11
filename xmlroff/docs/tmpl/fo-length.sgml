@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-length
+FoLength
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-length
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -32,14 +34,6 @@ fo-length
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION fo_length_new ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION fo_length_new_with_value ##### -->
@@ -101,15 +95,7 @@ fo-length
 @Returns: 
 
 
-<!-- ##### FUNCTION fo_length_get_length_12 ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION fo_length_get_length_24 ##### -->
+<!-- ##### FUNCTION fo_length_get_length_24pt ##### -->
 <para>
 
 </para>

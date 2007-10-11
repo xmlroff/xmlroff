@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-baseline-shift
+baseline-shift
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-baseline-shift
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBaselineShift ##### -->
 <para>
-The #FoPropertyBaselineShift structure represents one instance of the
-'baseline-shift' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBaselineShiftClass ##### -->
 <para>
-The #FoPropertyBaselineShiftClass structure represents the type of
-the 'baseline-shift' XSL property.
+
 </para>
 
 

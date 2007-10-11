@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-number-rows-spanned
+number-rows-spanned
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-number-rows-spanned
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

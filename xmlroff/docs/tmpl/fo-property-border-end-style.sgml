@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-end-style
+border-end-style
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-end-style
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderEndStyle ##### -->
 <para>
-The #FoPropertyBorderEndStyle structure represents one instance of the
-'border-end-style' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderEndStyleClass ##### -->
 <para>
-The #FoPropertyBorderEndStyleClass structure represents the type of
-the 'border-end-style' XSL property.
 
 </para>
 

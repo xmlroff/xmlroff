@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-inline-container
+inline-container
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-inline-container
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

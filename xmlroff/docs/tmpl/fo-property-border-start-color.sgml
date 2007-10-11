@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-start-color
+border-start-color
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-start-color
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderStartColor ##### -->
 <para>
-The #FoPropertyBorderStartColor structure represents one instance of the
-'border-start-color' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderStartColorClass ##### -->
 <para>
-The #FoPropertyBorderStartColorClass structure represents the type of
-the 'border-start-color' XSL property.
 
 </para>
 

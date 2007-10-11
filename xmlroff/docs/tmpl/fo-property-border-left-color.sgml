@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-left-color
+border-left-color
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-left-color
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderLeftColor ##### -->
 <para>
-The #FoPropertyBorderLeftColor structure represents one instance of the
-'border-left-color' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderLeftColorClass ##### -->
 <para>
-The #FoPropertyBorderLeftColorClass structure represents the type of
-the 'border-left-color' XSL property.
 
 </para>
 

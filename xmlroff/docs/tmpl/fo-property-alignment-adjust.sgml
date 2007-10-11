@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-alignment-adjust
+alignment-adjust
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-alignment-adjust
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyAlignmentAdjust ##### -->
 <para>
-The #FoPropertyAlignmentAdust structure represents one instance of the
-'alignment-adjust' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyAlignmentAdjustClass ##### -->
 <para>
-The #FoPropertyAlignmentAdjustClass structure represents the type of
-the 'alignment-adjust' property.
+
 </para>
 
 

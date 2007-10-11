@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-keep-together-within-column
+keep-together.within-column
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-keep-together-within-column
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

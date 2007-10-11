@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-flow-name
+flow-name
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-flow-name
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

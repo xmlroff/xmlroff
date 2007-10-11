@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-after-width
+border-after-width
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-border-after-width
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderAfterWidth ##### -->
 <para>
-The #FoPropertyBorderAfterWidth structure represents one instance of the
-'border-after-width' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderAfterWidthClass ##### -->
 <para>
-The #FoPropertyBorderAfterWidthClass structure represents the type of
-the 'border-after-width' XSL property.
+
 </para>
 
 

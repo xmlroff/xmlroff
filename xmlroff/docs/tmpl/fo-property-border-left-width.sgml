@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-left-width
+border-left-width
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-left-width
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderLeftWidth ##### -->
 <para>
-The #FoPropertyBorderLeftWidth structure represents one instance of the
-'border-left-width' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderLeftWidthClass ##### -->
 <para>
-The #FoPropertyBorderLeftWidthClass structure represents the type of
-the 'border-left-width' XSL property.
 
 </para>
 

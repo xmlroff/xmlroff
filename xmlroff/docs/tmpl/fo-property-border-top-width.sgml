@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-top-width
+border-top-width
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-top-width
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderTopWidth ##### -->
 <para>
-The #FoPropertyBorderTopWidth structure represents one instance of the
-'border-top-width' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderTopWidthClass ##### -->
 <para>
-The #FoPropertyBorderTopWidthClass structure represents the type of
-the 'border-top-width' XSL property.
 
 </para>
 

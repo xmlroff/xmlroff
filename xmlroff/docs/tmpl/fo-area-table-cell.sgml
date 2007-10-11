@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-area-table-cell
+FoAreaTableCell
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-area-table-cell
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

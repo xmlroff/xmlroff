@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-keep-with-previous-within-page
+keep-with-previous.within-page
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-keep-with-previous-within-page
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

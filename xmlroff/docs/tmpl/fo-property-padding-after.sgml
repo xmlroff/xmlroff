@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-padding-after
+padding-after
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-padding-after
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

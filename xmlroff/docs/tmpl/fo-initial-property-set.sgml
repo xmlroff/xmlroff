@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-initial-property-set
+initial-property-set
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-initial-property-set
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

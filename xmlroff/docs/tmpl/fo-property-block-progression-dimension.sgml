@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-block-progression-dimension
+block-progression-dimension
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,25 @@ fo-property-block-progression-dimension
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBlockProgressionDimension ##### -->
 <para>
-The #FoPropertyBlockProgressionDimension structure represents one instance of the
-'block-progression-dimension' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBlockProgressionDimensionClass ##### -->
 <para>
-The #FoPropertyBlockProgressionDimensionClass structure represents the type of
-the 'block-progression-dimension' XSL property.
+
 </para>
 
 

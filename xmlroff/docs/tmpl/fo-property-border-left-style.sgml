@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-left-style
+border-left-style
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-left-style
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderLeftStyle ##### -->
 <para>
-The #FoPropertyBorderLeftStyle structure represents one instance of the
-'border-left-style' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderLeftStyleClass ##### -->
 <para>
-The #FoPropertyBorderLeftStyleClass structure represents the type of
-the 'border-left-style' XSL property.
 
 </para>
 

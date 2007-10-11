@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-keep-together-within-line
+keep-together.within-line
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-keep-together-within-line
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-start-style
+border-start-style
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-start-style
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderStartStyle ##### -->
 <para>
-The #FoPropertyBorderStartStyle structure represents one instance of the
-'border-start-style' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderStartStyleClass ##### -->
 <para>
-The #FoPropertyBorderStartStyleClass structure represents the type of
-the 'border-start-style' XSL property.
 
 </para>
 

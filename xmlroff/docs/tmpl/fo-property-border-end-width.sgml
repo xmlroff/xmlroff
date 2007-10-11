@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-border-end-width
+border-end-width
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,25 +9,24 @@ fo-property-border-end-width
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
 
 <!-- ##### STRUCT FoPropertyBorderEndWidth ##### -->
 <para>
-The #FoPropertyBorderEndWidth structure represents one instance of the
-'border-end-width' property.
+
 </para>
 
 
 <!-- ##### STRUCT FoPropertyBorderEndWidthClass ##### -->
 <para>
-The #FoPropertyBorderEndWidthClass structure represents the type of
-the 'border-end-width' XSL property.
 
 </para>
 

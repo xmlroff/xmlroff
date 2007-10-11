@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-property-font-variant
+font-variant
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-property-font-variant
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

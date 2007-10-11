@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-char
+FoChar
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-char
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -34,14 +36,6 @@ fo-char
 </para>
 
 
-<!-- ##### FUNCTION fo_char_new ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### FUNCTION fo_char_new_with_value ##### -->
 <para>
 
@@ -57,6 +51,22 @@ fo-char
 </para>
 
 @fo_char: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_char_get_char_space ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION fo_char_get_char_zws ##### -->
+<para>
+
+</para>
+
 @Returns: 
 
 

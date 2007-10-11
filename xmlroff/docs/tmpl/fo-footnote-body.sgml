@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-footnote-body
+footnote-body
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-footnote-body
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

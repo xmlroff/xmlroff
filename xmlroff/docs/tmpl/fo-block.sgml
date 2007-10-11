@@ -1,18 +1,20 @@
 <!-- ##### SECTION Title ##### -->
-fo-block
+block
 
 <!-- ##### SECTION Short_Description ##### -->
-FoBlock
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-#FoObject for "block" formatting object.
+
 </para>
+
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 

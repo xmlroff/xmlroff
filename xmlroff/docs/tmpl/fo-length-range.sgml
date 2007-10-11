@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-fo-length-range
+FoLengthRange
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -9,10 +9,12 @@ fo-length-range
 
 </para>
 
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -53,14 +55,6 @@ fo-length-range
 
 
 <!-- ##### FUNCTION fo_length_range_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION fo_length_range_new ##### -->
 <para>
 
 </para>
