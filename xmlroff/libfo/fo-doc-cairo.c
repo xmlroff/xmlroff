@@ -771,7 +771,7 @@ fo_doc_cairo_set_dash (FoDoc  *fo_doc,
   g_return_if_fail (FO_DOC_CAIRO (fo_doc)->cr != NULL);
 
   cairo_set_dash (FO_DOC_CAIRO (fo_doc)->cr,
-		  values,
+		  &values,
 		  n,
 		  0.0);
 }
