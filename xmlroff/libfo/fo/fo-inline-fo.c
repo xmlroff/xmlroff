@@ -113,3 +113,58 @@ fo_inline_fo_get_text_attr_list_default (FoFo    *fo_inline_fo,
     }
 
 }
+
+/**
+ * fo_inline_fo_is_white_space:
+ * @string: the string
+ * 
+ * From http://www.w3.org/TR/xml/#sec-common-syn
+ *
+ * [3]  S ::= (#x20 | #x9 | #xD | #xA)+
+ * 
+ * Return value: TRUE if the current character is an white space character,
+ *               otherwise FALSE
+ **/
+gboolean
+fo_inline_fo_is_white_space (const gchar *string)
+{
+  return ((string != NULL) &&
+	  ((*string == ' ') ||
+	   (*string == '\t') ||
+	   (*string == '\r') ||
+	   (*string == '\n')));
+}
+
+/**
+ * fo_inline_fo_is_non_linefeed_white_space:
+ * @string: the string
+ * 
+ * From http://www.w3.org/TR/xml/#sec-common-syn
+ *
+ * [3]  S ::= (#x20 | #x9 | #xD | #xA)+
+ * 
+ * Return value: TRUE if the current character is an white space character,
+ *               otherwise FALSE
+ **/
+gboolean
+fo_inline_fo_is_non_linefeed_white_space (const gchar *string)
+{
+  return ((string != NULL) &&
+	  ((*string == ' ') ||
+	   (*string == '\t') ||
+	   (*string == '\r')));
+}
+
+/**
+ * fo_inline_fo_is_linefeed:
+ * @string: the string
+ * 
+ * Return value: TRUE if the current character is a linefeed character,
+ *               otherwise FALSE
+ **/
+gboolean
+fo_inline_fo_is_linefeed (const gchar *string)
+{
+  return ((string != NULL) &&
+	  (*string == '\n'));
+}

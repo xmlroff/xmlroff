@@ -44,6 +44,10 @@ void fo_inline_fo_get_text_attr_list (FoFo    *fo_inline_fo,
 				      GString *text,
 				      GList  **attr_glist,
 				      guint    debug_level);
+gboolean fo_inline_fo_is_white_space              (const gchar *string);
+gboolean fo_inline_fo_is_non_linefeed_white_space (const gchar *string);
+gboolean fo_inline_fo_is_linefeed                 (const gchar *string);
+
 G_END_DECLS
 
 #endif /* !__FO_INLINE_FO_H__ */

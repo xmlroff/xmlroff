@@ -523,8 +523,8 @@ fo_text_validate (FoFo      *fo,
   if (linefeed_treatment != FO_ENUM_ENUM_PRESERVE)
     {
       gchar **strings = g_strsplit_set (fo_text_get_value (fo),
-					 "\n",
-					 -1);
+					"\n",
+					-1);
       gchar *separator = NULL;
 
       switch (linefeed_treatment)
@@ -1064,61 +1064,6 @@ fo_text_get_whitespace_only (FoFo *fo_fo)
 }
 
 /**
- * is_white_space:
- * @string: the string
- * 
- * From http://www.w3.org/TR/xml/#sec-common-syn
- *
- * [3]  S ::= (#x20 | #x9 | #xD | #xA)+
- * 
- * Return value: TRUE if the current character is an white space character,
- *               otherwise FALSE
- **/
-static gboolean
-is_white_space (const gchar *string)
-{
-  return ((string != NULL) &&
-	  ((*string == ' ') ||
-	   (*string == '\t') ||
-	   (*string == '\r') ||
-	   (*string == '\n')));
-}
-
-/**
- * is_non_linefeed_white_space:
- * @string: the string
- * 
- * From http://www.w3.org/TR/xml/#sec-common-syn
- *
- * [3]  S ::= (#x20 | #x9 | #xD | #xA)+
- * 
- * Return value: TRUE if the current character is an white space character,
- *               otherwise FALSE
- **/
-static gboolean
-is_non_linefeed_white_space (const gchar *string)
-{
-  return ((string != NULL) &&
-	  ((*string == ' ') ||
-	   (*string == '\t') ||
-	   (*string == '\r')));
-}
-
-/**
- * is_linefeed:
- * @string: the string
- * 
- * Return value: TRUE if the current character is a linefeed character,
- *               otherwise FALSE
- **/
-static gboolean
-is_linefeed (const gchar *string)
-{
-  return ((string != NULL) &&
-	  (*string == '\n'));
-}
-
-/**
  * fo_text_get_text_attr_list:
  * @fo_inline_fo: The #FoInlineFo object.
  * @fo_doc:       The #FoDoc that will render @fo_inline_fo.
@@ -1148,11 +1093,14 @@ fo_text_get_text_attr_list (FoFo    *fo_inline_fo,
 
       while (*p != '\0')
 	{
-	  if (!(is_non_linefeed_white_space (p) &&
-		(is_white_space (g_utf8_find_prev_char (string, p)) ||
-		 is_linefeed (g_utf8_find_next_char (p, NULL)))))
+	  if (!(fo_inline_fo_is_non_linefeed_white_space (p) &&
+		(fo_inline_fo_is_white_space (g_utf8_find_prev_char (string,
+								     p))
+		 ||
+		 fo_inline_fo_is_linefeed (g_utf8_find_next_char (p,
+								  NULL)))))
 	    {
-	      g_string_append_unichar (text, g_utf8_get_char (p));	      
+	      g_string_append_unichar (text, g_utf8_get_char (p));
 	    }
 	  p = g_utf8_next_char (p);
 	}
