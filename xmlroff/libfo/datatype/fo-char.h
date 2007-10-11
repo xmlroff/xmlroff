@@ -25,12 +25,13 @@ G_BEGIN_DECLS
 typedef struct _FoChar      FoChar;
 typedef struct _FoCharClass FoCharClass;
 
-GType       fo_char_get_type      (void) G_GNUC_CONST;
-FoDatatype * fo_char_new            (void);
+GType        fo_char_get_type       (void) G_GNUC_CONST;
 FoDatatype * fo_char_new_with_value (const gchar *value);
 
 const gchar *fo_char_get_value      (FoDatatype  *fo_char);
 
+FoDatatype * fo_char_get_char_space (void);
+FoDatatype * fo_char_get_char_zws   (void);
 G_END_DECLS
 
 #endif /* !__FO_CHAR_H__ */

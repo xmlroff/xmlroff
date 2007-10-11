@@ -30,6 +30,8 @@ struct _FoCharClass
   FoDatatypeClass parent_class;
 };
 
+static FoDatatype * fo_char_new            (void);
+
 static void fo_char_init        (FoChar      *fo_char);
 static void fo_char_class_init  (FoCharClass *klass);
 static void fo_char_set_property (GObject         *object,
@@ -317,3 +319,45 @@ fo_char_sprintf (FoObject *object)
   return (g_strdup_printf(_("'%s'"), FO_CHAR (object)->value));
 }
 
+/**
+ * fo_char_get_char_space:
+ * 
+ * Get an #FoChar with the well-known value of ' '.
+ * 
+ * Return value: The #FoChar.
+ **/
+FoDatatype *
+fo_char_get_char_space (void)
+{
+  static FoDatatype *character = NULL;
+
+  if (character == NULL)
+    {
+      character =
+	fo_char_new_with_value (" ");
+    }
+
+  return character;
+}
+
+/**
+ * fo_char_get_char_zws:
+ * 
+ * Get an #FoChar with the well-known value of U+200B, ZERO WIDTH
+ * SPACE.
+ * 
+ * Return value: The #FoChar.
+ **/
+FoDatatype *
+fo_char_get_char_zws (void)
+{
+  static FoDatatype *character = NULL;
+
+  if (character == NULL)
+    {
+      character =
+	fo_char_new_with_value ("\xe2\x80\x8b");
+    }
+
+  return character;
+}
