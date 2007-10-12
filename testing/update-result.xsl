@@ -4,7 +4,7 @@
 <!-- Update one result in a 'testresults.xml' file. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -52,55 +52,58 @@
   <xsl:template match="testresult">
     <xsl:choose>
       <xsl:when test="@id=$id and ancestor::testcases[last()]/@base=$top-base">
-    <xsl:message><xsl:value-of select="$id"/></xsl:message>
-    <xsl:message><xsl:value-of select="ancestor::testcases[last()]/@base"/></xsl:message>
-    <xsl:copy>
-      <xsl:copy-of select="@*[local-name() != 'futuresupport']"/>
-      <xsl:if test="$agreement">
-        <xsl:attribute name="agreement">
-          <xsl:value-of select="$agreement"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:choose>
-        <xsl:when test="$futuresupport != -1">
-          <xsl:if test="$futuresupport != ''">
-            <xsl:attribute name="futuresupport">
-              <xsl:value-of select="$futuresupport"/>
+        <xsl:if test="$debug">
+          <xsl:message>id: <xsl:value-of select="$id"/></xsl:message>
+          <xsl:message>@base: <xsl:value-of
+          select="ancestor::testcases[last()]/@base"/></xsl:message>
+        </xsl:if>
+        <xsl:copy>
+          <xsl:copy-of select="@*[local-name() != 'futuresupport']"/>
+          <xsl:if test="$agreement">
+            <xsl:attribute name="agreement">
+              <xsl:value-of select="$agreement"/>
             </xsl:attribute>
           </xsl:if>
-        </xsl:when>
-        <xsl:when test="@futuresupport">
-          <xsl:copy-of select="@futuresupport"/>
-        </xsl:when>
-      </xsl:choose>
-      <xsl:if test="$specproblem">
-        <xsl:attribute name="specproblem">
-          <xsl:value-of select="$specproblem"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:if test="$testproblem">
-        <xsl:attribute name="testproblem">
-          <xsl:value-of select="$testproblem"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:choose>
-        <xsl:when test="$comment or $comment = ''">
-          <xsl:value-of select="$comment" disable-output-escaping="yes"/>
-        </xsl:when>
-        <xsl:otherwise>
+          <xsl:choose>
+            <xsl:when test="$futuresupport != -1">
+              <xsl:if test="$futuresupport != ''">
+                <xsl:attribute name="futuresupport">
+                  <xsl:value-of select="$futuresupport"/>
+                </xsl:attribute>
+              </xsl:if>
+            </xsl:when>
+            <xsl:when test="@futuresupport">
+              <xsl:copy-of select="@futuresupport"/>
+            </xsl:when>
+          </xsl:choose>
+          <xsl:if test="$specproblem">
+            <xsl:attribute name="specproblem">
+              <xsl:value-of select="$specproblem"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:if test="$testproblem">
+            <xsl:attribute name="testproblem">
+              <xsl:value-of select="$testproblem"/>
+            </xsl:attribute>
+          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="$comment or $comment = ''">
+              <xsl:value-of select="$comment" disable-output-escaping="yes"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy>
+          <xsl:copy-of select="@*"/>
           <xsl:apply-templates/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:copy>
-</xsl:when>
-<xsl:otherwise>
-  <xsl:copy>
-    <xsl:copy-of select="@*"/>
-    <xsl:apply-templates/>
-  </xsl:copy>
-</xsl:otherwise>
-</xsl:choose>
-</xsl:template>
+        </xsl:copy>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 
   <xsl:template match="*">
     <xsl:copy>
