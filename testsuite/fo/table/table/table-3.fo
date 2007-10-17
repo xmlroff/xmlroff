@@ -1,0 +1,25 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      font-size="inherit"
+      margin-right="1in" margin-left="1in" margin-bottom="1in" margin-top="1in"
+      page-width="21cm" page-height="29.7cm"
+      master-name="first">
+      <fo:region-body region-name="xsl-region-body"></fo:region-body>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow flow-name="xsl-region-body" font-size="40pt">
+      <fo:table inline-progression-dimension="100%" table-layout="fixed">
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell>
+              <fo:block>Table cell</fo:block>
+            </fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
