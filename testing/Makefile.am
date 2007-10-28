@@ -8,7 +8,7 @@ REPORT_HTML = index.html
 REPORT_PARAM =
 TESTING_PARAM=config.xsl
 
-RESULTS_PACKAGE=xmlroff-testresults
+RESULTS_PACKAGE=xmlroff-`basename $(TEST_RESULTS) .xml`
 
 EXTRA_DIST = \
 	bottom-left.png			\
