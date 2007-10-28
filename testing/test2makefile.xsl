@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- xmlroff-testing -->
-<!-- test2sh.xsl -->
-<!-- Generate 'test.sh' files for each test suite referred to from
+<!-- test2makefile.xsl -->
+<!-- Generate 'Makefile' files for each test suite referred to from
      $testsuites. -->
 <!-- Process with xsltproc, e.g.:
-        xsltproc -\-novalid test2sh.xsl test2sh.xsl
+        xsltproc -\-novalid test2makefile.xsl test2makefile.xsl
 -->
 
 <!-- Copyright (C) 2001, 2004 Sun Microsystems -->
@@ -12,13 +12,13 @@
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:import href="config.xsl"/>
   <xsl:import href="common.xsl"/>
-  
+
   <xsl:output method="text" omit-xml-declaration="yes"/>
 
   <xsl:strip-space elements="*"/>
@@ -29,9 +29,13 @@
        format string.   U+FFFD is REPLACEMENT CHARACTER. -->
   <xsl:variable name="unsubstituted-indicator">&#xFFFD;</xsl:variable>
 
+  <!-- Each @href refers to a testsuite definition file (e.g.,
+       'testsuite.xml') of a separate testsuite. -->
   <xsl:variable name="testsuite-hrefs"
     select="document($TESTSUITES)/testsuites/testsuite/@href"/>
 
+  <!-- The directory containing the file that refers to individual
+       testsuite definition files. -->
   <xsl:variable name="testsuites-dirname">
     <xsl:call-template name="dirname">
       <xsl:with-param name="string" select="$TESTSUITES"/>
@@ -39,22 +43,33 @@
   </xsl:variable>
 
   <xsl:template match="/">
+    <!-- Ignore the source tree and instead process each
+         attribute that refers to a testsuite definition file. -->
     <xsl:apply-templates select="$testsuite-hrefs"/>
   </xsl:template>
 
+  <!-- Process the attribute that refers to an individual testsuite
+       definition file. -->
   <xsl:template match="@href">
+
+    <!-- The directory containing the testsuite definition file. -->
     <xsl:variable name="href-dirname">
       <xsl:call-template name="dirname">
         <xsl:with-param name="string" select="."/>
       </xsl:call-template>
     </xsl:variable>
 
+    <!-- The last component of the directory containing the
+         testsuite definition file. -->
     <xsl:variable name="use-pwd">
       <xsl:call-template name="basename">
         <xsl:with-param name="string" select="$href-dirname"/>
       </xsl:call-template>
     </xsl:variable>
 
+    <!-- In a generated makefile, a relative path to the directory
+         containing $TESTSUITES will be relative to the parent
+         directory. -->
     <xsl:variable name="use-testsuites-dirname">
       <xsl:call-template name="merge-dirnames">
         <xsl:with-param name="dirname1" select="'..'"/>
@@ -62,6 +77,18 @@
       </xsl:call-template>
     </xsl:variable>
 
+    <!-- A relative path to the individual testsuite file will be
+         relative to the directory containing $TESTSUITES. -->
+    <xsl:variable name="data-dir">
+      <xsl:call-template name="merge-dirnames">
+        <xsl:with-param name="dirname1" select="$use-testsuites-dirname"/>
+        <xsl:with-param name="dirname2" select="$href-dirname"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <!-- In a generated makefile, a relative path to the default
+         stylesheet, if any, will be relative to the parent
+         directory. -->
     <xsl:variable name="use-default-stylesheet">
       <xsl:if test="$DEFAULT_STYLESHEET">
         <xsl:call-template name="merge-dirnames">
@@ -71,17 +98,12 @@
       </xsl:if>
     </xsl:variable>
 
+    <!-- In a generated makefile, a relative path to the xsl processor
+         will be relative to the parent directory. -->
     <xsl:variable name="use-xsl-processor">
       <xsl:call-template name="merge-dirnames">
         <xsl:with-param name="dirname1" select="'..'"/>
         <xsl:with-param name="dirname2" select="$XSL_PROCESSOR"/>
-      </xsl:call-template>
-    </xsl:variable>
-
-    <xsl:variable name="data-dir">
-      <xsl:call-template name="merge-dirnames">
-        <xsl:with-param name="dirname1" select="$use-testsuites-dirname"/>
-        <xsl:with-param name="dirname2" select="$href-dirname"/>
       </xsl:call-template>
     </xsl:variable>
 
@@ -114,13 +136,8 @@
       <xsl:message><xsl:text>&#10;</xsl:text></xsl:message>
     </xsl:if>
 
-    <!--
-    <xsl:text>cd </xsl:text>
-    <xsl:value-of select="$use-pwd"/>
-    <xsl:text>&#10;</xsl:text>
-    -->
     <xsl:message>Creating ./<xsl:value-of select="$use-pwd"/>/Makefile</xsl:message>
-    <saxon:output href="./{$use-pwd}/Makefile"
+    <exsl:document href="./{$use-pwd}/Makefile"
       method="text">
 
       <xsl:variable name="tests"
@@ -128,16 +145,20 @@
         document(.)/testsuite/testcases/testcases/test |
         document(.)/testsuite/testcases/testcases/testcases/test"/>
 
-      <xsl:text>&#10;&#10;all:&#9;</xsl:text>
+      <xsl:text># Automatically generated file.  Do not edit.&#10;</xsl:text>
+
+      <!-- The 'all' rule that potentially runs every test. -->
+      <xsl:text>&#10;all:&#9;</xsl:text>
       <xsl:for-each select="$tests">
         <xsl:value-of select="concat(@id, '.pdf')"/>
         <xsl:text> </xsl:text>
       </xsl:for-each>
       <xsl:text>&#10;&#10;</xsl:text>
-      
+
+      <!-- Individual rule for each test. -->
       <xsl:for-each select="$tests">
 
-          <xsl:variable name="input-xml">
+        <xsl:variable name="input-xml">
           <xsl:call-template name="merge-dirnames">
             <xsl:with-param name="dirname1" select="$data-dir"/>
             <xsl:with-param name="dirname2">
@@ -156,7 +177,7 @@
             </xsl:with-param>
           </xsl:call-template>
         </xsl:variable>
-        
+
         <xsl:variable name="input-xsl">
           <xsl:choose>
             <xsl:when test="@xsl">
@@ -204,11 +225,13 @@
           </xsl:call-template>
         </xsl:variable>
 
-      	<xsl:value-of select="concat(@id, '.pdf')"/>
+        <xsl:value-of select="concat(@id, '.pdf')"/>
         <xsl:text>:&#9;</xsl:text>
         <xsl:value-of select="$input-xml"/>
         <xsl:text> </xsl:text>
         <xsl:value-of select="$input-xsl"/>
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="$use-xsl-processor"/>
         <xsl:text>&#10;</xsl:text>
         <!-- Output shell command to echo $command-line. -->
         <xsl:text>&#9;@echo </xsl:text>
@@ -226,188 +249,93 @@
           <xsl:text> #</xsl:text>
           <xsl:value-of select="@id"/>
         </xsl:if>
-        <xsl:text>&#10;&#10;</xsl:text>
+        <xsl:text>&#10;</xsl:text>
 
       </xsl:for-each>
 
-      </saxon:output>
-  </xsl:template>
+      <!-- Rule to replace results in testsuite with current results -->
+      <xsl:text>&#10;&#10;replace-testsuite-results:&#10;</xsl:text>
+      <xsl:for-each select="$tests[@results]">
 
-  
-  <!-- Selects the first command-line in $command-patterns where all
-       format strings are replaced by values. -->
-  <xsl:template name="select-command-line">
-    <!-- The patterns, with ';' separating patterns. -->
-    <xsl:param name="command-patterns"/>
-    <!-- Used in error messages only. -->
-    <xsl:param name="original-command-patterns"/>
-    <!-- String to substitute for '%p'. -->
-    <xsl:param name="xsl-processor"/>
-    <!-- String to substitute for '%c'.  Optional. -->
-    <xsl:param name="xsl-processor-flags"/>
-    <!-- String to substitute for '%o'. -->
-    <xsl:param name="output"/>
-    <!-- String to substitute for '%i'. -->
-    <xsl:param name="input"/>
-    <!-- String to substitute for '%s'.  Optional. -->
-    <xsl:param name="stylesheet"/>
-    
-    <xsl:variable name="first-pattern">
-      <xsl:choose>
-        <xsl:when test="contains($command-patterns, ';')">
-          <xsl:value-of
-            select="substring-before($command-patterns, ';')"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$command-patterns"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <xsl:variable name="first-command">
-      <xsl:call-template name="substitute-formats">
-        <xsl:with-param name="command-pattern" select="$first-pattern"/>
-        <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
-        <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
-        <xsl:with-param name="output" select="$output"/>
-        <xsl:with-param name="input" select="$input"/>
-        <xsl:with-param name="stylesheet" select="$stylesheet"/>
-      </xsl:call-template>
-    </xsl:variable>
-    
-    <!-- The command is used only if all formats were replaced. -->
-    <xsl:choose>
-      <xsl:when test="not(contains($first-command, $unsubstituted-indicator))">
-        <xsl:value-of select="$first-command"/>
-      </xsl:when>
-      <xsl:when test="not(contains($command-patterns, ';'))">
-        <xsl:message>
-          <xsl:text>No resolvable command patterns: </xsl:text>
-          <xsl:value-of select="$original-command-patterns"/>
-        </xsl:message>
-      </xsl:when>
-      <xsl:otherwise>
-        <!-- Recurse with remaining patterns if first command unusable. -->
-        <xsl:call-template name="select-command-line">
-          <xsl:with-param name="command-patterns"
-            select="substring($command-patterns,
-                              string-length($first-pattern) + 2)"/>
-          <xsl:with-param name="original-command-patterns"
-            select="$original-command-patterns"/>
-          <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
-          <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
-          <xsl:with-param name="output" select="$output"/>
-          <xsl:with-param name="input" select="$input"/>
-          <xsl:with-param name="stylesheet" select="$stylesheet"/>
-        </xsl:call-template>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-  <!-- Replaces format strings, '%p', etc., with specified values,
-       if there is a specified value.  Matches on first format
-       string then recursively calls itself on remainder of
-       $command-pattern. -->
-  <xsl:template name="substitute-formats">
-    <!-- The pattern, possibly containing format strings. -->
-    <xsl:param name="command-pattern"/>
-    <!-- The portion of the command that has already been processed. -->
-    <xsl:param name="before"/>
-    <!-- String to substitute for '%p'. -->
-    <xsl:param name="xsl-processor"/>
-    <!-- String to substitute for '%c'.  Optional. -->
-    <xsl:param name="xsl-processor-flags"/>
-    <!-- String to substitute for '%o'. -->
-    <xsl:param name="output"/>
-    <!-- String to substitute for '%i'. -->
-    <xsl:param name="input"/>
-    <!-- String to substitute for '%s'.  Optional. -->
-    <xsl:param name="stylesheet"/>
-    
-    <xsl:choose>
-      <xsl:when test="contains($command-pattern, '%')">
-        <!-- Portion of $command-pattern before first '%'. -->
-        <xsl:variable name="before-format"
-          select="substring-before($command-pattern, '%')"/>
-
-        <!-- Format character following first '%'. -->
-        <xsl:variable name="format-code"
-          select="substring(substring-after($command-pattern, '%'), 1, 1)"/>
-
-        <!-- Portion of $command-pattern after first '%' and its
-             following format-code. -->
-        <xsl:variable name="after-format"
-          select="substring(substring-after($command-pattern, '%'), 2)"/>
-        
-        <!-- String to replace format string.  If there is no
-             replacement for a known format string, reuse the format
-             string as a sign that the command string isn't usable. -->
-        <xsl:variable name="format-replacement">
-          <xsl:choose>
-            <xsl:when test="$format-code = 'i'">
-              <xsl:value-of select="$input"/>
-            </xsl:when>
-            <xsl:when test="$format-code = 'o'">
-              <xsl:value-of select="$output"/>
-            </xsl:when>
-            <xsl:when test="$format-code = 's'">
+        <xsl:variable name="results">
+          <xsl:call-template name="merge-dirnames">
+            <xsl:with-param name="dirname1" select="$data-dir"/>
+            <xsl:with-param name="dirname2">
               <xsl:choose>
-                <xsl:when test="$stylesheet">
-                  <xsl:value-of select="$stylesheet"/>
+                <xsl:when test="ancestor::*/@base">
+                  <xsl:for-each select="ancestor::*/@base">
+                    <xsl:value-of select="."/>
+                    <xsl:text>/</xsl:text>
+                  </xsl:for-each>
+                  <xsl:value-of select="@results"/>
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:value-of select="$unsubstituted-indicator"/>
-                  <xsl:text>s</xsl:text>
+                  <xsl:value-of select="@results"/>
                 </xsl:otherwise>
               </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$format-code = 'c'">
-              <xsl:choose>
-                <xsl:when test="$xsl-processor-flags">
-                  <xsl:value-of select="$xsl-processor-flags"/>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$unsubstituted-indicator"/>
-                  <xsl:text>c</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$format-code = 'p'">
-              <xsl:value-of select="$xsl-processor"/>
-            </xsl:when>
-            <xsl:when test="$format-code = '%'">
-              <xsl:text>%</xsl:text>
-            </xsl:when>
-            <xsl:when test="$format-code = ''">
-              <xsl:message>
-                <xsl:text>Command pattern ends with a '%'</xsl:text>
-              </xsl:message>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:message>
-                <xsl:text>Unknown format code: </xsl:text>
-                <xsl:value-of select="$format-code"/>
-              </xsl:message>
-            </xsl:otherwise>
-          </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:variable>
-        
-        <!-- Recurse for rest of $command-pattern. -->
-        <xsl:call-template name="substitute-formats">
-          <xsl:with-param name="before"
-            select="concat($before, $before-format, $format-replacement)"/>
-          <xsl:with-param name="command-pattern" select="$after-format"/>
-          <xsl:with-param name="xsl-processor" select="$xsl-processor"/>
-          <xsl:with-param name="xsl-processor-flags" select="$xsl-processor-flags"/>
-          <xsl:with-param name="output" select="$output"/>
-          <xsl:with-param name="input" select="$input"/>
-          <xsl:with-param name="stylesheet" select="$stylesheet"/>
-        </xsl:call-template>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="concat($before, $command-pattern)"/>
-      </xsl:otherwise>
-    </xsl:choose>
+
+        <!-- Output the actual $command-line to be executed. -->
+        <xsl:text>&#9;@-cp </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.pdf </xsl:text>
+        <xsl:value-of select="$results"/>
+        <xsl:if test="$DEBUG">
+          <xsl:text> #</xsl:text>
+          <xsl:value-of select="@id"/>
+        </xsl:if>
+        <xsl:text>&#10;</xsl:text>
+
+      </xsl:for-each>
+
+      <!-- Rule to replace results in testsuite with current results -->
+      <xsl:text>&#10;&#10;replace-ref:&#10;</xsl:text>
+      <xsl:for-each select="$tests[@results]">
+
+        <xsl:variable name="results">
+          <xsl:call-template name="merge-dirnames">
+            <xsl:with-param name="dirname1" select="$data-dir"/>
+            <xsl:with-param name="dirname2">
+              <xsl:choose>
+                <xsl:when test="ancestor::*/@base">
+                  <xsl:for-each select="ancestor::*/@base">
+                    <xsl:value-of select="."/>
+                    <xsl:text>/</xsl:text>
+                  </xsl:for-each>
+                  <xsl:value-of select="@results"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="@results"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:with-param>
+          </xsl:call-template>
+        </xsl:variable>
+
+        <!-- Output the actual $command-line to be executed. -->
+        <xsl:text>&#9;@-cp </xsl:text>
+        <xsl:value-of select="$results"/>
+        <xsl:text> ref/</xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.pdf </xsl:text>
+        <xsl:if test="$DEBUG">
+          <xsl:text> #</xsl:text>
+          <xsl:value-of select="@id"/>
+        </xsl:if>
+        <xsl:text>&#10;</xsl:text>
+        <xsl:text>&#9;@-(cd ref; convert -depth 8 -type palette </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.pdf </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.%02d.png; touch </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.log)&#10;</xsl:text>
+
+      </xsl:for-each>
+
+    </exsl:document>
   </xsl:template>
 
 </xsl:stylesheet>
