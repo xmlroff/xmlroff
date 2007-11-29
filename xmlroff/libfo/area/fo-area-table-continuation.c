@@ -282,7 +282,6 @@ fo_area_table_continuation_size_request (FoArea *child)
   gfloat table_continuation_child_available_bpdim;
   gfloat table_continuation_use_height = 0.0;
   gfloat table_continuation_target_height = 0.0;
-  gfloat table_continuation_header_height = 0.0;
   gfloat child_height;
   gfloat total_child_height = 0.0;
 
@@ -300,7 +299,9 @@ fo_area_table_continuation_size_request (FoArea *child)
   table_continuation_child_available_bpdim =
     fo_area_get_child_available_bpdim (table_continuation);
 
-  if (FO_AREA_TABLE_CONTINUATION (table_continuation)->table != NULL)
+  gfloat table_continuation_header_height = 0.0;
+  if ((FO_AREA_TABLE_CONTINUATION (table_continuation)->table != NULL) &&
+      (FO_AREA_TABLE_CONTINUATION (table_continuation)->table_header != NULL))
     {
       table_continuation_header_height =
 	fo_area_area_get_height (FO_AREA_TABLE_CONTINUATION (table_continuation)->table_header);
