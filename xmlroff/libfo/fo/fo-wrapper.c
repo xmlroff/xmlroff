@@ -403,10 +403,8 @@ fo_wrapper_validate (FoFo      *fo,
 
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
-  /*
   fo_fo_register_id (fo,
                      fo_property_get_value (fo_wrapper->id));
-  */
 }
 
 /**

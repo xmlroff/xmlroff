@@ -1960,7 +1960,10 @@ fo_fo_register_id (FoFo       *fo,
   g_return_if_fail (FO_IS_FO (fo));
   g_return_if_fail (FO_IS_ID (id));
 
-  fo_tree_id_add (fo->tree,
-		  fo_id_get_value (id),
-		  fo);
+  if (fo->tree != NULL)
+    {
+      fo_tree_id_add (fo->tree,
+		      fo_id_get_value (id),
+		      fo);
+    }
 }
