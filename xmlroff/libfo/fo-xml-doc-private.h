@@ -20,4 +20,6 @@ xmlDocPtr  fo_xml_doc_get_xml_doc (FoXmlDoc *fo_xml_doc);
 void       fo_xml_doc_set_xml_doc (FoXmlDoc *fo_xml_doc,
 				   xmlDocPtr xml_doc);
 
+G_END_DECLS
+
 #endif /* !__FO_XML_DOC_PRIVATE_H__ */
