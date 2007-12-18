@@ -15,7 +15,7 @@ formatting objects and properties.</para>
 <para>xmlroff supports both "lr-tb" and "rl-tb" values of the
 writing-mode property (and the "lr" and "rl" shorthands).</para>
 
-<section>
+<section id="conformance-levels">
 <title>Conformance Levels</title>
 
 <para>From Section 8, Conformance, of the XSL Recommendation:</para>
@@ -90,7 +90,7 @@ level interactive media formatting objects.</para>
 
   </section>
 
-<section>
+<section id="stated-conformance">
 <title>Stated Conformance</title>
 
 <para>The stated conformance also has three levels:</para>
@@ -128,7 +128,7 @@ fallback behaviour for implemented formatting objects.</entry>
 
   </section>
 
-<section>
+<section id="conformance-formatting-objects">
 <title>Formatting Objects</title>
 
 <para>All the formatting object specified by the XSL 1.0
@@ -141,7 +141,8 @@ whether xmlroff implements the formatting object or the fallback
 treatment.  Conformance level and fallbacks for aural processors are
 not shown.</para>
 
-    <section><title>Declaration and Pagination and Layout Formatting Objects</title>
+    <section id="conformance-declaration-and-pagination">
+      <title>Declaration and Pagination and Layout Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup span="1" cols="5">
 	  <thead>
@@ -285,7 +286,8 @@ not shown.</para>
 	</tgroup>
       </informaltable>
     </section>
-    <section><title>Block Formatting Objects</title>
+    <section id="conformance-block-fo">
+      <title>Block Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup span="1" cols="5">
 	  <thead>
@@ -312,7 +314,8 @@ rendered</entry>
 	</tgroup>
       </informaltable>
     </section>
-    <section><title>Inline Formatting Objects</title>
+    <section id="conformance-inline-fo">
+      <title>Inline Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup span="1" cols="5">
 	  <thead>
@@ -395,7 +398,8 @@ rendered</entry>
       </informaltable>
     </section>
 
-    <section><title>Table Formatting Objects</title>
+    <section id="conformance-table-fo">
+      <title>Table Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup span="1" cols="5">
 	  <thead>
@@ -478,7 +482,8 @@ rendered</entry>
       </informaltable>
     </section>
 
-    <section><title>List Formatting Objects</title>
+    <section id="conformance-list-fo">
+      <title>List Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup cols="5" span="1">
 	  <thead>
@@ -522,7 +527,8 @@ list-item-body.
       </informaltable>
     </section>
 
-    <section id="ConfMulti"><title>Link and Multi Formatting Objects</title>
+    <section id="ConfMulti">
+      <title>Link and Multi Formatting Objects</title>
 
 <para>xmlroff is a non-interactive media formatter.  Only the fallback
 treatment for the interactive media formatting objects will be
@@ -598,7 +604,8 @@ ignore.</entry>
       </informaltable>
     </section>
 
-    <section><title>Out-of-line Formatting Objects</title>
+    <section id="conformance-out-of-line-fo">
+      <title>Out-of-line Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup cols="5" span="1">
 	  <thead>
@@ -631,7 +638,8 @@ ignore.</entry>
       </informaltable>
     </section>
 
-    <section><title>Other Formatting Objects</title>
+    <section id="conformance-other-fo">
+      <title>Other Formatting Objects</title>
       <informaltable border="1" width="90%">
 	<tgroup cols="5" span="1">
 	  <thead>
@@ -666,7 +674,7 @@ content cannot be correctly rendered.</entry>
     </section>
   </section>
 
-<section>
+<section id="conformance-properties">
 <title>Properties</title>
 <informaltable>
       <tgroup cols="4">

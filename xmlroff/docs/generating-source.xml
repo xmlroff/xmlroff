@@ -5,7 +5,7 @@
 <abstract><para>Generating source code</para></abstract>
 </sectioninfo>
 
-<section>
+<section id="generating-source-text">
 <title>Generating Source</title>
 
 <para>The stylesheets in the 'spec-dump' package are used to generate C source and header files from the XML for the XSL 1.0 Recommendation.</para>
@@ -18,7 +18,7 @@
 
 </section>
 
-<section>
+<section id="files">
 <title>Files</title>
 
 <para>The significant files are:</para>
@@ -74,7 +74,7 @@
 
 </section>
 
-<section>
+<section id="make-targets">
 <title>Make targets</title>
 
 <variablelist>

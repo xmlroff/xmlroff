@@ -5,7 +5,7 @@
 <abstract><para>Backends for writing xmlroff output</para></abstract>
 </sectioninfo>
 
-<section>
+<section id="backends-text">
 <title>Backends</title>
 
 <para>xmlroff is built with one or more backends that do the work of
@@ -23,7 +23,7 @@ render Pango layouts using the backend.</para>
 
 </section>
 
-<section>
+<section id="yapc">
 <title>Yet Another PostScript Clone (YAPC)</title>
 
 <para>Graphics libraries seemingly all implement some variation on the

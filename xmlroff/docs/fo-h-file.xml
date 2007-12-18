@@ -18,7 +18,7 @@ this writing. Not only may the convention change in the future, some
 of the older source code files may not yet have been updated to match
 the current conventions.</para>
 
-<section>
+<section id="fo-h-initial-comment">
 <title>Initial comment</title>
 
 <programlisting>/* Fo
@@ -35,7 +35,7 @@ the current conventions.</para>
 owner.</para>
 
 </section>
-<section>
+<section id="fo-h-initial-housekeeping">
 <title>Initial housekeeping</title>
 
 <programlisting>#ifndef FO_ROOT_H
@@ -54,7 +54,7 @@ owner.</para>
 useful for C++.</para>
 
 </section>
-<section>
+<section id="fo-h-typedefs">
 <title>GObject typedefs</title>
 
 <para>Every GObject has these.</para>
@@ -70,7 +70,7 @@ typedef struct _FoRootClass FoRootClass;</programlisting>
 are not publicly visible.</para>
 
 </section>
-<section>
+<section id="fo-h-defines">
 <title>GObject #defines</title>
 
 <para>Every GObject has these.</para>
@@ -107,7 +107,7 @@ are not publicly visible.</para>
 specified class or of a subclass of the specified class.</para>
 
 </section>
-<section>
+<section id="fo-h-gobject-functions">
 <title>GObject functions</title>
 
 <programlisting>GType         fo_root_get_type      (void) G_GNUC_CONST;</programlisting>
@@ -124,7 +124,7 @@ operate on FoFo objects, this avoids having to cast the specific
 object type to FoFo on every one of those function calls.</para>
 
 </section>
-<section>
+<section id="fo-h-non-property-functions">
 <title>Non-property functions</title>
 
 <para>A formatting object may have hand-generated functions that do
@@ -132,7 +132,7 @@ not just get and set property values. fo:root, however, does not have
 any.</para>
 
 </section>
-<section>
+<section id="fo-h-property-functions">
 <title>Property functions</title>
 
 <para>By a happy coincidence, the XSL properties of a formatting
@@ -154,7 +154,7 @@ g_object_get_property().</para>
 using g_object_set_property().</para>
 
 </section>
-<section>
+<section id="fo-h-final-housekeeping">
 <title>Final housekeeping</title>
 
 <programlisting>G_END_DECLS</programlisting>

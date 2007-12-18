@@ -4,10 +4,10 @@
 <abstract><para>Debugging xmlroff</para></abstract>
 </sectioninfo>
 
-<section>
+<section id="command-line">
 <title>Command Line</title>
 
-<section>
+<section id="dump-fo-tree">
 <title>-d2 command line switch dumps FO tree</title>
 
 <para>Each node shows its type [FoTree], its address [0x82a0698], and its reference count [1].</para>
@@ -41,7 +41,7 @@
 
 </section>
 
-<section>
+<section id="dump-area-tree">
 <title>-d4 command line switch dumps area tree</title>
 
 <programlisting>[xmlroff]$ ./xmlroff -d4 xmlroff.fo
@@ -79,7 +79,7 @@
 
 </section>
 
-<section>
+<section id="dump-pango-info">
 <title>-d8 command line switch dumps PangoAttribute information</title>
 
 <programlisting>[xmlroff]$ ./xmlroff -d8 xmlroff.fo
@@ -102,10 +102,10 @@
 
 </section>
 
-<section>
+<section id="using-gdb">
 <title>Using GDB or other debugger</title>
 
-<section>
+<section id="statically-linked">
 <title>Statically link xmlroff</title>
 
 <para>GDB, at least, has more to work with when you build a statically linked xmlroff executable.</para>
@@ -114,7 +114,7 @@
 
 </section>
 
-<section>
+<section id="break-on">
 <title>Break on g_log</title>
 
 <para>If you are getting an error message and you can't work out what's causing it, break on g_log so you break just before the message is emitted.</para>
@@ -127,7 +127,7 @@
 
 </section>
 
-<section>
+<section id="interactive-debug">
 <title>Functions useful when debugging interatively</title>
 
 <variablelist>

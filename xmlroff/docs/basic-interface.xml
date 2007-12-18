@@ -4,7 +4,7 @@
 <abstract><para>Using the basic interface</para></abstract>
 </sectioninfo>
 
-<section>
+<section id="overview">
 <title>Overview</title>
 
 <para>The libfo basic interface defined in
@@ -13,12 +13,12 @@ formatter while hiding the use of GObjects.</para>
 
   </section>
 
-<section>
+<section id="lifecycle">
 <title>Lifecycle</title>
 
 <para>The lifecycle is init&ndash;format&ndash;shutdown.</para>
 
-<section>
+<section id="initialize">
 <title>Initialise</title>
 
 <para>There are two ways to initialise the basic formatter.  The first
@@ -44,7 +44,7 @@ failure.</para>
 
 </section>
 
-<section>
+<section id="format">
 <title>Format</title>
 
 <para>There is one function for performing the formatting.  The inputs
@@ -89,7 +89,7 @@ contains information about any error that occurred.</para>
 
 </section>
 
-<section>
+<section id="shutdown">
 <title>Shutdown</title>
 
 <para>There is one function for shutting down the formatter.</para>
@@ -106,7 +106,7 @@ do.</para>
 
   </section>
 
-<section>
+<section id="folibfocontext">
 <title><classname>FoLibfoContext</classname></title>
 
 <para>You can use a <classname>FoLibfoContext</classname> to control
