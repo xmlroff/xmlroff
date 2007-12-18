@@ -19,7 +19,7 @@ dnl   xmlroff_interface_age = 0;
 
 m4_define([xmlroff_major],0)
 m4_define([xmlroff_minor],5)
-m4_define([xmlroff_micro],3)
+m4_define([xmlroff_micro],4)
 m4_define([xmlroff_interface_age],0)
 
 m4_define([xmlroff_binary_age],0)
@@ -460,12 +460,14 @@ AC_ARG_ENABLE(cunit,
               enable_cunit_arg="$enableval",
               enable_cunit_arg=no)
 
-if test "x$enable_cunit_arg" = "xyes" ; then
-  if test "x$have_cunit" = "xtrue" ; then
-    build_cunit=true
-  else
-    build_cunit=false
-  fi
+if test "x$enable_cunit_arg" != "xno" ; then
+  enable_cunit_arg=yes
+fi
+
+build_cunit=false
+if test "x$enable_cunit_arg" = "xyes" && \
+    test "x$have_cunit" = "xtrue" ; then
+  build_cunit=true
 fi
 
 dnl NOTE: We need to use a separate automake conditional for this
