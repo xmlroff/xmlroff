@@ -1,7 +1,10 @@
 # libfo and xmlroff Makefile.am
-# $Id: Makefile.am,v 1.34 2006/12/07 05:31:51 menteith Exp $
 
-SUBDIRS = libfo xmlroff . examples docs cunit
+if ENABLE_CUNIT
+CUNIT_DIRS = cunit
+endif
+
+SUBDIRS = libfo xmlroff . examples docs $(CUNIT_DIRS)
 
 if PLATFORM_WIN32
 no_undefined = -no-undefined
