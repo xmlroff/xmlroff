@@ -1,0 +1,43 @@
+Changes between 0.3.3 and 0.3.9:
+
+* Added 'extent'.
+* Added generating comments for instance and class structures.
+* Corrected generating initial value of properties with enumerated
+  values.
+
+Changes between 0.3.2 and 0.3.3:
+
+* Added 'border', 'border-left', 'border-right', 'border-top',
+  'border-bottom', 'border-style', and 'border-width' properties.
+
+Changes between 0.3.1 and 0.3.2:
+
+* Added 'border-color' property.
+* Property entity declarations now for XML documents in 'xml'
+  subdirectory. 
+* Improved README file.
+
+Changes between 0.3.0 and 0.3.1:
+
+* Added handling 'type="length-conditional"' in dump-info.xml for
+  padding-* properties.
+
+What is new in spec-dump 0.3.0:
+
+* Generates C code that works with property expression enumeration
+  tokens being in fo-enum.[ch], not in the property's .[ch] files.
+
+* Supports 'resolve-enum' attribute in dump-info.xml <property>
+  elements for when not using a property-specific function for
+  resolving enumeration tokens.
+
+* Supports 'validate' attribute in dump-info.xml <property> elements
+  for when not using a property-specific function for validating the
+  property value.
+
+* Supports 'init-value' attribute in dump-info.xml <property> elements
+  for specifying the initial value of the property.
+
+* Supports 'is-text-property' attribute in dump-info.xml <property>
+  elements for generating code for properties that implement
+  FO_TYPE_PROPERTY_TEXT_PROPERTY interface.

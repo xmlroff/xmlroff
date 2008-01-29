@@ -1,0 +1,121 @@
+<?xml encoding="utf-8" ?>
+<!-- libfo -->
+<!-- DTD for control file for dumping .c and .h files from XSL spec-->
+
+<!-- Copyright (C) 2001-2006 Sun Microsystems                      -->
+<!-- Copyright (C) 2007 Menteith Consulting Ltd                    -->
+<!-- See COPYING for the status of this software.                  -->
+
+<!--                    codegen-info                               -->
+<!--                    Data controlling dumping of .c and .h
+                        files from XSL spec.                       -->
+<!ELEMENT  codegen-info (fos, properties)                            >
+
+
+<!--                    fos                                        -->
+<!--                    Information about formatting objects.      -->
+<!ELEMENT  fos          (fo+)                                        >
+
+
+<!--                    fo                                         -->
+<!--                    Information about one formatting object.   -->
+<!ELEMENT  fo           (defines?, hdefines?, errors?)               >
+<!--         name       Formatting object name
+             parent-typeParent object type, e.g., 'table-part'.
+             mixed      Whether or not the formatting object contains
+                        mixed content.
+             area       Whether or not the formatting object
+                        generates areas.
+             inline     Whether or not the formatting object
+                        generates inline areas.
+             block      Whether or not the formatting object
+                        generates block areas.
+             neutral    Whether or not the formatting object
+                        generates neutral areas.
+             reference  Whether or not the formatting object
+                        generates reference areas.
+             validate   Function that validates formatting object's
+                        properties.
+             validate-content
+                        Function that validates formatting object's
+                        content.                                   -->
+<!ATTLIST  fo
+             name       CDATA                              #REQUIRED
+             parent-type
+                        CDATA                              #IMPLIED
+             mixed      (yes | no)                         "no"
+             area       (yes | no)                         "no"
+             inline     (yes | no)                         "no"
+             block      (yes | no)                         "no"
+             neutral    (yes | no)                         "no"
+             reference  (yes | no)                         "no"
+             validate   CDATA                              #IMPLIED
+             validate-content
+                        CDATA                              #IMPLIED  >
+
+
+<!--                    defines                                    -->
+<!--                    '#define' text to insert into a generated
+                        .c file.                                   -->
+<!ELEMENT  defines      (#PCDATA)                                    >
+
+
+<!--                    hdefines                                   -->
+<!--                    '#define' text to insert into a generated
+                        .h file.                                   -->
+<!ELEMENT  hdefines     (#PCDATA)                                    >
+
+
+
+<!--                    errors                                     -->
+<!--                    Errors defined for the formatting object
+                        or property.                               -->
+<!ELEMENT  errors       (error+)                                     >
+
+
+
+<!--                    error                                      -->
+<!--                    One error defined for a formatting object
+                        or property.                               -->
+<!ELEMENT  error        EMPTY                                        >
+<!--         code       Error code
+             message    Error message.                             -->
+<!ATTLIST  error
+             code       CDATA                              #REQUIRED
+             message    CDATA                              #REQUIRED >
+
+
+<!--                    properties                                 -->
+<!--                    Information about properties.              -->
+<!ELEMENT  properties   (property+)                                  >
+
+
+
+<!--                    property                                   -->
+<!--                    Information about a single property.       -->
+<!ELEMENT  property     (defines?, hdefines?, errors?)               >
+<!--         name       Property name
+             type       Expected datatype of resolved property value.
+             is-text-property
+                        Whether or not the property is a text
+                        property.
+             init-value Expression to set the property's initial
+                        value.
+             resolve-enum
+                        Function that resolves property's enumeration
+                        tokens.
+             validate   Function that validates property's resolved
+                        value.
+             expr-eval  Function that evaluates property expressions.
+                                                                   -->
+<!ATTLIST  property
+             name       CDATA                              #REQUIRED
+             type       (keep | length-conditional | length-range |
+                         space)                            #IMPLIED
+             is-text-property
+                        (yes | no)                         "no"
+             init-value CDATA                              #IMPLIED
+             resolve-enum
+                        CDATA                              #IMPLIED
+             validate   CDATA                              #IMPLIED
+             expr-eval  CDATA                              #IMPLIED  >

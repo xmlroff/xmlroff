@@ -1,0 +1,432 @@
+<!DOCTYPE codegen-info SYSTEM "codegen-info.dtd">
+<!-- libfo -->
+<!-- Control file for dumping .c and .h files from XSL spec -->
+
+<!-- Copyright (C) 2001-2006 Sun Microsystems -->
+<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- See COPYING for the status of this software. -->
+
+<codegen-info>
+<fos>
+<fo name="basic-link"              inline="yes" mixed="yes"/>
+<fo name="bidi-override"           inline="yes" mixed="yes">
+<defines>
+/* PDF = U+202C
+ *     = 0010 0000 0010 1100 (UTF-16)
+ *     = zzzz yyyy yyxx xxxx
+ *     = 1110zzzz 10yyyyyy 10xxxxxx (UTF-8)
+ *     = 11100010 10000000 10101100 (UTF-8)
+ *     = 11 100 010  10 000 000  10 101 100 (UTF-8)
+ *     = \342\200\254 (UTF-8)
+ */
+#define FO_UTF8_STR_PDF		"\342\200\254"	/* U+202C */
+#define FO_UTF8_STR_RLO		"\342\200\256"	/* U+202E */
+#define FO_UTF8_STR_LRO		"\342\200\255"	/* U+202D */
+#define FO_UTF8_STR_RLE		"\342\200\253"	/* U+202B */
+#define FO_UTF8_STR_LRE		"\342\200\252"	/* U+202A */
+</defines>
+</fo>
+<fo name="block" parent-type="marker-parent" block="yes"  mixed="yes"/>
+<fo name="block-container" parent-type="marker-parent" block="yes"
+reference="yes" area="yes"/>
+<fo name="character" validate-content="fo_fo_validate_content_empty" inline="yes"/>
+<fo name="external-graphic"
+validate-content="fo_fo_validate_content_empty" inline="yes">
+<defines>
+/* ORC = U+FFFC
+ *     = 1111 1111 1111 1100 (UTF-16)
+ *     = zzzz yyyy yyxx xxxx
+ *     = 1110zzzz 10yyyyyy 10xxxxxx (UTF-8)
+ *     = 11101111 10111111 10111100 (UTF-8)
+ *     = 11 101 111  10 111 111  10 111 100 (UTF-8)
+ *     = \357\277\274 (UTF-8)
+ */
+#define UTF8_STR_OBJECT_REPLACEMENT_CHAR "\357\277\274"  /* U+FFFC */
+</defines>
+</fo>
+<fo name="inline"                  inline="yes" mixed="yes"/>
+<fo name="inline-container"        inline="yes"             reference="yes"/>
+<fo name="instream-foreign-object" inline="yes"            />
+<fo name="leader"                  inline="yes" mixed="yes"/>
+<fo name="list-block"              block="yes"             />
+<fo name="marker"                               mixed="yes"/>
+<fo name="multi-case"                           mixed="yes"/>
+<fo name="multi-toggle"            inline="yes" mixed="yes"/>
+<fo name="page-number"             inline="yes"            />
+<fo name="page-number-citation"    inline="yes"            />
+<fo name="page-sequence" area="yes"/>
+<fo name="region-body"
+    validate-content="fo_fo_validate_content_empty"
+    reference="yes"/>
+<fo name="region-after"
+    validate-content="fo_fo_validate_content_empty"
+    reference="yes"/>
+<fo name="region-before"
+    validate-content="fo_fo_validate_content_empty"
+    reference="yes"/>
+<fo name="region-end"
+    validate-content="fo_fo_validate_content_empty"
+    reference="yes"/>
+<fo name="region-start"
+    validate-content="fo_fo_validate_content_empty"
+    reference="yes"/>
+<fo name="simple-page-master"                               reference="yes"/>
+<fo name="table"                   block="yes"              reference="yes">
+<defines>
+#define fo_table_make_column_hash_key(column_number,number_columns_spanned) \
+           (((column_number) &lt;&lt; 16) + (number_columns_spanned))
+
+GType
+fo_enum_table_layout_method_get_type (void)
+{
+  static GType etype = 0;
+  if (etype == 0)
+    {
+      static const GEnumValue values[] = {
+        { FO_ENUM_TABLE_LAYOUT_METHOD_UNKNOWN, "FO_ENUM_TABLE_LAYOUT_METHOD_UNKNOWN", "unknown" },
+        { FO_ENUM_TABLE_LAYOUT_METHOD_AUTOMATIC, "FO_ENUM_TABLE_LAYOUT_METHOD_AUTOMATIC", "automatic" },
+        { FO_ENUM_TABLE_LAYOUT_METHOD_FIXED, "FO_ENUM_TABLE_LAYOUT_METHOD_FIXED", "fixed" },
+        { 0, NULL, NULL }
+      };
+      etype = g_enum_register_static ("FoEnumTableLayoutMethod", values);
+    }
+  return etype;
+}
+</defines>
+<hdefines>
+typedef enum {
+  FO_ENUM_TABLE_LAYOUT_METHOD_UNKNOWN,
+  FO_ENUM_TABLE_LAYOUT_METHOD_AUTOMATIC,
+  FO_ENUM_TABLE_LAYOUT_METHOD_FIXED
+} FoEnumTableLayoutMethod;
+
+GType fo_enum_table_layout_method_get_type (void);
+#define FO_TYPE_ENUM_TABLE_LAYOUT_METHOD fo_enum_table_layout_method_get_type ()
+</hdefines>
+<errors>
+<error code="LAYOUT_METHOD_UNKNOWN" message="Table layout method is unknown."/>
+<error code="FIXED_NO_COLUMN" message="Table layout method is fixed but no 'fo:table-column's specified."/>
+<error code="MISSING_COLUMN" message="No 'fo:table-column' for column number '%d'."/>
+<error code="WIDTH_NOT_LENGTH" message="'column-width' expression is not a length: '%s'"/>
+<error code="NO_AREA" message="No area associated with 'fo:table'."/>
+<error code="AUTOMATIC_NOT_SUPPORTED" message="Automatic table layout is not supported."/>
+<error code="SPANNING_CELLS_FILL_ROW" message="Spanning table cells fill entire row."/>
+</errors>
+</fo>
+<fo name="table-and-caption"       block="yes"             />
+<fo name="table-body" parent-type="table-part"
+validate-content="fo_table_validate_content_table_row_table_cell" area="yes"/>
+<fo name="table-caption"                                    reference="yes"/>
+<fo name="table-cell"                                       reference="yes"/>
+<fo name="table-column">
+<errors>
+<error code="FIXED_NO_WIDTH" message="'column-width' property must be specified when fixed table layout method is used."/>
+</errors>
+</fo>
+<fo name="title"                                mixed="yes"/>
+<fo name="wrapper" parent-type="marker-parent" neutral="yes" mixed="yes"/>
+</fos>
+<properties>
+<property name="alignment-adjust" is-text-property="yes"/>
+<property name="alignment-baseline" is-text-property="yes"/>
+<property name="background-color"/>
+<property name="background-image"/>
+<property name="baseline-shift" is-text-property="yes"/>
+<!--<property name="blank-or-not-blank"/>-->
+<property name="block-progression-dimension" type="length-range"/>
+<property name="border"
+    resolve-enum="fo_property_util_resolve_wsc_enum"
+    validate="fo_property_util_validate_wsc"
+    expr-eval="fo_expr_wsc_eval" />
+<property name="border-after-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-after-precedence"
+    resolve-enum="fo_property_util_resolve_force_enum"/>
+<property name="border-after-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-after-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-before-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-before-precedence"
+    resolve-enum="fo_property_util_resolve_force_enum"/>
+<property name="border-before-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-before-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-bottom"
+    resolve-enum="fo_property_util_resolve_wsc_enum"
+    validate="fo_property_util_validate_wsc"
+    expr-eval="fo_expr_wsc_eval" />
+<property name="border-bottom-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-bottom-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-bottom-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-collapse"
+    init-value="fo_enum_get_enum_by_nick (&quot;collapse&quot;)"/>
+<property name="border-color"
+    expr-eval="fo_expr_border_color_eval"
+    resolve-enum="fo_property_util_resolve_color_transparent_enum"/>
+<property name="border-end-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-end-precedence"
+    resolve-enum="fo_property_util_resolve_force_enum"/>
+<property name="border-end-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-end-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-left"
+    resolve-enum="fo_property_util_resolve_wsc_enum"
+    validate="fo_property_util_validate_wsc"
+    expr-eval="fo_expr_wsc_eval" />
+<property name="border-left-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-left-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-left-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-right"
+    resolve-enum="fo_property_util_resolve_wsc_enum"
+    validate="fo_property_util_validate_wsc"
+    expr-eval="fo_expr_wsc_eval" />
+<property name="border-right-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-right-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-right-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-separation"/>
+<property name="border-start-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-start-precedence"
+    resolve-enum="fo_property_util_resolve_force_enum"/>
+<property name="border-start-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-start-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-style"
+    expr-eval="fo_expr_border_style_eval"
+    resolve-enum="fo_property_util_resolve_style_enum" />
+<property name="border-top"
+    resolve-enum="fo_property_util_resolve_wsc_enum"
+    validate="fo_property_util_validate_wsc"
+    expr-eval="fo_expr_wsc_eval" />
+<property name="border-top-color"
+    init-value="fo_property_util_get_color_initial ()"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="border-top-style"
+    init-value="fo_property_util_get_style_initial ()"
+    resolve-enum="fo_property_util_resolve_style_enum"
+    validate="fo_property_util_validate_style"/>
+<property name="border-top-width"
+    init-value="fo_property_util_get_width_initial ()"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    validate="fo_property_util_validate_width"/>
+<property name="border-width"
+    resolve-enum="fo_property_util_resolve_width_enum"
+    expr-eval="fo_expr_padding_eval" />
+<property name="break-after"/>
+<property name="break-before"/>
+<property name="character"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="clip"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="color"
+    is-text-property="yes"
+    resolve-enum="fo_property_util_resolve_color_enum"
+    validate="fo_property_util_validate_color"/>
+<property name="column-number"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="column-width"/>
+<property name="content-height"/>
+<property name="content-type"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="content-width"/>
+<property name="direction"/>
+<property name="display-align"/>
+<property name="dominant-baseline"
+    is-text-property="yes"/>
+<property name="end-indent"/>
+<property name="extent"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="flow-name"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="font-family"
+    is-text-property="yes"/>
+<property name="font-size"
+    is-text-property="yes">
+<defines>
+/* font-size */
+/* Enumerated font sizes derive from "medium" font size and font size step */
+#ifndef FO_FONT_SIZE_STEP
+#define FO_FONT_SIZE_STEP	1.2
+#endif	/* !FO_FONT_SIZE_STEP */
+
+#ifndef FO_FONT_SIZE_MEDIUM
+#define FO_FONT_SIZE_MEDIUM	12.0
+#endif	/* !FO_FONT_SIZE_MEDIUM */
+
+#define FO_FONT_SIZE_SMALL	FO_FONT_SIZE_MEDIUM / FO_FONT_SIZE_STEP
+#define FO_FONT_SIZE_X_SMALL	FO_FONT_SIZE_SMALL / FO_FONT_SIZE_STEP
+#define FO_FONT_SIZE_XX_SMALL	FO_FONT_SIZE_X_SMALL / FO_FONT_SIZE_STEP
+
+#define FO_FONT_SIZE_LARGE	FO_FONT_SIZE_MEDIUM * FO_FONT_SIZE_STEP
+#define FO_FONT_SIZE_X_LARGE	FO_FONT_SIZE_LARGE * FO_FONT_SIZE_STEP
+#define FO_FONT_SIZE_XX_LARGE	FO_FONT_SIZE_X_LARGE * FO_FONT_SIZE_STEP
+</defines>
+</property>
+<property name="font-stretch" is-text-property="yes"/>
+<property name="font-style" is-text-property="yes"/>
+<property name="font-variant" is-text-property="yes"/>
+<property name="font-weight" is-text-property="yes"/>
+<property name="format"/>
+<property name="grouping-separator"/>
+<property name="grouping-size"/>
+<property name="height"/>
+<property name="id"/>
+<property name="inline-progression-dimension" type="length-range"/>
+<property name="keep-together"
+    type="keep"
+    resolve-enum="fo_property_util_resolve_auto_always_enum"/>
+<property name="keep-with-next"
+    type="keep"
+    resolve-enum="fo_property_util_resolve_auto_always_enum"/>
+<property name="keep-with-previous"
+    type="keep"
+    resolve-enum="fo_property_util_resolve_auto_always_enum"/>
+<property name="letter-value"/>
+<property name="linefeed-treatment"/>
+<property name="line-height"
+    is-text-property="yes"
+    init-value="fo_enum_get_enum_by_nick (&quot;normal&quot;)">
+<defines>
+#define FO_PROPERTY_LINE_HEIGHT_NORMAL_MULTIPLIER 1.2
+</defines>
+</property>
+<property name="line-stacking-strategy"
+    init-value="fo_enum_get_enum_by_nick (&quot;max-height&quot;)"/>
+<property name="margin"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="margin-bottom"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="margin-left"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="margin-right"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="margin-top"
+    resolve-enum="fo_property_util_resolve_auto_enum"/>
+<property name="master-name"/>
+<property name="master-reference"/>
+<!--<property name="maximum-repeats"/>-->
+<property name="media-usage"
+    init-value="fo_enum_get_enum_by_nick (&quot;auto&quot;)"/>
+<property name="number-columns-repeated"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="number-columns-spanned"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="number-rows-spanned"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<!--<property name="odd-or-even"/>-->
+<property name="orphans">
+<defines>
+#define FO_PROPERTY_ORPHANS_INITIAL	2
+</defines>
+</property>
+<property name="overflow"/>
+<property name="padding"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="padding-after" type="length-conditional"/>
+<property name="padding-before" type="length-conditional"/>
+<property name="padding-bottom"/>
+<property name="padding-end" type="length-conditional"/>
+<property name="padding-left"/>
+<property name="padding-right"/>
+<property name="padding-start" type="length-conditional"/>
+<property name="padding-top"/>
+<property name="page-height"/>
+<!--<property name="page-position"/>-->
+<property name="page-width"/>
+<property name="provisional-distance-between-starts"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="provisional-label-separation"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="ref-id"/>
+<property name="region-name"/>
+<property name="role"/>
+<property name="scaling"/>
+<property name="scaling-method"/>
+<property name="score-spaces"/>
+<property name="source-document"/>
+<property name="span"/>
+<property name="space-after" type="space"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="space-before" type="space"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="space-end" type="space"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="space-start" type="space"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="src"
+    resolve-enum="fo_property_util_resolve_no_enum"/>
+<property name="start-indent"/>
+<property name="table-layout"/>
+<property name="text-align"/>
+<property name="text-indent"/>
+<property name="unicode-bidi"/>
+<property name="white-space-collapse"/>
+<property name="white-space-treatment"/>
+<property name="widows">
+<defines>
+#define FO_PROPERTY_WIDOWS_INITIAL	2
+</defines>
+</property>
+<property name="width"/>
+<property name="wrap-option"/>
+<property name="writing-mode"/>
+</properties>
+</codegen-info>

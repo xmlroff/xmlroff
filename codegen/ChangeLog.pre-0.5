@@ -1,0 +1,896 @@
+2006-09-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* dump-info.xml: Removed 'page-width' defines since page sizes now
+	lengths in fo-length.c.
+
+2006-03-29  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* dump-info.xml: Added customisations for fo:character and
+	fo:external-graphic, added linefeed-treatment,
+	white-space-collapse, and white-space-treatment properties.
+
+	* fo-all-property-h-dump.xsl: Removed some outdated special
+	handling, added 'property/' to all includes, added including
+	-conditionality.h and -length.h for 'length-conditional'
+	properties.
+
+	* fo-object-dump.xsl: Added output of fo_fo_register_id() call in
+	_validate() when FO has 'id' property.
+
+2006-03-21  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am, fo-property-eval-dump.xsl: Added dumping of
+	'property/fo-property-eval.c'.
+
+	* conversion-lib.xsl: Added 'hyphen-colon-dot-to-underscore'
+	template.
+
+	* dump-info.xml: Added 'ref-id' and 'span'.  Added more attributes
+	for 'block', 'block-container', and 'wrapper'.
+
+	* fo-object-dump.xsl: Changed generated function names for
+	resolving dominant-baseline and height/width.
+
+	* fo-property-object-dump.xsl: Added handling 'idref' datatype.
+
+2006-03-17  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* COPYING: Updated copyright years.
+
+	* configure.ac: Upped version to 0.4.0.
+
+	* fo-object-dump.xsl: Added handling new 'parent-type',
+	'validate-content', and 'area' attributes from dump-info.
+
+	* dump-info.xml: Added reference to DTD.  Added new @parent-type,
+	@validate-content, and @area to 'table-body'.
+
+	* dump-info.dtd: DTD for control file for dumping .c and .h files
+	from XSL spec.
+
+2006-02-23  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.9 ===
+
+	* NEWS: Updated for 0.3.9.
+
+	* README: Updated to include current SourceForge xmlroff project
+	definition and a note about version numbers tracking xmlroff
+	versions.
+
+	* fo-property-object-dump.xsl: Trying to better handle properties
+	with single enumeration token.
+
+	* dump-info.xml: Added 'extent' property.  Marked 'font-stretch',
+	'font-style', and 'font-variant' as 'text' properties.
+
+	* .cvsignore: .cvsignore file for ignoring auto-generated files
+	and directories.
+
+	* xmlroff-property-decl-dump.xsl, xmlroff-property-ref-dump.xsl,
+	conversion-lib.xsl, fo-all-property-h-dump.xsl,
+	fo-context-dump.xsl, fo-object-dump.xsl: Added '2006' to copyright
+	years.
+
+	* configure.ac: Upped version to 0.3.9.
+
+2005-12-06  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.ac: Upped version to 0.3.8.
+
+	* fo-property-object-dump.xsl: Corrected generating initial value
+	of properties with enumerated values.
+
+	* fo-object-dump.xsl: Added generated comment for instance and
+	class structures for FO objects.
+
+	* conversion-lib.xsl: Added periods at end of some generated
+	comments.
+
+2005-11-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* configure.ac: Upped version to 0.3.7.
+
+	* dump-info.xml: Made 'font-weight' a text property.
+
+	* fo-object-dump.xsl: Corrected filename in .h initial comment.
+
+	* fo-property-object-dump.xsl: Added generating comments for
+	instance and class structures.
+
+2005-04-27  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.3 ===
+
+	* NEWS: Updated for 0.3.3.
+
+2005-04-26  Julian Rosse  <gnome@themidnightrebellion.com>
+
+	* dump-info.xml: added tags to dump border, border-left,
+	border-right, border-top, and border-bottom properties
+
+2005-03-10  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* Makefile.am, README: Added 'property-entity-decl-dump' and
+	'property-entity-ref-dump' to 'all' target.
+
+	* dump-info.xml: Added 'border-style' and 'border-width' (Julian
+	Rosse).
+
+2005-03-08  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-property-object-dump.xsl: Removed unused
+	'value-string-to-fo-enums' and 'value-string-to-enums' named
+	templates, unused variables that used them, and unused references
+	to those variables.  Changed path to include pango-xsl-attributes
+	for 'text' properties.  Added some comments.
+
+2005-03-07  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* dump-info.xml: Updated attributes for 'border-color' property.
+
+	* fo-property-object-dump.xsl: Added support for 'expr-eval'
+	attribute in dump info.  Added some comments.
+
+	* configure.ac: Upped version to 0.3.3.
+
+2005-02-28  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.2 ===
+
+	* NEWS: Updated for 0.3.2.
+
+	* README: Added more explanations about make targets.
+
+	* configure.ac: Upped version to 0.3.2.
+
+	* Makefile.am: Removed extraneous '.'.
+
+	* dump-info.xml: Added 'border-color'.
+
+	* xmlroff-property-decl-dump.xsl: Updated to refer to XML files in
+	'xml' subdirectory.
+
+	* conversion-lib.xsl, fo-all-property-h-dump.xsl,
+	fo-context-dump.xsl, fo-object-dump.xsl,
+	fo-property-object-dump.xsl, xmlroff-property-ref-dump.xsl:
+	Updated copyright years.
+
+2004-06-03  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.1 ===
+
+	* configure.ac: Upped version to 0.3.1.
+
+	* fo-context-dump.xsl, fo-property-object-dump.xsl: Added handling
+	'type=length-conditional property types."
+
+	* dump-info.xml: Added 'type=length-conditional' for padding-*
+	properties.
+
+2004-05-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* === Released 0.3.0 ===
+
+	* NEWS: Reverted one of the property attribute names.
+
+	* NEWS: Corrected some attribute value names.
+
+	* fo-property-object-dump.xsl: Separated handling of 'space' and
+	'length-range' type properties.
+
+	* fo-context-dump.xsl: Changed where _get_space_*() function
+	prototypes are output.
+
+	* dump-info.xml: Added more properties and more attributes
+	controlling properties.
+
+2004-03-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* README: Changed to refer to http://www.xmlroff.org/.
+	
+	* NEWS: Added entries for 'validate' and 'initial-value'
+	attributes.
+
+	* fo-property-object-dump.xsl: Added 'init-value' and 'validate'
+	parameters.  Includes fo-property-util.h if 'resolve-enum'
+	parameter is set.
+
+	* Makefile.am: Changes so 'make dist' makes a distribution that
+	will work.
+
+	* xslspec.xml: Copy of XML version of XSL 1.0 spec.
+
+	* configure.ac: Upped version to '0.3.0'.
+
+	* dump-info.xml: Updated to add more 'validate', 'init-value',
+	and 'resolve-enum' attributes.
+
+2004-03-16  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* NEWS: News file.
+
+	* autogen.sh: Shell script for building from CVS checkout.
+
+	* Makefile.am, configure.ac, makefile: Removed makefile and added
+	Makefile.am and configure.ac so can make distributions more
+	easily.
+
+	* fo-property-object-dump.xsl: Added support for
+	'is-text-property' and 'resolve-enum' attributes in dump-info.xml.
+	Changed output to work with enums all being defined once in
+	fo-enum.[ch] instead of being defined in each property's files
+	(possibly in multiple properties' files).  This will reduce the
+	size of the generated code and make it easier to implement
+	from-parent() and from-nearest-specified-value().
+
+2004-03-15  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* dump-info.xml: Added 'is-text-property' and/or 'resolve-enum'
+	attributes to some properties.
+
+2004-02-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-property-object-dump.xsl: Reworked output of enum handling
+	code since all enums now in fo-enum.[ch].
+
+	* fo-context-dump.xsl: Added output of prototypes for space-*
+	properties to match current usage.
+
+	* fo-all-property-h-dump.xsl: Added special handling of 'padding'
+	and 'border' properties.
+
+	* dump-info.xml: Added 'resolve-enum' attribute to keep and margin
+	properties.  Added padding and margin properties.
+
+	* README: Added reference to xmlroff website.  Added paragraph
+	about license.
+
+2003-07-02  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-property-object-dump.xsl: Corrected two datatype macro name
+	uses.
+
+	* fo-context-dump.xsl: Added 'libfo/' to two generated #include
+	statements.
+
+2003-05-04  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-property-object-dump.xsl: Added 'libfo/' to generated include
+	statement.
+
+	* fo-object-dump.xsl: Added a missing close in generated comment.
+
+2003-04-14  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-property-object-dump.xsl: Added 'libfo/' and 'fo/' to
+	generated include statements.
+
+	* conversion-lib.xsl: Cosmetic changes in generated comments and
+	prototypes.
+
+	* fo-object-dump.xsl: Handles FOs with no properties.  Added
+	'libfo/' and 'fo/' to includes.
+
+	* fo-context-dump.xsl: Cosmetic change in generated doc comment.
+
+2003-03-12  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-object-dump.xsl: Added 'property/' or 'fo/' to #includes.
+	Restored dumping no-property FOs.
+
+	* fo-context-dump.xsl (_merge): Changed to use _get_initial() for
+	non-inherited properties.
+
+	* dump-info.xml: Added three errors for fo:table.
+
+	* conversion-lib.xsl: Added '.' on end of some generated doc
+	comments.
+
+	* README: Added URL for XSL spec XML.
+
+2003-03-11  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-object-dump.xsl: Corrected setting line_height in generated
+	_validate().  Doc comment changes.
+
+	* conversion-lib.xsl: Cosmetic whitespace change to generated
+	_get_/_set_ prototypes.
+
+2003-02-24  Tony Graham  <tonygraham@users.sourceforge.net>
+
+	* fo-property-object-dump.xsl: Removed '_class' from names of
+	base_init and base_finalize functions in generated code.  Added
+	freeing of string from fo_object_sprintf() calls in g_set_error()
+	calls in generated code.
+
+	* fo-object-dump.xsl: Punctuation changes in generated
+	documentation comments.
+
+	* fo-context-dump.xsl: Changed erroneous '<' to '&lt;'.
+	Punctuation changes in generated documentation comments.
+
+2003-02-11  Tony Graham  <Tony.Graham@Sun.COM>
+
+	* fo-context-dump.xsl: Cosmetic documentation comment changes.
+
+2003-02-11  Tony Graham <Tony.Graham@Sun.COM>
+
+	* AUTHORS: AUTHORS file.
+
+	* fo-property-object-dump.xsl: Added generated error propagation
+	in 'value-string-to-validate-ifs' named template used to generate
+	_validate() function.  Numerous cosmetic changes to generated
+	documentation comments.
+
+	* fo-context-dump.xsl: Stopped generating fo_context_init().
+	Added generating fo_context_debug_dump().  Other cosmetic changes.
+
+	* conversion-lib.xsl: Changed 'context' to 'fo_context' in a doc
+	comment.
+
+2003-01-22  Tony Graham <Tony.Graham@Sun.COM>
+
+	* fo-property-object-dump.xsl: Added output of comments of
+	property's initial value, if shorthand, and if inherited.  Stopped
+	handling 'inherit' token when resolving enumeration tokens.  Added
+	'#' to many doc comments so gtk-doc will turn them into hyperlinks
+	in HTML output.
+
+	* fo-object-dump.xsl: Corrected comment at #endif in -private.h
+	files.
+
+	* dump-info.xml: Added 'background-image' property.
+
+2002-11-22  Tony Graham <Tony.Graham@Sun.COM>
+
+	* dump-info.xml, fo-all-property-h-dump.xsl, fo-context-dump.xsl,
+	fo-object-dump.xsl, fo-property-object-dump.xsl,
+	xmlroff-property-decl-dump.xsl, xmlroff-property-ref-dump.xsl,
+	conversion-lib.xsl: Added missing copyright info.
+
+	* makefile: Removed rules for unused stylesheets.  Added
+	copyright.
+
+	* fo-element-dump.xml: Removed unused fo-element-dump.xml.
+
+	* fo-dump.xsl, fo-element-dump.xsl, spec-dump.xsl,
+	fo-element-to-makefile.xsl, property-dump.xsl,
+	property-enum-dump.xsl: Removed unused XSLT stylesheets.
+
+2002-11-22  Tony Graham  <Tony.Graham@Sun.COM>
+
+	* COPYING: BSD license.
+
+2002-11-22  Tony Graham <Tony.Graham@Sun.COM>
+
+	* README: Added words about property-entity-{decl,ref}-dump.
+
+	* fo-object-dump.xsl: Added #ifndef and #endif around generated
+	-private.h.  Stopped outputting some #include in generated .c
+	since alread included by generated -private.h.  Added some '#' in
+	generated comments for struct names that gtk-doc can probably turn
+	into links in its generated HTML.
+
+	* makefile: Added specific output files for
+	xmlroff-property-{ref,decl}-dump rules.
+
+2002-11-15  Tony Graham <Tony.Graham@Sun.COM>
+
+	* conversion-lib.xsl: Made GObject properties for properties
+	read-only.
+
+	* fo-property-object-dump.xsl: Added generation of _get_initial()
+	function for get_initial class method of FoProperty class.  Made
+	generation of _base_class_init() and _base_class_finalize()
+	functions contingent on there being enumeration tokens to be
+	represented as FoEnum objects.  Removed generation of _sprintf()
+	function.  Added NULL for value_table in GTypeInfo struct for
+	type.
+
+	* fo-object-dump.xsl: Removed generation of _init function.  Added
+	NULL pointer for value_table in GTypeInfo to quieten compiler.
+
+2002-10-14  Tony Graham <Tony.Graham@Sun.COM>
+
+	* fo-property-object-dump.xsl: Stopped outputting enum for
+	'inherit' token since 'inherit' handled by expression language.
+	Removed output of _set_value(), _get_value(), 'value' property,
+	_sprintf(), _new_from_expression(), and _new_initial().  Added
+	initialisation of FO_PROPERTY(property)->value to generated
+	_init().
+
+	* fo-object-dump.xsl: Removed all '<xsl:with-param
+	name="specialise-property-type" select="false()"/>' since
+	'false()' is now the default.  Changed all '-conditionality' to
+	'-condity' in generated property names.  Swapped order of _get_
+	and _set_ functions.  Added code for FoTableBorderFoIface.  Added
+	variables controlling whether or not to output interface code.
+
+	* fo-context-dump.xsl: Removed all '<xsl:with-param
+	name="specialise-property-type" select="false()"/>' since
+	'false()' is now the default.  Changed all '-conditionality' to
+	'-condity' in generated property names.  Added nulling of space
+	and length-range components in generated fo_context_initialize().
+
+	* fo-all-property-h-dump.xsl: Changed initial comments in
+	stylesheet and in generated file.
+
+	* dump-info.xml: Added border-after-precedence,
+	border-before-precedence, border-collapse, border-end-precedence,
+	border-separation, border-start-precedence, clip, content-height,
+	content-type, content-width, display-align, overflow, scaling,
+	scaling-method, and src properties for supporting table border
+	models and images.
+
+	* conversion-lib.xsl: Changed 'specialise-property-type' parameter
+	default to 'false()' since now no longer using any specialised
+	property types.  Improved differentiation between output for
+	FoContext properties and FoFo properties.  Changed to use real
+	property name in more comments.  Made parameter names in functions
+	match parameter names in function prototypes.  Changed
+	'-conditionality' to '-condity' in generated property names.
+
+	* makefile, xmlroff-property-decl-dump.xsl,
+	xmlroff-property-ref-dump.xsl: Added stylesheets to create SGML
+	entity declarations and references for properties for use in
+	documentation.
+
+2002-09-12  Tony Graham <Tony.Graham@Sun.COM>
+
+	* fo-property-object-dump.xsl: Added some quotes in comments,
+	removed FO_OBJECT() call, fixed spelling.
+
+	* fo-object-dump.xsl: Added generating error-handling code, added
+	keeps to ifaces.
+
+	* dump-info.xml: Added 'reference' attribute for FOs, added
+	<defines> and <errors>.
+
+	* conversion-lib.xsl: Changed some '@' to '#' in generated
+	comments, removed FO_OBJECT() casts.
+
+2002-07-29  Tony Graham <Tony.Graham@Sun.COM>
+
+	* fo-property-object-dump.xsl: Changed to use 'value' instance
+	property of FoProperty parent class.  Removed 'value' instance
+	property of current class.  Removed generating unnecessary
+	G_OBJECT_CLASS() macro calls.
+
+	* fo-object-dump.xsl: Added support for <define> and <hdefine>
+	elements for FOs.  Added output of fo_block_fo_init function, when
+	warranted.  Removed unnecessary G_OBJECT_CLASS() macro calls.
+	Started adding conditional output of function calls in _validate()
+	function based on properties of current FO.  Stopped generating
+	code for _set_from_context() for components of space and
+	length-range type properties.
+
+	* fo-context-dump.xsl: Added output of fo-context-private.h for
+	use by fo-context-util.c.  Simplified generated fo_context_merge()
+	code.  Added more documentation comments in generated code.
+	Stopped length-range components from being writable.
+
+	* dump-info.xml: Added <defines> for bidi-override.  Added
+	<defines> and new <hdefines> for table.  Added column-number,
+	column-width, height, number-columns-repeated,
+	number-columns-spanned, and number-rows-spanned properties.
+
+	* conversion-lib.xsl: Removed unnecessary G_OBJECT_CLASS() macro
+	call.  Added code to allow NULL property values in FoContext
+	properties.
+
+2002-06-28  Tony Graham <Tony.Graham@Sun.COM>
+
+	* README: README file for XSL spec dump stylesheets.
+
+	* fo-object-dump.xsl: Added documentation comment for
+	fo_*_get_type().
+
+	* fo-all-property-h-dump.xsl: Added space, length-range, and keep
+	component's headers.
+
+	* dump-info.xml: Reformatted <fo> attributes for hopefully better
+	readability.
+
+2002-06-25  Tony Graham <Tony.Graham@Sun.COM>
+
+	* conversion-lib.xsl, fo-all-property-h-dump.xsl,
+	fo-context-dump.xsl, fo-object-dump.xsl,
+	fo-property-object-dump.xsl: Improved generation of
+	fo-context.[ch].  Added support for FoBlockFo and FoInlineFo
+	interfaces.  Added support for length-range datatype.  Changed to
+	generate set but not get functions for space and length-range
+	components on context and get but not set functions for components
+	on FOs.  Added 'method="text"' on all saxon:output elements to get
+	desired result from current Saxon and xsltproc processors.
+
+	* makefile: Changed to use xsltproc instead of Saxon.
+
+	* dump-info.xml: Added <fos> and <fo> elements so can indicate FOs
+	that are block or inline.  Added block-progression-dimension,
+	inline-progression-dimension and width properties.  Commented out
+	blank-or-not-blank, maximum-repeats, odd-or-even, and
+	page-position properties.
+
+2002-03-12  Tony Graham  <tony.graham@sun.com>
+
+	* fo-property-object-dump.xsl: Added better handling of enums in
+	header file when property, e.g., "id", doesn't have any enumerated
+	tokens.  Added more cosmetic whitespace.  Added some error
+	handling to generated *_new_from_expression() function.  Changed
+	point where property is created in *_new_from_expression() so
+	don't need to unref it if eval or validate fails.
+
+2002-03-08  Tony Graham  <tony.graham@sun.com>
+
+	* fo-object-dump.xsl: Added generated fo_*_validate_content() and
+	fo_*_validate() functions.
+
+	* fo-property-object-dump.xsl: Added another documentation
+	comment.
+
+	* fo-all-property-h-dump.xsl: Changed 'Copyright' to 'Copying' in
+	generated initial comment.
+
+	* fo-property-object-dump.xsl: Added $property-identifier-spaces
+	variable for use in indenting function declarations and
+	prototypes.  Changed 'Copyright' to 'Copying' in generated initial
+	comments.  Changed to output G_BEGIN_DECLS and G_END_DECLS in
+	generated header files.  Added '#include "fo-context.h" in
+	generated header files.  Removed uses of FO_ENUM(), FO_STRING(),
+	and FO_NAME() macros in generated code.  Added generation of
+	documentation comments for functions.  Changed g_warning() to
+	g_set_error() in generated fo_property_*_resolve_enum() and
+	fo_property_*_validate().  Added output of code for components of
+	space properties.  Added $inherited variable controlling setting
+	of is_inherited class variable in generated code.  Added setting
+	of new resolve_enum and validate class methods.
+
+	* dump-info.xml: Added blank-or-not-blank, maximum-repeats,
+	odd-or-even, and page-position properties.  Added 'type="space"'
+	for space-after, space-before, space-end, and space-start for use
+	with code added to stylesheets to output components of space
+	properties.
+
+	* property-enum-dump.xsl: Changed 'Copyright' to 'Copying' in
+	generated initial comment.
+
+2002-03-07  Tony Graham  <tony.graham@sun.com>
+
+	* fo-object-dump.xsl: Added $lowercase-object-spaces variable for
+	use in fancy indenting of function declarations and function
+	prototypes.  Added several initial comments for generated
+	functions.  Changed generated initial comment.  Changed to use '"'
+	around local includes.  Added generation of multiple
+	prototypes/function calls for space properties.  Added generation
+	of non-specialised prototype/function call for keep properties.
+
+	* fo-context-dump.xsl: Changed generated initial comment.  Changed
+	to use '"' around local includes.  Added generation of multiple
+	prototypes/function calls for space properties.  Added generation
+	of non-specialised prototype/function call for keep properties.
+
+	* conversion-lib.xsl: Added $spaces, $lowercase-object-spaces, and
+	$lowercase-property-spaces variables for use in fancy indenting of
+	function declarations and function prototypes.  Changed 'N_(' to
+	'_(' to reflect current understanding of the use of the macros.
+	Changed 'G_PARAM_READABLE | G_PARAM_WRITABLE' to
+	'G_PARAM_READWRITE' in generated parameter registrations.  Changed
+	to generate comment delimiters around g_object_notify() calls.
+	Added several initial comments for generated functions.  Added
+	generation of code to dump multiple properties for space
+	properties.
+
+2002-01-02  Tony Graham  <tony.graham@sun.com>
+
+	* conversion-lib.xsl: Reduced several arguments and return values
+	to FoProperty, FoFo, etc.
+
+2001-12-17  Tony Graham <tony.graham@sun.com>
+
+	* fo-property-object-dump.xsl: Removed generation of "Generated
+	by" comments.
+
+	* fo-object-dump.xsl: More reducing output of FO_TYPE_PROPERTY_*,
+	FO_TYPE_*, FoProperty*, and Fo* to FO_TYPE_PROPERTY, FO_TYPE_FO,
+	FoProperty, and FoFo.  Removed generation of "Generated by"
+	comments.
+
+	* fo-context-dump.xsl: Removed generation of "Generated by"
+	comments.
+
+	* fo-all-property-h-dump.xsl: Removed generation of "Generated by"
+	comment.
+
+	* conversion-lib.xsl: More reducing output of FO_TYPE_PROPERTY_*,
+	FO_TYPE_*, FoProperty*, and Fo* to FO_TYPE_PROPERTY, FO_TYPE_FO,
+	FoProperty, and FoFo.
+
+2001-12-07  Tony Graham <tony.graham@sun.com>
+
+	* conversion-lib.xsl, fo-context-dump.xsl, fo-object-dump.xsl,
+	fo-property-object-dump.xsl: Part-way through updating to remove a
+	lot of specialised argument types.
+
+2001-12-04  Tony Graham <tony.graham@sun.com>
+
+	* dump-info.xml: Added provisional-distance-between-starts and
+	provisional-label-separation.
+
+	* makefile: Changed to use final version of XSL Recommendation.
+
+2001-09-12  Tony Graham  <tony.graham@sun.com>
+
+	* conversion-lib.xsl: Added special casing for dumping context
+	properties.
+
+	* dump-info.xml: Added text-align, text-indent, and wrap-option.
+
+2001-09-05  Tony Graham  <tony.graham@sun.com>
+
+	* fo-context-dump.xsl: Changed prototype for
+	fo_context_debug_dump_properties().  Still need to further modify
+	generated version of the function.
+
+	* fo-property-object-dump.xsl: Added keep-* magic to enum object
+	type definition output.
+
+	* dump-info.xml: Added <define> elements for widows and orphans.
+
+2001-09-04  Tony Graham  <tony.graham@sun.com>
+
+	* conversion-lib.xsl: Removed spurious 'p'.
+
+	* dump-info.xml, fo-context-dump.xsl, fo-object-dump.xsl,
+	fo-property-object-dump.xsl, conversion-lib.xsl: Added support for
+	generating multiple components of keep datatype.
+
+2001-09-03  Tony Graham <tony.graham@sun.com>
+
+	* fo-context-dump.xsl: Removed unnecessary inclusion of
+	xslParser.h.
+
+	* makefile: Changed to dumping from XML source for XSL PR.
+
+2001-08-31  Tony Graham  <tony.graham@sun.com>
+
+	* dump-info.xml: Added alignment-adjust, alignment-baseline,
+	character, dominant-baseline, line-height, line-stacking-strategy,
+	and score-spaces.
+
+2001-08-30  Tony Graham  <tony.graham@sun.com>
+
+	* fo-context-dump.xsl: Added correct handling of background-color
+	property currently implemented as a datatype.
+
+2001-08-29  Tony Graham  <tony.graham@sun.com>
+
+	* dump-info.xml: Added font-family, font-stretch, font-style,
+	font-variant, and region-name.
+
+	* makefile: Added 'all' rule.
+
+	* fo-property-object-dump.xsl: Corrected wrong change of '-' to
+	'_' in strings that are compared to enumeration tokens, changed
+	generated *_new_initial() code to use (and reuse) a single
+	instance of the property.
+
+	* fo-property-object-dump.xsl: Added expansions of
+	<generic-family> and <family-name> "datatypes".
+
+2001-08-27  Tony Graham  <tony.graham@sun.com>
+
+	* fo-object-dump.xsl: Moved object instance and class structure
+	definitions to gobject-private-header named template.
+
+2001-08-20  Tony Graham  <tony.graham@sun.com>
+
+	* fo-context-dump.xsl, fo-object-dump.xsl,
+	fo-property-object-dump.xsl, property-enum-dump.xsl,
+	conversion-lib.xsl: Added copyright message.
+
+	* fo-all-property-h-dump.xsl: Reduced output copyright statements
+	to references to 'Copying' file.
+
+	* property-enum-dump.xsl: Reduced output copyright statements to
+	references to 'Copying' file.  Changed to Unix line endings.
+
+	* fo-object-dump.xsl, fo-context-dump.xsl,
+	fo-property-object-dump.xsl: Reduced output copyright statements
+	to references to 'Copying' file.
+
+2001-08-15  Tony Graham <tony.graham@sun.com>
+
+	* conversion-lib.xsl: Changed position of '*' when declaring
+	instance variables.
+
+2001-08-15  Tony Graham  <tony.graham@sun.com>
+
+	* dump-info.xml: Added direction and unicode-bidi properties.
+
+	* conversion-lib.xsl: Fixed bug related to
+	$specialise-property-type and macro name in
+	property-to-get-set-functions.
+
+2001-08-13  Tony Graham  <tony.graham@sun.com>
+
+	* fo-object-dump.xsl: Revamped _debug_dump_properties() function
+	output to use g_log instead of returning a string.
+
+	* conversion-lib.xsl: Added another conditional
+	FoProperty/FoDatatype choice to support background-color being a
+	datatype.
+
+2001-08-08  Tony Graham  <tony.graham@sun.com>
+
+	* fo-all-property-h-dump.xsl: Read the XSL spec and dump
+	fo-all-property.h file.
+
+	* fo-object-dump.xsl: Added many <xsl:sort/> to sort properties in
+	alphabetic order, stopped outputting include statement for
+	xslParser.h in C file, added debug message for new 'is-datatype'
+	attribute used in dump-info.xml.
+
+	* makefile: Added $(FOALLPROPERTYHDUMP) rule, made different
+	output types put results in different directories (that match C
+	code directory structure).
+
+	* fo-property-object-dump.xsl: Added margin-width "datatype"
+	expansion, added <length> to border-width "datatype" expansion,
+	added validate code for more datatypes, changed parameter of
+	generated _sprintf functions from FoProperty* to FoObject*.
+
+	* fo-context-dump.xsl: Got rid of some spurious code output,
+	improved a C error message.
+
+	* dump-info.xml: Added 'is-datatype="yes"' to background-color
+	property element.
+
+	* conversion-lib.xsl: Added $is-datatype handling to
+	property-related named templates to handle background-color
+	datatype, which is currently implemented in the C code as a
+	datatype object, not as a property object.
+
+2001-08-02  Tony Graham  <tony.graham@sun.com>
+
+	* dump-info.xml: Got rid of context code since no longer used.
+	Added many more properties.
+
+	* fo-context-dump.xsl: Added code to generate fo_context_merge()
+	and fo_context_debug_dump_properties() code.
+
+2001-07-30  Tony Graham  <tony.graham@sun.com>
+
+	* fo-context-dump.xsl: Added fo_context_initialize() instead of
+	dumping C code from $dump-info into fo_context_init().  Added
+	fo_context_copy().
+
+2001-07-27  Tony Graham <tony.graham@sun.com>
+
+	* fo-element-to-makefile.xsl: New file.
+
+	* fo-element-to-makefile.xsl, dump-info.xml, fo-context-dump.xsl,
+	conversion-lib.xsl, fo-property-object-dump.xsl: XSL Formatter.
+
+	* property-dump.xsl, spec-dump.xsl: New file.
+
+	* fo-object-dump.xsl, property-dump.xsl, property-enum-dump.xsl,
+	spec-dump.xsl: XSL Formatter.
+
+	* fo-dump.xsl, fo-element-dump.xml, fo-element-dump.xsl: New file.
+
+	* fo-dump.xsl, fo-element-dump.xml, fo-element-dump.xsl, makefile:
+	XSL Formatter.
+
+	* makefile: Added ~ files to clean rule.
+
+	* fo-property-object-dump.xsl: Added padding-width datatype
+	expansion, changed some messages, changed function call for
+	sprintf of datatypes.
+
+	* fo-object-dump.xsl: Maded "Generated by:" comment prettier.
+
+	* dump-info.xml: Added more properties, added changes to context
+	initial code.
+
+2001-07-24  Tony Graham <tony.graham@sun.com>
+
+	* fo-property-object-dump.xsl: Changed _get_initial() to
+	_new_initial() and made it a bit smarter.
+
+	* fo-property-object-dump.xsl: Added base_class_init() and
+	base_class_finalize() functions, moved initialisation and unref of
+	enum token variable to these functions.
+
+	* fo-property-object-dump.xsl: Added initial comment, added
+	'value-string-to-validate-ifs' named template, modified "Generated
+	by" comment generation.
+
+	* dump-info.xml: New file.
+
+	* makefile: Added initial comment, added fo-context-dump rule.
+
+	* fo-object-dump.xsl: Moved several named templates to
+	conversion-lib.xsl since the templates are now also used by
+	fo-context-dump.xsl.
+
+	* conversion-lib.xsl: Moved a lot of stuff from fo-object-dump.xsl
+	to here since the new stuff is now also used by
+	fo-context-dump.xsl.
+
+	* fo-context-dump.xsl: Changes necessary to match version that
+	compiled successfully.  Now use FoProperty instead of
+	FoPropertyXxxx because that got into circular definitions if
+	fo-context.h had to include fo-all-property.h.
+
+	* fo-context-dump.xsl: Escaped RCS identifiers that are for use
+	when generated files are checked into a revision control system.
+
+	* fo-context-dump.xsl: New file.
+
+	* conversion-lib.xsl: Converted to Unix lineends.
+
+	* fo-property-object-dump.xsl: Added cosmetic whitespace in
+	output.
+
+	* fo-property-object-dump.xsl: Added 'is-datatype-token' named
+	template to centralise test whether token is a datatype.  Added
+	'value-string-to-enum-object-action' to declare, set, and unref
+	objects corresponding to each enumeration token.
+
+	* fo-property-object-dump.xsl: Cleaned up code and reduced
+	repetition by adding 'expand-datatype' and 'is-punctuation-token'
+	named templates.
+
+2001-07-23  Tony Graham <tony.graham@sun.com>
+
+	* fo-property-object-dump.xsl: Adding more enumerations of
+	property values.  Checking in so there's something to come back to
+	if the next change is useless.
+
+	* fo-property-object-dump.xsl: Removed some hardcoded
+	"media-usage" from header file output.  Corrected RCS identifier
+	added to header file output.
+
+	* fo-property-object-dump.xsl: Moved template for "/" to end.
+	Renamed $uppercase-property, etc., to $property-macro, etc.
+	Centralised definition of $property-macro, etc.  to "/" template.
+	Added ouput of .h files, which works fine for media-usage, but
+	anything else will require rework.
+
+	* fo-object-dump.xsl: Added "debug" stylesheet parameter.
+
+2001-07-20  Tony Graham <tony.graham@sun.com>
+
+	* makefile: New file.
+
+	* fo-object-dump.xsl: Started tidying up repetitions of same
+	variable definitions by putting common variable definitions in the
+	main xsl:for-each in the rule for "/".  Added #include of header
+	file for each property as part of general attempt to reduce
+	cross-dependencies of files.  Put in full path in place of "//" in
+	main for-each in rule for "/".
+
+	* fo-object-dump.xsl, fo-property-object-dump.xsl: Changed to Unix
+	line ends.
+
+	* property-enum-dump.xsl, fo-property-object-dump.xsl: New file.
+
+	* fo-object-dump.xsl: Major changes as the generated files are
+	getting more complex.  Now dump set_from_context() and
+	debug_dump_properties() functions.  Base class is now FoFo, not
+	GObject.
+
+	* conversion-lib.xsl: New file.
+
+2001-06-29  Tony Graham <tony.graham@sun.com>
+
+	* fo-object-dump.xsl: Now out of date.
+
+2001-06-25  Tony Graham <tony.graham@sun.com>
+
+	* fo-object-dump.xsl: Works okay, but now about to make changes so
+	output matches fo-root.c and fo-root.h files that actually
+	compiled and ran.
+
+	* fo-object-dump.xsl: New file.
