@@ -1,3 +1,343 @@
+01/31/08 17:42:56 tkg [296]
+	* trunk/testing/NEWS (modified)
+	Added more items for 0.5.4 news.
+
+01/31/08 17:36:46 tkg [295]
+	* trunk/testing/NEWS (modified)
+	Updated for 0.5.4.
+
+01/31/08 17:35:02 tkg [294]
+	* trunk/testing/configure.ac (modified)
+	Upped version to 0.5.4.
+
+01/31/08 17:32:49 tkg [293]
+	* trunk/testing/README (modified)
+	Added mention of 'test2makefile.xsl'.
+
+01/31/08 17:20:58 tkg [291]
+	* trunk/testing/Makefile.am (modified)
+	Added 'test2makefile.xsl' to dependencies.  'replace-testsuite-
+	results' target in generated Makefiles can update reference versions
+	with testsuite sample outputs.  (Closes #87.)
+
+10/28/07 12:38:52 tkg [273]
+	* trunk/testing/cairo-pdf-results.xml (modified)
+	Updated for current xmlroff 0.5.3 results.
+
+10/28/07 12:37:20 tkg [272]
+	* trunk/testing/Makefile.am (modified)
+	Made $(RESULTS_PACKAGE) derive from $(TEST_RESULTS).
+
+10/28/07 12:35:10 tkg [271]
+	* trunk/testing/test2makefile.xsl (modified)
+	Added generating rule to copy results to testsuite results.  Moved
+	common 'select-command-line' named template to common.xsl.
+
+10/28/07 12:34:28 tkg [270]
+	* trunk/testing/test2sh.xsl (modified)
+	Moved common 'select-command-line' named template to common.xsl.
+
+10/28/07 12:30:40 tkg [269]
+	* trunk/testing/common.xsl (modified)
+	Added 'select-command-line' named template.  Added some comments.
+
+10/12/07 09:03:55 tkg [263]
+	* trunk/testing/update-result.xsl (modified)
+	Made some debugging messages conditional on $DEBUG.
+
+10/11/07 19:43:48 tkg [256]
+	* trunk/testing/cairo-ps-results.xml (modified)
+	Updated for current xmlroff 0.5.3.
+
+10/11/07 19:38:35 tkg [255]
+	* trunk/testing/testresults.xml (modified)
+	Updated for current xmlroff 0.5.3.
+
+10/11/07 19:36:52 tkg [254]
+	* trunk/testing/docbook-testdocs.conf (modified)
+	Updated for new location of testdocs.
+
+10/09/07 16:29:50 tkg [246]
+	* trunk/testing/bottom-left.png (added)
+	* trunk/testing/bottom-right.png (added)
+	* trunk/testing/top-left.png (added)
+	* trunk/testing/top-right.png (added)
+	Rounded corners.
+
+10/08/07 20:37:23 tkg [244]
+	* trunk/testing/Makefile.am (modified)
+	Omitting reference and stereo forms from results distribution (after
+	all, all the differences should have been fixed or accepted by the
+	time that you package the results).  (Re #97.)
+
+10/08/07 19:15:41 tkg [243]
+	* trunk/testing/configure.ac (modified)
+	Added 'testing' as default component in link to 'newticket' Trac
+	page.
+
+10/08/07 19:09:02 tkg [242]
+	* trunk/testing/README (modified)
+	Added info about bundling test results (re #97) and linking to Trac
+	tickets (re #21).
+
+10/08/07 19:06:32 tkg [241]
+	* trunk/testing/configure.ac (modified)
+	Added handling a results PI for Trac setting (closes #21).  Fix a
+	common typo.
+
+10/08/07 19:02:43 tkg [240]
+	* trunk/testing/testresults.xml (modified)
+	Current results for xmlroff 0.5.3.
+
+10/08/07 19:00:30 tkg [239]
+	* trunk/testing/png+ref2stereo.pl (modified)
+	Added deleting old PNG files of a test result before making new ones
+	since had problem where was seeing mix of new pages and remainder of
+	old pages.
+
+10/08/07 18:55:19 tkg [238]
+	* trunk/testing/testsuccess.xsl (modified)
+	Added linking to Trac tickets (re #21).  Stopped making links to PDF
+	file when no output (closes #39).  Added rounded corners in main
+	report.  Using collapsing border model in main report.  Using EXSLT
+	document() for creating files.
+
+10/08/07 18:49:20 tkg [237]
+	* trunk/testing/Makefile.am (modified)
+	Got 'dist-results' target working (closes #97).  Added new corner
+	graphics to $EXTRA_DIST).
+
+10/08/07 10:56:48 tkg [236]
+	* trunk/testing/configure.ac (modified)
+	Added '--with-trac' for when linking ticket numbers in result
+	descriptions to Trac tickets.  Upped version to 0.5.3.
+
+08/17/07 14:08:23 tkg [202]
+	* trunk/testing/Makefile.am (modified)
+	Added copying $(TEST_RESULTS) to 'install' target's .tar.gz as fixed
+	'testresults.xml' file name.
+
+08/17/07 13:38:01 tkg [201]
+	* trunk/testing/testsuites2testresults.xsl (modified)
+	Added fixed default value for output /testsuite/@profile.
+
+08/17/07 13:11:39 tkg [200]
+	* trunk/testing/NEWS (modified)
+	Added that #40 is fixed.
+
+08/17/07 12:59:37 tkg [199]
+	* trunk/testing/Makefile.am (modified)
+	Split 'tar' command in 'install-data-local' target since was too many
+	files to do in one go.
+
+08/17/07 12:46:14 tkg [198]
+	* trunk/testing/png+ref2stereo.pl (modified)
+	* trunk/testing/update-result.xsl (modified)
+	Removed CVS keywords.
+
+08/17/07 12:34:19 tkg [197]
+	* trunk/testing/Makefile.am (modified)
+	Added 'svn-tag' target.  Added 'testing.conf.in' to $(EXTRA_DIST).
+
+08/17/07 12:29:37 tkg [196]
+	* trunk/testing/Makefile.am (modified)
+	Added $(TESTSUITES) to test2sh.stamp dependencies.
+
+08/17/07 12:27:17 tkg [195]
+	* trunk/testing/cairo-ps-results.xml (modified)
+	Added xsl-processor-flags PI. Added DocBook results based on gp
+	backend DocBook results.
+
+08/17/07 10:39:40 tkg [194]
+	* trunk/testing/cairo-pdf-results.xml (modified)
+	Added xsl-processor-flags PI.  Added DocBook results based on gp
+	backend DocBook results.
+
+08/09/07 21:58:14 tkg [179]
+	* trunk/testing/configure.ac (modified)
+	Added generating custom Apache testing.conf file instead of
+	maintaining separate .conf files for the 'known' testing
+	configurations.
+
+08/09/07 21:47:40 tkg [178]
+	* trunk/testing/README (modified)
+	Added DocBook testdocs 'svn co' command in 'Before you begin' section
+	at suggestion of Emmanuel Fleury.
+
+08/09/07 21:26:04 tkg [177]
+	* trunk/testing/testing.conf.in (added)
+	Added generating custom Apache testing.conf file instead of
+	maintaining separate .conf files for the 'known' testing
+	configurations.
+
+08/09/07 20:46:46 tkg [176]
+	* trunk/testing/testsuccess.xsl (modified)
+	Added missing xsl:param needed for producing static reports.  Bug
+	reported on mailing list by Emmanuel Fleury.
+
+08/09/07 16:24:40 tkg [175]
+	* trunk/testing/Makefile.am (modified)
+	Added testsuccess.xml as target to rule that creates it.  Fixes #73.
+
+08/09/07 15:58:02 tkg [174]
+	* trunk/testing/Makefile.am (modified)
+	Removed uses of '$&lt;'.
+
+08/09/07 15:49:38 tkg [173]
+	* trunk/testing/testsuccess.xsl (modified)
+	Changed single-option xsl:choose to xsl:if, made consistent use of
+	xsl:text.
+
+08/09/07 01:51:52 tkg [172]
+	* trunk/testing/accept-all.sh (added)
+	Utility script to copy all results to 'ref', etc.
+
+08/09/07 01:50:43 tkg [171]
+	* trunk/testing/testresults.xml (modified)
+	Updated for xmlroff 0.5.2 on Ubuntu 7.04.
+
+08/09/07 01:48:44 tkg [170]
+	* trunk/testing/README (modified)
+	* trunk/testing/configure.ac (modified)
+	Added getting parameters from PIs in test results XML.  Closes #67.
+
+08/09/07 01:41:57 tkg [169]
+	* trunk/testing/NEWS (modified)
+	Updated for 0.5.2.
+
+08/09/07 01:08:15 tkg [168]
+	* trunk/testing/test2makefile.xsl (added)
+	Experimenting with a Makefile for running tests.
+
+08/08/07 16:19:25 tkg [167]
+	* trunk/testing/README (modified)
+	Added 'Setting Defaults in the Test Results File' section.  Added ToC
+	since file getting quite big.
+
+08/01/07 22:54:43 tkg [162]
+	* trunk/testing/NEWS (modified)
+	Made more readable in Trac source browser.
+
+08/01/07 19:51:21 tkg [156]
+	* trunk/testing/testresults.xml (modified)
+	Added back DocBook test results.  Re #64.
+
+08/01/07 16:17:39 tkg [154]
+	* trunk/testing/update-result.xsl (modified)
+	Preserving processing instructions on update.  Re #67.
+
+08/01/07 15:42:28 tkg [153]
+	* trunk/testing/update-results.pl (modified)
+	Removed unnecessary quoting of &#34;'&#34;.  Fixes #45.
+
+08/01/07 09:18:41 tkg [152]
+	* trunk/testing/AUTHORS (modified)
+	Removed email address.
+
+08/01/07 09:17:16 tkg [151]
+	* trunk/testing/INSTALL (added)
+	Configuration instructions are in README.
+
+08/01/07 09:10:20 tkg [150]
+	* trunk/testing/dotests.pl (modified)
+	Updated list of directories to ignore.
+
+08/01/07 09:05:52 tkg [149]
+	* trunk/testing/README (modified)
+	Added using 'make-testsuite.pl' for DocBook testing.  Closes #64.
+
+07/31/07 22:11:00 tkg [148]
+	* trunk/testing/cairo-pdf-results.xml (modified)
+	Added PI for XSL processor sptions.
+
+07/31/07 22:07:29 tkg [147]
+	* trunk/testing/configure.ac (modified)
+	Reordered so can get defaults from results file. Re #67.
+
+07/30/07 21:21:58 tkg [142]
+	* trunk/testing/testsuites.xml (modified)
+	Added back a commented-out reference to DocBook testdocs.
+
+07/30/07 21:21:17 tkg [141]
+	* trunk/testing/make-testsuite.pl (added)
+	Makes a starter 'testsuite' document from XML files in
+	subdirectories.  Used with DocBook testdocs.
+
+07/30/07 20:15:51 tkg [140]
+	* trunk/testing/test2sh.xsl (modified)
+	Handling cases where testsuite XML uses @base but a @xsl is an
+	absolute filename.
+
+07/30/07 19:56:04 tkg [139]
+	* trunk/testing/.cvsignore (deleted)
+	Removed since unused.
+
+07/27/07 12:01:45 tkg [129]
+	* trunk/testing/README (modified)
+	Added links to XSL 1.0 Test Suite and to NIST tests.  Minor cleanups
+	and clarifications.
+
+07/26/07 21:18:12 tkg [128]
+	* trunk/testing/Makefile.am (modified)
+	Added h2pl.pl and h2xsl.pl to EXTRA_DIST.  Fixes #72.
+
+07/25/07 10:17:39 tkg [127]
+	* trunk/testing/README (modified)
+	Documented using command patterns when testing other processors.
+	Closes #16.
+
+07/25/07 10:15:51 tkg [126]
+	* trunk/testing/test2sh.xsl (modified)
+	'%o' is no longer optional.  Added substituting '%' for '%%'.  Added
+	error message if no resolvable command patterns.  Re #16.
+
+07/25/07 10:12:42 tkg [125]
+	* trunk/testing/configure.ac (modified)
+	Added another alternative to default command patterns.
+
+07/24/07 20:56:56 tkg [124]
+	* trunk/testing/configure.ac (modified)
+	* trunk/testing/test2sh.xsl (modified)
+	Added specifying patterns for generating XSL formatter command lines.
+	Re #16.
+
+07/24/07 20:54:14 tkg [123]
+	* trunk/testing/h2xsl.pl (modified)
+	Cosmetic change to put added 'Generated by...' comment next to
+	existing 'Generated by...' comments.
+
+07/19/07 21:22:20 tkg [117]
+	* trunk/testing/ChangeLog (modified)
+	Set svn:mime-type.
+
+07/19/07 21:21:08 tkg [116]
+	* trunk/testing/configure.ac (modified)
+	Added checking that XSL processor exists.  Couldn't check that XSL
+	processor is runnable since Autoconf manual says to not use 'test
+	-x'.  Closes #40.
+
+07/12/07 10:17:38 tkg [71]
+	* trunk/testing/testsuccess.xsl (modified)
+	Added yet another level of testcases template to distinguish 'block'
+	testcases containing 'block' testcases in xmlroff testsuite.
+
+07/11/07 13:42:26 tkg [70]
+	* trunk/testing/Makefile.am (modified)
+	Added xmlroff-testing-cairo-pdf.conf and xmlroff-testing-cairo-
+	ps.conf to distribution.
+
+07/11/07 13:39:58 tkg [69]
+	* trunk/testing/COPYING (modified)
+	Added Menteith Consulting copyright.
+
+07/11/07 13:35:03 tkg [68]
+	* trunk/testing/ChangeLog (added)
+	ChangeLog.
+
+07/11/07 13:33:29 tkg [67]
+	* trunk/testing/ChangeLog (deleted)
+	Moved old changes out of ChangeLog to ChangeLog.pre-0.5.
+
 07/11/07 13:30:49 tkg [66]
 	* trunk/testing/testresults.xml (modified)
 	Updated for xmlroff 0.5.1.  Removed DocBook results.
