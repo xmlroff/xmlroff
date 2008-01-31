@@ -482,6 +482,16 @@ log files to remove process IDs from the messages in the .log files so
 the files can be meaningfully diffed.
 
 
+test2makefile.xsl
+-----------------
+
+This is a work in progress for letting Make work out when a test needs
+to be redone.
+
+Also used for copying testsuite samples to reference directory, and
+vice-versa.
+
+
 dotests.pl
 ----------
 
@@ -695,7 +705,7 @@ The individual reports contain:
     - If, instead, there are no differences between the current PNG
       and the corresponding 'ref' PNG:
 
-       - text stating 'Reference is identical to current."
+       - text stating 'Reference is identical to current.'
 
 Selecting the 'Update' button in the 'Result' form both updates the
 test result information in testresults.xml and copies the current PNG
@@ -778,4 +788,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-8 October 2007
+30 January 2008
