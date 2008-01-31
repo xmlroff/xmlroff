@@ -150,7 +150,7 @@
       xml="font-size-fail.fo">Demonstrate catching the failure
       conditions for the 'font-size' property.</test>
       <test id="font-stretch" fo="block" xml="font-stretch.fo"
-      results="results/font-size.pdf">Demonstrate support for the
+      results="results/font-stretch.pdf">Demonstrate support for the
       'font-stretch' property.</test>
       <test id="font-weight-sans-serif" fo="block"
       xml="font-weight-sans-serif.fo"
