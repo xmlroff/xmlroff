@@ -1,3 +1,7 @@
+Changes between 0.5.2 and 0.5.4
+
+ * Can update reference versions from testsuite samples (#87)
+
 Changes between 0.5.1 and 0.5.2:
 
  * Tests any XSL processor (#16)
