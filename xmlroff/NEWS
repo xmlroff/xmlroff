@@ -1,3 +1,9 @@
+Changes between 0.5.3 and 0.5.4
+
+ * Fixed compilation problem if CUnit not present (#100)
+ * Added IDs to static XML files (#84, Asmodai)
+ * Fixed some table bugs
+
 Changes between 0.5.2 and 0.5.3
 
  * Implemented linefeed-treatment and white-space-collapse properties
