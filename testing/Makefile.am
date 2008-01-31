@@ -1,5 +1,4 @@
 # xmlroff test results makefile
-# $Id: Makefile.am,v 1.13 2007/04/09 20:16:54 menteith Exp $
 
 TESTSUITES=testsuites.xml
 XSLTPROC=xsltproc
@@ -24,6 +23,7 @@ EXTRA_DIST = \
 	make-success-report.sh		\
 	png+ref2stereo.pl		\
 	regenerate-testsuccess.pl	\
+	test2makefile.xsl		\
 	test2sh.xsl			\
 	testing.conf.in			\
 	testsuccess.pl			\
