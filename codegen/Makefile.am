@@ -87,3 +87,13 @@ EXTRA_DIST = \
 
 dist-hook:
 	mkdir $(distdir)/fo $(distdir)/property
+
+#
+# Reliably "tag" the Subversion repository to mark the current release.
+#
+svn-tag:
+	-svn mkdir -m"Tag for modules of xmlroff $(VERSION)." \
+	   svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
+	svn cp -m"Tagging xmlroff-codegen $(VERSION)." \
+	   svn://svn.xmlroff.org/trunk/codegen \
+	   svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)/codegen
