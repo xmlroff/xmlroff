@@ -74,10 +74,12 @@ CLEANFILES = \
 
 EXTRA_DIST = \
 	conversion-lib.xsl	\
+	codegen-info.dtd	\
 	codegen-info.xml	\
 	fo-all-property-h-dump.xsl	\
 	fo-context-dump.xsl	\
 	fo-object-dump.xsl	\
+	fo-property-eval-dump.xsl	\
 	fo-property-object-dump.xsl	\
 	xmlroff-property-decl-dump.xsl	\
 	xmlroff-property-ref-dump.xsl \

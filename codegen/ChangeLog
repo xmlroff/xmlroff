@@ -1,0 +1,19 @@
+02/04/08 13:37:20 tkg [301]
+	* trunk/codegen/conversion-lib.xsl (modified)
+	* trunk/codegen/fo-all-property-h-dump.xsl (modified)
+	* trunk/codegen/fo-context-dump.xsl (modified)
+	* trunk/codegen/fo-object-dump.xsl (modified)
+	* trunk/codegen/fo-property-eval-dump.xsl (modified)
+	* trunk/codegen/fo-property-object-dump.xsl (modified)
+	* trunk/codegen/xmlroff-property-decl-dump.xsl (modified)
+	* trunk/codegen/xmlroff-property-ref-dump.xsl (modified)
+	Updated to match current code and to use exsl:document.
+
+01/29/08 23:29:11 tkg [289]
+	* trunk/codegen (moved)
+	Prefer to have one copy of 'codegen' to start with.
+
+01/26/08 17:22:06 tkg [287]
+	* branches/memory/codegen (added)
+	XSLT stylesheets for generating C code from XML of the XSL 1.0
+	Recommendation.

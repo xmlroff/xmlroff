@@ -1,0 +1,77 @@
+Generating the code
+===================
+
+  ./configure
+  make
+
+Much of the generated code will need to be manually merged with the
+existing xmlroff source code.
+
+
+Make targets
+============
+
+make
+
+  Executes the 'all' target.
+
+make all
+
+  Executes the other targets.
+
+make fo-context-dump
+
+  Makes 'fo-context.c', 'fo-context{-private}?.h', which are the C
+  source and header files for the FoContext object that xmlroff uses
+  when resolving property values.
+
+  You will need to merge the generated files with the existing files
+  in the 'xmlroff' package.
+
+make fo-object-dump
+
+  Makes 'fo/fo-*.c', 'fo/fo-*{-private}?.h', which are the C source
+  and header files for the supported XSL FO formatting objects; i.e.,
+  for the formatting objects listed in 'codegen-info.xml'.
+
+  Files for formatting objects that you've just added to
+  'codegen-info.xml' can be copied to 'xmlroff/libfo/fo'.
+
+  Files corresponding to files already in 'xmlroff/libfo/fo' should be
+  merged with the existing files.
+
+  Note that if you add a property to 'codegen-info.xsl', you should
+  then update the files in 'xmlroff/libfo/fo' for all formatting
+  objects that have that new property.
+
+make fo-property-eval-dump
+
+  Makes 'property/fo-property-eval.c', which is the C source for
+  relating property attributes to the procedures for evaluating them.
+  Copy this file to 'xmlroff/libfo/property'.
+
+make fo-property-object-dump
+
+  Makes 'property/fo-property-*.[ch]', which are the C source and
+  header files for the supported XSL FO properties; i.e., for the
+  properties listed in 'codegen-info.xml'.
+
+make fo-all-property-h-dump
+
+  Makes 'property/fo-all-property.h', which is a C header file that
+  includes the header files for all supported XSL FO properties.  Copy
+  this file to 'xmlroff/libfo/property'.
+
+make property-entity-decl-dump
+
+  Makes 'xmlroff-property-decl.ent', which is used when generating
+  the xmlroff reference manual.  Copy this file to 'xmlroff/docs'.
+
+make property-entity-ref-dump
+
+  Makes 'xmlroff-property-ref.ent', which is used when generating the
+  xmlroff reference manual.  Copy this file to 'xmlroff/docs'.
+
+
+Tony Graham
+4 February 2008
