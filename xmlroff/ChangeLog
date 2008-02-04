@@ -1,3 +1,33 @@
+01/11/08 19:40:56 tkg [286]
+	* trunk/xmlroff/Makefile.am (modified)
+	Further fix for when CUnit not required (re #100).
+
+12/18/07 09:44:03 tkg [285]
+	* trunk/xmlroff/configure.ac (modified)
+	Fixed compilation problem if CUnit not present (fixes #100).  Upped
+	version to 0.5.4.
+
+12/18/07 09:31:45 tkg [284]
+	* trunk/xmlroff/docs/backends.xml (modified)
+	* trunk/xmlroff/docs/basic-interface.xml (modified)
+	* trunk/xmlroff/docs/conformance-body.xml (modified)
+	* trunk/xmlroff/docs/debugging.xml (modified)
+	* trunk/xmlroff/docs/directory-structure.xml (modified)
+	* trunk/xmlroff/docs/fo-area-c-file.xml (modified)
+	* trunk/xmlroff/docs/fo-c-file.xml (modified)
+	* trunk/xmlroff/docs/fo-h-file.xml (modified)
+	* trunk/xmlroff/docs/generating-source.xml (modified)
+	* trunk/xmlroff/docs/xmlroff-code-rules.xml (modified)
+	Added IDs to static XML files.  Fixes #84. (Asmodai)
+
+12/10/07 11:52:53 tkg [283]
+	* trunk/xmlroff/libfo/fo-xml-doc-private.h (modified)
+	Added missing G_END_DECLS.
+
+11/30/07 20:44:45 tkg [277]
+	* trunk/xmlroff/ChangeLog (modified)
+	Updated.
+
 11/30/07 20:41:07 tkg [276]
 	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
 	* trunk/xmlroff/libfo/fo/fo-wrapper.c (modified)
