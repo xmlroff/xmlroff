@@ -3,17 +3,15 @@
 <!-- fo-object-dump.xsl -->
 <!-- Read the XSL spec and dump .c and .h files for GLib gobjects for
      each formatting object. -->
-<!-- Requires Saxon or Saxon lookalike since it uses Saxon extension
-     element for creating multiple output files. -->
 <!-- If a named template isn't in this file, see conversion-lib.xsl. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:output method="text"/>
@@ -32,9 +30,6 @@
 
   <xsl:variable name="allowed-fos"
     select="document($codegen-info)/codegen-info/fos/fo/@name"/>
-
-  <xsl:variable name="stylesheet-name"
-    select="substring-before(substring-after('$Id: fo-object-dump.xsl,v 1.13 2006/03/29 17:46:43 tonygraham Exp $', '&#x24;Id: '), ' &#x24;')"/>
 
   <!-- gobject-header
        Make a "fo-xxxx.h" file -->
@@ -69,13 +64,13 @@
       </xsl:call-template>
     </xsl:variable>
 
-    <saxon:output href="./fo-{$object}.h"
+    <exsl:document href="./fo-{$object}.h"
       method="text">
   <xsl:text>/* Fo
  * fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>.h: '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -84,10 +79,10 @@
 #define __FO_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text>_H__
 
 #include &lt;libfo/fo-utils.h>
-#include &lt;fo/fo-fo.h>
+#include &lt;libfo/fo/fo-fo.h>
 </xsl:text>
 <xsl:if test="$properties">
-  <xsl:text>#include &lt;property/fo-property.h>&#10;</xsl:text>
+  <xsl:text>#include &lt;libfo/property/fo-property.h>&#10;</xsl:text>
 </xsl:if>
 
 <xsl:text>
@@ -209,7 +204,7 @@ G_END_DECLS
 
 #endif /* !__FO_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text>_H__ */
 </xsl:text>
-</saxon:output>
+</exsl:document>
   </xsl:template>
 
   <!-- gobject-private-header
@@ -264,13 +259,13 @@ G_END_DECLS
       </xsl:call-template>
     </xsl:variable>
 
-    <saxon:output href="./fo-{$object}-private.h"
+    <exsl:document href="./fo-{$object}-private.h"
       method="text">
       <xsl:text>/* Fo
  * fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>-private.h: Structures private to '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -348,7 +343,7 @@ G_END_DECLS
 
 #endif /* !__FO_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text>_PRIVATE_H__ */
 </xsl:text>
-</saxon:output>
+</exsl:document>
   </xsl:template>
 
   <!-- property-to-set-from-context
@@ -483,14 +478,14 @@ G_END_DECLS
     -->
     <xsl:variable name="validate-content" select="$allowed-fos[. = $object]/../@validate-content"/>
 
-    <saxon:output href="./fo-{$object}.c"
+    <exsl:document href="./fo-{$object}.c"
       method="text">
     <!-- Start of generated text -->
   <xsl:text>/* Fo
  * fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>.c: '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -737,11 +732,11 @@ static void fo_</xsl:text>
 </xsl:text>
 
 <xsl:if test="$fo-inline-fo-iface">
-  <xsl:text>static void fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr_list (FoFo *fo_inline_fo,
-				       FoDoc   *fo_doc,
+  <xsl:text>static void fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr_list (FoFo    *fo_inline_fo,
+				             FoDoc   *fo_doc,
 					     GString *text,
-					     GList **attr_glist,
-					     guint debug_level);
+					     GList  **attr_glist,
+					     guint    debug_level);
 </xsl:text>
 </xsl:if>
 
@@ -812,7 +807,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 </xsl:if>
 
 <xsl:text>      object_type = g_type_register_static (FO_TYPE_</xsl:text><xsl:value-of select="$uppercase-parent-type"/><xsl:text>,
-                                            "</xsl:text><xsl:value-of select="$object"/><xsl:text>",
+                                            "Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>",
                                             &amp;object_info, 0);
 </xsl:text>
 
@@ -1347,7 +1342,7 @@ fo_</xsl:text>
 <xsl:value-of select="$lowercase-object-spaces"/>
 <xsl:text>                   GError **error)
 {
-  GError *tmp_error = NULL;
+  /*GError *tmp_error = NULL;*/
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text> (fo), TRUE);
@@ -1536,6 +1531,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr
   while (fo_child_node)
     {
       fo_inline_fo_get_text_attr_list (FO_FO (fo_child_node),
+				       fo_doc,
 				       text,
 				       &amp;my_attr_glist,
 				       debug_level);
@@ -1614,7 +1610,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr
 </xsl:for-each>
 <!-- End of generated text -->
 
-</saxon:output>
+</exsl:document>
   </xsl:template>
 
   <xsl:template match="/">

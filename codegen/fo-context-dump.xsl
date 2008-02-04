@@ -2,16 +2,14 @@
 <!-- libfo -->
 <!-- fo-context-dump.xsl -->
 <!-- Read the XSL spec and generate .c and .h files for FoContext object. -->
-<!-- Requires Saxon since it uses Saxon extension element for creating
-     multiple output files. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:output method="text"/>
@@ -30,9 +28,6 @@
   <xsl:variable name="allowed-properties"
     select="document($codegen-info)/codegen-info/properties/property/@name"/>
 
-  <xsl:variable name="stylesheet-name"
-    select="substring-before(substring-after('$Id: fo-context-dump.xsl,v 1.10 2006/02/23 14:15:52 tonygraham Exp $', '&#x24;Id: '), ' &#x24;')"/>
-
   <!-- property-to-unref-context-object
        Generate the function call to unref a class variable -->
   <xsl:template name="property-to-unref-context-object">
@@ -49,9 +44,9 @@
     </xsl:variable>
 
     <!-- Start of generated text -->
-    <xsl:text>  g_object_unref (context-></xsl:text>
+    <xsl:text>  fo_context_set_</xsl:text>
     <xsl:value-of select="$lowercase-property"/>
-    <xsl:text>);&#10;</xsl:text>
+    <xsl:text> (context, NULL);&#10;</xsl:text>
     <!-- End of generated text -->
   </xsl:template>
 
@@ -228,13 +223,13 @@
   <xsl:template name="fo-context-h-file">
     <xsl:param name="properties"/>
 
-    <saxon:output href="./fo-context.h"
+    <exsl:document href="./fo-context.h"
       method="text">
       <xsl:text>/* Fo
  * fo-context.h: Context formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -246,9 +241,9 @@ typedef struct _FoContext      FoContext;
 typedef struct _FoContextClass FoContextClass;
 
 #include &lt;libfo/fo-utils.h>
-#include &lt;fo-object.h>
-#include &lt;fo/fo-fo.h>
-#include &lt;property/fo-property.h>
+#include &lt;libfo/fo-object.h>
+#include &lt;libfo/fo/fo-fo.h>
+#include &lt;libfo/property/fo-property.h>
 
 G_BEGIN_DECLS
 
@@ -341,7 +336,7 @@ G_END_DECLS
 
 #endif /* __FO_CONTEXT_H__ */
 </xsl:text>
-</saxon:output>
+</exsl:document>
   </xsl:template>
 
   <!-- fo-context-private-h-file -->
@@ -349,13 +344,13 @@ G_END_DECLS
   <xsl:template name="fo-context-private-h-file">
     <xsl:param name="properties"/>
 
-    <saxon:output href="./fo-context-private.h"
+    <exsl:document href="./fo-context-private.h"
       method="text">
       <xsl:text>/* Fo
  * fo-context-private.h: Structures private to the FoContext formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -364,7 +359,7 @@ G_END_DECLS
 #define __FO_CONTEXT_PRIVATE_H__
 
 #include "fo-object.h"
-#include "fo-property.h"
+#include "property/fo-property.h"
 
 G_BEGIN_DECLS
 
@@ -435,27 +430,27 @@ G_END_DECLS
 
 #endif /* __FO_CONTEXT_PRIVATE_H__ */
 </xsl:text>
-    </saxon:output>
+    </exsl:document>
   </xsl:template>
 
   <xsl:template name="fo-context-c-file">
     <xsl:param name="properties"/>
 
-    <saxon:output href="./fo-context.c"
+    <exsl:document href="./fo-context.c"
       method="text">
       <xsl:text>/* Fo
  * fo-context.c: Context formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-object.h"
-#include "fo-all-datatype.h"
-#include "fo-all-property.h"
+#include "datatype/fo-all-datatype.h"
+#include "property/fo-all-property.h"
 #include "fo-context.h"
 #include "fo-context-private.h"
 
@@ -1173,8 +1168,10 @@ fo_context_copy (FoContext *src)
  * 
  * Merge @primary and @secondary.
  *
- * When a property does not exist in @primary but does in @secondary,
- * set the property value in @primary to that in @secondary.
+ * When a property does not exist in @primary, if the property is
+ * inherited, set the property value in @primary to that in
+ * @secondary, otherwise set the property value in @primary to its
+ * initial value.
  **/
 void
 fo_context_merge (FoContext *primary, FoContext *secondary)
@@ -1380,7 +1377,7 @@ fo_context_debug_dump (FoObject *object,
   <xsl:with-param name="object" select="'context'"/>
 </xsl:call-template>
 
-     </saxon:output>
+     </exsl:document>
   </xsl:template>
 
   <xsl:template match="/">

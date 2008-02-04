@@ -2,16 +2,14 @@
 <!-- libfo -->
 <!-- fo-all-property-h-dump.xsl -->
 <!-- Read the XSL spec and dump fo-all-property.h file -->
-<!-- Requires Saxon lookalike since it uses Saxon extension element for
-     creating a specific output file. -->
-<!-- $Id: fo-all-property-h-dump.xsl,v 1.5 2006/03/29 17:48:29 tonygraham Exp $ -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
+<!-- Copyright (C) 2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:output method="text"/>
@@ -35,16 +33,15 @@
   <xsl:template name="fo-all-property-h-file">
     <xsl:param name="properties"/>
 
-    <saxon:output href="./fo-all-property.h"
+    <exsl:document href="./fo-all-property.h"
       method="text">
       <xsl:text>/* Fo
  * fo-all-property.h: Header file that includes all property header files
  *
  * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2008 Menteith Consulting Ltd
  *
- * &#x24;Id$
- *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_ALL_PROPERTY_H__
@@ -52,13 +49,13 @@
 
 G_BEGIN_DECLS
 
-#include "property/fo-property.h"
+#include &lt;libfo/property/fo-property.h>
 
 /* Property objects */
 
 /* font-size goes first because the various new_from_expression()
    functions need to know about the 'font-size' property */
-#include "property/fo-property-font-size.h"
+#include &lt;libfo/property/fo-property-font-size.h>
 
 </xsl:text>
 
@@ -72,40 +69,40 @@ G_BEGIN_DECLS
         <xsl:text>' property already included above. */&#10;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>.h"&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>.h>&#10;<xsl:text/>
       </xsl:otherwise>
     </xsl:choose>
     <xsl:choose>
       <xsl:when test="$allowed-properties[. = $property][../@type = 'keep']">
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-within-column.h"&#10;<xsl:text/>
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-within-line.h"&#10;<xsl:text/>
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-within-page.h"&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-within-column.h>&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-within-line.h>&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-within-page.h>&#10;<xsl:text/>
       </xsl:when>
       <xsl:when test="$allowed-properties[. = $property][../@type = 'space' or ../@type = 'length-range']">
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-minimum.h"&#10;<xsl:text/>
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-optimum.h"&#10;<xsl:text/>
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-maximum.h"&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-minimum.h>&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-optimum.h>&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-maximum.h>&#10;<xsl:text/>
 
         <xsl:if test="$allowed-properties[. = $property][../@type = 'space']"
 >
-          <xsl:text>#include "property/fo-property-</xsl:text>
-          <xsl:value-of select="."/>-precedence.h"&#10;<xsl:text/>
-          <xsl:text>#include "property/fo-property-</xsl:text>
-          <xsl:value-of select="."/>-conditionality.h"&#10;<xsl:text/>
+          <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+          <xsl:value-of select="."/>-precedence.h>&#10;<xsl:text/>
+          <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+          <xsl:value-of select="."/>-conditionality.h>&#10;<xsl:text/>
         </xsl:if>
       </xsl:when>
       <xsl:when test="$allowed-properties[. = $property][../@type = 'length-conditional']">
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-conditionality.h"&#10;<xsl:text/>
-        <xsl:text>#include "property/fo-property-</xsl:text>
-        <xsl:value-of select="."/>-length.h"&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-conditionality.h>&#10;<xsl:text/>
+        <xsl:text>#include &lt;libfo/property/fo-property-</xsl:text>
+        <xsl:value-of select="."/>-length.h>&#10;<xsl:text/>
       </xsl:when>
     </xsl:choose>
   </xsl:for-each>
@@ -115,7 +112,7 @@ G_END_DECLS
 
 #endif /* !__FO_ALL_PROPERTY_H__ */
 </xsl:text>
-</saxon:output>
+</exsl:document>
   </xsl:template>
 
   <xsl:template match="/">

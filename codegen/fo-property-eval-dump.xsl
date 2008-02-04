@@ -2,17 +2,14 @@
 <!-- libfo -->
 <!-- fo-property-util-dump.xsl -->
 <!-- Read the XSL spec and dump fo-property-util.c file -->
-<!-- Requires Saxon lookalike since it uses Saxon extension element for
-     creating a specific output file. -->
-<!-- $Id: fo-property-eval-dump.xsl,v 1.1 2006/03/21 23:47:03 tonygraham Exp $ -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:output method="text"/>
@@ -56,7 +53,7 @@
   <xsl:template name="fo-property-eval-c-file">
     <xsl:param name="properties"/>
 
-    <saxon:output href="property/fo-property-eval.c"
+    <exsl:document href="property/fo-property-eval.c"
       method="text">
 
       <xsl:text>/* Fo
@@ -64,7 +61,7 @@
  *                     procedures for evaluating them.
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -168,7 +165,7 @@ fo_property_eval_init_hash (GHashTable *hash)
 <xsl:text>  return hash;
 }
 </xsl:text>
-    </saxon:output>
+    </exsl:document>
   </xsl:template>
 
   <xsl:template match="/">

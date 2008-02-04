@@ -3,18 +3,15 @@
 <!-- fo-property-object-dump.xsl -->
 <!-- Read the XSL spec and generate .c and .h files for FoProperty
      subtypes for each property. -->
-<!-- Requires Saxon lookalike since it uses Saxon extension element
-     for creating multiple output files. -->
 <!-- If a named template isn't in this file, see conversion-lib.xsl. -->
-<!-- $Id: fo-property-object-dump.xsl,v 1.19 2006/03/21 23:42:12 tonygraham Exp $ -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:saxon="http://icl.com/saxon"
-                extension-element-prefixes="saxon"
+                xmlns:exsl="http://exslt.org/common"
+                extension-element-prefixes="exsl"
                 version="1.0">
 
   <xsl:output method="text"/>
@@ -155,13 +152,13 @@
     <xsl:param name="inherited"/>
     <xsl:param name="initial-value-string"/>
 
-    <saxon:output href="./fo-property-{$property-filename}.h"
+    <exsl:document href="./fo-property-{$property-filename}.h"
       method="text">
       <xsl:text>/* Fo
  * fo-property-</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>.h: '</xsl:text><xsl:value-of select="$property"/><xsl:text>' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -241,7 +238,7 @@ G_END_DECLS
 
 #endif /* !__FO_PROPERTY_</xsl:text><xsl:value-of select="$property-macro"/><xsl:text>_H__ */
 </xsl:text>
-  </saxon:output>
+  </exsl:document>
 </xsl:template>
 
   <!-- value-string-to-validate-ifs -->
@@ -1031,6 +1028,7 @@ G_END_DECLS
     <xsl:param name="resolve-enum"/>
     <xsl:param name="validate"/>
     <xsl:param name="is-text-property"/>
+    <xsl:param name="expr-eval"/>
     
     <xsl:variable name="enum-object-sets">
       <xsl:call-template name="value-string-to-enum-object-action">
@@ -1057,13 +1055,13 @@ G_END_DECLS
       </xsl:call-template>
     </xsl:variable>
 
-    <saxon:output href="./fo-property-{$property-filename}.c"
+    <exsl:document href="./fo-property-{$property-filename}.c"
       method="text">
   <xsl:text>/* Fo
  * fo-property-</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>.c: '</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See Copying for the status of this software.
  */
@@ -1526,7 +1524,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
   return </xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>;
 }
 </xsl:text>
-</saxon:output>
+</exsl:document>
   </xsl:template>
 
   <xsl:template match="@ref" name="enum-get-type-definition">
@@ -1840,6 +1838,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
   <xsl:template name="process-property">
     <xsl:param name="property"/>
     <xsl:param name="value-string"/>
+    <xsl:param name="initial-value-string"/>
     <xsl:param name="inherited"/>
     <xsl:param name="shorthand"/>
     <xsl:param name="resolve-enum"/>
