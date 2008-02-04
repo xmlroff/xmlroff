@@ -59,7 +59,7 @@ The significant files are:
    xmlroff-property-ref-dump.xsl
                                 Stylesheet for generating entity references
 				  for property documentation files
-
+   xslspec.xml                  XML for XSL 1.0 Recommendation
 
 License
 =======
