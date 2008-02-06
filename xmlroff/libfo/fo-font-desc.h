@@ -1,8 +1,8 @@
 /* Fo
- * fo-font-desc.c: Boxed object type for libxslt XSLT processor
+ * fo-font-desc.c: Boxed object type for Pango font description.
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,6 +11,7 @@
 #define __FO_FONT_DESC_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/datatype/fo-enum.h>
 
 typedef struct _FoFontDesc      FoFontDesc;
 typedef struct _FoFontDescClass FoFontDescClass;
@@ -48,7 +49,7 @@ void         fo_font_desc_set_style   (FoFontDesc        *font_desc,
 void         fo_font_desc_set_stretch (FoFontDesc        *font_desc,
 				       FoEnumFontStretch  stretch);
 void         fo_font_desc_set_variant (FoFontDesc        *font_desc,
-				       FoEnumFontVariant  variant);
+				       FoEnumEnum         variant);
 void         fo_font_desc_set_weight  (FoFontDesc        *font_desc,
 				       gint               weight);
 

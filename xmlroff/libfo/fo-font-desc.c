@@ -222,11 +222,22 @@ fo_font_desc_set_stretch (FoFontDesc        *font_desc,
 				      fo_font_stretch_to_pango_stretch (stretch));
 }
 
-#define fo_font_variant_to_pango_variant(font_variant) (font_variant)
+static PangoVariant
+fo_font_variant_to_pango_variant (FoEnumEnum font_variant)
+{
+  PangoVariant pango_font_variant = PANGO_VARIANT_NORMAL;
+
+  if (font_variant == FO_ENUM_ENUM_SMALL_CAPS)
+    {
+      pango_font_variant = PANGO_VARIANT_SMALL_CAPS;
+    }
+
+  return pango_font_variant;
+}
 
 void
-fo_font_desc_set_variant (FoFontDesc        *font_desc,
-			  FoEnumFontVariant  variant)
+fo_font_desc_set_variant (FoFontDesc *font_desc,
+			  FoEnumEnum  variant)
 {
   g_return_if_fail (FO_IS_FONT_DESC (font_desc));
 

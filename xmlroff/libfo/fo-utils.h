@@ -87,11 +87,6 @@ typedef enum {
   FO_ENUM_FONT_STYLE_BACKSLANT
 } FoEnumFontStyle;
 
-typedef enum {
-  FO_ENUM_FONT_VARIANT_NORMAL,
-  FO_ENUM_FONT_VARIANT_SMALL_CAPS
-} FoEnumFontVariant;
-
 G_END_DECLS
 
 #endif /* !__FO_UTILS_H__ */
