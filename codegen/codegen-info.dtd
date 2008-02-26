@@ -34,6 +34,9 @@
                         generates neutral areas.
              reference  Whether or not the formatting object
                         generates reference areas.
+             cbpbp      Whether or not the formatting object
+                        has the 'Common Border, Padding, and
+			Background Properties'.
              validate   Function that validates formatting object's
                         properties.
              validate-content
@@ -49,6 +52,7 @@
              block      (yes | no)                         "no"
              neutral    (yes | no)                         "no"
              reference  (yes | no)                         "no"
+             cbpbp      (yes | no)                         "no"
              validate   CDATA                              #IMPLIED
              validate-content
                         CDATA                              #IMPLIED  >

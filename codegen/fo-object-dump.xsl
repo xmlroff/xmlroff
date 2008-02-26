@@ -470,6 +470,12 @@ G_END_DECLS
     <xsl:variable name="fo-block-fo-iface"
       select="$allowed-fos[. = $object][../@block = 'yes']"/>
 
+    <!-- Whether or not the FO should implement the 'fo-cbpbp-fo'
+         GObject interface.  Determined from the dump info.
+    -->
+    <xsl:variable name="fo-cbpbp-fo-iface"
+      select="$allowed-fos[. = $object][../@cbpbp = 'yes']"/>
+
     <!-- 'validate' function, if any.
     -->
     <xsl:variable name="validate" select="$allowed-fos[. = $object]/../@validate"/>
@@ -498,6 +504,10 @@ G_END_DECLS
 
 <xsl:if test="$fo-block-fo-iface">
   <xsl:text>#include "fo/fo-block-fo-private.h"&#10;</xsl:text>
+</xsl:if>
+
+<xsl:if test="$fo-cbpbp-fo-iface">
+  <xsl:text>#include "fo/fo-cbpbp-fo-private.h"&#10;</xsl:text>
 </xsl:if>
 
 <xsl:if test="$fo-table-border-fo-iface">
@@ -652,6 +662,12 @@ static void fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_c
   <xsl:text>_block_fo_init (FoBlockFoIface *iface);&#10;</xsl:text>
 </xsl:if>
 
+<xsl:if test="$fo-cbpbp-fo-iface">
+  <xsl:text>static void fo_</xsl:text>
+  <xsl:value-of select="$lowercase-object"/>
+  <xsl:text>_cbpbp_fo_init (FoCBPBPFoIface *iface);&#10;</xsl:text>
+</xsl:if>
+
 <xsl:if test="$fo-inline-fo-iface">
   <xsl:text>static void fo_</xsl:text>
   <xsl:value-of select="$lowercase-object"/>
@@ -758,50 +774,61 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class),
+	  NULL,           /* base_init */
+	  NULL,           /* base_finalize */
+	  (GClassInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>),
+	  0,              /* n_preallocs */
+	  NULL,		  /* instance_init */
+	  NULL		  /* value_table */
+	};
 
 </xsl:text>
 
 <xsl:if test="$fo-inline-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_inline_fo_info =
-      {
-	(GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_inline_fo_init, /* interface_init */
-        NULL,
-        NULL
-      };
+	{
+	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_inline_fo_init, /* interface_init */
+	  NULL,
+	  NULL
+	};
 
 </xsl:text>
 </xsl:if>
 
 <xsl:if test="$fo-block-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_block_fo_info =
-      {
-	(GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init,	 /* interface_init */
-        NULL,
-        NULL
-      };
+	{
+	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
+
+</xsl:text>
+</xsl:if>
+
+<xsl:if test="$fo-cbpbp-fo-iface">
+  <xsl:text>      static const GInterfaceInfo fo_cbpbp_fo_info =
+	{
+	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
 
 </xsl:text>
 </xsl:if>
 
 <xsl:if test="$fo-table-border-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_table_border_fo_info =
-      {
-	(GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_table_border_fo_init, /* interface_init */
-        NULL,
-        NULL
-      };
+	{
+	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_table_border_fo_init, /* interface_init */
+	  NULL,
+	  NULL
+	};
 
 </xsl:text>
 </xsl:if>
@@ -822,6 +849,13 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
   <xsl:text>      g_type_add_interface_static (object_type,
                                    FO_TYPE_BLOCK_FO,
                                    &amp;fo_block_fo_info);
+</xsl:text>
+</xsl:if>
+
+<xsl:if test="$fo-cbpbp-fo-iface">
+  <xsl:text>      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &amp;fo_cbpbp_fo_info);
 </xsl:text>
 </xsl:if>
 
@@ -1006,6 +1040,38 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init
   iface->get_space_after = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_space_after;
   iface->get_start_indent = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_start_indent;
   iface->get_end_indent = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_end_indent;
+}
+
+</xsl:text>
+</xsl:if>
+
+<xsl:if test="$fo-cbpbp-fo-iface">
+  <xsl:text>/**
+ * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
+ * 
+ * Initialize #FoCBPBPFoIface interface for this class.
+ **/
+void
+fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init (FoCBPBPFoIface *iface)
+{
+  iface->get_background_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_background_color;
+  iface->get_border_after_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_after_color;
+  iface->get_border_after_style = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_after_style;
+  iface->get_border_after_width = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_after_width;
+  iface->get_border_before_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_before_color;
+  iface->get_border_before_style = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_before_style;
+  iface->get_border_before_width = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_before_width;
+  iface->get_border_end_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_end_color;
+  iface->get_border_end_style = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_end_style;
+  iface->get_border_end_width = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_end_width;
+  iface->get_border_start_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_start_color;
+  iface->get_border_start_style = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_start_style;
+  iface->get_border_start_width = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_start_width;
+  iface->get_padding_after = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_padding_after;
+  iface->get_padding_before = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_padding_before;
+  iface->get_padding_end = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_padding_end;
+  iface->get_padding_start = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_padding_start;
 }
 
 </xsl:text>
