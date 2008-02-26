@@ -582,7 +582,7 @@
     <xsl:text>
 /**
  * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_</xsl:text><xsl:value-of select="$lowercase-use-property"/><xsl:text>:
- * @fo_</xsl:text><xsl:value-of select="$fo-or-context"/><xsl:text>: The @</xsl:text><xsl:value-of select="$fo-or-context-object"/><xsl:text> object.
+ * @fo_</xsl:text><xsl:value-of select="$fo-or-context"/><xsl:text>: The #</xsl:text><xsl:value-of select="$fo-or-context-object"/><xsl:text> object.
  * 
  * Gets the "</xsl:text><xsl:value-of select="$property"/><xsl:text>" property of @fo_</xsl:text><xsl:value-of select="$fo-or-context"/><xsl:text>.
  *
