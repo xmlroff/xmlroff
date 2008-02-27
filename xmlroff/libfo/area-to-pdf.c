@@ -2,7 +2,7 @@
  * area-to-pdf.c: Convert area tree into PDF
  *
  * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -19,18 +19,17 @@
 #include "property/fo-property-border-top-style.h"
 #include "property/fo-property-color.h"
 #include "property/fo-property-font-size.h"
-#include "fo/fo-flow.h"
 
 typedef struct
 {
-  gfloat x1;	  /* X-coordinate of one corner. */
-  gfloat y1;	  /* Y-coordinate of one corner. */
-  gfloat x2;	  /* X-coordinate of the opposite corner. */
-  gfloat y2;	  /* Y-coordinate of the opposite corder. */
-  gfloat x1delta; /* Relative x-offset of interior corner nearest (x1,y1). */
-  gfloat y1delta; /* Relative y-offset of interior corner nearest (x1,y1). */
-  gfloat x2delta; /* Relative x-offset of interior corner nearest (x2,y2). */
-  gfloat y2delta; /* Relative y-offset of interior corner nearest (x2,y2). */
+  gdouble x1;	  /* X-coordinate of one corner. */
+  gdouble y1;	  /* Y-coordinate of one corner. */
+  gdouble x2;	  /* X-coordinate of the opposite corner. */
+  gdouble y2;	  /* Y-coordinate of the opposite corder. */
+  gdouble x1delta; /* Relative x-offset of interior corner nearest (x1,y1). */
+  gdouble y1delta; /* Relative y-offset of interior corner nearest (x1,y1). */
+  gdouble x2delta; /* Relative x-offset of interior corner nearest (x2,y2). */
+  gdouble y2delta; /* Relative y-offset of interior corner nearest (x2,y2). */
 } FoPdfOneBorderCoords;
 
 /**
@@ -49,10 +48,10 @@ typedef struct
  **/
 static void
 fo_pdf_draw_background (FoDoc *fo_doc,
-			gfloat x,
-			gfloat y,
-			gfloat width,
-			gfloat height,
+			gdouble x,
+			gdouble y,
+			gdouble width,
+			gdouble height,
 			FoDatatype *background_color)
 {
 
@@ -620,7 +619,7 @@ fo_pdf_draw_border_outset (FoDoc *fo_doc,
 static void
 fo_pdf_draw_one_border (FoDoc *fo_doc,
 			FoDatatype *color,
-			gint border_style,
+			FoEnumEnum border_style,
 			FoPdfOneBorderCoords *coords)
 {
   fo_doc_save (fo_doc);
@@ -673,6 +672,8 @@ fo_pdf_draw_one_border (FoDoc *fo_doc,
 			       color,
 			       coords);
     break;
+  default:
+    g_error ("Unexpected enumeration.");
   }
   fo_doc_restore (fo_doc);
 }
@@ -688,25 +689,25 @@ fo_pdf_draw_one_border (FoDoc *fo_doc,
  **/
 static void
 fo_pdf_draw_borders (FoDoc  *fo_doc,
-		     FoArea *area_node)
+		     FoArea *area_node,
+		     gdouble width,
+		     gdouble height)
 {
   GValue value = { 0, {{0}, {0}} };
   FoFo *fo = fo_area_get_generated_by (area_node);
-  FoPropertyColor *prop_color;
+  FoProperty *prop_color;
   FoProperty *prop_border_style;
   FoDatatype *color;
-  gint border_style;
-  gfloat x = fo_area_area_get_x (area_node);
-  gfloat y = fo_area_area_get_y (area_node);
-  gfloat width = fo_area_area_get_width (area_node);
-  gfloat height = fo_area_area_get_height (area_node);
-  gfloat border_before =
+  FoEnumEnum border_style;
+  gdouble x = fo_area_area_get_x (area_node);
+  gdouble y = fo_area_area_get_y (area_node);
+  gdouble border_before =
     fo_area_area_get_border_before (area_node);
-  gfloat border_after =
+  gdouble border_after =
     fo_area_area_get_border_after (area_node);
-  gfloat border_start =
+  gdouble border_start =
     fo_area_area_get_border_start (area_node);
-  gfloat border_end =
+  gdouble border_end =
     fo_area_area_get_border_end (area_node);
 
   g_value_init (&value, G_TYPE_OBJECT);
@@ -719,7 +720,7 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 			     &value);
 
       /*
-	g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
+	g_print ("%s\n", fo_object_sprintf (g_value_get_object (&value)));
       */
       prop_border_style = g_value_get_object (&value);
       border_style =
@@ -748,7 +749,7 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 				 &value);
 
 	  /*
-	    g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
+	    g_print ("%s\n", fo_object_sprintf (g_value_get_object (&value)));
 	  */
 	  color = g_value_get_object (&value);
 
@@ -952,17 +953,17 @@ fo_area_tree_to_pdf (FoArea  *area_node,
       FoPropertyFontSize *prop_font_size;
       FoDatatype *color;
       FoDatatype *length;
-      gfloat x = fo_area_area_get_x (area_node);
-      gfloat y = fo_area_area_get_y (area_node);
-      gfloat width = fo_area_area_get_width (area_node);
-      gfloat height = fo_area_area_get_height (area_node);
-      gfloat border_before =
+      gdouble x = fo_area_area_get_x (area_node);
+      gdouble y = fo_area_area_get_y (area_node);
+      gdouble width = fo_area_area_get_width (area_node);
+      gdouble height = fo_area_area_get_height (area_node);
+      gdouble border_before =
 	fo_area_area_get_border_before (area_node);
-      gfloat border_start =
+      gdouble border_start =
 	fo_area_area_get_border_start (area_node);
-      gfloat padding_before =
+      gdouble padding_before =
 	fo_area_area_get_padding_before (area_node);
-      gfloat padding_start =
+      gdouble padding_start =
 	fo_area_area_get_padding_start (area_node);
 
       fo_doc_save (fo_doc);
@@ -1026,13 +1027,16 @@ fo_area_tree_to_pdf (FoArea  *area_node,
 				  y - border_before - padding_before);
 
       /* borders */
-      fo_pdf_draw_borders (fo_doc, area_node);
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_restore (fo_doc);
     }
   else if (FO_IS_AREA_NORMAL (area_node))
     {
-      fo_pdf_draw_borders (fo_doc, area_node);
+      gdouble width = fo_area_area_get_width (area_node);
+      gdouble height = fo_area_area_get_height (area_node);
+
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
@@ -1050,15 +1054,41 @@ fo_area_tree_to_pdf (FoArea  *area_node,
     {
       FoProperty *prop_overflow;
       FoEnumEnum overflow;
-      gdouble width;
-      gdouble height;
+      gdouble x = fo_area_area_get_x (area_node);
+      gdouble y = fo_area_area_get_y (area_node);
+      gdouble width = fo_area_get_available_width (area_node);
+      gdouble height = fo_area_get_available_height (area_node);
+
+      /* background-color */
+      g_object_get_property (G_OBJECT (fo),
+			     "background-color",
+			     &value);
+
+      prop_background_color = g_value_get_object (&value);
+
+      g_object_get_property (G_OBJECT (prop_background_color),
+			     "value",
+			     &value);
+
+      background_color = g_value_get_object (&value);
+
+      fo_pdf_draw_background (fo_doc,
+			      x,
+			      y,
+			      width,
+			      height,
+			      background_color);
+
+      /* borders */
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_save (fo_doc);
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
 			fo_area_area_get_y (area_node));
 
-      g_object_get_property (G_OBJECT (fo_flow_get_region_master (fo)),
+      /* overflow */
+      g_object_get_property (G_OBJECT (fo),
 			     "overflow",
 			     &value);
       prop_overflow = g_value_get_object (&value);
@@ -1067,10 +1097,6 @@ fo_area_tree_to_pdf (FoArea  *area_node,
       if ((overflow == FO_ENUM_ENUM_HIDDEN) ||
 	  (overflow == FO_ENUM_ENUM_SCROLL))
 	{
-	  width = fo_area_get_available_width (area_node);
-	  height = fo_area_get_available_height (area_node);
-
-
 	  fo_doc_move_to (fo_doc,
 			  0,
 			  0);
@@ -1095,10 +1121,10 @@ fo_area_tree_to_pdf (FoArea  *area_node,
     }
   else if (FO_IS_AREA_SPANNING_TABLE_CELL (area_node))
     {
-      gfloat x = fo_area_area_get_x (area_node);
-      gfloat y = fo_area_area_get_y (area_node);
-      gfloat width = fo_area_area_get_width (area_node);
-      gfloat height = fo_area_spanning_table_cell_get_real_available_height (area_node);
+      gdouble x = fo_area_area_get_x (area_node);
+      gdouble y = fo_area_area_get_y (area_node);
+      gdouble width = fo_area_area_get_width (area_node);
+      gdouble height = fo_area_spanning_table_cell_get_real_available_height (area_node);
 
       fo_doc_save (fo_doc);
 
@@ -1123,7 +1149,7 @@ fo_area_tree_to_pdf (FoArea  *area_node,
 			      background_color);
 
       /* borders */
-      fo_pdf_draw_borders (fo_doc, area_node);
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
@@ -1139,10 +1165,10 @@ fo_area_tree_to_pdf (FoArea  *area_node,
   else if (FO_IS_AREA_TABLE_CONTINUATION (area_node))
     {
       FoArea *table_header = FO_AREA_TABLE_CONTINUATION (area_node)->table_header;
-      gfloat x = fo_area_area_get_x (area_node);
-      gfloat y = fo_area_area_get_y (area_node);
-      gfloat width = fo_area_area_get_width (area_node);
-      gfloat height = fo_area_area_get_height (area_node);
+      gdouble x = fo_area_area_get_x (area_node);
+      gdouble y = fo_area_area_get_y (area_node);
+      gdouble width = fo_area_area_get_width (area_node);
+      gdouble height = fo_area_area_get_height (area_node);
 
       if (table_header != NULL)
 	{
@@ -1181,7 +1207,7 @@ fo_area_tree_to_pdf (FoArea  *area_node,
 			      background_color);
 
       /* borders */
-      fo_pdf_draw_borders (fo_doc, area_node);
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
@@ -1198,10 +1224,10 @@ fo_area_tree_to_pdf (FoArea  *area_node,
     }
   else if (FO_IS_AREA_REFERENCE (area_node))
     {
-      gfloat x = fo_area_area_get_x (area_node);
-      gfloat y = fo_area_area_get_y (area_node);
-      gfloat width = fo_area_area_get_width (area_node);
-      gfloat height = fo_area_area_get_height (area_node);
+      gdouble x = fo_area_area_get_x (area_node);
+      gdouble y = fo_area_area_get_y (area_node);
+      gdouble width = fo_area_area_get_width (area_node);
+      gdouble height = fo_area_area_get_height (area_node);
 
       fo_doc_save (fo_doc);
 
@@ -1226,7 +1252,7 @@ fo_area_tree_to_pdf (FoArea  *area_node,
 			      background_color);
 
       /* borders */
-      fo_pdf_draw_borders (fo_doc, area_node);
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
@@ -1241,8 +1267,11 @@ fo_area_tree_to_pdf (FoArea  *area_node,
     }
   else if (FO_IS_AREA_AREA (area_node))
     {
+      gdouble width = fo_area_area_get_width (area_node);
+      gdouble height = fo_area_area_get_height (area_node);
+
       /* borders */
-      fo_pdf_draw_borders (fo_doc, area_node);
+      fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
