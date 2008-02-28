@@ -348,6 +348,12 @@ fo_area_table_cell_size_request (FoArea *child)
     {
       fo_area_area_set_height (table_cell, table_cell_use_height);
       table_cell = fo_area_size_request (table_cell);
+
+      /* The row will have set this cell's available height.
+         If there are other cells in the row that need more height,
+         the available height may have been more than requested. */
+      fo_area_area_set_height (table_cell,
+			       fo_area_get_available_height (table_cell));
       /*
       table_cell_child_available_ipdim =
 	MAX (fo_area_get_available_width (table_cell) -
