@@ -74,6 +74,10 @@
     xml="table-3.fo" results="results/table-3.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%".</test>
         <test id="table-4" fo="multiple"
     xml="table-4.fo" results="results/table-4.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%", fo:table-column.</test>
+        <test id="table-5" fo="multiple"
+    xml="table-5.fo" results="results/table-5.pdf">Three-row, two-column table with more text in first cell in middle row.</test>
+        <test id="table-6" fo="multiple"
+    xml="table-6.fo" results="results/table-6.pdf">Three-row, two-column table with more text in second cell in middle row.</test>
       </testcases>
     </testcases>
   </testcases>
