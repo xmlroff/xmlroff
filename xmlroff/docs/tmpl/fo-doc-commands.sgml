@@ -9,12 +9,10 @@ fo-doc-commands
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -237,14 +235,6 @@ fo-doc-commands
 
 
 <!-- ##### FUNCTION fo_doc_stroke ##### -->
-<para>
-
-</para>
-
-@fo_doc: 
-
-
-<!-- ##### FUNCTION fo_doc_fill_stroke ##### -->
 <para>
 
 </para>

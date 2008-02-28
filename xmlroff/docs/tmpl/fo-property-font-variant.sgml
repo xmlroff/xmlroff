@@ -9,29 +9,12 @@ font-variant
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
 
-
 <!-- ##### SECTION Stability_Level ##### -->
-
-
-<!-- ##### MACRO FO_TYPE_ENUM_FONT_VARIANT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION fo_enum_font_variant_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### STRUCT FoPropertyFontVariant ##### -->

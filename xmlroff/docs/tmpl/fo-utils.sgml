@@ -9,12 +9,10 @@ fo-utils
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -187,12 +185,4 @@ fo-utils
 @FO_ENUM_FONT_STYLE_ITALIC: 
 @FO_ENUM_FONT_STYLE_OBLIQUE: 
 @FO_ENUM_FONT_STYLE_BACKSLANT: 
-
-<!-- ##### ENUM FoEnumFontVariant ##### -->
-<para>
-
-</para>
-
-@FO_ENUM_FONT_VARIANT_NORMAL: 
-@FO_ENUM_FONT_VARIANT_SMALL_CAPS: 
 

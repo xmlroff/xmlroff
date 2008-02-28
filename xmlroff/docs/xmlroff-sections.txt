@@ -7215,8 +7215,6 @@ FO_PROPERTY_FONT_STYLE_GET_CLASS
 <SECTION>
 <FILE>fo-property-font-variant</FILE>
 <TITLE>font-variant</TITLE>
-FO_TYPE_ENUM_FONT_VARIANT
-fo_enum_font_variant_get_type
 FoPropertyFontVariant
 FoPropertyFontVariantClass
 fo_property_font_variant_new
@@ -9485,7 +9483,6 @@ FO_WARNING_MAX
 FoEnumAreaDirection
 FoEnumFontStretch
 FoEnumFontStyle
-FoEnumFontVariant
 </SECTION>
 
 <SECTION>

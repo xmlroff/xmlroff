@@ -1,0 +1,28 @@
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_VARIANT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM FoEnumFontVariant ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_VARIANT_NORMAL: 
+@FO_ENUM_FONT_VARIANT_SMALL_CAPS: 
+
+<!-- ##### FUNCTION fo_doc_fill_stroke ##### -->
+<para>
+
+</para>
+
+@fo_doc: 
+
+<!-- ##### FUNCTION fo_enum_font_variant_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
