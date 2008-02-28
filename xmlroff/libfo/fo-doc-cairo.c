@@ -1033,10 +1033,12 @@ fo_doc_cairo_place_image (FoDoc   *fo_doc,
   static const cairo_user_data_key_t key;
   int j;
 
-  cairo_translate (FO_DOC_CAIRO (fo_doc)->cr, 0, height * yscale * 72 / PIXELS_PER_INCH);
-  /*  cairo_scale (FO_DOC_CAIRO (fo_doc)->cr,
-	       width * xscale * 72 / PIXELS_PER_INCH,
-	       height * yscale * 72 / PIXELS_PER_INCH);
+  /*cairo_translate (FO_DOC_CAIRO (fo_doc)->cr, 0, height * yscale * 72.0 / PIXELS_PER_INCH);*/
+  cairo_save (FO_DOC_CAIRO(fo_doc)->cr);
+  /*
+  cairo_scale (FO_DOC_CAIRO (fo_doc)->cr,
+	       xscale * 72.0 / PIXELS_PER_INCH,
+	       yscale * 72.0 / PIXELS_PER_INCH);
   */
   if (n_channels == 3)
     {
@@ -1114,9 +1116,13 @@ fo_doc_cairo_place_image (FoDoc   *fo_doc,
 					 PIXELS_PER_INCH,
 					 PIXELS_PER_INCH);
   cairo_set_source_surface (FO_DOC_CAIRO (fo_doc)->cr, surface, 0, 0);
+  cairo_pattern_t *pattern = cairo_get_source (FO_DOC_CAIRO (fo_doc)->cr);
+  cairo_pattern_set_extend (pattern,
+			    CAIRO_EXTEND_NONE);
   cairo_paint (FO_DOC_CAIRO (fo_doc)->cr);
   cairo_surface_destroy (surface);
   g_object_unref (pixbuf);
+  cairo_restore (FO_DOC_CAIRO(fo_doc)->cr);
 }
 
 void
