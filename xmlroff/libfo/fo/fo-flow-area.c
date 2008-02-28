@@ -2,7 +2,7 @@
  * fo-flow-area.c: Generate area for flow formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007, 2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -30,7 +30,7 @@ fo_flow_area_new2 (FoFo *fo,
 			   context->new_area,
 			   context->debug_level);
 
-  fo_area_set_generated_by (*(context->new_area), fo);
+  /*fo_area_set_generated_by (*(context->new_area), fo);*/
   FO_FO (fo)->areas = g_list_append (FO_FO (fo)->areas, *(context->new_area));
   fo_area_add_child (context->parent_area, *(context->new_area));
   *(context->new_area) = fo_area_size_request (*(context->new_area));

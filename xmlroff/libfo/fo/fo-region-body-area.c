@@ -2,7 +2,7 @@
  * fo-region-body-area.c: Generate area for region-body formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007, 2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -67,4 +67,5 @@ fo_region_body_area_new (FoFo    *fo,
   fo_area_reference_set_sd (*new_area,
 			    fo_property_writing_mode_to_sd (writing_mode,
 							    NULL));
+  fo_area_set_generated_by (*new_area, fo);
 }
