@@ -86,6 +86,22 @@
     </testcases>
     <testcases profile="accessability" base="accessability">
     </testcases>
+    <testcases profile="area-alignment" base="area-alignment">
+      <testcases profile="display-align" base="display-align">
+	<test id="display-align-1" fo="table-cell" xml="display-align-1.fo" results="results/display-align-1.pdf">table-cell, display-align="auto", one fo:block</test>
+	<test id="display-align-2" fo="table-cell" xml="display-align-2.fo" results="results/display-align-2.pdf">table-cell, display-align="before", one fo:block</test>
+	<test id="display-align-3" fo="table-cell" xml="display-align-3.fo" results="results/display-align-3.pdf">table-cell, display-align="center", one fo:block</test>
+	<test id="display-align-4" fo="table-cell" xml="display-align-4.fo" results="results/display-align-4.pdf">table-cell, display-align="after", one fo:block</test>
+	<test id="display-align-5" fo="table-cell" xml="display-align-5.fo" results="results/display-align-5.pdf">table-cell, display-align="auto", two fo:block</test>
+	<test id="display-align-6" fo="table-cell" xml="display-align-6.fo" results="results/display-align-6.pdf">table-cell, display-align="before", two fo:block</test>
+	<test id="display-align-7" fo="table-cell" xml="display-align-7.fo" results="results/display-align-7.pdf">table-cell, display-align="center", two fo:block</test>
+	<test id="display-align-8" fo="table-cell" xml="display-align-8.fo" results="results/display-align-8.pdf">table-cell, display-align="after", two fo:block</test>
+	<test id="display-align-9" fo="table-cell" xml="display-align-9.fo" results="results/display-align-9.pdf">spanning table-cell, display-align="auto", one fo:block</test>
+	<test id="display-align-10" fo="table-cell" xml="display-align-10.fo" results="results/display-align-10.pdf">spanning table-cell, display-align="before", one fo:block</test>
+	<test id="display-align-11" fo="table-cell" xml="display-align-11.fo" results="results/display-align-11.pdf">spanning table-cell, display-align="center", one fo:block</test>
+	<test id="display-align-12" fo="table-cell" xml="display-align-12.fo" results="results/display-align-12.pdf">spanning table-cell, display-align="after", one fo:block</test>
+      </testcases>
+    </testcases>
     <testcases profile="block-line" base="block-line">
       <test id="linefeed-treatment-1" fo="block" xml="linefeed-treatment-1.fo" results="results/linefeed-treatment-1.pdf">linefeed-treatment="ignore"</test>
       <test id="linefeed-treatment-2" fo="block" xml="linefeed-treatment-2.fo" results="results/linefeed-treatment-2.pdf">linefeed-treatment="preserve"</test>
