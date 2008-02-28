@@ -2117,19 +2117,16 @@ fo_table_span_info_resolve_column_number (FoFo    *fo,
 					  gint     rows_spanned,
 					  GError **error)
 {
-  FoTable *fo_table;
-  gint new_column_number;
-  gint column_index;
-
   g_return_val_if_fail (fo != NULL, 0);
   g_return_val_if_fail (FO_IS_TABLE (fo), 0);
   g_return_val_if_fail (FO_IS_TABLE_CELL (table_cell), 0);
   g_return_val_if_fail (error == NULL || *error == NULL, 0);
 
-  fo_table = FO_TABLE (fo);
+  FoTable *fo_table = FO_TABLE (fo);
 
   g_return_val_if_fail (column_number <= fo_table->max_column_number, 0);
 
+  gint new_column_number;
   if (column_number == 0)
     {
       new_column_number = fo_table->span_info_next_column;
@@ -2139,6 +2136,7 @@ fo_table_span_info_resolve_column_number (FoFo    *fo,
       new_column_number = column_number;
     }
 
+  gint column_index;
   for (column_index = new_column_number - 1;
        column_index < (new_column_number + columns_spanned - 1);
        column_index++)
@@ -2150,7 +2148,26 @@ fo_table_span_info_resolve_column_number (FoFo    *fo,
       span_info->table_cell = table_cell;
     }
 
-  fo_table->span_info_next_column = new_column_number + columns_spanned;
+  /* The next available column is the next column that does not have
+     an intrusion from the previous row (or, when column numbers are
+     not in sequence in the FO document, that has not yet been
+     filled by a cell in this row). */
+  /* Subtract 1 when making column_index and add it back when setting
+     span_info_next_column since the span_info GArray counts from 0
+     and column numbers count from 1. */
+  for (column_index = new_column_number + columns_spanned - 1;
+       column_index < fo_table->max_column_number;
+       column_index++)
+    {
+      SpanInfo *span_info = &g_array_index (fo_table->span_info,
+					    SpanInfo,
+					    column_index);
+      if (span_info->rows_spanned == 0)
+	{
+	  fo_table->span_info_next_column = column_index + 1;
+	  break;
+	}
+    }
 
   return new_column_number;
 }
