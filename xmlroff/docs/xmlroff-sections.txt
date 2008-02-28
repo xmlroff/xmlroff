@@ -9511,7 +9511,6 @@ fo_doc_rect_stroked
 fo_doc_rect_filled
 fo_doc_fill
 fo_doc_stroke
-fo_doc_fill_stroke
 fo_doc_place_image
 fo_doc_get_font_desc
 fo_doc_render_layout_lines
