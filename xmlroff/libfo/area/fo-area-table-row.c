@@ -195,9 +195,12 @@ fo_area_table_row_size_request (FoArea *child)
     MAX (fo_area_get_available_height (table_row),
 	 0);
 
+  /* The simple case is when a cell needs less bpdim than was needed
+     for a previous cell in the row. */
   if (child_height <= table_row_child_available_bpdim)
     {
-      fo_area_set_available_height (child, table_row_child_available_bpdim);
+      fo_area_set_available_height (child,
+				    table_row_child_available_bpdim);
       return child;
     }
 
