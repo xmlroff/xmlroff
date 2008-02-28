@@ -425,38 +425,32 @@ fo_area_spanning_table_cell_get_real_available_height (FoArea *fo_area)
 FoArea*
 fo_area_spanning_table_cell_size_request (FoArea *child)
 {
-  FoArea *parent;
-  FoArea *return_child;
-  FoArea *child_original_next_part;
-  FoDatatype *fo_cell_bpdim;
-  gfloat parent_available_height;
-  gfloat parent_use_height = 0.0;
-  gfloat parent_real_height = 0.0;
-  gfloat parent_real_available_height = 0.0;
-  gfloat parent_target_height = 0.0;
-  gfloat child_height;
-  gfloat total_child_height = 0.0;
-  gint   rows_spanned;
-
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
   g_return_val_if_fail (!FO_AREA_IS_ROOT (child), NULL);
   g_return_val_if_fail (fo_area_parent (child) != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_SPANNING_TABLE_CELL (fo_area_parent (child)), NULL);
 
-  child_original_next_part = child->next_part;
+  /* The area that is the return value of this procedure. */
+  FoArea *return_child;
+  /* Used when determining the return value. */
+  FoArea *child_original_next_part = child->next_part;
 
-  child_height = fo_area_area_get_height (child);
+  /* The table cell containing the area that issued this request. */
+  FoArea *parent = fo_area_parent (child);
+  gfloat parent_available_height =
+    fo_area_get_available_height (parent);
 
-  parent = fo_area_parent (child);
-  parent_available_height = fo_area_get_available_height (parent);
-
+  /* Find the total height of all children. */
+  gfloat total_child_height = 0.0;
   fo_area_children_foreach (parent,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
 			    &total_child_height);
 
-  parent_target_height = total_child_height +
+  /* Ideally, this table cell would be just big enough for its borders
+     and padding plus the height needed for its children. */
+  gfloat parent_target_height = total_child_height +
     fo_area_area_get_border_before (parent) +
     fo_area_area_get_padding_before (parent) +
     fo_area_area_get_padding_after (parent) +
@@ -464,14 +458,20 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 
   FO_AREA_SPANNING_TABLE_CELL (parent)->real_height = parent_target_height;
 
-  fo_cell_bpdim =
+  /* The FoFo that generated this table cell may have set the allowed
+     height. */
+  FoDatatype *fo_cell_bpdim =
     fo_property_get_value (fo_table_cell_get_block_progression_dimension (parent->generated_by));
 
+  gfloat parent_use_height = 0.0;
   if (FO_IS_LENGTH_RANGE (fo_cell_bpdim))
     {
-      FoDatatype *min_datatype = fo_length_range_get_minimum (fo_cell_bpdim);
-      FoDatatype *opt_datatype = fo_length_range_get_optimum (fo_cell_bpdim);
-      FoDatatype *max_datatype = fo_length_range_get_maximum (fo_cell_bpdim);
+      FoDatatype *min_datatype =
+	fo_length_range_get_minimum (fo_cell_bpdim);
+      FoDatatype *opt_datatype =
+	fo_length_range_get_optimum (fo_cell_bpdim);
+      FoDatatype *max_datatype =
+	fo_length_range_get_maximum (fo_cell_bpdim);
 
       if (FO_IS_LENGTH (min_datatype) &&
 	  parent_target_height <= fo_length_get_value (min_datatype))
@@ -513,16 +513,18 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
     }
   else
     {
+      /* The 'block_progression_dimension' property should only ever
+	 be a length-range. */
       g_assert_not_reached ();
     }
 
-  parent_real_height = fo_area_spanning_table_cell_get_real_height (parent);
-  parent_real_available_height = fo_area_get_available_height (parent);
+  gfloat parent_real_available_height =
+    fo_area_get_available_height (parent);
 
   g_list_foreach (FO_AREA_SPANNING_TABLE_CELL (parent)->proxies,
 		  fo_area_spanning_table_cell_accumulate_proxy_available_height,
 		  &parent_real_available_height);
-  rows_spanned = FO_AREA_SPANNING_TABLE_CELL (parent)->rows_spanned;
+  gint rows_spanned = FO_AREA_SPANNING_TABLE_CELL (parent)->rows_spanned;
 
 #if defined(LIBFO_DEBUG) && 1
   fo_area_spanning_table_cell_debug_dump_heights (parent);
@@ -531,6 +533,8 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 	     parent_use_height);
 #endif
 
+  /* The available height may be less than what is required (or what
+     is allowed by the FoFo). */
   if (parent_real_available_height < parent_use_height)
     {
       gfloat remaining_height = parent_use_height;
@@ -545,7 +549,9 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 	   (row_number <= rows_spanned - 1) && remaining_height > 0;
 	   row_number++)
 	{
-	  FoArea *proxy = fo_area_spanning_table_cell_get_nth_row_proxy (parent, row_number);
+	  FoArea *proxy =
+	    fo_area_spanning_table_cell_get_nth_row_proxy (parent,
+							   row_number);
 
 	  fo_area_area_set_height (proxy,
 				   fo_area_get_available_height (proxy));
@@ -555,30 +561,33 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 
       if (remaining_height > 0)
 	{
-	  FoArea *last_proxy = fo_area_spanning_table_cell_get_nth_row_proxy (parent, rows_spanned);
+	  FoArea *last_proxy =
+	    fo_area_spanning_table_cell_get_nth_row_proxy (parent,
+							   rows_spanned);
 
 	  fo_area_area_set_height (last_proxy, remaining_height);
 	  last_proxy = fo_area_size_request (last_proxy);
 	}
-      /*
-      fo_area_area_set_height (parent, parent_use_height);
-      parent = fo_area_size_request (parent);
-      parent_available_height = fo_area_get_available_height (parent);
-      */
     }
 
+  /* Work out the total child height again because this area's parent
+     area may have adjusted the children. */
   total_child_height = 0;
   fo_area_children_foreach (parent,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
 			    &total_child_height);
 
-  parent_target_height = total_child_height +
+  /* Work out the new target height. */
+  parent_target_height =
+    total_child_height +
     fo_area_area_get_border_before (parent) +
     fo_area_area_get_padding_before (parent) +
     fo_area_area_get_padding_after (parent) +
     fo_area_area_get_border_after (parent);
 
+  /* In the absence of 'display-align', the first child is placed just
+     inside the borders and padding of this table cell. */
   fo_area_set_next_x (parent,
 		      fo_area_area_get_border_start (parent) +
 		      fo_area_area_get_padding_start (parent));
@@ -588,23 +597,18 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 
   if (parent_target_height <= parent_available_height)
     {
+      /* Since the children all fit within the allowed height, adjust
+	 their sizes and positions in sequence. */
       fo_area_children_foreach (parent,
 				G_TRAVERSE_ALL,
 				&fo_area_size_adjust,
 				NULL);
-
-      return_child = child;
-
-      while ((return_child->next_part != NULL) &&
-	     (return_child->next_part != child_original_next_part))
-	{
-	  return_child = return_child->next_part;
-	}
-
-      return return_child;
     }
   else
     {
+      /* Since the children don't all fit, place the ones that fit in
+	 the available height, and split at or before the allowed
+	 height. */
       fo_area_children_foreach (parent,
 				G_TRAVERSE_ALL,
 				&fo_area_set_or_split,
@@ -615,19 +619,20 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 		 fo_object_debug_sprintf (fo_area_last_child (parent)),
 		 fo_object_debug_sprintf (fo_area_last_child (parent)->generated_by));
 #endif
-      return_child = child;
-
-      while ((return_child->next_part != NULL) &&
-	     (return_child->next_part != child_original_next_part))
-	{
-	  return_child = return_child->next_part;
-	}
-
-      return return_child;
-      /*
-      return fo_area_last_child (parent);
-      */
     }
+
+  /* The result will be the current child unless the child has been
+     split, in which case the result is the portion after the last
+     split. */
+  return_child = child;
+
+  while ((return_child->next_part != NULL) &&
+	 (return_child->next_part != child_original_next_part))
+    {
+      return_child = return_child->next_part;
+    }
+
+  return return_child;
 }
 
 /* return the new area containing what comes after the split */
