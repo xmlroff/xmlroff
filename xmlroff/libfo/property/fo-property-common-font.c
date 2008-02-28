@@ -2,7 +2,7 @@
  * fo-property-common-font.c: Common font property functions
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -18,7 +18,7 @@
 
 GList*
 fo_property_common_font_get_pango_attrs (FoProperty *font_family,
-					 /* No font-selection-family */
+					 /* No font-selection-strategy */
 					 FoProperty *font_size,
 					 FoProperty *font_stretch,
 					 /* No font-size-adjust */
