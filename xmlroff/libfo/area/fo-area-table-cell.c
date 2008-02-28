@@ -161,12 +161,10 @@ void
 fo_area_table_cell_size_adjust (FoArea  *area,
 				gpointer data G_GNUC_UNUSED)
 {
-  FoArea *table_cell;
-
   g_return_if_fail (FO_IS_AREA (area));
   g_return_if_fail (FO_IS_AREA_TABLE_CELL (fo_area_parent (area)));
 
-  table_cell = fo_area_parent (area);
+  FoArea *table_cell = fo_area_parent (area);
 
   fo_area_area_set_x (area,
 		      fo_area_get_next_x (table_cell) +
@@ -257,49 +255,53 @@ fo_area_table_cell_set_or_split (FoArea  *area,
 FoArea*
 fo_area_table_cell_size_request (FoArea *child)
 {
-  FoArea *table_cell;
-  FoArea *return_child;
-  FoArea *child_original_next_part;
-  FoDatatype *fo_cell_bpdim;
-  gfloat table_cell_child_available_bpdim;
-  gfloat table_cell_use_height = 0.0;
-  gfloat table_cell_target_height = 0.0;
-  gfloat child_height;
-  gfloat total_child_height = 0.0;
-
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
   g_return_val_if_fail (!FO_AREA_IS_ROOT (child), NULL);
   g_return_val_if_fail (fo_area_parent (child) != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_TABLE_CELL (fo_area_parent (child)), NULL);
 
-  child_original_next_part = child->next_part;
+  /* The area that is the return value of this procedure. */
+  FoArea *return_child;
+  /* Used when determining the return value. */
+  FoArea *child_original_next_part = child->next_part;
 
-  child_height = fo_area_area_get_height (child);
-
-  table_cell = fo_area_parent (child);
-  table_cell_child_available_bpdim =
+  /* The table cell containing the area that issued this request. */
+  FoArea *table_cell = fo_area_parent (child);
+  /* The length available for all children of this table cell. */
+  gfloat table_cell_child_available_bpdim =
     fo_area_get_child_available_bpdim (table_cell);
 
+  /* Find the total height of all children. */
+  gfloat total_child_height = 0.0;
   fo_area_children_foreach (table_cell,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
 			    &total_child_height);
 
-  table_cell_target_height = total_child_height +
+  /* Ideally, this table cell would be just big enough for its borders
+     and padding plus the height needed for its children. */
+  gfloat table_cell_target_height =
+    total_child_height +
     fo_area_area_get_border_before (table_cell) +
     fo_area_area_get_padding_before (table_cell) +
     fo_area_area_get_padding_after (table_cell) +
     fo_area_area_get_border_after (table_cell);
 
-  fo_cell_bpdim =
+  /* The FoFo that generated this table cell may have set the allowed
+     height. */
+  FoDatatype *fo_cell_bpdim =
     fo_property_get_value (fo_table_cell_get_block_progression_dimension (table_cell->generated_by));
 
+  gfloat table_cell_use_height = 0.0;
   if (FO_IS_LENGTH_RANGE (fo_cell_bpdim))
     {
-      FoDatatype *min_datatype = fo_length_range_get_minimum (fo_cell_bpdim);
-      FoDatatype *opt_datatype = fo_length_range_get_optimum (fo_cell_bpdim);
-      FoDatatype *max_datatype = fo_length_range_get_maximum (fo_cell_bpdim);
+      FoDatatype *min_datatype =
+	fo_length_range_get_minimum (fo_cell_bpdim);
+      FoDatatype *opt_datatype =
+	fo_length_range_get_optimum (fo_cell_bpdim);
+      FoDatatype *max_datatype =
+	fo_length_range_get_maximum (fo_cell_bpdim);
 
       if (FO_IS_LENGTH (min_datatype) &&
 	  table_cell_target_height <= fo_length_get_value (min_datatype))
@@ -341,12 +343,19 @@ fo_area_table_cell_size_request (FoArea *child)
     }
   else
     {
+      /* The 'block_progression_dimension' property should only ever
+	 be a length-range. */
       g_assert_not_reached ();
     }
 
+  /* The available height may be less than what is required (or what
+     is allowed by the FoFo). */
   if (table_cell_child_available_bpdim < table_cell_use_height)
     {
-      fo_area_area_set_height (table_cell, table_cell_use_height);
+      /* Set the height to what we want, and then let the parent area
+	 work out what the available height should be. */
+      fo_area_area_set_height (table_cell,
+			       table_cell_use_height);
       table_cell = fo_area_size_request (table_cell);
 
       /* The row will have set this cell's available height.
@@ -354,17 +363,7 @@ fo_area_table_cell_size_request (FoArea *child)
          the available height may have been more than requested. */
       fo_area_area_set_height (table_cell,
 			       fo_area_get_available_height (table_cell));
-      /*
-      table_cell_child_available_ipdim =
-	MAX (fo_area_get_available_width (table_cell) -
-	     fo_area_area_get_border_start (table_cell) -
-	     fo_area_area_get_padding_start (table_cell) -
-	     fo_area_area_get_padding_end (table_cell) -
-	     fo_area_area_get_border_end (table_cell),
-	     0);
-      fo_area_set_child_available_ipdim (table_cell,
-					 table_cell_child_available_ipdim);
-      */
+
       table_cell_child_available_bpdim =
 	MAX (fo_area_get_available_height (table_cell) -
 	     fo_area_area_get_border_before (table_cell) -
@@ -376,12 +375,15 @@ fo_area_table_cell_size_request (FoArea *child)
 					 table_cell_child_available_bpdim);
     }
 
-  total_child_height = 0;
+  /* Work out the total child height again because the parent area may
+     have adjusted the children. */
+  total_child_height = 0.0;
   fo_area_children_foreach (table_cell,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
 			    &total_child_height);
 
+  /* Work out the new target height. */
   table_cell_target_height =
     total_child_height +
     fo_area_area_get_border_before (table_cell) +
@@ -389,6 +391,8 @@ fo_area_table_cell_size_request (FoArea *child)
     fo_area_area_get_padding_after (table_cell) +
     fo_area_area_get_border_after (table_cell);
 
+  /* In the absence of 'display-align', the first child is placed just
+     inside the borders and padding of this table cell. */
   fo_area_set_next_x (table_cell,
 		      fo_area_area_get_border_start (table_cell) +
 		      fo_area_area_get_padding_start (table_cell));
@@ -398,23 +402,18 @@ fo_area_table_cell_size_request (FoArea *child)
 
   if (table_cell_target_height <= table_cell_child_available_bpdim)
     {
+      /* Since the children all fit within the allowed height, adjust
+	 their sizes and positions in sequence. */
       fo_area_children_foreach (table_cell,
 				G_TRAVERSE_ALL,
 				&fo_area_table_cell_size_adjust,
 				NULL);
-
-      return_child = child;
-
-      while ((return_child->next_part != NULL) &&
-	     (return_child->next_part != child_original_next_part))
-	{
-	  return_child = return_child->next_part;
-	}
-
-      return return_child;
     }
   else
     {
+      /* Since the children don't all fit, place the ones that fit in
+	 the available height, and split at or before the allowed
+	 height. */
       fo_area_children_foreach (table_cell,
 				G_TRAVERSE_ALL,
 				&fo_area_table_cell_set_or_split,
@@ -425,19 +424,20 @@ fo_area_table_cell_size_request (FoArea *child)
 		 fo_object_debug_sprintf (fo_area_last_child (table_cell)),
 		 fo_object_debug_sprintf (fo_area_last_child (table_cell)->generated_by));
 #endif
-      return_child = child;
-
-      while ((return_child->next_part != NULL) &&
-	     (return_child->next_part != child_original_next_part))
-	{
-	  return_child = return_child->next_part;
-	}
-
-      return return_child;
-      /*
-      return fo_area_last_child (table_cell);
-      */
     }
+
+  /* The result will be the current child unless the child has been
+     split, in which case the result is the portion after the last
+     split. */
+  return_child = child;
+
+  while ((return_child->next_part != NULL) &&
+	 (return_child->next_part != child_original_next_part))
+    {
+      return_child = return_child->next_part;
+    }
+
+  return return_child;
 }
 
 /* return the new area containing what comes after the split */
