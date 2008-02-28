@@ -375,8 +375,8 @@ fo_area_table_cell_size_request (FoArea *child)
 					 table_cell_child_available_bpdim);
     }
 
-  /* Work out the total child height again because the parent area may
-     have adjusted the children. */
+  /* Work out the total child height again because this area's parent
+     area may have adjusted the children. */
   total_child_height = 0.0;
   fo_area_children_foreach (table_cell,
 			    G_TRAVERSE_ALL,
@@ -402,6 +402,42 @@ fo_area_table_cell_size_request (FoArea *child)
 
   if (table_cell_target_height <= table_cell_child_available_bpdim)
     {
+      FoDatatype *fo_cell_display_align =
+	fo_property_get_value (fo_table_cell_get_display_align (table_cell->generated_by));
+
+      FoEnumEnum display_align =
+	fo_enum_get_value (fo_cell_display_align);
+
+      gfloat next_y;
+      switch (display_align)
+	{
+	case FO_ENUM_ENUM_AUTO:
+	  /* Treat as 'before' while 'relative-align' is
+	     unimplemented. */
+	case FO_ENUM_ENUM_BEFORE:
+	  next_y =
+	    - (fo_area_area_get_border_before (table_cell) +
+	       fo_area_area_get_padding_before (table_cell));
+	  break;
+	case FO_ENUM_ENUM_CENTER:
+	  next_y =
+	    - (fo_area_area_get_border_before (table_cell) +
+	       fo_area_area_get_padding_before (table_cell) +
+	       (table_cell_child_available_bpdim -
+		total_child_height) / 2.0);
+	  break;
+	case FO_ENUM_ENUM_AFTER:
+	  next_y =
+	    - (fo_area_area_get_border_before (table_cell) +
+	       fo_area_area_get_padding_before (table_cell) +
+	       (table_cell_child_available_bpdim -
+		total_child_height));
+	  break;
+	default:
+	  g_assert_not_reached ();
+	}
+      fo_area_set_next_y (table_cell,
+			  next_y);
       /* Since the children all fit within the allowed height, adjust
 	 their sizes and positions in sequence. */
       fo_area_children_foreach (table_cell,
