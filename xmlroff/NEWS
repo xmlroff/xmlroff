@@ -1,3 +1,14 @@
+Changes between 0.5.4 and 0.5.5
+
+ * Fixed cell borders on spanned table cells (#93)
+ * Fixed cell borders when last cell in row is shorter (#101)
+ * Fixed cell placement when multiple intrusions from
+   previous row (#108)
+ * Implemented 'display-align' for fo:table-cell (#107)
+
+ All xmlroff 0.5.5 tickets are listed at
+ http://xmlroff.org/query?milestone=xmlroff+0.5.5
+
 Changes between 0.5.3 and 0.5.4
 
  * Fixed compilation problem if CUnit not present (#100)
