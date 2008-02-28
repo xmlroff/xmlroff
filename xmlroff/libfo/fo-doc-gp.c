@@ -86,7 +86,6 @@ static void          fo_doc_gp_rect_filled      (FoDoc        *fo_doc,
 						 gdouble        height);
 static void          fo_doc_gp_fill             (FoDoc        *fo_doc);
 static void          fo_doc_gp_stroke           (FoDoc        *fo_doc);
-static void          fo_doc_gp_fill_stroke      (FoDoc        *fo_doc);
 static void          fo_doc_gp_place_image      (FoDoc        *fo_doc,
 						 FoImage      *fo_image,
 						 gdouble        x,
@@ -255,7 +254,6 @@ fo_doc_gp_base_init (FoDocGPClass *klass)
   fo_doc_class->rect_filled      = fo_doc_gp_rect_filled;
   fo_doc_class->fill             = fo_doc_gp_fill;
   fo_doc_class->stroke           = fo_doc_gp_stroke;
-  fo_doc_class->fill_stroke      = fo_doc_gp_fill_stroke;
   fo_doc_class->place_image      = fo_doc_gp_place_image;
   fo_doc_class->render_layout_lines = fo_doc_gp_render_layout_lines;
   fo_doc_class->render_layout       = fo_doc_gp_render_layout;
@@ -1107,21 +1105,16 @@ fo_doc_gp_stroke (FoDoc *fo_doc)
 }
 
 /**
- * fo_doc_gp_fill_stroke:
- * @fo_doc: #FoDoc.
+ * fo_doc_gp_place_image:
+ * @fo_doc: 
+ * @fo_image: 
+ * @x: 
+ * @y: 
+ * @xscale: 
+ * @yscale: 
  * 
- * Fill and stroke the path of @fo_doc with the current fill and
- * stroke colors.
+ * 
  **/
-void
-fo_doc_gp_fill_stroke (FoDoc *fo_doc)
-{
-  g_return_if_fail (FO_IS_DOC_GP (fo_doc));
-  g_return_if_fail (FO_DOC_GP (fo_doc)->context != NULL);
-
-  /*PDF_fill_stroke (FO_DOC_GP (fo_doc)->context);*/
-}
-
 static void
 fo_doc_gp_place_image (FoDoc   *fo_doc,
 		       FoImage *fo_image,

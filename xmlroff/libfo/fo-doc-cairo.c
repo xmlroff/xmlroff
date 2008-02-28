@@ -85,7 +85,6 @@ static void          fo_doc_cairo_rect_filled         (FoDoc       *fo_doc,
 						       gdouble      height);
 static void          fo_doc_cairo_fill                (FoDoc       *fo_doc);
 static void          fo_doc_cairo_stroke              (FoDoc       *fo_doc);
-static void          fo_doc_cairo_fill_stroke         (FoDoc       *fo_doc);
 static void          fo_doc_cairo_place_image         (FoDoc       *fo_doc,
 						       FoImage     *fo_image,
 						       gdouble      x,
@@ -212,7 +211,6 @@ fo_doc_cairo_base_init (FoDocCairoClass *klass)
   fo_doc_class->rect_filled         = fo_doc_cairo_rect_filled;
   fo_doc_class->fill                = fo_doc_cairo_fill;
   fo_doc_class->stroke              = fo_doc_cairo_stroke;
-  fo_doc_class->fill_stroke         = fo_doc_cairo_fill_stroke;
   fo_doc_class->place_image         = fo_doc_cairo_place_image;
   fo_doc_class->render_layout_lines = fo_doc_cairo_render_layout_lines;
   fo_doc_class->render_layout       = fo_doc_cairo_render_layout;
@@ -998,21 +996,16 @@ fo_doc_cairo_stroke (FoDoc *fo_doc)
 }
 
 /**
- * fo_doc_cairo_fill_stroke:
- * @fo_doc: #FoDoc.
+ * fo_doc_cairo_place_image:
+ * @fo_doc: 
+ * @fo_image: 
+ * @x: 
+ * @y: 
+ * @xscale: 
+ * @yscale: 
  * 
- * Fill and stroke the path of @fo_doc with the current fill and
- * stroke colors.
+ * 
  **/
-void
-fo_doc_cairo_fill_stroke (FoDoc *fo_doc)
-{
-  g_return_if_fail (FO_IS_DOC_CAIRO (fo_doc));
-  g_return_if_fail (FO_DOC_CAIRO (fo_doc)->cr != NULL);
-
-  /*PDF_fill_stroke (FO_DOC_CAIRO (fo_doc)->cr);*/
-}
-
 static void
 fo_doc_cairo_place_image (FoDoc   *fo_doc,
 			  FoImage *fo_image,

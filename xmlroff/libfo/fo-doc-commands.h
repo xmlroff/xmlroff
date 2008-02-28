@@ -72,7 +72,6 @@ void          fo_doc_rect_filled    (FoDoc        *fo_doc,
 				     gdouble       height);
 void          fo_doc_fill           (FoDoc        *fo_doc);
 void          fo_doc_stroke         (FoDoc        *fo_doc);
-void          fo_doc_fill_stroke    (FoDoc        *fo_doc);
 
 void          fo_doc_place_image     (FoDoc        *fo_doc,
 				      FoImage      *fo_image,

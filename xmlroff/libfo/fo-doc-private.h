@@ -96,7 +96,6 @@ struct _FoDocClass
 					  gdouble       height);
   void           (* fill)                (FoDoc        *fo_doc);
   void           (* stroke)              (FoDoc        *fo_doc);
-  void           (* fill_stroke)         (FoDoc        *fo_doc);
   void           (* place_image)         (FoDoc        *fo_doc,
 					  FoImage      *fo_image,
 					  gdouble       x,

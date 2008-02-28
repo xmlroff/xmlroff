@@ -92,7 +92,6 @@ static void          fo_doc_rect_filled_default     (FoDoc        *fo_doc,
 						     gdouble        height);
 static void          fo_doc_fill_default            (FoDoc        *fo_doc);
 static void          fo_doc_stroke_default          (FoDoc        *fo_doc);
-static void          fo_doc_fill_stroke_default     (FoDoc        *fo_doc);
 static void          fo_doc_place_image_default     (FoDoc        *fo_doc,
 						     FoImage      *fo_image,
 						     gdouble        x,
@@ -202,7 +201,6 @@ fo_doc_base_init (FoDocClass *klass)
   klass->rect_filled         = fo_doc_rect_filled_default;
   klass->fill                = fo_doc_fill_default;
   klass->stroke              = fo_doc_stroke_default;
-  klass->fill_stroke         = fo_doc_fill_stroke_default;
   klass->place_image         = fo_doc_place_image_default;
   klass->render_layout_lines = fo_doc_render_layout_lines_default;
   klass->render_layout       = fo_doc_render_layout_default;
@@ -1412,37 +1410,6 @@ void
 fo_doc_stroke (FoDoc        *fo_doc)
 {
   FO_DOC_GET_CLASS (fo_doc)->stroke (fo_doc);
-}
-
-/**
- * fo_doc_fill_stroke_default:
- * @fo_doc: #FoDoc.
- * 
- * Fill and stroke the path of @fo_doc with the current fill and
- * stroke colors.
- **/
-void
-fo_doc_fill_stroke_default (FoDoc        *fo_doc)
-{
-#if defined(LIBFO_DEBUG)
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 _("%s does not have a 'fill_stroke' function."),
-	 fo_object_sprintf (fo_doc));
-#endif
-}
-
-/**
- * fo_doc_fill_stroke:
- * @fo_doc: #FoDoc.
- * 
- * Fill and stroke the path of @fo_doc with the current fill and
- * stroke colors.
- **/
-void
-fo_doc_fill_stroke (FoDoc *fo_doc)
-{
-  FO_DOC_GET_CLASS (fo_doc)->fill_stroke (fo_doc);
 }
 
 /**
