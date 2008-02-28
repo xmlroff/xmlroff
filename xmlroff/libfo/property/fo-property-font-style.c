@@ -450,8 +450,8 @@ fo_property_font_style_get_initial (void)
 static PangoStyle
 fo_property_font_style_to_pango_style (FoProperty *property)
 {
-  gint font_style;
-  gint pango_font_style = PANGO_STYLE_NORMAL;
+  FoEnumEnum font_style;
+  PangoStyle pango_font_style = PANGO_STYLE_NORMAL;
 
   /* No 'invalid' font style so default to 'normal' if fail */
   g_return_val_if_fail (FO_IS_PROPERTY_FONT_STYLE (property),
