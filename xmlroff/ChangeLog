@@ -1,3 +1,102 @@
+02/28/08 21:45:35 tkg [352]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for xmlroff 0.5.5.
+
+02/28/08 21:41:28 tkg [351]
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Removed fo_doc_fill_stroke (re #106).
+
+02/28/08 21:32:15 tkg [350]
+	Changes in automatically generated doc files.
+
+02/28/08 21:31:22 tkg [349]
+	* trunk/xmlroff/docs/debugging.xml (modified)
+	Added section about using G_DEBUG to force core dump on error.
+
+02/28/08 21:08:22 tkg [348]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-commands.h (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	Removed unused fo_doc_fill_stroke().  Closes #106.
+
+02/28/08 21:04:41 tkg [347]
+	* trunk/xmlroff/libfo/fo/fo-table.c (modified)
+	Handling setting span_info_next_column to avoid columns already
+	filled by spans from previous row.  Closes #108.
+
+02/28/08 17:12:54 tkg [346]
+	* trunk/xmlroff/libfo/fo/fo-flow-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-region-body-area.c (modified)
+	Indecision about which Fo generates area for fo:flow.  Re #5.
+
+02/28/08 17:06:00 tkg [344]
+	* trunk/xmlroff/libfo/area/fo-area-spanning-table-cell.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-table-cell.c (modified)
+	Implemented 'display-align' for spanning and non-spanning fo:table-
+	cell.  Closes #107.
+
+02/28/08 16:03:53 tkg [343]
+	* trunk/xmlroff/libfo/area/fo-area-spanning-table-cell.c (modified)
+	Added comments in fo_area_spanning_table_cell_size_request().
+
+02/28/08 14:40:29 tkg [342]
+	* trunk/xmlroff/libfo/area/fo-area-table-cell.c (modified)
+	Added comments in fo_area_table_cell_size_request().
+
+02/28/08 12:53:01 tkg [341]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	Tinkering with image placement.  (Re #42).
+
+02/28/08 12:51:24 tkg [340]
+	* trunk/xmlroff/libfo/property/fo-property-font-style.c (modified)
+	Changed two gint to correct enum names.
+
+02/28/08 12:49:50 tkg [339]
+	* trunk/xmlroff/libfo/property/fo-property-common-font.c (modified)
+	Fixed a typo.
+
+02/28/08 12:49:19 tkg [338]
+	* trunk/xmlroff/libfo/area/fo-area-table-row.c (modified)
+	Added a comment.
+
+02/28/08 12:48:51 tkg [337]
+	* trunk/xmlroff/libfo/area/fo-area-table-cell.c (modified)
+	Setting cell height to available height as set by row.  Closes #101.
+
+02/27/08 11:39:38 tkg [335]
+	* trunk/xmlroff/libfo/area-to-pdf.c (modified)
+	Merging in [334]: Passing explicit width and height when drawing
+	borders improves spanning table cells (Re #93).  Using gdoubles
+	instead of gfloats.
+
+02/06/08 15:04:30 tkg [310]
+	* trunk/xmlroff/libfo/fo-font-desc.c (modified)
+	* trunk/xmlroff/libfo/fo-font-desc.h (modified)
+	* trunk/xmlroff/libfo/fo-utils.h (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-variant.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-variant.h (modified)
+	Changed font variant to use enums in fo-enum.c.  (re #58).
+
+02/06/08 15:01:51 tkg [309]
+	* trunk/xmlroff/configure.ac (modified)
+	Upped version to 0.5.5.
+
+02/06/08 15:00:13 tkg [308]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	Reworked fo_doc_cairo_place_image() borrowing ideas from gdkcairo.c
+	(re #42).  Image colours are correct, but image placement and scaling
+	are still wrong.
+
+02/04/08 14:14:48 tkg [306]
+	* trunk/xmlroff/ChangeLog (modified)
+	Updated for 0.5.4.
+
+01/31/08 19:34:09 tkg [298]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for 0.5.4.
+
 01/11/08 19:40:56 tkg [286]
 	* trunk/xmlroff/Makefile.am (modified)
 	Further fix for when CUnit not required (re #100).
