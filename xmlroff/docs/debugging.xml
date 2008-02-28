@@ -100,6 +100,18 @@
 
 </section>
 
+<section id="fatal-critical">
+<title>Aborting on critical log message</title>
+
+<para>xmlroff often gives "CRITICAL" error messages when something goes wrong.  For example:</para>
+
+<literallayout><computeroutput>(xmlroff:4384): libfo-CRITICAL **:
+fo_area_area_split_before_height_check: assertion `max_height > 0'
+failed</computeroutput></literallayout>
+
+<para>If you want to abort on the critical error so you can use a debugger on the core file, according to <ulink url="http://library.gnome.org/devel/glib/stable/glib-running.html">http://library.gnome.org/devel/glib/stable/glib-running.html</ulink>, if you set G_DEBUG=fatal-critical, xmlroff should abort.</para>
+</section>
+
 </section>
 
 <section id="using-gdb">
@@ -123,7 +135,7 @@
 
 <para>By going up enough stack frames, you can usually work out what property or what FO experienced the error.</para>
 
-<para>Note that you should enable g_log again if you are going to interactively call any functions that use g_log.</para>
+<para>Note that you should disable the breakpoint on g_log if you are going to interactively call any functions that use g_log.</para>
 
 </section>
 
@@ -154,5 +166,5 @@
 </variablelist>
 </section>
 
-  </section>
+</section>
 </section>
