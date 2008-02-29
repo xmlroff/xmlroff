@@ -146,6 +146,20 @@ fo_table_part_debug_dump_properties (FoFo *fo, gint depth)
   FO_FO_CLASS (parent_class)->debug_dump_properties (fo, depth + 1);
 }
 
+/**
+ * fo_table_part_children_properties_resolve:
+ * @this_fo: 
+ * @this_fo_parent_area: 
+ * @new_area: 
+ * @prop_eval_hash: 
+ * @fo_doc: 
+ * @continue_after_error: 
+ * @debug_level: 
+ * @warning_mode: 
+ * @error: 
+ * 
+ * 
+ **/
 void
 fo_table_part_children_properties_resolve (FoFo       *this_fo,
 					   FoArea     *this_fo_parent_area,
@@ -184,6 +198,14 @@ fo_table_part_children_properties_resolve (FoFo       *this_fo,
 
   fo_fo_resolve_property_attributes (FO_NODE (this_fo),
 				     &prop_context);
+
+  if (prop_context.error != NULL)
+    {
+      fo_object_log_or_propagate_error (FO_OBJECT (row_child),
+					error,
+					*prop_context.error);
+      return;
+    }
 
   area_new2_context.fo_doc               = fo_doc;
   area_new2_context.parent_area          = this_fo_parent_area;
