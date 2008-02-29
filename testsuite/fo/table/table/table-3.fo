@@ -12,6 +12,7 @@
     master-reference="first">
     <fo:flow flow-name="xsl-region-body" font-size="40pt">
       <fo:table inline-progression-dimension="100%" table-layout="fixed">
+        <fo:table-column column-width="100%"/>
         <fo:table-body>
           <fo:table-row>
             <fo:table-cell>
