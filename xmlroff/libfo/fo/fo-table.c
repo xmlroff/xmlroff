@@ -2342,7 +2342,6 @@ gboolean
 fo_table_validate_content (FoFo    *fo,
                            GError **error)
 {
-  FoNode *child_node;
   GError *tmp_error;
 
   g_return_val_if_fail (fo != NULL, TRUE);
@@ -2351,8 +2350,11 @@ fo_table_validate_content (FoFo    *fo,
 
   fo_fo_trim_whitespace_children (fo);
 
-  child_node = fo_node_first_child (FO_NODE (fo));
+  /* First, check that the structure is correct. */
+  FoNode *child_node = fo_node_first_child (FO_NODE (fo));
 
+  /* Need at least one table-body. */
+  gboolean have_table_body = FALSE;
   while (child_node)
     {
       FoNode *next_child = fo_node_next_sibling (child_node);
@@ -2396,6 +2398,8 @@ fo_table_validate_content (FoFo    *fo,
 	}
       else if (FO_IS_TABLE_BODY (child_node))
 	{
+	  have_table_body = TRUE;
+
 	  if (!next_child ||
 	      FO_IS_TABLE_BODY (next_child))
 	    {
@@ -2412,13 +2416,43 @@ fo_table_validate_content (FoFo    *fo,
 	}
     }
 
+    if (!have_table_body)
+    {
+      goto error;
+    }
+
+  /* Second, put any table-footer after the table-body (or bodies).*/
+  child_node = fo_node_first_child (FO_NODE (fo));
+
+  FoNode *footer = NULL;
+  while (child_node)
+    {
+      FoNode *next_child = fo_node_next_sibling (child_node);
+
+      if (FO_IS_TABLE_FOOTER (child_node))
+	{
+	  footer = child_node;
+	  fo_node_unlink (footer);
+	  break;
+	}
+
+      child_node = next_child;
+    }
+
+  if (footer != NULL)
+    {
+      fo_node_append (FO_NODE (fo),
+		      footer);
+    }
+
   return FALSE;
 
  error:
-  tmp_error = g_error_new (FO_FO_ERROR,
-			   FO_FO_ERROR_INVALID_CONTENT,
-			   _(fo_fo_error_messages[FO_FO_ERROR_INVALID_CONTENT]),
-			   fo_object_sprintf (FO_OBJECT (fo)));
+  tmp_error =
+    g_error_new (FO_FO_ERROR,
+		 FO_FO_ERROR_INVALID_CONTENT,
+		 _(fo_fo_error_messages[FO_FO_ERROR_INVALID_CONTENT]),
+		 fo_object_sprintf (FO_OBJECT (fo)));
 
   return fo_object_log_or_propagate_error (FO_OBJECT (fo),
 					   error,
