@@ -179,12 +179,11 @@ gboolean
 fo_marker_parent_validate_content (FoFo    *fo,
 				   GError **error)
 {
-  gboolean parent_result = FALSE;
-
   g_return_val_if_fail (FO_IS_MARKER_PARENT (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
 
-  parent_result = FO_FO_CLASS (parent_class)->validate_content (fo, error);
+  gboolean parent_result =
+    FO_FO_CLASS (parent_class)->validate_content (fo, error);
 
   if (parent_result == TRUE)
     {
