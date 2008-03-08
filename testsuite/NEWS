@@ -1,3 +1,14 @@
+Changes between 0.5.3 and 0.5.5:
+
+ * Added new tests for 'display-align' in fo:table-cell and tests for
+   tables
+
+ All xmlroff 0.5.5 tickets are listed at
+ http://xmlroff.org/query?milestone=xmlroff+0.5.5
+
+ All xmlroff 0.5.4 tickets are listed at
+ http://xmlroff.org/query?milestone=xmlroff+0.5.4
+
 Changes between 0.5.1 and 0.5.3:
 
  * Added new tests for 'linefeed-treatment' and 'white-space-collapse'
