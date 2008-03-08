@@ -1,3 +1,77 @@
+03/08/08 22:06:41 tkg [364]
+	* trunk/testsuite/NEWS (modified)
+	Updated for 0.5.5.
+
+02/29/08 11:21:34 tkg [359]
+	* trunk/testsuite/configure.ac (modified)
+	Upped version to 0.5.5.
+
+02/29/08 11:21:16 tkg [358]
+	* trunk/testsuite/fo/table/table/table-1.fo (modified)
+	* trunk/testsuite/fo/table/table/table-2.fo (modified)
+	* trunk/testsuite/fo/table/table/table-3.fo (modified)
+	Added missing fo:table-column.
+
+02/28/08 17:08:35 tkg [345]
+	* trunk/testsuite/property/area-alignment (added)
+	* trunk/testsuite/property/area-alignment/display-align (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-1.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-10.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-11.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-12.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-2.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-3.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-4.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-5.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-6.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-7.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-8.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/display-align-9.fo (added)
+	* trunk/testsuite/property/area-alignment/display-align/results (added)
+	* trunk/testsuite/testsuite.xml (modified)
+	Added fo:table-cell 'display-align' tests.  Re #107.
+
+02/28/08 12:29:23 tkg [336]
+	* trunk/testsuite/fo/table/table/table-5.fo (added)
+	* trunk/testsuite/fo/table/table/table-6.fo (added)
+	* trunk/testsuite/testsuite.xml (modified)
+	Added tests for #101. (Re #101).
+
+01/31/08 17:24:34 tkg [292]
+	* trunk/testsuite/configure.ac (modified)
+	Upped version to 0.5.4.
+
+01/31/08 17:14:41 tkg [290]
+	* trunk/testsuite/testsuite.xml (modified)
+	Fixed a wrong results file name.
+
+11/30/07 21:44:04 tkg [278]
+	* trunk/testsuite/NEWS (modified)
+	Updated for xmlroff 0.5.3.
+
+10/17/07 09:52:41 tkg [268]
+	Set svn:mime-type property.
+
+10/17/07 09:50:29 tkg [267]
+	Set svn:mime property.
+
+10/17/07 09:45:10 tkg [266]
+	Added and updated results files.
+
+10/17/07 09:35:34 tkg [265]
+	* trunk/testsuite/fo/table (added)
+	* trunk/testsuite/fo/table/table (added)
+	* trunk/testsuite/fo/table/table/results (added)
+	* trunk/testsuite/fo/table/table/table-1.fo (added)
+	* trunk/testsuite/fo/table/table/table-2.fo (added)
+	* trunk/testsuite/fo/table/table/table-3.fo (added)
+	* trunk/testsuite/fo/table/table/table-4.fo (added)
+	Table tests.
+
+10/11/07 20:05:39 tkg [261]
+	* trunk/testsuite/ChangeLog (modified)
+	Updated for 0.5.3.
+
 10/11/07 20:01:05 tkg [260]
 	* trunk/testsuite/multiple/minimal.fo (added)
 	The most minimal file that will format.
