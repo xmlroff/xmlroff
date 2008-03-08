@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testing framework],
-	[0.5.4],
+	[0.5.5],
 	[http://xmlroff.org/newticket?component=testing],
 	xmlroff-testing)
 
