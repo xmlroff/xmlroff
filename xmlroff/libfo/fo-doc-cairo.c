@@ -1237,9 +1237,9 @@ fo_doc_cairo_do_callbacks (cairo_t     *cr,
       baseline = pango_layout_iter_get_baseline (iter);
       
       fo_doc_cairo_do_line_callbacks (cr,
-				   line,
-				   x + logical_rect.x,
-				   y - baseline);
+				      line,
+				      x + logical_rect.x,
+				      y - baseline);
 
       if (line_number >= line_last)
 	{
@@ -1289,6 +1289,7 @@ fo_doc_cairo_render_layout_lines (FoDoc   *fo_doc,
     }
 
   gint line_last = fo_area_layout_get_line_last (area_layout);
+#if ENABLE_CLIP
   gdouble y2 =
       y1 - fo_area_layout_get_line_height (area_layout,
 					   line_last);
@@ -1296,28 +1297,27 @@ fo_doc_cairo_render_layout_lines (FoDoc   *fo_doc,
   gdouble x2 =
       x + fo_area_area_get_width (area_layout);
 
-#if ENABLE_CLIP
-  cairo_save (FO_DOC_CAIRO(fo_doc)->cr);
+  cairo_save (FO_DOC_CAIRO (fo_doc)->cr);
 
-  cairo_move_to (FO_DOC_CAIRO(fo_doc)->cr,
-		 x, FO_DOC_CAIRO(fo_doc)->page_height - y);
+  cairo_move_to (FO_DOC_CAIRO (fo_doc)->cr,
+		 x, FO_DOC_CAIRO (fo_doc)->page_height - y);
+  cairo_line_to (FO_DOC_CAIRO (fo_doc)->cr,
+		 x2, FO_DOC_CAIRO (fo_doc)->page_height - y);
+  cairo_line_to (FO_DOC_CAIRO (fo_doc)->cr,
+		 x2, FO_DOC_CAIRO (fo_doc)->page_height - y2);
   cairo_line_to (FO_DOC_CAIRO(fo_doc)->cr,
-		 x2, FO_DOC_CAIRO(fo_doc)->page_height - y);
-  cairo_line_to (FO_DOC_CAIRO(fo_doc)->cr,
-		 x2, FO_DOC_CAIRO(fo_doc)->page_height - y2);
-  cairo_line_to (FO_DOC_CAIRO(fo_doc)->cr,
-		 x, FO_DOC_CAIRO(fo_doc)->page_height - y2);
+		 x, FO_DOC_CAIRO (fo_doc)->page_height - y2);
 
-  cairo_clip (FO_DOC_CAIRO(fo_doc)->cr);
+  cairo_clip (FO_DOC_CAIRO (fo_doc)->cr);
 #endif
 
-  cairo_move_to (FO_DOC_CAIRO(fo_doc)->cr,
+  cairo_move_to (FO_DOC_CAIRO (fo_doc)->cr,
 		 x,
 		 FO_DOC_CAIRO (fo_doc)->page_height - y1);
-  pango_cairo_show_layout (FO_DOC_CAIRO(fo_doc)->cr,
+  pango_cairo_show_layout (FO_DOC_CAIRO (fo_doc)->cr,
 			   fo_layout_get_pango_layout (fo_area_layout_get_layout (area_layout)));
 
-  fo_doc_cairo_do_callbacks (FO_DOC_CAIRO(fo_doc)->cr,
+  fo_doc_cairo_do_callbacks (FO_DOC_CAIRO (fo_doc)->cr,
 			     fo_layout_get_pango_layout (fo_area_layout_get_layout (area_layout)),
 			     line_first,
 			     line_last,
@@ -1348,10 +1348,10 @@ fo_doc_cairo_render_layout (FoDoc   *fo_doc,
   g_return_if_fail (FO_DOC_CAIRO (fo_doc)->cr != NULL);
   g_return_if_fail (FO_IS_AREA_LAYOUT (area_layout));
 
-  cairo_move_to (FO_DOC_CAIRO(fo_doc)->cr,
+  cairo_move_to (FO_DOC_CAIRO (fo_doc)->cr,
 		 x,
 		 y);
-  pango_cairo_show_layout (FO_DOC_CAIRO(fo_doc)->cr,
+  pango_cairo_show_layout (FO_DOC_CAIRO (fo_doc)->cr,
 			   fo_layout_get_pango_layout (fo_area_layout_get_layout (area_layout)));
 
 }
@@ -1386,27 +1386,11 @@ fo_doc_cairo_debug_dump (FoObject *object,
 
   g_free (object_sprintf);
 
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 "%s    job:     %s",
-	 indent,
-	 object_sprintf);
-
-  g_free (object_sprintf);
-
   object_sprintf = fo_object_debug_sprintf (fo_doc_cairo->cr);
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 "%s    cr: %s",
-	 indent,
-	 object_sprintf);
-
-  g_free (object_sprintf);
-
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 "%s    config:  %s",
 	 indent,
 	 object_sprintf);
 
