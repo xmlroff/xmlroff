@@ -1339,6 +1339,7 @@ fo_doc_gp_render_layout_lines (FoDoc   *fo_doc,
     }
 
   gint line_last = fo_area_layout_get_line_last (area_layout);
+#if ENABLE_CLIP
   gdouble y2 =
       y1 - fo_area_layout_get_line_height (area_layout,
 					   line_last);
@@ -1346,7 +1347,6 @@ fo_doc_gp_render_layout_lines (FoDoc   *fo_doc,
   gdouble x2 =
       x + fo_area_area_get_width (area_layout);
 
-#if ENABLE_CLIP
   gnome_print_gsave (FO_DOC_GP(fo_doc)->context);
 
   gnome_print_moveto (FO_DOC_GP(fo_doc)->context,
