@@ -2,7 +2,7 @@
  * fo-area-layout-private.h: Private information for layout area objects
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * !See COPYING for the status of this software.
  */
@@ -11,7 +11,6 @@
 #define __FO_AREA_LAYOUT_PRIVATE_H__
 
 #include <pango/pango.h>
-#include <libfo/area/fo-area-area.h>
 #include <libfo/area/fo-area-area-private.h>
 
 G_BEGIN_DECLS
