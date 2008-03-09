@@ -10,7 +10,6 @@
 #include <fo-inline-fo.h>
 #include <area/fo-area-area.h>
 #include <area/fo-area-layout.h>
-#include <area/fo-area-layout-private.h>
 #include <fo-text.h>
 #include <fo-block-area.h>
 #include <fo-block-private.h>
@@ -195,64 +194,36 @@ fo_block_area_new (FoFo *block,
 		   FoArea **new_area,
 		   guint debug_level)
 {
-  FoFontDesc *font_desc;
-  FoLayout *fo_layout;
-  FoRectangle logical;
-  /* FIXME: should be FO-specific dir enum */
-  PangoDirection base_dir;
-  FoDatatype *start_indent_datatype, *end_indent_datatype;
-  gfloat parent_child_available_ipdim;
-  gfloat parent_child_available_bpdim;
-  gfloat x, y;
-  gfloat border_start_width, border_end_width, border_before_width;
-  gfloat border_after_width, padding_start, padding_end;
-  gfloat padding_before, padding_after;
-  gfloat start_indent, end_indent;
-  gfloat space_before, space_after;
-  gfloat layout_width;
-  gfloat text_indent;
-  gfloat line_height;
-  GString *text = g_string_new (NULL);
-  GList *attr_glist = NULL;
-  GSList *line_heights = NULL;
-  gint line_count, line_index;
-  gint cumulative_height = 0;
-
   g_return_if_fail (block != NULL);
   g_return_if_fail (FO_IS_BLOCK (block));
   g_return_if_fail (FO_IS_DOC (fo_doc));
 
-  base_dir = fo_doc_get_base_dir (fo_doc);
-
-  parent_child_available_ipdim =
+  gfloat parent_child_available_ipdim =
     fo_area_get_child_available_ipdim (parent_area);
-  parent_child_available_bpdim =
-    fo_area_get_child_available_bpdim (parent_area);
-  x = fo_area_get_next_x (parent_area);
-  y = fo_area_get_next_y (parent_area);
+  gfloat x = fo_area_get_next_x (parent_area);
+  gfloat y = fo_area_get_next_y (parent_area);
 
-  *new_area = fo_area_layout_new ();
-
-  border_start_width =
+  gfloat border_start_width =
     fo_length_get_value (fo_property_get_value (fo_block_get_border_start_width (block)));
-  border_end_width =
+  gfloat border_end_width =
     fo_length_get_value (fo_property_get_value (fo_block_get_border_end_width (block)));
-  border_before_width =
+  gfloat border_before_width =
     fo_length_get_value (fo_property_get_value (fo_block_get_border_before_width (block)));
-  border_after_width =
+  gfloat border_after_width =
     fo_length_get_value (fo_property_get_value (fo_block_get_border_after_width (block)));
 
-  padding_start =
+  gfloat padding_start =
     fo_length_get_value (fo_property_get_value (fo_block_get_padding_start (block)));
-  padding_end =
+  gfloat padding_end =
     fo_length_get_value (fo_property_get_value (fo_block_get_padding_end (block)));
-  padding_before =
+  gfloat padding_before =
     fo_length_get_value (fo_property_get_value (fo_block_get_padding_before (block)));
-  padding_after =
+  gfloat padding_after =
     fo_length_get_value (fo_property_get_value (fo_block_get_padding_after (block)));
 
-  start_indent_datatype =
+  FoDatatype *start_indent_datatype =
     fo_property_get_value (fo_block_get_start_indent (block));
+  gfloat start_indent;
   if (FO_IS_LENGTH (start_indent_datatype))
     {
       start_indent = fo_length_get_value (start_indent_datatype);
@@ -270,8 +241,9 @@ fo_block_area_new (FoFo *block,
 		 fo_area_area_get_width (parent_area));
 #endif
     }
-  end_indent_datatype =
+  FoDatatype *end_indent_datatype =
     fo_property_get_value (fo_block_get_end_indent (block));
+  gfloat end_indent;
   if (FO_IS_LENGTH (end_indent_datatype))
     {
       end_indent = fo_length_get_value (end_indent_datatype);
@@ -290,28 +262,19 @@ fo_block_area_new (FoFo *block,
 #endif
     }
 
-  space_before =
-    fo_length_get_value (fo_property_get_value (fo_block_get_space_before (block)));
-  space_after =
-    fo_length_get_value (fo_property_get_value (fo_block_get_space_after (block)));
-
-  line_height =
-    fo_length_get_value (fo_property_get_value (fo_block_get_line_height (block)));
-
-  text_indent =
-    fo_length_get_value (fo_property_get_value (fo_block_get_text_indent (block)));
-
-  layout_width = parent_child_available_ipdim -
+  gfloat layout_width =
+    parent_child_available_ipdim -
     (border_start_width + border_end_width + padding_start + padding_end +
      start_indent + end_indent);
 
-  font_desc =
+  FoFontDesc *font_desc =
     fo_font_desc_copy (fo_doc_get_font_desc (fo_doc));
 
-  gchar *font_family = fo_string_get_value (fo_property_get_value (fo_block_get_font_family (block)));
+  gchar *font_family =
+    fo_string_get_value (fo_property_get_value (fo_block_get_font_family (block)));
   fo_font_desc_set_family (font_desc, font_family);
   g_free (font_family);
-    
+
   fo_font_desc_set_size (font_desc,
     fo_length_get_value (fo_property_get_value (fo_block_get_font_size (block))));
   fo_font_desc_set_weight (font_desc,
@@ -323,7 +286,7 @@ fo_block_area_new (FoFo *block,
   fo_font_desc_set_variant (font_desc,
 			    fo_enum_get_value (fo_property_get_value (fo_block_get_font_variant (block))));
 
-  fo_layout = fo_doc_get_new_layout (fo_doc);
+  FoLayout *fo_layout = fo_doc_get_new_layout (fo_doc);
   fo_layout_set_width (fo_layout,
 		       layout_width);
 
@@ -331,16 +294,27 @@ fo_block_area_new (FoFo *block,
 					fo_enum_get_value (fo_property_get_value (fo_block_get_line_stacking_strategy (block))));
   fo_layout_set_font_desc (fo_layout,
 			   font_desc);
+
+  gfloat line_height =
+    fo_length_get_value (fo_property_get_value (fo_block_get_line_height (block)));
   fo_layout_set_line_height (fo_layout,
 			     line_height);
+
+  /* FIXME: should be FO-specific dir enum */
+  PangoDirection base_dir = fo_doc_get_base_dir (fo_doc);
   fo_layout_set_alignment (fo_layout,
 			   base_dir);
+
+  gfloat text_indent =
+    fo_length_get_value (fo_property_get_value (fo_block_get_text_indent (block)));
   fo_layout_set_indent (fo_layout,
 			text_indent);
   /*
     FIXME: Pango does not justify.
   fo_layout_set_justify (pango_layout, TRUE);
   */
+  GString *text = g_string_new (NULL);
+  GList *attr_glist = NULL;
   fo_block_area_get_text_attr_list2 (FO_FO (block),
 				     fo_doc,
 				     text,
@@ -366,12 +340,9 @@ fo_block_area_new (FoFo *block,
       fo_object_debug_dump (fo_layout, 0);
     }
 
-  line_count = fo_layout_get_line_count (fo_layout);
+  *new_area = fo_area_layout_new_with_layout (fo_layout);
 
-  FO_AREA_LAYOUT (*new_area)->layout = fo_layout;
-  FO_AREA_LAYOUT (*new_area)->line_first = 0;
-  FO_AREA_LAYOUT (*new_area)->line_last = line_count - 1;
-
+  FoRectangle logical;
   fo_layout_get_extents (fo_layout,
 			 &logical);
 
@@ -379,21 +350,6 @@ fo_block_area_new (FoFo *block,
 			   logical.height / PANGO_SCALE +
 			   border_before_width + padding_before +
 			   border_after_width + padding_after);
-
-  for (line_index = 0; line_index < line_count; line_index++)
-    {
-      pango_layout_line_get_extents (pango_layout_get_line (fo_layout_get_pango_layout (fo_layout),
-							    line_index),
-				     NULL,
-				     (PangoRectangle *) &logical);
-
-      cumulative_height += logical.height;
-      line_heights =
-	g_slist_prepend (line_heights, GINT_TO_POINTER (cumulative_height));
-    }
-
-  FO_AREA_LAYOUT (*new_area)->line_heights =
-    g_slist_reverse (line_heights);
 
   fo_area_area_set_width (*new_area,
 			  MAX (parent_child_available_ipdim -
@@ -412,7 +368,11 @@ fo_block_area_new (FoFo *block,
   fo_area_area_set_padding_start (*new_area, padding_start);
   fo_area_area_set_start_indent (*new_area, start_indent);
   fo_area_area_set_end_indent (*new_area, end_indent);
+  gfloat space_before =
+    fo_length_get_value (fo_property_get_value (fo_block_get_space_before (block)));
   fo_area_area_set_space_before (*new_area, space_before);
+  gfloat space_after =
+    fo_length_get_value (fo_property_get_value (fo_block_get_space_after (block)));
   fo_area_area_set_space_after (*new_area, space_after);
   fo_area_set_generated_by (*new_area, FO_FO (block));
   FO_FO (block)->areas = g_list_append (FO_FO (block)->areas, *new_area);
