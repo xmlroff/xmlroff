@@ -519,6 +519,7 @@ FO_AREA_INLINE_GET_CLASS
 FoAreaLayout
 FoAreaLayoutClass
 fo_area_layout_new
+fo_area_layout_new_with_layout
 fo_area_layout_set_layout
 fo_area_layout_get_layout
 fo_area_layout_set_line_first
