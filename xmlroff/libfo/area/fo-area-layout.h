@@ -2,7 +2,7 @@
  * fo-area-layout.h: Layout area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -26,19 +26,21 @@ typedef struct _FoAreaLayoutClass FoAreaLayoutClass;
 #define FO_AREA_LAYOUT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA_LAYOUT, FoAreaLayoutClass))
 
 
-GType      fo_area_layout_get_type        (void) G_GNUC_CONST;
-FoArea *   fo_area_layout_new             (void);
-FoLayout * fo_area_layout_get_layout      (FoArea   *fo_area_layout);
-void       fo_area_layout_set_layout      (FoArea   *fo_area_layout,
-					   FoLayout *new_layout);
-guint      fo_area_layout_get_line_first  (FoArea   *fo_area_layout);
-void       fo_area_layout_set_line_first  (FoArea   *fo_area_layout,
-					   guint     new_line_first);
-guint      fo_area_layout_get_line_last   (FoArea   *fo_area_layout);
-void       fo_area_layout_set_line_last   (FoArea   *fo_area_layout,
-					   guint      new_line_last);
-gdouble    fo_area_layout_get_line_height (FoArea   *fo_area_layout,
-					   gint      line_number);
+GType      fo_area_layout_get_type         (void) G_GNUC_CONST;
+FoArea *   fo_area_layout_new              (void);
+FoArea *   fo_area_layout_new_with_layout  (FoLayout *layout);
+FoLayout * fo_area_layout_get_layout       (FoArea   *fo_area_layout);
+void       fo_area_layout_set_layout       (FoArea   *fo_area_layout,
+					    FoLayout *new_layout);
+guint      fo_area_layout_get_line_first   (FoArea   *fo_area_layout);
+void       fo_area_layout_set_line_first   (FoArea   *fo_area_layout,
+					    guint     new_line_first);
+guint      fo_area_layout_get_line_last    (FoArea   *fo_area_layout);
+void       fo_area_layout_set_line_last    (FoArea   *fo_area_layout,
+					    guint     new_line_last);
+gdouble    fo_area_layout_get_line_height  (FoArea   *fo_area_layout,
+					    gint      line_number);
+
 G_END_DECLS
 
 #endif /* !__FO_AREA_LAYOUT_H__ */
