@@ -138,13 +138,14 @@ fo_area_layout_finalize (GObject *object)
   fo_area_layout = FO_AREA_LAYOUT (object);
 
   g_object_unref (fo_area_layout->layout);
+  g_slist_free (fo_area_layout->line_heights);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 /**
  * fo_area_layout_get_property:
- * @object:  GObject whose property will be retreived
+ * @object:  GObject whose property will be retrieved
  * @prop_id: Property ID assigned when property registered
  * @value:   GValue to set with property value
  * @pspec:   Parameter specification for this property type
@@ -153,9 +154,9 @@ fo_area_layout_finalize (GObject *object)
  **/
 void
 fo_area_layout_get_property (GObject         *object,
-			   guint            prop_id,
-			   GValue          *value,
-			   GParamSpec      *pspec)
+			     guint            prop_id,
+			     GValue          *value,
+			     GParamSpec      *pspec)
 {
   FoArea *fo_area;
 
@@ -182,9 +183,9 @@ fo_area_layout_get_property (GObject         *object,
  **/
 void
 fo_area_layout_set_property (GObject         *object,
-			   guint            prop_id,
-			   const GValue    *value,
-			   GParamSpec      *pspec)
+			     guint            prop_id,
+			     const GValue    *value,
+			     GParamSpec      *pspec)
 {
   FoArea *fo_area;
 
@@ -208,11 +209,30 @@ fo_area_layout_set_property (GObject         *object,
  * 
  * Return value: the new #FoAreaLayout
  **/
-FoArea*
+FoArea *
 fo_area_layout_new (void)
 {
   return FO_AREA (g_object_new (fo_area_layout_get_type (),
 				NULL));
+}
+
+/**
+ * fo_area_layout_new_with_layout:
+ * @layout: #FoLayout used by the new #FoAreaLayout
+ * 
+ * Creates a new #FoAreaLayout initialized with @layout.
+ * 
+ * Return value: the new #FoAreaLayout
+ **/
+FoArea *
+fo_area_layout_new_with_layout (FoLayout *layout)
+{
+  FoArea *fo_area_layout = fo_area_layout_new ();
+
+  fo_area_layout_set_layout (fo_area_layout,
+			     layout);
+
+  return fo_area_layout;
 }
 
 /**
@@ -223,7 +243,7 @@ fo_area_layout_new (void)
  *
  * Return value: The "layout" property value
 **/
-FoLayout*
+FoLayout *
 fo_area_layout_get_layout (FoArea *fo_area_layout)
 {
   g_return_val_if_fail (fo_area_layout != NULL, 0);
@@ -233,7 +253,7 @@ fo_area_layout_get_layout (FoArea *fo_area_layout)
 }
 
 /**
- * fo_area_area_set_layout:
+ * fo_area_layout_set_layout:
  * @fo_area_layout: The #FoAreaLayout object
  * @new_layout: The new "layout" property value
  * 
@@ -251,7 +271,37 @@ fo_area_layout_set_layout (FoArea   *fo_area_layout,
       g_object_unref (FO_AREA_LAYOUT (fo_area_layout)->layout);
     }
 
+  if (FO_AREA_LAYOUT (fo_area_layout)->line_heights != NULL)
+    {
+      g_slist_free (FO_AREA_LAYOUT (fo_area_layout)->line_heights);
+    }
+
   FO_AREA_LAYOUT (fo_area_layout)->layout = g_object_ref (new_layout);
+
+  gint cumulative_height = 0;
+  GSList *line_heights = NULL;
+  FoRectangle logical;
+  gint line_count = fo_layout_get_line_count (new_layout);
+  fo_area_layout_set_line_first (fo_area_layout,
+				 0);
+  fo_area_layout_set_line_last (fo_area_layout,
+				line_count - 1);
+  gint line_index;
+  for (line_index = 0; line_index < line_count; line_index++)
+    {
+      pango_layout_line_get_extents (pango_layout_get_line (fo_layout_get_pango_layout (new_layout),
+							    line_index),
+				     NULL,
+				     (PangoRectangle *) &logical);
+
+      cumulative_height += logical.height;
+      line_heights =
+	g_slist_prepend (line_heights, GINT_TO_POINTER (cumulative_height));
+    }
+
+  FO_AREA_LAYOUT (fo_area_layout)->line_heights =
+    g_slist_reverse (line_heights);
+
   /*g_object_notify (G_OBJECT (fo_area_layout), "layout");*/
 }
 
@@ -273,7 +323,7 @@ fo_area_layout_get_line_first (FoArea *fo_area_layout)
 }
 
 /**
- * fo_area_area_set_line_first:
+ * fo_area_layout_set_line_first:
  * @fo_area_layout: The #FoAreaLayout object
  * @new_line_first: The new "line_first" property value
  * 
@@ -387,7 +437,7 @@ fo_area_layout_debug_dump_properties (FoArea *area,
 }
 
 /**
- * fo_area_area_update_after_clone:
+ * fo_area_layout_update_after_clone:
  * @clone:    New object cloned from @original
  * @original: Original area object
  * 
@@ -428,7 +478,7 @@ fo_area_layout_update_after_clone (FoArea *clone,
  *
  * Return value: The part of @area spit from @area, or NULL if unsplit.
  **/
-FoArea*
+FoArea *
 fo_area_layout_split_before_height (FoArea *area, gfloat max_height)
 {
   FoAreaLayout *layout;
