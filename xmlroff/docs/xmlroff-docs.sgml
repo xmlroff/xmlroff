@@ -239,7 +239,7 @@
     </section>
   </chapter>
 
-  <chapter>
+  <chapter id="object-hierarchy">
     <title>Object Hierarchy</title>
     &index-Object-Tree;
   </chapter>
