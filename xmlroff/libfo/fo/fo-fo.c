@@ -1406,13 +1406,7 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
 					   FoWarningFlag warning_mode,
 					   GError      **error)
 {
-  FoNode *child_node;
   GError *tmp_error = NULL;
-  FoArea *this_fo_area = NULL;
-  FoArea *child_fo_parent_area;
-  FoFoAreaNew2Context area_new2_context;
-  FoPropertyResolveContext prop_context;
-  gboolean resolve_attributes_halted;
 
   g_return_if_fail (FO_IS_FO (this_fo));
   g_return_if_fail (FO_IS_AREA (this_fo_parent_area));
@@ -1425,6 +1419,7 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
 	     fo_object_debug_sprintf (this_fo_parent_area));
 #endif
 
+  FoPropertyResolveContext prop_context;
   prop_context.reference_area       = fo_area_get_reference (this_fo_parent_area);
   prop_context.prop_eval_hash       = prop_eval_hash;
   prop_context.continue_after_error = continue_after_error;
@@ -1432,7 +1427,7 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
   prop_context.warning_mode         = warning_mode;
   prop_context.error                = &tmp_error;
 
-  resolve_attributes_halted =
+  gboolean resolve_attributes_halted =
     fo_fo_resolve_property_attributes (FO_NODE (this_fo),
 				       &prop_context);
 
@@ -1444,6 +1439,8 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
       return;
     }
 
+  FoArea *this_fo_area = NULL;
+  FoFoAreaNew2Context area_new2_context;
   area_new2_context.fo_doc               = fo_doc;
   area_new2_context.parent_area          = this_fo_parent_area;
   area_new2_context.new_area             = &this_fo_area;
@@ -1456,6 +1453,7 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
 
   *new_area = this_fo_area;
 
+  FoArea *child_fo_parent_area;
   if (*new_area != NULL)
     {
       child_fo_parent_area = *new_area;
@@ -1470,8 +1468,7 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
 	     fo_object_debug_sprintf (*new_area));
 #endif
 
-  child_node = fo_node_first_child (FO_NODE (this_fo));
-
+  FoNode *child_node = fo_node_first_child (FO_NODE (this_fo));
   while (child_node)
     {
       FoArea *area = NULL;
