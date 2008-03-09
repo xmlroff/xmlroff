@@ -1,3 +1,68 @@
+03/09/08 21:02:34 tkg [375]
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Added fo_area_layout_new_with_layout().
+
+03/09/08 17:05:11 tkg [374]
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	Readability improvements.
+
+03/09/08 17:03:43 tkg [373]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	Removed debug-dump of two carryovers from GNOME Print version.
+
+03/09/08 17:01:59 tkg [372]
+	* trunk/xmlroff/libfo/fo/fo-block-area.c (modified)
+	Moved setting line heights list to fo-area-layout.c.  Readability
+	improvements.
+
+03/09/08 17:00:30 tkg [371]
+	* trunk/xmlroff/libfo/fo/fo-table-part.c (modified)
+	Readability improvements.
+
+03/09/08 16:58:57 tkg [370]
+	* trunk/xmlroff/libfo/area/fo-area-layout-private.h (modified)
+	Removed an unnecessary #include.
+
+03/09/08 16:56:43 tkg [369]
+	* trunk/xmlroff/libfo/area/fo-area-layout.c (modified)
+	Added fo_area_layout_new_with_layout().  Moved setting line heights
+	list here from fo-block-area.c (re #112).
+
+03/09/08 16:53:21 tkg [368]
+	* trunk/xmlroff/libfo/area/fo-area-layout.h (modified)
+	Added fo_area_layout_new_with_layout().
+
+03/09/08 16:52:22 tkg [367]
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	Moved a '#if ENABLE_CLIP' to stop a compiler warning when not
+	defined.
+
+03/09/08 16:46:32 tkg [366]
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	Added ID to 'Object Hierarchy' chapter.
+
+02/29/08 11:17:33 tkg [357]
+	* trunk/xmlroff/libfo/fo/fo-table-part.c (modified)
+	Added reporting errors from when
+	fo_table_part_children_properties_resolve() calls
+	fo_fo_resolve_property_attributes().
+
+02/29/08 10:55:01 tkg [356]
+	* trunk/xmlroff/libfo/fo/fo-marker-parent.c (modified)
+	Cosmetic readability change.
+
+02/29/08 10:52:50 tkg [355]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for xmlroff 0.5.5.
+
+02/29/08 10:24:44 tkg [354]
+	* trunk/xmlroff/libfo/fo/fo-table.c (modified)
+	Reordering table content to put any table-footer last.  Closes #94.
+
+02/28/08 21:49:11 tkg [353]
+	* trunk/xmlroff/ChangeLog (modified)
+	Updated for xmlroff 0.5.5.
+
 02/28/08 21:45:35 tkg [352]
 	* trunk/xmlroff/NEWS (modified)
 	Updated for xmlroff 0.5.5.
