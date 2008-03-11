@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter 'codegen'],
-	0.5.5,
+	[0.6.0],
 	[http://xmlroff.org/newticket],
 	xmlroff-codegen)
 AC_CONFIG_SRCDIR([fo-object-dump.xsl])

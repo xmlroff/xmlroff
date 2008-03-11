@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter libfo library usage examples],
-	0.5.2,
+	[0.6.0],
 	[http://xmlroff.org/newticket?component=libfo-examples],
 	libfo-examples)
 AC_CONFIG_SRCDIR([xmlroff-init2.c])

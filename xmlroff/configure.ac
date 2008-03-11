@@ -18,8 +18,8 @@ dnl   xmlroff_binary_age = 0;
 dnl   xmlroff_interface_age = 0;
 
 m4_define([xmlroff_major],0)
-m4_define([xmlroff_minor],5)
-m4_define([xmlroff_micro],5)
+m4_define([xmlroff_minor],6)
+m4_define([xmlroff_micro],0)
 m4_define([xmlroff_interface_age],0)
 
 m4_define([xmlroff_binary_age],0)
