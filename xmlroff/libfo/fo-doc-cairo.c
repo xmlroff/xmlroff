@@ -2,7 +2,7 @@
  * fo-doc-cairo.c: libfo output document based on Cairo.
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -1026,13 +1026,13 @@ fo_doc_cairo_place_image (FoDoc   *fo_doc,
   static const cairo_user_data_key_t key;
   int j;
 
-  /*cairo_translate (FO_DOC_CAIRO (fo_doc)->cr, 0, height * yscale * 72.0 / PIXELS_PER_INCH);*/
+  cairo_translate (FO_DOC_CAIRO (fo_doc)->cr,
+		   0,
+		   FO_DOC_CAIRO(fo_doc)->page_height);
   cairo_save (FO_DOC_CAIRO(fo_doc)->cr);
-  /*
   cairo_scale (FO_DOC_CAIRO (fo_doc)->cr,
 	       xscale * 72.0 / PIXELS_PER_INCH,
 	       yscale * 72.0 / PIXELS_PER_INCH);
-  */
   if (n_channels == 3)
     {
       format = CAIRO_FORMAT_RGB24;
@@ -1119,10 +1119,10 @@ fo_doc_cairo_place_image (FoDoc   *fo_doc,
 }
 
 void
-fo_doc_cairo_do_run_callbacks (cairo_t *cr,
-			    PangoLayoutRun    *run,
-			    gint               x, 
-			    gint               y)
+fo_doc_cairo_do_run_callbacks (cairo_t        *cr,
+			       PangoLayoutRun *run,
+			       gint            x, 
+			       gint            y)
 {
   GSList *extra_attrs_list = run->item->analysis.extra_attrs;
 
@@ -1150,7 +1150,7 @@ fo_doc_cairo_do_run_callbacks (cairo_t *cr,
 
 	  cairo_translate (cr,
 			   x / PANGO_SCALE,
-			   y / PANGO_SCALE);
+			   -y / PANGO_SCALE);
 
 	  g_closure_invoke (((GClosure *) libfo_pango_attr_callback_get_callback(attr)),
 			     NULL,
@@ -1165,10 +1165,10 @@ fo_doc_cairo_do_run_callbacks (cairo_t *cr,
 }
 
 void 
-fo_doc_cairo_do_line_callbacks (cairo_t *cr,
-			     PangoLayoutLine   *line,
-			     gint               x, 
-			     gint               y)
+fo_doc_cairo_do_line_callbacks (cairo_t         *cr,
+				PangoLayoutLine *line,
+				gint             x, 
+				gint             y)
 {
   GSList *run_list;
   PangoRectangle overall_rect;
@@ -1350,7 +1350,7 @@ fo_doc_cairo_render_layout (FoDoc   *fo_doc,
 
   cairo_move_to (FO_DOC_CAIRO (fo_doc)->cr,
 		 x,
-		 y);
+		 FO_DOC_CAIRO (fo_doc)->page_height - y);
   pango_cairo_show_layout (FO_DOC_CAIRO (fo_doc)->cr,
 			   fo_layout_get_pango_layout (fo_area_layout_get_layout (area_layout)));
 
