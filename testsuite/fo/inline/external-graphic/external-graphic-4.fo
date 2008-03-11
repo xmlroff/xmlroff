@@ -17,7 +17,7 @@
       <fo:flow
         flow-name="xsl-region-body"
         font-size="10pt">
-        <fo:block space-after="12pt" font-size="12pt">Black 384x192 box with content-with="50%" (4 inches x 2 inches at 96dpi, 2 inched by 2 inches at 50% width at 96dpi) in block with yellow background and purple 192x192 box (2 inched by 2 inches at 96dpi) in separate fo:block with gray.</fo:block>
+        <fo:block space-after="12pt" font-size="12pt">Black 384x192 box with content-width="50%" (4 inches x 2 inches at 96dpi, 2 inches by 2 inches at 50% width at 96dpi) in block with yellow background and purple 192x192 box (2 inches by 2 inches at 96dpi) in separate fo:block with gray background.</fo:block>
         <fo:block background-color="yellow"><fo:external-graphic
             src="url(resources/black-384x192.png)" content-width="50%"
             background-color="yellow"/></fo:block>
