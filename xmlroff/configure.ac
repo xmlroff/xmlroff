@@ -141,37 +141,7 @@ AC_SUBST(HTML_DIR)
 #
 # Check for sufficiently new gtk-doc
 #
-GTK_DOC_MIN_VERSION=0.10
-
-have_gtk_doc=false
-PKG_CHECK_MODULES(GTK_DOC,
-		  gtk-doc >= $GTK_DOC_MIN_VERSION,
-		  have_gtk_doc=true,
-		  :)
-AM_CONDITIONAL(HAVE_GTK_DOC, $have_gtk_doc)
-AC_SUBST(HAVE_GTK_DOC, $have_gtk_doc)
-
-AC_CHECK_PROG(DB2HTML, db2html, true, false)
-AM_CONDITIONAL(HAVE_DOCBOOK, $DB2HTML)
-
-dnl Let people disable the gtk-doc stuff.
-AC_ARG_ENABLE(gtk-doc,
-              AC_HELP_STRING([--enable-gtk-doc],
-                             [use gtk-doc to build documentation [default=no]]),
-              enable_gtk_doc="$enableval",
-              enable_gtk_doc=no)
-
-if test "x$enable_gtk_doc" = "xyes" ; then
-  if test "x$have_gtk_doc" = "xtrue" ; then
-    enable_gtk_doc=yes
-  else
-    enable_gtk_doc=no 
-  fi
-fi
-
-dnl NOTE: We need to use a separate automake conditional for this
-dnl       to make this work with the tarballs.
-AM_CONDITIONAL(ENABLE_GTK_DOC, test "x$enable_gtk_doc" = "xyes")
+GTK_DOC_CHECK(1.4)
 
 #
 # Checks for libxslt

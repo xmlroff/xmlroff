@@ -68,6 +68,7 @@ fi
 libtoolize --copy --force
 aclocal $ACLOCAL_FLAGS
 
+gtkdocize --docdir docs || exit 1
 # optionally run autoheader
 (autoheader --version)  < /dev/null > /dev/null 2>&1 && autoheader
 
