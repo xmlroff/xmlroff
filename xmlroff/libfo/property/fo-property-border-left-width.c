@@ -2,9 +2,23 @@
  * fo-property-border-left-width.c: 'border-left-width' property
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
+ */
+
+/**
+ * SECTION:fo-property-border-left-width
+ * @short_description: 'border-left-width' property
+ * @include: <libfo/property/fo-property-border-left-width.h>
+ *
+ * Inherited: FALSE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: &lt;border-width> | inherit
+ *
+ * Initial value: medium
  */
 
 #include <string.h>
@@ -36,7 +50,7 @@ static void fo_property_border_left_width_init         (FoPropertyBorderLeftWidt
 static void fo_property_border_left_width_class_init   (FoPropertyBorderLeftWidthClass *klass);
 static void fo_property_border_left_width_finalize     (GObject       *object);
 
-static const gchar class_name[] = "border-left-width";
+static const gchar class_name[] = "FoPropertyBorderLeftWidth";
 static gpointer parent_class;
 
 /**
