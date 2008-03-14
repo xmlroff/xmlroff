@@ -2,11 +2,12 @@
  * fo-tree.c: Formatting object tree root
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
+#include <string.h>
 #include "fo-utils.h"
 #include "fo/fo-fo.h"
 #include "fo/fo-fo-private.h"
@@ -197,7 +198,7 @@ fo_tree_id_add (FoFo        *tree,
   */
   if (g_hash_table_lookup (FO_TREE (tree)->id_hash, id))
     {
-      g_warning ("'%s' already in id hash.", id);
+      g_warning ("'%s' already in id hash.  Not adding.", id);
     }
   else
     {
@@ -357,7 +358,9 @@ fo_tree_default_master_get (FoFo *tree)
 }
 
 static void
-fo_tree_debug_dump_hash (gpointer key, gpointer value, gpointer data)
+fo_tree_debug_dump_hash_item (gpointer key,
+			      gpointer value,
+			      gpointer data)
 {
   gchar *indent = g_strnfill (GPOINTER_TO_INT (data) * 2, ' ');
 
@@ -369,18 +372,73 @@ fo_tree_debug_dump_hash (gpointer key, gpointer value, gpointer data)
   g_free (indent);
 }
 
+typedef struct _FoTreeSortedHashDumpData
+{
+  GHashTable  *hash;
+  GSList      *keys;
+  const gchar *indent;
+} FoTreeSortedHashDumpData;
+
+static void
+fo_tree_hash_key_to_list (gpointer key,
+			  gpointer value,
+			  gpointer data)
+{
+  FoTreeSortedHashDumpData *hash_dump_data =
+    (FoTreeSortedHashDumpData *) data;
+
+  hash_dump_data->keys =
+    g_slist_prepend (hash_dump_data->keys,
+		     key);
+}
+
+static void
+fo_tree_debug_dump_hash_from_keys (gpointer data,
+				   gpointer user_data)
+{
+  FoTreeSortedHashDumpData *hash_dump_data =
+    (FoTreeSortedHashDumpData *) user_data;
+
+  g_log (G_LOG_DOMAIN,
+	 G_LOG_LEVEL_DEBUG,
+	 "%s%s : %p",
+	 hash_dump_data->indent,
+	 (gchar *) data,
+	 (gchar *) g_hash_table_lookup (hash_dump_data->hash,
+					data));
+}
+
+static void
+fo_tree_debug_dump_sorted_hash (GHashTable *hash,
+				gint depth)
+{
+  gchar *indent = g_strnfill (depth * 2, ' ');
+  FoTreeSortedHashDumpData hash_dump_data = { hash, NULL, indent };
+
+  g_hash_table_foreach (hash,
+			fo_tree_hash_key_to_list,
+			&hash_dump_data);
+
+  hash_dump_data.keys = g_slist_sort (hash_dump_data.keys,
+				      (GCompareFunc) strcmp);
+
+  g_slist_foreach (hash_dump_data.keys,
+		   fo_tree_debug_dump_hash_from_keys,
+		   (gpointer) &hash_dump_data);
+
+  g_slist_free (hash_dump_data.keys);
+  g_free (indent);
+}
+
 void
 fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 {
-  FoTree *fo_tree;
-  gchar *indent = g_strnfill (depth * 2, ' ');
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_TREE (fo));
 
-  fo_tree = FO_TREE (fo);
+  FoTree *fo_tree = FO_TREE (fo);
 
-
+  gchar *indent = g_strnfill (depth * 2, ' ');
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 "%sdefault-master:   %p",
@@ -392,9 +450,8 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 	     G_LOG_LEVEL_DEBUG,
 	     "%smaster-name hash:",
 	     indent);
-      g_hash_table_foreach (fo_tree->master_name_hash,
-			    fo_tree_debug_dump_hash,
-			    GINT_TO_POINTER (depth + 1));
+      fo_tree_debug_dump_sorted_hash (fo_tree->master_name_hash,
+				      depth + 1);
     }
 
   if (fo_tree->page_sequence_master_name_hash != NULL)
@@ -403,9 +460,18 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 	     G_LOG_LEVEL_DEBUG,
 	     "%spage-sequence-master-name hash:",
 	     indent);
-      g_hash_table_foreach (fo_tree->page_sequence_master_name_hash,
-			    fo_tree_debug_dump_hash,
-			    GINT_TO_POINTER (depth + 1));
+      fo_tree_debug_dump_sorted_hash (fo_tree->page_sequence_master_name_hash,
+				      depth + 1);
+    }
+
+  if (fo_tree->id_hash != NULL)
+    {
+      g_log (G_LOG_DOMAIN,
+	     G_LOG_LEVEL_DEBUG,
+	     "%sid hash:",
+	     indent);
+      fo_tree_debug_dump_sorted_hash (fo_tree->id_hash,
+				      depth + 1);
     }
 
   g_free (indent);
@@ -413,8 +479,9 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
   FO_FO_CLASS (parent_class)->debug_dump_properties (fo, depth + 2);
 }
 
-gboolean fo_tree_validate_content (FoFo *fo,
-				   GError **error)
+gboolean
+fo_tree_validate_content (FoFo *fo,
+			  GError **error)
 {
   GError *tmp_error;
 
