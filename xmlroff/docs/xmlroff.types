@@ -1,4 +1,8 @@
 #include <libfo/fo-utils.h>
+#include <libfo/area/fo-all-area.h>
+#include <libfo/datatype/fo-all-datatype.h>
+#include <libfo/fo/fo-all-fo.h>
+#include <libfo/property/fo-all-property.h>
 
 fo_area_area_get_type
 fo_area_get_type
