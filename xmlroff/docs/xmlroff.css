@@ -1,0 +1,15 @@
+td.basic	   { background-color: #99BBFF
+		   }
+td.extended	   { background-color: #CCDDFF
+		   }
+td.complete	   { background-color: #DDEEFF
+		   }
+td.yes		   { background-color: #ADFF2F;
+		     text-align: center
+		   }
+td.no		   { background-color: #CD5C5C;
+		     text-align: center
+		   }
+td.na		   { background-color: #B5B5B5;
+		     text-align: center
+		   }
