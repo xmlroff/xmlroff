@@ -2,7 +2,7 @@
  * fo-property.h: FoProperty superclass of all property classes
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -25,7 +25,9 @@ const gchar *fo_property_error_messages [] = {
 
 enum {
   PROP_0,
-  PROP_VALUE
+  PROP_VALUE,
+  PROP_IS_INHERITED,
+  PROP_IS_SHORTHAND
 };
 
 static void fo_property_base_init  (FoPropertyClass *klass);
@@ -170,7 +172,24 @@ fo_property_class_init (FoPropertyClass *klass)
 							_("property value"),
 							_("Property value"),
 							FO_TYPE_DATATYPE,
-							G_PARAM_READWRITE));
+							G_PARAM_READWRITE |
+							G_PARAM_CONSTRUCT_ONLY));
+  g_object_class_install_property
+    (object_class,
+     PROP_IS_INHERITED,
+     g_param_spec_boolean ("is-inherited",
+			   _("Is inherited?"),
+			   _("Is this an inherited property?"),
+			   TRUE,
+			   G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
+     PROP_IS_SHORTHAND,
+     g_param_spec_boolean ("is-shorthand",
+			   _("Is shorthand?"),
+			   _("Is this a shorthand property?"),
+			   TRUE,
+			   G_PARAM_READABLE));
 
   klass->resolve_enum = fo_property_resolve_enum_default;
 }
@@ -239,9 +258,9 @@ fo_property_set_property (GObject         *object,
  **/
 void
 fo_property_get_property (GObject         *object,
-                         guint            prop_id,
-                         GValue          *value,
-                         GParamSpec      *pspec)
+			  guint            prop_id,
+			  GValue          *value,
+			  GParamSpec      *pspec)
 {
   FoProperty *property;
 
@@ -251,7 +270,15 @@ fo_property_get_property (GObject         *object,
     {
     case PROP_VALUE:
       g_value_set_instance (value,
-			  fo_property_get_value (property));
+			    fo_property_get_value (property));
+      break;
+    case PROP_IS_INHERITED:
+      g_value_set_boolean (value,
+			   fo_property_is_inherited (property));
+      break;
+    case PROP_IS_SHORTHAND:
+      g_value_set_boolean (value,
+			   fo_property_is_shorthand (property));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
