@@ -18,6 +18,7 @@ G_BEGIN_DECLS
 /* area objects */
 #include <libfo/area/fo-area-area.h>
 #include <libfo/area/fo-area-layout.h>
+#include <libfo/area/fo-area-list-item.h>
 #include <libfo/area/fo-area-normal.h>
 #include <libfo/area/fo-area-page.h>
 #include <libfo/area/fo-area-reference.h>
@@ -28,6 +29,7 @@ G_BEGIN_DECLS
 #include <libfo/area/fo-area-table-continuation.h>
 #include <libfo/area/fo-area-table-footer.h>
 #include <libfo/area/fo-area-table-header.h>
+#include <libfo/area/fo-area-table-part.h>
 #include <libfo/area/fo-area-table-row.h>
 #include <libfo/area/fo-area-table.h>
 #include <libfo/area/fo-area-tree.h>

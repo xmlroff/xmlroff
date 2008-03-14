@@ -17,6 +17,7 @@ G_BEGIN_DECLS
 #include <libfo/fo/fo-text.h>
 #include <libfo/fo/fo-block-block.h>
 #include <libfo/fo/fo-block-layout.h>
+#include <libfo/fo/fo-block-whitespace.h>
 #include <libfo/fo/fo-wrapper-block.h>
 #include <libfo/fo/fo-wrapper-inline.h>
 #include <libfo/fo/fo-wrapper-inline-empty.h>
