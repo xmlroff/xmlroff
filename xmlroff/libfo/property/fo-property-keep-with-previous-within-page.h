@@ -2,7 +2,7 @@
  * fo-property-keep-with-previous-within-page.h: 'keep-with-previous-within-page' property
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,7 +11,7 @@
 #define __FO_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE_H__
 
 #include <libfo/fo-utils.h>
-#include <property/fo-property.h>
+#include <libfo/property/fo-property.h>
 
 G_BEGIN_DECLS
 

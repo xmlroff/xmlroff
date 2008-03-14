@@ -11,7 +11,7 @@
 #define __FO_PROPERTY_ALIGNMENT_BASELINE_H__
 
 #include <libfo/fo-utils.h>
-#include <property/fo-property.h>
+#include <libfo/property/fo-property.h>
 
 G_BEGIN_DECLS
 
