@@ -1538,6 +1538,7 @@ FO_PIXBUF_GET_IFACE
 FoBasicLink
 FoBasicLinkClass
 fo_basic_link_new
+<SUBSECTION>
 fo_basic_link_get_alignment_adjust
 fo_basic_link_set_alignment_adjust
 fo_basic_link_get_alignment_baseline
@@ -1666,6 +1667,7 @@ FO_BASIC_LINK_GET_CLASS
 FoBidiOverride
 FoBidiOverrideClass
 fo_bidi_override_new
+<SUBSECTION>
 fo_bidi_override_set_color
 fo_bidi_override_get_color
 fo_bidi_override_set_direction
@@ -1722,6 +1724,7 @@ FO_BLOCK_BLOCK_GET_CLASS
 FoBlockContainer
 FoBlockContainerClass
 fo_block_container_new
+<SUBSECTION>
 fo_block_container_get_background_color
 fo_block_container_set_background_color
 fo_block_container_get_background_image
@@ -1943,6 +1946,7 @@ FO_BLOCK_WHITESPACE_GET_CLASS
 FoBlock
 FoBlockClass
 fo_block_new
+<SUBSECTION>
 fo_block_get_background_color
 fo_block_set_background_color
 fo_block_get_background_image
@@ -2113,6 +2117,7 @@ FO_BLOCK_GET_CLASS
 FoCharacter
 FoCharacterClass
 fo_character_new
+<SUBSECTION>
 fo_character_get_alignment_adjust
 fo_character_set_alignment_adjust
 fo_character_get_alignment_baseline
@@ -2247,6 +2252,7 @@ FO_CHARACTER_GET_CLASS
 FoColorProfile
 FoColorProfileClass
 fo_color_profile_new
+<SUBSECTION>
 fo_color_profile_get_src
 fo_color_profile_set_src
 <SUBSECTION Standard>
@@ -2265,6 +2271,7 @@ FO_COLOR_PROFILE_GET_CLASS
 FoConditionalPageMasterReference
 FoConditionalPageMasterReferenceClass
 fo_conditional_page_master_reference_new
+<SUBSECTION>
 fo_conditional_page_master_reference_get_master_reference
 fo_conditional_page_master_reference_set_master_reference
 <SUBSECTION Standard>
@@ -2300,6 +2307,7 @@ FoExternalGraphic
 FoExternalGraphicClass
 fo_external_graphic_new
 fo_external_graphic_new_with_base_uri
+<SUBSECTION>
 fo_external_graphic_get_alignment_adjust
 fo_external_graphic_set_alignment_adjust
 fo_external_graphic_get_alignment_baseline
@@ -2465,6 +2473,7 @@ FO_FLOAT_GET_CLASS
 FoFlow
 FoFlowClass
 fo_flow_new
+<SUBSECTION>
 fo_flow_get_region_master
 fo_flow_set_flow_name
 fo_flow_get_flow_name
@@ -2529,6 +2538,7 @@ FO_FO_GET_CLASS
 FoFootnoteBody
 FoFootnoteBodyClass
 fo_footnote_body_new
+<SUBSECTION>
 fo_footnote_body_get_role
 fo_footnote_body_set_role
 fo_footnote_body_get_source_document
@@ -2549,6 +2559,7 @@ FO_FOOTNOTE_BODY_GET_CLASS
 FoFootnote
 FoFootnoteClass
 fo_footnote_new
+<SUBSECTION>
 fo_footnote_set_role
 fo_footnote_get_role
 fo_footnote_set_source_document
@@ -2569,6 +2580,7 @@ FO_FOOTNOTE_GET_CLASS
 FoInitialPropertySet
 FoInitialPropertySetClass
 fo_initial_property_set_new
+<SUBSECTION>
 fo_initial_property_set_get_background_color
 fo_initial_property_set_set_background_color
 fo_initial_property_set_get_background_image
@@ -2677,6 +2689,7 @@ FO_INITIAL_PROPERTY_SET_GET_CLASS
 FoInlineContainer
 FoInlineContainerClass
 fo_inline_container_new
+<SUBSECTION>
 fo_inline_container_get_alignment_adjust
 fo_inline_container_set_alignment_adjust
 fo_inline_container_get_alignment_baseline
@@ -2835,6 +2848,7 @@ FO_INLINE_FO_GET_IFACE
 FoInline
 FoInlineClass
 fo_inline_new
+<SUBSECTION>
 fo_inline_get_alignment_adjust
 fo_inline_set_alignment_adjust
 fo_inline_get_alignment_baseline
@@ -2987,6 +3001,7 @@ FO_INLINE_GET_CLASS
 FoInstreamForeignObject
 FoInstreamForeignObjectClass
 fo_instream_foreign_object_new
+<SUBSECTION>
 fo_instream_foreign_object_get_alignment_adjust
 fo_instream_foreign_object_set_alignment_adjust
 fo_instream_foreign_object_get_alignment_baseline
@@ -3149,6 +3164,7 @@ FO_LAYOUT_MASTER_SET_GET_CLASS
 FoLeader
 FoLeaderClass
 fo_leader_new
+<SUBSECTION>
 fo_leader_get_alignment_adjust
 fo_leader_set_alignment_adjust
 fo_leader_get_alignment_baseline
@@ -3283,6 +3299,7 @@ FO_LEADER_GET_CLASS
 FoListBlock
 FoListBlockClass
 fo_list_block_new
+<SUBSECTION>
 fo_list_block_get_body_start
 fo_list_block_get_label_end
 fo_list_block_get_background_color
@@ -3423,6 +3440,7 @@ FO_LIST_BLOCK_GET_CLASS
 FoListItemBody
 FoListItemBodyClass
 fo_list_item_body_new
+<SUBSECTION>
 fo_list_item_body_get_id
 fo_list_item_body_set_id
 fo_list_item_body_get_keep_together
@@ -3453,6 +3471,7 @@ FO_LIST_ITEM_BODY_GET_CLASS
 FoListItemLabel
 FoListItemLabelClass
 fo_list_item_label_new
+<SUBSECTION>
 fo_list_item_label_get_id
 fo_list_item_label_set_id
 fo_list_item_label_get_keep_together
@@ -3483,6 +3502,7 @@ FO_LIST_ITEM_LABEL_GET_CLASS
 FoListItem
 FoListItemClass
 fo_list_item_new
+<SUBSECTION>
 fo_list_item_get_background_color
 fo_list_item_set_background_color
 fo_list_item_get_background_image
@@ -3633,6 +3653,7 @@ FO_MARKER_GET_CLASS
 FoMultiCase
 FoMultiCaseClass
 fo_multi_case_new
+<SUBSECTION>
 fo_multi_case_set_id
 fo_multi_case_get_id
 fo_multi_case_set_role
@@ -3655,6 +3676,7 @@ FO_MULTI_CASE_GET_CLASS
 FoMultiProperties
 FoMultiPropertiesClass
 fo_multi_properties_new
+<SUBSECTION>
 fo_multi_properties_set_id
 fo_multi_properties_get_id
 fo_multi_properties_set_role
@@ -3677,6 +3699,7 @@ FO_MULTI_PROPERTIES_GET_CLASS
 FoMultiPropertySet
 FoMultiPropertySetClass
 fo_multi_property_set_new
+<SUBSECTION>
 fo_multi_property_set_set_id
 fo_multi_property_set_get_id
 <SUBSECTION Standard>
@@ -3695,6 +3718,7 @@ FO_MULTI_PROPERTY_SET_GET_CLASS
 FoMultiSwitch
 FoMultiSwitchClass
 fo_multi_switch_new
+<SUBSECTION>
 fo_multi_switch_get_id
 fo_multi_switch_set_id
 fo_multi_switch_get_role
@@ -3717,6 +3741,7 @@ FO_MULTI_SWITCH_GET_CLASS
 FoMultiToggle
 FoMultiToggleClass
 fo_multi_toggle_new
+<SUBSECTION>
 fo_multi_toggle_get_id
 fo_multi_toggle_set_id
 fo_multi_toggle_get_role
@@ -3753,6 +3778,7 @@ FO_NEUTRAL_FO_GET_IFACE
 FoPageNumberCitation
 FoPageNumberCitationClass
 fo_page_number_citation_new
+<SUBSECTION>
 fo_page_number_citation_get_alignment_adjust
 fo_page_number_citation_set_alignment_adjust
 fo_page_number_citation_get_alignment_baseline
@@ -3891,6 +3917,7 @@ FO_PAGE_NUMBER_CITATION_GET_CLASS
 FoPageNumber
 FoPageNumberClass
 fo_page_number_new
+<SUBSECTION>
 fo_page_number_get_alignment_adjust
 fo_page_number_set_alignment_adjust
 fo_page_number_get_alignment_baseline
@@ -4027,6 +4054,7 @@ FO_PAGE_NUMBER_GET_CLASS
 FoPageSequenceMaster
 FoPageSequenceMasterClass
 fo_page_sequence_master_new
+<SUBSECTION>
 fo_page_sequence_master_set_master_name
 fo_page_sequence_master_get_master_name
 <SUBSECTION Standard>
@@ -4045,6 +4073,7 @@ FO_PAGE_SEQUENCE_MASTER_GET_CLASS
 FoPageSequence
 FoPageSequenceClass
 fo_page_sequence_new
+<SUBSECTION>
 fo_page_sequence_get_format
 fo_page_sequence_set_format
 fo_page_sequence_get_grouping_separator
@@ -4073,6 +4102,7 @@ FO_PAGE_SEQUENCE_GET_CLASS
 FoRegionAfter
 FoRegionAfterClass
 fo_region_after_new
+<SUBSECTION>
 fo_region_after_get_background_color
 fo_region_after_set_background_color
 fo_region_after_get_background_image
@@ -4169,6 +4199,7 @@ FO_REGION_AFTER_GET_CLASS
 FoRegionBefore
 FoRegionBeforeClass
 fo_region_before_new
+<SUBSECTION>
 fo_region_before_get_background_color
 fo_region_before_set_background_color
 fo_region_before_get_background_image
@@ -4265,6 +4296,7 @@ FO_REGION_BEFORE_GET_CLASS
 FoRegionBody
 FoRegionBodyClass
 fo_region_body_new
+<SUBSECTION>
 fo_region_body_get_background_color
 fo_region_body_set_background_color
 fo_region_body_get_background_image
@@ -4375,6 +4407,7 @@ FO_REGION_BODY_GET_CLASS
 FoRegionEnd
 FoRegionEndClass
 fo_region_end_new
+<SUBSECTION>
 fo_region_end_get_background_color
 fo_region_end_set_background_color
 fo_region_end_get_background_image
@@ -4471,6 +4504,7 @@ FO_REGION_END_GET_CLASS
 FoRegionStart
 FoRegionStartClass
 fo_region_start_new
+<SUBSECTION>
 fo_region_start_get_background_color
 fo_region_start_set_background_color
 fo_region_start_get_background_image
@@ -4583,6 +4617,7 @@ FO_REPEATABLE_PAGE_MASTER_ALTERNATIVES_GET_CLASS
 FoRepeatablePageMasterReference
 FoRepeatablePageMasterReferenceClass
 fo_repeatable_page_master_reference_new
+<SUBSECTION>
 fo_repeatable_page_master_reference_set_master_reference
 fo_repeatable_page_master_reference_get_master_reference
 <SUBSECTION Standard>
@@ -4601,6 +4636,7 @@ FO_REPEATABLE_PAGE_MASTER_REFERENCE_GET_CLASS
 FoRoot
 FoRootClass
 fo_root_new
+<SUBSECTION>
 fo_root_get_media_usage
 fo_root_set_media_usage
 <SUBSECTION Standard>
@@ -4619,6 +4655,7 @@ FO_ROOT_GET_CLASS
 FoSimplePageMaster
 FoSimplePageMasterClass
 fo_simple_page_master_new
+<SUBSECTION>
 fo_simple_page_master_get_end_indent
 fo_simple_page_master_set_end_indent
 fo_simple_page_master_get_margin_bottom
@@ -4662,6 +4699,7 @@ FO_SIMPLE_PAGE_MASTER_GET_CLASS
 FoSinglePageMasterReference
 FoSinglePageMasterReferenceClass
 fo_single_page_master_reference_new
+<SUBSECTION>
 fo_single_page_master_reference_get_master_reference
 fo_single_page_master_reference_set_master_reference
 <SUBSECTION Standard>
@@ -4680,6 +4718,7 @@ FO_SINGLE_PAGE_MASTER_REFERENCE_GET_CLASS
 FoStaticContent
 FoStaticContentClass
 fo_static_content_new
+<SUBSECTION>
 fo_static_content_get_flow_name
 fo_static_content_set_flow_name
 <SUBSECTION Standard>
@@ -4698,6 +4737,7 @@ FO_STATIC_CONTENT_GET_CLASS
 FoTableAndCaption
 FoTableAndCaptionClass
 fo_table_and_caption_new
+<SUBSECTION>
 fo_table_and_caption_get_background_color
 fo_table_and_caption_set_background_color
 fo_table_and_caption_get_background_image
@@ -4834,6 +4874,7 @@ FO_TABLE_AND_CAPTION_GET_CLASS
 FoTableBody
 FoTableBodyClass
 fo_table_body_new
+<SUBSECTION>
 fo_table_body_get_background_color
 fo_table_body_set_background_color
 fo_table_body_get_background_image
@@ -4963,6 +5004,7 @@ FO_TABLE_BORDER_FO_GET_IFACE
 FoTableCaption
 FoTableCaptionClass
 fo_table_caption_new
+<SUBSECTION>
 fo_table_caption_get_background_color
 fo_table_caption_set_background_color
 fo_table_caption_get_background_image
@@ -5069,11 +5111,13 @@ FO_TABLE_CAPTION_GET_CLASS
 FoTableCell
 FoTableCellClass
 fo_table_cell_new
+<SUBSECTION>
 fo_table_cell_resolve_column
 fo_table_cell_resolve_number_columns_spanned
 fo_table_cell_resolve_number_rows_spanned
 fo_table_cell_resolve_column_number
 fo_table_cell_get_column
+<SUBSECTION>
 fo_table_cell_get_background_color
 fo_table_cell_set_background_color
 fo_table_cell_get_background_image
@@ -5191,6 +5235,7 @@ FoTableColumnError
 FoTableColumn
 FoTableColumnClass
 fo_table_column_new
+<SUBSECTION>
 fo_table_column_get_offset
 fo_table_column_set_offset
 fo_table_column_get_background_color
@@ -5293,6 +5338,7 @@ FO_TABLE_COLUMN_GET_CLASS
 FoTableFooter
 FoTableFooterClass
 fo_table_footer_new
+<SUBSECTION>
 fo_table_footer_get_background_color
 fo_table_footer_set_background_color
 fo_table_footer_get_background_image
@@ -5391,6 +5437,7 @@ FO_TABLE_FOOTER_GET_CLASS
 FoTableHeader
 FoTableHeaderClass
 fo_table_header_new
+<SUBSECTION>
 fo_table_header_get_background_color
 fo_table_header_set_background_color
 fo_table_header_get_background_image
@@ -5506,6 +5553,7 @@ FO_TABLE_PART_GET_CLASS
 FoTableRow
 FoTableRowClass
 fo_table_row_new
+<SUBSECTION>
 fo_table_row_get_background_color
 fo_table_row_set_background_color
 fo_table_row_get_background_image
@@ -5642,6 +5690,7 @@ FoTable
 FoTableClass
 fo_table_get_type
 fo_table_new
+<SUBSECTION>
 fo_table_validate_content_table_row_table_cell
 fo_table_resolve_columns
 fo_table_span_info_start_row
@@ -5810,6 +5859,7 @@ FO_TABLE_GET_CLASS
 FoText
 FoTextClass
 fo_text_new
+<SUBSECTION>
 fo_text_set_color
 fo_text_get_color
 fo_text_set_font_family
@@ -5845,6 +5895,7 @@ FO_TEXT_GET_CLASS
 FoTitle
 FoTitleClass
 fo_title_new
+<SUBSECTION>
 fo_title_get_background_color
 fo_title_set_background_color
 fo_title_get_background_image
@@ -5953,6 +6004,7 @@ FO_TITLE_GET_CLASS
 FoTree
 FoTreeClass
 fo_tree_new
+<SUBSECTION>
 fo_tree_id_add
 fo_tree_id_get
 fo_tree_master_name_add
@@ -6042,6 +6094,7 @@ FO_WRAPPER_WHITESPACE_GET_CLASS
 FoWrapper
 FoWrapperClass
 fo_wrapper_new
+<SUBSECTION>
 fo_wrapper_set_id
 fo_wrapper_get_id
 <SUBSECTION Standard>
