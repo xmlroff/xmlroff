@@ -1,3 +1,7 @@
+Changes between 0.5.5 and 0.6.0
+
+ * Using plain BSD license (Jon Bosak, Mike Anastasio)
+
 Changes between 0.5.4 and 0.5.5
 
  * Fixed cell borders on spanned table cells (#93)
