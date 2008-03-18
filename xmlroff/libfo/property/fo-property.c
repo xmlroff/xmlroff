@@ -172,8 +172,7 @@ fo_property_class_init (FoPropertyClass *klass)
 							_("property value"),
 							_("Property value"),
 							FO_TYPE_DATATYPE,
-							G_PARAM_READWRITE |
-							G_PARAM_CONSTRUCT_ONLY));
+							G_PARAM_READWRITE));
   g_object_class_install_property
     (object_class,
      PROP_IS_INHERITED,
