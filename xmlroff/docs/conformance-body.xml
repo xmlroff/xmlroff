@@ -454,7 +454,7 @@ rendered</entry>
 	      <entry role="no">No</entry>
 	      <entry>Place at end of table.
 </entry>
-	      <entry role="no">No</entry>
+	      <entry role="yes">Yes</entry>
 	    </row>
 	    <row>
 	      <entry>fo:table-body</entry>
@@ -735,7 +735,7 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
-|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-after-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
@@ -754,7 +754,7 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 <entry>border-before-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-bottom</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
-|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-bottom-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
@@ -764,7 +764,7 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 <row>
 <entry>border-collapse</entry><entry>collapse | collapse-with-precedence | separate | inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
 <row>
-<entry>border-color</entry><entry>[ &lt;color&gt; | transparent ]{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<entry>border-color</entry><entry>[ &lt;color&gt; | transparent ]{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-end-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
@@ -775,7 +775,7 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 <entry>border-end-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-left</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
-|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-left-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
@@ -784,7 +784,7 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 <entry>border-left-width</entry><entry>&lt;border-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-right</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
-|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-right-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
@@ -804,10 +804,10 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 <row>
 <entry>border-start-width</entry><entry>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
-<entry>border-style</entry><entry>&lt;border-style&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<entry>border-style</entry><entry>&lt;border-style&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-top</entry><entry>[ &lt;border-width&gt; || &lt;border-style&gt;
-|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+|| &lt;color&gt; ] | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>border-top-color</entry><entry>&lt;color&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
@@ -815,7 +815,7 @@ top | center | bottom | inherit</entry><entry role="extended">Extended</entry><e
 <row>
 <entry>border-top-width</entry><entry>&lt;border-width&gt; | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
-<entry>border-width</entry><entry>&lt;border-width&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="no">No. Use individual properties instead.</entry></row>
+<entry>border-width</entry><entry>&lt;border-width&gt;{1,4} | inherit</entry><entry role="complete">Complete</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>bottom</entry><entry>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</entry><entry role="extended">Extended</entry><entry role="no">No. Use individual properties instead.</entry></row>
 <row>
@@ -868,7 +868,7 @@ detected automatically by the image library.</entry></row>
 <entry>direction</entry><entry>ltr | rtl | inherit</entry><entry role="basic">Basic</entry><entry role="yes">Yes</entry></row>
 <row>
 <entry>display-align</entry><entry>auto | before | center | after
-| inherit</entry><entry role="extended">Extended</entry><entry role="no">No</entry></row>
+| inherit</entry><entry role="extended">Extended</entry><entry role="yes">fo:table-cell only</entry></row>
 <row>
 <entry>dominant-baseline</entry><entry>auto | use-script | no-change | reset-size
 | ideographic | alphabetic | hanging | mathematical
