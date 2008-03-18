@@ -13,7 +13,7 @@ LDADDS = @STRIP_BEGIN@	\
 
 noinst_LTLIBRARIES = libfo-libfo.la libfo-fodoc.la
 
-lib_LTLIBRARIES = libfo-0.5.la
+lib_LTLIBRARIES = libfo-0.6.la
 
 if ENABLE_GP
 GP_headers = fo-doc-gp.h fo-doc-gp-private.h fo-layout-gp.h fo-layout-gp-private.h
@@ -58,7 +58,7 @@ libfoinclude_HEADERS = \
 	$(fodoc_headers)        \
 	$(libfo_headers)
 
-libfoincludedir = $(includedir)/libfo-0.5/libfo
+libfoincludedir = $(includedir)/libfo-0.6/libfo
 
 libfo_libfo_la_SOURCES =	\
 	$(libfo_headers)	\
@@ -95,25 +95,25 @@ fo_base_cfiles = \
 	fo-node.c		\
 	fo-node-private.h
 
-libfo_0_5_la_LDFLAGS = \
+libfo_0_6_la_LDFLAGS = \
 	-version-info $(LT_VERSION_INFO)	\
 	$(no_undefined)
 
-libfo_0_5_includedir = $(includedir)/libfo-0.5/libfo
+libfo_0_6_includedir = $(includedir)/libfo-0.6/libfo
 
-libfo_0_5_include_HEADERS = \
+libfo_0_6_include_HEADERS = \
 	fo-object.h		\
 	fo-node.h		\
 	fo-context.h
 
-libfo_0_5_la_SOURCES = \
-	$(libfo_0_5_include_HEADERS) \
+libfo_0_6_la_SOURCES = \
+	$(libfo_0_6_include_HEADERS) \
 	$(fo_base_cfiles)	\
 	$(fo_context_cfiles)	\
 	area-to-pdf.c		\
 	area-to-pdf.h
 
-libfo_0_5_la_LIBADD = \
+libfo_0_6_la_LIBADD = \
 	util/libfo-util.la		\
 	area/libfo-area.la		\
 	expr/libfo-expr.la		\

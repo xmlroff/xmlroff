@@ -460,7 +460,7 @@ libfo/expr/Makefile
 libfo/fo/Makefile
 libfo/property/Makefile
 libfo/util/Makefile
-libfo-0.5.pc
+libfo-0.6.pc
 xmlroff.spec
 xmlroff/Makefile
 catalog.xml

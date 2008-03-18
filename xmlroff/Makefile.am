@@ -1,5 +1,7 @@
 # libfo and xmlroff Makefile.am
 
+# Only building CUnit tests when both have CUnit and tests are
+# enabled.
 if ENABLE_CUNIT
 CUNIT_DIRS = cunit
 endif
@@ -18,7 +20,7 @@ INCLUDES = \
 
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libfo-0.5.pc
+pkgconfig_DATA = libfo-0.6.pc
 
 xmldir = $(datadir)/xml/libfo-@VERSION@
 xml_DATA = \

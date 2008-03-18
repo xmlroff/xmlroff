@@ -13,7 +13,7 @@ LDADDS = @STRIP_BEGIN@	\
 
 noinst_LTLIBRARIES = libfo-util.la
 
-libfo_util_includedir = $(includedir)/libfo-0.5/libfo/util
+libfo_util_includedir = $(includedir)/libfo-0.6/libfo/util
 
 libfo_util_include_HEADERS = \
 	fo-hash-table.h		\

@@ -1,3 +1,4 @@
+## libfo CUnit tests Makefile.am
 ## Process this file with automake to create Makefile.in.
 
 INCLUDES = \
@@ -23,4 +24,4 @@ test_LDFLAGS = -static
 
 test_LDADD = \
 	$(CUNIT_LIBS)		\
-	../libfo/libfo-0.5.la
+	../libfo/libfo-0.6.la

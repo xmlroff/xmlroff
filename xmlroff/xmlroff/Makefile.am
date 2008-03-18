@@ -1,5 +1,4 @@
-# libfo and xmlroff Makefile.am
-# $Id: Makefile.am,v 1.34 2006/12/07 05:31:51 menteith Exp $
+# xmlroff Makefile.am
 
 if PLATFORM_WIN32
 no_undefined = -no-undefined
@@ -22,7 +21,7 @@ xmlroff_SOURCES = \
 xmlroff_LDFLAGS = -static
 
 xmlroff_LDADD = \
-	../libfo/libfo-0.5.la \
+	../libfo/libfo-0.6.la \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \
 	$(LIBXSLT_LIBS) \
