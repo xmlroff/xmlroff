@@ -54,6 +54,10 @@
     xml="external-graphic-5.fo" results="results/external-graphic-5.pdf">"xmlroff XSL formatter" image.</test>
         <test id="external-graphic-6" fo="external-graphic"
     xml="external-graphic-6.fo" results="results/external-graphic-6.pdf">"xmlroff XSL formatter" image with transparent background in fo:external-graphic with yellow background.</test>
+        <test id="external-graphic-7" fo="external-graphic"
+        xml="external-graphic-7.fo"
+        results="results/external-graphic-7.pdf">external-graphic
+        without url() in @src.</test>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
