@@ -1,0 +1,38 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master
+      master-name="first"
+      margin-right="1in"
+      margin-left="1in"
+      margin-bottom="1in"
+      margin-top="1in"
+      page-width="8in"
+      page-height="11in">
+      <fo:region-body/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence
+    master-reference="first">
+    <fo:flow
+      flow-name="xsl-region-body"
+      font-size="10pt">
+      <fo:block space-after="12pt" font-size="12pt">"xmlroff XSL formatter" image in second table cell in row.</fo:block>
+      <fo:table>
+        <fo:table-column column-width="20%"/>
+        <fo:table-column column-width="80%"/>
+        <fo:table-body>
+          <fo:table-row>
+            <fo:table-cell>
+              <fo:block>a</fo:block>
+            </fo:table-cell>
+            <fo:table-cell>
+              <fo:block><fo:external-graphic
+                  src="url(resources/xmlroff.png)"
+                  background-color="yellow"/></fo:block>
+            </fo:table-cell>
+          </fo:table-row>
+        </fo:table-body>
+      </fo:table>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

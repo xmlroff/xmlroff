@@ -58,6 +58,8 @@
         xml="external-graphic-7.fo"
         results="results/external-graphic-7.pdf">external-graphic
         without url() in @src.</test>
+        <test id="external-graphic-8" fo="external-graphic"
+    xml="external-graphic-8.fo" results="results/external-graphic-8.pdf">"xmlroff XSL formatter" image in second table cell in row.</test>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
