@@ -1273,6 +1273,8 @@ fo_area_tree_to_pdf (FoArea  *area_node,
       /* borders */
       fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
+      /* No fo_doc_save().  Instead, do reverse translate after
+	 drawing children. */
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
 			fo_area_area_get_y (area_node));
