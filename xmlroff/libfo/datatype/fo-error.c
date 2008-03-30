@@ -2,15 +2,13 @@
  * fo-error.c: Error datatype
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
-#include "fo-utils.h"
 #include "fo-datatype-private.h"
 #include "fo-error.h"
-#include "fo-space.h"
 
 enum {
   PROP_0,
