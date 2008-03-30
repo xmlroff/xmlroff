@@ -2,7 +2,7 @@
  * fo-integer.h: Integer datatype
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,6 +11,7 @@
 #define __FO_INTEGER_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/datatype/fo-datatype.h>
 
 G_BEGIN_DECLS
 
@@ -25,19 +26,18 @@ G_BEGIN_DECLS
 typedef struct _FoInteger      FoInteger;
 typedef struct _FoIntegerClass FoIntegerClass;
 
-GType       fo_integer_get_type          (void) G_GNUC_CONST;
-FoDatatype *fo_integer_new               (void);
-FoDatatype *fo_integer_new_with_value    (gint value);
+GType        fo_integer_get_type          (void) G_GNUC_CONST;
+FoDatatype * fo_integer_new_with_value    (gint value);
 
-gint        fo_integer_get_value         (FoDatatype *integer);
+gint         fo_integer_get_value         (FoDatatype *integer);
 
-FoDatatype* fo_integer_get_integer_zero  (void);
-FoDatatype* fo_integer_get_integer_one   (void);
-FoDatatype* fo_integer_get_integer_two   (void);
-FoDatatype* fo_integer_get_integer_three (void);
-FoDatatype* fo_integer_get_integer_four  (void);
-FoDatatype* fo_integer_get_integer_five  (void);
-FoDatatype* fo_integer_get_integer_six   (void);
+FoDatatype * fo_integer_get_integer_zero  (void);
+FoDatatype * fo_integer_get_integer_one   (void);
+FoDatatype * fo_integer_get_integer_two   (void);
+FoDatatype * fo_integer_get_integer_three (void);
+FoDatatype * fo_integer_get_integer_four  (void);
+FoDatatype * fo_integer_get_integer_five  (void);
+FoDatatype * fo_integer_get_integer_six   (void);
 
 G_END_DECLS
 
