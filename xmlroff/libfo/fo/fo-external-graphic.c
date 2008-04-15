@@ -1360,7 +1360,8 @@ resolve_one_dimension (FoDatatype *specified,
 		  g_assert_not_reached ();
 		}
 	    }
-	  else if (FO_IS_LENGTH (viewport))
+	  else if (FO_IS_LENGTH (viewport) ||
+		   FO_IS_LENGTH_RANGE (viewport))
 	    {
 	      dimension = fo_length_get_value (viewport);
 	    }
@@ -1427,19 +1428,20 @@ fo_external_graphic_validate (FoFo      *fo,
                               FoContext *parent_context,
                               GError   **error)
 {
-  FoExternalGraphic *fo_external_graphic;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_EXTERNAL_GRAPHIC (fo));
   g_return_if_fail (FO_IS_CONTEXT (current_context));
   g_return_if_fail (FO_IS_CONTEXT (parent_context));
   g_return_if_fail (error == NULL || *error == NULL);
 
-  fo_external_graphic = FO_EXTERNAL_GRAPHIC (fo);
+  FoExternalGraphic *fo_external_graphic = FO_EXTERNAL_GRAPHIC (fo);
 
-  fo_context_util_dominant_baseline_resolve (current_context, parent_context);
-  fo_context_util_height_width_resolve (current_context, parent_context);
-  fo_context_merge (current_context, parent_context);
+  fo_context_util_dominant_baseline_resolve (current_context,
+					     parent_context);
+  fo_context_util_height_width_resolve (current_context,
+					parent_context);
+  fo_context_merge (current_context,
+		    parent_context);
   fo_fo_update_from_context (fo, current_context);
   fo_external_graphic_set_line_height (fo,
 				       fo_property_line_height_resolve (fo_external_graphic->line_height,
