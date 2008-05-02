@@ -42,7 +42,6 @@ typedef enum
 #define FO_PROPERTY_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_PROPERTY, FoPropertyClass))
 
 GType        fo_property_get_type      (void) G_GNUC_CONST;
-FoProperty * fo_property_new           (void);
 
 FoDatatype * fo_property_get_value (FoProperty *property);
 void         fo_property_set_value (FoProperty *property,

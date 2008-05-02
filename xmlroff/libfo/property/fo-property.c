@@ -30,6 +30,8 @@ enum {
   PROP_IS_SHORTHAND
 };
 
+static FoProperty * fo_property_new (void);
+
 static void fo_property_base_init  (FoPropertyClass *klass);
 static void fo_property_base_finalize  (FoPropertyClass *klass);
 static void fo_property_class_init  (FoPropertyClass *klass);
