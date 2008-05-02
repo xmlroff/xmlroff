@@ -68,8 +68,6 @@ fi
 libtoolize --copy --force
 aclocal $ACLOCAL_FLAGS
 
-# optionally run gtkdocize
-(gtkdocize --version)  < /dev/null > /dev/null 2>&1 && gtkdocize --docdir docs
 # optionally run autoheader
 (autoheader --version)  < /dev/null > /dev/null 2>&1 && autoheader
 
