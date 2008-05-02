@@ -185,7 +185,7 @@ fo_image_new (void)
  *
  * If @uri is a relative URI, it is resolved relative to @base.
  * 
- * Return value: the newly created #FoImage.
+ * Return value: the newly created #FoImageo or #NULL.
  **/
 FoImage *
 fo_image_new_from_uri (const gchar *uri,
@@ -204,7 +204,7 @@ fo_image_new_from_uri (const gchar *uri,
 
   xmlFree ((xmlChar *) resolved_uri);
 
-  return fo_image;
+  return fo_image_get_pixbuf (fo_image) != NULL ? fo_image : NULL;
 }
 
 /**
@@ -280,13 +280,17 @@ fo_image_set_uri (FoImage     *fo_image,
       fo_object_log_error (FO_OBJECT (fo_image),
 			   &error);
     }
-  if (fo_image->pixbuf == NULL)
+  if (fo_image->pixbuf != NULL)
+    {
+      fo_image->width =
+	g_object_ref (fo_length_new_from_pixels (gdk_pixbuf_get_width (fo_image->pixbuf)));
+      fo_image->height =
+	g_object_ref (fo_length_new_from_pixels (gdk_pixbuf_get_height (fo_image->pixbuf)));
+    }
+  else
     {
       g_print ("Could not load image.\n");
     }
-
-  fo_image->width = g_object_ref (fo_length_new_from_pixels (gdk_pixbuf_get_width (fo_image->pixbuf)));
-  fo_image->height = g_object_ref (fo_length_new_from_pixels (gdk_pixbuf_get_height (fo_image->pixbuf)));
 }
 
 /**
