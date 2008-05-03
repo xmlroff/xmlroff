@@ -8,7 +8,7 @@
 <section id="generating-source-text">
 <title>Generating Source</title>
 
-<para>The stylesheets in the 'spec-dump' package are used to generate C source and header files from the XML for the XSL 1.0 Recommendation.</para>
+<para>The stylesheets in the 'codegen' package are used to generate C source and header files from the XML for the XSL 1.0 Recommendation.</para>
 
 <para>The generated files are not guaranteed to be drop-in replacements for the existing xmlroff source code and header files, since many of the xmlroff source code and header files have had manual modifications.</para>
 
