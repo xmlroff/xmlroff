@@ -443,15 +443,12 @@ else
 fi
 
 #
-# Check for sufficiently new CUnit
+# Check for CUnit
 #
-CUNIT_MIN_VERSION=2.1
 
 have_cunit=false
-PKG_CHECK_MODULES(CUNIT,
-		  cunit >= $CUNIT_MIN_VERSION,
-		  have_cunit=true,
-		  :)
+AC_CHECK_HEADER([CUnit/CUnit.h],
+		 have_cunit=true)
 
 dnl Let people disable the CUnit stuff.
 AC_ARG_ENABLE(cunit,
