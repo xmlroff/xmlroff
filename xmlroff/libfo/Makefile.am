@@ -11,6 +11,8 @@ LDADDS = @STRIP_BEGIN@	\
 	@GLIB_LIBS@	\
 @STRIP_END@
 
+BUILT_SOURCES = libfo-features.h
+
 noinst_LTLIBRARIES = libfo-libfo.la libfo-fodoc.la
 
 lib_LTLIBRARIES = libfo-0.6.la
@@ -104,14 +106,17 @@ libfo_0_6_includedir = $(includedir)/libfo-0.6/libfo
 libfo_0_6_include_HEADERS = \
 	fo-object.h		\
 	fo-node.h		\
-	fo-context.h
+	fo-context.h		\
+	libfo-features.h	\
+	libfo-version.h
 
 libfo_0_6_la_SOURCES = \
 	$(libfo_0_6_include_HEADERS) \
 	$(fo_base_cfiles)	\
 	$(fo_context_cfiles)	\
 	area-to-pdf.c		\
-	area-to-pdf.h
+	area-to-pdf.h		\
+	libfo-version.c
 
 libfo_0_6_la_LIBADD = \
 	util/libfo-util.la		\
@@ -127,6 +132,9 @@ libfo_0_6_la_LIBADD = \
 	$(GNOMEPRINT_LIBS) 		\
 	$(LIBXSLT_LIBS)			\
 	$(FREETYPE_LIBS)
+
+libfo-features.h:
+	cd $(top_builddir) && ./config.status libfo/libfo-features.h
 
 libfo-compat.c: s-libfo-compat-c
 	@true

@@ -12,6 +12,7 @@
 #include <string.h>
 #include <libfo/fo-libfo.h>
 #include <libfo/libfo-compat.h>
+#include <libfo/libfo-version.h>
 #if ENABLE_CAIRO
 #include <libfo/fo-doc-cairo.h>
 #endif
@@ -198,7 +199,8 @@ main (gint    argc,
       0,
       G_OPTION_ARG_NONE,
       &compat,
-      /* Describe both --compat and --nocompat since --nocompat is hidden. */
+      /* Describe both --compat and --nocompat since --nocompat is
+	 hidden. */
       _("Do ('--compat') or do not ('--nocompat') preprocess with compatibility stylesheet "
 	"(default is '--compat')"),
       NULL
@@ -306,8 +308,9 @@ main (gint    argc,
 
   if (version != 0)
     {
-      g_print (_("%s\nSubmit bug reports to %s\n"),
+      g_print (_("%s\nlibfo version: %s\nSubmit bug reports to %s\n"),
 	       PACKAGE_STRING,
+	       libfo_version_string (),
 	       PACKAGE_BUGREPORT);
       if (files == NULL)
 	{
