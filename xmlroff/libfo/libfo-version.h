@@ -1,7 +1,7 @@
 /* libfo
  * libfo-version.h: libfo version
  *
- * Copyright (C) 2008 SARL Cyberporte
+ * Copyright (C) 2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
