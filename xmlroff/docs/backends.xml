@@ -24,14 +24,14 @@ render Pango layouts using the backend.</para>
 </section>
 
 <section id="yapc">
-<title>Yet Another PostScript Clone (YAPC)</title>
+<title>FoDoc is YAPC (Yet Another PostScript Clone)</title>
 
 <para>Graphics libraries seemingly all implement some variation on the
 PostScript imaging model:</para>
 
 <variablelist>
 <varlistentry>
-<term>Drawing is done a an active "point"</term>
+<term>Drawing is done at an active "point"</term>
     <listitem><para>The "point" has a position, and you can move the
     "point" to an absolute or relative position on the drawing surface.</para></listitem>
 </varlistentry>

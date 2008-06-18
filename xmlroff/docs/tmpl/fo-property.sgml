@@ -23,6 +23,16 @@ FoProperty
 </para>
 
 
+<!-- ##### ARG FoProperty:is-inherited ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FoProperty:is-shorthand ##### -->
+<para>
+
+</para>
+
 <!-- ##### ARG FoProperty:value ##### -->
 <para>
 
@@ -61,11 +71,17 @@ FoProperty
 @FO_PROPERTY_ERROR_ZERO_LENGTH: 
 @FO_PROPERTY_ERROR_LAST: 
 
-<!-- ##### FUNCTION fo_property_new ##### -->
+<!-- ##### FUNCTION fo_property_new_from_expr ##### -->
 <para>
 
 </para>
 
+@property_class: 
+@expr: 
+@context: 
+@current_font_size: 
+@fo_node: 
+@error: 
 @Returns: 
 
 
@@ -144,20 +160,6 @@ FoProperty
 @fo_node: 
 @context: 
 @err: 
-@Returns: 
-
-
-<!-- ##### FUNCTION fo_property_new_from_expr ##### -->
-<para>
-
-</para>
-
-@property_class: 
-@expr: 
-@context: 
-@current_font_size: 
-@fo_node: 
-@error: 
 @Returns: 
 
 

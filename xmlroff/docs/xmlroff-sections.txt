@@ -1111,7 +1111,6 @@ FO_ID_GET_CLASS
 <TITLE>FoInteger</TITLE>
 FoInteger
 FoIntegerClass
-fo_integer_new
 fo_integer_new_with_value
 fo_integer_get_value
 fo_integer_get_integer_zero
@@ -8927,7 +8926,7 @@ FoPropertyClass
 FO_PROPERTY_ERROR
 fo_property_error_quark
 FoPropertyError
-fo_property_new
+fo_property_new_from_expr
 fo_property_get_value
 fo_property_set_value
 fo_property_class_is_inherited
@@ -8936,7 +8935,6 @@ fo_property_class_is_shorthand
 fo_property_is_shorthand
 FoResolveEnumFunc
 FoResolvePercentFunc
-fo_property_new_from_expr
 <SUBSECTION Standard>
 FO_PROPERTY
 FO_IS_PROPERTY
@@ -9392,6 +9390,22 @@ FO_LAYOUT_GP_GET_CLASS
 <SECTION>
 <FILE>area-to-pdf</FILE>
 fo_area_tree_to_pdf
+</SECTION>
+
+<SECTION>
+<FILE>libfo-version</FILE>
+LIBFO_VERSION_MAJOR
+LIBFO_VERSION_MINOR
+LIBFO_VERSION_MICRO
+LIBFO_VERSION_STRING
+LIBFO_PIXELS_PER_INCH
+LIBFO_VERSION_ENCODE
+LIBFO_VERSION
+LIBFO_VERSION_CHECK
+libfo_version
+libfo_version_string
+libfo_version_check
+libfo_pixels_per_inch
 </SECTION>
 
 <SECTION>

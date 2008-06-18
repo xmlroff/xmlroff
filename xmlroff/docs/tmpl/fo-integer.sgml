@@ -34,14 +34,6 @@ FoInteger
 </para>
 
 
-<!-- ##### FUNCTION fo_integer_new ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### FUNCTION fo_integer_new_with_value ##### -->
 <para>
 

@@ -42,6 +42,15 @@ FoAreaLayout
 @Returns: 
 
 
+<!-- ##### FUNCTION fo_area_layout_new_with_layout ##### -->
+<para>
+
+</para>
+
+@layout: 
+@Returns: 
+
+
 <!-- ##### FUNCTION fo_area_layout_set_layout ##### -->
 <para>
 
