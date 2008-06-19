@@ -381,7 +381,7 @@ typedef struct _FoTreeSortedHashDumpData
 
 static void
 fo_tree_hash_key_to_list (gpointer key,
-			  gpointer value,
+			  gpointer value G_GNUC_UNUSED,
 			  gpointer data)
 {
   FoTreeSortedHashDumpData *hash_dump_data =
