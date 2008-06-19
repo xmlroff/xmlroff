@@ -28,7 +28,7 @@ struct _FoDocCairo
 
   FoDocCairoSurfaceCreate  surface_create;
   gchar                   *base_filename;
-  FoEnumFormat             format;
+  FoFlagsFormat            format;
   gint                     output_sequence;
 
   gchar                   *current_filename;

@@ -30,8 +30,10 @@
 #include "CUnit/Basic.h"
 #include "test-fo-color.h"
 #include "test-fo-context.h"
+#include "test-fo-doc.h"
 #include "test-fo-expr-eval.h"
 #include "test-fo-length-range.h"
+#include "test-fo-libfo-context.h"
 
 /* The main() function for setting up and running the tests.
  * Returns a CUE_SUCCESS on successful running, another
@@ -41,7 +43,9 @@ int main ()
 {
   /* initialize the CUnit test registry */
   if (CUE_SUCCESS != CU_initialize_registry())
-    return CU_get_error();
+    {
+      return CU_get_error();
+    }
 
   CU_ErrorCode error =
     CU_register_suites (test_fo_expr_eval_get_suites());
@@ -69,7 +73,23 @@ int main ()
       return (error);
     }
 
+  error = CU_register_suites (test_fo_doc_get_suites());
+  if (error != CUE_SUCCESS)
+    {
+      printf ("%s\n" ,
+	      CU_get_error_msg ());
+      return (error);
+    }
+
   error = CU_register_suites (test_fo_length_range_get_suites());
+  if (error != CUE_SUCCESS)
+    {
+      printf ("%s\n" ,
+	      CU_get_error_msg ());
+      return (error);
+    }
+
+  error = CU_register_suites (test_fo_libfo_context_get_suites());
   if (error != CUE_SUCCESS)
     {
       printf ("%s\n" ,

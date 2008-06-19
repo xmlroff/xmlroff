@@ -33,7 +33,17 @@ const char *fo_doc_error_messages [] = {
   N_("Unsupported document format.")
 };
 
-static void          fo_doc_base_init (FoDocClass *klass);
+enum {
+  PROP_0,
+  PROP_FORMATS
+};
+
+static void          fo_doc_base_init  (FoDocClass   *klass);
+static void          fo_doc_class_init (FoDocClass   *klass);
+static void          fo_doc_get_property (GObject    *object,
+					  guint       param_id,
+					  GValue     *value,
+					  GParamSpec *pspec);
 
 static void          fo_doc_open_file_default      (FoDoc          *fo_doc,
 						    const gchar    *filename,
@@ -107,6 +117,8 @@ static void 	     fo_doc_render_layout_default       (FoDoc   *fo_doc,
 							 gdouble   x,
 							 gdouble   y);
 
+static gpointer parent_class;
+
 /**
  * fo_doc_error_quark:
  * 
@@ -145,7 +157,7 @@ fo_doc_get_type (void)
         sizeof (FoDocClass),
         (GBaseInitFunc) fo_doc_base_init,
         NULL,           /* base_finalize */
-        NULL,           /* class_init */
+        (GClassInitFunc) fo_doc_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoDoc),
@@ -172,6 +184,8 @@ fo_doc_get_type (void)
 void
 fo_doc_base_init (FoDocClass *klass)
 {
+  klass->formats             = FO_FLAG_FORMAT_UNKNOWN;
+
   klass->open_file           = fo_doc_open_file_default;
 
   klass->get_new_layout = fo_doc_get_new_layout_default;
@@ -204,6 +218,59 @@ fo_doc_base_init (FoDocClass *klass)
   klass->place_image         = fo_doc_place_image_default;
   klass->render_layout_lines = fo_doc_render_layout_lines_default;
   klass->render_layout       = fo_doc_render_layout_default;
+}
+
+/**
+ * fo_doc_class_init:
+ * @klass: #FoDocClass object to initialise.
+ * 
+ * Implements #GClassInitFunc for #FoDocClass.
+ **/
+void
+fo_doc_class_init (FoDocClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  parent_class = g_type_class_peek_parent (klass);
+
+  object_class->get_property = fo_doc_get_property;
+
+  g_object_class_install_property
+    (object_class,
+     PROP_FORMATS,
+     g_param_spec_flags ("formats",
+			 _("Output formats"),
+			 _("Supported output file formats"),
+			 FO_TYPE_FLAGS_FORMAT,
+			 FO_FLAG_FORMAT_UNKNOWN,
+			 G_PARAM_READABLE));
+}
+
+/**
+ * fo_doc_get_property:
+ * @object:  #GObject whose property will be retreived
+ * @prop_id: Property ID assigned when property registered
+ * @value:   #GValue to set with property value
+ * @pspec:   Parameter specification for this property type
+ * 
+ * Implements #GObjectGetPropertyFunc for #FoLibfoContext
+ **/
+void
+fo_doc_get_property (GObject        *object,
+		     guint           param_id,
+		     GValue         *value,
+		     GParamSpec     *pspec)
+{
+  switch (param_id)
+    {
+    case PROP_FORMATS:
+      g_value_set_flags (value,
+			 fo_doc_formats_from_name (G_OBJECT_CLASS_NAME (object)));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+    }
 }
 
 /**
@@ -280,6 +347,39 @@ fo_doc_open_file_default (FoDoc          *fo_doc,
 	 _("%s does not have a 'open_file' function."),
 	 fo_object_sprintf (fo_doc));
 #endif
+}
+
+/**
+ * fo_doc_formats_from_name:
+ * @name: Registered #FoObject type name, e.g., "FoDocCairo"
+ * 
+ * Gets the output formats supported by @name class.
+ *
+ * @name should not be #NULL.
+ *
+ * If @name does not implement any formats, returns
+ * #FO_FLAG_FORMAT_UNKNOWN.
+ * 
+ * Returns: #FoFlagsFormat with zero or more bits set for the
+ *   supported formats.
+ **/
+FoFlagsFormat
+fo_doc_formats_from_name (const gchar *name)
+{
+  g_return_val_if_fail (name != NULL, FO_FLAG_FORMAT_UNKNOWN);
+
+  FoFlagsFormat formats = FO_FLAG_FORMAT_UNKNOWN;
+  GType type = g_type_from_name (name);
+
+  if (g_type_is_a (type, fo_doc_get_type ()))
+    {
+      gpointer klass = g_type_class_ref (type);
+      formats =
+	((FoDocClass *) klass)->formats;
+      g_type_class_unref (klass);
+    }
+
+  return formats;
 }
 
 /**

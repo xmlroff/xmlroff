@@ -13,22 +13,22 @@
 #include "fo-object.h"
 
 GType
-fo_enum_format_get_type (void)
+fo_flags_format_get_type (void)
 {
-  static GType etype = 0;
-  if (etype == 0)
+  static GType ftype = 0;
+  if (ftype == 0)
     {
-      static const GEnumValue values[] = {
-        { FO_ENUM_FORMAT_UNKNOWN, "FO_ENUM_FORMAT_UNKNOWN", "unknown" },
-        { FO_ENUM_FORMAT_AUTO, "FO_ENUM_FORMAT_AUTO", "auto" },
-        { FO_ENUM_FORMAT_PDF, "FO_ENUM_FORMAT_PDF", "PDF" },
-        { FO_ENUM_FORMAT_POSTSCRIPT, "FO_ENUM_FORMAT_POSTSCRIPT", "PostScript" },
-        { FO_ENUM_FORMAT_SVG, "FO_ENUM_FORMAT_SVG", "SVG" },
+      static const GFlagsValue values[] = {
+        { FO_FLAG_FORMAT_UNKNOWN, "FO_FLAG_FORMAT_UNKNOWN", "unknown" },
+        { FO_FLAG_FORMAT_AUTO, "FO_FLAG_FORMAT_AUTO", "auto" },
+        { FO_FLAG_FORMAT_PDF, "FO_FLAG_FORMAT_PDF", "PDF" },
+        { FO_FLAG_FORMAT_POSTSCRIPT, "FO_FLAG_FORMAT_POSTSCRIPT", "PostScript" },
+        { FO_FLAG_FORMAT_SVG, "FO_FLAG_FORMAT_SVG", "SVG" },
         { 0, NULL, NULL }
       };
-      etype = g_enum_register_static ("FoEnumFormat", values);
+      ftype = g_flags_register_static ("FoFlagsFormat", values);
     }
-  return etype;
+  return ftype;
 }
 
 GType
@@ -54,7 +54,7 @@ struct _FoLibfoContext
   FoObject parent_instance;
 
   gboolean        validation;
-  FoEnumFormat    format;
+  FoFlagsFormat   format;
   FoEnumFontEmbed font_embed;
   FoWarningFlag   warning_mode;
   gboolean        continue_after_error;
@@ -137,12 +137,12 @@ fo_libfo_context_get_type (void)
  * 
  * Implements #GInstanceInitFunc for #FoLibfoContext.
  *
- * Initialises format to %FO_ENUM_FORMAT_AUTO.
+ * Initialises format to %FO_FLAG_FORMAT_AUTO.
  **/
 void
 fo_libfo_context_init (FoLibfoContext *libfo_context)
 {
-  libfo_context->format = FO_ENUM_FORMAT_AUTO;
+  libfo_context->format = FO_FLAG_FORMAT_AUTO;
 }
 
 /**
@@ -164,12 +164,12 @@ fo_libfo_context_class_init (FoLibfoContextClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_FORMAT,
-     g_param_spec_enum ("format",
-			_("Output format"),
-			_("Output file format"),
-			FO_TYPE_ENUM_FORMAT,
-			FO_ENUM_FORMAT_PDF,
-			G_PARAM_READWRITE));
+     g_param_spec_flags ("format",
+			 _("Output format"),
+			 _("Output file format"),
+			 FO_TYPE_FLAGS_FORMAT,
+			 FO_FLAG_FORMAT_PDF,
+			 G_PARAM_READWRITE));
 
   g_object_class_install_property
     (object_class,
@@ -343,11 +343,11 @@ fo_libfo_context_new (void)
  *
  * Return value: Value of the 'format' property of @libfo_context.
  **/
-FoEnumFormat
+FoFlagsFormat
 fo_libfo_context_get_format (FoLibfoContext *libfo_context)
 {
   g_return_val_if_fail (FO_IS_LIBFO_CONTEXT (libfo_context),
-			FO_ENUM_FORMAT_UNKNOWN);
+			FO_FLAG_FORMAT_UNKNOWN);
 
   return libfo_context->format;
 }
@@ -359,16 +359,21 @@ fo_libfo_context_get_format (FoLibfoContext *libfo_context)
  * @format:        New 'format' value for @libfo_context.
  * 
  * Set the 'format' property of @libfo_context.
+ *
+ * If more that one flag value is set in @format, only the first
+ * (lowest) set value will be used.
  **/
 void
 fo_libfo_context_set_format (FoLibfoContext *libfo_context,
-			     FoEnumFormat    format)
+			     FoFlagsFormat   format)
 {
   g_return_if_fail (FO_IS_LIBFO_CONTEXT (libfo_context));
-  g_return_if_fail (g_enum_get_value (g_type_class_peek (FO_TYPE_ENUM_FORMAT),
-				      format) != NULL);
+  g_return_if_fail (g_flags_get_first_value (g_type_class_peek (FO_TYPE_FLAGS_FORMAT),
+					     format) != NULL);
 
-  libfo_context->format = format;
+  libfo_context->format =
+    g_flags_get_first_value (g_type_class_peek (FO_TYPE_FLAGS_FORMAT),
+			     format)->value;
 }
 
 /**

@@ -9261,6 +9261,7 @@ FoDocLineCap
 FoDocLineJoin
 fo_doc_new
 fo_doc_new_from_type
+fo_doc_formats_from_name
 fo_doc_open_file
 fo_doc_get_new_layout
 fo_doc_get_language

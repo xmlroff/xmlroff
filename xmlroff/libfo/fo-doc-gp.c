@@ -226,6 +226,11 @@ fo_doc_gp_base_init (FoDocGPClass *klass)
 {
   FoDocClass *fo_doc_class = FO_DOC_CLASS (klass);
 
+  fo_doc_class->formats =
+    FO_FLAG_FORMAT_PDF |
+    FO_FLAG_FORMAT_POSTSCRIPT |
+    FO_FLAG_FORMAT_SVG;
+
   fo_doc_class->open_file        = fo_doc_gp_open_file;
 
   fo_doc_class->get_new_layout   = fo_doc_gp_get_new_layout;
@@ -288,21 +293,25 @@ fo_doc_gp_finalize (GObject *object)
 
   fo_doc_gp = FO_DOC_GP (object);
 
-  if (gnome_print_job_print_to_file (fo_doc_gp->job,
-				     fo_doc_gp->current_filename)
+  if ((fo_doc_gp->current_filename != NULL) &&
+      (gnome_print_job_print_to_file (fo_doc_gp->job,
+				      fo_doc_gp->current_filename))
       != GNOME_PRINT_OK)
     {
       g_error ("print_job_print_to_file");
     }
 
-  if (gnome_print_job_close (fo_doc_gp->job) != GNOME_PRINT_OK)
+  if (fo_doc_gp->job != NULL)
     {
-      g_error ("gnome_print_job_close");
-    }
+      if (gnome_print_job_close (fo_doc_gp->job) != GNOME_PRINT_OK)
+	{
+	  g_error ("gnome_print_job_close");
+	}
 
-  if (gnome_print_job_print (fo_doc_gp->job) != GNOME_PRINT_OK)
-    {
-      g_error ("gnome_print_job_print");
+      if (gnome_print_job_print (fo_doc_gp->job) != GNOME_PRINT_OK)
+	{
+	  g_error ("gnome_print_job_print");
+	}
     }
 
   if (fo_doc_gp->base_filename != NULL)
@@ -463,7 +472,7 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 	}
 
       // FIXME: There has to be a better way to do this.
-      if (fo_doc_gp->format == FO_ENUM_FORMAT_AUTO)
+      if (fo_doc_gp->format == FO_FLAG_FORMAT_AUTO)
 	{
 	  gint len = strlen (fo_doc_gp->base_filename);
 	  if (g_ascii_strncasecmp (&(fo_doc_gp->base_filename)[len-4], ".pdf", 4) == 0)
@@ -487,7 +496,7 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 		}
 	    }
 	}
-      else if (fo_doc_gp->format == FO_ENUM_FORMAT_PDF)
+      else if (fo_doc_gp->format == FO_FLAG_FORMAT_PDF)
 	{
 	  if (!gnome_print_config_set (fo_doc_gp->config,
 				       (guchar *) "Printer",
@@ -496,7 +505,7 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 	      fprintf (stderr, "gnome_print_config_set Printer-PDF");
 	    }
 	}
-      else if (fo_doc_gp->format == FO_ENUM_FORMAT_POSTSCRIPT)
+      else if (fo_doc_gp->format == FO_FLAG_FORMAT_POSTSCRIPT)
 	{
 	  if (!gnome_print_config_set (fo_doc_gp->config,
 				       (guchar *) "Printer",
@@ -506,7 +515,7 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 		       "gnome_print_config_set Printer-POSTSCRIPT");
 	    }
 	}
-      else if (fo_doc_gp->format == FO_ENUM_FORMAT_SVG)
+      else if (fo_doc_gp->format == FO_FLAG_FORMAT_SVG)
 	{
 	  if (!gnome_print_config_set (fo_doc_gp->config,
 				       (guchar *) "Settings.Engine.Backend.Driver",

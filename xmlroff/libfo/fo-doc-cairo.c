@@ -183,6 +183,11 @@ fo_doc_cairo_base_init (FoDocCairoClass *klass)
 {
   FoDocClass *fo_doc_class = FO_DOC_CLASS (klass);
 
+  fo_doc_class->formats =
+    FO_FLAG_FORMAT_PDF |
+    FO_FLAG_FORMAT_POSTSCRIPT |
+    FO_FLAG_FORMAT_SVG;
+
   fo_doc_class->open_file           = fo_doc_cairo_open_file;
 
   fo_doc_class->get_new_layout      = fo_doc_cairo_get_new_layout;
@@ -298,7 +303,7 @@ fo_doc_cairo_open_file (FoDoc          *fo_doc,
   len = strlen (fo_doc_cairo->base_filename);
   switch (fo_doc_cairo->format)
     {
-    case FO_ENUM_FORMAT_AUTO:
+    case FO_FLAG_FORMAT_AUTO:
       if (g_ascii_strncasecmp (&(fo_doc_cairo->base_filename)[len-4], ".pdf", 4) == 0)
 	{
 	  fo_doc_cairo->surface_create = &cairo_pdf_surface_create;
@@ -319,13 +324,13 @@ fo_doc_cairo_open_file (FoDoc          *fo_doc,
 		       N_(fo_doc_error_messages[FO_DOC_ERROR_UNSUPPORTED_FORMAT]));
 	}
       break;
-    case FO_ENUM_FORMAT_PDF:
+    case FO_FLAG_FORMAT_PDF:
       fo_doc_cairo->surface_create = &cairo_pdf_surface_create;
       break;
-    case FO_ENUM_FORMAT_POSTSCRIPT:
+    case FO_FLAG_FORMAT_POSTSCRIPT:
       fo_doc_cairo->surface_create = &cairo_ps_surface_create;
       break;
-    case FO_ENUM_FORMAT_SVG:
+    case FO_FLAG_FORMAT_SVG:
       fo_doc_cairo->surface_create = &cairo_svg_surface_create;
       break;
     default:

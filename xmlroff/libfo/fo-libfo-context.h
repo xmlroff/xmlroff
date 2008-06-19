@@ -2,7 +2,7 @@
  * fo-libfo-context.h: 'FoLibfoContext' object type
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -16,15 +16,15 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-  FO_ENUM_FORMAT_UNKNOWN,
-  FO_ENUM_FORMAT_AUTO,
-  FO_ENUM_FORMAT_PDF,
-  FO_ENUM_FORMAT_POSTSCRIPT,
-  FO_ENUM_FORMAT_SVG
-} FoEnumFormat;
+  FO_FLAG_FORMAT_UNKNOWN = 0,
+  FO_FLAG_FORMAT_AUTO = 1 << 0,
+  FO_FLAG_FORMAT_PDF = 1 << 1,
+  FO_FLAG_FORMAT_POSTSCRIPT = 1 << 2,
+  FO_FLAG_FORMAT_SVG = 1 << 3
+} FoFlagsFormat;
 
-GType fo_enum_format_get_type (void);
-#define FO_TYPE_ENUM_FORMAT fo_enum_format_get_type ()
+GType fo_flags_format_get_type (void);
+#define FO_TYPE_FLAGS_FORMAT fo_flags_format_get_type ()
 
 typedef enum {
   FO_ENUM_FONT_EMBED_INVALID,
@@ -50,9 +50,9 @@ typedef struct _FoLibfoContextClass FoLibfoContextClass;
 GType            fo_libfo_context_get_type (void) G_GNUC_CONST;
 FoLibfoContext * fo_libfo_context_new (void);
 
-FoEnumFormat    fo_libfo_context_get_format               (FoLibfoContext *libfo_context);
+FoFlagsFormat   fo_libfo_context_get_format               (FoLibfoContext *libfo_context);
 void            fo_libfo_context_set_format               (FoLibfoContext *libfo_context,
-							   FoEnumFormat    format);
+							   FoFlagsFormat   format);
 FoEnumFontEmbed fo_libfo_context_get_font_embed           (FoLibfoContext *libfo_context);
 void            fo_libfo_context_set_font_embed           (FoLibfoContext *libfo_context,
 							   FoEnumFontEmbed font_embed);

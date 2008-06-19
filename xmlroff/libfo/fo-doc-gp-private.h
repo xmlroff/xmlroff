@@ -26,7 +26,7 @@ struct _FoDocGP
   GnomePrintConfig  *config;
 
   gchar             *base_filename;
-  FoEnumFormat       format;
+  FoFlagsFormat      format;
   gint               output_sequence;
 
   gchar             *current_filename;

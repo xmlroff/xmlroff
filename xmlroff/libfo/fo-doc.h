@@ -62,6 +62,7 @@ typedef enum
 GType         fo_doc_get_type (void);
 FoDoc *       fo_doc_new (void);
 FoDoc *       fo_doc_new_from_type (const gchar *type);
+FoFlagsFormat fo_doc_formats_from_name (const gchar *type);
 
 void          fo_doc_open_file (FoDoc          *fo_doc,
 				const gchar    *filename,

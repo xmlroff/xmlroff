@@ -36,6 +36,7 @@ struct _FoDoc
 struct _FoDocClass
 {
   FoObjectClass parent_class;
+  FoFlagsFormat formats;
 
   void           (* open_file)           (FoDoc          *fo_doc,
 					  const gchar    *filename,

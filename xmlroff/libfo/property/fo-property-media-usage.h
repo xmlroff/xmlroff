@@ -4,7 +4,7 @@
  * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_PROPERTY_MEDIA_USAGE_H__

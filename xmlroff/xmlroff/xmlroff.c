@@ -2,7 +2,7 @@
  * xmlroff.c: Demonstration command line XSL formatter program
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting
+ * Copyright (C) 2007-2008 Menteith Consulting
  *
  * See COPYING for the status of this software.
  */
@@ -44,11 +44,11 @@ const char *xmlroff_error_messages [] = {
 
 /**
  * xmlroff_error_quark:
- * 
+ *
  * Get the error quark for xmlroff.
  *
  * If the quark does not yet exist, create it.
- * 
+ *
  * Return value: Quark associated with xmlroff errors.
  **/
 static GQuark
@@ -150,7 +150,7 @@ main (gint    argc,
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
   const gchar *format_string = NULL;
-  FoEnumFormat format_mode = FO_ENUM_FORMAT_UNKNOWN;
+  FoFlagsFormat format_mode = FO_FLAG_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
   gboolean compat_stylesheet = FALSE;
@@ -326,7 +326,7 @@ main (gint    argc,
 		  XMLROFF_ERROR,
 		  XMLROFF_ERROR_NO_FILE,
 		  xmlroff_error_messages [XMLROFF_ERROR_NO_FILE]);
-		  
+
       goto option_error;
     }
   else
@@ -345,7 +345,7 @@ main (gint    argc,
 		      XMLROFF_ERROR_ADDITIONAL_PARAM,
 		      xmlroff_error_messages [XMLROFF_ERROR_ADDITIONAL_PARAM],
 		      files[2]);
-		  
+
 	  goto option_error;
 	}
     }
@@ -360,39 +360,45 @@ main (gint    argc,
 					     continue_after_error);
 
   /* Need to do 'format' before 'backend'. */
-  if ((format_string == NULL) ||
-      (strcmp (format_string, "auto") == 0))
+  if (format_string == NULL)
     {
-      format_mode = FO_ENUM_FORMAT_AUTO;
-    }
-  else if (strcmp (format_string, "pdf") == 0)
-    {
-      format_mode = FO_ENUM_FORMAT_PDF;
-    }
-  else if (strcmp (format_string, "postscript") == 0)
-    {
-      format_mode = FO_ENUM_FORMAT_POSTSCRIPT;
-    }
-  else if (strcmp (format_string, "svg") == 0)
-    {
-      format_mode = FO_ENUM_FORMAT_SVG;
+      format_mode = FO_FLAG_FORMAT_AUTO;
     }
   else
     {
-      g_set_error(&error,
-		  XMLROFF_ERROR,
-		  XMLROFF_ERROR_UNSUPPORTED_FORMAT,
-		  xmlroff_error_messages [XMLROFF_ERROR_UNSUPPORTED_FORMAT],
-		  format_string);
-		  
-      goto option_error;
+      gchar *lower_format = g_ascii_strdown (format_string,
+					     -1);
+      if (strcmp (lower_format, "auto") == 0)
+	{
+	  format_mode = FO_FLAG_FORMAT_AUTO;
+	}
+      else if (strcmp (lower_format, "pdf") == 0)
+	{
+	  format_mode = FO_FLAG_FORMAT_PDF;
+	}
+      else if (strcmp (lower_format, "postscript") == 0)
+	{
+	  format_mode = FO_FLAG_FORMAT_POSTSCRIPT;
+	}
+      else if (strcmp (lower_format, "svg") == 0)
+	{
+	  format_mode = FO_FLAG_FORMAT_SVG;
+	}
+      else
+	{
+	  g_set_error(&error,
+		      XMLROFF_ERROR,
+		      XMLROFF_ERROR_UNSUPPORTED_FORMAT,
+		      xmlroff_error_messages [XMLROFF_ERROR_UNSUPPORTED_FORMAT],
+		      lower_format);
+	  g_free (lower_format);
+	  goto option_error;
+	}
+      g_free (lower_format);
     }
 
-  if (goption_success == TRUE)
-    {
-      fo_libfo_context_set_format (libfo_context,
-				   format_mode);
-    }
+  fo_libfo_context_set_format (libfo_context,
+			       format_mode);
 
   if (backend_string == NULL)
     {
@@ -408,28 +414,34 @@ main (gint    argc,
 		  XMLROFF_ERROR,
 		  XMLROFF_ERROR_NO_BACKEND,
 		  xmlroff_error_messages [XMLROFF_ERROR_NO_BACKEND]);
-		  
+
       goto option_error;
 #endif /* ENABLE_CAIRO */
 #endif /* ENABLE_GP */
     }
-  else if (strcmp (backend_string, "cairo") == 0)
-    {
-      fo_doc = init_fo_doc_cairo (out_file, libfo_context);
-    }
-  else if (strcmp (backend_string, "gp") == 0)
-    {
-      fo_doc = init_fo_doc_gp (out_file, libfo_context);
-    }
   else
     {
-      g_set_error(&error,
-		  XMLROFF_ERROR,
-		  XMLROFF_ERROR_UNSUPPORTED_BACKEND,
-		  xmlroff_error_messages [XMLROFF_ERROR_UNSUPPORTED_BACKEND],
-		  backend_string);
-		  
-      goto option_error;
+      gchar *lower_backend = g_ascii_strdown (backend_string,
+					      -1);
+      if (strcmp (lower_backend, "cairo") == 0)
+	{
+	  fo_doc = init_fo_doc_cairo (out_file, libfo_context);
+	}
+      else if (strcmp (lower_backend, "gp") == 0)
+	{
+	  fo_doc = init_fo_doc_gp (out_file, libfo_context);
+	}
+      else
+	{
+	  g_set_error(&error,
+		      XMLROFF_ERROR,
+		      XMLROFF_ERROR_UNSUPPORTED_BACKEND,
+		      xmlroff_error_messages [XMLROFF_ERROR_UNSUPPORTED_BACKEND],
+		      lower_backend);
+	  g_free (lower_backend);
+	  goto option_error;
+	}
+      g_free (lower_backend);
     }
 
   if (debug_mode != FO_DEBUG_NONE)

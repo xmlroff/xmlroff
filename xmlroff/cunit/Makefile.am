@@ -15,10 +15,14 @@ test_SOURCES = \
 	test-fo-color.h	\
 	test-fo-context.c	\
 	test-fo-context.h	\
+	test-fo-doc.c	\
+	test-fo-doc.h	\
 	test-fo-expr-eval.c	\
 	test-fo-expr-eval.h	\
 	test-fo-length-range.c	\
-	test-fo-length-range.h
+	test-fo-length-range.h	\
+	test-fo-libfo-context.c	\
+	test-fo-libfo-context.h
 
 test_LDFLAGS = -static
 
