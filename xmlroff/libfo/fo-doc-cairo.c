@@ -187,6 +187,8 @@ fo_doc_cairo_base_init (FoDocCairoClass *klass)
     FO_FLAG_FORMAT_PDF |
     FO_FLAG_FORMAT_POSTSCRIPT |
     FO_FLAG_FORMAT_SVG;
+  fo_doc_class->version             = cairo_version;
+  fo_doc_class->version_string      = cairo_version_string;
 
   fo_doc_class->open_file           = fo_doc_cairo_open_file;
 

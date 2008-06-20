@@ -3,7 +3,8 @@
 
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
-	$(CUNIT_CFLAGS)
+	$(CUNIT_CFLAGS)	\
+	$(PANGO_CFLAGS)
 
 if ENABLE_CUNIT
   noinst_PROGRAMS = test
@@ -28,4 +29,5 @@ test_LDFLAGS = -static
 
 test_LDADD = \
 	$(CUNIT_LIBS)		\
+	$(PANGO_LIBS)		\
 	../libfo/libfo-0.6.la

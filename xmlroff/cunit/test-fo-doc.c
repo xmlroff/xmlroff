@@ -30,6 +30,7 @@
 #include <libfo/fo-doc.h>
 #include <libfo/fo-doc-gp.h>
 #include <libfo/fo-doc-cairo.h>
+#include <cairo/cairo.h>
 
 /* The suite initialization function.
  * Returns zero on success, non-zero otherwise.
@@ -89,11 +90,37 @@ test_fo_doc_formats (void)
 		     FO_FLAG_FORMAT_SVG ));
 }
 
+static void
+test_fo_doc_version (void)
+{
+  CU_ASSERT_EQUAL (fo_doc_version_from_name (NULL),
+		   0);
+
+  CU_ASSERT_EQUAL (fo_doc_version_from_name ("bogus"),
+		   0);
+
+  /* Class that is not a FoDoc subtype should return unknown
+     format. */
+  CU_ASSERT_EQUAL (fo_doc_version_from_name (g_type_name (fo_object_get_type ())),
+		   0);
+
+  CU_ASSERT_EQUAL (fo_doc_version_from_name (g_type_name (fo_doc_get_type ())),
+		   0);
+
+  CU_ASSERT_EQUAL (fo_doc_version_from_name (g_type_name (fo_doc_cairo_get_type ())),
+		   cairo_version ());
+
+  CU_ASSERT_EQUAL (fo_doc_version_from_name (g_type_name (fo_doc_gp_get_type ())),
+		   0);
+}
+
 static CU_TestInfo test_array[] = {
   { "FoDoc new and finalize",
     test_fo_doc_new_finalize },
   { "FoDoc get formats",
     test_fo_doc_formats },
+  { "FoDoc get version",
+    test_fo_doc_version },
   CU_TEST_INFO_NULL,
 };
 

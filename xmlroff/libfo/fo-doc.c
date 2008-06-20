@@ -4,7 +4,7 @@
  * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include "config.h"
@@ -27,6 +27,18 @@
 #include "fo-font-desc-private.h"
 #include "fo-libfo-context.h"
 
+/**
+ * SECTION:fo-doc
+ * @short_description: Abstract output document type
+ *
+ * #FoDoc provides the primitives for writing text, lines, rectangles,
+ * etc., to the output.
+ *
+ * It is generalised so that libfo can support multiple backend
+ * implementations (and add and remove backend implementations)
+ * without having to restructure the rest of libfo.
+ */
+
 const char *fo_doc_error_messages [] = {
   N_("FoDoc error"),
   N_("Cannot open output document: '%s'"),
@@ -45,6 +57,8 @@ static void          fo_doc_get_property (GObject    *object,
 					  GValue     *value,
 					  GParamSpec *pspec);
 
+static gint          fo_doc_version_default        (void);
+static const gchar * fo_doc_version_string_default (void);
 static void          fo_doc_open_file_default      (FoDoc          *fo_doc,
 						    const gchar    *filename,
 						    FoLibfoContext *libfo_context,
@@ -185,6 +199,8 @@ void
 fo_doc_base_init (FoDocClass *klass)
 {
   klass->formats             = FO_FLAG_FORMAT_UNKNOWN;
+  klass->version             = fo_doc_version_default;
+  klass->version_string      = fo_doc_version_string_default;
 
   klass->open_file           = fo_doc_open_file_default;
 
@@ -382,6 +398,88 @@ fo_doc_formats_from_name (const gchar *name)
   return formats;
 }
 
+gint
+fo_doc_version_default ()
+{
+  return 0;
+}
+
+
+/**
+ * fo_doc_version_from_name:
+ * @name: Registered #FoObject type name, e.g., "FoDocCairo"
+ * 
+ * Gets the runtime version of the library underlying the #FoDoc
+ * implementation as a human-readable string.
+ *
+ * This function just returns what the underlying library provides, if
+ * anything, so version numbers can only meaningfully be compared
+ * against version numbers of the same library implementation.
+ * 
+ * Returns: Library version, or 0 if the underlying library does not
+ *   make its version number available at runtime
+ **/
+gint
+fo_doc_version_from_name (const gchar *name)
+{
+  g_return_val_if_fail (name != NULL, 0);
+
+  gint version = 0;
+  GType type = g_type_from_name (name);
+
+  if (g_type_is_a (type, fo_doc_get_type ()))
+    {
+      gpointer klass = g_type_class_ref (type);
+      version =
+	((FoDocClass *) klass)->version ();
+      g_type_class_unref (klass);
+    }
+
+  return version;
+}
+
+
+const gchar *
+fo_doc_version_string_default ()
+{
+  return NULL;
+}
+
+
+/**
+ * fo_doc_version_string_from_name:
+ * @name: Registered #FoObject type name, e.g., "FoDocCairo"
+ * 
+ * Gets the runtime version of the library underlying the #FoDoc
+ * implementation.
+ * 
+ * The string is likely to be of the form "X.Y.Z", e.g., "1.0.0", but
+ * this function just returns what the underlying library provides, so
+ * nothing in guaranteed.
+ * 
+ * Returns: Library version, or 0 if the underlying library does not
+ *   make its version number available at runtime
+ **/
+const gchar *
+fo_doc_version_string_from_name (const gchar *name)
+{
+  g_return_val_if_fail (name != NULL, NULL);
+
+  const gchar *version = NULL;
+  GType type = g_type_from_name (name);
+
+  if (g_type_is_a (type, fo_doc_get_type ()))
+    {
+      gpointer klass = g_type_class_ref (type);
+      version =
+	((FoDocClass *) klass)->version_string ();
+      g_type_class_unref (klass);
+    }
+
+  return version;
+}
+
+
 /**
  * fo_doc_open_file:
  * @fo_doc:        #FoDoc for which to open an output file.
@@ -413,7 +511,7 @@ fo_doc_open_file (FoDoc          *fo_doc,
  * Return value: New #FoLayout.
  **/
 FoLayout *
-fo_doc_get_new_layout_default (FoDoc        *fo_doc)
+fo_doc_get_new_layout_default (FoDoc  *fo_doc)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
