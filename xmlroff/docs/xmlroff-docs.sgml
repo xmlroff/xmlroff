@@ -201,6 +201,7 @@
 <!ENTITY fo-image SYSTEM "xml/fo-image.xml">
 
 <!-- Utility modules -->
+<!ENTITY fo-utils SYSTEM "xml/fo-utils.xml">
 <!ENTITY libfo-compat SYSTEM "xml/libfo-compat.xml">
 <!ENTITY libfo-pango SYSTEM "xml/libfo-pango.xml">
 <!ENTITY libfo-version SYSTEM "xml/libfo-version.xml">
@@ -437,6 +438,7 @@
 
   <chapter id="utility-modules">
     <title>Utility Modules</title>
+    &fo-utils;
     &libfo-compat;
     &libfo-pango;
     &libfo-version;

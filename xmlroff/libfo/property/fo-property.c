@@ -15,6 +15,13 @@
 #include "fo-property-font-size.h"
 /*#include <expression-parser.h>*/
 
+/**
+ * SECTION:fo-property
+ * @short_description: Abstract FO property type
+ *
+ * Every property is a subtype of #FoProperty.
+ */
+
 const gchar *fo_property_error_messages [] = {
   N_("Property error."),
   N_("Property expression evaluation failed."),
@@ -29,8 +36,6 @@ enum {
   PROP_IS_INHERITED,
   PROP_IS_SHORTHAND
 };
-
-static FoProperty * fo_property_new (void);
 
 static void fo_property_base_init  (FoPropertyClass *klass);
 static void fo_property_base_finalize  (FoPropertyClass *klass);
@@ -286,24 +291,6 @@ fo_property_get_property (GObject         *object,
       break;
     }
 }
-
-/**
- * fo_property_new:
- * 
- * Creates a new #FoProperty initialized to default value.
- * 
- * Return value: the new #FoProperty.
- **/
-FoProperty*
-fo_property_new (void)
-{
-  FoProperty *property;
-
-  property = FO_PROPERTY (g_object_new (fo_property_get_type (), NULL));
-  
-  return property;
-}
-
 
 /**
  * fo_property_get_value:

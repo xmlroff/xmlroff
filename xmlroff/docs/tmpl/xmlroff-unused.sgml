@@ -1,4 +1,82 @@
+<!-- ##### MACRO FO_DEBUG_AREA ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_FO ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_MAX ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_NONE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_PANGO ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_PDF ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_DEBUG_RESULT ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### MACRO FO_TYPE_ENUM_FONT_VARIANT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_TYPE_ENUM_FORMAT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_WARNING_FO ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_WARNING_MAX ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_WARNING_NONE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_WARNING_PROPERTY ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_WARNING_UNSUPPORTED_PROPERTY ##### -->
 <para>
 
 </para>
@@ -11,6 +89,17 @@
 
 @FO_ENUM_FONT_VARIANT_NORMAL: 
 @FO_ENUM_FONT_VARIANT_SMALL_CAPS: 
+
+<!-- ##### ENUM FoEnumFormat ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FORMAT_UNKNOWN: 
+@FO_ENUM_FORMAT_AUTO: 
+@FO_ENUM_FORMAT_PDF: 
+@FO_ENUM_FORMAT_POSTSCRIPT: 
+@FO_ENUM_FORMAT_SVG: 
 
 <!-- ##### FUNCTION fo_doc_fill_stroke ##### -->
 <para>

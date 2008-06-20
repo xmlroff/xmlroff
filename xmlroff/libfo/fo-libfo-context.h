@@ -14,8 +14,18 @@
 
 G_BEGIN_DECLS
 
-typedef enum
-{
+/**
+ * FoFlagsFormat:
+ * @FO_FLAG_FORMAT_UNKNOWN:    Invalid format
+ * @FO_FLAG_FORMAT_AUTO:       Choose based on output file name or other heuristic
+ * @FO_FLAG_FORMAT_PDF:        PDF
+ * @FO_FLAG_FORMAT_POSTSCRIPT: PostScript
+ * @FO_FLAG_FORMAT_SVG:        SVG
+ *
+ * Output file format.  Used both for specifying which format to use
+ * and to identify formats supported by a particular backend.
+ */
+typedef enum {
   FO_FLAG_FORMAT_UNKNOWN = 0,
   FO_FLAG_FORMAT_AUTO = 1 << 0,
   FO_FLAG_FORMAT_PDF = 1 << 1,
@@ -26,6 +36,17 @@ typedef enum
 GType fo_flags_format_get_type (void);
 #define FO_TYPE_FLAGS_FORMAT fo_flags_format_get_type ()
 
+/**
+ * FoEnumFontEmbed:
+ * @FO_ENUM_FONT_EMBED_INVALID: Invalid category
+ * @FO_ENUM_FONT_EMBED_ALL:     Embed all fonts
+ * @FO_ENUM_FONT_EMBED_NONBASE: Embed all fonts except the PostScript base fonts
+ * @FO_ENUM_FONT_EMBED_NONE:    Do not embed any fonts
+ *
+ * Which categories of fonts to embed in the output file, useful only
+ * where the output format and the backend both support control of
+ * embedding or not embedding those fonts.
+ */
 typedef enum {
   FO_ENUM_FONT_EMBED_INVALID,
   FO_ENUM_FONT_EMBED_ALL,

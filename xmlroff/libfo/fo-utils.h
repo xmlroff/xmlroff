@@ -31,31 +31,43 @@ G_BEGIN_DECLS
      if ((src) != NULL) \
 	{ g_propagate_error ((src), (dest)); return ((val)); }
 
-typedef gint FoDebugFlag;
-
 /**
- * FO_DEBUG_NONE: No debug
- **/
-#define FO_DEBUG_NONE		0
-#define FO_DEBUG_RESULT		1 << 0
-#define FO_DEBUG_FO		1 << 1
-#define FO_DEBUG_AREA		1 << 2
-#define FO_DEBUG_PANGO		1 << 3
-#define FO_DEBUG_PDF		1 << 4
-#define FO_DEBUG_MAX		((1 << 5) - 1)
-
-typedef gint FoWarningFlag;
-
-/**
- * FO_WARNING_NONE:
+ * FoDebugFlag:
+ * @FO_DEBUG_NONE:   No debugging enabled
+ * @FO_DEBUG_RESULT: Debug result tree
+ * @FO_DEBUG_FO:     Debug FO tree
+ * @FO_DEBUG_AREA:   Debug area tree
+ * @FO_DEBUG_PANGO:  Debug Pango layouts
+ * @FO_DEBUG_MAX:    Maximum possible value
  *
- * No explicit control over warning message output.
- **/
-#define FO_WARNING_NONE			0
-#define FO_WARNING_FO			1 << 0
-#define FO_WARNING_PROPERTY		1 << 1
-#define FO_WARNING_UNSUPPORTED_PROPERTY	1 << 2
-#define FO_WARNING_MAX			((1 << 3) - 1)
+ * Debugging flags.
+ */
+typedef enum {
+  FO_DEBUG_NONE = 0,
+  FO_DEBUG_RESULT = 1 << 0,
+  FO_DEBUG_FO = 1 << 1,
+  FO_DEBUG_AREA = 1 << 2,
+  FO_DEBUG_PANGO = 1 << 3,
+  FO_DEBUG_MAX = ((1 << 4) - 1)
+} FoDebugFlag;
+
+/**
+ * FoWarningFlag:
+ * @FO_WARNING_NONE: No explicit control over warning message output
+ * @FO_WARNING_FO:   Do not warn about FO errors
+ * @FO_WARNING_PROPERTY: Do not warn about property errors
+ * @FO_WARNING_UNSUPPORTED_PROPERTY: Do not warn about unsupported properties
+ * @FO_WARNING_MAX: Maxemum possible value
+ *
+ * Warning flags.
+ */
+typedef enum {
+  FO_WARNING_NONE = 0,
+  FO_WARNING_FO = 1 << 0,
+  FO_WARNING_PROPERTY = 1 << 1,
+  FO_WARNING_UNSUPPORTED_PROPERTY = 1 << 2,
+  FO_WARNING_MAX = ((1 << 3) - 1)
+} FoWarningFlag;
 
 typedef enum {
   FO_ENUM_AREA_DIRECTION_UNKNOWN,

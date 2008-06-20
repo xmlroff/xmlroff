@@ -2,7 +2,7 @@
  * fo-libfo-context.c: 'FoLibfoContext' object type
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,6 +11,17 @@
 #include "libfo/fo-utils.h"
 #include "libfo/fo-libfo-context.h"
 #include "fo-object.h"
+
+/**
+ * SECTION:fo-libfo-context
+ * @short_description: Collected information about the processing context
+ *
+ * Collected information about the processing context in which to do the formatting.
+ *
+ * This context contains parameters that are not part of the XML for
+ * the FO, e.g., whether or not to validate the input and whether or
+ * not to embed fonts in the output.
+ */
 
 GType
 fo_flags_format_get_type (void)

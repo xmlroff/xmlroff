@@ -15,6 +15,16 @@
 #include "fo-node.h"
 #include "fo-root.h"
 
+/**
+ * SECTION:fo-tree
+ * @short_description: Top of the FO tree
+ *
+ * #FoTree is above #FoRoot (which represents the fo:root formatting
+ * object).  #FoTree is used for aspects such as id-FO mapping that
+ * apply to the FO tree as a whole but are outside the definition of
+ * XSL formatting objects.
+ */
+
 enum {
   PROP_0
 };
@@ -355,21 +365,6 @@ fo_tree_default_master_get (FoFo *tree)
   g_return_val_if_fail (FO_IS_TREE (tree), NULL);
 
   return FO_TREE (tree)->default_master;
-}
-
-static void
-fo_tree_debug_dump_hash_item (gpointer key,
-			      gpointer value,
-			      gpointer data)
-{
-  gchar *indent = g_strnfill (GPOINTER_TO_INT (data) * 2, ' ');
-
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 "%s%s : %p",
-	 indent, (gchar *) key, value);
-
-  g_free (indent);
 }
 
 typedef struct _FoTreeSortedHashDumpData

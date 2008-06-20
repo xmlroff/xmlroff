@@ -52,101 +52,28 @@ fo-utils
 @val: 
 
 
-<!-- ##### TYPEDEF FoDebugFlag ##### -->
+<!-- ##### ENUM FoDebugFlag ##### -->
 <para>
 
 </para>
 
+@FO_DEBUG_NONE: 
+@FO_DEBUG_RESULT: 
+@FO_DEBUG_FO: 
+@FO_DEBUG_AREA: 
+@FO_DEBUG_PANGO: 
+@FO_DEBUG_MAX: 
 
-<!-- ##### MACRO FO_DEBUG_NONE ##### -->
+<!-- ##### ENUM FoWarningFlag ##### -->
 <para>
 
 </para>
 
-
-
-<!-- ##### MACRO FO_DEBUG_RESULT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_DEBUG_FO ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_DEBUG_AREA ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_DEBUG_PANGO ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_DEBUG_PDF ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_DEBUG_MAX ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### TYPEDEF FoWarningFlag ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### MACRO FO_WARNING_NONE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_WARNING_FO ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_WARNING_PROPERTY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_WARNING_UNSUPPORTED_PROPERTY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO FO_WARNING_MAX ##### -->
-<para>
-
-</para>
-
-
+@FO_WARNING_NONE: 
+@FO_WARNING_FO: 
+@FO_WARNING_PROPERTY: 
+@FO_WARNING_UNSUPPORTED_PROPERTY: 
+@FO_WARNING_MAX: 
 
 <!-- ##### ENUM FoEnumAreaDirection ##### -->
 <para>
