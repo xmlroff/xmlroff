@@ -114,6 +114,30 @@ test_fo_doc_version (void)
 		   0);
 }
 
+static void
+test_fo_doc_version_string (void)
+{
+  CU_ASSERT_EQUAL (fo_doc_version_string_from_name (NULL),
+		   NULL);
+
+  CU_ASSERT_EQUAL (fo_doc_version_string_from_name ("bogus"),
+		   NULL);
+
+  /* Class that is not a FoDoc subtype should return unknown
+     format. */
+  CU_ASSERT_EQUAL (fo_doc_version_string_from_name (g_type_name (fo_object_get_type ())),
+		   NULL);
+
+  CU_ASSERT_EQUAL (fo_doc_version_string_from_name (g_type_name (fo_doc_get_type ())),
+		   NULL);
+
+  CU_ASSERT_EQUAL (fo_doc_version_string_from_name (g_type_name (fo_doc_cairo_get_type ())),
+		   cairo_version_string ());
+
+  CU_ASSERT_EQUAL (fo_doc_version_string_from_name (g_type_name (fo_doc_gp_get_type ())),
+		   NULL);
+}
+
 static CU_TestInfo test_array[] = {
   { "FoDoc new and finalize",
     test_fo_doc_new_finalize },
@@ -121,6 +145,8 @@ static CU_TestInfo test_array[] = {
     test_fo_doc_formats },
   { "FoDoc get version",
     test_fo_doc_version },
+  { "FoDoc get version string",
+    test_fo_doc_version_string },
   CU_TEST_INFO_NULL,
 };
 

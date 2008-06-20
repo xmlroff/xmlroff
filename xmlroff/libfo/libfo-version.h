@@ -117,6 +117,15 @@ const char * libfo_version_check (int required_major,
 
 int libfo_pixels_per_inch (void);
 
+typedef struct {
+  const gchar *nick;
+  const gchar *name;
+  gint         version;
+  const gchar *version_string;
+} LibfoVersionInfo;
+
+const LibfoVersionInfo * libfo_version_backend_info (void);
+
 G_END_DECLS
 
 #endif /* __LIBFO_VERSION_H__ */

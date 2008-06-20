@@ -9,9 +9,15 @@
  */
 
 #include <config.h>
-#include <glib.h>
-#include "libfo-features.h"
-#include "libfo-version.h"
+#include <libfo/fo-utils.h>
+#include "libfo/libfo-features.h"
+#include "libfo/libfo-version.h"
+#if ENABLE_CAIRO
+#include <libfo/fo-doc-cairo.h>
+#endif
+#if ENABLE_GP
+#include <libfo/fo-doc-gp.h>
+#endif
 
 /**
  * libfo_version:
@@ -110,3 +116,47 @@ libfo_pixels_per_inch (void)
   return PIXELS_PER_INCH;
 }
 
+enum {
+#if ENABLE_CAIRO
+  CAIRO_INFO,
+#endif
+#if ENABLE_GP
+  GP_INFO,
+#endif
+  NULL_INFO,
+  INFO_LIMIT
+};
+
+const LibfoVersionInfo *
+libfo_version_backend_info (void)
+{
+  static LibfoVersionInfo * backend_info = NULL;
+
+  if (backend_info == NULL)
+    {
+      backend_info = g_new0 (LibfoVersionInfo, INFO_LIMIT);
+
+#if ENABLE_CAIRO
+      backend_info[CAIRO_INFO].nick = "cairo";
+      backend_info[CAIRO_INFO].name =
+	g_type_name (fo_doc_cairo_get_type ());
+      backend_info[CAIRO_INFO].version =
+	fo_doc_version_from_name (g_type_name (fo_doc_cairo_get_type ()));
+      backend_info[CAIRO_INFO].version_string =
+	fo_doc_version_string_from_name (g_type_name (fo_doc_cairo_get_type ()));
+
+#endif
+
+#if ENABLE_GP
+      backend_info[GP_INFO].nick = "gp";
+      backend_info[GP_INFO].name =
+	g_type_name (fo_doc_cairo_get_type ());
+      backend_info[GP_INFO].version =
+	fo_doc_version_from_name (g_type_name (fo_doc_cairo_get_type ()));
+      backend_info[GP_INFO].version_string =
+	fo_doc_version_string_from_name (g_type_name (fo_doc_gp_get_type ()));
+#endif
+    }
+
+  return backend_info;
+}
