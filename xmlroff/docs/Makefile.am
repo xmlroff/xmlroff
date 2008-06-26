@@ -196,7 +196,24 @@ GTKDOC_LIBS = \
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 
+########################################################################
+
+man_MANS = xmlroff.1 
+
+if ENABLE_MAN
+
+%.1 : %.xml 
+	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+
+endif
+
+BUILT_EXTRA_DIST = $(man_MANS)
+
 dist-hook-local:
+	files='$(BUILT_EXTRA_DIST)';				\
+	for f in $$files; do					\
+	  if test -f $$f; then d=.; else d=$(srcdir); fi;	\
+	  cp $$d/$$f $(distdir) || exit 1; done
 	mv $(srcdir)/html/style.css $(srcdir)/html/old-style.css
 	echo "@import \"xmlroff.css\";" > $(srcdir)/html/style.css
 	cat $(srcdir)/html/old-style.css >> $(srcdir)/html/style.css

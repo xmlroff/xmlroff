@@ -196,6 +196,23 @@ dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_GTK_DOC, test "x$enable_gtk_doc" = "xyes")
 
+AC_ARG_ENABLE(man,
+              [AC_HELP_STRING([--enable-man],
+                              [regenerate man pages from Docbook [default=no]])],enable_man=yes,
+              enable_man=no)
+
+if test "${enable_man}" != no; then
+dnl
+dnl Check for xsltproc
+dnl
+AC_PATH_PROG([XSLTPROC], [xsltproc])
+  if test -z "$XSLTPROC"; then
+    enable_man=no
+  fi
+fi
+
+AM_CONDITIONAL(ENABLE_MAN, test x$enable_man != xno)
+
 #
 # Checks for libxslt
 #
