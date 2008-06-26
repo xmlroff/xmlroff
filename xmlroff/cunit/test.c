@@ -34,6 +34,7 @@
 #include "test-fo-expr-eval.h"
 #include "test-fo-length-range.h"
 #include "test-fo-libfo-context.h"
+#include "test-libfo-version.h"
 
 /* The main() function for setting up and running the tests.
  * Returns a CUE_SUCCESS on successful running, another
@@ -90,6 +91,14 @@ int main ()
     }
 
   error = CU_register_suites (test_fo_libfo_context_get_suites());
+  if (error != CUE_SUCCESS)
+    {
+      printf ("%s\n" ,
+	      CU_get_error_msg ());
+      return (error);
+    }
+
+  error = CU_register_suites (test_libfo_version_get_suites());
   if (error != CUE_SUCCESS)
     {
       printf ("%s\n" ,

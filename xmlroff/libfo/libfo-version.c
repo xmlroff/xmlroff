@@ -150,9 +150,9 @@ libfo_version_backend_info (void)
 #if ENABLE_GP
       backend_info[GP_INFO].nick = "gp";
       backend_info[GP_INFO].name =
-	g_type_name (fo_doc_cairo_get_type ());
+	g_type_name (fo_doc_gp_get_type ());
       backend_info[GP_INFO].version =
-	fo_doc_version_from_name (g_type_name (fo_doc_cairo_get_type ()));
+	fo_doc_version_from_name (g_type_name (fo_doc_gp_get_type ()));
       backend_info[GP_INFO].version_string =
 	fo_doc_version_string_from_name (g_type_name (fo_doc_gp_get_type ()));
 #endif
