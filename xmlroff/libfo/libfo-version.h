@@ -112,8 +112,8 @@ const char * libfo_version_string (void);
 
 /* Check that run-time libfo is as new as required */
 const char * libfo_version_check (int required_major,
-				int required_minor,
-				int required_micro);
+				  int required_minor,
+				  int required_micro);
 
 int libfo_pixels_per_inch (void);
 
