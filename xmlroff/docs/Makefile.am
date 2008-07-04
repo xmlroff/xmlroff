@@ -166,7 +166,8 @@ content_files = \
 	generating-source.xml		\
 	xmlroff-code-rules.xml		\
 	xmlroff-property-decl.ent	\
-	xmlroff-property-ref.ent
+	xmlroff-property-ref.ent	\
+	xsl-gobject.xml
 
 extra_files = \
 	xmlroff.fo	\

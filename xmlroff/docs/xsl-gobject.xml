@@ -1,0 +1,46 @@
+<section id="xsl-gobject">
+<sectioninfo>
+<abstract><para>XSL defines formatting objects and their properties. GObject -- the GLib Object System -- is an object oriented framework for C for where you define objects and their properties.  This section is a summary of how formatting objects and their properties map to GOjects and their properties.</para></abstract>
+</sectioninfo>
+<title>Relating XSL to GObjects</title>
+
+<section id="fo-gobject">
+<title>Formatting Object --> FoFo</title>
+
+<para>Each XSL formatting object maps to a subtype of the FoFo GObject object type.</para>
+
+<para>Each XSL property of an XSL formatting object maps to a property of the corresponding FoFo subtype.</para>
+
+<para>Functions that return or use formatting object generally use FoFo objects rather than subtypes.</para>
+
+<para>The GObject object type name is "Fo" and the camel-case form of the XSL formatting object name.  For example, fo:page-sequence maps to FoPageSequence.</para>
+
+</section>
+
+<section id="datatype-gobject">
+<title>Formatting Object property --> FoProperty</title>
+
+<para>Each XSL property maps to a subtype of the FoProperty GObject object type.</para>
+
+<para>An FoProperty has a value, which is a FoDatatype.</para>
+
+<para>Functions that return or use XSL properties generally use FoProperty objects rather than specific subtypes.</para>
+
+<para>The GObject object type name is "FoProperty" and the camel-case form of the XSL property name.  For example, writing-mode maps to FoPropertyWritingMode.</para>
+
+</section>
+
+<section id="datatype-gobject">
+<title>XSL datatype --> FoDatatype</title>
+
+<para>Each XSL dataype maps to a subtype of the FoDatatype GObject object type.</para>
+
+<para>An FoDatatype has a value.  The value is set when the FoDatatype is created, and it cannot be changed.</para>
+
+<para>Functions that return or use XSL datatypes generally use FoDatatype objects rather than specific subtypes.</para>
+
+<para>The GObject object type name is the camel-case form of the XSL datatype name.  For example, color maps to FoColor.</para>
+
+</section>
+
+</section>
