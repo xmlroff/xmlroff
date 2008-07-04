@@ -28,6 +28,8 @@ static void fo_doc_cairo_base_init     (FoDocCairoClass *klass);
 static void fo_doc_cairo_class_init    (FoDocCairoClass *klass);
 static void fo_doc_cairo_finalize      (GObject         *object);
 
+static const LibfoVersionInfo * _version_info ();
+
 static FoLayout *    fo_doc_cairo_get_new_layout     (FoDoc        *fo_doc);
 
 static void          fo_doc_cairo_begin_page         (FoDoc        *fo_doc,
@@ -100,6 +102,17 @@ static void 	     fo_doc_cairo_render_layout       (FoDoc       *fo_doc,
 						       gdouble      x,
 						       gdouble      y);
 static gpointer parent_class;
+
+static LibfoVersionInfo version_info =
+  {
+    LIBFO_MODULE_BACKEND,
+    "cairo",
+    "FoDocCairo",
+    CAIRO_VERSION,
+    CAIRO_VERSION_STRING,
+    0,
+    NULL
+  };
 
 /**
  * fo_doc_cairo_error_quark:
@@ -189,6 +202,7 @@ fo_doc_cairo_base_init (FoDocCairoClass *klass)
     FO_FLAG_FORMAT_SVG;
   fo_doc_class->version             = cairo_version;
   fo_doc_class->version_string      = cairo_version_string;
+  fo_doc_class->version_info        = _version_info;
 
   fo_doc_class->open_file           = fo_doc_cairo_open_file;
 
@@ -270,6 +284,16 @@ fo_doc_cairo_new (void)
   return FO_DOC (g_object_new (fo_doc_cairo_get_type (),
 			       NULL));
 }
+
+const LibfoVersionInfo *
+_version_info ()
+{
+  version_info.runtime = cairo_version ();
+  version_info.runtime_string = cairo_version_string ();
+
+  return &version_info;
+}
+
 
 /**
  * fo_doc_cairo_open_file:

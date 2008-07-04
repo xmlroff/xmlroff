@@ -32,6 +32,8 @@ static void fo_doc_gp_base_init     (FoDocGPClass *klass);
 static void fo_doc_gp_class_init    (FoDocGPClass *klass);
 static void fo_doc_gp_finalize      (GObject      *object);
 
+static const LibfoVersionInfo * _version_info ();
+
 static FoLayout *    fo_doc_gp_get_new_layout   (FoDoc        *fo_doc);
 
 static void          fo_doc_gp_begin_page       (FoDoc        *fo_doc,
@@ -101,6 +103,17 @@ static void 	     fo_doc_gp_render_layout       (FoDoc   *fo_doc,
 						    gdouble   x,
 						    gdouble   y);
 static gpointer parent_class;
+
+static const LibfoVersionInfo version_info =
+  {
+    LIBFO_MODULE_BACKEND,
+    "gp",
+    "FoDocGP",
+    0,
+    NULL,
+    0,
+    NULL
+  };
 
 /**
  * fo_doc_gp_error_quark:
@@ -231,6 +244,8 @@ fo_doc_gp_base_init (FoDocGPClass *klass)
     FO_FLAG_FORMAT_POSTSCRIPT |
     FO_FLAG_FORMAT_SVG;
 
+  fo_doc_class->version_info     = _version_info;
+
   fo_doc_class->open_file        = fo_doc_gp_open_file;
 
   fo_doc_class->get_new_layout   = fo_doc_gp_get_new_layout;
@@ -354,6 +369,12 @@ fo_doc_gp_new (void)
 {
   return FO_DOC (g_object_new (fo_doc_gp_get_type (),
 			       NULL));
+}
+
+const LibfoVersionInfo *
+_version_info ()
+{
+  return &version_info;
 }
 
 /**

@@ -52,18 +52,18 @@ clean_suite (void)
 }
 
 static void
-test_libfo_version_backend (void)
+test_libfo_version_get_info (void)
 {
-  const LibfoVersionInfo * backend_info = libfo_version_backend_info ();
+  const LibfoVersionInfo ** backend_info = libfo_version_get_info ();
 
-  CU_ASSERT_EQUAL (backend_info[0].nick, "cairo");
-  CU_ASSERT_EQUAL (backend_info[1].nick, "gp");
-  CU_ASSERT_EQUAL (backend_info[2].nick, NULL);
+  CU_ASSERT_EQUAL (backend_info[0]->nick, "cairo");
+  CU_ASSERT_EQUAL (backend_info[1]->nick, "gp");
+  CU_ASSERT_EQUAL (backend_info[2], NULL);
 }
 
 static CU_TestInfo test_array[] = {
-  { "libfo-version get backend info",
-    test_libfo_version_backend },
+  { "libfo-version get info",
+    test_libfo_version_get_info },
   CU_TEST_INFO_NULL,
 };
 

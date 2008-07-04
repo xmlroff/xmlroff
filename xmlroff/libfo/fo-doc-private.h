@@ -40,6 +40,7 @@ struct _FoDocClass
 
   gint           (*version)              (void);
   const gchar*   (*version_string)       (void);
+  const LibfoVersionInfo * (*version_info) (void);
 
   void           (* open_file)           (FoDoc          *fo_doc,
 					  const gchar    *filename,

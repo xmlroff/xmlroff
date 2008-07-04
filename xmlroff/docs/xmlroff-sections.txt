@@ -9411,6 +9411,9 @@ libfo_version
 libfo_version_string
 libfo_version_check
 libfo_pixels_per_inch
+LibfoModuleEnum
+LibfoVersionInfo
+libfo_version_get_info
 </SECTION>
 
 <SECTION>

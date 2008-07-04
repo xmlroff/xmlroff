@@ -127,36 +127,28 @@ enum {
   INFO_LIMIT
 };
 
-const LibfoVersionInfo *
-libfo_version_backend_info (void)
+/**
+ * libfo_version_get_info:
+ * 
+ * Gets the #LibfoVersionInfo of libfo components.
+ * 
+ * Returns: Array of pointers to #LibfoVersionInfo.  The last item is %NULL.
+ **/
+const LibfoVersionInfo **
+libfo_version_get_info (void)
 {
-  static LibfoVersionInfo * backend_info = NULL;
+  static const LibfoVersionInfo * backend_info[INFO_LIMIT];
 
-  if (backend_info == NULL)
+  if (backend_info[0] == NULL)
     {
-      backend_info = g_new0 (LibfoVersionInfo, INFO_LIMIT);
-
 #if ENABLE_CAIRO
-      backend_info[CAIRO_INFO].nick = "cairo";
-      backend_info[CAIRO_INFO].name =
-	g_type_name (fo_doc_cairo_get_type ());
-      backend_info[CAIRO_INFO].version =
-	fo_doc_version_from_name (g_type_name (fo_doc_cairo_get_type ()));
-      backend_info[CAIRO_INFO].version_string =
-	fo_doc_version_string_from_name (g_type_name (fo_doc_cairo_get_type ()));
-
+      backend_info[CAIRO_INFO] = fo_doc_version_info_from_name (g_type_name (fo_doc_cairo_get_type ()));
 #endif
 
 #if ENABLE_GP
-      backend_info[GP_INFO].nick = "gp";
-      backend_info[GP_INFO].name =
-	g_type_name (fo_doc_gp_get_type ());
-      backend_info[GP_INFO].version =
-	fo_doc_version_from_name (g_type_name (fo_doc_gp_get_type ()));
-      backend_info[GP_INFO].version_string =
-	fo_doc_version_string_from_name (g_type_name (fo_doc_gp_get_type ()));
+      backend_info[GP_INFO] = fo_doc_version_info_from_name (g_type_name (fo_doc_gp_get_type ()));
 #endif
     }
 
-  return backend_info;
+  return &backend_info[0];
 }

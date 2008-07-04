@@ -2,7 +2,7 @@
  * fo-doc.c: Wrapper for libfo output document
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -50,15 +50,17 @@ enum {
   PROP_FORMATS
 };
 
-static void          fo_doc_base_init  (FoDocClass   *klass);
-static void          fo_doc_class_init (FoDocClass   *klass);
+static void          fo_doc_base_init    (FoDocClass *klass);
+static void          fo_doc_class_init   (FoDocClass *klass);
 static void          fo_doc_get_property (GObject    *object,
 					  guint       param_id,
 					  GValue     *value,
 					  GParamSpec *pspec);
 
-static gint          fo_doc_version_default        (void);
-static const gchar * fo_doc_version_string_default (void);
+static gint          _version_default              (void);
+static const gchar * _version_string_default       (void);
+static const LibfoVersionInfo * _version_info_default       (void);
+
 static void          fo_doc_open_file_default      (FoDoc          *fo_doc,
 						    const gchar    *filename,
 						    FoLibfoContext *libfo_context,
@@ -199,8 +201,9 @@ void
 fo_doc_base_init (FoDocClass *klass)
 {
   klass->formats             = FO_FLAG_FORMAT_UNKNOWN;
-  klass->version             = fo_doc_version_default;
-  klass->version_string      = fo_doc_version_string_default;
+  klass->version             = _version_info_default;
+  klass->version_string      = _version_string_default;
+  klass->version_info        = _version_info_default;
 
   klass->open_file           = fo_doc_open_file_default;
 
@@ -440,7 +443,7 @@ fo_doc_version_from_name (const gchar *name)
 
 
 const gchar *
-fo_doc_version_string_default ()
+_version_string_default ()
 {
   return NULL;
 }
@@ -479,6 +482,31 @@ fo_doc_version_string_from_name (const gchar *name)
   return version;
 }
 
+const LibfoVersionInfo *
+_version_info_default ()
+{
+  return NULL;
+}
+
+
+const LibfoVersionInfo *
+fo_doc_version_info_from_name (const gchar *name)
+{
+  g_return_val_if_fail (name != NULL, NULL);
+
+  const LibfoVersionInfo *version_info = NULL;
+  GType type = g_type_from_name (name);
+
+  if (g_type_is_a (type, fo_doc_get_type ()))
+    {
+      gpointer klass = g_type_class_ref (type);
+      version_info =
+	((FoDocClass *) klass)->version_info ();
+      g_type_class_unref (klass);
+    }
+
+  return version_info;
+}
 
 /**
  * fo_doc_open_file:

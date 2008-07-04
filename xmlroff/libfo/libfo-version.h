@@ -117,14 +117,51 @@ const char * libfo_version_check (int required_major,
 
 int libfo_pixels_per_inch (void);
 
+/**
+ * LibfoModuleEnum:
+ * @LIBFO_MODULE_INVALID:        Not a module
+ * @LIBFO_MODULE_XSL_FORMATTER:  XSL formatter
+ * @LIBFO_MODULE_XSLT_PROCESSOR: XSLT processor
+ * @LIBFO_MODULE_BACKEND:        Backend
+ * @LIBFO_MODULE_PANGO:          Pango
+ *
+ * The type of a module of libfo.
+ */
+typedef enum {
+  LIBFO_MODULE_INVALID,
+  LIBFO_MODULE_XSL_FORMATTER,
+  LIBFO_MODULE_XSLT_PROCESSOR,
+  LIBFO_MODULE_BACKEND,
+  LIBFO_MODULE_PANGO
+} LibfoModuleEnum;
+
+/**
+ * LibfoVersionInfo:
+ * @module:          Type of the module
+ * @nick:            Nickname
+ * @name:            #FoObject type name, e.g., #FoDocCairo
+ * @compiled:        Compiled version number
+ * @compiled_string: Compiled version number string
+ * @runtime:         Runtime version number
+ * @runtime_string:  Runtime version number string
+ *
+ * Collected version information about a component of libfo.
+ *
+ * Other than @nick, one or more of the parts of the #LibfoVersionInfo
+ * may be 0 or %NULL if the component is unable to report that
+ * information.
+ */
 typedef struct {
-  const gchar *nick;
-  const gchar *name;
-  gint         version;
-  const gchar *version_string;
+  LibfoModuleEnum module;
+  const gchar    *nick;
+  const gchar    *name;
+  gint            compiled;
+  const gchar    *compiled_string;
+  gint            runtime;
+  const gchar    *runtime_string;
 } LibfoVersionInfo;
 
-const LibfoVersionInfo * libfo_version_backend_info (void);
+const LibfoVersionInfo ** libfo_version_get_info (void);
 
 G_END_DECLS
 
