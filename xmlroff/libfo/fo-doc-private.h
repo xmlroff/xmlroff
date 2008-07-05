@@ -14,7 +14,7 @@
 #include <datatype/fo-datatype.h>
 #include <area/fo-area.h>
 #include <libfo/fo-doc.h>
-#include "fo-object.h"
+#include "fo-libfo-module-private.h"
 #include "libfo/fo-font-desc.h"
 #include "util/fo-image.h"
 
@@ -22,25 +22,21 @@ G_BEGIN_DECLS
 
 struct _FoDoc
 {
-  FoObject parent_instance;
+  FoLibfoModule parent_instance;
 
   FoDatatype   *fill_color;
   FoDatatype   *stroke_color;
   FoDocLineCap  line_cap;
   FoDocLineJoin line_join;
-  gdouble        line_width;
+  gdouble       line_width;
 
-  PangoContext  *pango_context;
+  PangoContext *pango_context;
 };
 
 struct _FoDocClass
 {
-  FoObjectClass parent_class;
+  FoLibfoModuleClass parent_class;
   FoFlagsFormat formats;
-
-  gint           (*version)              (void);
-  const gchar*   (*version_string)       (void);
-  const LibfoVersionInfo * (*version_info) (void);
 
   void           (* open_file)           (FoDoc          *fo_doc,
 					  const gchar    *filename,

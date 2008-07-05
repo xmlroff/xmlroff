@@ -237,14 +237,16 @@ fo_doc_gp_init (FoDocGP *fo_doc_gp)
 void
 fo_doc_gp_base_init (FoDocGPClass *klass)
 {
+  FoLibfoModuleClass *fo_libfo_module_class =
+    FO_LIBFO_MODULE_CLASS (klass);
   FoDocClass *fo_doc_class = FO_DOC_CLASS (klass);
+
+  fo_libfo_module_class->version_info = _version_info;
 
   fo_doc_class->formats =
     FO_FLAG_FORMAT_PDF |
     FO_FLAG_FORMAT_POSTSCRIPT |
     FO_FLAG_FORMAT_SVG;
-
-  fo_doc_class->version_info     = _version_info;
 
   fo_doc_class->open_file        = fo_doc_gp_open_file;
 

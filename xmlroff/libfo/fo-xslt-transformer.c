@@ -1,8 +1,8 @@
 /* Fo
- * fo-xslt-transformer.c: Boxed object type for libxslt XSLT processor
+ * fo-xslt-transformer.c: Wrapper for libxslt XSLT processor
  *
  * Copyright (C) 2003-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -10,9 +10,17 @@
 #include <libxslt/xslt.h>
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
+#include <libxslt/xsltconfig.h>
 #include "libfo/fo-utils.h"
 #include "fo-xml-doc-private.h"
 #include "fo-xslt-transformer.h"
+
+/**
+ * SECTION:fo-xslt-transformer
+ * @short_description: libxslt XSLT processor
+ *
+ * Wrapper for libxslt XSLT processor.
+ */
 
 extern int xmlLoadExtDtdDefaultValue;
 
@@ -23,6 +31,17 @@ const char *fo_xslt_transformer_error_messages [] = {
   N_("No input XML document"),
   N_("Parsing stylesheet as stylesheet failed"),
 };
+
+static LibfoVersionInfo version_info =
+  {
+    LIBFO_MODULE_XSLT_PROCESSOR,
+    "libxslt",
+    NULL,
+    LIBXSLT_VERSION,
+    LIBXSLT_VERSION_STRING,
+    0,
+    NULL
+  };
 
 /**
  * fo_xslt_transformer_error_quark:
@@ -40,6 +59,15 @@ fo_xslt_transformer_error_quark (void)
   if (quark == 0)
     quark = g_quark_from_static_string ("FoXsltTransformer error");
   return quark;
+}
+
+const LibfoVersionInfo *
+fo_xslt_transformer_version_info (void)
+{
+  version_info.runtime = xsltLibxsltVersion;
+  version_info.runtime_string = xsltEngineVersion;
+
+  return &version_info;
 }
 
 

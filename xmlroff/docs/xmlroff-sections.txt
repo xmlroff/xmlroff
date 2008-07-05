@@ -661,6 +661,23 @@ FO_AREA_TABLE_BODY_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>fo-libfo-module</FILE>
+FoLibfoModule
+FoLibfoModuleClass
+fo_libfo_module_version_from_name
+fo_libfo_module_version_string_from_name
+fo_libfo_module_version_info_from_name
+<SUBSECTION Standard>
+FO_LIBFO_MODULE
+FO_IS_LIBFO_MODULE
+FO_TYPE_LIBFO_MODULE
+fo_libfo_module_get_type
+FO_LIBFO_MODULE_CLASS
+FO_IS_LIBFO_MODULE_CLASS
+FO_LIBFO_MODULE_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>fo-area-table-cell-proxy</FILE>
 <TITLE>FoAreaTableCellProxy</TITLE>
 FoAreaTableCellProxy
@@ -9150,6 +9167,7 @@ FO_XML_DOC_ERROR
 fo_xml_doc_error_quark
 FoXmlDocError
 FoXmlDoc
+fo_xml_doc_version_info
 fo_xml_doc_new_from_filename
 fo_xml_doc_new_from_memory
 fo_xml_doc_new_from_string
@@ -9218,6 +9236,7 @@ libfo_pango_attr_callback_new
 <SECTION>
 <FILE>fo-xslt-transformer</FILE>
 <TITLE>FoXsltTransformer</TITLE>
+fo_xslt_transformer_version_info
 fo_xslt_transformer_do_transform
 FO_XSLT_TRANSFORMER_ERROR
 FoXsltTransformerError
@@ -9263,8 +9282,6 @@ FoDocLineJoin
 fo_doc_new
 fo_doc_new_from_type
 fo_doc_formats_from_name
-fo_doc_version_from_name
-fo_doc_version_string_from_name
 <SUBSECTION>
 fo_doc_open_file
 fo_doc_get_new_layout

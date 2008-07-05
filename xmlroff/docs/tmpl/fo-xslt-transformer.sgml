@@ -17,6 +17,14 @@ FoXsltTransformer
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### FUNCTION fo_xslt_transformer_version_info ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION fo_xslt_transformer_do_transform ##### -->
 <para>
 

@@ -194,15 +194,18 @@ fo_doc_cairo_init (FoDocCairo *fo_doc_cairo)
 void
 fo_doc_cairo_base_init (FoDocCairoClass *klass)
 {
+  FoLibfoModuleClass *fo_libfo_module_class =
+    FO_LIBFO_MODULE_CLASS (klass);
   FoDocClass *fo_doc_class = FO_DOC_CLASS (klass);
+
+  fo_libfo_module_class->version        = cairo_version;
+  fo_libfo_module_class->version_string = cairo_version_string;
+  fo_libfo_module_class->version_info   = _version_info;
 
   fo_doc_class->formats =
     FO_FLAG_FORMAT_PDF |
     FO_FLAG_FORMAT_POSTSCRIPT |
     FO_FLAG_FORMAT_SVG;
-  fo_doc_class->version             = cairo_version;
-  fo_doc_class->version_string      = cairo_version_string;
-  fo_doc_class->version_info        = _version_info;
 
   fo_doc_class->open_file           = fo_doc_cairo_open_file;
 

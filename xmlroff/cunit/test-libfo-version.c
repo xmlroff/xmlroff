@@ -58,7 +58,10 @@ test_libfo_version_get_info (void)
 
   CU_ASSERT_EQUAL (backend_info[0]->nick, "cairo");
   CU_ASSERT_EQUAL (backend_info[1]->nick, "gp");
-  CU_ASSERT_EQUAL (backend_info[2], NULL);
+  CU_ASSERT_EQUAL (backend_info[2]->nick, "xsl-formatter");
+  CU_ASSERT_EQUAL (backend_info[3]->nick, "libxslt");
+  CU_ASSERT_EQUAL (backend_info[4]->nick, "libxml2");
+  CU_ASSERT_EQUAL (backend_info[5], NULL);
 }
 
 static CU_TestInfo test_array[] = {

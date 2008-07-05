@@ -56,56 +56,68 @@ clean_suite (void)
 }
 
 static void
-test_fo_doc_new_finalize (void)
+test_fo_libfo_module_version (void)
 {
-  FoDoc *doc = fo_doc_new();
+  CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (NULL),
+		   0);
 
-  g_object_unref (doc);
-}
-
-static void
-test_fo_doc_formats (void)
-{
-  CU_ASSERT_EQUAL (fo_doc_formats_from_name (NULL),
-		   FO_FLAG_FORMAT_UNKNOWN);
-
-  CU_ASSERT_EQUAL (fo_doc_formats_from_name ("bogus"),
-		   FO_FLAG_FORMAT_UNKNOWN);
+  CU_ASSERT_EQUAL (fo_libfo_module_version_from_name ("bogus"),
+		   0);
 
   /* Class that is not a FoDoc subtype should return unknown
      format. */
-  CU_ASSERT_EQUAL (fo_doc_formats_from_name (g_type_name (fo_object_get_type ())),
-		   FO_FLAG_FORMAT_UNKNOWN);
+  CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (g_type_name (fo_object_get_type ())),
+		   0);
 
-  CU_ASSERT_EQUAL (fo_doc_formats_from_name (g_type_name (fo_doc_get_type ())),
-		   FO_FLAG_FORMAT_UNKNOWN);
+  CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (g_type_name (fo_doc_get_type ())),
+		   0);
 
-  CU_ASSERT_EQUAL (fo_doc_formats_from_name (g_type_name (fo_doc_cairo_get_type ())),
-		   ( FO_FLAG_FORMAT_PDF |
-		     FO_FLAG_FORMAT_POSTSCRIPT |
-		     FO_FLAG_FORMAT_SVG ));
+  CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (g_type_name (fo_doc_cairo_get_type ())),
+		   cairo_version ());
 
-  CU_ASSERT_EQUAL (fo_doc_formats_from_name (g_type_name (fo_doc_gp_get_type ())),
-		   ( FO_FLAG_FORMAT_PDF |
-		     FO_FLAG_FORMAT_POSTSCRIPT |
-		     FO_FLAG_FORMAT_SVG ));
+  CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (g_type_name (fo_doc_gp_get_type ())),
+		   0);
+}
+
+static void
+test_fo_libfo_module_version_string (void)
+{
+  CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (NULL),
+		   NULL);
+
+  CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name ("bogus"),
+		   NULL);
+
+  /* Class that is not a FoDoc subtype should return unknown
+     format. */
+  CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (g_type_name (fo_object_get_type ())),
+		   NULL);
+
+  CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (g_type_name (fo_doc_get_type ())),
+		   NULL);
+
+  CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (g_type_name (fo_doc_cairo_get_type ())),
+		   cairo_version_string ());
+
+  CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (g_type_name (fo_doc_gp_get_type ())),
+		   NULL);
 }
 
 static CU_TestInfo test_array[] = {
-  { "FoDoc new and finalize",
-    test_fo_doc_new_finalize },
-  { "FoDoc get formats",
-    test_fo_doc_formats },
+  { "FoLibfoModule get version",
+    test_fo_libfo_module_version },
+  { "FoLibfoModule get version string",
+    test_fo_libfo_module_version_string },
   CU_TEST_INFO_NULL,
 };
 
 static CU_SuiteInfo suites[] = {
-  { "fo-doc", init_suite, clean_suite, test_array },
+  { "fo-libfo-module", init_suite, clean_suite, test_array },
   CU_SUITE_INFO_NULL,
 };
 
 CU_SuiteInfo *
-test_fo_doc_get_suites (void)
+test_fo_libfo_module_get_suites (void)
 {
   return suites;
 }

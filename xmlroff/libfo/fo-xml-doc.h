@@ -12,6 +12,7 @@
 
 #include <libfo/fo-utils.h>
 #include <libfo/fo-libfo-context.h>
+#include <libfo/libfo-version.h>
 
 G_BEGIN_DECLS
 
@@ -32,6 +33,9 @@ typedef struct _FoXmlDoc FoXmlDoc;
 #define FO_IS_XML_DOC(object)       (G_TYPE_CHECK_INSTANCE_TYPE ((object), FO_TYPE_XML_DOC))
 
 GType      fo_xml_doc_get_type          (void);
+
+const LibfoVersionInfo * fo_xml_doc_version_info (void);
+
 FoXmlDoc * fo_xml_doc_new_from_filename (const gchar    *filename,
 					 FoLibfoContext *libfo_context,
 					 GError        **error);

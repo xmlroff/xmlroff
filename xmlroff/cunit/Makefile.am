@@ -24,6 +24,8 @@ test_SOURCES = \
 	test-fo-length-range.h	\
 	test-fo-libfo-context.c	\
 	test-fo-libfo-context.h	\
+	test-fo-libfo-module.c	\
+	test-fo-libfo-module.h	\
 	test-libfo-version.c	\
 	test-libfo-version.h
 

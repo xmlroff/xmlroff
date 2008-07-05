@@ -12,12 +12,16 @@
 #include <libfo/fo-utils.h>
 #include "libfo/libfo-features.h"
 #include "libfo/libfo-version.h"
+#include "libfo/fo-libfo-module.h"
 #if ENABLE_CAIRO
 #include <libfo/fo-doc-cairo.h>
 #endif
 #if ENABLE_GP
 #include <libfo/fo-doc-gp.h>
 #endif
+#include "libfo/fo-xsl-formatter.h"
+#include "libfo/fo-xslt-transformer.h"
+#include "libfo/fo-xml-doc.h"
 
 /**
  * libfo_version:
@@ -123,6 +127,9 @@ enum {
 #if ENABLE_GP
   GP_INFO,
 #endif
+  FORMATTER_INFO,
+  XSLT_INFO,
+  XML_DOC_INFO,
   NULL_INFO,
   INFO_LIMIT
 };
@@ -142,12 +149,23 @@ libfo_version_get_info (void)
   if (backend_info[0] == NULL)
     {
 #if ENABLE_CAIRO
-      backend_info[CAIRO_INFO] = fo_doc_version_info_from_name (g_type_name (fo_doc_cairo_get_type ()));
+      backend_info[CAIRO_INFO] =
+	fo_libfo_module_version_info_from_name (g_type_name (fo_doc_cairo_get_type ()));
 #endif
 
 #if ENABLE_GP
-      backend_info[GP_INFO] = fo_doc_version_info_from_name (g_type_name (fo_doc_gp_get_type ()));
+      backend_info[GP_INFO] =
+	fo_libfo_module_version_info_from_name (g_type_name (fo_doc_gp_get_type ()));
 #endif
+
+      backend_info[FORMATTER_INFO] =
+	fo_libfo_module_version_info_from_name (g_type_name (fo_xsl_formatter_get_type ()));
+
+      backend_info[XSLT_INFO] =
+	fo_xslt_transformer_version_info ();
+
+      backend_info[XML_DOC_INFO] =
+	fo_xml_doc_version_info ();
     }
 
   return &backend_info[0];

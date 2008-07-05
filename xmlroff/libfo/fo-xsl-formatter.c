@@ -2,11 +2,12 @@
  * fo-xsl-formatter.c: Object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
+#include "config.h"
 #include <string.h>
 #include "fo-utils.h"
 #include "fo-xml-doc-private.h"
@@ -45,7 +46,7 @@ const char *fo_xsl_formatter_error_messages [] = {
 
 struct _FoXslFormatter
 {
-  FoObject parent_instance;
+  FoLibfoModule parent_instance;
 
   FoXmlDoc *result_tree;
 
@@ -57,7 +58,7 @@ struct _FoXslFormatter
 
 struct _FoXslFormatterClass
 {
-  FoObjectClass parent_class;
+  FoLibfoModuleClass parent_class;
 };
 
 enum {
@@ -70,6 +71,9 @@ enum {
 
 static void fo_xsl_formatter_class_init   (FoXslFormatterClass *klass);
 static void fo_xsl_formatter_finalize     (GObject             *object);
+
+static const LibfoVersionInfo * _version_info ();
+
 static void fo_xsl_formatter_get_property (GObject             *object,
 					   guint                prop_id,
 					   GValue              *value,
@@ -80,6 +84,17 @@ static void fo_xsl_formatter_set_property (GObject             *object,
 					   GParamSpec          *pspec);
 
 static gpointer parent_class;
+
+static LibfoVersionInfo version_info =
+  {
+    LIBFO_MODULE_XSL_FORMATTER,
+    "xsl-formatter",
+    "FoXslFormatter",
+    LIBFO_VERSION,
+    LIBFO_VERSION_STRING,
+    LIBFO_VERSION,
+    LIBFO_VERSION_STRING
+  };
 
 /**
  * fo_xsl_formatter_error_quark:
@@ -127,7 +142,7 @@ GType fo_xsl_formatter_get_type (void)
 	NULL		/* value_table */
       };
 
-      object_type = g_type_register_static (FO_TYPE_OBJECT,
+      object_type = g_type_register_static (FO_TYPE_LIBFO_MODULE,
                                             "FoXslFormatter",
                                             &object_info, 0);
     }
@@ -145,12 +160,18 @@ void
 fo_xsl_formatter_class_init (FoXslFormatterClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  FoLibfoModuleClass *fo_libfo_module_class =
+    FO_LIBFO_MODULE_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
   object_class->get_property = fo_xsl_formatter_get_property;
   object_class->set_property = fo_xsl_formatter_set_property;
   object_class->finalize     = fo_xsl_formatter_finalize;
+
+  fo_libfo_module_class->version        = libfo_version;
+  fo_libfo_module_class->version_string = libfo_version_string;
+  fo_libfo_module_class->version_info   = _version_info;
 
   g_object_class_install_property
     (object_class,
@@ -222,6 +243,15 @@ fo_xsl_formatter_finalize  (GObject *object)
     }
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+const LibfoVersionInfo *
+_version_info ()
+{
+  version_info.runtime = libfo_version ();
+  version_info.runtime_string = libfo_version_string ();
+
+  return &version_info;
 }
 
 /**

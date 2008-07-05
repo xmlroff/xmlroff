@@ -11,6 +11,13 @@
 #include "fo-utils.h"
 #include "fo-xml-doc-private.h"
 
+/**
+ * SECTION:fo-xml-doc
+ * @short_description: libxml2 xmlDoc document
+ *
+ * Boxed object type for libxml2 xmlDoc document.
+ */
+
 extern int xmlLoadExtDtdDefaultValue;
 
 const char *fo_xml_doc_error_messages [] = {
@@ -28,6 +35,17 @@ struct _FoXmlDoc
 
   guint ref_count;
 };
+
+static LibfoVersionInfo version_info =
+  {
+    LIBFO_MODULE_XML_DOC,
+    "libxml2",
+    NULL,
+    LIBXML_VERSION,
+    LIBXML_VERSION_STRING,
+    0,
+    NULL
+  };
 
 /**
  * fo_xml_doc_error_quark:
@@ -65,6 +83,12 @@ GType fo_xml_doc_get_type (void)
 					     (GBoxedFreeFunc) fo_xml_doc_unref);
 
   return our_type;
+}
+
+const LibfoVersionInfo *
+fo_xml_doc_version_info (void)
+{
+  return &version_info;
 }
 
 /**

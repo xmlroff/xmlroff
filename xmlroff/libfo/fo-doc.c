@@ -57,10 +57,6 @@ static void          fo_doc_get_property (GObject    *object,
 					  GValue     *value,
 					  GParamSpec *pspec);
 
-static gint          _version_default              (void);
-static const gchar * _version_string_default       (void);
-static const LibfoVersionInfo * _version_info_default       (void);
-
 static void          fo_doc_open_file_default      (FoDoc          *fo_doc,
 						    const gchar    *filename,
 						    FoLibfoContext *libfo_context,
@@ -182,7 +178,7 @@ fo_doc_get_type (void)
 	NULL		/* value_table */
       };
       
-      object_type = g_type_register_static (FO_TYPE_OBJECT,
+      object_type = g_type_register_static (FO_TYPE_LIBFO_MODULE,
                                             "FoDoc",
                                             &object_info,
 					    G_TYPE_FLAG_ABSTRACT);
@@ -201,9 +197,6 @@ void
 fo_doc_base_init (FoDocClass *klass)
 {
   klass->formats             = FO_FLAG_FORMAT_UNKNOWN;
-  klass->version             = _version_info_default;
-  klass->version_string      = _version_string_default;
-  klass->version_info        = _version_info_default;
 
   klass->open_file           = fo_doc_open_file_default;
 
@@ -399,113 +392,6 @@ fo_doc_formats_from_name (const gchar *name)
     }
 
   return formats;
-}
-
-gint
-fo_doc_version_default ()
-{
-  return 0;
-}
-
-
-/**
- * fo_doc_version_from_name:
- * @name: Registered #FoObject type name, e.g., "FoDocCairo"
- * 
- * Gets the runtime version of the library underlying the #FoDoc
- * implementation as a human-readable string.
- *
- * This function just returns what the underlying library provides, if
- * anything, so version numbers can only meaningfully be compared
- * against version numbers of the same library implementation.
- * 
- * Returns: Library version, or 0 if the underlying library does not
- *   make its version number available at runtime
- **/
-gint
-fo_doc_version_from_name (const gchar *name)
-{
-  g_return_val_if_fail (name != NULL, 0);
-
-  gint version = 0;
-  GType type = g_type_from_name (name);
-
-  if (g_type_is_a (type, fo_doc_get_type ()))
-    {
-      gpointer klass = g_type_class_ref (type);
-      version =
-	((FoDocClass *) klass)->version ();
-      g_type_class_unref (klass);
-    }
-
-  return version;
-}
-
-
-const gchar *
-_version_string_default ()
-{
-  return NULL;
-}
-
-
-/**
- * fo_doc_version_string_from_name:
- * @name: Registered #FoObject type name, e.g., "FoDocCairo"
- * 
- * Gets the runtime version of the library underlying the #FoDoc
- * implementation.
- * 
- * The string is likely to be of the form "X.Y.Z", e.g., "1.0.0", but
- * this function just returns what the underlying library provides, so
- * nothing in guaranteed.
- * 
- * Returns: Library version, or 0 if the underlying library does not
- *   make its version number available at runtime
- **/
-const gchar *
-fo_doc_version_string_from_name (const gchar *name)
-{
-  g_return_val_if_fail (name != NULL, NULL);
-
-  const gchar *version = NULL;
-  GType type = g_type_from_name (name);
-
-  if (g_type_is_a (type, fo_doc_get_type ()))
-    {
-      gpointer klass = g_type_class_ref (type);
-      version =
-	((FoDocClass *) klass)->version_string ();
-      g_type_class_unref (klass);
-    }
-
-  return version;
-}
-
-const LibfoVersionInfo *
-_version_info_default ()
-{
-  return NULL;
-}
-
-
-const LibfoVersionInfo *
-fo_doc_version_info_from_name (const gchar *name)
-{
-  g_return_val_if_fail (name != NULL, NULL);
-
-  const LibfoVersionInfo *version_info = NULL;
-  GType type = g_type_from_name (name);
-
-  if (g_type_is_a (type, fo_doc_get_type ()))
-    {
-      gpointer klass = g_type_class_ref (type);
-      version_info =
-	((FoDocClass *) klass)->version_info ();
-      g_type_class_unref (klass);
-    }
-
-  return version_info;
 }
 
 /**

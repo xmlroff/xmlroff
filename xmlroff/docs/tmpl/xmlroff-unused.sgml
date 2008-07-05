@@ -108,6 +108,22 @@
 
 @fo_doc: 
 
+<!-- ##### FUNCTION fo_doc_version_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION fo_doc_version_string_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
 <!-- ##### FUNCTION fo_enum_font_variant_get_type ##### -->
 <para>
 

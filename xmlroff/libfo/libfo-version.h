@@ -57,6 +57,14 @@ G_BEGIN_DECLS
 
 
 /**
+ * LIBFO_VERSION_EXTRA:
+ *
+ * Extra compile-time version information string literal containing,
+ * e.g., the Subversion changeset number.
+ */
+
+
+/**
  * LIBFO_PIXELS_PER_INCH:
  *
  * Pixels per inch for use with graphics without intrinsic size.
@@ -131,6 +139,7 @@ typedef enum {
   LIBFO_MODULE_INVALID,
   LIBFO_MODULE_XSL_FORMATTER,
   LIBFO_MODULE_XSLT_PROCESSOR,
+  LIBFO_MODULE_XML_DOC,
   LIBFO_MODULE_BACKEND,
   LIBFO_MODULE_PANGO
 } LibfoModuleEnum;

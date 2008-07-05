@@ -42,6 +42,8 @@ libfo_headers =			\
 	fo-libfo.h		\
 	fo-libfo-basic.h	\
 	fo-libfo-context.h	\
+	fo-libfo-module.h	\
+	fo-libfo-module-private.h	\
 	fo-xml-doc-private.h	\
 	fo-xml-doc.h		\
 	fo-xml-node-private.h	\
@@ -68,6 +70,7 @@ libfo_libfo_la_SOURCES =	\
 	fo-layout.c		\
 	fo-libfo-basic.c	\
 	fo-libfo-context.c	\
+	fo-libfo-module.c	\
 	fo-xml-doc.c		\
 	fo-xml-node.c		\
 	fo-xslt-transformer.c	\

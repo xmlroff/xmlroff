@@ -12,6 +12,7 @@
 
 #include <libfo/fo-utils.h>
 #include <libfo/fo-xml-doc.h>
+#include <libfo/libfo-version.h>
 
 G_BEGIN_DECLS
 
@@ -26,6 +27,8 @@ typedef enum
   FO_XSLT_TRANSFORMER_ERROR_NO_XML_DOC,
   FO_XSLT_TRANSFORMER_ERROR_PARSE_FAILED
 } FoXsltTransformerError;
+
+const LibfoVersionInfo * fo_xslt_transformer_version_info (void);
 
 FoXmlDoc * fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 					     FoXmlDoc          *stylesheet_doc,

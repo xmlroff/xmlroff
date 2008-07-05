@@ -48,6 +48,14 @@ FoXmlDoc
 </para>
 
 
+<!-- ##### FUNCTION fo_xml_doc_version_info ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION fo_xml_doc_new_from_filename ##### -->
 <para>
 

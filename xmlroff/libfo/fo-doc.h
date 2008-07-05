@@ -12,7 +12,6 @@
 
 #include <libfo/fo-utils.h>
 #include <libfo/fo-libfo-context.h>
-#include <libfo/libfo-version.h>
 
 typedef struct _FoDoc      FoDoc;
 typedef struct _FoDocClass FoDocClass;
@@ -64,9 +63,6 @@ GType         fo_doc_get_type (void);
 FoDoc *       fo_doc_new (void);
 FoDoc *       fo_doc_new_from_type (const gchar *type);
 FoFlagsFormat fo_doc_formats_from_name (const gchar *name);
-gint          fo_doc_version_from_name (const gchar *name);
-const gchar*  fo_doc_version_string_from_name (const gchar *name);
-const LibfoVersionInfo * fo_doc_version_info_from_name (const gchar *name);
 
 void          fo_doc_open_file (FoDoc          *fo_doc,
 				const gchar    *filename,
