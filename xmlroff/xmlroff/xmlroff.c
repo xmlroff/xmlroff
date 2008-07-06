@@ -126,9 +126,9 @@ exit_if_error (GError *error)
 {
   if (error != NULL)
     {
-      g_error ("%s:: %s",
-	       g_quark_to_string (error->domain),
-	       error->message);
+      g_warning ("%s:: %s",
+		 g_quark_to_string (error->domain),
+		 error->message);
       g_error_free (error);
       exit (1);
     }
@@ -508,6 +508,7 @@ main (gint    argc,
 
   fo_xsl_formatter_set_result_tree (fo_xsl_formatter,
 				    result_tree);
+  exit_if_error (error);
 
   fo_xsl_formatter_set_fo_doc (fo_xsl_formatter,
 			       fo_doc);

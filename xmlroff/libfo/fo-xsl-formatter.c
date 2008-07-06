@@ -35,6 +35,7 @@ const char *fo_xsl_formatter_error_messages [] = {
   N_("XSLT format failed"),
   N_("Unable to parse stylesheet file: %s"),
   N_("No input result tree specified"),
+  N_("Result tree does not have an XSL-FO root element:: URI: %s; local-name: %s"),
   N_("No area tree present"),
   N_("No output FoDoc specified"),
   N_("Specified FoDoc is not FoDoc object type"),
@@ -987,6 +988,22 @@ fo_xsl_formatter_format (FoXslFormatter *fo_xsl_formatter,
       return FALSE;
     }
 
+  xmlNodePtr root_element =
+    xmlDocGetRootElement (fo_xml_doc_get_xml_doc (fo_xsl_formatter->result_tree));
+
+  if ((strcmp ((gchar *) root_element->name, "root") != 0) ||
+      (root_element->ns == NULL) ||
+      (strcmp ((gchar *) root_element->ns->href, XSL_FO_NAMESPACE) != 0))
+    {
+      g_set_error (error,
+		   FO_XSL_FORMATTER_ERROR,
+		   FO_XSL_FORMATTER_ERROR_RESULT_TREE_NOT_FO,
+		   _(fo_xsl_formatter_error_messages[FO_XSL_FORMATTER_ERROR_RESULT_TREE_NOT_FO]),
+		   root_element->ns == NULL ? NULL : root_element->ns->href,
+		   root_element->name);
+      return FALSE;
+    }
+
   if (fo_xsl_formatter->fo_doc == NULL)
     {
       g_set_error (error,
@@ -1174,6 +1191,7 @@ fo_xsl_formatter_set_fo_doc (FoXslFormatter *fo_xsl_formatter,
 			     FoDoc          *fo_doc)
 {
   g_return_if_fail (fo_xsl_formatter != NULL);
+  g_return_if_fail (fo_doc != NULL);
 
   if (fo_xsl_formatter->fo_doc != NULL)
     g_object_unref (fo_xsl_formatter->fo_doc);
