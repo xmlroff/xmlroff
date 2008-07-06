@@ -31,12 +31,13 @@
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
-        <testresult id="external-graphic-1" results="external-graphic-1.pdf" agreement="issues" specproblem="no" testproblem="no">Graphic too large.</testresult>
-        <testresult id="external-graphic-2" results="external-graphic-2.pdf" agreement="issues" specproblem="no" testproblem="no">Colour okay.  Placement is wrong.</testresult>
-        <testresult id="external-graphic-3" results="external-graphic-3.pdf" agreement="issues" specproblem="no" testproblem="no">Graphics too large.</testresult>
-        <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="issues" specproblem="no" testproblem="no">No purple.  Black is not scaled.</testresult>
-        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="issues" specproblem="no" testproblem="no">Cairo backend not rendering PNG file properly.  Ticket #42.  Colour now okay.  May be a clipping/placement problem.</testresult>
-        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
+        <testresult id="external-graphic-1" results="external-graphic-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-2" results="external-graphic-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-3" results="external-graphic-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="issues" specproblem="no" testproblem="no">Second black square.</testresult>
+        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="full" specproblem="no" testproblem="yes">Image background is black in PNG but not when viewing PDF in evince.</testresult>
+        <testresult id="external-graphic-7" results="external-graphic-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
