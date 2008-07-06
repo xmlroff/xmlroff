@@ -40,6 +40,7 @@ typedef enum
   FO_FO_ERROR_DATATYPE_REPLACE,  /* Invalid datatype value for property replaced */
   FO_FO_ERROR_DATATYPE_NULL,     /* Invalid datatype value for property: NULL */
   FO_FO_ERROR_UNSUPPORTED_PROPERTY,	/* Unsupported property */
+  FO_FO_ERROR_NO_IMAGE,		 /* No image */
   FO_FO_ERROR_LAST
 } FoFoError;
 

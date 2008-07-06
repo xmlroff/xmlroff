@@ -49,7 +49,8 @@ const char *fo_fo_error_messages[] = {
   N_("Invalid value datatype for '%s' property: %s (%s)"),
   N_("Invalid value datatype for '%s' property: %s (%s).  Using %s (%s)"),
   N_("Invalid value for '%s' property: NULL"),
-  N_("Unsupported property: %s")
+  N_("Unsupported property: %s"),
+  N_("No image file for src URI: %s")
 };
 
 enum {

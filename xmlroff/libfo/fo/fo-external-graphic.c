@@ -1321,19 +1321,19 @@ fo_external_graphic_new_with_base_uri (const gchar *base_uri)
 }
 
 /**
- * resolve_one_dimension:
- * @specified: 
- * @intrinsic: 
- * @viewport: 
+ * _resolve_one_dimension:
+ * @specified: Specified width/height
+ * @intrinsic: Intrinsic width/height of image
+ * @viewport:  Where the image will go
  * 
+ * Determines best width/height to use for an image.
  * 
- * 
- * Return value: 
+ * Return value: Width/height to use.
  **/
 static gdouble
-resolve_one_dimension (FoDatatype *specified,
-		       FoDatatype *intrinsic,
-		       FoDatatype *viewport)
+_resolve_one_dimension (FoDatatype *specified,
+			FoDatatype *intrinsic,
+			FoDatatype *viewport)
 {
   gdouble dimension = 0.0;
 
@@ -1401,14 +1401,14 @@ static void
 fo_external_graphic_layout_resolve (FoExternalGraphic *fo_external_graphic)
 {
   fo_external_graphic->area_width =
-    resolve_one_dimension (fo_property_get_value (fo_external_graphic->content_width),
-			   fo_image_get_width (fo_external_graphic->fo_image),
-			   fo_property_get_value (fo_external_graphic->inline_progression_dimension));
+    _resolve_one_dimension (fo_property_get_value (fo_external_graphic->content_width),
+			    fo_image_get_width (fo_external_graphic->fo_image),
+			    fo_property_get_value (fo_external_graphic->inline_progression_dimension));
 
   fo_external_graphic->area_height =
-    resolve_one_dimension (fo_property_get_value (fo_external_graphic->content_height),
-			   fo_image_get_height (fo_external_graphic->fo_image),
-			   fo_property_get_value (fo_external_graphic->block_progression_dimension));
+    _resolve_one_dimension (fo_property_get_value (fo_external_graphic->content_height),
+			    fo_image_get_height (fo_external_graphic->fo_image),
+			    fo_property_get_value (fo_external_graphic->block_progression_dimension));
 }
 
 /**
@@ -1449,6 +1449,15 @@ fo_external_graphic_validate (FoFo      *fo,
   fo_external_graphic->fo_image =
     fo_image_new_from_uri (fo_uri_specification_get_value (fo_property_get_value (fo_external_graphic->src)),
 			   fo_external_graphic->base_uri);
+  if (fo_external_graphic->fo_image == NULL)
+    {
+      g_set_error (error,
+		   FO_FO_ERROR,
+		   FO_FO_ERROR_NO_IMAGE,
+		   _(fo_fo_error_messages[FO_FO_ERROR_NO_IMAGE]),
+		   fo_uri_specification_get_value (fo_property_get_value (fo_external_graphic->src)));
+      return;
+    }
   fo_external_graphic_layout_resolve (fo_external_graphic);
 }
 

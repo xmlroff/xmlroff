@@ -44,15 +44,22 @@ fo_external_graphic_callback_test (gpointer data1,
 	     fo_object_debug_sprintf (data1));
 #endif
 
-  xscale = external_graphic->area_width / fo_length_get_value (fo_image_get_width (external_graphic->fo_image));
-  yscale = external_graphic->area_height / fo_length_get_value (fo_image_get_height (external_graphic->fo_image));
+  if (external_graphic->fo_image != NULL)
+    {
+      xscale =
+	external_graphic->area_width /
+	fo_length_get_value (fo_image_get_width (external_graphic->fo_image));
+      yscale =
+	external_graphic->area_height /
+	fo_length_get_value (fo_image_get_height (external_graphic->fo_image));
 
-  fo_doc_place_image (external_graphic->fo_doc,
-		      external_graphic->fo_image,
-		      0.0,
-		      0.0,
-		      xscale,
-		      yscale);
+      fo_doc_place_image (external_graphic->fo_doc,
+			  external_graphic->fo_image,
+			  0.0,
+			  0.0,
+			  xscale,
+			  yscale);
+    }
 }
 
 /**
