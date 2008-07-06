@@ -17,21 +17,6 @@ font-style
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### MACRO FO_TYPE_ENUM_FONT_STYLE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION fo_enum_font_style_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### STRUCT FoPropertyFontStyle ##### -->
 <para>
 

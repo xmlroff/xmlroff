@@ -40,6 +40,18 @@
 </para>
 
 
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_STRETCH ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO FO_TYPE_ENUM_FONT_STYLE ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### MACRO FO_TYPE_ENUM_FONT_VARIANT ##### -->
 <para>
 
@@ -82,6 +94,33 @@
 </para>
 
 
+<!-- ##### ENUM FoEnumFontStretch ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_STRETCH_ULTRA_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_EXTRA_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_SEMI_CONDENSED: 
+@FO_ENUM_FONT_STRETCH_NORMAL: 
+@FO_ENUM_FONT_STRETCH_SEMI_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_EXTRA_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_ULTRA_EXPANDED: 
+@FO_ENUM_FONT_STRETCH_WIDER: 
+@FO_ENUM_FONT_STRETCH_NARROWER: 
+
+<!-- ##### ENUM FoEnumFontStyle ##### -->
+<para>
+
+</para>
+
+@FO_ENUM_FONT_STYLE_NORMAL: 
+@FO_ENUM_FONT_STYLE_ITALIC: 
+@FO_ENUM_FONT_STYLE_OBLIQUE: 
+@FO_ENUM_FONT_STYLE_BACKSLANT: 
+
 <!-- ##### ENUM FoEnumFontVariant ##### -->
 <para>
 
@@ -122,6 +161,20 @@
 </para>
 
 @name: 
+@Returns: 
+
+<!-- ##### FUNCTION fo_enum_font_stretch_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION fo_enum_font_style_get_type ##### -->
+<para>
+
+</para>
+
 @Returns: 
 
 <!-- ##### FUNCTION fo_enum_font_variant_get_type ##### -->

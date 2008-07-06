@@ -7247,8 +7247,6 @@ FO_PROPERTY_FONT_SIZE_GET_CLASS
 <SECTION>
 <FILE>fo-property-font-stretch</FILE>
 <TITLE>font-stretch</TITLE>
-FO_TYPE_ENUM_FONT_STRETCH
-fo_enum_font_stretch_get_type
 FoPropertyFontStretch
 FoPropertyFontStretchClass
 fo_property_font_stretch_new
@@ -7266,8 +7264,6 @@ FO_PROPERTY_FONT_STRETCH_GET_CLASS
 <SECTION>
 <FILE>fo-property-font-style</FILE>
 <TITLE>font-style</TITLE>
-FO_TYPE_ENUM_FONT_STYLE
-fo_enum_font_style_get_type
 FoPropertyFontStyle
 FoPropertyFontStyleClass
 fo_property_font_style_new
@@ -9420,6 +9416,7 @@ LIBFO_VERSION_MAJOR
 LIBFO_VERSION_MINOR
 LIBFO_VERSION_MICRO
 LIBFO_VERSION_STRING
+LIBFO_VERSION_EXTRA
 LIBFO_PIXELS_PER_INCH
 LIBFO_VERSION_ENCODE
 LIBFO_VERSION
@@ -9562,8 +9559,6 @@ fo_propagate_and_return_val_if_error
 FoDebugFlag
 FoWarningFlag
 FoEnumAreaDirection
-FoEnumFontStretch
-FoEnumFontStyle
 </SECTION>
 
 <SECTION>

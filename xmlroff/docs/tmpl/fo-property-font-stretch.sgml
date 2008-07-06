@@ -17,21 +17,6 @@ font-stretch
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### MACRO FO_TYPE_ENUM_FONT_STRETCH ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION fo_enum_font_stretch_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### STRUCT FoPropertyFontStretch ##### -->
 <para>
 
