@@ -1,6 +1,15 @@
 Changes between 0.5.5 and 0.6.0
 
  * Using plain BSD license (Jon Bosak, Mike Anastasio)
+ * Added version API (#123)
+ * Fixed segfault if input not an FO document (#117)
+ * Added generating xmlroff.1 man page
+ * Fixed checking for CUnit (#116)
+ * PNG graphics rendering in Cairo backend (#42, lode leroy)
+ * Fewer error messages when image file not found (#69)
+
+ All xmlroff 0.6.0 tickets are listed at
+ http://xmlroff.org/query?milestone=xmlroff+0.6.0
 
 Changes between 0.5.4 and 0.5.5
 
