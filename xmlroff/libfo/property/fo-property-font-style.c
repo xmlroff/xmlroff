@@ -1,42 +1,26 @@
 /* Fo
  * fo-property-font-style.c: 'font-style' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "fo-utils.h"
+#include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
-#include "property/fo-property-text-property.h"
 #include "property/fo-property-private.h"
+#include "property/fo-property-text-property.h"
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-font-style.h"
 
+/* font-style */
 /* Inherited: TRUE */
 /* Shorthand: FALSE */
-/* font-style */
 /* normal | italic | oblique | backslant | inherit */
-GType
-fo_enum_font_style_get_type (void)
-{
-  static GType etype = 0;
-  if (etype == 0)
-    {
-      static const GEnumValue values[] = {
-        { FO_ENUM_FONT_STYLE_NORMAL, "FO_ENUM_FONT_STYLE_NORMAL", "normal" },
-        { FO_ENUM_FONT_STYLE_ITALIC, "FO_ENUM_FONT_STYLE_ITALIC", "italic" },
-        { FO_ENUM_FONT_STYLE_OBLIQUE, "FO_ENUM_FONT_STYLE_OBLIQUE", "oblique" },
-        { FO_ENUM_FONT_STYLE_BACKSLANT, "FO_ENUM_FONT_STYLE_BACKSLANT", "backslant" },
-        { 0, NULL, NULL }
-      };
-      etype = g_enum_register_static ("FoEnumFontStyle", values);
-    }
-  return etype;
-}
+/* Initial value: normal */
 
 struct _FoPropertyFontStyle
 {
@@ -49,26 +33,20 @@ struct _FoPropertyFontStyleClass
 };
 
 static void fo_property_font_style_init         (FoPropertyFontStyle      *property_font_style);
-static void fo_property_font_style_base_init   (FoPropertyFontStyleClass *klass);
-static void fo_property_font_style_base_finalize   (FoPropertyFontStyleClass *klass);
 static void fo_property_font_style_class_init   (FoPropertyFontStyleClass *klass);
 static void fo_property_font_style_finalize     (GObject       *object);
 static void fo_property_font_style_text_property_init (FoPropertyTextPropertyIface *iface);
 
-static FoDatatype* fo_property_font_style_resolve_enum (const gchar *token,
-                                                        FoContext   *context,
-                                                        GError     **error);
-static FoDatatype* fo_property_font_style_validate (FoDatatype *datatype,
-                                                    FoContext  *context,
-                                                    GError    **error);
+static FoDatatype * fo_property_font_style_resolve_enum (const gchar *token,
+                                                         FoContext   *context,
+                                                         GError     **error);
+static FoDatatype * fo_property_font_style_validate (FoDatatype *datatype,
+                                                     FoContext  *context,
+                                                     GError    **error);
 static PangoAttribute * fo_property_font_style_new_attr (FoProperty *property);
 
 static const gchar class_name[] = "font-style";
 static gpointer parent_class;
-static FoDatatype *enum_normal;
-static FoDatatype *enum_italic;
-static FoDatatype *enum_oblique;
-static FoDatatype *enum_backslant;
 
 /**
  * fo_property_font_style_get_type:
@@ -88,8 +66,8 @@ fo_property_font_style_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoPropertyFontStyleClass),
-        (GBaseInitFunc) fo_property_font_style_base_init,
-        (GBaseFinalizeFunc) fo_property_font_style_base_finalize,
+        NULL,           /* base_init */
+        NULL,           /* base_finalize */
         (GClassInitFunc) fo_property_font_style_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
@@ -109,6 +87,7 @@ fo_property_font_style_get_type (void)
       object_type = g_type_register_static (FO_TYPE_PROPERTY,
                                             class_name,
                                             &object_info, 0);
+
       g_type_add_interface_static (object_type,
                                    FO_TYPE_PROPERTY_TEXT_PROPERTY,
                                    &fo_property_text_property_info);
@@ -127,61 +106,7 @@ void
 fo_property_font_style_init (FoPropertyFontStyle *font_style)
 {
   FO_PROPERTY (font_style)->value =
-    g_object_ref (enum_normal);
-}
-
-/**
- * fo_property_font_style_base_init:
- * @klass: #FoPropertyFontStyleClass object to initialise.
- * 
- * Implements #GBaseInitFunc for #FoPropertyFontStyleClass.
- **/
-void
-fo_property_font_style_base_init (FoPropertyFontStyleClass *klass G_GNUC_UNUSED)
-{
-  enum_normal =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STYLE),
-                  "value",
-                  FO_ENUM_FONT_STYLE_NORMAL,
-                  NULL);
-  enum_italic =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STYLE),
-                  "value",
-                  FO_ENUM_FONT_STYLE_ITALIC,
-                  NULL);
-  enum_oblique =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STYLE),
-                  "value",
-                  FO_ENUM_FONT_STYLE_OBLIQUE,
-                  NULL);
-  enum_backslant =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STYLE),
-                  "value",
-                  FO_ENUM_FONT_STYLE_BACKSLANT,
-                  NULL);
-}
-
-/**
- * fo_property_font_style_base_finalize:
- * @klass: #FoPropertyFontStyleClass object to finalise.
- * 
- * Implements #GBaseFinalizeFunc for #FoPropertyFontStyleClass.
- **/
-void
-fo_property_font_style_base_finalize (FoPropertyFontStyleClass *klass G_GNUC_UNUSED)
-{
-  g_object_unref (enum_normal);
-  g_object_unref (enum_italic);
-  g_object_unref (enum_oblique);
-  g_object_unref (enum_backslant);
+    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -228,9 +153,9 @@ fo_property_font_style_finalize (GObject *object)
 
 /**
  * fo_property_font_style_text_property_init:
- * @iface: #FoPropertyTextPropertyIFace structure for this class
+ * @iface: #FoPropertyTextPropertyIFace structure for this class.
  * 
- * Initialize #FoPropertyTextPropertyIface interface for this class
+ * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
 void
 fo_property_font_style_text_property_init (FoPropertyTextPropertyIface *iface)
@@ -281,21 +206,12 @@ fo_property_font_style_resolve_enum (const gchar *token,
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-  if (strcmp (token, "normal") == 0)
+  if ((strcmp (token, "normal") == 0) ||
+      (strcmp (token, "italic") == 0) ||
+      (strcmp (token, "oblique") == 0) ||
+      (strcmp (token, "backslant") == 0))
     {
-      return g_object_ref (enum_normal);
-    }
-  else if (strcmp (token, "italic") == 0)
-    {
-      return g_object_ref (enum_italic);
-    }
-  else if (strcmp (token, "oblique") == 0)
-    {
-      return g_object_ref (enum_oblique);
-    }
-  else if (strcmp (token, "backslant") == 0)
-    {
-      return g_object_ref (enum_backslant);
+      return g_object_ref (fo_enum_get_enum_by_nick (token));
     }
   else
     {
@@ -338,10 +254,12 @@ fo_property_font_style_validate (FoDatatype *datatype,
 
   if (FO_IS_ENUM (datatype))
     {
-      if ((G_ENUM_CLASS_TYPE (fo_enum_get_enum_class (datatype))
-           == FO_TYPE_ENUM_FONT_STYLE) &&
-	  (g_enum_get_value (fo_enum_get_enum_class (datatype),
-			     fo_enum_get_value (datatype)) != NULL))
+      FoEnumEnum value = fo_enum_get_value (datatype);
+
+      if ((value == FO_ENUM_ENUM_NORMAL) ||
+          (value == FO_ENUM_ENUM_ITALIC) ||
+          (value == FO_ENUM_ENUM_OBLIQUE) ||
+          (value == FO_ENUM_ENUM_BACKSLANT))
 	{
 	  return datatype;
 	}
@@ -351,8 +269,8 @@ fo_property_font_style_validate (FoDatatype *datatype,
 
 	  g_set_error (error,
 		       FO_FO_ERROR,
-		       FO_FO_ERROR_DATATYPE,
-		       _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE]),
+		       FO_FO_ERROR_ENUMERATION_TOKEN,
+		       _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
 		       class_name,
 		       datatype_sprintf,
 		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
@@ -373,11 +291,7 @@ fo_property_font_style_validate (FoDatatype *datatype,
 
       g_object_unref (datatype);
 
-      if (tmp_error != NULL)
-	{
-	  g_propagate_error (error, tmp_error);
-	  return NULL;
-	}
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
     }
@@ -390,11 +304,7 @@ fo_property_font_style_validate (FoDatatype *datatype,
 
       g_object_unref (datatype);
 
-      if (tmp_error != NULL)
-	{
-	  g_propagate_error (error, tmp_error);
-	  return NULL;
-	}
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
     }
@@ -432,7 +342,8 @@ fo_property_font_style_get_initial (void)
 
   if (font_style == NULL)
     {
-      font_style = fo_property_font_style_new ();
+      font_style =
+	fo_property_font_style_new ();
     }
 
   return font_style;
@@ -461,11 +372,11 @@ fo_property_font_style_to_pango_style (FoProperty *property)
   font_style = fo_enum_get_value (property->value);
 
   /* Pango doesn't support 'backslant' styles */
-  if (font_style == FO_ENUM_FONT_STYLE_ITALIC)
+  if (font_style == FO_ENUM_ENUM_ITALIC)
     {
       pango_font_style = PANGO_STYLE_ITALIC;
     }
-  else if (font_style == FO_ENUM_FONT_STYLE_OBLIQUE)
+  else if (font_style == FO_ENUM_ENUM_OBLIQUE)
     {
       pango_font_style = PANGO_STYLE_OBLIQUE;
     }

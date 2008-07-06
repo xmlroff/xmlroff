@@ -181,18 +181,18 @@ fo_font_desc_set_size (FoFontDesc *font_desc,
 }
 
 static PangoStyle
-fo_font_style_to_pango_style (FoEnumFontStyle font_style)
+fo_font_style_to_pango_style (FoEnumEnum font_style)
 {
   PangoStyle pango_font_style = PANGO_STYLE_NORMAL;
 
   /* Pango doesn't support 'backslant' styles so leave 'backslant' 
    * as 'normal'
    */
-  if (font_style == FO_ENUM_FONT_STYLE_ITALIC)
+  if (font_style == FO_ENUM_ENUM_ITALIC)
     {
       pango_font_style = PANGO_STYLE_ITALIC;
     }
-  else if (font_style == FO_ENUM_FONT_STYLE_OBLIQUE)
+  else if (font_style == FO_ENUM_ENUM_OBLIQUE)
     {
       pango_font_style = PANGO_STYLE_OBLIQUE;
     }
@@ -201,8 +201,8 @@ fo_font_style_to_pango_style (FoEnumFontStyle font_style)
 }
 
 void
-fo_font_desc_set_style (FoFontDesc      *font_desc,
-			FoEnumFontStyle  style)
+fo_font_desc_set_style (FoFontDesc *font_desc,
+			FoEnumEnum  style)
 {
   g_return_if_fail (FO_IS_FONT_DESC (font_desc));
 
@@ -210,16 +210,60 @@ fo_font_desc_set_style (FoFontDesc      *font_desc,
 				    fo_font_style_to_pango_style (style));
 }
 
-#define fo_font_stretch_to_pango_stretch(font_stretch) (font_stretch)
+static PangoStretch
+_font_stretch_to_pango_stretch (FoEnumEnum font_stretch)
+{
+  PangoStretch pango_stretch = PANGO_STRETCH_NORMAL;
+
+  switch (font_stretch)
+    {
+    case FO_ENUM_ENUM_ULTRA_CONDENSED:
+      pango_stretch = PANGO_STRETCH_ULTRA_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_EXTRA_CONDENSED:
+      pango_stretch = PANGO_STRETCH_EXTRA_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_CONDENSED:
+      pango_stretch = PANGO_STRETCH_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_SEMI_CONDENSED:
+      pango_stretch = PANGO_STRETCH_SEMI_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_SEMI_EXPANDED:
+      pango_stretch = PANGO_STRETCH_SEMI_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_EXPANDED:
+      pango_stretch = PANGO_STRETCH_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_EXTRA_EXPANDED:
+      pango_stretch = PANGO_STRETCH_EXTRA_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_ULTRA_EXPANDED:
+      pango_stretch = PANGO_STRETCH_ULTRA_EXPANDED;
+      break;
+
+    default:
+      break; 
+   }
+
+  return pango_stretch;
+}
 
 void
-fo_font_desc_set_stretch (FoFontDesc        *font_desc,
-			  FoEnumFontStretch  stretch)
+fo_font_desc_set_stretch (FoFontDesc *font_desc,
+			  FoEnumEnum  stretch)
 {
   g_return_if_fail (FO_IS_FONT_DESC (font_desc));
 
   pango_font_description_set_stretch (font_desc->font_desc,
-				      fo_font_stretch_to_pango_stretch (stretch));
+				      _font_stretch_to_pango_stretch (stretch));
 }
 
 static PangoVariant

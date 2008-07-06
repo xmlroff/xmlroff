@@ -20,31 +20,6 @@
 /* Shorthand: FALSE */
 /* font-stretch */
 /* normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit */
-/* Reordered to match Pango enumerations for common values */
-GType
-fo_enum_font_stretch_get_type (void)
-{
-  static GType etype = 0;
-  if (etype == 0)
-    {
-      static const GEnumValue values[] = {
-        { FO_ENUM_FONT_STRETCH_ULTRA_CONDENSED, "FO_ENUM_FONT_STRETCH_ULTRA_CONDENSED", "ultra-condensed" },
-        { FO_ENUM_FONT_STRETCH_EXTRA_CONDENSED, "FO_ENUM_FONT_STRETCH_EXTRA_CONDENSED", "extra-condensed" },
-        { FO_ENUM_FONT_STRETCH_CONDENSED, "FO_ENUM_FONT_STRETCH_CONDENSED", "condensed" },
-        { FO_ENUM_FONT_STRETCH_SEMI_CONDENSED, "FO_ENUM_FONT_STRETCH_SEMI_CONDENSED", "semi-condensed" },
-        { FO_ENUM_FONT_STRETCH_NORMAL, "FO_ENUM_FONT_STRETCH_NORMAL", "normal" },
-        { FO_ENUM_FONT_STRETCH_SEMI_EXPANDED, "FO_ENUM_FONT_STRETCH_SEMI_EXPANDED", "semi-expanded" },
-        { FO_ENUM_FONT_STRETCH_EXPANDED, "FO_ENUM_FONT_STRETCH_EXPANDED", "expanded" },
-        { FO_ENUM_FONT_STRETCH_EXTRA_EXPANDED, "FO_ENUM_FONT_STRETCH_EXTRA_EXPANDED", "extra-expanded" },
-        { FO_ENUM_FONT_STRETCH_ULTRA_EXPANDED, "FO_ENUM_FONT_STRETCH_ULTRA_EXPANDED", "ultra-expanded" },
-        { FO_ENUM_FONT_STRETCH_WIDER, "FO_ENUM_FONT_STRETCH_WIDER", "wider" },
-        { FO_ENUM_FONT_STRETCH_NARROWER, "FO_ENUM_FONT_STRETCH_NARROWER", "narrower" },
-        { 0, NULL, NULL }
-      };
-      etype = g_enum_register_static ("FoEnumFontStretch", values);
-    }
-  return etype;
-}
 
 struct _FoPropertyFontStretch
 {
@@ -57,8 +32,6 @@ struct _FoPropertyFontStretchClass
 };
 
 static void fo_property_font_stretch_init         (FoPropertyFontStretch      *property_font_stretch);
-static void fo_property_font_stretch_base_init   (FoPropertyFontStretchClass *klass);
-static void fo_property_font_stretch_base_finalize   (FoPropertyFontStretchClass *klass);
 static void fo_property_font_stretch_class_init   (FoPropertyFontStretchClass *klass);
 static void fo_property_font_stretch_finalize     (GObject       *object);
 static void fo_property_font_stretch_text_property_init (FoPropertyTextPropertyIface *iface);
@@ -72,18 +45,8 @@ static FoDatatype* fo_property_font_stretch_validate (FoDatatype *datatype,
 static PangoAttribute * fo_property_font_stretch_new_attr (FoProperty *property);
 
 static const gchar class_name[] = "font-stretch";
+
 static gpointer parent_class;
-static FoDatatype *enum_normal;
-static FoDatatype *enum_wider;
-static FoDatatype *enum_narrower;
-static FoDatatype *enum_ultra_condensed;
-static FoDatatype *enum_extra_condensed;
-static FoDatatype *enum_condensed;
-static FoDatatype *enum_semi_condensed;
-static FoDatatype *enum_semi_expanded;
-static FoDatatype *enum_expanded;
-static FoDatatype *enum_extra_expanded;
-static FoDatatype *enum_ultra_expanded;
 
 /**
  * fo_property_font_stretch_get_type:
@@ -103,8 +66,8 @@ fo_property_font_stretch_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoPropertyFontStretchClass),
-        (GBaseInitFunc) fo_property_font_stretch_base_init,
-        (GBaseFinalizeFunc) fo_property_font_stretch_base_finalize,
+        NULL,           /* base_init */
+        NULL,           /* base_finalize */
         (GClassInitFunc) fo_property_font_stretch_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
@@ -142,117 +105,7 @@ void
 fo_property_font_stretch_init (FoPropertyFontStretch *font_stretch)
 {
   FO_PROPERTY (font_stretch)->value =
-    g_object_ref (enum_normal);
-}
-
-/**
- * fo_property_font_stretch_base_init:
- * @klass: #FoPropertyFontStretchClass object to initialise.
- * 
- * Implements #GBaseInitFunc for #FoPropertyFontStretchClass.
- **/
-void
-fo_property_font_stretch_base_init (FoPropertyFontStretchClass *klass G_GNUC_UNUSED)
-{
-  enum_normal =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_NORMAL,
-                  NULL);
-  enum_wider =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_WIDER,
-                  NULL);
-  enum_narrower =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_NARROWER,
-                  NULL);
-  enum_ultra_condensed =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_ULTRA_CONDENSED,
-                  NULL);
-  enum_extra_condensed =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_EXTRA_CONDENSED,
-                  NULL);
-  enum_condensed =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_CONDENSED,
-                  NULL);
-  enum_semi_condensed =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_SEMI_CONDENSED,
-                  NULL);
-  enum_semi_expanded =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_SEMI_EXPANDED,
-                  NULL);
-  enum_expanded =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_EXPANDED,
-                  NULL);
-  enum_extra_expanded =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_EXTRA_EXPANDED,
-                  NULL);
-  enum_ultra_expanded =
-    g_object_new (FO_TYPE_ENUM,
-                  "enum-class",
-                  g_type_class_ref (FO_TYPE_ENUM_FONT_STRETCH),
-                  "value",
-                  FO_ENUM_FONT_STRETCH_ULTRA_EXPANDED,
-                  NULL);
-}
-
-/**
- * fo_property_font_stretch_base_finalize:
- * @klass: #FoPropertyFontStretchClass object to finalise.
- * 
- * Implements #GBaseFinalizeFunc for #FoPropertyFontStretchClass.
- **/
-void
-fo_property_font_stretch_base_finalize (FoPropertyFontStretchClass *klass G_GNUC_UNUSED)
-{
-  g_object_unref (enum_normal);
-  g_object_unref (enum_wider);
-  g_object_unref (enum_narrower);
-  g_object_unref (enum_ultra_condensed);
-  g_object_unref (enum_extra_condensed);
-  g_object_unref (enum_condensed);
-  g_object_unref (enum_semi_condensed);
-  g_object_unref (enum_semi_expanded);
-  g_object_unref (enum_expanded);
-  g_object_unref (enum_extra_expanded);
-  g_object_unref (enum_ultra_expanded);
+    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -329,6 +182,118 @@ fo_property_font_stretch_new (void)
   return font_stretch;
 }
 
+FoEnumEnum
+_wider_font_stretch (FoContext *context)
+{
+  FoEnumEnum wider;
+
+  FoEnumEnum old_stretch =
+    fo_enum_get_value (fo_property_get_value (fo_context_get_font_stretch (context)));
+
+  switch (old_stretch)
+    {
+    case FO_ENUM_ENUM_ULTRA_CONDENSED:
+      wider = FO_ENUM_ENUM_EXTRA_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_EXTRA_CONDENSED:
+      wider = FO_ENUM_ENUM_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_CONDENSED:
+      wider = FO_ENUM_ENUM_SEMI_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_SEMI_CONDENSED:
+      wider = FO_ENUM_ENUM_NORMAL;
+      break;
+
+    case FO_ENUM_ENUM_NORMAL:
+      wider = FO_ENUM_ENUM_SEMI_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_SEMI_EXPANDED:
+      wider = FO_ENUM_ENUM_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_EXPANDED:
+      wider = FO_ENUM_ENUM_EXTRA_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_EXTRA_EXPANDED:
+      wider = FO_ENUM_ENUM_ULTRA_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_ULTRA_EXPANDED:
+      /* Can't get more expanded. */
+      wider = FO_ENUM_ENUM_ULTRA_EXPANDED;
+      break;
+
+    default:
+      /* When in doubt, use 'normal'. */
+      wider = FO_ENUM_ENUM_NORMAL;
+      break; 
+    }
+
+  return wider;
+}
+
+FoEnumEnum
+_narrower_font_stretch (FoContext *context)
+{
+  FoEnumEnum narrower;
+
+  FoEnumEnum old_stretch =
+    fo_enum_get_value (fo_property_get_value (fo_context_get_font_stretch (context)));
+
+  switch (old_stretch)
+    {
+    case FO_ENUM_ENUM_ULTRA_CONDENSED:
+      /* Can't get more condensed. */
+      narrower = FO_ENUM_ENUM_ULTRA_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_EXTRA_CONDENSED:
+      narrower = FO_ENUM_ENUM_ULTRA_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_CONDENSED:
+      narrower = FO_ENUM_ENUM_EXTRA_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_SEMI_CONDENSED:
+      narrower = FO_ENUM_ENUM_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_NORMAL:
+      narrower = FO_ENUM_ENUM_SEMI_CONDENSED;
+      break;
+
+    case FO_ENUM_ENUM_SEMI_EXPANDED:
+      narrower = FO_ENUM_ENUM_NORMAL;
+      break;
+
+    case FO_ENUM_ENUM_EXPANDED:
+      narrower = FO_ENUM_ENUM_SEMI_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_EXTRA_EXPANDED:
+      narrower = FO_ENUM_ENUM_EXPANDED;
+      break;
+
+    case FO_ENUM_ENUM_ULTRA_EXPANDED:
+      narrower = FO_ENUM_ENUM_EXTRA_EXPANDED;
+      break;
+
+    default:
+      /* When in doubt, use 'normal'. */
+      narrower = FO_ENUM_ENUM_NORMAL;
+      break; 
+    }
+
+  return narrower;
+}
+
 /**
  * fo_property_font_stretch_resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
@@ -344,7 +309,7 @@ fo_property_font_stretch_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
+FoDatatype *
 fo_property_font_stretch_resolve_enum (const gchar *token,
                                        FoContext   *context,
                                        GError     **error)
@@ -353,49 +318,25 @@ fo_property_font_stretch_resolve_enum (const gchar *token,
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-  if (strcmp (token, "normal") == 0)
+  if ((strcmp (token, "normal") == 0) ||
+      (strcmp (token, "ultra-condensed") == 0) ||
+      (strcmp (token, "extra-condensed") == 0) ||
+      (strcmp (token, "condensed") == 0) ||
+      (strcmp (token, "semi-condensed") == 0) ||
+      (strcmp (token, "semi-expanded") == 0) ||
+      (strcmp (token, "expanded") == 0) ||
+      (strcmp (token, "extra-expanded") == 0) ||
+      (strcmp (token, "ultra-expanded") == 0))
     {
-      return g_object_ref (enum_normal);
+      return g_object_ref (fo_enum_get_enum_by_nick (token));
     }
   else if (strcmp (token, "wider") == 0)
     {
-      return g_object_ref (enum_wider);
+      return g_object_ref (fo_enum_get_enum_by_value (_wider_font_stretch (context)));
     }
   else if (strcmp (token, "narrower") == 0)
     {
-      return g_object_ref (enum_narrower);
-    }
-  else if (strcmp (token, "ultra-condensed") == 0)
-    {
-      return g_object_ref (enum_ultra_condensed);
-    }
-  else if (strcmp (token, "extra-condensed") == 0)
-    {
-      return g_object_ref (enum_extra_condensed);
-    }
-  else if (strcmp (token, "condensed") == 0)
-    {
-      return g_object_ref (enum_condensed);
-    }
-  else if (strcmp (token, "semi-condensed") == 0)
-    {
-      return g_object_ref (enum_semi_condensed);
-    }
-  else if (strcmp (token, "semi-expanded") == 0)
-    {
-      return g_object_ref (enum_semi_expanded);
-    }
-  else if (strcmp (token, "expanded") == 0)
-    {
-      return g_object_ref (enum_expanded);
-    }
-  else if (strcmp (token, "extra-expanded") == 0)
-    {
-      return g_object_ref (enum_extra_expanded);
-    }
-  else if (strcmp (token, "ultra-expanded") == 0)
-    {
-      return g_object_ref (enum_ultra_expanded);
+      return g_object_ref (fo_enum_get_enum_by_value (_narrower_font_stretch (context)));
     }
   else
     {
@@ -438,10 +379,19 @@ fo_property_font_stretch_validate (FoDatatype *datatype,
 
   if (FO_IS_ENUM (datatype))
     {
-      if ((G_ENUM_CLASS_TYPE (fo_enum_get_enum_class (datatype))
-           == FO_TYPE_ENUM_FONT_STRETCH) &&
-	  (g_enum_get_value (fo_enum_get_enum_class (datatype),
-			     fo_enum_get_value (datatype)) != NULL))
+      FoEnumEnum value = fo_enum_get_value (datatype);
+
+      if ((value == FO_ENUM_ENUM_NORMAL) ||
+          (value == FO_ENUM_ENUM_WIDER) ||
+          (value == FO_ENUM_ENUM_NARROWER) ||
+          (value == FO_ENUM_ENUM_ULTRA_CONDENSED) ||
+          (value == FO_ENUM_ENUM_EXTRA_CONDENSED) ||
+          (value == FO_ENUM_ENUM_CONDENSED) ||
+          (value == FO_ENUM_ENUM_SEMI_CONDENSED) ||
+          (value == FO_ENUM_ENUM_SEMI_EXPANDED) ||
+          (value == FO_ENUM_ENUM_EXPANDED) ||
+          (value == FO_ENUM_ENUM_EXTRA_EXPANDED) ||
+          (value == FO_ENUM_ENUM_ULTRA_EXPANDED))
 	{
 	  return datatype;
 	}
@@ -451,8 +401,8 @@ fo_property_font_stretch_validate (FoDatatype *datatype,
 
 	  g_set_error (error,
 		       FO_FO_ERROR,
-		       FO_FO_ERROR_DATATYPE,
-		       _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE]),
+		       FO_FO_ERROR_ENUMERATION_TOKEN,
+		       _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
 		       class_name,
 		       datatype_sprintf,
 		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));

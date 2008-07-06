@@ -18,10 +18,6 @@ G_BEGIN_DECLS
 /* font-stretch */
 /* normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit */
 /* Initial value: normal */
-/* FoEnumFontStretch typedef moved to fo-utils.h */
-
-GType fo_enum_font_stretch_get_type (void);
-#define FO_TYPE_ENUM_FONT_STRETCH fo_enum_font_stretch_get_type ()
 
 #define FO_TYPE_PROPERTY_FONT_STRETCH              (fo_property_font_stretch_get_type ())
 #define FO_PROPERTY_FONT_STRETCH(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), FO_TYPE_PROPERTY_FONT_STRETCH, FoPropertyFontStretch))

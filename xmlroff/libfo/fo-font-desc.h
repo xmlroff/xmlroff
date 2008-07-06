@@ -40,18 +40,18 @@ FoFontDesc * fo_font_desc_new       (void);
 
 FoFontDesc * fo_font_desc_copy (const FoFontDesc *font_desc);
 
-void         fo_font_desc_set_family  (FoFontDesc        *font_desc,
-				       const char        *family);
-void         fo_font_desc_set_size    (FoFontDesc        *font_desc,
-				       gfloat             size);
-void         fo_font_desc_set_style   (FoFontDesc        *font_desc,
-				       FoEnumFontStyle    style);
-void         fo_font_desc_set_stretch (FoFontDesc        *font_desc,
-				       FoEnumFontStretch  stretch);
-void         fo_font_desc_set_variant (FoFontDesc        *font_desc,
-				       FoEnumEnum         variant);
-void         fo_font_desc_set_weight  (FoFontDesc        *font_desc,
-				       gint               weight);
+void         fo_font_desc_set_family  (FoFontDesc *font_desc,
+				       const char *family);
+void         fo_font_desc_set_size    (FoFontDesc *font_desc,
+				       gfloat      size);
+void         fo_font_desc_set_style   (FoFontDesc *font_desc,
+				       FoEnumEnum  style);
+void         fo_font_desc_set_stretch (FoFontDesc *font_desc,
+				       FoEnumEnum  stretch);
+void         fo_font_desc_set_variant (FoFontDesc *font_desc,
+				       FoEnumEnum  variant);
+void         fo_font_desc_set_weight  (FoFontDesc *font_desc,
+				       gint        weight);
 
 
 G_END_DECLS
