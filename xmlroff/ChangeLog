@@ -1,3 +1,339 @@
+07/06/08 21:35:53 tkg [439]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for xmlroff 0.6.0.
+
+07/06/08 21:27:29 tkg [437]
+	* trunk/xmlroff/libfo/fo-font-desc.c (modified)
+	* trunk/xmlroff/libfo/fo-font-desc.h (modified)
+	* trunk/xmlroff/libfo/fo-utils.h (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-stretch.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-stretch.h (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-style.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property-font-style.h (modified)
+	Using FoEnumEnum enums for font-stretch and font-style.  (Closes
+	#58.)
+
+07/06/08 21:26:19 tkg [436]
+	* trunk/xmlroff/libfo/fo/fo-external-graphic-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-external-graphic.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo.h (modified)
+	Coping if no image file.  (Closes #69.)
+
+07/06/08 10:36:16 tkg [435]
+	* trunk/xmlroff/docs/tmpl/fo-xsl-formatter.sgml (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.c (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.h (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Catching if result document's document element is not a fo:root.
+	(Closes #117.)
+
+07/05/08 15:56:48 tkg [434]
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/cunit/Makefile.am (modified)
+	* trunk/xmlroff/cunit/test-fo-doc.c (modified)
+	* trunk/xmlroff/cunit/test-fo-libfo-module.c (added)
+	* trunk/xmlroff/cunit/test-fo-libfo-module.h (added)
+	* trunk/xmlroff/cunit/test-libfo-version.c (modified)
+	* trunk/xmlroff/cunit/test.c (modified)
+	* trunk/xmlroff/docs/tmpl/fo-doc.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-xml-doc.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-xslt-transformer.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	* trunk/xmlroff/docs/xmlroff.types (modified)
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-doc.h (modified)
+	* trunk/xmlroff/libfo/fo-libfo-module-private.h (added)
+	* trunk/xmlroff/libfo/fo-libfo-module.c (added)
+	* trunk/xmlroff/libfo/fo-libfo-module.h (added)
+	* trunk/xmlroff/libfo/fo-xml-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-xml-doc.h (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.c (modified)
+	* trunk/xmlroff/libfo/fo-xslt-transformer.c (modified)
+	* trunk/xmlroff/libfo/fo-xslt-transformer.h (modified)
+	* trunk/xmlroff/libfo/libfo-version.c (modified)
+	* trunk/xmlroff/libfo/libfo-version.h (modified)
+	Hopefully the final attempt at a version API.  (Re #123.)
+
+07/04/08 22:25:43 tkg [433]
+	* trunk/xmlroff/cunit/test-libfo-version.c (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-doc.h (modified)
+	* trunk/xmlroff/libfo/fo-utils.h (modified)
+	* trunk/xmlroff/libfo/libfo-version.c (modified)
+	* trunk/xmlroff/libfo/libfo-version.h (modified)
+	Next rendition of a version interface for libfo components.  (Re
+	#123.)
+
+07/04/08 21:36:32 tkg [432]
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Wouldn't run if xmlroff.1 didn't exist.
+
+07/04/08 20:30:04 tkg [431]
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	* trunk/xmlroff/docs/xsl-gobject.xml (added)
+	Relating XSL FOs to GObjects.
+
+06/26/08 15:06:48 tkg [430]
+	* trunk/xmlroff/libfo/libfo-version.h (modified)
+	Cosmetic change.
+
+06/26/08 15:05:16 tkg [429]
+	* trunk/xmlroff/cunit/Makefile.am (modified)
+	* trunk/xmlroff/cunit/test-libfo-version.c (added)
+	* trunk/xmlroff/cunit/test-libfo-version.h (added)
+	* trunk/xmlroff/cunit/test.c (modified)
+	* trunk/xmlroff/libfo/libfo-version.c (modified)
+	Backend runtime version info now available from
+	libfo_version_backend_info(). (Re #123.)
+
+06/26/08 15:00:54 tkg [428]
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Added generating xmlroff.1 man page if configure with --enable-man.
+
+06/20/08 20:59:17 tkg [427]
+	* trunk/xmlroff/cunit/test-fo-doc.c (modified)
+	* trunk/xmlroff/libfo/libfo-version.c (modified)
+	* trunk/xmlroff/libfo/libfo-version.h (modified)
+	Documentation updates.
+
+06/20/08 20:04:54 tkg [426]
+	* trunk/xmlroff/docs/tmpl/fo-doc.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-libfo-context.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-utils.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	* trunk/xmlroff/libfo/fo-libfo-context.c (modified)
+	* trunk/xmlroff/libfo/fo-libfo-context.h (modified)
+	* trunk/xmlroff/libfo/fo-utils.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-tree.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property.c (modified)
+	Documentation updates.
+
+06/20/08 20:04:05 tkg [425]
+	* trunk/xmlroff/cunit/Makefile.am (modified)
+	* trunk/xmlroff/cunit/test-fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-doc.h (modified)
+	Added fo_doc_version_from_name() and
+	fo_doc_version_string_from_name().  (Re #123.)
+
+06/19/08 16:16:40 tkg [424]
+	* trunk/xmlroff/cunit/Makefile.am (modified)
+	* trunk/xmlroff/cunit/test-fo-doc.c (added)
+	* trunk/xmlroff/cunit/test-fo-doc.h (added)
+	* trunk/xmlroff/cunit/test-fo-libfo-context.c (added)
+	* trunk/xmlroff/cunit/test-fo-libfo-context.h (added)
+	* trunk/xmlroff/cunit/test.c (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-private.h (modified)
+	* trunk/xmlroff/libfo/fo-doc.c (modified)
+	* trunk/xmlroff/libfo/fo-doc.h (modified)
+	* trunk/xmlroff/libfo/fo-libfo-context.c (modified)
+	* trunk/xmlroff/libfo/fo-libfo-context.h (modified)
+	* trunk/xmlroff/libfo/property/fo-property-media-usage.h (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Renamed FoEnumFormat to FoFlagsFormat so it could indicate multiple
+	values.  Added fo_doc_formats_from_name() for getting formats
+	supported by a backend (re #123).  Added some CUnit tests.  Made
+	xmlroff do case-insensitive matching on backend and format
+	parameters.
+
+06/19/08 16:10:50 tkg [423]
+	* trunk/xmlroff/libfo/fo/fo-tree.c (modified)
+	Stopped a compiler warning.
+
+06/18/08 23:13:07 tkg [422]
+	* trunk/xmlroff/libfo/libfo-version.h (modified)
+	Corrected copyright.
+
+06/18/08 16:24:41 tkg [421]
+	* trunk/xmlroff/docs/backends.xml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-area-layout.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-integer.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-property.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Documentation updates.
+
+06/18/08 16:22:26 tkg [420]
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/libfo-version.c (added)
+	* trunk/xmlroff/libfo/libfo-version.h (added)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	First pass at adding version API. (Re #123.)
+
+06/12/08 12:11:43 tkg [419]
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Added first-time failure fix from
+	http://bugzilla.gnome.org/show_bug.cgi?id=156643
+
+05/07/08 19:44:04 tkg [418]
+	* trunk/xmlroff/configure.ac (modified)
+	Changed to using 'AC_CHECK_HEADER' to check for CUnit.  (Closes
+	#116.)
+
+05/03/08 20:08:23 tkg [417]
+	* trunk/xmlroff/docs/directory-structure.xml (modified)
+	Updated.
+
+05/03/08 20:06:54 tkg [416]
+	* trunk/xmlroff/docs/generating-source.xml (modified)
+	Fixed 'codegen' module name.
+
+05/02/08 20:26:23 tkg [415]
+	* trunk/xmlroff/libfo/util/fo-image.c (modified)
+	Starting to handle missing graphic.  (Re #69.)
+
+05/02/08 20:24:32 tkg [414]
+	* trunk/xmlroff/libfo/property/fo-property.c (modified)
+	* trunk/xmlroff/libfo/property/fo-property.h (modified)
+	Made fo_property_new() static.
+
+05/02/08 20:23:25 tkg [413]
+	* trunk/xmlroff/libfo/datatype/fo-error.h (modified)
+	Added a missing #include.
+
+05/02/08 20:22:08 tkg [412]
+	* trunk/xmlroff/autogen.sh (modified)
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Reverted attempt to use 'gtkdocize' to setup gtk-doc usage since many
+	xmlroff users build from svn and don't have gtk-doc installed.
+
+05/01/08 20:45:16 tkg [411]
+	* trunk/xmlroff/autogen.sh (modified)
+	Made 'gtkdocize' optional.
+
+04/15/08 20:55:42 tkg [410]
+	* trunk/xmlroff/libfo/fo/fo-external-graphic.c (modified)
+	Handling length-range for viewport width/height when resolving
+	dimensions.  Re #120.
+
+03/30/08 19:56:44 tkg [409]
+	* trunk/xmlroff/docs/xmlroff.xml (modified)
+	Changed to reporting bugs at http://xmlroff.org/newticket.
+
+03/30/08 19:46:29 tkg [408]
+	* trunk/xmlroff/libfo/datatype/fo-integer.c (modified)
+	* trunk/xmlroff/libfo/datatype/fo-integer.h (modified)
+	Made fo_integer_new() to be static.
+
+03/30/08 19:44:50 tkg [407]
+	* trunk/xmlroff/libfo/area-to-pdf.c (modified)
+	Added a comment.
+
+03/30/08 19:44:30 tkg [406]
+	* trunk/xmlroff/libfo/datatype/fo-error.c (modified)
+	Cleaned up includes.
+
+03/18/08 20:57:45 tkg [403]
+	* trunk/xmlroff/libfo/property/fo-property.c (modified)
+	G_PARAM_CONSTRUCT_ONLY was breaking xmlroff.
+
+03/18/08 20:38:19 tkg [402]
+	* trunk/xmlroff/docs/conformance-body.xml (modified)
+	More up to date.
+
+03/18/08 20:37:41 tkg [401]
+	* trunk/xmlroff/libfo/fo/Makefile.am (modified)
+	Version number update.
+
+03/18/08 17:45:27 tkg [400]
+	* trunk/xmlroff/libfo-0.5.pc.in (deleted)
+	Superseded by libfo-0.6.pc.in.
+
+03/18/08 14:44:50 tkg [399]
+	* trunk/xmlroff/Makefile.am (modified)
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/cunit/Makefile.am (modified)
+	* trunk/xmlroff/libfo-0.6.pc.in (copied)
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/area/Makefile.am (modified)
+	* trunk/xmlroff/libfo/datatype/Makefile.am (modified)
+	* trunk/xmlroff/libfo/property/Makefile.am (modified)
+	* trunk/xmlroff/libfo/util/Makefile.am (modified)
+	* trunk/xmlroff/xmlroff/Makefile.am (modified)
+	More version number changes.
+
+03/17/08 23:01:06 tkg [398]
+	* trunk/xmlroff/ChangeLog (modified)
+	* trunk/xmlroff/NEWS (modified)
+	Updated for xmlroff 0.6.0.
+
+03/17/08 22:59:30 tkg [397]
+	* trunk/xmlroff/libfo/area/fo-area-table-part.h (modified)
+	Corrected includes.
+
+03/14/08 22:06:15 tkg [396]
+	* trunk/xmlroff/libfo/area/fo-all-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-all-fo.h (modified)
+	Added more includes so gtk-doc scan-obj doesn't complain.
+
+03/14/08 22:03:02 tkg [395]
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	* trunk/xmlroff/docs/xmlroff.css (added)
+	Trickery to get colours in conformance table in 'dist' version of
+	documentation.
+
+03/14/08 20:41:09 tkg [394]
+	* trunk/xmlroff/autogen.sh (modified)
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/docs/Makefile.am (modified)
+	Updated configuring for gtk-doc to match advice in
+	http://library.gnome.org/devel/gtk-doc-manual/stable/index.html.en
+
+03/14/08 20:36:50 tkg [393]
+	Regularised include of property/fo-property.h so gtk-doc scan-obj
+	works.
+
+03/14/08 20:34:12 tkg [392]
+	* trunk/xmlroff/libfo/fo/fo-tree.c (modified)
+	Sorting debug dump of id hash (and other hashes).  (Re #77.)
+
+03/14/08 20:30:44 tkg [391]
+	* trunk/xmlroff/libfo/property/fo-property-border-left-width.c (modified)
+	Experimenting with putting descriptive documentation in source code
+	to be picked up by gtk-doc.
+
+03/14/08 20:18:48 tkg [390]
+	* trunk/xmlroff/docs/xmlroff.types (modified)
+	Corrected #includes.
+
+03/14/08 20:17:48 tkg [389]
+	* trunk/xmlroff/libfo/property/fo-property.c (modified)
+	Added GObject properties for 'is-inherited' and 'is-shorthand'.
+
+03/14/08 20:16:06 tkg [388]
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Added many &lt;SUBSECTION&gt; to put blank lines in formatted in formatted
+	synopses.
+
+03/11/08 16:00:46 tkg [387]
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	Corrected image placement. (Closes #42, lode leroy)
+
 03/11/08 10:51:58 tkg [385]
 	* trunk/xmlroff/ChangeLog.pre-0.6 (copied)
 	Changes before xmlroff 0.6.0.
