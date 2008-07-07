@@ -7,6 +7,7 @@ Changes between 0.5.5 and 0.6.0
  * Fixed checking for CUnit (#116)
  * PNG graphics rendering in Cairo backend (#42, lode leroy)
  * Fewer error messages when image file not found (#69)
+ * Divided manual into users' guide and developers' guide chapters
 
  All xmlroff 0.6.0 tickets are listed at
  http://xmlroff.org/query?milestone=xmlroff+0.6.0
