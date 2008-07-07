@@ -1,8 +1,26 @@
 <section id="xsl-gobject">
 <sectioninfo>
-<abstract><para>XSL defines formatting objects and their properties. GObject -- the GLib Object System -- is an object oriented framework for C for where you define objects and their properties.  This section is a summary of how formatting objects and their properties map to GOjects and their properties.</para></abstract>
+<abstract><para>XSL defines formatting objects and their
+properties. GObject -- the GLib Object System -- is an object oriented
+framework for C for where you define objects and their properties.
+This section is a summary of how formatting objects and their
+properties map to GOjects and their properties.</para></abstract>
 </sectioninfo>
 <title>Relating XSL to GObjects</title>
+
+<section id="foobject">
+<title>FoObject, FoNode</title>
+
+<para>The libfo object hierarchy starts at FoObject, which is an
+extension of GObject that adds some common debugging and logging
+functions.</para>
+
+<para>FoNode is a subtype of FoObject that has additional properties
+and functions for making trees of FoNode objects.  FoNode is the
+parent type of both FoFo and FoArea, since XSL operates in terms of FO
+and area trees.</para>
+
+</section>
 
 <section id="fo-gobject">
 <title>Formatting Object --> FoFo</title>
@@ -40,6 +58,14 @@
 <para>Functions that return or use XSL datatypes generally use FoDatatype objects rather than specific subtypes.</para>
 
 <para>The GObject object type name is the camel-case form of the XSL datatype name.  For example, color maps to FoColor.</para>
+
+</section>
+
+<section id="other-objects">
+<title>Other Objects</title>
+
+<para>Other parts of libfo, including FoXslFormatter, are implemented
+as subtypes of FoObject where it makes sense to do so.</para>
 
 </section>
 

@@ -23,6 +23,13 @@
 #include "datatype/fo-color.h"
 #include <string.h>
 
+/**
+ * SECTION:fo-doc-cairo
+ * @short_description: Cairo backend
+ *
+ * Cairo backend.
+ */
+
 static void fo_doc_cairo_init          (FoDocCairo      *object);
 static void fo_doc_cairo_base_init     (FoDocCairoClass *klass);
 static void fo_doc_cairo_class_init    (FoDocCairoClass *klass);

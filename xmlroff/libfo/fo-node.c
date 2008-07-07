@@ -11,6 +11,13 @@
 #include "fo-node.h"
 #include "fo-node-private.h"
 
+/**
+ * SECTION:fo-node
+ * @short_description: Object for making trees
+ *
+ * #FoObject child type that makes trees.
+ */
+
 enum {
   PROP_0,
   PROP_PARENT,

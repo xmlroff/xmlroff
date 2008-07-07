@@ -22,6 +22,13 @@
 #include "datatype/fo-color.h"
 #include <string.h>
 
+/**
+ * SECTION:fo-doc-gp
+ * @short_description: GNOME Print backend
+ *
+ * GNOME Print backend.
+ */
+
 const char *fo_doc_gp_error_messages [] = {
   N_("FoDocGP error"),
   N_("Cannot open output document: '%s'")

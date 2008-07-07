@@ -10,6 +10,16 @@
 #include "fo-utils.h"
 #include "fo-object.h"
 
+/**
+ * SECTION:fo-object
+ * @short_description: libfo base object type
+ *
+ * Top of the object hierarchy for libfo.
+ *
+ * Extends #GObject to add some common debugging and logging
+ * functions.
+ */
+
 static void     fo_object_base_class_init                (FoObjectClass *klass);
 static void     fo_object_class_init                     (FoObjectClass *klass);
 static void     fo_object_finalize                       (GObject       *object);
