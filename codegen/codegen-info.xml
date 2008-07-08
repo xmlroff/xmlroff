@@ -53,6 +53,8 @@
 <fo name="flow"
     parent-type="marker-parent"
     cbpbp="yes"/>
+<fo name="footnote"
+    inline="yes"/>
 <fo name="initial-property-set"
     validate-content="fo_fo_validate_content_empty"
     cbpbp="yes"/>
