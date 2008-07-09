@@ -61,6 +61,10 @@ void      fo_xsl_formatter_set_fo_doc      (FoXslFormatter  *fo_xsl_formatter,
 GObject * fo_xsl_formatter_get_fo_tree     (FoXslFormatter  *fo_xsl_formatter);
 GObject * fo_xsl_formatter_get_area_tree   (FoXslFormatter  *fo_xsl_formatter);
 
+void       fo_xsl_formatter_write_id_file  (FoXslFormatter  *fo_xsl_formatter,
+					    const gchar     *file,
+					    GError          **error);
+
 G_END_DECLS
 
 #endif /* !__FO_XSL_FORMATTER_H__ */

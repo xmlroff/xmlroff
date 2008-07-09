@@ -88,6 +88,13 @@ static gboolean fo_fo_validate_content_default            (FoFo *fo,
 static void   fo_fo_validate_default (FoFo *fo,
 				      FoContext *current_context,
 				      FoContext *parent_context);
+static void   fo_fo_real_validate (FoFo *fo,
+				   FoContext *current_context,
+				   FoContext *parent_context);
+static void   fo_fo_real_validate2 (FoFo *fo,
+				    FoContext *current_context,
+				    FoContext *parent_context,
+				    GError   **error);
 static void   fo_fo_validate2_default (FoFo *fo,
 				       FoContext *current_context,
 				       FoContext *parent_context,
@@ -201,6 +208,8 @@ fo_fo_class_init (FoFoClass *klass)
   object_class->get_property = fo_fo_get_property;
 
   klass->debug_dump_properties = fo_fo_debug_dump_properties;
+  klass->validate = fo_fo_real_validate;
+  klass->validate2 = fo_fo_real_validate2;
 
   g_object_class_install_property
     (object_class,
@@ -794,6 +803,9 @@ fo_fo_validate_default (FoFo *fo,
   if (FO_FO_GET_CLASS (fo)->validate != NULL)
     FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
   */
+  FO_FO_CLASS (g_type_class_peek_parent (FO_FO_GET_CLASS (fo)))->validate (fo,
+									   current_context,
+									   parent_context);
 }
 
 /**
@@ -819,7 +831,45 @@ fo_fo_validate2_default (FoFo *fo,
 	 fo_object_sprintf (FO_OBJECT (fo)));
 #endif
   if (FO_FO_GET_CLASS (fo)->validate != NULL)
-    FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
+    {
+      FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
+    }
+}
+
+/**
+ * fo_fo_real_validate:
+ * @fo:              #FoFo to validate.
+ * @current_context: #FoContext of @fo.
+ * @parent_context:  #FoContext of parent of @fo.
+ * 
+ * Default behaviour is to fallback to using the FO's _validate
+ * function.
+ **/
+void
+fo_fo_real_validate (FoFo *fo G_GNUC_UNUSED,
+		     FoContext *current_context G_GNUC_UNUSED,
+		     FoContext *parent_context G_GNUC_UNUSED)
+{
+  return;
+}
+
+/**
+ * fo_fo_real_validate2:
+ * @fo:              #FoFo to validate.
+ * @current_context: #FoContext of @fo.
+ * @parent_context:  #FoContext of parent of @fo.
+ * @error:           #GError indicating any error that occurs
+ * 
+ * Default behaviour is to fallback to using the FO's _validate
+ * function.
+ **/
+void
+fo_fo_real_validate2 (FoFo *fo G_GNUC_UNUSED,
+		      FoContext *current_context G_GNUC_UNUSED,
+		      FoContext *parent_context G_GNUC_UNUSED,
+		      GError   **error G_GNUC_UNUSED)
+{
+  return;
 }
 
 /**

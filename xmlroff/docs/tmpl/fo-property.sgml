@@ -71,6 +71,8 @@ FoProperty
 @FO_PROPERTY_ERROR_ZERO_LENGTH: 
 @FO_PROPERTY_ERROR_LAST: 
 
+<<<<<<< .mine
+=======
 <!-- ##### FUNCTION fo_property_new_from_expr ##### -->
 <para>
 
@@ -85,6 +87,7 @@ FoProperty
 @Returns: 
 
 
+>>>>>>> .r430
 <!-- ##### FUNCTION fo_property_get_value ##### -->
 <para>
 

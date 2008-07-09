@@ -9,8 +9,10 @@
 
 #include <string.h>
 #include "fo-utils.h"
-#include "fo/fo-fo.h"
 #include "fo/fo-fo-private.h"
+#include "fo/fo-block.h"
+#include "area/fo-area.h"
+#include "area/fo-area-page.h"
 #include "fo-tree.h"
 #include "fo-node.h"
 #include "fo-root.h"
@@ -471,6 +473,8 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 
   g_free (indent);
 
+  fo_tree_id_write_file (fo, NULL, NULL);
+
   FO_FO_CLASS (parent_class)->debug_dump_properties (fo, depth + 2);
 }
 
@@ -497,3 +501,79 @@ fo_tree_validate_content (FoFo *fo,
 					       tmp_error);
     }
 }
+
+#define _GROUP_NAME "id"
+
+static const gchar *_group_name = _GROUP_NAME;
+
+typedef struct _FoTreeKeyFileDumpData
+{
+  GHashTable  *hash;
+  GSList      *keys;
+  GKeyFile    *key_file;
+} FoTreeKeyFileDumpData;
+
+static void
+_key_file_set_from_keys (gpointer data,
+			 gpointer user_data)
+{
+  FoTreeKeyFileDumpData *hash_dump_data =
+    (FoTreeKeyFileDumpData *) user_data;
+
+  FoNode *fo = FO_NODE (g_hash_table_lookup (hash_dump_data->hash,
+					     data));
+
+  FoFoAreaIterator *iterator =
+    fo_fo_get_area_iterator (FO_FO (fo_node_get_ancestor_or_self_by_type (fo,
+									  FO_TYPE_BLOCK)));
+
+  FoArea *first_area = fo_fo_area_iterator_get_area (iterator);
+
+  if (first_area != NULL)
+    {
+      gint page_number = fo_area_page_get_page_number (fo_area_get_page (first_area));
+
+      gchar *page_number_sprintf = g_strdup_printf ("%d", page_number);
+
+      g_key_file_set_value (hash_dump_data->key_file,
+			    _group_name,
+			    (gchar *) data,
+			    (gchar *) page_number_sprintf);
+
+      g_free (page_number_sprintf);
+    }
+
+}
+
+void
+fo_tree_id_write_file (FoFo        *tree,
+		       const gchar *file,
+		       GError     **error)
+{
+  g_return_if_fail (tree != NULL);
+  g_return_if_fail (FO_IS_TREE (tree));
+
+  FoTree *fo_tree = FO_TREE (tree);
+
+  GKeyFile *key_file = g_key_file_new ();
+
+  FoTreeKeyFileDumpData hash_dump_data = { fo_tree->id_hash,
+					   NULL,
+					   key_file };
+
+  g_hash_table_foreach (fo_tree->id_hash,
+			fo_tree_hash_key_to_list,
+			&hash_dump_data);
+
+  hash_dump_data.keys = g_slist_sort (hash_dump_data.keys,
+				      (GCompareFunc) strcmp);
+
+  g_slist_foreach (hash_dump_data.keys,
+		   _key_file_set_from_keys,
+		   (gpointer) &hash_dump_data);
+
+  g_slist_free (hash_dump_data.keys);
+
+  g_printerr (g_key_file_to_data (key_file, NULL, NULL));
+}
+

@@ -10,7 +10,7 @@
 /**
  * SECTION:fo-property-border-left-width
  * @short_description: 'border-left-width' property
- * @include: <libfo/property/fo-property-border-left-width.h>
+ * @include: libfo/property/fo-property-border-left-width.h
  *
  * Inherited: FALSE
  *

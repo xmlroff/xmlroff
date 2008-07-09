@@ -123,6 +123,9 @@ libfo_fo_la_SOURCES =	\
 	fo-footnote-body.c \
 	fo-footnote-body.h \
 	fo-footnote-body-private.h \
+	fo-idable.c \
+	fo-idable.h \
+	fo-idable-private.h \
 	fo-initial-property-set.c \
 	fo-initial-property-set.h \
 	fo-initial-property-set-private.h \
