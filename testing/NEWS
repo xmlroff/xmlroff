@@ -1,3 +1,8 @@
+Changes between 0.5.4 and 0.6.0
+
+ * Using plain BSD license (Jon Bosak, Mike Anastasio)
+ * Added instructions for getting DocBook callout symbols (#80)
+
 Changes between 0.5.2 and 0.5.4
 
  * Can update reference versions from testsuite samples (#87)
