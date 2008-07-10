@@ -321,9 +321,19 @@ DocBook Subversion repository if you want to use them:
       https://docbook.svn.sourceforge.net/svnroot/docbook/trunk/testdocs \
       testdocs
 
-The testdocs checkout does not include a test definitions file (i.e.,
-a 'testsuite.xml' file) that is needed by this module, so you need to
-make your own.
+This checkout doesn't get you any 'callout' symbols that are usable
+by the test documents.  The DocBook testdocs fit in with the rest of
+the SourceForge DocBook project's setup, so you need to fake some of
+the DocBook setup for the callout graphics to work:
+
+   cd testdocs/tests
+   svn co \
+      https://docbook.svn.sourceforge.net/svnroot/docbook/trunk/xsl/images \
+      images
+
+The testdocs checkout also does not include a test definitions file
+(i.e., a 'testsuite.xml' file) that is needed by this module, so you
+need to make your own.
 
 'make-testsuite.pl' in this module generates a usable 'testsuites.xml'
 that includes a '<testcase>' element for each XML file in
@@ -788,4 +798,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-30 January 2008
+10 July 2008
