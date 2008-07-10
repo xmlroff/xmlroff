@@ -16,6 +16,7 @@ EXTRA_DIST = \
 	cairo-ps-results.xml		\
 	common.xsl			\
 	coverage.xsl			\
+	docbook-testdocs.conf		\
 	dotests.pl			\
 	h2pl.pl				\
 	h2xsl.pl			\
