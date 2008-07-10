@@ -1,3 +1,7 @@
+07/10/08 14:07:46 tkg [463]
+	* trunk/testing/Makefile.am (modified)
+	Added docbook-testdocs.conf to distribution.
+
 07/10/08 13:59:22 tkg [461]
 	* trunk/testing/cairo-ps-results.xml (modified)
 	Updated for 0.6.0.
