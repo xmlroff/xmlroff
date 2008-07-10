@@ -285,9 +285,9 @@
 <testresult id="book.008" results="book.008.pdf" agreement="issues" specproblem="no" testproblem="yes">No output.  Not handling xi:include in source.</testresult>
 <testresult id="bookinfo.001" results="bookinfo.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="bridgehead.001" results="bridgehead.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
-<testresult id="calloutlist.001" results="calloutlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
-<testresult id="calloutlist.002" results="calloutlist.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
-<testresult id="calloutlist.003" results="calloutlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">'Embedded Cos' title missing.  Extra blank page.</testresult>
+<testresult id="calloutlist.001" results="calloutlist.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="calloutlist.002" results="calloutlist.002.pdf" agreement="full" specproblem="no" testproblem="yes"/>
+<testresult id="calloutlist.003" results="calloutlist.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="changebars.001" results="changebars.001.pdf" agreement="issues" specproblem="no" testproblem="no">No changebars.</testresult>
 <testresult id="chapter.001" results="chapter.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="chapter.002" results="chapter.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
@@ -295,26 +295,26 @@
 <testresult id="cmdsynopsis.001" results="cmdsynopsis.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
 <testresult id="cmdsynopsis.002" results="cmdsynopsis.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
 <testresult id="cmdsynopsis.003" results="cmdsynopsis.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
-<testresult id="co.001" results="co.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
+<testresult id="co.001" results="co.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="dir.001" results="dir.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
 <testresult id="docbook-43.001" results="docbook-43.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
 <testresult id="draft.001" results="draft.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward references.  Ticket #77.</testresult>
 <testresult id="emphasis.001" results="emphasis.001.pdf" agreement="issues" specproblem="no" testproblem="no">No strikethrough, no underline.</testresult>
 <testresult id="epigraph.001" results="epigraph.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-<testresult id="equation.001" results="equation.001.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
-<testresult id="equation.002" results="equation.002.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
-<testresult id="equation.003" results="equation.003.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
-<testresult id="equation.004" results="equation.004.pdf" agreement="issues" specproblem="no" testproblem="no">No equations, no figure.  Ticket #80.</testresult>
+<testresult id="equation.001" results="equation.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="equation.002" results="equation.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="equation.003" results="equation.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="equation.004" results="equation.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work.  #77.</testresult>
 <testresult id="example.001" results="example.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="extensions.001" results="extensions.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
 <testresult id="extensions.002" results="extensions.002.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
 <testresult id="extensions.003" results="extensions.003.pdf" agreement="issues" specproblem="no" testproblem="no">No line numbers.</testresult>
 <testresult id="extensions.004" results="extensions.004.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
 <testresult id="figure.001" results="figure.001.pdf" agreement="issues" specproblem="no" testproblem="no">No figure.  Ticket #80.</testresult>
-<testresult id="figure.002" results="figure.002.pdf" agreement="issues" specproblem="no" testproblem="no">No figures.  Ticket #80.</testresult>
+<testresult id="figure.002" results="figure.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="figure.003" results="figure.003.pdf" agreement="issues" specproblem="no" testproblem="no">No figure.  Ticket #80.</testresult>
-<testresult id="figure.004" results="figure.004.pdf" agreement="issues" specproblem="no" testproblem="no">No figures.  Ticket #80.</testresult>
-<testresult id="figure.005" results="figure.005.pdf" agreement="issues" specproblem="no" testproblem="no">No figure.  Ticket #80.</testresult>
+<testresult id="figure.004" results="figure.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="figure.005" results="figure.005.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="firstterm.001" results="firstterm.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="footnote.001" results="footnote.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="footnote.002" results="footnote.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Not sure what result should be.</testresult>
@@ -327,8 +327,8 @@
 <testresult id="glossary.002.data" results="glossary.002.data.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="glossary.002" results="glossary.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="glossary.003" results="glossary.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
-<testresult id="imagelib.001" results="imagelib.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
-<testresult id="imageobjectco.001" results="imageobjectco.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="imagelib.001" results="imagelib.001.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
+<testresult id="imageobjectco.001" results="imageobjectco.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="index.001" results="index.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="index.002" results="index.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="index.003" results="index.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
@@ -370,10 +370,10 @@
 <testresult id="literallayout.002" results="literallayout.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="literallayout.003" results="literallayout.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="lot.001" results="lot.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
-<testresult id="mediaobject.001" results="mediaobject.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
-<testresult id="mediaobject.002" results="mediaobject.002.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject.  Ticket #80.</testresult>
-<testresult id="mediaobjectco.001" results="mediaobjectco.001.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
-<testresult id="mediaobjectco.002" results="mediaobjectco.002.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
+<testresult id="mediaobject.001" results="mediaobject.001.pdf" agreement="issues" specproblem="no" testproblem="no">Stretched duck.</testresult>
+<testresult id="mediaobject.002" results="mediaobject.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="mediaobjectco.001" results="mediaobjectco.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="mediaobjectco.002" results="mediaobjectco.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="methodsynopsis.001" results="methodsynopsis.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="note.001" results="note.001.pdf" agreement="issues" specproblem="no" testproblem="no">No note icon.  Ticket #80.</testresult>
 <testresult id="olink.001" results="olink.001.pdf" agreement="issues" specproblem="no" testproblem="no">No link. Ticket #82.</testresult>
@@ -436,19 +436,19 @@
 <testresult id="stamp.002" results="stamp.002.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.003" results="stamp.003.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.004" results="stamp.004.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
-<testresult id="stamp.005" results="stamp.005.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="stamp.005" results="stamp.005.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
 <testresult id="stamp.006" results="stamp.006.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.007" results="stamp.007.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.008" results="stamp.008.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.009" results="stamp.009.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.010" results="stamp.010.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
-<testresult id="stamp.011" results="stamp.011.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
-<testresult id="stamp.012" results="stamp.012.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="stamp.011" results="stamp.011.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
+<testresult id="stamp.012" results="stamp.012.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
 <testresult id="stamp.013" results="stamp.013.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stepalternatives.001" results="stepalternatives.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
 <testresult id="subtitle.001" results="subtitle.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="superscript.001" results="superscript.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
-<testresult id="svg.002" results="svg.002.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
+<testresult id="svg.002" results="svg.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="table.001" results="table.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="table.002" results="table.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="table.003" results="table.003.pdf" agreement="issues" specproblem="no" testproblem="no">Don't know what result should be.</testresult>
