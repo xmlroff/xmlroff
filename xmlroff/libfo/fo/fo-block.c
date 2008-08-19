@@ -1794,8 +1794,8 @@ fo_block_validate (FoFo      *fo,
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
   fo_block_set_line_height (fo,
-			    fo_property_line_height_resolve (fo_block->line_height,
-							     fo_block->font_size));
+    fo_property_line_height_resolve (fo_block->line_height,
+				     fo_block->font_size));
   fo_fo_register_id (fo,
 		     fo_property_get_value (fo_block->id));
   FO_FO_CLASS (parent_class)->validate (fo, current_context, parent_context);
@@ -2075,7 +2075,7 @@ fo_block_debug_dump_properties (FoFo *fo,
 
 /**
  * fo_block_get_background_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "background-color" property of @fo_fo.
  *
@@ -2124,7 +2124,7 @@ fo_block_set_background_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_background_image:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "background-image" property of @fo_fo.
  *
@@ -2173,7 +2173,7 @@ fo_block_set_background_image (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_after_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-after-color" property of @fo_fo.
  *
@@ -2222,7 +2222,7 @@ fo_block_set_border_after_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_after_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-after-style" property of @fo_fo.
  *
@@ -2271,7 +2271,7 @@ fo_block_set_border_after_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_after_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-after-width" property of @fo_fo.
  *
@@ -2320,7 +2320,7 @@ fo_block_set_border_after_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_before_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-before-color" property of @fo_fo.
  *
@@ -2369,7 +2369,7 @@ fo_block_set_border_before_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_before_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-before-style" property of @fo_fo.
  *
@@ -2418,7 +2418,7 @@ fo_block_set_border_before_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_before_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-before-width" property of @fo_fo.
  *
@@ -2467,7 +2467,7 @@ fo_block_set_border_before_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_bottom_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-bottom-color" property of @fo_fo.
  *
@@ -2516,7 +2516,7 @@ fo_block_set_border_bottom_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_bottom_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-bottom-style" property of @fo_fo.
  *
@@ -2565,7 +2565,7 @@ fo_block_set_border_bottom_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_bottom_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-bottom-width" property of @fo_fo.
  *
@@ -2614,7 +2614,7 @@ fo_block_set_border_bottom_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_end_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-end-color" property of @fo_fo.
  *
@@ -2663,7 +2663,7 @@ fo_block_set_border_end_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_end_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-end-style" property of @fo_fo.
  *
@@ -2712,7 +2712,7 @@ fo_block_set_border_end_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_end_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-end-width" property of @fo_fo.
  *
@@ -2761,7 +2761,7 @@ fo_block_set_border_end_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_left_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-left-color" property of @fo_fo.
  *
@@ -2810,7 +2810,7 @@ fo_block_set_border_left_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_left_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-left-style" property of @fo_fo.
  *
@@ -2859,7 +2859,7 @@ fo_block_set_border_left_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_left_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-left-width" property of @fo_fo.
  *
@@ -2908,7 +2908,7 @@ fo_block_set_border_left_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_right_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-right-color" property of @fo_fo.
  *
@@ -2957,7 +2957,7 @@ fo_block_set_border_right_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_right_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-right-style" property of @fo_fo.
  *
@@ -3006,7 +3006,7 @@ fo_block_set_border_right_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_right_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-right-width" property of @fo_fo.
  *
@@ -3055,7 +3055,7 @@ fo_block_set_border_right_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_start_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-start-color" property of @fo_fo.
  *
@@ -3104,7 +3104,7 @@ fo_block_set_border_start_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_start_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-start-style" property of @fo_fo.
  *
@@ -3153,7 +3153,7 @@ fo_block_set_border_start_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_start_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-start-width" property of @fo_fo.
  *
@@ -3202,7 +3202,7 @@ fo_block_set_border_start_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_top_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-top-color" property of @fo_fo.
  *
@@ -3251,7 +3251,7 @@ fo_block_set_border_top_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_top_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-top-style" property of @fo_fo.
  *
@@ -3300,7 +3300,7 @@ fo_block_set_border_top_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_border_top_width:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "border-top-width" property of @fo_fo.
  *
@@ -3349,7 +3349,7 @@ fo_block_set_border_top_width (FoFo *fo_fo,
 
 /**
  * fo_block_get_break_after:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "break-after" property of @fo_fo.
  *
@@ -3398,7 +3398,7 @@ fo_block_set_break_after (FoFo *fo_fo,
 
 /**
  * fo_block_get_break_before:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "break-before" property of @fo_fo.
  *
@@ -3447,7 +3447,7 @@ fo_block_set_break_before (FoFo *fo_fo,
 
 /**
  * fo_block_get_color:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "color" property of @fo_fo.
  *
@@ -3496,7 +3496,7 @@ fo_block_set_color (FoFo *fo_fo,
 
 /**
  * fo_block_get_end_indent:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "end-indent" property of @fo_fo.
  *
@@ -3545,7 +3545,7 @@ fo_block_set_end_indent (FoFo *fo_fo,
 
 /**
  * fo_block_get_font_family:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "font-family" property of @fo_fo.
  *
@@ -3594,7 +3594,7 @@ fo_block_set_font_family (FoFo *fo_fo,
 
 /**
  * fo_block_get_font_size:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "font-size" property of @fo_fo.
  *
@@ -3643,7 +3643,7 @@ fo_block_set_font_size (FoFo *fo_fo,
 
 /**
  * fo_block_get_font_stretch:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "font-stretch" property of @fo_fo.
  *
@@ -3692,7 +3692,7 @@ fo_block_set_font_stretch (FoFo *fo_fo,
 
 /**
  * fo_block_get_font_style:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "font-style" property of @fo_fo.
  *
@@ -3741,7 +3741,7 @@ fo_block_set_font_style (FoFo *fo_fo,
 
 /**
  * fo_block_get_font_variant:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "font-variant" property of @fo_fo.
  *
@@ -3790,7 +3790,7 @@ fo_block_set_font_variant (FoFo *fo_fo,
 
 /**
  * fo_block_get_font_weight:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "font-weight" property of @fo_fo.
  *
@@ -3839,7 +3839,7 @@ fo_block_set_font_weight (FoFo *fo_fo,
 
 /**
  * fo_block_get_id:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "id" property of @fo_fo.
  *
@@ -3888,7 +3888,7 @@ fo_block_set_id (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_together:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-together" property of @fo_fo.
  *
@@ -3937,7 +3937,7 @@ fo_block_set_keep_together (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_together_within_column:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-together-within-column" property of @fo_fo.
  *
@@ -3986,7 +3986,7 @@ fo_block_set_keep_together_within_column (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_together_within_line:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-together-within-line" property of @fo_fo.
  *
@@ -4035,7 +4035,7 @@ fo_block_set_keep_together_within_line (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_together_within_page:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-together-within-page" property of @fo_fo.
  *
@@ -4084,7 +4084,7 @@ fo_block_set_keep_together_within_page (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_next:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-next" property of @fo_fo.
  *
@@ -4133,7 +4133,7 @@ fo_block_set_keep_with_next (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_next_within_column:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-next-within-column" property of @fo_fo.
  *
@@ -4182,7 +4182,7 @@ fo_block_set_keep_with_next_within_column (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_next_within_line:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-next-within-line" property of @fo_fo.
  *
@@ -4231,7 +4231,7 @@ fo_block_set_keep_with_next_within_line (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_next_within_page:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-next-within-page" property of @fo_fo.
  *
@@ -4280,7 +4280,7 @@ fo_block_set_keep_with_next_within_page (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_previous:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-previous" property of @fo_fo.
  *
@@ -4329,7 +4329,7 @@ fo_block_set_keep_with_previous (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_previous_within_column:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-previous-within-column" property of @fo_fo.
  *
@@ -4378,7 +4378,7 @@ fo_block_set_keep_with_previous_within_column (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_previous_within_line:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-previous-within-line" property of @fo_fo.
  *
@@ -4427,7 +4427,7 @@ fo_block_set_keep_with_previous_within_line (FoFo *fo_fo,
 
 /**
  * fo_block_get_keep_with_previous_within_page:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "keep-with-previous-within-page" property of @fo_fo.
  *
@@ -4476,7 +4476,7 @@ fo_block_set_keep_with_previous_within_page (FoFo *fo_fo,
 
 /**
  * fo_block_get_line_height:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "line-height" property of @fo_fo.
  *
@@ -4525,7 +4525,7 @@ fo_block_set_line_height (FoFo *fo_fo,
 
 /**
  * fo_block_get_line_stacking_strategy:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "line-stacking-strategy" property of @fo_fo.
  *
@@ -4574,7 +4574,7 @@ fo_block_set_line_stacking_strategy (FoFo *fo_fo,
 
 /**
  * fo_block_get_linefeed_treatment:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "linefeed-treatment" property of @fo_fo.
  *
@@ -4623,7 +4623,7 @@ fo_block_set_linefeed_treatment (FoFo *fo_fo,
 
 /**
  * fo_block_get_margin_bottom:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "margin-bottom" property of @fo_fo.
  *
@@ -4672,7 +4672,7 @@ fo_block_set_margin_bottom (FoFo *fo_fo,
 
 /**
  * fo_block_get_margin_left:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "margin-left" property of @fo_fo.
  *
@@ -4721,7 +4721,7 @@ fo_block_set_margin_left (FoFo *fo_fo,
 
 /**
  * fo_block_get_margin_right:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "margin-right" property of @fo_fo.
  *
@@ -4770,7 +4770,7 @@ fo_block_set_margin_right (FoFo *fo_fo,
 
 /**
  * fo_block_get_margin_top:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "margin-top" property of @fo_fo.
  *
@@ -4819,7 +4819,7 @@ fo_block_set_margin_top (FoFo *fo_fo,
 
 /**
  * fo_block_get_orphans:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "orphans" property of @fo_fo.
  *
@@ -4868,7 +4868,7 @@ fo_block_set_orphans (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_after:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-after" property of @fo_fo.
  *
@@ -4917,7 +4917,7 @@ fo_block_set_padding_after (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_before:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-before" property of @fo_fo.
  *
@@ -4966,7 +4966,7 @@ fo_block_set_padding_before (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_bottom:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-bottom" property of @fo_fo.
  *
@@ -5015,7 +5015,7 @@ fo_block_set_padding_bottom (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_end:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-end" property of @fo_fo.
  *
@@ -5064,7 +5064,7 @@ fo_block_set_padding_end (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_left:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-left" property of @fo_fo.
  *
@@ -5113,7 +5113,7 @@ fo_block_set_padding_left (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_right:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-right" property of @fo_fo.
  *
@@ -5162,7 +5162,7 @@ fo_block_set_padding_right (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_start:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-start" property of @fo_fo.
  *
@@ -5211,7 +5211,7 @@ fo_block_set_padding_start (FoFo *fo_fo,
 
 /**
  * fo_block_get_padding_top:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "padding-top" property of @fo_fo.
  *
@@ -5260,7 +5260,7 @@ fo_block_set_padding_top (FoFo *fo_fo,
 
 /**
  * fo_block_get_role:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "role" property of @fo_fo.
  *
@@ -5309,7 +5309,7 @@ fo_block_set_role (FoFo *fo_fo,
 
 /**
  * fo_block_get_source_document:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "source-document" property of @fo_fo.
  *
@@ -5358,7 +5358,7 @@ fo_block_set_source_document (FoFo *fo_fo,
 
 /**
  * fo_block_get_space_after:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "space-after" property of @fo_fo.
  *
@@ -5407,7 +5407,7 @@ fo_block_set_space_after (FoFo *fo_fo,
 
 /**
  * fo_block_get_space_before:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "space-before" property of @fo_fo.
  *
@@ -5456,7 +5456,7 @@ fo_block_set_space_before (FoFo *fo_fo,
 
 /**
  * fo_block_get_span:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "span" property of @fo_fo.
  *
@@ -5505,7 +5505,7 @@ fo_block_set_span (FoFo *fo_fo,
 
 /**
  * fo_block_get_start_indent:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "start-indent" property of @fo_fo.
  *
@@ -5554,7 +5554,7 @@ fo_block_set_start_indent (FoFo *fo_fo,
 
 /**
  * fo_block_get_text_align:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "text-align" property of @fo_fo.
  *
@@ -5603,7 +5603,7 @@ fo_block_set_text_align (FoFo *fo_fo,
 
 /**
  * fo_block_get_text_indent:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "text-indent" property of @fo_fo.
  *
@@ -5652,7 +5652,7 @@ fo_block_set_text_indent (FoFo *fo_fo,
 
 /**
  * fo_block_get_white_space_collapse:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "white-space-collapse" property of @fo_fo.
  *
@@ -5701,7 +5701,7 @@ fo_block_set_white_space_collapse (FoFo *fo_fo,
 
 /**
  * fo_block_get_white_space_treatment:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "white-space-treatment" property of @fo_fo.
  *
@@ -5750,7 +5750,7 @@ fo_block_set_white_space_treatment (FoFo *fo_fo,
 
 /**
  * fo_block_get_widows:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "widows" property of @fo_fo.
  *
@@ -5799,7 +5799,7 @@ fo_block_set_widows (FoFo *fo_fo,
 
 /**
  * fo_block_get_wrap_option:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "wrap-option" property of @fo_fo.
  *
