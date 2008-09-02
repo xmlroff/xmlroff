@@ -74,7 +74,7 @@
     <xsl:message>testsuite-nodes: '<xsl:value-of select="$testsuite-nodes"/>'</xsl:message>
   </xsl:if>
   
-    <xsl:apply-templates select="$testresults-doc" mode="testresults"/>
+    <xsl:apply-templates select="." mode="testresults"/>
   </xsl:template>
 
   <xsl:template match="/" mode="testresults">

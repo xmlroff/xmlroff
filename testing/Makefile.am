@@ -1,6 +1,6 @@
 # xmlroff test results makefile
 
-TESTSUITES=testsuites.xml
+TESTSUITES=@TESTSUITES@
 XSLTPROC=xsltproc
 
 REPORT_HTML = index.html
@@ -65,18 +65,18 @@ png+ref2stereo.stamp: png+ref2stereo.pl dotests.stamp
 #
 # Generate the initial test results file if it doesn't already exist.
 #
-$(TEST_RESULTS):
+@TEST_RESULTS@:
 	$(XSLTPROC) --novalid testsuites2testresults.xsl $(TESTSUITES) > \
-		$(TEST_RESULTS)
+		@TEST_RESULTS@
 
-testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSOR) png+ref2stereo.stamp $(TEST_RESULTS)
+testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSOR) png+ref2stereo.stamp @TEST_RESULTS@
 	perl testsuccess.pl . > $(TESTSUCCESS)
 	touch $@
 
 $(REPORT_HTML):	testsuccess.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl
 	$(XSLTPROC) -o $@ --novalid \
 	--stringparam date "`date`" $(REPORT_PARAM) \
-	testsuccess.xsl testsuccess.xsl
+	testsuccess.xsl @TEST_RESULTS@
 	chmod 666 $@
 
 clean:
