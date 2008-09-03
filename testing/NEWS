@@ -1,7 +1,8 @@
-Changes between 0.5.4 and 0.6.0
+Changes between 0.5.4 and 0.6.1
 
  * Using plain BSD license (Jon Bosak, Mike Anastasio)
  * Added instructions for getting DocBook callout symbols (#80)
+ * Added standalone web server for viewing results (#15)
 
 Changes between 0.5.2 and 0.5.4
 
