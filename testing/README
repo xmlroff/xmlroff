@@ -185,6 +185,14 @@ Individual steps
 
       file:///path/to/testing/index.html
 
+   or start the standalone web server:
+
+      perl testing-server.pl
+
+   and open the page it suggests, e.g.:
+
+      http://localhost:8080/index.html
+
 2. For any test, you can click on the "Results" link to see individual
    test results.
 
@@ -798,4 +806,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-10 July 2008
+4 September 2008
