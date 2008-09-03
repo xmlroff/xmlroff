@@ -1,6 +1,18 @@
 #! /usr/bin/perl
+#
+# Copyright (c) 2008 Menteith Consulting Ltd
+#
+# Perl web server for XSL FO test results.
+#
+# This is part of the xmlroff XSL Formatter project.
+#
+# See COPYING for the status of this software.
+
 #use strict;
 
+############################################################
+# Library modules
+use Getopt::Long;
 use XML::LibXML;
 use XML::LibXSLT;
 use HTTP::Daemon;
@@ -10,6 +22,9 @@ use HTTP::Status;
 
 require("config.pl");
 
+my $debug = 0;
+my $result = GetOptions ("debug"  => \$debug);  # flag
+
 my $parser = XML::LibXML->new();
 my $xslt = XML::LibXSLT->new();
 my $stylesheet = $xslt->parse_stylesheet_file("testsuccess.xsl");
@@ -18,27 +33,30 @@ my $testresults = $parser->parse_file($TEST_RESULTS);
 my $d = HTTP::Daemon->new(
     LocalPort => 8080
     ) || die;
-print "Please contact me at: <URL:", $d->url, ">\n";
+print "$TITLE at: <URL:", $d->url, "/index.html>\n";
 
 while (my $client = $d->accept) {
     while (my $request = $client->get_request) {
 	my ($page) = $request->url->path;
 	$page =~ s/^\///;
-	print "$page\n";
-	print $request->as_string;
-	if ($page =~ m/index.html/) {
+	if ($debug > 0) {
+	    print "$page\n";
+	    print $request->as_string;
+	}
+	if ($page =~ m/^index.html/) {
 	    my $time = localtime();
 	    my $results = $stylesheet->transform($testresults,
-						 date => "'$time'");
+						 date => "'$time'",
+		                                 FORM => 0);
 	    my $response = HTTP::Response->new(RC_OK);
 	    $response->date(time);
 	    $response->content_type($stylesheet->media_type());
 	    $response->content_encoding($stylesheet->output_encoding());
-	    my $string = $stylesheet->output_as_bytes($results);
-	    #$response->content_length($string);
-	    $response->content($string);
+	    $response->content($stylesheet->output_as_bytes($results));
 	    $client->send_response($response);
-	    print $response->headers->as_string;
+	    if ($debug > 0) {
+		print $response->headers->as_string;
+	    }
 	    $client->force_last_request;
 	} elsif (-e $page) {
 	    my $mtime = (stat(_))[9];
