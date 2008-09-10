@@ -61,7 +61,7 @@
         <test id="external-graphic-8" fo="external-graphic"
     xml="external-graphic-8.fo" results="results/external-graphic-8.pdf">"xmlroff XSL formatter" image in second table cell in row.</test>
         <test id="external-graphic-9" fo="external-graphic"
-    xml="external-graphic-9.fo" results="results/external-graphic-9.pdf">"xmlroff XSL formatter" image in second table cell in row.</test>
+    xml="external-graphic-9.fo" results="results/external-graphic-9.pdf">xmlroff XSL Formatter JPEG image.</test>
         <test id="external-graphic-10" fo="external-graphic" xml="external-graphic-10.fo" results="results/external-graphic-10.pdf">xmlroff XSL Formatter TIFF image.</test>
         <test id="external-graphic-11" fo="external-graphic" xml="external-graphic-11.fo" results="results/external-graphic-11.pdf">xmlroff XSL Formatter BMP image.</test>
         <test id="external-graphic-12" fo="external-graphic" xml="external-graphic-12.fo" results="results/external-graphic-12.pdf">xmlroff XSL Formatter GIF image.</test>
