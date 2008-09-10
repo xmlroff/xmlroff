@@ -18,7 +18,7 @@
         font-size="10pt">
         <fo:block space-after="12pt" font-size="12pt">xmlroff XSL formatter.</fo:block>
         <fo:block><fo:external-graphic
-            src="url(resources/xmlroff.png)"
+            src="url(resources/xmlroff.jpg)"
             background-color="yellow"/></fo:block>
       </fo:flow>
 </fo:page-sequence>
