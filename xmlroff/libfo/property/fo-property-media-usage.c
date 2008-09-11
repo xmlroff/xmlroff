@@ -2,24 +2,33 @@
  * fo-property-media-usage.c: 'media-usage' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "fo-utils.h"
+#include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-media-usage.h"
 
-/* media-usage */
-/* Inherited: FALSE */
-/* Shorthand: FALSE */
-/* auto | paginate | bounded-in-one-dimension | unbounded */
-/* Initial value: auto */
+/**
+ * SECTION:fo-property-media-usage
+ * @short_description: 'media-usage' property
+ *
+ * Inherited: FALSE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: auto | paginate | bounded-in-one-dimension | unbounded
+ *
+ * Initial value: auto
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;media-usage">http://www.w3.org/TR/xsl11/&num;media-usage</ulink>
+ */
 
 struct _FoPropertyMediaUsage
 {
