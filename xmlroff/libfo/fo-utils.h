@@ -13,15 +13,10 @@
 #include <stdio.h>
 #include <glib.h>
 #include <glib-object.h>
+#define GETTEXT_PACKAGE "libfo"
+#include <glib/gi18n-lib.h>
 
 G_BEGIN_DECLS
-
-#ifndef _
-#define _(String)	(String)
-#endif
-#ifndef N_
-#define N_(String)	(String)
-#endif
 
 #define fo_propagate_and_return_if_error(src, dest) \
      if ((src) != NULL) \
@@ -57,7 +52,7 @@ typedef enum {
  * @FO_WARNING_FO:   Do not warn about FO errors
  * @FO_WARNING_PROPERTY: Do not warn about property errors
  * @FO_WARNING_UNSUPPORTED_PROPERTY: Do not warn about unsupported properties
- * @FO_WARNING_MAX: Maxemum possible value
+ * @FO_WARNING_MAX:  Maximum possible value
  *
  * Warning flags.
  */
