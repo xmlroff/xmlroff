@@ -1,8 +1,8 @@
 /* Fo
  * fo-root.c: 'root' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -12,6 +12,13 @@
 #include "fo/fo-declarations.h"
 #include "fo/fo-page-sequence.h"
 #include "property/fo-property-media-usage.h"
+
+/**
+ * SECTION:fo-root
+ * @short_description: 'root' formatting object
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;fo_root">http://www.w3.org/TR/xsl11/&num;fo_root</ulink>
+ */
 
 enum {
   PROP_0,
@@ -56,18 +63,18 @@ fo_root_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoRootClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_root_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoRoot),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoRootClass),
+	  NULL,           /* base_init */
+	  NULL,           /* base_finalize */
+	  (GClassInitFunc) fo_root_class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoRoot),
+	  0,              /* n_preallocs */
+	  NULL,		  /* instance_init */
+	  NULL		  /* value_table */
+	};
 
       object_type = g_type_register_static (FO_TYPE_FO,
                                             "FoRoot",
@@ -96,8 +103,10 @@ fo_root_class_init (FoRootClass *klass)
   object_class->get_property = fo_root_get_property;
   object_class->set_property = fo_root_set_property;
 
-  fofo_class->validate_content = fo_root_validate_content;
-  fofo_class->validate2 = fo_root_validate;
+  fofo_class->validate_content =
+    fo_root_validate_content;
+  fofo_class->validate2 =
+    fo_root_validate;
   fofo_class->update_from_context = fo_root_update_from_context;
   fofo_class->debug_dump_properties = fo_root_debug_dump_properties;
 
@@ -120,9 +129,10 @@ fo_root_class_init (FoRootClass *klass)
 void
 fo_root_finalize (GObject *object)
 {
-  FoRoot *fo_root;
+  FoFo *fo = FO_FO (object);
 
-  fo_root = FO_ROOT (object);
+  /* Release references to all property objects. */
+  fo_root_set_media_usage (fo, NULL);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -424,13 +434,13 @@ fo_root_debug_dump_properties (FoFo *fo,
 
 /**
  * fo_root_get_media_usage:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "media-usage" property of @fo_fo.
  *
  * Return value: The "media-usage" property value.
 **/
-FoProperty*
+FoProperty *
 fo_root_get_media_usage (FoFo *fo_fo)
 {
   FoRoot *fo_root = (FoRoot *) fo_fo;
@@ -443,10 +453,10 @@ fo_root_get_media_usage (FoFo *fo_fo)
 
 /**
  * fo_root_set_media_usage:
- * @fo_fo: The #FoFo object
- * @new_media_usage: The new "media-usage" property value
+ * @fo_fo: The #FoFo object.
+ * @new_media_usage: The new "media-usage" property value.
  * 
- * Sets the "media-usage" property of @fo_fo to @new_media_usage
+ * Sets the "media-usage" property of @fo_fo to @new_media_usage.
  **/
 void
 fo_root_set_media_usage (FoFo *fo_fo,
@@ -456,7 +466,8 @@ fo_root_set_media_usage (FoFo *fo_fo,
 
   g_return_if_fail (fo_root != NULL);
   g_return_if_fail (FO_IS_ROOT (fo_root));
-  g_return_if_fail (FO_IS_PROPERTY_MEDIA_USAGE (new_media_usage));
+  g_return_if_fail ((new_media_usage == NULL) ||
+		    FO_IS_PROPERTY_MEDIA_USAGE (new_media_usage));
 
   if (new_media_usage != NULL)
     {
