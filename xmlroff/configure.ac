@@ -20,12 +20,12 @@ dnl   xmlroff_interface_age = 0;
 m4_define([xmlroff_version_major],0)
 m4_define([xmlroff_version_minor],6)
 m4_define([xmlroff_version_micro],1)
-m4_define([xmlroff_interface_age],0)
+m4_define([xmlroff_interface_age],1)
 m4_define([xmlroff_version],
           [xmlroff_version_major.xmlroff_version_minor.xmlroff_version_micro])
 
-m4_define([xmlroff_binary_age],0)
-dnl m4_define([xmlroff_binary_age],m4_eval(100 * xmlroff_minor + xmlroff_micro))
+dnl m4_define([xmlroff_binary_age],0)
+m4_define([xmlroff_binary_age],m4_eval(100 * xmlroff_version_minor + xmlroff_version_micro))
 
 AC_INIT([xmlroff XSL Formatter],
 	xmlroff_version(),
@@ -387,6 +387,19 @@ AM_CONDITIONAL(ENABLE_CAIRO, [$enable_cairo])
 AM_CONDITIONAL(HAVE_CAIRO, $have_cairo)
 AM_CONDITIONAL(HAVE_CAIRO_WIN32, $have_cairo_win32 && $have_win32)
 AM_CONDITIONAL(HAVE_CAIRO_FREETYPE, $have_cairo_freetype && $have_freetype)
+
+have_librsvg=false
+if $enable_cairo ; then
+    AC_DEFINE(HAVE_LIBRSVG,1, [Whether Cairo can render SVG files])
+    PKG_CHECK_MODULES(LIBRSVG,
+          librsvg-2.0 >= 2.4.0,
+		  have_librsvg=true,
+	  :)
+fi
+AM_CONDITIONAL(HAVE_LIBRSVG, $have_librsvg)
+AC_SUBST(HAVE_LIBRSVG, [$have_librsvg])
+AC_SUBST(LIBRSVG_LIBS)
+AC_SUBST(LIBRSVG_CFLAGS)
 
 #
 # Check have at least one backend enabled

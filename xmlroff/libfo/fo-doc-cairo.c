@@ -23,6 +23,11 @@
 #include "datatype/fo-color.h"
 #include <string.h>
 
+#if HAVE_LIBRSVG
+#include <librsvg/rsvg.h>
+#include <librsvg/rsvg-cairo.h>
+#endif
+
 /**
  * SECTION:fo-doc-cairo
  * @short_description: Cairo backend
@@ -1074,6 +1079,32 @@ fo_doc_cairo_place_image (FoDoc   *fo_doc,
   cairo_scale (FO_DOC_CAIRO (fo_doc)->cr,
 	       xscale * 72.0 / PIXELS_PER_INCH,
 	       yscale * 72.0 / PIXELS_PER_INCH);
+
+#if HAVE_LIBRSVG
+  if (g_str_has_suffix( fo_image_get_uri(fo_image), ".svg"))
+    {
+      RsvgHandle *rsvg;
+      GError *error = NULL;
+      g_log (G_LOG_DOMAIN,
+             G_LOG_LEVEL_DEBUG,
+             "rendering %s as SVG\n",
+             fo_image_get_uri(fo_image));
+      rsvg_init();
+      rsvg_set_default_dpi_x_y (PIXELS_PER_INCH, PIXELS_PER_INCH);
+      rsvg = rsvg_handle_new_from_file (fo_image_get_uri(fo_image), &error);
+      rsvg_handle_render_cairo (rsvg, FO_DOC_CAIRO(fo_doc)->cr);
+      rsvg_term();
+      cairo_restore (FO_DOC_CAIRO(fo_doc)->cr);
+      if (error) {
+	g_log (G_LOG_DOMAIN,
+	       G_LOG_LEVEL_ERROR,
+	       error->message);
+	g_error_free (error);
+      }
+      return;
+    }
+#endif
+
   if (n_channels == 3)
     {
       format = CAIRO_FORMAT_RGB24;

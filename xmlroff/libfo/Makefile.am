@@ -5,6 +5,7 @@ SUBDIRS = area fo datatype property expr util .
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
 	$(LIBXSLT_CFLAGS)	\
+	$(LIBRSVG_CFLAGS)	\
 	$(PANGO_CFLAGS)
 
 LDADDS = @STRIP_BEGIN@	\
@@ -131,6 +132,7 @@ libfo_0_6_la_LIBADD = \
 	property/libfo-text-property.la	\
 	libfo-libfo.la		\
 	libfo-fodoc.la		\
+	$(LIBRSVG_LIBS)		\
 	$(PANGO_LIBS)			\
 	$(GNOMEPRINT_LIBS) 		\
 	$(LIBXSLT_LIBS)			\
