@@ -9552,8 +9552,7 @@ fo_libfo_format
 
 <SECTION>
 <FILE>fo-utils</FILE>
-_
-N_
+GETTEXT_PACKAGE
 fo_propagate_and_return_if_error
 fo_propagate_and_return_val_if_error
 FoDebugFlag

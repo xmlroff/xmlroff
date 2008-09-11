@@ -61,7 +61,7 @@ and area trees.</para>
 
 </section>
 
-<section id="other-objects">
+<section id="other-fo-objects">
 <title>Other Objects</title>
 
 <para>Other parts of libfo, including FoXslFormatter, are implemented

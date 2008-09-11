@@ -214,10 +214,14 @@
 <book id="index">
   <bookinfo>
     <title>xmlroff Reference Manual</title>
-    <abstract>    <para>xmlroff is a fast, free, high-quality, multi-platform XSL
+    <abstract><para>xmlroff is a fast, free, high-quality, multi-platform XSL
     formatter that aims to excel at DocBook formatting and that
     integrates easily with other programs and with scripting
     languages.</para>
+    <para>xmlroff lives
+at <ulink url="http://xmlroff.org">http://xmlroff.org</ulink>.
+xmlroff is discussed on the xmlroff-list@xmlroff.org mailing list and
+on the #xmlroff channel at oftc.net.</para>
 </abstract>
   </bookinfo>
 

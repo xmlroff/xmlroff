@@ -17,20 +17,11 @@ fo-utils
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### MACRO _ ##### -->
+<!-- ##### MACRO GETTEXT_PACKAGE ##### -->
 <para>
 
 </para>
 
-@String: 
-
-
-<!-- ##### MACRO N_ ##### -->
-<para>
-
-</para>
-
-@String: 
 
 
 <!-- ##### MACRO fo_propagate_and_return_if_error ##### -->
