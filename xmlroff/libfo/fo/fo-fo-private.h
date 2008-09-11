@@ -101,9 +101,6 @@ void         fo_fo_update_after_clone          (FoFo       *clone,
 						FoFo       *original);
 void         fo_fo_register_id                 (FoFo       *fo,
 						FoDatatype *id);
-void         fo_fo_validate_parent             (FoFo *fo,
-						FoContext  *current_context,
-						FoContext  *parent_context);
 
 G_END_DECLS
 

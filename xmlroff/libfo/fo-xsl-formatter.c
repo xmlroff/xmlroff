@@ -1242,16 +1242,3 @@ fo_xsl_formatter_get_area_tree (FoXslFormatter *fo_xsl_formatter)
 
   return G_OBJECT (fo_xsl_formatter->area_tree);
 }
-
-void
-fo_xsl_formatter_write_id_file (FoXslFormatter *fo_xsl_formatter,
-				const gchar *file,
-				GError     **error)
-{
-  g_return_if_fail (fo_xsl_formatter != NULL);
-  g_return_if_fail (FO_IS_XSL_FORMATTER (fo_xsl_formatter));
-
-  fo_tree_id_write_file (FO_FO (fo_xsl_formatter_get_fo_tree (fo_xsl_formatter)),
-			 file,
-			 error);
-}

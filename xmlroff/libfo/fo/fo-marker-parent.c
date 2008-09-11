@@ -43,7 +43,7 @@ fo_marker_parent_get_type (void)
 	NULL		/* value_table */
       };
 
-      object_type = g_type_register_static (FO_TYPE_IDABLE,
+      object_type = g_type_register_static (FO_TYPE_FO,
                                             "FoMarkerParent",
                                             &object_info,
 					    G_TYPE_FLAG_ABSTRACT);

@@ -1796,9 +1796,8 @@ fo_block_validate (FoFo      *fo,
   fo_block_set_line_height (fo,
     fo_property_line_height_resolve (fo_block->line_height,
 				     fo_block->font_size));
-  fo_fo_register_id (fo,
-		     fo_property_get_value (fo_block->id));
-  FO_FO_CLASS (parent_class)->validate (fo, current_context, parent_context);
+  /*fo_fo_register_id (fo,
+    fo_property_get_value (fo_block->id));*/
 }
 
 /**

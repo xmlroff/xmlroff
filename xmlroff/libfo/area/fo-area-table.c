@@ -2,17 +2,12 @@
  * fo-area-table.c: Area object for 'table' formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo-utils.h"
-#include "fo-area.h"
-#include "fo-area-private.h"
-#include "fo-area-reference.h"
-#include "fo-area-reference-private.h"
-#include "fo-area-table.h"
 #include "fo-area-table-private.h"
 #include "fo-area-table-continuation.h"
 #include "fo-area-table-header.h"

@@ -68,9 +68,6 @@ fo_block_layout_class_init (FoBlockLayoutClass *klass)
   fo_fo_class->update_from_context = fo_block_layout_update_from_context;
   fo_fo_class->children_properties_resolve =
     fo_block_layout_children_properties_resolve;
-  /*
-  fo_fo_class->validate2 = fo_fo_validate_parent;
-  */
 }
 
 static void

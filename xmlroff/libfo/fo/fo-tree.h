@@ -33,9 +33,6 @@ void   fo_tree_id_add                        (FoFo        *tree,
 					      FoFo        *fo);
 FoFo * fo_tree_id_get                        (FoFo        *tree,
 					      const gchar *id);
-void   fo_tree_id_write_file                 (FoFo        *tree,
-					      const gchar *file,
-					      GError     **error);
 void   fo_tree_master_name_add               (FoFo        *tree,
 					      const gchar *name,
 					      FoFo        *fo);

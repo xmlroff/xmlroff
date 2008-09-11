@@ -150,7 +150,6 @@ main (gint    argc,
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
   const gchar *format_string = NULL;
-  const gchar *id_file = NULL;
   FoFlagsFormat format_mode = FO_FLAG_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
@@ -263,14 +262,6 @@ main (gint    argc,
       &debug_mode,
       _("Debug mode"),
       _("integer")
-    },
-    { "id-file",
-      0,
-      0,
-      G_OPTION_ARG_STRING,
-      &id_file,
-      _("ID-page file"),
-      _("filename")
     },
     { G_OPTION_REMAINING,
       0,
@@ -527,13 +518,6 @@ main (gint    argc,
 			   &error);
 
   exit_if_error (error);
-
-  if (id_file != NULL)
-    {
-      fo_xsl_formatter_write_id_file (fo_xsl_formatter,
-				      NULL,
-				      NULL);
-    }
 
   fo_xsl_formatter_draw (fo_xsl_formatter,
 			 libfo_context,

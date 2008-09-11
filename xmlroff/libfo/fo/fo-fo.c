@@ -2,7 +2,7 @@
  * fo-fo.c: Base formatting object of formatting object system
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -30,16 +30,6 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
-
-/**
- * SECTION:fo-fo
- * @short_description: Base FO object type
- *
- * Top of the object hierarchy for XSL's Formatting Objects.
- *
- * Extends #FoNode to add some common properties that aren't defined
- * by the XSL spec but make implementation easier.
- */
 
 struct _FoFoAreaIterator
 {
@@ -98,13 +88,6 @@ static gboolean fo_fo_validate_content_default            (FoFo *fo,
 static void   fo_fo_validate_default (FoFo *fo,
 				      FoContext *current_context,
 				      FoContext *parent_context);
-static void   fo_fo_null_validate (FoFo *fo,
-				   FoContext *current_context,
-				   FoContext *parent_context);
-static void   fo_fo_null_validate2 (FoFo *fo,
-				    FoContext *current_context,
-				    FoContext *parent_context,
-				    GError   **error);
 static void   fo_fo_validate2_default (FoFo *fo,
 				       FoContext *current_context,
 				       FoContext *parent_context,
@@ -218,8 +201,6 @@ fo_fo_class_init (FoFoClass *klass)
   object_class->get_property = fo_fo_get_property;
 
   klass->debug_dump_properties = fo_fo_debug_dump_properties;
-  klass->validate = fo_fo_validate_default;
-  klass->validate2 = fo_fo_validate2_default;
 
   g_object_class_install_property
     (object_class,
@@ -779,12 +760,10 @@ fo_fo_validate (FoFo *fo,
 		GError   **error)
 {
   if (FO_FO_GET_CLASS (fo)->validate2 != NULL)
-    {
-      FO_FO_GET_CLASS (fo)->validate2 (fo,
-				       current_context,
-				       parent_context,
-				       error);
-    }
+    FO_FO_GET_CLASS (fo)->validate2 (fo,
+				     current_context,
+				     parent_context,
+				     error);
 }
 
 /**
@@ -815,42 +794,6 @@ fo_fo_validate_default (FoFo *fo,
   if (FO_FO_GET_CLASS (fo)->validate != NULL)
     FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
   */
-  /*
-  FO_FO_CLASS (g_type_class_peek_parent (G_OBJECT_GET_CLASS (fo)))->validate (fo,
-									      current_context,
-									      parent_context);
-  */
-}
-
-/**
- * fo_fo_validate_parent:
- * @fo:              #FoFo to validate.
- * @current_context: #FoContext of @fo.
- * @parent_context:  #FoContext of parent of @fo.
- * 
- * Default validation is to just merge and update contexts.
- *
- * This will only be called for #FoFo that do not have either a
- * _validate2 or _validate function of their own.
- **/
-void
-fo_fo_validate_parent (FoFo *fo,
-		       FoContext *current_context,
-		       FoContext *parent_context)
-{
-#if defined(LIBFO_DEBUG) && 0
-  g_log (G_LOG_DOMAIN,
-	 G_LOG_LEVEL_DEBUG,
-	 _("%s does not have a 'validate' function."),
-	 fo_object_sprintf (FO_OBJECT (fo)));
-#endif
-  /*
-  if (FO_FO_GET_CLASS (fo)->validate != NULL)
-    FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
-  */
-  FO_FO_CLASS (g_type_class_peek_parent (G_OBJECT_GET_CLASS (fo)))->validate (fo,
-									   current_context,
-									   parent_context);
 }
 
 /**
@@ -876,45 +819,7 @@ fo_fo_validate2_default (FoFo *fo,
 	 fo_object_sprintf (FO_OBJECT (fo)));
 #endif
   if (FO_FO_GET_CLASS (fo)->validate != NULL)
-    {
-      FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
-    }
-}
-
-/**
- * fo_fo_null_validate:
- * @fo:              #FoFo to validate.
- * @current_context: #FoContext of @fo.
- * @parent_context:  #FoContext of parent of @fo.
- * 
- * Default behaviour is to fallback to using the FO's _validate
- * function.
- **/
-void
-fo_fo_null_validate (FoFo *fo G_GNUC_UNUSED,
-		     FoContext *current_context G_GNUC_UNUSED,
-		     FoContext *parent_context G_GNUC_UNUSED)
-{
-  return;
-}
-
-/**
- * fo_fo_null_validate2:
- * @fo:              #FoFo to validate.
- * @current_context: #FoContext of @fo.
- * @parent_context:  #FoContext of parent of @fo.
- * @error:           #GError indicating any error that occurs
- * 
- * Default behaviour is to fallback to using the FO's _validate
- * function.
- **/
-void
-fo_fo_null_validate2 (FoFo *fo G_GNUC_UNUSED,
-		      FoContext *current_context G_GNUC_UNUSED,
-		      FoContext *parent_context G_GNUC_UNUSED,
-		      GError   **error G_GNUC_UNUSED)
-{
-  return;
+    FO_FO_GET_CLASS (fo)->validate (fo, current_context, parent_context);
 }
 
 /**
