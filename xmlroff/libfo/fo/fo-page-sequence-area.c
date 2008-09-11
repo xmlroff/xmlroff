@@ -2,7 +2,7 @@
  * fo-page-sequence-area.c: Generate area for page-sequence formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * !See COPYING for the status of this software.
  */
@@ -22,25 +22,25 @@
 #include "datatype/fo-length.h"
 
 void
-fo_page_sequence_area_new (FoFo    *fo_node,
-			   FoDoc   *fo_doc,
-			   FoArea  *parent_area,
-			   FoArea **new_area,
-			   guint    debug_level G_GNUC_UNUSED)
+fo_page_sequence_area_new (FoFo                *fo_node,
+			   FoFoAreaNew2Context *context,
+			   GError             **error)
 {
-  FoFo *page_master;
-  FoProperty *writing_mode;
-  FoEnumAreaDirection ipd;
-  gfloat page_width, page_height, margin_left, margin_right, margin_top;
-  gfloat margin_bottom;
-  gint page_number = 0;
+  g_return_if_fail (fo_node != NULL);
+  g_return_if_fail (FO_IS_PAGE_SEQUENCE (fo_node));
+  g_return_if_fail (context != NULL);
+  g_return_if_fail (error == NULL || *error == NULL);
+
+  FoDoc *fo_doc = context->fo_doc;
+  FoArea *use_parent_area = context->parent_area;
+  FoArea **new_area = context->new_area;
 
   *new_area = NULL;
 
   g_return_if_fail (fo_node != NULL);
   g_return_if_fail (FO_IS_FO (fo_node));
-  g_return_if_fail (parent_area != NULL);
-  g_return_if_fail (FO_IS_AREA (parent_area));
+  g_return_if_fail (use_parent_area != NULL);
+  g_return_if_fail (FO_IS_AREA (use_parent_area));
   /*g_return_if_fail (FO_IS_DOC (fo_doc));*/
 
   while (! FO_IS_PAGE_SEQUENCE (fo_node))
@@ -48,21 +48,22 @@ fo_page_sequence_area_new (FoFo    *fo_node,
       fo_node = FO_FO (fo_node_parent (FO_NODE (fo_node)));
     }
 
-  page_master = FO_PAGE_SEQUENCE (fo_node)->page_master;
+  FoFo *page_master = FO_PAGE_SEQUENCE (fo_node)->page_master;
 
-  page_width =
+  gdouble page_width =
     fo_length_get_value (fo_property_get_value (fo_simple_page_master_get_page_width (page_master)));
-  page_height =
+  gdouble page_height =
     fo_length_get_value (fo_property_get_value (fo_simple_page_master_get_page_height (page_master)));
-  margin_left =
+  gdouble margin_left =
     fo_length_get_value (fo_property_get_value (fo_simple_page_master_get_margin_left (page_master)));
-  margin_right =
+  gdouble margin_right =
     fo_length_get_value (fo_property_get_value (fo_simple_page_master_get_margin_right (page_master)));
-  margin_top =
+  gdouble margin_top =
     fo_length_get_value (fo_property_get_value (fo_simple_page_master_get_margin_top (page_master)));
-  margin_bottom =
+  gdouble margin_bottom =
     fo_length_get_value (fo_property_get_value (fo_simple_page_master_get_margin_bottom (page_master)));
-  writing_mode = fo_simple_page_master_get_writing_mode (page_master);
+  FoProperty *writing_mode
+    = fo_simple_page_master_get_writing_mode (page_master);
 
   /*
   g_message ("Writing mode: %d", writing_mode);
@@ -80,15 +81,16 @@ fo_page_sequence_area_new (FoFo    *fo_node,
   fo_area_set_generated_by (*new_area, g_object_ref (fo_node));
   fo_area_set_page (*new_area, g_object_ref (*new_area));
 
-  while (! FO_IS_AREA_TREE (parent_area))
+  gint page_number = 0;
+  while (! FO_IS_AREA_TREE (use_parent_area))
     {
-      if (FO_IS_AREA_PAGE (parent_area))
+      if (FO_IS_AREA_PAGE (use_parent_area))
 	{
 	  page_number =
-	    fo_area_page_get_page_number (parent_area);
-	  fo_area_set_is_last (parent_area, FALSE);
+	    fo_area_page_get_page_number (use_parent_area);
+	  fo_area_set_is_last (use_parent_area, FALSE);
 	}
-      parent_area = fo_area_parent (parent_area);
+      use_parent_area = fo_area_parent (use_parent_area);
     }
 
   fo_area_page_set_page_number (*new_area, page_number + 1);
@@ -111,13 +113,14 @@ fo_page_sequence_area_new (FoFo    *fo_node,
   fo_area_set_next_y (*new_area,
 		      page_height - margin_top);
 
-  fo_area_add_child (parent_area, *new_area);
+  fo_area_add_child (use_parent_area, *new_area);
 
   fo_area_reference_set_bpd (*new_area,
 			     fo_property_writing_mode_to_bpd (writing_mode,
 							      NULL));
-  ipd =	fo_property_writing_mode_to_ipd (writing_mode,
-					 NULL);
+  FoEnumAreaDirection ipd
+    = fo_property_writing_mode_to_ipd (writing_mode,
+				       NULL);
 
   fo_area_reference_set_ipd (*new_area,
 			     ipd);
@@ -140,18 +143,4 @@ fo_page_sequence_area_new (FoFo    *fo_node,
   fo_area_reference_set_sd (*new_area,
 			    fo_property_writing_mode_to_sd (writing_mode,
 							    NULL));
-}
-
-void
-fo_page_sequence_area_new2 (FoFo         *fo_node,
-			    FoFoAreaNew2Context *context,
-			    GError **error)
-{
-  g_return_if_fail (error == NULL || *error == NULL);
-
-  fo_page_sequence_area_new (fo_node,
-			     context->fo_doc,
-			     context->parent_area,
-			     context->new_area,
-			     context->debug_level);
 }

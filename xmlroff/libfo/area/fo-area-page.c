@@ -690,10 +690,14 @@ fo_area_page_clone (FoArea *original)
   g_return_val_if_fail (original != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_PAGE (original), NULL);
 
+  FoFoAreaNew2Context context;
+
+  context.fo_doc = NULL;
+  context.parent_area = original;
+  context.new_area = &clone;
+
   fo_page_sequence_area_new (original->generated_by,
-			     NULL,
-			     original,
-			     &clone,
+			     &context,
 			     0);
 #if defined(LIBFO_DEBUG) && 0
   fo_object_debug_dump (clone, 0);

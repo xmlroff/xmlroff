@@ -113,7 +113,7 @@ fo_page_sequence_class_init (FoPageSequenceClass *klass)
   fofo_class->update_from_context = fo_page_sequence_update_from_context;
   fofo_class->debug_dump_properties = fo_page_sequence_debug_dump_properties;
   fofo_class->area_new2 =
-    fo_page_sequence_area_new2;
+    fo_page_sequence_area_new;
 
   g_object_class_install_property
     (object_class,

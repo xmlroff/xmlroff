@@ -17,14 +17,9 @@
 
 G_BEGIN_DECLS
 
-void fo_page_sequence_area_new (FoFo    *fo_node,
-				FoDoc   *fo_doc,
-				FoArea  *parent_area,
-				FoArea **new_area,
-				guint    debug_level);
-void fo_page_sequence_area_new2 (FoFo                *fo_node,
-				 FoFoAreaNew2Context *context,
-				 GError             **error);
+void fo_page_sequence_area_new (FoFo                *fo_node,
+				FoFoAreaNew2Context *context,
+				GError             **error);
 
 G_END_DECLS
 
