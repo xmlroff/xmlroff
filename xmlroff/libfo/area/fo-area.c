@@ -1541,11 +1541,12 @@ fo_area_break_resolve (FoArea *parent_area,
 
       clone = fo_area_clone (parent_area);
       fo_area_dump_path_to_root (clone);
-
       /*
-      parent_area = fo_add_to_new_page_area (fo_node, parent_area,
-						 context, NULL,
-						 debug_level);
+      parent_area = fo_add_to_new_page_area (fo_node,
+					     parent_area,
+					     context,
+					     NULL,
+					     debug_level);
       page_number =
 	fo_area_page_get_page_number (parent_area->page);
 
