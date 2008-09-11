@@ -2,7 +2,7 @@
  * fo-table-cell-area.c: Generate area for 'table-cell' formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,7 +11,9 @@
 #include "fo-table.h"
 #include "fo-table-column.h"
 #include "property/fo-property-column-width.h"
+#include "property/fo-property-writing-mode.h"
 #include "area/fo-area.h"
+#include "area/fo-area-reference.h"
 #include "area/fo-area-table-cell.h"
 #include "area/fo-area-spanning-table-cell.h"
 #include "fo/fo-table-cell-private.h"
@@ -21,14 +23,7 @@ fo_table_cell_area_new2 (FoFo                *fo_node,
 			 FoFoAreaNew2Context *context,
 			 GError             **error)
 {
-  FoTableCell *table_cell;
-  FoFo *table;
-  FoArea *use_parent_area;
   FoArea *new_area;
-  gint column_number;
-  gint number_columns_spanned;
-  gint number_rows_spanned;
-  gint span;
   gfloat cell_width = 0.0;
 
   g_return_if_fail (fo_node != NULL);
@@ -36,19 +31,20 @@ fo_table_cell_area_new2 (FoFo                *fo_node,
   g_return_if_fail (context != NULL);
   g_return_if_fail (error == NULL || *error == NULL);
 
-  table_cell = FO_TABLE_CELL (fo_node);
+  FoTableCell *table_cell = FO_TABLE_CELL (fo_node);
 
   /* fo:table/fo:table-body/fo:table-row/fo:table-cell */
-  table =
+  FoFo *table =
     FO_FO (fo_node_parent (fo_node_parent (fo_node_parent (FO_NODE (fo_node)))));
 
-  column_number =
+  gint column_number =
     fo_integer_get_value (fo_property_get_value (table_cell->column_number));
-  number_columns_spanned =
+  gint number_columns_spanned =
     fo_integer_get_value (fo_property_get_value (table_cell->number_columns_spanned));
-  number_rows_spanned =
+  gint number_rows_spanned =
     fo_integer_get_value (fo_property_get_value (table_cell->number_rows_spanned));
 
+  gint span;
   for (span = 1;
        span <= number_columns_spanned;
        span++)
@@ -67,9 +63,10 @@ fo_table_cell_area_new2 (FoFo                *fo_node,
     }
   else
     {
-      new_area = fo_area_spanning_table_cell_new_with_rows_spanned (number_rows_spanned);
+      new_area =
+	fo_area_spanning_table_cell_new_with_rows_spanned (number_rows_spanned);
     }
-  use_parent_area = context->parent_area;
+  FoArea *use_parent_area = context->parent_area;
 
 #if defined(LIBFO_DEBUG) && 0
   g_warning ("*** table-cell parent before new area:");
@@ -147,6 +144,18 @@ fo_table_cell_area_new2 (FoFo                *fo_node,
   new_area = fo_area_size_request (new_area);
   fo_area_area_set_height (new_area,
 			   fo_area_get_available_height (new_area));
+
+  FoProperty *writing_mode
+    = fo_table_get_writing_mode (table);
+  fo_area_reference_set_bpd (new_area,
+			     fo_property_writing_mode_to_bpd (writing_mode,
+							      NULL));
+  fo_area_reference_set_ipd (new_area,
+			     fo_property_writing_mode_to_ipd (writing_mode,
+							      NULL));
+  fo_area_reference_set_sd (new_area,
+			    fo_property_writing_mode_to_sd (writing_mode,
+							    NULL));
 
 #if defined(LIBFO_DEBUG) && 0
   g_warning ("*** table-cell parent after new area:");

@@ -2,7 +2,7 @@
  * fo-area-reference.c: reference-area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -197,6 +197,32 @@ fo_area_reference_new (void)
   return FO_AREA (g_object_new (fo_area_reference_get_type (), NULL));
 }
 
+static gchar *
+_direction_to_string (FoEnumAreaDirection direction)
+{
+  gchar *string = NULL;
+
+  switch (direction)
+    {
+    case FO_ENUM_AREA_DIRECTION_UNKNOWN:
+      string = "unknown";
+      break;
+    case FO_ENUM_AREA_DIRECTION_LR:
+      string = "left-to-right";
+      break;
+    case FO_ENUM_AREA_DIRECTION_RL:
+      string = "right-to-left";
+      break;
+    case FO_ENUM_AREA_DIRECTION_TB:
+      string = "top-to-bottom";
+      break;
+    case FO_ENUM_AREA_DIRECTION_BT:
+      string = "bottom-to-top";
+      break;
+    }
+
+  return string;
+}
 
 void
 fo_area_reference_debug_dump_properties (FoArea *area, gint depth)
@@ -211,19 +237,19 @@ fo_area_reference_debug_dump_properties (FoArea *area, gint depth)
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
-	 "%sbpd: %d",
+	 "%sbpd: %s",
 	 indent,
-	 reference->bpd);
+	 _direction_to_string (reference->bpd));
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
-	 "%sipd: %d",
+	 "%sipd: %s",
 	 indent,
-	 reference->ipd);
+	 _direction_to_string (reference->ipd));
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
-	 "%ssd:  %d",
+	 "%ssd:  %s",
 	 indent,
-	 reference->sd);
+	 _direction_to_string (reference->sd));
 
   g_free (indent);
   FO_AREA_CLASS (parent_class)->debug_dump_properties (area, depth + 1);
@@ -237,8 +263,8 @@ fo_area_reference_debug_dump_properties (FoArea *area, gint depth)
  * Sets the "bpd" property of @fo_area to @new_bpd
 **/
 void
-fo_area_reference_set_bpd (FoArea *fo_area,
-			   guint   new_bpd)
+fo_area_reference_set_bpd (FoArea             *fo_area,
+			   FoEnumAreaDirection new_bpd)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA_REFERENCE (fo_area));
@@ -255,7 +281,7 @@ fo_area_reference_set_bpd (FoArea *fo_area,
  *
  * Return value: The "bpd" property value
 **/
-guint
+FoEnumAreaDirection
 fo_area_reference_get_bpd (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -272,8 +298,8 @@ fo_area_reference_get_bpd (FoArea *fo_area)
  * Sets the "ipd" property of @fo_area to @new_ipd
 **/
 void
-fo_area_reference_set_ipd (FoArea *fo_area,
-			   guint   new_ipd)
+fo_area_reference_set_ipd (FoArea             *fo_area,
+			   FoEnumAreaDirection new_ipd)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA_REFERENCE (fo_area));
@@ -290,7 +316,7 @@ fo_area_reference_set_ipd (FoArea *fo_area,
  *
  * Return value: The "ipd" property value
 **/
-guint
+FoEnumAreaDirection
 fo_area_reference_get_ipd (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -307,8 +333,8 @@ fo_area_reference_get_ipd (FoArea *fo_area)
  * Sets the "sd" property of @fo_area to @new_sd
 **/
 void
-fo_area_reference_set_sd (FoArea *fo_area,
-			  guint   new_sd)
+fo_area_reference_set_sd (FoArea             *fo_area,
+			  FoEnumAreaDirection new_sd)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA_REFERENCE (fo_area));
@@ -325,7 +351,7 @@ fo_area_reference_set_sd (FoArea *fo_area,
  *
  * Return value: The "sd" property value
 **/
-guint
+FoEnumAreaDirection
 fo_area_reference_get_sd (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);

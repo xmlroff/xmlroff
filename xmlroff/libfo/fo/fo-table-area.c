@@ -7,19 +7,19 @@
  * See COPYING for the status of this software.
  */
 
-#include "area/fo-area-table.h"
+#include "fo-table-area.h"
 #include "fo-table-private.h"
+#include "area/fo-area-table.h"
+#include "area/fo-all-area.h"
 #include "fo-block-fo.h"
 #include "property/fo-property-inline-progression-dimension.h"
+#include "property/fo-property-writing-mode.h"
 
 void
 fo_table_area_new2 (FoFo *fo,
 		    FoFoAreaNew2Context *context,
 		    GError **error)
 {
-  FoTable *table;
-  FoArea *use_parent_area;
-  FoArea *new_area;
   FoDatatype *ipdim_datatype;
   gfloat available_width;
   gfloat use_width;
@@ -29,10 +29,10 @@ fo_table_area_new2 (FoFo *fo,
   g_return_if_fail (context != NULL);
   g_return_if_fail (error == NULL || *error == NULL);
 
-  table = FO_TABLE (fo);
+  FoTable *table = FO_TABLE (fo);
 
-  new_area = fo_area_table_new ();
-  use_parent_area = context->parent_area;
+  FoArea *new_area = fo_area_table_new ();
+  FoArea *use_parent_area = context->parent_area;
 
 #if defined(LIBFO_DEBUG) && 0
   g_warning ("*** table parent before new area:");
@@ -107,6 +107,19 @@ fo_table_area_new2 (FoFo *fo,
     }
 
   fo_area_area_set_width (new_area, use_width);
+
+  FoProperty *writing_mode
+    = fo_table_get_writing_mode (fo);
+  fo_area_reference_set_bpd (new_area,
+			     fo_property_writing_mode_to_bpd (writing_mode,
+							      NULL));
+  fo_area_reference_set_ipd (new_area,
+			     fo_property_writing_mode_to_ipd (writing_mode,
+							      NULL));
+  fo_area_reference_set_sd (new_area,
+			    fo_property_writing_mode_to_sd (writing_mode,
+							    NULL));
+
 
 #if defined(LIBFO_DEBUG) && 0
   g_warning ("*** table parent after new area:");

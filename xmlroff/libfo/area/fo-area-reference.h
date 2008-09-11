@@ -2,7 +2,7 @@
  * fo-area-reference.h: Reference area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -28,15 +28,16 @@ typedef struct _FoAreaReferenceClass FoAreaReferenceClass;
 
 GType         fo_area_reference_get_type      (void) G_GNUC_CONST;
 FoArea *fo_area_reference_new (void);
-void fo_area_reference_set_bpd  (FoArea *fo_area,
-				 guint   new_bpd);
-guint fo_area_reference_get_bpd (FoArea *fo_area);
-void fo_area_reference_set_ipd  (FoArea *fo_area,
-				 guint   new_ipd);
-guint fo_area_reference_get_ipd (FoArea *fo_area);
-void fo_area_reference_set_sd   (FoArea *fo_area,
-				 guint   new_sd);
-guint fo_area_reference_get_sd  (FoArea *fo_area);
+
+FoEnumAreaDirection fo_area_reference_get_bpd (FoArea  *fo_area);
+void fo_area_reference_set_bpd (FoArea             *fo_area,
+				FoEnumAreaDirection new_bpd);
+FoEnumAreaDirection fo_area_reference_get_ipd (FoArea *fo_area);
+void fo_area_reference_set_ipd (FoArea             *fo_area,
+				FoEnumAreaDirection new_ipd);
+FoEnumAreaDirection fo_area_reference_get_sd  (FoArea *fo_area);
+void fo_area_reference_set_sd (FoArea             *fo_area,
+			       FoEnumAreaDirection new_sd);
 
 G_END_DECLS
 
