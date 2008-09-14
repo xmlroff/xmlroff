@@ -388,9 +388,10 @@ AM_CONDITIONAL(HAVE_CAIRO, $have_cairo)
 AM_CONDITIONAL(HAVE_CAIRO_WIN32, $have_cairo_win32 && $have_win32)
 AM_CONDITIONAL(HAVE_CAIRO_FREETYPE, $have_cairo_freetype && $have_freetype)
 
+AH_TEMPLATE(HAVE_LIBRSVG,
+	    [Whether Cairo can render SVG files])
 have_librsvg=false
 if $enable_cairo ; then
-    AC_DEFINE(HAVE_LIBRSVG,1, [Whether Cairo can render SVG files])
     PKG_CHECK_MODULES(LIBRSVG,
           librsvg-2.0 >= 2.4.0,
 		  have_librsvg=true,
