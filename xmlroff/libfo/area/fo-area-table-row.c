@@ -2,7 +2,7 @@
  * fo-area-table-row.c: Area object for table-row formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -400,15 +400,22 @@ fo_area_table_row_split_before_height (FoArea *area,
 	  split_child = fo_area_split_before_height (use_child_area,
 						     max_height);
 
-	  fo_area_unlink (split_child);
-	  fo_area_append (clone, split_child);
+	  if (split_child != NULL)
+	    {
+	      fo_area_unlink (split_child);
+	      fo_area_append (clone, split_child);
 
-	  max_remaining_child_height =
-	    MAX (max_remaining_child_height,
-		 fo_area_area_get_height (use_child_area));
-	  max_split_child_height =
-	    MAX (max_split_child_height,
-		 fo_area_area_get_height (split_child));
+	      max_remaining_child_height =
+		MAX (max_remaining_child_height,
+		     fo_area_area_get_height (use_child_area));
+	      max_split_child_height =
+		MAX (max_split_child_height,
+		     fo_area_area_get_height (split_child));
+	    }
+	  else
+	    {
+	      g_warning ("Did not split cell.");
+	    }
 
 	  use_child_area = fo_area_next_sibling (use_child_area);
 	}
