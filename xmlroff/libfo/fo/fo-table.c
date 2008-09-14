@@ -128,7 +128,8 @@ const char *fo_table_error_messages[] = {
   N_("No area associated with 'fo:table'."),
   N_("table-layout=\"fixed\" but automatic table layout is specified since i-p-d=\"auto\"."),
   N_("Spanning table cells fill entire row."),
-  N_("Automatic table layout is not supported.  Falling back to fixed table layout.")
+  N_("Automatic table layout is not supported.  Falling back to fixed table layout."),
+  N_("Unsupported inline-progression-dimension value: $d.")
 };
 
 enum {
@@ -1934,25 +1935,55 @@ void
 fo_table_resolve_column_offsets (FoFo    *fo,
 				 GError **error)
 {
-  FoTable *fo_table;
-  FoFo *fo_column;
-  gfloat cumulative_offset = 0;
-  gint max_column_number;
-  gint key;
-  gint column_number;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_TABLE (fo));
   g_return_if_fail (FO_TABLE (fo)->max_column_number != 0);
   g_return_if_fail (error == NULL || *error == NULL);
 
-  fo_table = FO_TABLE (fo);
+  FoTable *fo_table = FO_TABLE (fo);
 
-  max_column_number = fo_table->max_column_number;
+  gint max_column_number = fo_table->max_column_number;
+  FoEnumAreaDirection ipd =
+    fo_property_writing_mode_to_ipd (fo_table->writing_mode,
+				     NULL);
 
-  for (column_number = 1;
-       column_number <= max_column_number;
-       column_number++)
+  gint initial_column;
+  gboolean increment;
+  gint limit;
+  /* Calculate column offsets either from 1 to max or max to 1
+     depending on inline-progression-direction value. */
+  switch (ipd)
+    {
+    case FO_ENUM_AREA_DIRECTION_LR:
+      initial_column = 1;
+      /* Test in 'for' is equality test, so don't stop until after max
+	 column number. */
+      limit = max_column_number + 1;
+      increment = TRUE;
+      break;
+    case FO_ENUM_AREA_DIRECTION_RL:
+      initial_column = max_column_number;
+      /* Test in 'for' is equality test, so don't stop until after
+	 first column. */
+      limit = 0;
+      increment = FALSE;
+      break;
+    default:
+      g_set_error (error,
+		   FO_TABLE_ERROR,
+		   FO_TABLE_ERROR_INLINE_PROGRESSION_DIRECTION,
+		   fo_table_error_messages[FO_TABLE_ERROR_INLINE_PROGRESSION_DIRECTION],
+		   ipd);
+      return;
+    }
+
+  gint column_number;
+  gint key;
+  FoFo *fo_column;
+  gfloat cumulative_offset = 0;
+  for (column_number = initial_column;
+       column_number != limit;
+       increment ? column_number++ : column_number--)
     {
       key = fo_table_make_column_hash_key (column_number, 1);
 
@@ -1969,12 +2000,11 @@ fo_table_resolve_column_offsets (FoFo    *fo,
 	  return;
 	}
 
-      
       fo_table_column_set_offset (fo_column,
 				  cumulative_offset);
 
       cumulative_offset +=
-	fo_length_get_value (fo_property_get_value (fo_table_column_get_column_width (fo_column)));
+      fo_length_get_value (fo_property_get_value (fo_table_column_get_column_width (fo_column)));
     }
 }
 
