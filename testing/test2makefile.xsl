@@ -290,7 +290,7 @@
 
       </xsl:for-each>
 
-      <!-- Rule to replace results in testsuite with current results -->
+      <!-- Rule to seed reference with current testsuite results -->
       <xsl:text>&#10;&#10;replace-ref:&#10;</xsl:text>
       <xsl:for-each select="$tests[@results]">
 
@@ -332,6 +332,26 @@
         <xsl:text>.%02d.png; touch </xsl:text>
         <xsl:value-of select="@id"/>
         <xsl:text>.log)&#10;</xsl:text>
+
+      </xsl:for-each>
+
+      <!-- Rule to accept all current results as new reference results -->
+      <xsl:text>&#10;&#10;accept-all:&#10;</xsl:text>
+      <xsl:for-each select="$tests[@results]">
+
+        <!-- Output the actual $command-line to be executed. -->
+        <xsl:text>&#9;@-cp </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.pdf </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.*.png </xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:text>.log ref</xsl:text>
+        <xsl:if test="$DEBUG">
+          <xsl:text> #</xsl:text>
+          <xsl:value-of select="@id"/>
+        </xsl:if>
+        <xsl:text>&#10;</xsl:text>
 
       </xsl:for-each>
 
