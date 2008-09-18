@@ -93,9 +93,9 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 #
 
 # Strings to indicate the source of a setting.
-default_setter="(default)"
-option_setter="(option)"
-results_setter="(results)"
+default_setter="default"
+option_setter="option"
+results_setter="results"
 
 #
 # Filename of test results XML file.
@@ -170,7 +170,7 @@ command_patterns_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
-  results_command_patterns=["`$PERL -n -e'if(/<\?xt:command-patterns\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  results_command_patterns=["`$PERL -n -e'if(/<\?xt-command-patterns\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_command_patterns" != "x" ; then
     command_patterns_default="$results_command_patterns"
     command_patterns_setter=$results_setter
@@ -189,6 +189,9 @@ fi
 AC_DEFINE_UNQUOTED(COMMAND_PATTERNS,
 	           "$COMMAND_PATTERNS",
 	           [Patterns for running processor.])
+AC_DEFINE_UNQUOTED(COMMAND_PATTERNS_SETTER,
+	           "$command_patterns_setter",
+	           [Where COMMAND_PATTERNS was set.])
 
 #
 # Default stylesheet, if any, to use with tests that don't specify
@@ -199,7 +202,7 @@ default_stylesheet_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
-  results_default_stylesheet=["`$PERL -n -e'if(/<\?xt:default-stylesheet\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  results_default_stylesheet=["`$PERL -n -e'if(/<\?xt-default-stylesheet\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_default_stylesheet" != "x" ; then
     default_stylesheet_default="$results_default_stylesheet"
     default_stylesheet_setter=$results_setter
@@ -218,6 +221,9 @@ fi
 AC_DEFINE_UNQUOTED(DEFAULT_STYLESHEET,
 	           "$DEFAULT_STYLESHEET",
 	           [Full path to default stylesheet, if any.  (default=false)])
+AC_DEFINE_UNQUOTED(DEFAULT_STYLESHEET_SETTER,
+	           "$default_stylesheet_setter",
+	           [Where DEFAULT_STYLESHEET was set.])
 
 #
 # Whether or not to output form for updating results interactively.
@@ -284,7 +290,7 @@ testsuites_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
-  results_testsuites=["`$PERL -n -e'if(/<\?xt:testsuites\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  results_testsuites=["`$PERL -n -e'if(/<\?xt-testsuites\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_testsuites" != "x" ; then
     testsuites_default="$results_testsuites"
     testsuites_setter=$results_setter
@@ -299,10 +305,13 @@ if test "x$with_testsuites" = "x" ; then
 else
   TESTSUITES=$with_testsuites
 fi
+AC_SUBST(TESTSUITES)
 AC_DEFINE_UNQUOTED(TESTSUITES,
 	           "$TESTSUITES",
 	           [Filename of test results XML file.])
-AC_SUBST(TESTSUITES)
+AC_DEFINE_UNQUOTED(TESTSUITES_SETTER,
+	           "$testsuites_setter",
+	           [Where TESTSUITES was set.])
 
 #
 # XSL processor.
@@ -312,7 +321,7 @@ xsl_processor_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
-  results_xsl_processor=["`$PERL -n -e'if(/<\?xt:xsl-processor\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  results_xsl_processor=["`$PERL -n -e'if(/<\?xt-xsl-processor\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_xsl_processor" != "x" ; then
     xsl_processor_default="$results_xsl_processor"
     xsl_processor_setter=$results_setter
@@ -336,10 +345,13 @@ else
 *** XSL processor "$XSL_PROCESSOR" does not exist.
   ])
 fi
+AC_SUBST(XSL_PROCESSOR)
 AC_DEFINE_UNQUOTED(XSL_PROCESSOR,
 	           "$XSL_PROCESSOR",
 	           [Path to XSL processor to test.])
-AC_SUBST(XSL_PROCESSOR)
+AC_DEFINE_UNQUOTED(XSL_PROCESSOR_SETTER,
+	           "$xsl_processor_setter",
+	           [Where XSL_PROCESSOR was set.])
 
 #
 # XSL processor flags.
@@ -349,7 +361,7 @@ xsl_processor_flags_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
-  results_xsl_processor_flags=["`$PERL -n -e'if(/<\?xt:xsl-processor-flags\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  results_xsl_processor_flags=["`$PERL -n -e'if(/<\?xt-xsl-processor-flags\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_xsl_processor_flags" != "x" ; then
     xsl_processor_flags_default="$results_xsl_processor_flags"
     xsl_processor_flags_setter=$results_setter
@@ -365,10 +377,13 @@ else
   XSL_PROCESSOR_FLAGS=$with_xsl_processor_flags
   xsl_processor_flags_setter=$option_setter
 fi
+AC_SUBST(XSL_PROCESSOR_FLAGS)
 AC_DEFINE_UNQUOTED(XSL_PROCESSOR_FLAGS,
 	           "$XSL_PROCESSOR_FLAGS",
 	           [Flags to pass to the XSL processor.])
-AC_SUBST(XSL_PROCESSOR_FLAGS)
+AC_DEFINE_UNQUOTED(XSL_PROCESSOR_FLAGS_SETTER,
+	           "$xsl_processor_flags_setter",
+	           [Where XSL_PROCESSOR_FLAGS was set.])
 
 #
 # Location of Trac
@@ -380,7 +395,7 @@ trac_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
 if test -f "$TEST_RESULTS" ; then
-  results_trac=["`$PERL -n -e'if(/<\?xt:trac\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  results_trac=["`$PERL -n -e'if(/<\?xt-trac\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
   if test "x$results_trac" != "x" ; then
     trac_default="$results_trac"
     trac_setter=$results_setter
@@ -396,10 +411,13 @@ else
   TRAC=$with_trac
   trac_setter=$option_setter
 fi
+AC_SUBST(TRAC)
 AC_DEFINE_UNQUOTED(TRAC,
 	           "$TRAC",
 	           [URL of Trac to which ticket numbers refer.])
-AC_SUBST(TRAC)
+AC_DEFINE_UNQUOTED(TRAC_SETTER,
+	           "$trac_setter",
+	           [Where TRAC setting was set.])
 
 #
 # Current directory
@@ -420,12 +438,12 @@ AC_OUTPUT
 echo "
 Configurable settings (and where set):
 
-command-patterns:    \"$COMMAND_PATTERNS\" $command_patterns_setter
-default-stylesheet:  \"$DEFAULT_STYLESHEET\" $default_stylesheet_setter
-test-results:        \"$TEST_RESULTS\" $test_results_setter
-testsuites:          \"$TESTSUITES\" $testsuites_setter
-xsl-processor:       \"$XSL_PROCESSOR\" $xsl_processor_setter
-xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" $xsl_processor_flags_setter
-trac:                \"$TRAC\" $trac_setter
+command-patterns:    \"$COMMAND_PATTERNS\" ($command_patterns_setter)
+default-stylesheet:  \"$DEFAULT_STYLESHEET\" ($default_stylesheet_setter)
+test-results:        \"$TEST_RESULTS\" ($test_results_setter)
+testsuites:          \"$TESTSUITES\" ($testsuites_setter)
+xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
+xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
+trac:                \"$TRAC\" ($trac_setter)
 
 The 'configure' options that you used are recorded in 'config.log'."

@@ -2,12 +2,13 @@
 <!-- xmlroff -->
 <!-- testsuites2testresults.xsl -->
 <!-- Generate 'testresults.xml' file from 'testsuites.xml' file. -->
+<!-- Gets configuration from 'config.xsl'. -->
 <!-- Example usage:
      xsltproc -\-novalid testsuites2testresults.xsl testsuites.xml > testresults.xml
 -->
 
 <!-- Copyright (C) 2004 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -32,11 +33,12 @@
   <!--<xsl:strip-space elements="*"/>-->
   
   <xsl:template match="/">
-    <testsuite profile="xmlroff with PDF output">
+    <xsl:call-template name="options"/>
+    <testsuite profile="{$TITLE}">
       <xsl:apply-templates select="$testsuite-hrefs"/>
     </testsuite>
   </xsl:template>
-  
+
   <xsl:template match="@href">
     <xsl:variable name="href-dirname">
       <xsl:call-template name="dirname">
@@ -81,4 +83,53 @@
     <testresult id="{@id}" results="{@id}.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
   </xsl:template>
   
+  <xsl:template name="options">
+    <xsl:if test="$COMMAND_PATTERNS_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'command-patterns'"/>
+	<xsl:with-param name="value" select="$COMMAND_PATTERNS"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="$DEFAULT_STYLESHEET_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'default-stylesheet'"/>
+	<xsl:with-param name="value" select="$DEFAULT_STYLESHEET"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="$TESTSUITES_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'testsuites'"/>
+	<xsl:with-param name="value" select="$testsuites"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="$TRAC_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'trac'"/>
+	<xsl:with-param name="value" select="$TRAC"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="$XSL_PROCESSOR_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'xsl-processor'"/>
+	<xsl:with-param name="value" select="$XSL_PROCESSOR"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:if test="$XSL_PROCESSOR_FLAGS_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'xsl-processor-flags'"/>
+	<xsl:with-param name="value" select="$XSL_PROCESSOR_FLAGS"/>
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="option-pi">
+    <xsl:param name="option"/>
+    <xsl:param name="value"/>
+
+    <xsl:processing-instruction
+       name="xt-{$option}">
+      <xsl:value-of select="$value"/>
+    </xsl:processing-instruction>
+  </xsl:template>
+
 </xsl:stylesheet>
