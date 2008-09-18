@@ -44,6 +44,16 @@ fi
 #
 # ImageMagick 'convert' program.
 #
+convert_default=convert
+AC_ARG_WITH(convert,
+	    AC_HELP_STRING([--with-convert],
+			   [Full path to ImageMagick 'convert' program.]),
+	    convert="$withval", :)
+if test "x$with_convert" = "x" ; then
+  CONVERT=$convert_default
+else
+  CONVERT=$with_convert
+fi
 AC_PATH_PROG(CONVERT, convert, no)
 if test "x$CONVERT" = "xno" ; then
   AC_MSG_ERROR([
@@ -56,6 +66,16 @@ AC_DEFINE_UNQUOTED(CONVERT, "$CONVERT", [Full path to ImageMagick 'convert' prog
 #
 # ImageMagick 'composite' program.
 #
+composite_default=composite
+AC_ARG_WITH(composite,
+	    AC_HELP_STRING([--with-composite],
+			   [Full path to ImageMagick 'composite' program.]),
+	    composite="$withval", :)
+if test "x$with_composite" = "x" ; then
+  COMPOSITE=$composite_default
+else
+  COMPOSITE=$with_composite
+fi
 AC_PATH_PROG(COMPOSITE, composite, no)
 if test "x$COMPOSITE" = "xno" ; then
   AC_MSG_ERROR([
