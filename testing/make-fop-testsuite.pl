@@ -31,9 +31,11 @@ EndOfUsage
 
 ############################################################
 # Main program
+$gTitle = "FOP testsuite";
 
 &GetOptions("verbose" => \$gVerbose,
-            "stylesheet:s" => \$gStylesheet);
+            "stylesheet:s" => \$gStylesheet,
+            "title:s" => \$gTitle);
 
 if (defined($gStylesheet)) {
     $gStylesheetAttr = "\n    xsl=\"$gStylesheet\"";
@@ -69,12 +71,13 @@ chdir $gTestsDir;
 
 if ($gVerbose) {
     print STDERR "Stylesheet::", $gStylesheet, ":\n";
+    print STDERR "Title::", $gTitle, ":\n";
     print STDERR "Test directories::", join(":", @lTestDirs), ":\n";
 }
 
 print << "EndOfTestsuiteStart";
 <?xml version="1.0" encoding="utf-8"?>
-<testsuite profile="Test Suite">
+<testsuite profile="$gTitle">
 EndOfTestsuiteStart
 
 TESTDIR:
@@ -128,6 +131,10 @@ sub ProcessDir {
 	    my $xp = XML::XPath->new(filename => $lSourceFile);
 
 	    my $info = $xp->findvalue('/testcase/info'); # find info
+	    $info =~ s/^\s+//;
+	    $info =~ s/\s+$//;
+	    $info =~ s/&/&amp;/g;
+	    $info =~ s/</&lt;/g;
 
 	    print <<EndOfTest;
 <test id="$lBasename"
