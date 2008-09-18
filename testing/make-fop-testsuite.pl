@@ -138,7 +138,7 @@ sub ProcessDir {
 
 	    print <<EndOfTest;
 <test id="$lBasename"
-    xml="$lBasename.fo"$gStylesheetAttr
+    xml="$lSourceFile"$gStylesheetAttr
     results="$lBasename.pdf"
     fo="multiple">$info</test>
 EndOfTest
