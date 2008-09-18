@@ -1,8 +1,14 @@
-Changes between 0.5.4 and 0.6.1
+Changes between 0.6.0 and 0.6.1
+
+ * Added standalone web server for viewing results (#15)
+ * Added --with-convert and --with-composite configure options
+ * Changed result file option PI prefix
+ * Outputting option PIs when creating initial test results file
+
+Changes between 0.5.4 and 0.6.0
 
  * Using plain BSD license (Jon Bosak, Mike Anastasio)
  * Added instructions for getting DocBook callout symbols (#80)
- * Added standalone web server for viewing results (#15)
 
 Changes between 0.5.2 and 0.5.4
 
