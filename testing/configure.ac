@@ -390,7 +390,7 @@ AC_DEFINE_UNQUOTED(XSL_PROCESSOR_FLAGS_SETTER,
 #
 # Ticket numbers refer to tickets in this Trac
 #
-trac_default=http://xmlroff.org
+trac_default=http://xmlroff.org/ticket/
 trac_setter=$default_setter
 
 # Default may be overridden by a PI in the results document.
@@ -403,7 +403,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(trac,
 	    AC_HELP_STRING([--with-trac],
-			   [URL of Trac to which ticket numbers refer. (default=http://xmlroff.org)]),
+			   [URL of Trac to which ticket numbers refer. (default=http://xmlroff.org/ticket/)]),
 	    trac="$withval", :)
 if test "x$with_trac" = "x" ; then
   TRAC=$trac_default

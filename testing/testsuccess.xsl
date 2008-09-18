@@ -800,7 +800,7 @@
         <xsl:text>#</xsl:text>
       </xsl:when>
       <xsl:when test="($string = '') and ($ticket-number != '')">
-        <a href="{$TRAC}/ticket/{$ticket-number}">
+        <a href="{$TRAC}{$ticket-number}">
           <xsl:text>#</xsl:text>
           <xsl:value-of select="$ticket-number"/>
         </a>
@@ -819,7 +819,7 @@
             </xsl:call-template>
           </xsl:when>
           <xsl:otherwise>
-            <a href="{$TRAC}/ticket/{$ticket-number}">
+            <a href="{$TRAC}{$ticket-number}">
               <xsl:text>#</xsl:text>
               <xsl:value-of select="$ticket-number"/>
             </a>
