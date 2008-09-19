@@ -1,15 +1,20 @@
 #! /usr/local/bin/perl
 #
 # Copyright (c) 2001, 2002, 2004 Sun Microsystems
+# Copyright (c) 2007-2008 Menteith Consulting Ltd
 #
 # Perl script to create 'stereo' images of PNG files and their
 # reference versions.
+#
+# Variables in UPPERCASE are from 'config.pl' in this directory.
 #
 # See COPYING for the status of this software.
 
 ############################################################
 # Library modules
 use Getopt::Long;
+
+require("config.pl");
 
 ############################################################
 # Constants
@@ -23,9 +28,6 @@ where:
  -force         = Force generation of PNG files
   TestDir       = Directory containing the test directories
 EndOfUsage
-
-# ImageMagick 'composite' program
-$cComposite = "/usr/bin/composite";
 
 ############################################################
 # Main program
@@ -132,7 +134,7 @@ foreach $gTestDir (@lTestDirs) {
 	    if (-e "$lBasename.00.png") {
 		unlink(glob("$lBasename.*.png"));
 	    }
-	    $rc = 0xffff & system "convert -depth 8 -type palette $lPDFFile $lBasename.%02d.png";
+	    $rc = 0xffff & system "$CONVERT -depth 8 -type palette $lPDFFile $lBasename.%02d.png";
 	    if ($rc != 0) {
 		$gError++;
 		warn("Creating PNG of \"$lPDFFile\" failed.");
@@ -150,7 +152,7 @@ foreach $gTestDir (@lTestDirs) {
 		if (-e "ref/$lPNGFile" &&
 		    (!-e "stereo/$lPNGFile" || -M $lPNGFile < -M "stereo/$lPNGFile") &&
 		    (!-e "diff/$lPNGFile" || -s _)) {
-		    $rc = 0xffff & system "$cComposite -stereo $lPNGFile ref/$lPNGFile stereo/$lPNGFile";
+		    $rc = 0xffff & system "$COMPOSITE -stereo $lPNGFile ref/$lPNGFile stereo/$lPNGFile";
 		    if ($rc != 0) {
 			$gError++;
 			die("Creating 'stereo' of \"$lPNGFile\" failed." .
