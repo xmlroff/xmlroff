@@ -352,8 +352,13 @@
           <xsl:value-of select="@id"/>
         </xsl:if>
         <xsl:text>&#10;</xsl:text>
-
       </xsl:for-each>
+
+      <xsl:text>&#9;@-for FILE in `ls diff/*`; do \&#10;&#9;
+      <xsl:text>&#9;@-for FILE in `ls stereo/*.png`; do ; rm $$FILE ; done&#10;</xsl:text>
+      <xsl:text>&#9;@-touch ../</xsl:text>
+      <xsl:value-of select="$TEST_RESULTS"/>
+      <xsl:text>&#10;</xsl:text>
 
     </exsl:document>
   </xsl:template>
