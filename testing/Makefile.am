@@ -21,6 +21,7 @@ EXTRA_DIST = \
 	h2pl.pl				\
 	h2xsl.pl			\
 	identity.xsl			\
+	make-fop-testsuite.pl		\
 	make-success-report.sh		\
 	png+ref2stereo.pl		\
 	regenerate-testsuccess.pl	\
