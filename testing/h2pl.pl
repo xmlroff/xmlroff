@@ -55,7 +55,7 @@ $gBasename = $`;
 open(PERLFILE, ">$gBasename.pl");
 
 
-print PERLFILE "# Generated from $gHeaderFile by $0.\n";
+print PERLFILE "# $gBasename.pl. Generated from $gHeaderFile by $0.\n";
 
 while (<HEADERFILE>) {
     if (/^$/) {
