@@ -1,3 +1,98 @@
+09/24/08 18:09:03 tkg [506]
+	* trunk/testing/cairo-pdf-results.xml (modified)
+	Added more tests.  Changed PI prefix.
+
+09/24/08 18:07:50 tkg [505]
+	* trunk/testing/test2makefile.xsl (modified)
+	Not using stylesheet as dependency if it contains 'http:'.
+
+09/19/08 20:35:04 tkg [499]
+	* trunk/testing/h2pl.pl (modified)
+	Outputting filename in initial comment.
+
+09/19/08 20:33:59 tkg [498]
+	* trunk/testing/png+ref2stereo.pl (modified)
+	Using CONVERT and COMPOSITE from config.pl.
+
+09/19/08 20:30:52 tkg [497]
+	* trunk/testing/test2makefile.xsl (modified)
+	Needed to also zero diffs in 'accept-all' target.
+
+09/19/08 20:29:52 tkg [496]
+	* trunk/testing/Makefile.am (modified)
+	Added make-fop-testsuite.pl to distribution.
+
+09/18/08 20:57:39 tkg [495]
+	* trunk/testing/test2makefile.xsl (modified)
+	Added generating 'accept-all' rule for accepting current output as
+	reference.
+
+09/18/08 20:23:52 tkg [494]
+	* trunk/testing/NEWS (modified)
+	Updated for 0.6.1.
+
+09/18/08 14:47:26 tkg [493]
+	* trunk/testing/configure.ac (modified)
+	* trunk/testing/testsuccess.xsl (modified)
+	Moved '/ticket/' in Trac ticket URLs from hardcoded in XSLT to part
+	of configuration option so testing framework also plays nicely with
+	other bug trackers, e.g., Bugzilla.
+
+09/18/08 14:30:38 tkg [492]
+	* trunk/testing/make-fop-testsuite.pl (modified)
+	Not rewriting test file name.
+
+09/18/08 14:30:02 tkg [491]
+	* trunk/testing/configure.ac (modified)
+	* trunk/testing/testsuites2testresults.xsl (modified)
+	Outputting option PIs when creating initial test results XML file.
+
+09/18/08 11:35:19 tkg [490]
+	* trunk/testing/make-fop-testsuite.pl (modified)
+	Re-escaping '&amp;' and '&lt;' in string from XML::XPath.
+
+09/18/08 11:11:32 tkg [489]
+	* trunk/testing/configure.ac (modified)
+	Added --with-covert and --with-configure options for locating
+	'convert' and 'configure' respectively.  Useful on Windows with
+	Cygwin since Windows has a completely different 'convert' program
+	that may be earlier in the path.
+
+09/03/08 11:41:16 tkg [473]
+	* trunk/testing/testing-server.pl (modified)
+	Adde --debug option.  Added initial comment.
+
+09/03/08 11:40:47 tkg [472]
+	* trunk/testing/README (modified)
+	Added standalone web server.
+
+09/03/08 11:40:12 tkg [471]
+	* trunk/testing/NEWS (modified)
+	Upped version to 0.6.1.  Added standalone web server.
+
+09/02/08 14:51:56 tkg [470]
+	* trunk/testing/testing-server.pl (added)
+	Simple webserver for viewing test reports.  Re #15.
+
+09/02/08 14:49:43 tkg [469]
+	* trunk/testing/Makefile.am (modified)
+	* trunk/testing/testsuccess.xsl (modified)
+	Using test results file as input to testsuccess.xsl so easier to run
+	stylesheet inside a web server program.
+
+09/02/08 14:46:04 tkg [468]
+	* trunk/testing/configure.ac (modified)
+	Upped version to 0.6.1.
+
+09/01/08 15:45:01 tkg [467]
+	* trunk/testing/make-fop-testsuite.pl (added)
+	Makes a starter XSL-style 'testsuite.xml' from FOP area tree test
+	file.
+
+07/10/08 14:08:27 tkg [464]
+	* trunk/testing/ChangeLog (modified)
+	Updated.
+
 07/10/08 14:07:46 tkg [463]
 	* trunk/testing/Makefile.am (modified)
 	Added docbook-testdocs.conf to distribution.
