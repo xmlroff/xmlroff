@@ -228,8 +228,10 @@
         <xsl:value-of select="concat(@id, '.pdf')"/>
         <xsl:text>:&#9;</xsl:text>
         <xsl:value-of select="$input-xml"/>
-        <xsl:text> </xsl:text>
-        <xsl:value-of select="$input-xsl"/>
+        <xsl:if test="not(contains($input-xsl, 'http:'))">
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="$input-xsl"/>
+        </xsl:if>
         <xsl:text> </xsl:text>
         <xsl:value-of select="$use-xsl-processor"/>
         <xsl:text>&#10;</xsl:text>
@@ -354,8 +356,8 @@
         <xsl:text>&#10;</xsl:text>
       </xsl:for-each>
 
-      <xsl:text>&#9;@-for FILE in `ls diff/*`; do \&#10;&#9;
-      <xsl:text>&#9;@-for FILE in `ls stereo/*.png`; do ; rm $$FILE ; done&#10;</xsl:text>
+      <xsl:text>&#9;@-for FILE in `ls diff/*`; do \&#10;&#9;rm $$FILE ; done&#10;</xsl:text>
+      <xsl:text>&#9;@-for FILE in `ls stereo/*.png`; do \&#10;&#9;rm $$FILE ; done&#10;</xsl:text>
       <xsl:text>&#9;@-touch ../</xsl:text>
       <xsl:value-of select="$TEST_RESULTS"/>
       <xsl:text>&#10;</xsl:text>
