@@ -32,7 +32,7 @@
 03/30/08 19:41:17 tkg [405]
 	* trunk/testsuite/fo/inline/external-graphic/external-graphic-8.fo (added)
 	* trunk/testsuite/testsuite.xml (modified)
-	&#34;xmlroff XSL formatter&#34; image in second table cell in row.
+	"xmlroff XSL formatter" image in second table cell in row.
 
 03/27/08 01:51:46 tkg [404]
 	* trunk/testsuite/fo/inline/external-graphic/external-graphic-7.fo (added)
