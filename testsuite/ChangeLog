@@ -1,3 +1,72 @@
+09/11/08 13:56:01 tkg [476]
+	* trunk/testsuite/fo/table/table/table-7.fo (added)
+	* trunk/testsuite/testsuite.xml (modified)
+	Test for 'rl-tb' writing-mode and table.  Re #131.
+
+09/10/08 07:50:24 tkg [475]
+	* trunk/testsuite/testsuite.xml (modified)
+	Corrected 'external-graphic-9' description.
+
+09/10/08 07:37:05 tkg [474]
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-10.fo (added)
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-11.fo (added)
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-12.fo (added)
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-13.fo (added)
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-5.fo (modified)
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-9.fo (added)
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.bmp (added)
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.eps (added)
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.gif (added)
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.jpg (added)
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.svg (added)
+	* trunk/testsuite/fo/inline/external-graphic/resources/xmlroff.tif (added)
+	* trunk/testsuite/fo/inline/external-graphic/results/external-graphic-1.pdf (modified)
+	* trunk/testsuite/fo/inline/external-graphic/results/external-graphic-2.pdf (modified)
+	* trunk/testsuite/fo/inline/external-graphic/results/external-graphic-3.pdf (modified)
+	* trunk/testsuite/fo/inline/external-graphic/results/external-graphic-4.pdf (modified)
+	* trunk/testsuite/fo/inline/external-graphic/results/external-graphic-5.pdf (modified)
+	* trunk/testsuite/fo/inline/external-graphic/results/external-graphic-6.pdf (modified)
+	* trunk/testsuite/testsuite.xml (modified)
+	Added more graphic file formats.
+
+03/30/08 19:41:17 tkg [405]
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-8.fo (added)
+	* trunk/testsuite/testsuite.xml (modified)
+	&#34;xmlroff XSL formatter&#34; image in second table cell in row.
+
+03/27/08 01:51:46 tkg [404]
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-7.fo (added)
+	* trunk/testsuite/testsuite.xml (modified)
+	external-graphic without url() in @src.
+
+03/11/08 11:35:36 tkg [386]
+	* trunk/testsuite/fo/inline/external-graphic/external-graphic-4.fo (modified)
+	Corrected typos.
+
+03/11/08 10:17:48 tkg [384]
+	* trunk/codegen/COPYING (modified)
+	* trunk/codegen/configure.ac (modified)
+	* trunk/libfo-examples/COPYING (modified)
+	* trunk/libfo-examples/configure.ac (modified)
+	* trunk/testing/COPYING (modified)
+	* trunk/testing/configure.ac (modified)
+	* trunk/testsuite/COPYING (modified)
+	* trunk/testsuite/configure.ac (modified)
+	* trunk/xmlroff/COPYING (modified)
+	* trunk/xmlroff/configure.ac (modified)
+	Thanks to the efforts of Jon Bosak of Sun and of Mike Anastasio of
+	Sun's Intellectual Property Law Group, Sun has approved the re-
+	release of xmlroff under this BSD license (essentially the same as
+	the old one with the nuclear paragraph removed).  Changes made since
+	Sun released the original source code and ceased its involvement with
+	the project are similarly relicensed.
+
+	Version number upped to 0.6.0 to mark the change in license terms.
+
+03/08/08 22:08:40 tkg [365]
+	* trunk/testsuite/ChangeLog (modified)
+	Updated for 0.5.5.
+
 03/08/08 22:06:41 tkg [364]
 	* trunk/testsuite/NEWS (modified)
 	Updated for 0.5.5.
