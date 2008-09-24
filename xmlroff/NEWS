@@ -1,3 +1,13 @@
+Changes between 0.6.0 and 0.6.1
+
+ * SVG external graphics rendered as vectors in Cairo backend (#113,
+   lode leroy)
+ * Fixed CFLAGS usage in configure.ac (#124, Asmodai)
+ * Table column order respects writing mode (#131)
+
+ All xmlroff 0.6.1 tickets are listed at
+ http://xmlroff.org/query?milestone=xmlroff+0.6.1
+
 Changes between 0.5.5 and 0.6.0
 
  * Using plain BSD license (Jon Bosak, Mike Anastasio)
