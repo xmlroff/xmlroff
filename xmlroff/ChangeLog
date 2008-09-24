@@ -1,3 +1,154 @@
+09/24/08 10:26:51 tkg [501]
+	* trunk/xmlroff/NEWS (modified)
+	Updated for 0.6.1.
+
+09/24/08 09:18:49 tkg [500]
+	* trunk/xmlroff/docs/tmpl/fo-table.sgml (modified)
+	* trunk/xmlroff/libfo/fo/fo-table.h (modified)
+	Added 'FO_TABLE_ERROR_INLINE_PROGRESSION_DIRECTION'.
+
+09/14/08 13:15:04 tkg [488]
+	* trunk/xmlroff/libfo/area/fo-area-table-row.c (modified)
+	Added fix from Debian 494227 (Thomas Viehmann).  Re #99.
+
+09/14/08 10:26:57 tkg [487]
+	* trunk/xmlroff/libfo/fo/fo-table.c (modified)
+	Table column offsets respect inline-progression-direction.  Closes
+	#131.
+
+09/14/08 08:52:57 tkg [486]
+	* trunk/xmlroff/configure.ac (modified)
+	Not setting HAVE_RSVG when don't have librsvg.  Re #113.
+
+09/11/08 15:41:33 tkg [485]
+	* trunk/xmlroff/docs/tmpl/fo-property.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-utils.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	* trunk/xmlroff/docs/xsl-gobject.xml (modified)
+	Updated doc files.
+
+09/11/08 14:53:28 tkg [484]
+	* trunk/xmlroff/libfo/area/fo-area-table-private.h (modified)
+	* trunk/xmlroff/libfo/area/fo-area-table.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-table.h (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.c (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.h (modified)
+	* trunk/xmlroff/libfo/fo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/fo/fo-block-layout.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo-private.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-footnote.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-idable-private.h (deleted)
+	* trunk/xmlroff/libfo/fo/fo-idable.c (deleted)
+	* trunk/xmlroff/libfo/fo/fo-idable.h (deleted)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent-private.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-tree.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-tree.h (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Removed 'FoIdable', etc., sinc now in separate branch.  (Re #77)
+
+09/11/08 14:51:17 tkg [483]
+	* trunk/xmlroff/libfo/fo/fo-root.c (modified)
+	Add gtk-doc section comment.
+
+09/11/08 14:46:26 tkg [482]
+	* trunk/xmlroff/libfo/property/fo-property-media-usage.c (modified)
+	Add gtk-doc section comment.
+
+09/11/08 14:32:34 tkg [481]
+	* trunk/xmlroff/libfo/fo-utils.h (modified)
+	Removed '_()' and 'N_()' since they are in GLib.  (Have been in GLib
+	since GLib 2.4, but xmlroff started circa GLib 2.2.)
+
+09/11/08 14:29:54 tkg [480]
+	* trunk/xmlroff/libfo/area/fo-area.c (modified)
+	Cosmetic change.
+
+09/11/08 14:27:17 tkg [479]
+	* trunk/xmlroff/configure.ac (modified)
+	* trunk/xmlroff/libfo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	Vector SVG images for Cairo backend.  (Re #113, lleroy)
+
+09/11/08 14:01:50 tkg [478]
+	* trunk/xmlroff/libfo/area/fo-area-page.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence-area.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-page-sequence.c (modified)
+	Moved fo_page_sequence_area_new2() to fo_page_sequence_area_new().
+
+09/11/08 13:59:44 tkg [477]
+	* trunk/xmlroff/libfo/area/fo-area-reference-private.h (modified)
+	* trunk/xmlroff/libfo/area/fo-area-reference.c (modified)
+	* trunk/xmlroff/libfo/area/fo-area-reference.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-area.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-table-cell-area.c (modified)
+	Improving handling writing-mode in tables before fixing #131.
+
+08/19/08 12:35:10 tkg [465]
+	* trunk/xmlroff/libfo/fo/fo-block-layout.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo-private.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	Working again after always segfaulting, but now repeated error
+	messages.
+
+07/09/08 13:42:55 tkg [456]
+	* trunk/xmlroff/docs/tmpl/fo-property.sgml (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.c (modified)
+	* trunk/xmlroff/libfo/fo-xsl-formatter.h (modified)
+	* trunk/xmlroff/libfo/fo/Makefile.am (modified)
+	* trunk/xmlroff/libfo/fo/fo-block.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-fo.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-footnote.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-idable-private.h (added)
+	* trunk/xmlroff/libfo/fo/fo-idable.c (added)
+	* trunk/xmlroff/libfo/fo/fo-idable.h (added)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent-private.h (modified)
+	* trunk/xmlroff/libfo/fo/fo-marker-parent.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-tree.c (modified)
+	* trunk/xmlroff/libfo/fo/fo-tree.h (modified)
+	* trunk/xmlroff/libfo/property/fo-property-border-left-width.c (modified)
+	* trunk/xmlroff/xmlroff/xmlroff.c (modified)
+	Adding 'id-file' as temporary solution for forward page references.
+	(Re #77.)
+
+07/09/08 13:39:19 tkg [455]
+	* trunk/xmlroff/configure.ac (modified)
+	Upped version to 0.6.1.
+
+07/07/08 11:20:12 tkg [443]
+	* trunk/xmlroff/NEWS (modified)
+	Added manual changes.
+
+07/07/08 11:15:55 tkg [442]
+	* trunk/xmlroff/docs/xmlroff-docs.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff.xml (modified)
+	* trunk/xmlroff/docs/xsl-gobject.xml (modified)
+	* trunk/xmlroff/libfo/fo-doc-cairo.c (modified)
+	* trunk/xmlroff/libfo/fo-doc-gp.c (modified)
+	* trunk/xmlroff/libfo/fo-node.c (modified)
+	* trunk/xmlroff/libfo/fo-object.c (modified)
+	Divided manual into users' guide and developers' guide.  Other doc
+	changes.
+
+07/06/08 21:57:55 tkg [441]
+	* trunk/xmlroff/docs/tmpl/fo-fo.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-property-font-stretch.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-property-font-style.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/fo-utils.sgml (modified)
+	* trunk/xmlroff/docs/tmpl/xmlroff-unused.sgml (modified)
+	* trunk/xmlroff/docs/xmlroff-sections.txt (modified)
+	Doc updates.
+
+07/06/08 21:38:55 tkg [440]
+	* trunk/xmlroff/ChangeLog (modified)
+	Updated for xmlroff 0.6.0.
+
 07/06/08 21:35:53 tkg [439]
 	* trunk/xmlroff/NEWS (modified)
 	Updated for xmlroff 0.6.0.
