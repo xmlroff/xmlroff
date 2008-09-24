@@ -28,6 +28,7 @@ EXTRA_DIST = \
 	test2makefile.xsl		\
 	test2sh.xsl			\
 	testing.conf.in			\
+	testing-server.pl		\
 	testsuccess.pl			\
 	testsuccess.xsl			\
 	testsuites.xml			\
