@@ -4,6 +4,7 @@ Changes between 0.6.0 and 0.6.1
    lode leroy)
  * Fixed CFLAGS usage in configure.ac (#124, Asmodai)
  * Table column order respects writing mode (#131)
+ * Added table fix from Debian 494227 (#99, Thomas Viehmann)
 
  All xmlroff 0.6.1 tickets are listed at
  http://xmlroff.org/query?milestone=xmlroff+0.6.1
