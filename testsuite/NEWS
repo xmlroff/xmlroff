@@ -1,3 +1,9 @@
+Changes between 0.5.5 and 0.6.0
+
+ * Using plain BSD license (Jon Bosak, Mike Anastasio)
+ * Added tests for rl-tb' writing-mode and table (#131) and image file
+   formats
+
 Changes between 0.5.3 and 0.5.5:
 
  * Added new tests for 'display-align' in fo:table-cell and tests for
