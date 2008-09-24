@@ -136,6 +136,10 @@ fi
 # xmlroff.c uses g_option_context_set_summary.  It was introduced in
 # glib 2.12, so need to check for it while minimum required version
 # is less than 2.12.0.
+OLD_CFLAGS="$CFLAGS"
+OLD_LIBS="$LIBS"
+CFLAGS="$CFLAGS $GLIB_CFLAGS"
+LIBS="$LIBS $GLIB_LIBS"
 AH_TEMPLATE([HAVE_G_OPTION_CONTEXT_SET_SUMMARY],
             [Define to 1 if you have the `g_option_context_set_summary' function.])
 AC_CHECK_LIB([glib-2.0],
@@ -151,6 +155,8 @@ dnl
 dnl AC_CHECK_FUNCS([g_option_context_set_summary])
 
 #GLIB_CFLAGS="-DG_DISABLE_DEPRECATED $GLIB_CFLAGS"
+CFLAGS="$OLD_CFLAGS"
+LIBS="$OLD_LIBS"
 
 dnl **************************
 dnl *** Checks for gtk-doc ***
@@ -509,6 +515,14 @@ fi
 #
 # Check for CUnit
 #
+OLD_CFLAGS="$CFLAGS"
+CUNIT_CFLAGS="-I/usr/local/include"
+CFLAGS="$CFLAGS $CUNIT_CFLAGS"
+OLD_CPPFLAGS="$CPPFLAGS"
+CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+OLD_LIBS="$LIBS"
+CUNIT_LIBS="-L/usr/local/lib"
+LIBS="$LIBS $CUNIT_LIBS"
 
 have_cunit=false
 AC_CHECK_HEADER([CUnit/CUnit.h],
@@ -530,15 +544,16 @@ if test "x$enable_cunit_arg" = "xyes" && \
     test "x$have_cunit" = "xtrue" ; then
   build_cunit=true
 fi
-CUNIT_LIBS="-lcunit"
+CUNIT_LIBS="$CUNIT_LIBS -lcunit"
 AC_SUBST(CUNIT_LIBS)
 AC_SUBST(CUNIT_CFLAGS)
+CFLAGS="$OLD_CFLAGS"
+CPPFLAGS="$OLD_CPPFLAGS"
+LIBS="$OLD_LIBS"
 
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.
 AM_CONDITIONAL(ENABLE_CUNIT,$build_cunit)
-
-CFLAGS="$CFLAGS $GLIB_CFLAGS"
 
 AC_CONFIG_COMMANDS([libfo/libfo-features.h],
           [featuresfile=libfo/libfo-features.h

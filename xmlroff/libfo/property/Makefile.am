@@ -2,7 +2,7 @@
 
 INCLUDES = \
 	-DG_LOG_DOMAIN=\"libfo\" \
-	$(GOBJECT_CFLAGS)	\
+	$(GLIB_CFLAGS)	\
 	-I..
 
 LDADDS = @STRIP_BEGIN@	\
