@@ -26,6 +26,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gtk-doc \
        $RPM_BUILD_ROOT%{_libdir}/pkgconfig \
        $RPM_BUILD_ROOT%{_libdir}/*.la \
        $RPM_BUILD_ROOT%{_libdir}/*.a \
+       $RPM_BUILD_ROOT%{_libdir}/*.so \
        $RPM_BUILD_ROOT%{_includedir}
 
 %clean
@@ -39,6 +40,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xml/libfo-*/
 
 %changelog
+* Fri Oct 10 2008 Steven Garcia <webwhammy@gmail.com> 0.6.1-0.1 
+- Added removal of *.so (development linking libraries) to the 
+  install stage until RPM devel target package is added here. 
+
 * Tue May 01 2007 Tony Graham <Tony.Graham@MenteithConsulting.com> 0.5.0-0.1
 - Removed dependencies on pangoxsl-devel and popt-devel.
 
