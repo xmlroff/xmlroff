@@ -8,7 +8,7 @@
 -->
 
 <!-- Copyright (C) 2001, 2004 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -125,11 +125,11 @@
       <xsl:text>#!/bin/sh&#10;</xsl:text>
       <xsl:text>date&#10;</xsl:text>
       <xsl:text>rm -f /var/tmp/magic*&#10;</xsl:text>
-      <xsl:text>rm -f *.pdf&#10;</xsl:text>
+      <!--<xsl:text>rm -f *.pdf&#10;</xsl:text>-->
 
-      <xsl:for-each select="document(.)/testsuite/testcases/test |
-        document(.)/testsuite/testcases/testcases/test |
-        document(.)/testsuite/testcases/testcases/testcases/test">
+      <xsl:for-each select="document(.)/testsuite/testcases[$TEST_SUBSET = '' or @profile = $TEST_SUBSET]/test |
+        document(.)/testsuite/testcases[$TEST_SUBSET = '' or @profile = $TEST_SUBSET]/testcases/test |
+        document(.)/testsuite/testcases[$TEST_SUBSET = '' or @profile = $TEST_SUBSET]/testcases/testcases/test">
 
         <xsl:variable name="input-xml">
           <xsl:call-template name="merge-dirnames">

@@ -314,6 +314,37 @@ AC_DEFINE_UNQUOTED(TESTSUITES_SETTER,
 	           [Where TESTSUITES was set.])
 
 #
+# Subset of testcases to run
+#
+test_subset_default=
+test_subset_setter=$default_setter
+
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_test_subset=["`$PERL -n -e'if(/<\?xt-test-subset\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_test_subset" != "x" ; then
+    test_subset_default="$results_test_subset"
+    test_subset_setter=$results_setter
+  fi
+fi
+AC_ARG_WITH(test_subset,
+	    AC_HELP_STRING([--with-test-subset],
+			   [Subset of tests to run. (default=no subsetting)]),
+	    testsuites="$withval", :)
+if test "x$with_test_subset" = "x" ; then
+  TEST_SUBSET=$test_subset_default
+else
+  TEST_SUBSET=$with_test_subset
+fi
+AC_SUBST(TEST_SUBSET)
+AC_DEFINE_UNQUOTED(TEST_SUBSET,
+	           "$TEST_SUBSET",
+	           [_ubset of tests to run.])
+AC_DEFINE_UNQUOTED(TEST_SUBSET_SETTER,
+	           "$test_subset_setter",
+	           [Where TEST_SUBSET was set.])
+
+#
 # XSL processor.
 #
 xsl_processor_default=../xmlroff/xmlroff/xmlroff
@@ -442,6 +473,7 @@ command-patterns:    \"$COMMAND_PATTERNS\" ($command_patterns_setter)
 default-stylesheet:  \"$DEFAULT_STYLESHEET\" ($default_stylesheet_setter)
 test-results:        \"$TEST_RESULTS\" ($test_results_setter)
 testsuites:          \"$TESTSUITES\" ($testsuites_setter)
+test-subset:         \"$TEST_SUBSET\" ($test_subset_setter)
 xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
 xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
 trac:                \"$TRAC\" ($trac_setter)
