@@ -122,10 +122,14 @@ Testing xmlroff requires:
 
    (If starting from a Subversion checkout, run './autogen.sh'.)
 
-7. (Optional, Apache-only) Copy *.conf to your Apache2 conf.d
-   directory, e.g., /etc/apache2/conf.d.  Modify the directory name in
-   the .conf files to match where you installed this package.  Restart
-   Apache.
+7. (Optional, Apache-only) Copy 'testing.conf' to your Apache2 conf.d
+   directory, e.g., '/etc/apache2/conf.d' (or make a symbolic link).
+   Modify the directory name in 'testing.conf' to match where you
+   installed this package.  Restart Apache.
+
+   If you needed to modify 'testing.conf' and are going to repeatedly
+   run 'configure', modify 'testing.conf.in' instead so you won't have
+   to keep redoing the changes.
 
 8. (Optional, non-Apache) Install update-results.pl in the cgi-bin of
    your web server.
@@ -136,8 +140,13 @@ Testing xmlroff requires:
 
    Note that you may need to change the permissions on the current
    directory and its descendant files and directories so both you and
-   the webserver UID, e.g., 'wwwrun' for Apache2, can create and
-   modify files.
+   the webserver UID (e.g., 'wwwrun' or 'www-data' for Apache2,
+   depending on your configuration) can create and modify files.
+
+   The simplistic solution (if you have the 'acl' option set for the
+   current file system in '/etc/fstab') is:
+
+      setfacl -m u:www-data:rwx .
 
 
 4. Running the tests
@@ -759,16 +768,21 @@ that isn't accessible to the wider Internet.
 Suggestions on how to improve the setup are welcome, but the best way
 that has been found so far is:
 
-1. Copy xmlroff-testing.conf to '/etc/apache2/conf.d' (or make a
-   symbolic link to the file).
+1. Copy 'testing.conf' to '/etc/apache2/conf.d' (or make a symbolic
+   link to the file).
 
-2. Adjust the paths in the xmlroff-testing.conf copy as necessary to
+2. Adjust the paths in the 'testing.conf' copy as necessary to
    match your setup.
 
 3. Restart apache.
 
 4. Make the group id sticky (i.e., 'chmod g+s ...') for the current
    directory and all the generated directories.
+
+   Alternatively, a simplistic solution if you have the 'acl' option
+   set for the current file system in '/etc/fstab' is:
+
+      setfacl -m u:www-data:rwx .
 
 
 A previous method that would require rolling back changes in
@@ -806,4 +820,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-4 September 2008
+14 October 2008
