@@ -5,7 +5,7 @@
 #
 # The alias provides the xmlroff testing results for access by Apache.
 #
-Alias /xmlroff/@BASENAME@ "@PWD@"
+Alias /@PROJECT_NAME@/@BASENAME@ "@PWD@"
 
 <Directory "@PWD@">
     Options +ExecCGI

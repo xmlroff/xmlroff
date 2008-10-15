@@ -16,7 +16,7 @@ require("config.pl");
 
 $cWorkingDir = '.';
 $cResultsXML = "$cWorkingDir/$TEST_RESULTS";
-$cTestResultsBase = "/xmlroff/$BASENAME";
+$cTestResultsBase = "/$PROJECT_NAME/$BASENAME";
 $cTopBase = param('top-base');
 $cId = param('id');
 $cRefreshDelay = 1;
