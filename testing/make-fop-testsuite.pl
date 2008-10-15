@@ -19,9 +19,11 @@ use XML::XPath::XMLParser;
 # Usage statement
 $cUsage = <<"EndOfUsage";
 Usage:
-perl $0 [--verbose] [--stylesheet Stylesheet] TestsDir
+perl $0 [--verbose] [--stylesheet Stylesheet]
+   [--title Title] TestsDir
 
 where:
+  Title         = Profile name in the generated testsuite
   Stylesheet    = Filename or URL of stylesheet for all tests
   TestsDir      = Directory containing the tests directories
 
@@ -31,7 +33,7 @@ EndOfUsage
 
 ############################################################
 # Main program
-$gTitle = "FOP testsuite";
+my $gTitle = "FOP testsuite";
 
 &GetOptions("verbose" => \$gVerbose,
             "stylesheet:s" => \$gStylesheet,
@@ -70,8 +72,8 @@ chdir $gTestsDir;
 @lTestDirs = sort(grep(-d && !/^\.+/ && !/^CVS$/, readdir(TESTS)));
 
 if ($gVerbose) {
-    print STDERR "Stylesheet::", $gStylesheet, ":\n";
     print STDERR "Title::", $gTitle, ":\n";
+    print STDERR "Stylesheet::", $gStylesheet, ":\n";
     print STDERR "Test directories::", join(":", @lTestDirs), ":\n";
 }
 
