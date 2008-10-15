@@ -4,7 +4,7 @@ set
 AC_PREREQ(2.53)
 
 AC_INIT([xmlroff XSL Formatter testing framework],
-	[0.6.1],
+	[0.6.2],
 	[http://xmlroff.org/newticket?component=testing],
 	xmlroff-testing)
 
@@ -120,6 +120,33 @@ AC_DEFINE_UNQUOTED(TEST_RESULTS,
 	           "$TEST_RESULTS",
 	           [Filename of test results XML file.])
 AC_SUBST(TEST_RESULTS)
+
+#
+# Project name.
+#
+project_name_default="xmlroff"
+project_name_setter=$default_setter
+
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_project_name=["`$PERL -n -e'if(/<\?xt-project-name\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_project_name" != "x" ; then
+    project_name_default="$results_project_name"
+    project_name_setter=$results_setter
+  fi
+fi
+AC_ARG_WITH(project_name,
+	    AC_HELP_STRING([--with-project-name],
+			   [Project name used in URLs. (default=$project_name_default)]),
+	      project_name="$withval", :)
+
+if test "x$with_project_name" = "x" ; then
+  PROJECT_NAME=$project_name_default
+else
+  PROJECT_NAME=$with_project_name
+fi
+AC_DEFINE_UNQUOTED(PROJECT_NAME,"$PROJECT_NAME", [Project name used in URLs.])
+AC_SUBST(PROJECT_NAME)
 
 #
 # Title used in generated reports.
@@ -476,6 +503,7 @@ testsuites:          \"$TESTSUITES\" ($testsuites_setter)
 test-subset:         \"$TEST_SUBSET\" ($test_subset_setter)
 xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
 xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
+project-name:        \"$PROJECT_NAME\" ($project_name_setter)
 trac:                \"$TRAC\" ($trac_setter)
 
 The 'configure' options that you used are recorded in 'config.log'."
