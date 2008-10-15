@@ -241,7 +241,7 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr>
-      <td colspan="5" class="coloured4 left">
+      <td colspan="3" class="coloured4 left">
         <h2 class="testcases">
           <a name="{$my-testcases-id}">
             <xsl:value-of select="@profile"/>
@@ -255,7 +255,7 @@
       </td>
 <!--
       <td>
-        <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
+        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
       </td>
@@ -278,7 +278,7 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr class="coloured3">
-      <td colspan="5" class="testcases2  left">
+      <td colspan="3" class="testcases2  left">
         <h3>
           <a name="{$my-testcases-id}">
             <xsl:value-of select="@profile"/>
@@ -292,7 +292,7 @@
       </td>
 <!--
       <td>
-        <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
+        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
       </td>
@@ -321,7 +321,7 @@
           <xsl:text> last left</xsl:text>
         </xsl:if>
       </xsl:attribute>
-      <td colspan="5" class="testcases3 left">
+      <td colspan="3" class="testcases3 left">
         <h4>
           <a name="{$my-testcases-id}">
             <xsl:value-of select="@profile"/>
@@ -335,7 +335,7 @@
       </td>
 <!--
       <td>
-        <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
+        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
       </td>
@@ -358,7 +358,7 @@
     <xsl:param name="results-top-base" select="@base"/>
 
     <tr class="coloured">
-      <td colspan="5" class="testcases4 left">
+      <td colspan="3" class="testcases4 left">
         <h4>
           <a name="{$my-testcases-id}">
             <xsl:value-of select="@profile"/>
@@ -372,7 +372,7 @@
       </td>
 <!--
       <td>
-        <form action="/xmlroff/{$BASENAME}/regenerate-testsuccess.pl" method="post">
+        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
           <input type="submit" name="submit" value="Regenerate"/>
         </form>
       </td>
@@ -432,6 +432,9 @@
         <xsl:apply-templates/>
       </td>
       <td>
+        <xsl:if test="not(following-sibling::testresult)">
+          <xsl:attribute name="class">last right</xsl:attribute>
+        </xsl:if>
         <xsl:if test="$pdf-name != '' and $pdf-size != 0">
           <a>
             <xsl:attribute name="href">
@@ -444,68 +447,43 @@
             <xsl:text>PDF</xsl:text>
           </a>
         </xsl:if>
-      </td>
-      <td>
-        <xsl:if test="$OUTPUT_INDIVIDUAL = 'yes'">
-          <xsl:for-each select="$testsuccess-node">
-            <xsl:variable name="pdf"
-              select="key('PDF', $results)[ancestor::*/@name =
-                                             $results/ancestor::*/@base]"/>
-            <a href="{($results/ancestor::*/@base)}/{$id}.html" target="_blank">Results</a>
-            <xsl:call-template name="results-doc">
-              <xsl:with-param name="pdf" select="$pdf"/>
-              <xsl:with-param name="results" select="$results/.."/>
-              <xsl:with-param name="results-top-base" select="$results-top-base"/>
-              <xsl:with-param name="id" select="$id"/>
-            </xsl:call-template>
-          </xsl:for-each>
-        </xsl:if>
-      </td>
-      <td>
-        <xsl:if test="not(following-sibling::testresult)">
-          <xsl:attribute name="class">last right</xsl:attribute>
-        </xsl:if>
+        <xsl:text> </xsl:text>
         <xsl:for-each select="$testsuccess-node">
           <xsl:variable name="pdf"
             select="key('PDF', $results)[ancestor::*/@name =
-                                           $results/ancestor::*/@base]"/>
+            $results/ancestor::*/@base]"/>
+          <xsl:variable name="page-count">
+            <xsl:choose>
+              <xsl:when test="not($pdf) or $pdf/@size = 0">
+                <xsl:text>No output</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <!-- Number of pages in the PDF. -->
+                <xsl:value-of select="$pdf/pwd/@count"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:variable>
           <xsl:choose>
-            <xsl:when test="not($pdf) or $pdf/@size = 0">
-              <xsl:text>No output</xsl:text>
+            <xsl:when test="$OUTPUT_INDIVIDUAL = 'yes'">
+              <a href="{($results/ancestor::*/@base)}/{$id}.html" target="_blank">
+                <!-- Are there also diff files? -->
+                <xsl:if test="($pdf/diff/@count != 0) and
+                              ($pdf/diff/*[@size != 0])">
+                  <xsl:attribute name="style">
+                    <xsl:text>font-weight: bold; color: white; background-color: red</xsl:text>
+                  </xsl:attribute>
+                </xsl:if>
+                <xsl:value-of select="$page-count"/>
+              </a>
+              <xsl:call-template name="results-doc">
+                <xsl:with-param name="pdf" select="$pdf"/>
+                <xsl:with-param name="results" select="$results/.."/>
+                <xsl:with-param name="results-top-base" select="$results-top-base"/>
+                <xsl:with-param name="id" select="$id"/>
+              </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-              <!-- Number of pages in the PDF. -->
-              <xsl:value-of select="$pdf/pwd/@count"/>
-              <!-- Output the other info only if can view individual reports. -->
-              <xsl:if test="$OUTPUT_INDIVIDUAL = 'yes'">
-                <!-- Are there PNG files from this run? -->
-                <xsl:if test="$pdf/pwd/@count != 0">
-                  <xsl:text>, PNG</xsl:text>
-                </xsl:if>
-                <!-- Are there reference PNGs against which to compare? -->
-                <xsl:if test="$REFERENCE">
-                  <xsl:if test="$pdf/ref/@count != '0'">
-                    <xsl:text>, Ref</xsl:text>
-                  </xsl:if>
-                  <!-- If so, are there also diff files? -->
-                  <xsl:if test="$pdf/diff/@count != 0">
-                    <xsl:text>, </xsl:text>
-                    <!-- Do the diff files indicate that there are differences? -->
-                    <xsl:choose>
-                      <xsl:when test="$pdf/diff/*[@size != 0]">
-                        <span style="color: white; background-color: red">Diff</span>
-                      </xsl:when>
-                      <xsl:otherwise>
-                        <xsl:text>Diff</xsl:text>
-                      </xsl:otherwise>
-                    </xsl:choose>
-                  </xsl:if>
-                  <!-- Are there 'stereo' PNGs showing the differences? -->
-                  <xsl:if test="$pdf/stereo/@count != 0">
-                    <xsl:text>, Stereo</xsl:text>
-                  </xsl:if>
-                </xsl:if>
-              </xsl:if>
+              <xsl:value-of select="$page-count"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
@@ -910,6 +888,7 @@
       </xsl:call-template>
     </xsl:variable>
 
+    <!-- Heuristic to work out which href value to use. -->
     <xsl:variable name="use-href">
       <xsl:choose>
         <xsl:when test="starts-with($full-href, '/usr/local/src/xslfo')">
@@ -942,7 +921,7 @@
     <xsl:param name="results-top-base"/>
     <table bgcolor="white" border="0" cellspacing="0">
       <xsl:for-each select="$results">
-        <form action="/xmlroff/{$BASENAME}/update-results.pl" method="post">
+        <form action="/{$PROJECT_NAME}/{$BASENAME}/update-results.pl" method="post">
           <input type="hidden" name="id" value="{$id}"/>
           <input type="hidden" name="top-base" value="{$results-top-base}"/>
           <input type="hidden" name="path" value="{($results/ancestor::*/@base)[1]}/{$id}"/>
