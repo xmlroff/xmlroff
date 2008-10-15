@@ -23,7 +23,9 @@ use HTTP::Status;
 require("config.pl");
 
 my $debug = 0;
-my $result = GetOptions ("debug"  => \$debug);  # flag
+my $port = 8080;
+my $result = GetOptions ("debug"  => \$debug,
+                         "port=i"   => \$port);
 
 my $parser = XML::LibXML->new();
 my $xslt = XML::LibXSLT->new();
@@ -31,7 +33,7 @@ my $stylesheet = $xslt->parse_stylesheet_file("testsuccess.xsl");
 my $testresults = $parser->parse_file($TEST_RESULTS);
 
 my $d = HTTP::Daemon->new(
-    LocalPort => 8080
+    LocalPort => $port
     ) || die;
 print "$TITLE at: <URL:", $d->url, "/index.html>\n";
 
