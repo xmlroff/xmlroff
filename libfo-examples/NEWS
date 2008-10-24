@@ -1,3 +1,8 @@
+Changes between 0.5.2 and 0.6.0
+
+ * Using plain BSD license (Jon Bosak, Mike Anastasio)
+ * Added xmlroff-gtktree.c to demonstrate multiple accesses of FO tree
+
 Changes between 0.3.0 and 0.5.2:
 
  * Updated to match xmlroff 0.5.2
