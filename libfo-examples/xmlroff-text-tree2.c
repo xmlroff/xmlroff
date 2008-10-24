@@ -173,7 +173,7 @@ main (gint    argc,
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
   const gchar *format_string = NULL;
-  FoEnumFormat format_mode = FO_ENUM_FORMAT_UNKNOWN;
+  FoFlagsFormat format_mode = FO_FLAG_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
   gboolean continue_after_error = FALSE;
@@ -332,19 +332,19 @@ main (gint    argc,
   if ((format_string == NULL) ||
       (strcmp (format_string, "auto") == 0))
     {
-      format_mode = FO_ENUM_FORMAT_AUTO;
+      format_mode = FO_FLAG_FORMAT_AUTO;
     }
   else if (strcmp (format_string, "pdf") == 0)
     {
-      format_mode = FO_ENUM_FORMAT_PDF;
+      format_mode = FO_FLAG_FORMAT_PDF;
     }
   else if (strcmp (format_string, "postscript") == 0)
     {
-      format_mode = FO_ENUM_FORMAT_POSTSCRIPT;
+      format_mode = FO_FLAG_FORMAT_POSTSCRIPT;
     }
   else if (strcmp (format_string, "svg") == 0)
     {
-      format_mode = FO_ENUM_FORMAT_SVG;
+      format_mode = FO_FLAG_FORMAT_SVG;
     }
   else
     {

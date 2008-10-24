@@ -13,6 +13,7 @@ noinst_PROGRAMS = \
 	xmlroff-basic	\
 	xmlroff-init2	\
 	xmlroff-gmodule	\
+	xmlroff-gtktree	\
 	xmlroff-libfo	\
 	xmlroff-text-tree	\
 	xmlroff-text-tree2
@@ -38,6 +39,17 @@ xmlroff_init2_SOURCES = \
 
 xmlroff_libfo_SOURCES = \
 	xmlroff-libfo.c
+
+xmlroff_gtktree_SOURCES = \
+	xmlroff-gtktree.c
+
+xmlroff_gtktree_CFLAGS = \
+	$(INCLUDES) \
+	$(GTK_CFLAGS)
+
+xmlroff_gtktree_LDADD = \
+	$(LDADD) \
+	$(GTK_LIBS)
 
 xmlroff_text_tree_SOURCES = \
 	xmlroff-text-tree.c

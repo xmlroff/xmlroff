@@ -25,8 +25,9 @@ fi
 
 # Checks for libraries.
 
+LIBFO_REQUIRED_VERSION=0.6.0
 PKG_CHECK_MODULES(LIBFO,
-		  libfo-0.5 >= 0.5.0,
+		  libfo-0.6 >= $LIBFO_REQUIRED_VERSION,
 		  have_libfo=true,
 		  have_libfo=false)
 
@@ -39,7 +40,7 @@ AH_TEMPLATE([ENABLE_CAIRO],
 
 if $have_libfo ; then
   AC_MSG_CHECKING(['GNOME Print' backend enabled])
-  enable_gp=`pkg-config --variable=enable_gp libfo-0.5`
+  enable_gp=`pkg-config --variable=enable_gp libfo-0.6`
 
   if test x"$enable_gp" = xtrue ; then
     AC_DEFINE(ENABLE_GP,1)
@@ -50,7 +51,7 @@ if $have_libfo ; then
   fi
 
   AC_MSG_CHECKING(['Cairo' backend enabled])
-  enable_cairo=`pkg-config --variable=enable_cairo libfo-0.5`
+  enable_cairo=`pkg-config --variable=enable_cairo libfo-0.6`
 
   if test x"$enable_cairo" = xtrue ; then
     AC_DEFINE(ENABLE_CAIRO,1)
@@ -59,6 +60,11 @@ if $have_libfo ; then
     AC_DEFINE(ENABLE_CAIRO,0)
     AC_MSG_RESULT(NO)
   fi
+else
+      AC_MSG_ERROR([
+*** libfo $LIBFO_REQUIRED_VERSION or newer is required.
+*** libfo is part of xmlroff, which is available at http://xmlroff.org/.
+  ])
 fi
 
 AC_SUBST(LIBFO_LIBS)
