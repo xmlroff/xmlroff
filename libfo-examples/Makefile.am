@@ -85,7 +85,7 @@ gmodule_area_tree_la_LIBADD = \
 	$(GTK_LIBS)
 
 svn-tag:
-	-svn mkdir -m"Tagging libfo-examples $(VERSION)." \
+	-svn mkdir -m"Tag for modules of xmlroff $(VERSION)." \
 	  svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
 	-svn cp -m"Tagging libfo-examples $(VERSION)." \
 	  svn://svn.xmlroff.org/trunk/libfo-examples \
