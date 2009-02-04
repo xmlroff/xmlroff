@@ -84,6 +84,13 @@ gmodule_area_tree_la_LIBADD = \
 	$(LDADD) \
 	$(GTK_LIBS)
 
+FORCE:
+
+ChangeLog:	FORCE
+if ENABLE_SVN2CL
+	svn2cl --include-actions --authors=AUTHORS --group-by-day --separate-daylogs --include-rev --ignore-message-starting='#'
+endif
+
 svn-tag:
 	-svn mkdir -m"Tag for modules of xmlroff $(VERSION)." \
 	  svn://svn.xmlroff.org/tags/xmlroff-$(VERSION)
