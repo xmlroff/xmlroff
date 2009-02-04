@@ -35,6 +35,13 @@ EXTRA_DIST = \
 	xmlroff.spec.in		\
 	tools/insert-file-as-string.pl
 
+FORCE:
+
+ChangeLog:	FORCE
+if ENABLE_SVN2CL
+	svn2cl --include-actions --authors=AUTHORS --group-by-day --separate-daylogs --include-rev --ignore-message-starting='#'
+endif
+
 srpm:
 	rpmbuild -ts --nodeps $(PACKAGE)-$(VERSION).tar.gz
 

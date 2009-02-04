@@ -512,6 +512,17 @@ else
     AC_DEFINE(ENABLE_CLIP,0)
 fi
 
+dnl
+dnl Check for svn2cl for generating ChangeLog
+dnl
+enable_svn2cl=yes
+AC_PATH_PROG([SVN2CL], [svn2cl])
+if test -z "$SVN2CL"; then
+  enable_svn2cl=no
+fi
+
+AM_CONDITIONAL(ENABLE_SVN2CL, test x$enable_svn2cl != xno)
+
 #
 # Check for CUnit
 #
