@@ -82,7 +82,20 @@ When you are installing the packages, you will notice that next to
 some of them, there are similar packages with the '-dev' (or '-devel')
 suffix. You will want to install those too, they include header files
 you need to compile against later. In particular you want to select
-from the package list libgnome2-dev and libxslt-dev for installation.
+from the package list:
+
+ * libxslt1-dev
+ * libpango1.0-dev
+ * libglib2.0-dev
+ * libcairo2-dev and/or libgnomeprint2.2-dev
+ * libgtk2.0-dev (not libgdk-pixbuf-dev)
+
+Optional packages include:
+
+ * librsvg-dev
+ * cunit
+
+Note that the exact package name may be different on your system.
 
 
 Building xmlroff
