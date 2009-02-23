@@ -3,14 +3,14 @@
  *
  * Copyright (C) 1998-2002 Daniel Veillard.
  * Copyright (C) 2001-2002 Sun Microsystems.
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  * All Rights Reserved.
  *
  * Based on an XSL expression language evaluator that was based on the
  * 'XML Path Language implementation' in 'xpath.c' from libxml2 by
  * Daniel Veillard.
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include "fo-expr-eval.h"
@@ -20,6 +20,7 @@
 #include "fo/fo-table.h"
 #include "fo/fo-table-column.h"
 #include "fo/fo-table-cell.h"
+#include "datatype/fo-all-datatype.h"
 #include <string.h>
 
 #define CHECK_ARITY(context, x)			    \

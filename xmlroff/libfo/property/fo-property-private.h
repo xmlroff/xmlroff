@@ -2,7 +2,7 @@
  * fo-property-private.h: Structures private to the FoProperty superclass of all property classes
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,6 +11,7 @@
 #define __FO_PROPERTY_PRIVATE_H__
 
 #include "property/fo-property.h"
+#include "datatype/fo-all-datatype.h"
 #include "expr/fo-expr-eval.h"
 
 G_BEGIN_DECLS

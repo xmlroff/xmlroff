@@ -10,6 +10,7 @@
 #ifndef __FO_AREA_PRIVATE_H__
 #define __FO_AREA_PRIVATE_H__
 
+#include <libfo/datatype/fo-all-datatype.h>
 #include <libfo/fo-node-private.h>
 #include <libfo/area/fo-area.h>
 #include <libfo/fo/fo-fo.h>

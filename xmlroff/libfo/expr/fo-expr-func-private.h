@@ -10,7 +10,7 @@
  * Daniel Veillard.
  * Copyright (C) 2007 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_EXPR_FUNC_PRIVATE_H__

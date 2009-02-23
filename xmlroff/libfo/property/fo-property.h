@@ -2,7 +2,7 @@
  * fo-property.h: FoProperty superclass of all property classes
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -16,7 +16,7 @@
 typedef struct _FoProperty      FoProperty;
 typedef struct _FoPropertyClass FoPropertyClass;
 
-#include <libfo/datatype/fo-all-datatype.h>
+#include <libfo/datatype/fo-datatype.h>
 #include <libfo/fo-context.h>
 
 G_BEGIN_DECLS

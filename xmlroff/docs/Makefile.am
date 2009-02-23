@@ -202,7 +202,7 @@ GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 if ENABLE_MAN
 man_MANS = xmlroff.1 
 
-%.1 : %.xml 
+.xml.1:
 	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 BUILT_EXTRA_DIST = $(man_MANS)

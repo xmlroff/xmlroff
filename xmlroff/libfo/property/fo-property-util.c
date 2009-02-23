@@ -2,7 +2,7 @@
  * fo-property-util.c: Utility functions for properties.
  *
  * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "fo-property-util.h"
+#include "datatype/fo-all-datatype.h"
 
 /**
  * fo_property_util_get_color_initial:

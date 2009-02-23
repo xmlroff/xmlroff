@@ -3,7 +3,7 @@
  * the formatting object system
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -14,6 +14,7 @@
 #include <libfo/fo-node-private.h>
 #include <libfo/fo/fo-fo.h>
 #include <libfo/fo-xml-node.h>
+#include <libfo/datatype/fo-all-datatype.h>
 
 G_BEGIN_DECLS
 
