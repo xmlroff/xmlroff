@@ -67,11 +67,16 @@ Example:
 
    ./xmlroff-gmodule --module .libs/gmodule-area-tree.so <xml>
 
+xmlroff-gtktree
+---------------
+
+xmlroff-tree demonstrates GTK widgets for a tree view of the FO tree.
+
 
 License
 =======
 
-These examples are licensed under the terms of a BSD-style license.
+These examples are licensed under the terms of a BSD license.
 See the file COPYING for details.
 
 
@@ -82,4 +87,4 @@ xmlroff and libfo are discussed on the xmlroff-list@xmlroff.org
 mailing list.  See http://xmlroff.org/wiki/MailingLists
 
 Tony Graham
-16 August 2007
+23 February 2009
