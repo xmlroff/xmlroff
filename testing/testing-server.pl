@@ -45,7 +45,7 @@ while (my $client = $d->accept) {
 	    print "$page\n";
 	    print $request->as_string;
 	}
-	if ($page =~ m/^index.html/) {
+	if ($page =~ m/^$BASENAME\/index.html/) {
 	    my $time = localtime();
 	    my $results = $stylesheet->transform($testresults,
 						 date => "'$time'",
