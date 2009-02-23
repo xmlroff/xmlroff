@@ -4,7 +4,7 @@
  * This version demonstrates accessing the FO tree as FoNode objects.
  *
  * Copyright (C) 2001-2004 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -14,6 +14,7 @@
 #include <string.h>
 #include <libfo/fo-libfo.h>
 #include <libfo/fo-node.h>
+#include <libfo/property/fo-property.h>
 #define GTK_ENABLE_BROKEN
 #include <gtk/gtk.h>
 #include <libfo/libfo-compat.h>
@@ -67,9 +68,50 @@ row_activated (GtkTreeView       *tree_view,
 		      FO_OBJECT_COLUMN, &fo_node,
 		      -1);
   /* Do something with the data */
-  gchar *fo_node_sprintf = fo_object_sprintf (fo_node);
-  g_print ("FoNode %s\n", fo_node_sprintf);
-  g_free (fo_node_sprintf);
+  GType node_type = G_TYPE_FROM_INSTANCE (fo_node);
+  g_print ("FoNode %s\n", g_type_name (node_type));
+
+  guint param_count;
+  GParamSpec **params = g_object_class_list_properties (G_OBJECT_GET_CLASS (fo_node),
+							&param_count);
+
+  g_print ("Properties: %d\n", param_count);
+  guint param_index;
+  for (param_index = 0; param_index < param_count; param_index++)
+    {
+      GParamSpec *param_spec = params[param_index];
+
+      gchar *value;
+      if (param_spec->value_type == G_TYPE_BOOLEAN)
+	{
+	  gboolean boolean;
+	  g_object_get (fo_node,
+			param_spec->name,
+			&boolean,
+			NULL);
+	  value = boolean ? "true" : "false";
+	}
+      else
+	{
+	  GObject *object;
+	  g_object_get (fo_node,
+			param_spec->name,
+			&object,
+			NULL);
+	  if (FO_IS_PROPERTY (object))
+	    {
+	    value = fo_object_sprintf (fo_property_get_value (object));
+	    }
+	  else
+	    {
+	      value = fo_object_sprintf (object);
+	    }
+	}
+      g_print ("%s: %s: %s\n",
+	       param_spec->name,
+	       g_type_name (param_spec->value_type),
+	       value);
+    }
 }
 
 static void
