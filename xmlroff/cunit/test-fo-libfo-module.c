@@ -74,9 +74,10 @@ test_fo_libfo_module_version (void)
 
   CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (g_type_name (fo_doc_cairo_get_type ())),
 		   cairo_version ());
-
+#if ENABLE_GP
   CU_ASSERT_EQUAL (fo_libfo_module_version_from_name (g_type_name (fo_doc_gp_get_type ())),
 		   0);
+#endif
 }
 
 static void
@@ -99,8 +100,10 @@ test_fo_libfo_module_version_string (void)
   CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (g_type_name (fo_doc_cairo_get_type ())),
 		   cairo_version_string ());
 
+#if ENABLE_GP
   CU_ASSERT_EQUAL (fo_libfo_module_version_string_from_name (g_type_name (fo_doc_gp_get_type ())),
 		   NULL);
+#endif
 }
 
 static CU_TestInfo test_array[] = {

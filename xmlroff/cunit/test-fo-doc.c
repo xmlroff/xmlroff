@@ -25,6 +25,7 @@
  *                      asserts       5       5       5       0
  */
 
+#include "config.h"
 #include <CUnit/Basic.h>
 #include <libfo/fo-libfo-basic.h>
 #include <libfo/fo-libfo-module.h>
@@ -84,11 +85,12 @@ test_fo_doc_formats (void)
 		   ( FO_FLAG_FORMAT_PDF |
 		     FO_FLAG_FORMAT_POSTSCRIPT |
 		     FO_FLAG_FORMAT_SVG ));
-
+#if ENABLE_GP
   CU_ASSERT_EQUAL (fo_doc_formats_from_name (g_type_name (fo_doc_gp_get_type ())),
 		   ( FO_FLAG_FORMAT_PDF |
 		     FO_FLAG_FORMAT_POSTSCRIPT |
 		     FO_FLAG_FORMAT_SVG ));
+#endif
 }
 
 static CU_TestInfo test_array[] = {
