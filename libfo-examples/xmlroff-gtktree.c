@@ -100,7 +100,7 @@ row_activated (GtkTreeView       *tree_view,
 			NULL);
 	  if (FO_IS_PROPERTY (object))
 	    {
-	    value = fo_object_sprintf (fo_property_get_value (object));
+	      value = fo_object_sprintf (fo_property_get_value (FO_PROPERTY (object)));
 	    }
 	  else
 	    {
