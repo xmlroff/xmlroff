@@ -2,7 +2,7 @@
  * fo-list-block-area.c: Generate area for list-block formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -35,7 +35,7 @@ fo_list_block_area_new2 (FoFo *fo,
   g_warning ("*** end list-block parent");
 #endif
 
-  FO_AREA (new_area)->generated_by = fo;
+  fo_area_set_generated_by (FO_AREA (new_area), fo);
   FO_FO (fo)->areas = g_list_append (FO_FO (fo)->areas, new_area);
   fo_block_fo_update_area (fo, new_area);
   use_parent_area = fo_area_break_resolve (use_parent_area, new_area);

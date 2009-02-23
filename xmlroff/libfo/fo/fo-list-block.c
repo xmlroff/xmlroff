@@ -2,7 +2,7 @@
  * fo-list-block.c: 'list-block' formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -1415,7 +1415,7 @@ fo_list_block_get_label_end (FoFo *fo_fo)
 #endif
 
   label_end =
-    fo_area_area_get_width (FO_AREA (fo_fo->areas->data)->reference) -
+    fo_area_area_get_width (fo_area_get_reference (fo_fo->areas->data)) -
     (fo_length_get_value (fo_property_get_value (fo_list_block_get_provisional_distance_between_starts (fo_fo))) +
      fo_area_area_get_start_indent (fo_fo->areas->data) -
      fo_length_get_value (fo_property_get_value (fo_list_block_get_provisional_label_separation (fo_fo))));

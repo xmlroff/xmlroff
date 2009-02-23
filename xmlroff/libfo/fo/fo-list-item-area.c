@@ -2,7 +2,7 @@
  * fo-list-item-area.c: Generate area for list-item formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -35,7 +35,7 @@ fo_list_item_area_new2 (FoFo         *fo_node,
   g_warning ("*** end list-item parent");
 #endif
 
-  FO_AREA (new_area)->generated_by = fo_node;
+  fo_area_set_generated_by (FO_AREA (new_area), fo_node);
   FO_FO (fo_node)->areas = g_list_append (FO_FO (fo_node)->areas, new_area);
   fo_block_fo_update_area (fo_node, new_area);
   use_parent_area = fo_area_break_resolve (use_parent_area, new_area);

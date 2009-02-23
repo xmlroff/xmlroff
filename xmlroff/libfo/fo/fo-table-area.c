@@ -2,7 +2,7 @@
  * fo-table-area.c: Generate area for 'table' formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -40,7 +40,7 @@ fo_table_area_new2 (FoFo *fo,
   g_warning ("*** end table parent");
 #endif
 
-  FO_AREA (new_area)->generated_by = fo;
+  fo_area_set_generated_by (FO_AREA (new_area), fo);
   FO_FO (fo)->areas = g_list_append (FO_FO (fo)->areas, new_area);
   fo_block_fo_update_area (fo, new_area);
   use_parent_area = fo_area_break_resolve (use_parent_area, new_area);

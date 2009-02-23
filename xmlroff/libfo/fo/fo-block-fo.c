@@ -2,7 +2,7 @@
  * fo-block-fo.c: Block formatting object interface
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -52,7 +52,7 @@ fo_block_fo_update_area (FoFo *fo,
 
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_BLOCK_FO (fo));
-  g_return_if_fail (area->generated_by == fo);
+  g_return_if_fail (fo_area_get_generated_by (area) == fo);
 
   fo_area_area_set_border_after (area,
 				 fo_length_get_value (fo_property_get_value (fo_block_fo_get_border_after_width (fo))));
