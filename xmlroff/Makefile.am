@@ -39,7 +39,7 @@ FORCE:
 
 ChangeLog:	FORCE
 if ENABLE_SVN2CL
-	svn2cl --include-actions --authors=AUTHORS --group-by-day --separate-daylogs --include-rev --ignore-message-starting='#'
+	svn2cl --include-actions --authors=AUTHORS --group-by-day --separate-daylogs --include-rev --ignore-message-starting='#' --revision HEAD:$(CHANGELOG_OLDEST)
 endif
 
 srpm:
