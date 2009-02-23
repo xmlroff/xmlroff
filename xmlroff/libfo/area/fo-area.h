@@ -2,7 +2,7 @@
  * fo-area.h: Base area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -40,15 +40,23 @@ G_BEGIN_DECLS
 #define FO_AREA_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA, FoAreaClass))
 
 
-#include "fo-area-private.h"
-
 GType    fo_area_get_type      (void) G_GNUC_CONST;
 FoArea*  fo_area_new           (void);
 FoArea*  fo_area_get_page (FoArea *fo_area);
+void     fo_area_set_page (FoArea  *fo_area,
+				 FoArea  *new_page_area);
 FoArea*  fo_area_get_reference (FoArea *fo_area);
+void     fo_area_set_reference (FoArea *fo_area,
+				FoArea *new_reference_area);
 FoArea*  fo_area_get_page_sequence (FoArea *fo_area);
+void     fo_area_set_page_sequence (FoArea *fo_area,
+				    FoArea *page_sequence_area);
 gboolean fo_area_get_is_first (FoArea *fo_area);
+void     fo_area_set_is_first (FoArea  *fo_area,
+			       gboolean new_is_first);
 gboolean fo_area_get_is_last (FoArea *fo_area);
+void     fo_area_set_is_last (FoArea  *fo_area,
+			      gboolean new_is_last);
 gfloat   fo_area_get_next_x (FoArea *fo_area);
 void     fo_area_set_next_x (FoArea *fo_area,
 			     gfloat  new_next_x);

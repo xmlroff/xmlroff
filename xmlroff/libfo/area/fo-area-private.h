@@ -2,9 +2,9 @@
  * fo-area-private.h: Structures and functions private to base area object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #ifndef __FO_AREA_PRIVATE_H__
@@ -78,16 +78,6 @@ struct _FoAreaClass
 					  FoArea *area);
 };
 
-void fo_area_set_page           (FoArea  *fo_area,
-				 FoArea  *new_page_area);
-void fo_area_set_reference      (FoArea  *fo_area,
-				 FoArea  *new_reference_area);
-void fo_area_set_page_sequence  (FoArea  *fo_area,
-				 FoArea  *page_sequence_area);
-void fo_area_set_is_first       (FoArea  *fo_area,
-				 gboolean new_is_first);
-void fo_area_set_is_last        (FoArea  *fo_area,
-				 gboolean new_is_last);
 FoArea * fo_area_real_add_child (FoArea  *parent,
 				 FoArea  *child);
 
