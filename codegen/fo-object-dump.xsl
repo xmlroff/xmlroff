@@ -581,6 +581,15 @@ G_END_DECLS
 
   <xsl:copy-of select="document($codegen-info)/codegen-info/fos/fo[@name = $object]/defines"/>
 
+<xsl:text>
+/**
+ * SECTION:fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>
+ * @short_description: '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
+ *
+ * Definition: &lt;ulink url="http://www.w3.org/TR/xsl11/&amp;num;fo_</xsl:text><xsl:value-of select="$object"/><xsl:text>">http://www.w3.org/TR/xsl11/&amp;num;fo_</xsl:text><xsl:value-of select="$object"/><xsl:text>&lt;/ulink>
+ */
+</xsl:text>
+
   <xsl:if test="document($codegen-info)/codegen-info/fos/fo[@name = $object]/errors">
     <xsl:variable
       name="errors"
