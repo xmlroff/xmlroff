@@ -167,7 +167,7 @@
 #define __FO_PROPERTY_</xsl:text><xsl:value-of select="$property-macro"/><xsl:text>_H__
 
 #include &lt;libfo/fo-utils.h>
-#include &lt;property/fo-property.h>
+#include &lt;libfo/property/fo-property.h>
 
 G_BEGIN_DECLS
 
@@ -1063,14 +1063,11 @@ G_END_DECLS
  * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include &lt;string.h>
 </xsl:text>
-<xsl:if test="$is-text-property">
-  <xsl:text>#include &lt;pangoxsl/pango-xsl-attributes.h>&#10;</xsl:text>
-</xsl:if>
 <xsl:text>#include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
@@ -1090,40 +1087,29 @@ G_END_DECLS
 
 <xsl:copy-of select="document($codegen-info)/codegen-info/properties/property[@name = $property]/defines"/>
 
-<xsl:call-template name="c-comment">
-  <xsl:with-param name="string"
-    select="$property"/>
-</xsl:call-template>
-
-<xsl:call-template name="c-comment">
-  <xsl:with-param name="string">
-    <xsl:text>Inherited: </xsl:text>
-    <xsl:choose>
-      <xsl:when test="$inherited = true()">TRUE</xsl:when>
-      <xsl:otherwise>FALSE</xsl:otherwise>
-    </xsl:choose>
-  </xsl:with-param>
-</xsl:call-template>
-
-<xsl:call-template name="c-comment">
-  <xsl:with-param name="string">
-    <xsl:text>Shorthand: </xsl:text>
-    <xsl:choose>
-      <xsl:when test="$shorthand = true()">TRUE</xsl:when>
-      <xsl:otherwise>FALSE</xsl:otherwise>
-    </xsl:choose>
-  </xsl:with-param>
-</xsl:call-template>
-
-<xsl:call-template name="c-comment">
-  <xsl:with-param name="string"
-    select="normalize-space($value-string)"/>
-</xsl:call-template>
-
-<xsl:call-template name="c-comment">
-  <xsl:with-param name="string"
-    select="concat('Initial value: ', $initial-value-string)"/>
-</xsl:call-template>
+<xsl:text>/**
+ * SECTION:fo-property-</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>
+ * @short_description: '</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>' property
+ *
+ * Inherited: </xsl:text>
+<xsl:choose>
+  <xsl:when test="$inherited = true()">TRUE</xsl:when>
+  <xsl:otherwise>FALSE</xsl:otherwise>
+</xsl:choose><xsl:text>
+ *
+ * Shorthand: </xsl:text>
+<xsl:choose>
+  <xsl:when test="$shorthand = true()">TRUE</xsl:when>
+  <xsl:otherwise>FALSE</xsl:otherwise>
+</xsl:choose><xsl:text>
+ *
+ * Value: </xsl:text><xsl:value-of select="normalize-space($value-string)"/><xsl:text>
+ *
+ * Initial value: </xsl:text><xsl:value-of select="normalize-space($initial-value-string)"/><xsl:text>
+ *
+ * Definition: &lt;ulink url="http://www.w3.org/TR/xsl11/&amp;num;</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>">http://www.w3.org/TR/xsl11/&amp;num;</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>&lt;/ulink>
+ */
+</xsl:text>
 
     <xsl:text>
 struct _FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>
