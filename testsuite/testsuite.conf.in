@@ -1,0 +1,14 @@
+#
+# This configuration file belongs to the xmlroff testsuite package.
+#
+# This is an generated when you run 'configure'.
+#
+# The alias provides the xmlroff testing results for access by Apache.
+#
+Alias /xmlroff/@BASENAME@ "@PWDIR@"
+
+<Directory "@PWDIR@">
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
