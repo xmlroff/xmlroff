@@ -22,38 +22,44 @@
     </testcases>
     <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
       <testcases profile="region-body" base="region-body">
+        <test id="region-body-border1" fo="region-body" xml="region-body-border1.fo"
+	      results="results/region-body-border1.pdf">border-before-style="solid"</test>
         <test id="region-body-overflow1" fo="region-body" xml="region-body-overflow1.fo"
-      results="results/region-body-overflow1.pdf">800pt "I" with overflow unspecified.</test>
-      <test id="region-body-overflow2" fo="region-body" xml="region-body-overflow2.fo"
+	      results="results/region-body-overflow1.pdf">800pt "I" with overflow unspecified.</test>
+	<test id="region-body-overflow2" fo="region-body" xml="region-body-overflow2.fo"
       results="results/region-body-overflow2.pdf">800pt "I" with overflow="visible".</test>
-      <test id="region-body-overflow3" fo="region-body" xml="region-body-overflow3.fo"
-      results="results/region-body-overflow3.pdf">800pt "I" with overflow="hidden".</test>
+	<test id="region-body-overflow3" fo="region-body" xml="region-body-overflow3.fo"
+	      results="results/region-body-overflow3.pdf">800pt "I" with overflow="hidden".</test>
       <test id="region-body-overflow4" fo="region-body" xml="region-body-overflow4.fo"
-      results="results/region-body-overflow4.pdf">800pt "I" with overflow="scroll".</test>
+	    results="results/region-body-overflow4.pdf">800pt "I" with overflow="scroll".</test>
       <test id="region-body-overflow5" fo="region-body" xml="region-body-overflow5.fo"
-      results="results/region-body-overflow5.pdf">800pt "I" with overflow="error-if-overflow".</test>
+	    results="results/region-body-overflow5.pdf">800pt "I" with overflow="error-if-overflow".</test>
       <test id="region-body-overflow6" fo="region-body" xml="region-body-overflow6.fo"
-      results="results/region-body-overflow6.pdf">800pt "I" with overflow="auto".</test>
+	    results="results/region-body-overflow6.pdf">800pt "I" with overflow="auto".</test>
       <test id="region-body-overflow7" fo="region-body" xml="region-body-overflow7.fo"
-      results="results/region-body-overflow7.pdf">800pt "I" with overflow="inherit".</test>
-    </testcases>
+	    results="results/region-body-overflow7.pdf">800pt "I" with overflow="inherit".</test>
+      </testcases>
+      <testcases profile="region-before" base="region-before">
+        <test id="region-before-background-1" fo="region-before" xml="region-before-background-1.fo"
+	      results="results/region-before-background-1.pdf">region-before with yellow background.</test>
+      </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
         <test id="external-graphic-1" fo="external-graphic" xml="external-graphic-1.fo" results="results/external-graphic-1.pdf">external-graphic.</test>
         <test id="external-graphic-2" fo="external-graphic"
-    xml="external-graphic-2.fo" results="results/external-graphic-2.pdf">Two graphics should be formatted next
-    to each other with no gap.</test>
+	      xml="external-graphic-2.fo" results="results/external-graphic-2.pdf">Two graphics should be formatted next
+	  to each other with no gap.</test>
         <test id="external-graphic-3" fo="external-graphic"
-    xml="external-graphic-3.fo" results="results/external-graphic-3.pdf">Two graphics should be formatted next
-    to each other with no gap.</test>
+	      xml="external-graphic-3.fo" results="results/external-graphic-3.pdf">Two graphics should be formatted next
+	  to each other with no gap.</test>
         <test id="external-graphic-4" fo="external-graphic"
-    xml="external-graphic-4.fo" results="results/external-graphic-4.pdf">content-width as percentage and no
-    specified content-height.</test>
+	      xml="external-graphic-4.fo" results="results/external-graphic-4.pdf">content-width as percentage and no
+	  specified content-height.</test>
         <test id="external-graphic-5" fo="external-graphic"
-    xml="external-graphic-5.fo" results="results/external-graphic-5.pdf">"xmlroff XSL formatter" image.</test>
+	      xml="external-graphic-5.fo" results="results/external-graphic-5.pdf">"xmlroff XSL formatter" image.</test>
         <test id="external-graphic-6" fo="external-graphic"
-    xml="external-graphic-6.fo" results="results/external-graphic-6.pdf">"xmlroff XSL formatter" image with transparent background in fo:external-graphic with yellow background.</test>
+	      xml="external-graphic-6.fo" results="results/external-graphic-6.pdf">"xmlroff XSL formatter" image with transparent background in fo:external-graphic with yellow background.</test>
         <test id="external-graphic-7" fo="external-graphic"
         xml="external-graphic-7.fo"
         results="results/external-graphic-7.pdf">external-graphic
@@ -79,13 +85,13 @@
     <testcases profile="table" base="table">
       <testcases profile="table" base="table">
         <test id="table-1" fo="multiple"
-    xml="table-1.fo" results="results/table-1.pdf">Single-cell table.</test>
+	      xml="table-1.fo" results="results/table-1.pdf">Single-cell table.</test>
         <test id="table-2" fo="multiple"
-    xml="table-2.fo" results="results/table-2.pdf">Single-cell table, fixed table layout.</test>
+	      xml="table-2.fo" results="results/table-2.pdf">Single-cell table, fixed table layout.</test>
         <test id="table-3" fo="multiple"
-    xml="table-3.fo" results="results/table-3.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%".</test>
+	      xml="table-3.fo" results="results/table-3.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%".</test>
         <test id="table-4" fo="multiple"
-    xml="table-4.fo" results="results/table-4.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%", fo:table-column.</test>
+	      xml="table-4.fo" results="results/table-4.pdf">Single-cell table, table-layout="fixed", inline-progression-dimension="100%", fo:table-column.</test>
         <test id="table-5" fo="multiple"
     xml="table-5.fo" results="results/table-5.pdf">Three-row, two-column table with more text in first cell in middle row.</test>
         <test id="table-6" fo="multiple"

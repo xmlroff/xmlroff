@@ -1,5 +1,5 @@
 <!-- xmlroff-testsuite -->
-<!-- region-body-overflow1.fo -->
+<!-- region-body-border1.fo -->
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
     <fo:layout-master-set>
         <fo:simple-page-master
@@ -10,7 +10,7 @@
           margin-top="1in"
           page-width="8in"
           page-height="11in">
-          <fo:region-body/>
+          <fo:region-body background-color="grey" border-before-style="solid" border-before-color="red" border="thick solid green"/>
         </fo:simple-page-master>
     </fo:layout-master-set>
     <fo:page-sequence
@@ -18,8 +18,7 @@
       <fo:flow
         flow-name="xsl-region-body"
         font-size="10pt">
-        <fo:block space-after="12pt" font-size="12pt">800pt "I" with overflow unspecified.</fo:block>
-        <fo:block font-size="800pt" font-family="times" background-color="yellow">I</fo:block>
+        <fo:block space-after="12pt" font-size="12pt">border-before-style="solid"</fo:block>
       </fo:flow>
 </fo:page-sequence>
 </fo:root>
