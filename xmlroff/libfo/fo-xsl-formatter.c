@@ -2,7 +2,7 @@
  * fo-xsl-formatter.c: Object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */

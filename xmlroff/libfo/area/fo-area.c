@@ -922,11 +922,13 @@ fo_area_debug_dump (FoObject *object,
 
 /**
  * fo_area_sprintf:
- * @object: 
+ * @object: #FoArea to print
  * 
+ * Returns a string name of the object type of #object.
+ *
+ * String must be freed by caller.
  * 
- * 
- * Return value: 
+ * Return value: String value of @object.
  **/
 gchar*
 fo_area_sprintf (FoObject *object)
@@ -1541,6 +1543,7 @@ fo_area_break_resolve (FoArea *parent_area,
 
       clone = fo_area_clone (parent_area);
       fo_area_dump_path_to_root (clone);
+
       /*
       parent_area = fo_add_to_new_page_area (fo_node,
 					     parent_area,
