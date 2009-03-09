@@ -815,23 +815,20 @@ move_to_new_page (FoArea *page,
 FoArea*
 fo_area_page_size_request (FoArea *child)
 {
-  FoArea *page;
-  gfloat total_child_height = 0;
-  gfloat child_height;
-  gfloat page_child_available_bpdim;
-
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_VIEWPORT_REFERENCE (child), NULL);
   g_return_val_if_fail (FO_IS_AREA_PAGE (fo_area_parent (child)), NULL);
 
-  page = fo_area_parent (child);
+  FoArea *page = fo_area_parent (child);
 
   g_return_val_if_fail (page != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_PAGE (page), NULL);
 
-  child_height = fo_area_area_get_height (child);
-  page_child_available_bpdim = fo_area_get_child_available_bpdim (page);
+  gfloat child_height = fo_area_area_get_height (child);
+  gfloat page_child_available_bpdim =
+    fo_area_get_child_available_bpdim (page);
 
+  gfloat total_child_height = 0;
   fo_area_children_foreach (page,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
@@ -849,13 +846,16 @@ fo_area_page_size_request (FoArea *child)
 
   if (child_height <= page_child_available_bpdim)
     {
-      fo_area_set_available_height (child, page_child_available_bpdim);
+      fo_area_set_available_height (child,
+				    page_child_available_bpdim);
       fo_area_area_set_x (child, fo_area_page_get_margin_left (page));
       fo_area_area_set_y (child,
 			  fo_area_page_get_page_height (page) -
 			  fo_area_page_get_margin_top (page));
-      fo_area_set_available_width (child, fo_area_get_child_available_ipdim (page));
-      fo_area_area_set_width (child, fo_area_get_child_available_ipdim (page));
+      fo_area_set_available_width (child,
+				   fo_area_get_child_available_ipdim (page));
+      fo_area_area_set_width (child,
+			      fo_area_get_child_available_ipdim (page));
 
       return child;
     }
