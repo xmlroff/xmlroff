@@ -70,7 +70,8 @@ Example:
 xmlroff-gtktree
 ---------------
 
-xmlroff-tree demonstrates GTK widgets for a tree view of the FO tree.
+xmlroff-tree is a work-in-progress that demonstrates GTK widgets for a
+tree view of the FO tree.
 
 
 License
@@ -87,4 +88,4 @@ xmlroff and libfo are discussed on the xmlroff-list@xmlroff.org
 mailing list.  See http://xmlroff.org/wiki/MailingLists
 
 Tony Graham
-23 February 2009
+9 March 2009
