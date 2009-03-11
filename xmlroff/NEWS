@@ -1,3 +1,7 @@
+Changes between 0.6.1 and 0.6.2
+
+ * Modified some #includes
+
 Changes between 0.6.0 and 0.6.1
 
  * SVG external graphics rendered as vectors in Cairo backend (#113,
