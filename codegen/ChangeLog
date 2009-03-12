@@ -1,19 +1,47 @@
-02/04/08 13:37:20 tkg [301]
-	* trunk/codegen/conversion-lib.xsl (modified)
-	* trunk/codegen/fo-all-property-h-dump.xsl (modified)
-	* trunk/codegen/fo-context-dump.xsl (modified)
-	* trunk/codegen/fo-object-dump.xsl (modified)
-	* trunk/codegen/fo-property-eval-dump.xsl (modified)
-	* trunk/codegen/fo-property-object-dump.xsl (modified)
-	* trunk/codegen/xmlroff-property-decl-dump.xsl (modified)
-	* trunk/codegen/xmlroff-property-ref-dump.xsl (modified)
-	Updated to match current code and to use exsl:document.
+2009-03-12  Tony Graham
 
-01/29/08 23:29:11 tkg [289]
-	* trunk/codegen (moved)
-	Prefer to have one copy of 'codegen' to start with.
+	* [r594] COPYING, NEWS, README: Updated for 0.6.0.
 
-01/26/08 17:22:06 tkg [287]
-	* branches/memory/codegen (added)
-	XSLT stylesheets for generating C code from XML of the XSL 1.0
-	Recommendation.
+	* [r593] AUTHORS, Makefile.am, configure.ac: Generating ChangeLog
+	  from Subversion log.
+
+2009-02-24  Tony Graham
+
+	* [r548] fo-object-dump.xsl: Generating section comment that will
+	  be picked up by GTK-Doc.
+
+	* [r547] fo-property-object-dump.xsl: Putting shorthand, etc.,
+	  information in C comment that will be picked up by GTK-Doc.
+
+2008-07-08  Tony Graham
+
+	* [r446] codegen-info.xml: Added footnote.
+
+2008-03-11  Tony Graham
+
+	* [r384] COPYING, configure.ac: Thanks to the efforts of Jon Bosak
+	  of Sun and of Mike Anastasio of Sun's Intellectual Property Law
+	  Group, Sun has approved the re-release of xmlroff under this BSD
+	  license (essentially the same as the old one with the nuclear
+	  paragraph removed). Changes made since Sun released the original
+	  source code and ceased its involvement with the project are
+	  similarly relicensed.
+	  
+	  Version number upped to 0.6.0 to mark the change in license
+	  terms.
+
+2008-02-26  Tony Graham
+
+	* [r332] codegen-info.dtd, fo-object-dump.xsl: Added 'cbpbp' for
+	  'Common Border, Padding, and Background Properties. (Re #5.)
+
+	* [r331] codegen-info.xml: Added 'cbpbp' attributes (re #5). Added
+	  'precendence' and 'reference-orientation' properties. Added some
+	  FOs and updated others so generated code better reflects reality.
+	  Cosmetic reformatting since lines getting too long and
+	  complicated.
+
+	* [r330] configure.ac: Upped version to 0.5.5.
+
+	* [r329] conversion-lib.xsl: Fixed a gtk-doc comment typo.
+
