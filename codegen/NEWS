@@ -1,3 +1,10 @@
+Changes between 0.5.3 and 0.6.0
+
+ * Using plain BSD license (Jon Bosak, Mike Anastasio)
+ * Generating section comments for GTK-Doc to pick up
+ * Added 'cbpbp' interface for 'Common Border, Padding, and Background
+   Properties
+
 Changes between 0.3.9 and 0.5.3:
 
  * Renamed project as 'codegen'.
