@@ -1,3 +1,5 @@
+# xmlroff 'codegen' Makefile.am
+
 XSLTPROC = xsltproc
 XSLSPEC = xslspec.xml
 
@@ -87,6 +89,13 @@ EXTRA_DIST = \
 
 dist-hook:
 	mkdir $(distdir)/fo $(distdir)/property
+
+FORCE:
+
+ChangeLog:	FORCE
+if ENABLE_SVN2CL
+	svn2cl --include-actions --authors=AUTHORS --group-by-day --separate-daylogs --include-rev --ignore-message-starting='#' --revision HEAD:$(CHANGELOG_OLDEST)
+endif
 
 #
 # Reliably "tag" the Subversion repository to mark the current release.
