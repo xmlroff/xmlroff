@@ -1,3 +1,11 @@
+2009-03-12  Tony Graham
+
+	* [r590] Makefile.am: Added '--revision' when making ChangeLog.
+
+2009-03-09  Tony Graham
+
+	* [r584] README: xmlroff-tree is a work-in-progress.
+
 2009-02-23  Tony Graham
 
 	* [r537] configure.ac: Generating ChangeLog.
@@ -23,6 +31,8 @@
 	* [r523] Makefile.am: Regularising generated Subversion commit
 	  message.
 
+2008-10-24  Tony Graham
+
 	* [r522] Makefile.am, configure.ac, xmlroff-libfo.c,
 	  xmlroff-text-tree.c, xmlroff-text-tree2.c: Updated to use
 	  libfo-0.6. Added xmlroff-gtktree.c.
@@ -45,59 +55,4 @@
 	  
 	  Version number upped to 0.6.0 to mark the change in license
 	  terms.
-
-2007-08-16  Tony Graham
-
-	* [r193] ChangeLog: Updated for libfo-examples 0.5.2.
-
-	* [r192] Makefile.am: Corrected 'svn-tag'.
-
-	* [r188] README: Removed mention of installing module.
-
-	* [r187] Makefile.am: Added 'svn-tag' target for making it easy to
-	  tag in Subversion repository.
-
-	* [r186] NEWS: Updated for libfo-examples 0.5.2.
-
-	* [r185] INSTALL: Module-specific installation (actually, don't
-	  install) instructions.
-
-2007-07-19  Tony Graham
-
-	* [r115] ChangeLog: Set svn:mime-type.
-
-	* [r114] ChangeLog: Change log for updating libfo-examples for
-	  xmlroff0.5.2. Fixes #30.
-
-	* [r113] ChangeLog[DEL], ChangeLog.pre-0.5[CPY]: Moved change log
-	  since format changing.
-
-	* [r112] AUTHORS, COPYING, NEWS, README, gmodule-area-tree.c,
-	  xmlroff-basic.c, xmlroff-init2.c, xmlroff-libfo.c,
-	  xmlroff-text-tree.c, xmlroff-text-tree2.c: Updated for xmlroff
-	  0.5.2. Fixed all compiler warnings.
-
-	* [r111] configure.ac: Added '-Wall' if in tkg's regular location.
-
-2007-07-18  Tony Graham
-
-	* [r110] gmodule-area-tree.c, xmlroff-gmodule.c, xmlroff-libfo.c:
-	  xmlroff-gmodule and xmlroff-libfo now working. Re #30.
-
-	* [r106] xmlroff-basic.c: Matching simplifications in
-	  fo-libfo-basic.h. re #63.
-
-	* [r101] xmlroff-basic.c: Updated for libfo 0.5.2. (see #30)
-
-	* [r100] Makefile.am: Removed references to popt. See #30.
-
-	* [r99] configure.ac: Removed checking for popt. Fixed bug in
-	  cecking for Cairo backend. Upped version to 0.5.2.
-
-2007-07-13  Tony Graham
-
-	* [r86] ., AUTHORS, COPYING, ChangeLog, Makefile.am, NEWS, README,
-	  autogen.sh, configure.ac, gmodule-area-tree.c, xmlroff-basic.c,
-	  xmlroff-gmodule.c, xmlroff-init2.c, xmlroff-libfo.c,
-	  xmlroff-text-tree.c, xmlroff-text-tree2.c: libfo-examples.
 
