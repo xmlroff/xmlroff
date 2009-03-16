@@ -43,6 +43,24 @@
         <test id="region-before-background-1" fo="region-before" xml="region-before-background-1.fo"
 	      results="results/region-before-background-1.pdf">region-before with yellow background.</test>
       </testcases>
+      <testcases profile="region-after" base="region-after">
+        <test id="region-after-background-1" fo="region-after" xml="region-after-background-1.fo"
+	      results="results/region-after-background-1.pdf">region-after with yellow background.</test>
+      </testcases>
+      <testcases profile="region-start" base="region-start">
+        <test id="region-start-background-1" fo="region-start" xml="region-start-background-1.fo"
+	      results="results/region-start-background-1.pdf">region-start with yellow background.</test>
+      </testcases>
+      <testcases profile="region-end" base="region-end">
+        <test id="region-end-background-1" fo="region-end" xml="region-end-background-1.fo"
+	      results="results/region-end-background-1.pdf">region-end with yellow background.</test>
+      </testcases>
+      <testcases profile="simple-page-master" base="simple-page-master">
+        <test id="region-before-after" fo="multiple" xml="region-before-after.fo"
+	      results="results/region-before-after.pdf">region-before and region-after with yellow background.</test>
+        <test id="region-before-after-2" fo="multiple" xml="region-before-after-2.fo"
+	      results="results/region-before-after-2.pdf">region-before and region-after with yellow background on two pages.</test>
+      </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
