@@ -44,7 +44,7 @@ if test -d .svn ; then
   echo extra=$extra
   if test "$extra" != ""
   then
-      XMLROFF_VERSION_EXTRA="-SVN$extra"
+      XMLROFF_VERSION_EXTRA="-r$extra"
   fi
 fi
 
@@ -185,8 +185,6 @@ PKG_CHECK_MODULES(GTK_DOC,
 		  gtk-doc >= $GTK_DOC_MIN_VERSION,
 		  have_gtk_doc=true,
 		  :)
-AC_MSG_RESULT($have_gtk_doc)
-
 AM_CONDITIONAL(HAVE_GTK_DOC, $have_gtk_doc)
 AC_SUBST(HAVE_GTK_DOC, $have_gtk_doc)
 
