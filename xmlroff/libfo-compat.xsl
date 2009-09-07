@@ -8,7 +8,7 @@
 
 <!--
      Copyright (c) 2003-2006 Sun Microsystems. All Rights Reserved.
-     Copyright (c) 2007 Menteith Consulting
+     Copyright (c) 2007-2009 Menteith Consulting
 
      Redistribution and use in source and binary forms, with or without
      modification, are permitted provided that the following conditions are
@@ -186,17 +186,13 @@
         <xsl:attribute name="{name()}">auto</xsl:attribute>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:attribute name="{name()}">
-          <xsl:value-of select="."/>
-        </xsl:attribute>
+        <xsl:copy-of select="."/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
 
   <xsl:template match="@*">
-    <xsl:attribute name="{name()}">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
+    <xsl:copy-of select="."/>
   </xsl:template>
 
   <xsl:template match="fo:block-container[@reference-orientation]">
