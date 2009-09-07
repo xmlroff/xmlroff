@@ -24,7 +24,7 @@
  * any Unicode character, excluding the surrogate blocks, FFFE, and FFFF.
  * Also available as a macro IS_CHAR()
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 gboolean
 fo_is_char (gunichar c)
@@ -43,7 +43,7 @@ fo_is_char (gunichar c)
  * [3] S ::= (#x20 | #x9 | #xD | #xA)+
  * Also available as a macro IS_BLANK()
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 gboolean
 fo_is_blank (gunichar c)
@@ -63,7 +63,7 @@ fo_is_blank (gunichar c)
  * and 
  * :1,$ s/#x\([0-9A-Z]*\)/     ((c) == 0x\1) ||/
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 static gunichar xmlBaseArray[] = {
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 0x0000 - 0x000F */
@@ -297,7 +297,7 @@ fo_is_basechar (gunichar c)
  * Check whether the character is allowed by the production
  * [88] Digit ::= ... long list see REC ...
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: FALSE if not, TRUE otherwise
  */
 gboolean
 fo_is_digit (gunichar c)
@@ -328,7 +328,7 @@ fo_is_digit (gunichar c)
  * Check whether the character is allowed by the production
  * [87] CombiningChar ::= ... long list see REC ...
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 gboolean
 fo_is_combining (gunichar c)
@@ -444,7 +444,7 @@ fo_is_combining (gunichar c)
  *                   #x0E46 | #x0EC6 | #x3005 | [#x3031-#x3035] |
  *                   [#x309D-#x309E] | [#x30FC-#x30FE]
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 gboolean
 fo_is_extender (gunichar c)
@@ -468,7 +468,7 @@ fo_is_extender (gunichar c)
  * Check whether the character is allowed by the production
  * [86] Ideographic ::= [#x4E00-#x9FA5] | #x3007 | [#x3021-#x3029]
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 gboolean
 fo_is_ideographic (gunichar c)
@@ -487,7 +487,7 @@ fo_is_ideographic (gunichar c)
  * Check whether the character is allowed by the production
  * [84] Letter ::= BaseChar | Ideographic
  *
- * Returns FALSE if not, TRUE otherwise
+ * Returns: %FALSE if not, %TRUE otherwise
  */
 gboolean
 fo_is_letter (gunichar c) {

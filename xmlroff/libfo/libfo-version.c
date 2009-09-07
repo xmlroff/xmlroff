@@ -1,7 +1,7 @@
 /* libfo
  * libfo-version.c: libfo version
  *
- * Copyright (C) 2008 Menteith Consulting Ltd
+ * Copyright (C) 2008-2009 Menteith Consulting Ltd
  *
  * Inspired by Pango and Cairo version APIs.
  *
@@ -33,7 +33,7 @@
  * A version number can be encoded into an integer using
  * LIBFO_VERSION_ENCODE().
  *
- * Returns value: The encoded version of libfo library
+ * Return value: The encoded version of libfo library
  *   available at run time.
  **/
 int
@@ -49,7 +49,7 @@ libfo_version (void)
  * returns the version of libfo available at run-time, as opposed
  * to the version available at compile-time.
  *
- * Returns value: A string containing the version of libfo library
+ * Return value: A string containing the version of libfo library
  *   available at run time.
  *   The returned string is owned by libfo and should not be modified
  *   or freed.
@@ -111,7 +111,7 @@ libfo_version_check (int required_major,
  * returns the encoded pixels per inch of libfo available at run-time,
  * as opposed to the pixels per inch available at compile-time.
  *
- * Returns value: The encoded pixels per inch of libfo library
+ * Return value: The encoded pixels per inch of libfo library
  *   available at run time.
  **/
 int

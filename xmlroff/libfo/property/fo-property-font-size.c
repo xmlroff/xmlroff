@@ -1,14 +1,14 @@
 /* Fo
  * fo-property-font-size.c: 'font-size' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "fo-utils.h"
+#include "libfo/fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
@@ -33,12 +33,20 @@
 #define FO_FONT_SIZE_LARGE	FO_FONT_SIZE_MEDIUM * FO_FONT_SIZE_STEP
 #define FO_FONT_SIZE_X_LARGE	FO_FONT_SIZE_LARGE * FO_FONT_SIZE_STEP
 #define FO_FONT_SIZE_XX_LARGE	FO_FONT_SIZE_X_LARGE * FO_FONT_SIZE_STEP
-
-/* font-size */
-/* Inherited: TRUE */
-/* Shorthand: FALSE */
-/* <absolute-size> | <relative-size> | <length> | <percentage> | inherit */
-/* Initial value: medium */
+/**
+ * SECTION:fo-property-font-size
+ * @short_description: 'font-size' property
+ *
+ * Inherited: TRUE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: &lt;absolute-size> | &lt;relative-size> | &lt;length> | &lt;percentage> | inherit
+ *
+ * Initial value: medium
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;font-size">http://www.w3.org/TR/xsl11/&num;font-size</ulink>
+ */
 
 struct _FoPropertyFontSize
 {
@@ -57,12 +65,12 @@ static void fo_property_font_size_class_init   (FoPropertyFontSizeClass *klass);
 static void fo_property_font_size_finalize     (GObject       *object);
 static void fo_property_font_size_text_property_init (FoPropertyTextPropertyIface *iface);
 
-static FoDatatype* fo_property_font_size_resolve_enum (const gchar *token,
-                                                       FoContext   *context,
-                                                       GError     **error);
-static FoDatatype* fo_property_font_size_validate (FoDatatype *datatype,
-                                                   FoContext  *context,
-                                                   GError    **error);
+static FoDatatype * fo_property_font_size_resolve_enum (const gchar *token,
+                                                        FoContext   *context,
+                                                        GError     **error);
+static FoDatatype * fo_property_font_size_validate (FoDatatype *datatype,
+                                                    FoContext  *context,
+                                                    GError    **error);
 static PangoAttribute * fo_property_font_size_new_attr (FoProperty *property);
 
 static const gchar class_name[] = "font-size";

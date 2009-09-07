@@ -235,8 +235,8 @@ fo_expr_eval_propagate_error (FoExprContext *context,
  * [NS 4] NCNameChar ::= Letter | Digit | '.' | '-' | '_' |
  *                       CombiningChar | Extender
  * 
- * Return value: TRUE if the current character is an NCNameChar,
- *               otherwise FALSE
+ * Return value: %TRUE if the current character is an NCNameChar,
+ *               otherwise %FALSE
  **/
 static gboolean
 is_ncnamechar (FoExprContext *context)
@@ -261,7 +261,7 @@ is_ncnamechar (FoExprContext *context)
  * [NS 4] NCNameChar ::= Letter | Digit | '.' | '-' | '_' |
  *                       CombiningChar | Extender
  *
- * Returns the name or NULL
+ * Returns: the name or %NULL
  **/
 static gchar *
 parse_ncname (FoExprContext *context)

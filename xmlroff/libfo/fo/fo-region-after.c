@@ -1,8 +1,8 @@
 /* Fo
  * fo-region-after.c: 'region-after' formatting object
  *
- * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -51,6 +51,13 @@
 #include "property/fo-property-padding-top.h"
 #include "property/fo-property-region-name.h"
 #include "property/fo-property-writing-mode.h"
+
+/**
+ * SECTION:fo-region-after
+ * @short_description: 'region-after' formatting object
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;fo_region-after">http://www.w3.org/TR/xsl11/&num;fo_region-after</ulink>
+ */
 
 enum {
   PROP_0,
@@ -172,8 +179,10 @@ fo_region_after_class_init (FoRegionAfterClass *klass)
   object_class->get_property = fo_region_after_get_property;
   object_class->set_property = fo_region_after_set_property;
 
-  fofo_class->validate_content = fo_fo_validate_content_empty;
-  fofo_class->validate2 = fo_region_after_validate;
+  fofo_class->validate_content =
+    fo_fo_validate_content_empty;
+  fofo_class->validate2 =
+    fo_region_after_validate;
   fofo_class->update_from_context = fo_region_after_update_from_context;
   fofo_class->debug_dump_properties = fo_region_after_debug_dump_properties;
   fofo_class->generate_reference_area = TRUE;

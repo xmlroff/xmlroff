@@ -100,6 +100,8 @@ fo_expr_func_add (FoExprContext *context,
  * 
  * NOTE: When this function is used outside of a list, it still
  * returns a calculated value as specified.
+ *
+ * Return value: Calculated body-start value
  **/
 FoDatatype*
 fo_expr_func_body_start (FoExprContext *context,
@@ -300,7 +302,8 @@ opt_arg_to_property_name (FoExprContext *context,
  * matching the property.  It is an error if arguments matching a
  * shorthand property are used in any other way.
  * 
- * Return value: #FoDatatype, which could be an #FoError */
+ * Return value: #FoDatatype, which could be an #FoError
+ **/
 FoDatatype*
 fo_expr_func_from_nearest_specified_value (FoExprContext *context,
 					   gint           nargs)
@@ -372,7 +375,8 @@ fo_expr_func_from_nearest_specified_value (FoExprContext *context,
  * error if arguments matching a shorthand property are used in any
  * other way.
  * 
- * Return value: #FoDatatype, which could be an #FoError */
+ * Return value: #FoDatatype, which could be an #FoError
+ **/
 FoDatatype*
 fo_expr_func_from_parent (FoExprContext *context,
 			  gint           nargs)
@@ -1163,7 +1167,8 @@ fo_expr_func_pcw_prop_fixed (FoExprContext *context,
  * 
  * Sets @error if cannot convert @datatype.
  *
- * Return value: 
+ * Return value: Unsigned integer in range 0 to
+ * #FO_COLOR_COMPONENT_MAX
  **/
 guint
 datatype_to_color_component (FoDatatype *datatype,
