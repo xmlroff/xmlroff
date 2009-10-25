@@ -22,7 +22,7 @@ AM_CONFIG_HEADER(config.h)
 xsltproc_default=xsltproc
 AC_ARG_WITH(xsltproc,
 	    AC_HELP_STRING([--with-xsltproc],
-			   [Full path to xsltproc XSLT processor for transforming reports.]),
+			   [Full path to xsltproc XSLT processor for transforming reports]),
 	    xsltproc="$withval", :)
 if test "x$with_xsltproc" = "x" ; then
   XSLTPROC=$xsltproc_default
@@ -108,7 +108,7 @@ test_results_default=testresults.xml
 test_results_setter=$default_setter
 AC_ARG_WITH(test_results,
 	    AC_HELP_STRING([--with-test-results],
-			   [Filename of test results XML file. (default=testresults.xml)]),
+			   [Filename of test results XML file (default=testresults.xml)]),
 	    test_results="$withval", :)
 if test "x$with_test_results" = "x" ; then
   TEST_RESULTS=$test_results_default
@@ -155,7 +155,7 @@ title_default="xmlroff Test Results"
 
 AC_ARG_WITH(title,
 	    AC_HELP_STRING([--with-title],
-			   [Title used in generated reports. (default=$title_default)]),
+			   [Title used in generated reports (default="xmlroff Test Results")]),
 	      title="$withval", :)
 
 if test "x$with_title" = "x" ; then
@@ -178,7 +178,7 @@ AC_DEFINE(DATE,
 debug_default=0
 AC_ARG_WITH(debug,
 	    AC_HELP_STRING([--with-debug],
-			   [1 enables debugging messages.  2 or greater enables more verbose output. (default is 0)]),
+			   [1 enables debugging messages;  2 or greater enables more verbose output (default is 0)]),
 	    debug="$withval", :)
 if test "x$with_debug" = "x" ; then
   DEBUG=$debug_default
@@ -205,7 +205,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(command_patterns,
 	    AC_HELP_STRING([--with-command-patterns],
-			   [Patterns for running XSL processor. (default works for xmlroff)]),
+			   [Patterns for running XSL processor (default works for xmlroff)]),
 	    command_patterns="$withval", :)
 if test "x$with_command_patterns" = "x" ; then
   COMMAND_PATTERNS=$command_patterns_default
@@ -237,7 +237,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(default_stylesheet,
 	    AC_HELP_STRING([--with-default-stylesheet],
-			   [Full path to default stylesheet used in tests. (default=no stylesheet)]),
+			   [Full path to default stylesheet used in tests (default=no stylesheet)]),
 	    default_stylesheet="$withval", :)
 if test "x$with_default_stylesheet" = "x" ; then
   DEFAULT_STYLESHEET=$default_stylesheet_default
@@ -291,7 +291,7 @@ AH_TEMPLATE([OUTPUT_INDIVIDUAL],
             [Whether or not to output a HTML report file for each test result. Set to 'true()' to output individual reports.])
 AC_ARG_ENABLE(individual,
 	      AC_HELP_STRING([--enable-individual],
-			     [Output a HTML report file for each test result (default=yes).]),
+			     [Output a HTML report file for each test result (default=yes)]),
 	      enable_individual_arg="$individualval", enable_individual_arg=yes)
 
 if test "x$enable_individual_arg" = "xyes" ; then
@@ -325,7 +325,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(testsuites,
 	    AC_HELP_STRING([--with-testsuites],
-			   [Filename of testsuites XML file that references individual 'testsuite.xml' files from one or more test suites. (default=testsuites.xml)]),
+			   [Filename of testsuites XML file that references individual 'testsuite.xml' files from one or more test suites (default=testsuites.xml)]),
 	    testsuites="$withval", :)
 if test "x$with_testsuites" = "x" ; then
   TESTSUITES=$testsuites_default
