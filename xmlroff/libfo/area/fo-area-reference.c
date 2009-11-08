@@ -2,16 +2,12 @@
  * fo-area-reference.c: reference-area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo-utils.h"
-#include "fo-area.h"
-#include "fo-area-area.h"
-#include "fo-area-area-private.h"
-#include "fo-area-reference.h"
 #include "fo-area-reference-private.h"
 
 enum {
@@ -22,20 +18,21 @@ enum {
 };
 
 static void fo_area_reference_class_init  (FoAreaReferenceClass *klass);
-static void fo_area_reference_set_property (GObject         *object,
-                                  guint            prop_id,
-                                  const GValue    *value,
-                                  GParamSpec      *pspec);
-static void fo_area_reference_get_property   (GObject         *object,
-                                       guint            prop_id,
-                                       GValue          *value,
-                                       GParamSpec      *pspec);
+static void _get_property (GObject         *object,
+			   guint            prop_id,
+			   GValue          *value,
+			   GParamSpec      *pspec);
+static void _set_property (GObject         *object,
+			   guint            prop_id,
+			   const GValue    *value,
+			   GParamSpec      *pspec);
 static void fo_area_reference_finalize    (GObject           *object);
 
-static void fo_area_reference_debug_dump_properties (FoArea *area,
-							      gint depth);
-static void fo_area_reference_update_after_clone (FoArea *clone,
-						  FoArea *original);
+static void _debug_dump_properties (FoArea *area,
+				    gint    depth);
+static void _update_after_clone    (FoArea *clone,
+				    FoArea *original);
+static FoArea*  _size_request (FoArea *child);
 
 static gpointer parent_class;
 
@@ -77,11 +74,11 @@ fo_area_reference_class_init (FoAreaReferenceClass *klass)
   
   object_class->finalize = fo_area_reference_finalize;
 
-  object_class->set_property = fo_area_reference_set_property;
-  object_class->get_property = fo_area_reference_get_property;
+  object_class->get_property = _get_property;
+  object_class->set_property = _set_property;
 
-  FO_AREA_CLASS (klass)->debug_dump_properties = fo_area_reference_debug_dump_properties;
-  FO_AREA_CLASS (klass)->update_after_clone = fo_area_reference_update_after_clone;
+  FO_AREA_CLASS (klass)->debug_dump_properties = _debug_dump_properties;
+  FO_AREA_CLASS (klass)->update_after_clone = _update_after_clone;
 
   g_object_class_install_property
     (object_class,
@@ -127,10 +124,40 @@ fo_area_reference_finalize (GObject *object)
 
 
 static void
-fo_area_reference_set_property (GObject         *object,
-			   guint            prop_id,
-			   const GValue    *value,
-			   GParamSpec      *pspec)
+_get_property (GObject         *object,
+	       guint            prop_id,
+	       GValue          *value,
+	       GParamSpec      *pspec)
+{
+  FoArea *fo_area_reference;
+
+  fo_area_reference = FO_AREA (object);
+
+  switch (prop_id)
+    {
+    case PROP_BPD:
+      g_value_set_uint (value,
+			fo_area_reference_get_bpd (fo_area_reference));
+      break;
+    case PROP_IPD:
+      g_value_set_uint (value,
+			fo_area_reference_get_ipd (fo_area_reference));
+      break;
+    case PROP_SD:
+      g_value_set_uint (value,
+			fo_area_reference_get_sd (fo_area_reference));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+_set_property (GObject         *object,
+	       guint            prop_id,
+	       const GValue    *value,
+	       GParamSpec      *pspec)
 {
   FoArea *fo_area_reference;
 
@@ -156,34 +183,6 @@ fo_area_reference_set_property (GObject         *object,
     }
 }
 
-static void
-fo_area_reference_get_property (GObject         *object,
-			   guint            prop_id,
-			   GValue          *value,
-			   GParamSpec      *pspec)
-{
-  FoArea *fo_area_reference;
-
-  fo_area_reference = FO_AREA (object);
-
-  switch (prop_id)
-    {
-    case PROP_BPD:
-      g_value_set_uint (value,
-			fo_area_reference_get_bpd (fo_area_reference));
-    case PROP_IPD:
-      g_value_set_uint (value,
-			fo_area_reference_get_ipd (fo_area_reference));
-    case PROP_SD:
-      g_value_set_uint (value,
-			fo_area_reference_get_sd (fo_area_reference));
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-
 /**
  * fo_area_reference_new:
  * 
@@ -194,7 +193,8 @@ fo_area_reference_get_property (GObject         *object,
 FoArea*
 fo_area_reference_new (void)
 {
-  return FO_AREA (g_object_new (fo_area_reference_get_type (), NULL));
+  return FO_AREA (g_object_new (fo_area_reference_get_type (),
+				NULL));
 }
 
 static gchar *
@@ -225,7 +225,7 @@ _direction_to_string (FoEnumAreaDirection direction)
 }
 
 void
-fo_area_reference_debug_dump_properties (FoArea *area, gint depth)
+_debug_dump_properties (FoArea *area, gint depth)
 {
   FoAreaReference *reference;
   gchar *indent = g_strnfill (depth * 2, ' ');
@@ -256,6 +256,23 @@ fo_area_reference_debug_dump_properties (FoArea *area, gint depth)
 }
 
 /**
+ * fo_area_reference_get_bpd:
+ * @fo_area: The #FoAreaReference object
+ *
+ * Gets the "bpd" property of @fo_area
+ *
+ * Return value: The "bpd" property value
+**/
+FoEnumAreaDirection
+fo_area_reference_get_bpd (FoArea *fo_area)
+{
+  g_return_val_if_fail (fo_area != NULL, 0);
+  g_return_val_if_fail (FO_IS_AREA_REFERENCE (fo_area), 0);
+
+  return FO_AREA_REFERENCE (fo_area)->bpd;
+}
+
+/**
  * fo_area_reference_set_bpd:
  * @fo_area: The #FoAreaReference object
  * @new_bpd: The new "bpd" property value
@@ -274,20 +291,20 @@ fo_area_reference_set_bpd (FoArea             *fo_area,
 }
 
 /**
- * fo_area_reference_get_bpd:
+ * fo_area_reference_get_ipd:
  * @fo_area: The #FoAreaReference object
  *
- * Gets the "bpd" property of @fo_area
+ * Gets the "ipd" property of @fo_area
  *
- * Return value: The "bpd" property value
+ * Return value: The "ipd" property value
 **/
 FoEnumAreaDirection
-fo_area_reference_get_bpd (FoArea *fo_area)
+fo_area_reference_get_ipd (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
   g_return_val_if_fail (FO_IS_AREA_REFERENCE (fo_area), 0);
 
-  return FO_AREA_REFERENCE (fo_area)->bpd;
+  return FO_AREA_REFERENCE (fo_area)->ipd;
 }
 
 /**
@@ -309,20 +326,20 @@ fo_area_reference_set_ipd (FoArea             *fo_area,
 }
 
 /**
- * fo_area_reference_get_ipd:
+ * fo_area_reference_get_sd:
  * @fo_area: The #FoAreaReference object
  *
- * Gets the "ipd" property of @fo_area
+ * Gets the "sd" property of @fo_area
  *
- * Return value: The "ipd" property value
+ * Return value: The "sd" property value
 **/
 FoEnumAreaDirection
-fo_area_reference_get_ipd (FoArea *fo_area)
+fo_area_reference_get_sd (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
   g_return_val_if_fail (FO_IS_AREA_REFERENCE (fo_area), 0);
 
-  return FO_AREA_REFERENCE (fo_area)->ipd;
+  return FO_AREA_REFERENCE (fo_area)->sd;
 }
 
 /**
@@ -344,24 +361,7 @@ fo_area_reference_set_sd (FoArea             *fo_area,
 }
 
 /**
- * fo_area_reference_get_sd:
- * @fo_area: The #FoAreaReference object
- *
- * Gets the "sd" property of @fo_area
- *
- * Return value: The "sd" property value
-**/
-FoEnumAreaDirection
-fo_area_reference_get_sd (FoArea *fo_area)
-{
-  g_return_val_if_fail (fo_area != NULL, 0);
-  g_return_val_if_fail (FO_IS_AREA_REFERENCE (fo_area), 0);
-
-  return FO_AREA_REFERENCE (fo_area)->sd;
-}
-
-/**
- * fo_area_reference_update_after_clone:
+ * _update_after_clone:
  * @clone:    New object cloned from @original
  * @original: Original area object
  * 
@@ -369,8 +369,8 @@ fo_area_reference_get_sd (FoArea *fo_area)
  * match those of @original
  **/
 void
-fo_area_reference_update_after_clone (FoArea *clone,
-				      FoArea *original)
+_update_after_clone (FoArea *clone,
+		     FoArea *original)
 {
   FoAreaReference *original_reference = (FoAreaReference *) original;
   FoAreaReference *clone_reference = (FoAreaReference *) clone;
