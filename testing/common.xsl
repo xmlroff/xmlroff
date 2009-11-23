@@ -4,7 +4,7 @@
 <!-- Templates common to multiple stylesheets. -->
 
 <!-- Copyright (C) 2001, 2004 Sun Microsystems -->
-<!-- Copyright (C) 2007 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2009 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -149,6 +149,10 @@
             <xsl:when test="$dirname2 != ''">
               <xsl:choose>
                 <xsl:when test="substring($dirname2, 1, 1) = $separator">
+                  <xsl:if test="substring($dirname1, 1, 7) = 'http://'">
+                    <xsl:value-of select="concat('http://',
+                      substring-before(substring($dirname1, 8), '/'))"/>
+                  </xsl:if>
                   <xsl:value-of select="$dirname2"/>
                 </xsl:when>
                 <xsl:otherwise>
