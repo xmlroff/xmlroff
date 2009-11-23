@@ -366,7 +366,7 @@ fi
 AC_SUBST(TEST_SUBSET)
 AC_DEFINE_UNQUOTED(TEST_SUBSET,
 	           "$TEST_SUBSET",
-	           [_ubset of tests to run.])
+	           [Subset of tests to run.])
 AC_DEFINE_UNQUOTED(TEST_SUBSET_SETTER,
 	           "$test_subset_setter",
 	           [Where TEST_SUBSET was set.])
