@@ -408,12 +408,12 @@ parameters when setting up to re-run the tests.
 The 'configure' options and their corresponding PIs (in the notional
 "xmlroff testing" namespace) are:
 
- --with-xsl-processor         xt:xsl-processor
- --with-xsl-processor-flags   xt:xsl-processor-flags
- --with-command-patterns      xt:command-patterns
- --with-default-stylesheet    xt:default-stylesheet
- --with-testsuites            xt:testsuites
- --with-trac                  xt:trac
+ --with-xsl-processor         xt-xsl-processor
+ --with-xsl-processor-flags   xt-xsl-processor-flags
+ --with-command-patterns      xt-command-patterns
+ --with-default-stylesheet    xt-default-stylesheet
+ --with-testsuites            xt-testsuites
+ --with-trac                  xt-trac
 
 The priority for setting a parameter, from lowest to highest, is:
 
@@ -454,6 +454,9 @@ http://xw2k.sdct.itl.nist.gov/brady/xml/generate.asp?tech=../../carmelo/XSL.
 The test cases currently available for testing xmlroff are the XSL 1.0
 CR test cases, the NIST test cases, and some test cases developed
 specifically for xmlroff.
+
+make-fop-testsuite.pl creates a W3C-format testsuite file from FOP
+"layoutengine" tests.
 
 
 config.h, config.pl, config.xsl
@@ -656,7 +659,7 @@ references in the file referred to by the '--with-testsuites' option
 to individual test suite description files.
 
 The xmlroff test results information is obtained from both
-testresults.xml and testsuccess.xsl.
+testresults.xml and testsuccess.xml.
 
 The summary report is a large table with one row for each test case.
 Each row contains:
@@ -820,4 +823,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-14 October 2008
+14 March 2009
