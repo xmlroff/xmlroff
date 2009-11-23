@@ -23,6 +23,8 @@ EXTRA_DIST = \
 	identity.xsl			\
 	make-fop-testsuite.pl		\
 	make-success-report.sh		\
+	make-fop-testsuite.pl		\
+	make-testsuite.pl		\
 	png+ref2stereo.pl		\
 	regenerate-testsuccess.pl	\
 	test2makefile.xsl		\
