@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 #
 # Copyright (c) 2001, 2002, 2004 Sun Microsystems
-# Copyright (c) Menteith Consulting Ltd
+# Copyright (c) 2007-2009 Menteith Consulting Ltd
 #
 # Perl script to run xsltproc to update one result in 'testresults.xml'.
 #
@@ -42,7 +42,7 @@ $gXsltprocCommand =
 	  );
 
 ############################################################
-# Do the work and save the error and status messages in @gBase
+# Do the work and save the error and status messages in @gBody
 #
 
 push(@gBody,
