@@ -27,6 +27,7 @@ EXTRA_DIST = \
 	make-testsuite.pl		\
 	png+ref2stereo.pl		\
 	regenerate-testsuccess.pl	\
+	results-doc.xsl			\
 	test2makefile.xsl		\
 	test2sh.xsl			\
 	testing.conf.in			\
@@ -77,7 +78,7 @@ testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSO
 	perl testsuccess.pl . > $(TESTSUCCESS)
 	touch $@
 
-$(REPORT_HTML):	testsuccess.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl
+$(REPORT_HTML):	testsuccess.xsl results-doc.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl
 	$(XSLTPROC) -o $@ --novalid \
 	--stringparam date "`date`" $(REPORT_PARAM) \
 	testsuccess.xsl @TEST_RESULTS@
