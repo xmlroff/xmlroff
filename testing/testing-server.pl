@@ -18,7 +18,7 @@ use XML::LibXSLT;
 use HTTP::Daemon;
 use HTTP::Headers;
 use HTTP::Response;
-use HTTP::Status;
+use HTTP::Status qw(:constants :is status_message);
 
 require("config.pl");
 
@@ -35,7 +35,7 @@ my $testresults = $parser->parse_file($TEST_RESULTS);
 my $d = HTTP::Daemon->new(
     LocalPort => $port
     ) || die;
-print "$TITLE at: <URL:", $d->url, "/index.html>\n";
+print "$TITLE at: <URL:", $d->url, "index.html>\n";
 
 while (my $client = $d->accept) {
     while (my $request = $client->get_request) {
@@ -45,32 +45,45 @@ while (my $client = $d->accept) {
 	    print "$page\n";
 	    print $request->as_string;
 	}
-	if ($page =~ m/^$BASENAME\/index.html/) {
-	    my $time = localtime();
-	    my $results = $stylesheet->transform($testresults,
-						 date => "'$time'",
-		                                 FORM => 0);
-	    my $response = HTTP::Response->new(RC_OK);
-	    $response->date(time);
-	    $response->content_type($stylesheet->media_type());
-	    $response->content_encoding($stylesheet->output_encoding());
-	    $response->content($stylesheet->output_as_bytes($results));
-	    $client->send_response($response);
-	    if ($debug > 0) {
-		print $response->headers->as_string;
-	    }
-	    $client->force_last_request;
-	} elsif (-e $page) {
-	    my $mtime = (stat(_))[9];
-	    if ($mtime > $request->if_modified_since) {
-		$client->send_file_response($page);
-		$client->force_last_request unless ($page =~ /\.html$/);
-	    } else {
-		$client->send_status_line(RC_NOT_MODIFIED);
+	if ($request->method eq 'GET') {
+	    if ($page =~ m/^index.html/) {
+		my $time = localtime();
+		my $results = $stylesheet->transform($testresults,
+						     date => "'$time'",
+						     FORM => 1);
+		my $response = HTTP::Response->new(RC_OK);
+		$response->date(time);
+		$response->content_type($stylesheet->media_type());
+		$response->content_encoding($stylesheet->output_encoding());
+		$response->content($stylesheet->output_as_bytes($results));
+		$client->send_response($response);
+		if ($debug > 0) {
+		    print "Processed index.html\n";
+		    print $response->headers->as_string;
+		}
 		$client->force_last_request;
+	    } elsif (-e $page) {
+		if ($page =~ m/\.html$/) {
+		    print $` . "\n";
+		}
+		my $mtime = (stat(_))[9];
+		if ($mtime > $request->if_modified_since) {
+		    $client->send_file_response($page);
+		    $client->send_crlf;
+		} else {
+		    $client->send_basic_header(RC_NOT_MODIFIED);
+		    $client->force_last_request;
+		}
+	    } else {
+		$client->send_error(HTTP_NOT_FOUND);
+	    }
+	} elsif ($request->method eq 'POST') {
+	    if ($page =~ m/update-results.pl$/) {
+	    } else {
+		$client->send_error(HTTP_NOT_FOUND);
 	    }
 	} else {
-	    $client->send_error(RC_NOT_FOUND);
+	    $client->send_error(HTTP_METHOD_NOT_ALLOWED);
 	}
     }
     $client->close;
