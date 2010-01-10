@@ -483,9 +483,39 @@ AC_DEFINE_UNQUOTED(TRAC_SETTER,
 PWD=`pwd`
 AC_SUBST(PWD)
 
-BASENAME=`basename $PWD`
-AC_DEFINE_UNQUOTED(BASENAME, "$BASENAME", [Current directory.])
+#
+# Basename of project
+#
+# Used when constructing URLs
+#
+basename_default=`basename $PWD`
+basename_setter=$default_setter
+
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_basename=["`$PERL -n -e'if(/<\?xt-basename\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_basename" != "x" ; then
+    basename_default="$results_basename"
+    basename_setter=$results_setter
+  fi
+fi
+AC_ARG_WITH(basename,
+	    AC_HELP_STRING([--with-basename],
+			   [Basename for use in URLs. (default=`basename $PWD`)]),
+	    basename="$withval", :)
+if test "x$with_basename" = "x" ; then
+  BASENAME=$basename_default
+else
+  BASENAME=$with_basename
+  basename_setter=$option_setter
+fi
 AC_SUBST(BASENAME)
+AC_DEFINE_UNQUOTED(BASENAME,
+	           "$BASENAME",
+                   [Basename for use in URLs.])
+AC_DEFINE_UNQUOTED(BASENAME_SETTER,
+	           "$basename_setter",
+	           [Where BASENAME setting was set.])
 
 AC_CONFIG_FILES([
 Makefile
@@ -505,5 +535,6 @@ xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
 xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
 project-name:        \"$PROJECT_NAME\" ($project_name_setter)
 trac:                \"$TRAC\" ($trac_setter)
+basename:            \"$BASENAME\" ($basename_setter)
 
 The 'configure' options that you used are recorded in 'config.log'."
