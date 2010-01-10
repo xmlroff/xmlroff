@@ -256,13 +256,6 @@
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-<!--
-      <td>
-        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
-          <input type="submit" name="submit" value="Regenerate"/>
-        </form>
-      </td>
--->
     </tr>
 
     <xsl:apply-templates>
@@ -293,13 +286,6 @@
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-<!--
-      <td>
-        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
-          <input type="submit" name="submit" value="Regenerate"/>
-        </form>
-      </td>
--->
     </tr>
 
     <xsl:apply-templates>
@@ -336,13 +322,6 @@
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-<!--
-      <td>
-        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
-          <input type="submit" name="submit" value="Regenerate"/>
-        </form>
-      </td>
--->
     </tr>
 
     <xsl:apply-templates>
@@ -373,13 +352,6 @@
           <xsl:with-param name="top-id" select="$testsuite-id"/>
         </xsl:call-template>
       </td>
-<!--
-      <td>
-        <form action="/{$PROJECT_NAME}/{$BASENAME}/regenerate-testsuccess.pl" method="post">
-          <input type="submit" name="submit" value="Regenerate"/>
-        </form>
-      </td>
--->
     </tr>
 
     <xsl:apply-templates>
@@ -655,234 +627,6 @@
     <a href="{$use-href}">
       <xsl:copy-of select="$content"/>
     </a>
-  </xsl:template>
-
-  <xsl:template name="results-form">
-    <xsl:param name="results"/>
-    <xsl:param name="id"/>
-    <xsl:param name="results-top-base"/>
-    <table bgcolor="white" border="0" cellspacing="0">
-      <xsl:for-each select="$results">
-        <form action="/{$PROJECT_NAME}/{$BASENAME}/update-results.pl" method="post">
-          <input type="hidden" name="id" value="{$id}"/>
-          <input type="hidden" name="top-base" value="{$results-top-base}"/>
-          <input type="hidden" name="path" value="{($results/ancestor::*/@base)[1]}/{$id}"/>
-          <tr>
-            <td style="background-color: white">Agreement:</td>
-            <td style="background-color: white">
-              <select name="agreement">
-                <option value="full">
-                  <xsl:if test="@agreement='full'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>Full</xsl:text>
-                </option>
-                <option value="issues">
-                  <xsl:if test="@agreement='issues'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>Issues</xsl:text>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: white">Future support:</td>
-            <td style="background-color: white">
-              <select name="futuresupport">
-                <option value="full">
-                  <xsl:if test="@futuresupport='full'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>Full</xsl:text>
-                </option>
-                <option value="partial">
-                  <xsl:if test="@futuresupport='partial'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>Partial</xsl:text>
-                </option>
-                <option value="none">
-                  <xsl:if test="@futuresupport='none'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>None</xsl:text>
-                </option>
-                <option>
-                  <xsl:if test="not(@futuresupport)">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: white">Spec problem:</td>
-            <td style="background-color: white">
-              <select name="specproblem">
-                <option value="yes">
-                  <xsl:if test="@specproblem='yes'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>Yes</xsl:text>
-                </option>
-                <option value="no">
-                  <xsl:if test="not(@specproblem) or @specproblem='no'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>No</xsl:text>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: white">Test problem:</td>
-            <td style="background-color: white">
-              <select name="testproblem">
-                <option value="yes">
-                  <xsl:if test="@testproblem='yes'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>Yes</xsl:text>
-                </option>
-                <option value="no">
-                  <xsl:if test="not(@testproblem) or @testproblem='no'">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                  </xsl:if>
-                  <xsl:text>No</xsl:text>
-                </option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: white">Further info:</td>
-            <td style="background-color: white">
-              <textarea name="comment" rows="1" cols="60">
-                <xsl:value-of select="."/>
-              </textarea>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: white">&#160;</td>
-            <td style="background-color: white">
-              <input type="submit" name="update" value="Update"/>&#160;&#160;<input type="reset"/>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">Note that "Update" updates the XML
-source for this report and <b>does not</b> regenerate this HTML page.
-            </td>
-          </tr>
-        </form>
-      </xsl:for-each>
-    </table>
-  </xsl:template>
-
-  <xsl:template name="results-static">
-    <xsl:param name="results"/>
-    <table bgcolor="white" border="0" cellspacing="0">
-      <xsl:for-each select="$results">
-        <tr>
-          <td style="background-color: white">Agreement:</td>
-          <td width="10%">
-            <xsl:attribute name="class">
-              <xsl:choose>
-                <xsl:when test="@agreement = 'issues' and . = $not-verified-string">
-                  <xsl:text>other</xsl:text>
-                </xsl:when>
-                <xsl:when test="@agreement = 'full'">
-                  <xsl:text>full</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:text>differ</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:attribute>
-            <xsl:choose>
-              <xsl:when test="@agreement = 'full'">
-                <xsl:text>Full</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>Issues</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="background-color: white">Future support:</td>
-          <td style="background-color: white">
-            <xsl:choose>
-              <xsl:when test="@futuresupport = 'full'">
-                <xsl:text>Full</xsl:text>
-              </xsl:when>
-              <xsl:when test="@futuresupport = 'partial'">
-                <xsl:text>Partial</xsl:text>
-              </xsl:when>
-              <xsl:when test="not(@futuresupport)">
-                <xsl:text>&#160;</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>None</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="background-color: white">Spec problem:</td>
-          <td>
-            <xsl:attribute name="class">
-              <xsl:choose>
-                <xsl:when test="@specproblem = 'yes'">
-                  <xsl:text>spec</xsl:text>
-		</xsl:when>
-            	<xsl:otherwise>other</xsl:otherwise>
-	      </xsl:choose>
-    	    </xsl:attribute>
-            <xsl:choose>
-              <xsl:when test="@specproblem = 'yes'">
-                <xsl:text>Yes</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>No</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="background-color: white">Test problem:</td>
-          <td>
-            <xsl:attribute name="class">
-              <xsl:choose>
-                <xsl:when test="@testproblem = 'yes'">
-                  <xsl:text>test</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:text>other</xsl:text>
-                </xsl:otherwise>
-              </xsl:choose>
-            </xsl:attribute>
-            <xsl:choose>
-              <xsl:when test="@testproblem = 'yes'">
-                <xsl:text>Yes</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>No</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="background-color: white">Further info:</td>
-          <td style="background-color: white" colspan="2">
-            <xsl:apply-templates/>
-          </td>
-        </tr>
-      </xsl:for-each>
-    </table>
   </xsl:template>
 
   <xsl:template match="text()">
