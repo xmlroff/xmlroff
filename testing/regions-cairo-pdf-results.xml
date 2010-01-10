@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xt-xsl-processor-flags --backend cairo?><testsuite profile="Regions -- Cairo PDF"><testcases base="testsuite" profile="xmlroff Test Suite">
+  
+  <testcases profile="expression" base="expression">
+    
+    <testresult id="expression1" results="expression1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected.  Too many assertion failure messages.  Ticket #17.</testresult>
+    <testresult id="from-table-column2" results="from-table-column2.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+    <testresult id="from-table-column3" results="from-table-column3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    <testresult id="from-table-column4" results="from-table-column4.pdf" agreement="issues" specproblem="no" testproblem="no">No error message.</testresult>
+    <testresult id="from-table-column5" results="from-table-column5.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+    <testresult id="from-table-column6" results="from-table-column6.pdf" agreement="issues" specproblem="no" testproblem="no">Fails with null property value</testresult>
+    <testresult id="from-table-column7" results="from-table-column7.pdf" agreement="full" specproblem="no" testproblem="yes">Formatted output and log messages not very informative.</testresult>
+  </testcases>
+  <testcases profile="fo" base="fo">
+    <testcases profile="block" base="block">
+      <testcases profile="block" base="block">
+        <testresult id="start-indent-percentage" results="start-indent-percentage.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+    </testcases>
+    <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
+      <testcases profile="region-body" base="region-body">
+        <testresult id="region-body-overflow1" results="region-body-overflow1.pdf" agreement="full" specproblem="no" testproblem="no">Treated as auto in accordance with XSL 1.0 spec.</testresult>
+      <testresult id="region-body-overflow2" results="region-body-overflow2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="region-body-overflow3" results="region-body-overflow3.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
+      <testresult id="region-body-overflow4" results="region-body-overflow4.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
+      <testresult id="region-body-overflow5" results="region-body-overflow5.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
+      <testresult id="region-body-overflow6" results="region-body-overflow6.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="region-body-overflow7" results="region-body-overflow7.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    </testcases>
+    </testcases>
+    <testcases profile="inline" base="inline">
+      <testcases profile="external-graphic" base="external-graphic">
+        <testresult id="external-graphic-1" results="external-graphic-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-2" results="external-graphic-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-3" results="external-graphic-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="issues" specproblem="no" testproblem="no">Second black square.</testresult>
+        <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="full" specproblem="no" testproblem="yes">Image background is black in PNG but not when viewing PDF in evince.</testresult>
+        <testresult id="external-graphic-7" results="external-graphic-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-8" results="external-graphic-8.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-9" results="external-graphic-9.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-10" results="external-graphic-10.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-11" results="external-graphic-11.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-12" results="external-graphic-12.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="external-graphic-13" results="external-graphic-13.pdf" agreement="full" specproblem="no" testproblem="no">Background is black in PNG but yellow in evince.</testresult>
+      </testcases>
+    </testcases>
+    <testcases profile="list" base="list">
+      <testresult id="list-1" results="list-1.pdf" agreement="issues" specproblem="no" testproblem="no">Wrong.</testresult>
+      <testresult id="list-2" results="list-2.pdf" agreement="issues" specproblem="no" testproblem="no">Wrong.</testresult>
+    </testcases>
+    <testcases profile="other" base="other">
+    </testcases>
+    <testcases profile="out-of-line" base="out-of-line">
+    </testcases>
+    <testcases profile="table" base="table">
+      <testcases profile="table" base="table">
+        <testresult id="table-1" results="table-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="table-2" results="table-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="table-3" results="table-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="table-4" results="table-4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="table-5" results="table-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="table-6" results="table-6.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="table-7" results="table-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+    </testcases>
+  </testcases>
+  <testcases profile="property" base="property">
+    <testcases profile="absolute-position" base="absolute-position">
+    </testcases>
+    <testcases profile="accessability" base="accessability">
+    </testcases>
+    <testcases profile="area-alignment" base="area-alignment">
+      <testcases profile="display-align" base="display-align">
+	<testresult id="display-align-1" results="display-align-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-2" results="display-align-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-3" results="display-align-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-4" results="display-align-4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-5" results="display-align-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-6" results="display-align-6.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-7" results="display-align-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-8" results="display-align-8.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-9" results="display-align-9.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-10" results="display-align-10.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-11" results="display-align-11.pdf" agreement="full" specproblem="no" testproblem="no"/>
+	<testresult id="display-align-12" results="display-align-12.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+    </testcases>
+    <testcases profile="block-line" base="block-line">
+      <testresult id="linefeed-treatment-1" results="linefeed-treatment-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-2" results="linefeed-treatment-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-3" results="linefeed-treatment-3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-4" results="linefeed-treatment-4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-5" results="linefeed-treatment-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-6" results="linefeed-treatment-6.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="linefeed-treatment-7" results="linefeed-treatment-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="text-align-start" results="text-align-start.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Alignment wrong.</testresult>
+      <testresult id="text-align-center" results="text-align-center.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="text-align-end" results="text-align-end.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Extra blank pages.</testresult>
+      <testresult id="text-align-justify" results="text-align-justify.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Pango does not justify.  Extra blank pages.</testresult>
+      <testresult id="text-align-inside" results="text-align-inside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem. Extra blank pages.</testresult>
+      <testresult id="text-align-outside" results="text-align-outside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Alignment problems.  Extra blank pages..</testresult>
+      <testresult id="text-align-left" results="text-align-left.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="text-align-right" results="text-align-right.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="white-space-collapse-1" results="white-space-collapse-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    </testcases>
+    <testcases profile="border-padding-background" base="border-padding-background">
+      <testresult id="background-color1" results="background-color1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-after-style1" results="border-after-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-before-style1" results="border-before-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-bottom-style1" results="border-bottom-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-end-style1" results="border-end-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-left-style1" results="border-left-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-right-style1" results="border-right-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-start-style1" results="border-start-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-top-style1" results="border-top-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-after1" results="padding-after1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-before1" results="padding-before1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-before2" results="padding-before2.pdf" agreement="issues" specproblem="no" testproblem="no">Not discarding.</testresult>
+      <testresult id="padding-before3" results="padding-before3.pdf" agreement="issues" specproblem="no" testproblem="no">Not discarding.</testresult>
+      <testresult id="padding-bottom1" results="padding-bottom1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-end1" results="padding-end1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-left1" results="padding-left1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-right1" results="padding-right1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-start1" results="padding-start1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding-top1" results="padding-top1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    </testcases>
+    <testcases profile="character" base="character">
+    </testcases>
+    <testcases profile="color" base="color">
+      <testresult id="color1" results="color1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    </testcases>
+    <testcases profile="dynamic" base="dynamic">
+    </testcases>
+    <testcases profile="float" base="float">
+    </testcases>
+    <testcases profile="font" base="font">
+      <testresult id="font-size" results="font-size.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-size-fail" results="font-size-fail.pdf" agreement="issues" specproblem="no" testproblem="no">Dumps core.</testresult>
+      <testresult id="font-stretch" results="font-stretch.pdf" agreement="full" specproblem="no" testproblem="yes">No apparent effect.  Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-weight-sans-serif" results="font-weight-sans-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-weight-serif" results="font-weight-serif.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="font-weight-monospace" results="font-weight-monospace.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+    </testcases>
+    <testcases profile="hyphenation" base="hyphenation">
+    </testcases>
+    <testcases profile="keep-break" base="keep-break">
+    </testcases>
+    <testcases profile="layout" base="layout">
+    </testcases>
+    <testcases profile="leader-rule" base="leader-rule">
+    </testcases>
+    <testcases profile="margin-block" base="margin-block">
+    </testcases>
+    <testcases profile="margin-inline" base="margin-inline">
+    </testcases>
+    <testcases profile="marker" base="marker">
+    </testcases>
+    <testcases profile="miscellaneous" base="miscellaneous">
+    </testcases>
+    <testcases profile="pagination-layout" base="pagination-layout">
+    </testcases>
+    <testcases profile="relative-position" base="relative-position">
+    </testcases>
+    <testcases profile="shorthand" base="shorthand">
+      <testresult id="border1" results="border1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border2" results="border2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border3" results="border3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-color1" results="border-color1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-color2" results="border-color2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-color3" results="border-color3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-color4" results="border-color4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-color5" results="border-color5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-style1" results="border-style1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-style2" results="border-style2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-style3" results="border-style3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-style4" results="border-style4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-style5" results="border-style5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-width1" results="border-width1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-width2" results="border-width2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-width3" results="border-width3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-width4" results="border-width4.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="border-width5" results="border-width5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding1" results="padding1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding2" results="padding2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding3" results="padding3.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding4" results="padding4.pdf" agreement="full" specproblem="no" testproblem="yes">Test needs more explanation of expected result.  Could be broken into multiple tests.</testresult>
+      <testresult id="padding5" results="padding5.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      <testresult id="padding6" results="padding6.pdf" agreement="issues" specproblem="no" testproblem="no">Wrong.</testresult>
+      <testresult id="padding7" results="padding7.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    </testcases>
+    <testcases profile="table" base="table">
+    </testcases>
+    <testcases profile="writing-mode" base="writing-mode">
+      <testresult id="writing-mode" results="writing-mode.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+    </testcases>
+
+  </testcases>
+
+  <testcases profile="structure" base="structure">
+    
+    <testresult id="element-content" results="element-content.pdf" agreement="full" specproblem="no" testproblem="no"/>
+
+  </testcases>
+
+  <testcases profile="multiple" base="multiple">
+
+    <testresult id="minimal" results="minimal.pdf" agreement="full" specproblem="no" testproblem="no"/>
+    <testresult id="simple" results="simple.pdf" agreement="issues" specproblem="no" testproblem="no">Don't know if extent of background behind fo:character is correct.</testresult>
+    <testresult id="unsupported-property" results="unsupported-property.pdf" agreement="issues" specproblem="no" testproblem="yes">No message.</testresult>
+
+  </testcases>
+  <testcases profile="other" base="other">
+    <testresult id="non-fo" results="non-fo.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+    <testresult id="fo-foo" results="fo-foo.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+    <testresult id="non-fo-foo" results="non-fo-foo.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
+  </testcases>
+</testcases>
+<testcases base="testdocs" profile="Test Suite">
+<testcases profile="graphics" base="graphics">
+<testresult id="svg-001" results="svg-001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+</testcases>
+<testcases profile="i18n" base="i18n">
+<testresult id="af" results="af.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="ar" results="ar.pdf" agreement="issues" specproblem="no" testproblem="no">Should paragraphs be right-aligned?</testresult>
+<testresult id="book" results="book.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problems.</testresult>
+<testresult id="ca" results="ca.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="cs" results="cs.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="da" results="da.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="de" results="de.pdf" agreement="issues" specproblem="no" testproblem="no">Paragraphs being truncated. #112</testresult>
+<testresult id="el" results="el.pdf" agreement="issues" specproblem="no" testproblem="no">Strange mix of bold and non-bold characters.</testresult>
+<testresult id="en" results="en.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="es" results="es.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="et" results="et.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="eu" results="eu.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="fi" results="fi.pdf" agreement="full" specproblem="no" testproblem="no">Text being truncated.  #112</testresult>
+<testresult id="fr" results="fr.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="he" results="he.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="hu" results="hu.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="id" results="id.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="it" results="it.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="ja" results="ja.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="ko" results="ko.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="lt" results="lt.pdf" agreement="issues" specproblem="no" testproblem="no">Paragraphs truncated.</testresult>
+<testresult id="nl" results="nl.pdf" agreement="issues" specproblem="no" testproblem="no">Bad split at page break.</testresult>
+<testresult id="nn" results="nn.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="no" results="no.pdf" agreement="issues" specproblem="no" testproblem="no">First paragraph truncated.</testresult>
+<testresult id="pl" results="pl.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="pt" results="pt.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="pt_br" results="pt_br.pdf" agreement="full" specproblem="no" testproblem="no">Text truncated. #112</testresult>
+<testresult id="ro" results="ro.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="ru" results="ru.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="sk" results="sk.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="sl" results="sl.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="source" results="source.pdf" agreement="issues" specproblem="no" testproblem="yes">Not sure what the result should be.</testresult>
+<testresult id="sr" results="sr.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="sv" results="sv.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="th" results="th.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="titlepage-fo" results="titlepage-fo.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="tr" results="tr.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="uk" results="uk.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="vi" results="vi.pdf" agreement="issues" specproblem="no" testproblem="no">Last line of first paragraph truncated.  #112.</testresult>
+<testresult id="xh" results="xh.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="zh_cn" results="zh_cn.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+<testresult id="zh_tw" results="zh_tw.pdf" agreement="full" specproblem="no" testproblem="no">Appears correct.</testresult>
+</testcases>
+<testcases profile="imagelib" base="imagelib">
+<testresult id="imagelib" results="imagelib.pdf" agreement="issues" specproblem="no" testproblem="yes">Not a DocBook file.</testresult>
+</testcases>
+<testcases profile="tests" base="tests">
+<testresult id="admonitions.001" results="admonitions.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Not sure what result should be.</testresult>
+<testresult id="article.001" results="article.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="article.002" results="article.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="article.003" results="article.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="article.004" results="article.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="article.005" results="article.005.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="article.006" results="article.006.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="author.001" results="author.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="author.002" results="author.002.pdf" agreement="issues" specproblem="no" testproblem="yes">No forward references.</testresult>
+<testresult id="bibliography.001" results="bibliography.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="bibliography.002" results="bibliography.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="bibliography.003" results="bibliography.003.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know if expecting DocBook error messages.</testresult>
+<testresult id="bibliography.004" results="bibliography.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="bibliography.005" results="bibliography.005.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="bibliolist.001" results="bibliolist.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="blockinfo.001" results="blockinfo.001.pdf" agreement="full" specproblem="no" testproblem="yes"/>
+<testresult id="blockinfo.002" results="blockinfo.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Not sure what result should be.</testresult>
+<testresult id="blockquote.001" results="blockquote.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="book.001" results="book.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="book.002" results="book.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="book.003" results="book.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="book.004" results="book.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="book.005" results="book.005.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="book.006" results="book.006.pdf" agreement="issues" specproblem="no" testproblem="yes">Not handling xi:include.</testresult>
+<testresult id="book.007" results="book.007.pdf" agreement="issues" specproblem="no" testproblem="yes">Not handling xi:include.</testresult>
+<testresult id="book.008" results="book.008.pdf" agreement="issues" specproblem="no" testproblem="yes">Not handling xi:include in source.</testresult>
+<testresult id="bookinfo.001" results="bookinfo.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="bridgehead.001" results="bridgehead.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="calloutlist.001" results="calloutlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
+<testresult id="calloutlist.002" results="calloutlist.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="calloutlist.003" results="calloutlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">'Embedded Cos' title missing.  Extra blank page.</testresult>
+<testresult id="changebars.001" results="changebars.001.pdf" agreement="issues" specproblem="no" testproblem="no">No changebars.</testresult>
+<testresult id="chapter.001" results="chapter.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="chapter.002" results="chapter.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="classsynopsis.001" results="classsynopsis.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="cmdsynopsis.001" results="cmdsynopsis.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="cmdsynopsis.002" results="cmdsynopsis.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="cmdsynopsis.003" results="cmdsynopsis.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="co.001" results="co.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
+<testresult id="dir.001" results="dir.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="docbook-43.001" results="docbook-43.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="draft.001" results="draft.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward references.  Ticket #77.</testresult>
+<testresult id="emphasis.001" results="emphasis.001.pdf" agreement="issues" specproblem="no" testproblem="no">No strikethrough, no underline.</testresult>
+<testresult id="epigraph.001" results="epigraph.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="equation.001" results="equation.001.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
+<testresult id="equation.002" results="equation.002.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
+<testresult id="equation.003" results="equation.003.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
+<testresult id="equation.004" results="equation.004.pdf" agreement="issues" specproblem="no" testproblem="no">No equations, no figure.  Ticket #80.</testresult>
+<testresult id="example.001" results="example.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="extensions.001" results="extensions.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
+<testresult id="extensions.002" results="extensions.002.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="extensions.003" results="extensions.003.pdf" agreement="issues" specproblem="no" testproblem="no">No line numbers.</testresult>
+<testresult id="extensions.004" results="extensions.004.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="figure.001" results="figure.001.pdf" agreement="issues" specproblem="no" testproblem="no">No figure.  Ticket #80.</testresult>
+<testresult id="figure.002" results="figure.002.pdf" agreement="issues" specproblem="no" testproblem="no">No figures.  Ticket #80.</testresult>
+<testresult id="figure.003" results="figure.003.pdf" agreement="issues" specproblem="no" testproblem="no">No figure.  Ticket #80.</testresult>
+<testresult id="figure.004" results="figure.004.pdf" agreement="issues" specproblem="no" testproblem="no">No figures.  Ticket #80.</testresult>
+<testresult id="figure.005" results="figure.005.pdf" agreement="issues" specproblem="no" testproblem="no">No figure.  Ticket #80.</testresult>
+<testresult id="firstterm.001" results="firstterm.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="footnote.001" results="footnote.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="footnote.002" results="footnote.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Not sure what result should be.</testresult>
+<testresult id="footnote.003" results="footnote.003.pdf" agreement="issues" specproblem="no" testproblem="no">No footnotes.</testresult>
+<testresult id="formalpara.001" results="formalpara.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="formalpara.002" results="formalpara.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="formalpara.003" results="formalpara.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="funcsynopsis.001" results="funcsynopsis.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="glossary.001" results="glossary.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="glossary.002.data" results="glossary.002.data.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="glossary.002" results="glossary.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="glossary.003" results="glossary.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="imagelib.001" results="imagelib.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="imageobjectco.001" results="imageobjectco.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="index.001" results="index.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="index.002" results="index.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="index.003" results="index.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="indexterm.001" results="indexterm.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="indexterm.002" results="indexterm.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="indexterm.003" results="indexterm.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="indexterm.004" results="indexterm.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="indexterm.005" results="indexterm.005.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="informaltable.001" results="informaltable.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.002" results="informaltable.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.003" results="informaltable.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.004" results="informaltable.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.005" results="informaltable.005.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.006" results="informaltable.006.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.007" results="informaltable.007.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.008" results="informaltable.008.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.009" results="informaltable.009.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.010" results="informaltable.010.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.011" results="informaltable.011.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.012" results="informaltable.012.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.013" results="informaltable.013.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.014" results="informaltable.014.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.015" results="informaltable.015.pdf" agreement="issues" specproblem="no" testproblem="no">Horizontal lines extend off page.</testresult>
+<testresult id="informaltable.016" results="informaltable.016.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.017" results="informaltable.017.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="informaltable.018" results="informaltable.018.pdf" agreement="issues" specproblem="no" testproblem="no">Left alignment is not the same.</testresult>
+<testresult id="inline.001" results="inline.001.pdf" agreement="issues" specproblem="no" testproblem="no">No red.</testresult>
+<testresult id="inline.002" results="inline.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="itemizedlist.001" results="itemizedlist.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be (but do know it's wrong).</testresult>
+<testresult id="itemizedlist.002" results="itemizedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.</testresult>
+<testresult id="itemizedlist.003" results="itemizedlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">Space at end of lists.  Ticket #29.</testresult>
+<testresult id="itemizedlist.004" results="itemizedlist.004.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what correct output should be.</testresult>
+<testresult id="itemizedlist.005" results="itemizedlist.005.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="itemizedlist.006" results="itemizedlist.006.pdf" agreement="issues" specproblem="no" testproblem="no">No marks.  Ticket #81.</testresult>
+<testresult id="legalnotice.001" results="legalnotice.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="lineannotation.001" results="lineannotation.001.pdf" agreement="full" specproblem="no" testproblem="yes"/>
+<testresult id="link.001" results="link.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="literallayout.001" results="literallayout.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="literallayout.002" results="literallayout.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="literallayout.003" results="literallayout.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="lot.001" results="lot.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="mediaobject.001" results="mediaobject.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="mediaobject.002" results="mediaobject.002.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject.  Ticket #80.</testresult>
+<testresult id="mediaobjectco.001" results="mediaobjectco.001.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
+<testresult id="mediaobjectco.002" results="mediaobjectco.002.pdf" agreement="issues" specproblem="no" testproblem="no">No mediaobject. Ticket #80.</testresult>
+<testresult id="methodsynopsis.001" results="methodsynopsis.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="note.001" results="note.001.pdf" agreement="issues" specproblem="no" testproblem="no">No note icon.  Ticket #80.</testresult>
+<testresult id="olink.001" results="olink.001.pdf" agreement="issues" specproblem="no" testproblem="no">No link. Ticket #82.</testresult>
+<testresult id="orderedlist.001" results="orderedlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
+<testresult id="orderedlist.002" results="orderedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
+<testresult id="orderedlist.003" results="orderedlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
+<testresult id="part.001" results="part.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="personname.001" results="personname.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="procedure.001" results="procedure.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
+<testresult id="procedure.002" results="procedure.002.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
+<testresult id="procedure.003" results="procedure.003.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers.  Ticket #81.</testresult>
+<testresult id="profile.001" results="profile.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what correct output should be.</testresult>
+<testresult id="programlisting.001" results="programlisting.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="programlisting.002" results="programlisting.002.pdf" agreement="issues" specproblem="no" testproblem="yes">No output. Not handling xi:include in source.</testresult>
+<testresult id="programlisting.003" results="programlisting.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="programlisting.004" results="programlisting.004.pdf" agreement="issues" specproblem="no" testproblem="no">Missing footnote. #95.</testresult>
+<testresult id="programlisting.005" results="programlisting.005.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="programlisting.006" results="programlisting.006.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="programlistingco.001" results="programlistingco.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
+<testresult id="programlistingco.002" results="programlistingco.002.pdf" agreement="issues" specproblem="no" testproblem="yes">No output. Not handling xi:include in source.</testresult>
+<testresult id="protocol.001" results="protocol.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="pubsnumber" results="pubsnumber.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="qandaset.001" results="qandaset.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers. Ticket #81.</testresult>
+<testresult id="qandaset.002" results="qandaset.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="qandaset.003" results="qandaset.003.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what correct result should be.</testresult>
+<testresult id="qandaset.004" results="qandaset.004.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers. Ticket #81.</testresult>
+<testresult id="qandaset.005" results="qandaset.005.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.001" results="refentry.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.002" results="refentry.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.003" results="refentry.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.004" results="refentry.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.005" results="refentry.005.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="refentry.006" results="refentry.006.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="refentry.007" results="refentry.007.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.008" results="refentry.008.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.009" results="refentry.009.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="refentry.010" results="refentry.010.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="reference.001" results="reference.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="reference.002" results="reference.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="remark.001" results="remark.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what the result should be.</testresult>
+<testresult id="remark.002" results="remark.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what the result should be.</testresult>
+<testresult id="revhistory.001" results="revhistory.001.pdf" agreement="issues" specproblem="no" testproblem="no">No list markers. Ticket #81.</testresult>
+<testresult id="screen.001" results="screen.001.pdf" agreement="full" specproblem="no" testproblem="yes"/>
+<testresult id="sect1.001" results="sect1.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="sect1.002" results="sect1.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="section.001" results="section.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="section.002" results="section.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="section.003" results="section.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="section.004" results="section.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="section.005" results="section.005.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="segmentedlist.001" results="segmentedlist.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="segmentedlist.002" results="segmentedlist.002.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="segmentedlist.003" results="segmentedlist.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="set.001" results="set.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="sgmltag" results="sgmltag.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="sidebar.001" results="sidebar.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="simplelist.001" results="simplelist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="simplesect.001" results="simplesect.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="stamp.001" results="stamp.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.002" results="stamp.002.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.003" results="stamp.003.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.004" results="stamp.004.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.005" results="stamp.005.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="stamp.006" results="stamp.006.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.007" results="stamp.007.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.008" results="stamp.008.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.009" results="stamp.009.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.010" results="stamp.010.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stamp.011" results="stamp.011.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="stamp.012" results="stamp.012.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="stamp.013" results="stamp.013.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
+<testresult id="stepalternatives.001" results="stepalternatives.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="subtitle.001" results="subtitle.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="superscript.001" results="superscript.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="svg.002" results="svg.002.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
+<testresult id="table.001" results="table.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.002" results="table.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.003" results="table.003.pdf" agreement="issues" specproblem="no" testproblem="no">Don't know what result should be.</testresult>
+<testresult id="table.004" results="table.004.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="table.005" results="table.005.pdf" agreement="issues" specproblem="no" testproblem="no">Don't know what result should be.</testresult>
+<testresult id="table.006" results="table.006.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.007" results="table.007.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.008" results="table.008.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.009" results="table.009.pdf" agreement="issues" specproblem="no" testproblem="yes">Nested table is too wide (#109).</testresult>
+<testresult id="table.010" results="table.010.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.011" results="table.011.pdf" agreement="issues" specproblem="no" testproblem="no">Contents do not start at the same place.</testresult>
+<testresult id="table.012" results="table.012.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="table.013" results="table.013.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="table.014" results="table.014.pdf" agreement="issues" specproblem="no" testproblem="no">Don't know what result should be.</testresult>
+<testresult id="table.015" results="table.015.pdf" agreement="issues" specproblem="no" testproblem="no">Area overflows not being handled correctly.</testresult>
+<testresult id="table.016" results="table.016.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="table.017" results="table.017.pdf" agreement="full" specproblem="no" testproblem="yes"/>
+<testresult id="table.018" results="table.018.pdf" agreement="full" specproblem="no" testproblem="yes"/>
+<testresult id="textobject.001" results="textobject.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="textobject.002" results="textobject.002.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="title.001" results="title.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="toc.001" results="toc.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="ulink.001" results="ulink.001.pdf" agreement="issues" specproblem="no" testproblem="no">No discretionary hyphens.</testresult>
+<testresult id="ulink.002" results="ulink.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="variablelist.001" results="variablelist.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="variablelist.002" results="variablelist.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="variablelist.003" results="variablelist.003.pdf" agreement="issues" specproblem="no" testproblem="no">No terms.  Ticket #81.</testresult>
+<testresult id="variablelist.004" results="variablelist.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="wordsize.001" results="wordsize.001.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
+<testresult id="xmlspace.001" results="xmlspace.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="xref.001" results="xref.001.pdf" agreement="issues" specproblem="no" testproblem="no">No forward references. Ticket #77.</testresult>
+<testresult id="xref.002" results="xref.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="xref.003" results="xref.003.pdf" agreement="issues" specproblem="no" testproblem="no">No forward references. #77.</testresult>
+<testresult id="xref.004" results="xref.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="xrefstyle.001" results="xrefstyle.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testcases profile="5.0" base="5.0">
+<testresult id="annotation.001" results="annotation.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="mathphrase.001" results="mathphrase.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="sidebar.001" results="sidebar.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="table.019" results="table.019.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="termdef.001" results="termdef.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+</testcases>
+<testcases profile="ebnf" base="ebnf">
+<testresult id="productionset.001" results="productionset.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="productionset.002" results="productionset.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="productionset.003" results="productionset.003.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="productionset.004" results="productionset.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
+<testresult id="productionset.005" results="productionset.005.pdf" agreement="issues" specproblem="no" testproblem="no">No forward references. No links.</testresult>
+<testresult id="productionset.006" results="productionset.006.pdf" agreement="full" specproblem="no" testproblem="no"/>
+</testcases>
+<testcases profile="mathml" base="mathml">
+<testresult id="informalequation-mml.001" results="informalequation-mml.001.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
+<testresult id="mathml.001" results="mathml.001.pdf" agreement="issues" specproblem="no" testproblem="no">No MathML.</testresult>
+</testcases>
+<testcases profile="svg" base="svg">
+<testresult id="svg.001" results="svg.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.</testresult>
+</testcases>
+</testcases>
+</testcases></testsuite>
