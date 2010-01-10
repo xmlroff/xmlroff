@@ -20,14 +20,31 @@
     </testcases>
     <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
       <testcases profile="region-body" base="region-body">
-        <testresult id="region-body-overflow1" results="region-body-overflow1.pdf" agreement="full" specproblem="no" testproblem="no">Treated as auto in accordance with XSL 1.0 spec.</testresult>
-      <testresult id="region-body-overflow2" results="region-body-overflow2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="region-body-border1" results="region-body-border1.pdf" agreement="full" specproblem="no" testproblem="yes">FO needs updating to describe current output.</testresult>
+        <testresult id="region-body-overflow1" results="region-body-overflow1.pdf" agreement="full" specproblem="no" testproblem="no">Treated as auto in accordance with XSL 1.0 spec.  Extra page.</testresult>
+      <testresult id="region-body-overflow2" results="region-body-overflow2.pdf" agreement="full" specproblem="no" testproblem="no">Extra page.</testresult>
       <testresult id="region-body-overflow3" results="region-body-overflow3.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
       <testresult id="region-body-overflow4" results="region-body-overflow4.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
       <testresult id="region-body-overflow5" results="region-body-overflow5.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
       <testresult id="region-body-overflow6" results="region-body-overflow6.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow7" results="region-body-overflow7.pdf" agreement="full" specproblem="no" testproblem="no"/>
     </testcases>
+      <testcases profile="region-before" base="region-before">
+        <testresult id="region-before-background-1" results="region-before-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="region-after" base="region-after">
+        <testresult id="region-after-background-1" results="region-after-background-1.pdf" agreement="issues" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="region-start" base="region-start">
+        <testresult id="region-start-background-1" results="region-start-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="region-end" base="region-end">
+        <testresult id="region-end-background-1" results="region-end-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="simple-page-master" base="simple-page-master">
+        <testresult id="region-before-after" results="region-before-after.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="region-before-after-2" results="region-before-after-2.pdf" agreement="issues" specproblem="no" testproblem="no">Empty third page.</testresult>
+      </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
@@ -95,12 +112,12 @@
       <testresult id="linefeed-treatment-5" results="linefeed-treatment-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="linefeed-treatment-6" results="linefeed-treatment-6.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="linefeed-treatment-7" results="linefeed-treatment-7.pdf" agreement="full" specproblem="no" testproblem="no"/>
-      <testresult id="text-align-start" results="text-align-start.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Alignment wrong.</testresult>
+      <testresult id="text-align-start" results="text-align-start.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
       <testresult id="text-align-center" results="text-align-center.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
-      <testresult id="text-align-end" results="text-align-end.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Extra blank pages.</testresult>
-      <testresult id="text-align-justify" results="text-align-justify.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Pango does not justify.  Extra blank pages.</testresult>
-      <testresult id="text-align-inside" results="text-align-inside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem. Extra blank pages.</testresult>
-      <testresult id="text-align-outside" results="text-align-outside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Alignment problems.  Extra blank pages..</testresult>
+      <testresult id="text-align-end" results="text-align-end.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
+      <testresult id="text-align-justify" results="text-align-justify.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Pango does not justify.</testresult>
+      <testresult id="text-align-inside" results="text-align-inside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem. Not swapping between pages.</testresult>
+      <testresult id="text-align-outside" results="text-align-outside.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.  Alignment problems.</testresult>
       <testresult id="text-align-left" results="text-align-left.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
       <testresult id="text-align-right" results="text-align-right.pdf" agreement="issues" specproblem="no" testproblem="no">Clipping problem.</testresult>
       <testresult id="white-space-collapse-1" results="white-space-collapse-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
@@ -193,7 +210,7 @@
     <testcases profile="table" base="table">
     </testcases>
     <testcases profile="writing-mode" base="writing-mode">
-      <testresult id="writing-mode" results="writing-mode.pdf" agreement="full" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.</testresult>
+      <testresult id="writing-mode" results="writing-mode.pdf" agreement="issues" specproblem="no" testproblem="yes">Should be broken into multiple tests with more explanation of expected results.  Ticket #43.  Alignment on first page in wrong.</testresult>
     </testcases>
 
   </testcases>
@@ -298,8 +315,8 @@
 <testresult id="bookinfo.001" results="bookinfo.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="bridgehead.001" results="bridgehead.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="calloutlist.001" results="calloutlist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No callouts.</testresult>
-<testresult id="calloutlist.002" results="calloutlist.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Don't know what result should be.</testresult>
-<testresult id="calloutlist.003" results="calloutlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">'Embedded Cos' title missing.  Extra blank page.</testresult>
+<testresult id="calloutlist.002" results="calloutlist.002.pdf" agreement="issues" specproblem="no" testproblem="yes">Missing second page.</testresult>
+<testresult id="calloutlist.003" results="calloutlist.003.pdf" agreement="issues" specproblem="no" testproblem="no">Missing second page.</testresult>
 <testresult id="changebars.001" results="changebars.001.pdf" agreement="issues" specproblem="no" testproblem="no">No changebars.</testresult>
 <testresult id="chapter.001" results="chapter.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="chapter.002" results="chapter.002.pdf" agreement="full" specproblem="no" testproblem="no"/>
@@ -431,7 +448,7 @@
 <testresult id="screen.001" results="screen.001.pdf" agreement="full" specproblem="no" testproblem="yes"/>
 <testresult id="sect1.001" results="sect1.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="sect1.002" results="sect1.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
-<testresult id="section.001" results="section.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
+<testresult id="section.001" results="section.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.  Dropping second paragraph after page break.</testresult>
 <testresult id="section.002" results="section.002.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="section.003" results="section.003.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="section.004" results="section.004.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
