@@ -60,6 +60,10 @@
 	      results="results/region-before-after.pdf">region-before and region-after with yellow background.</test>
         <test id="region-before-after-2" fo="multiple" xml="region-before-after-2.fo"
 	      results="results/region-before-after-2.pdf">region-before and region-after with yellow background on two pages.</test>
+        <test id="region-before-after-start-end-1" fo="multiple" xml="region-before-after-start-end-1.fo"
+	      results="results/region-before-after-start-end-1.pdf">region-before and region-after with yellow backgrounds. region-start and region-end with grey backgrounds.</test>
+        <test id="region-before-after-start-end-2" fo="multiple" xml="region-before-after-start-end-2.fo"
+	      results="results/region-before-after-start-end-2.pdf">region-before and region-after with yellow backgrounds and 'precedence="true"'. region-start and region-end with grey backgrounds.</test>
       </testcases>
     </testcases>
     <testcases profile="inline" base="inline">

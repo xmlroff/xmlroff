@@ -1,0 +1,39 @@
+<!-- xmlroff testsuite -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-right="1in"
+          margin-left="1in"
+          margin-bottom="1in"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body/>
+          <fo:region-before extent="40pt" background-color="yellow"/>
+          <fo:region-after extent="40pt" background-color="yellow"/>
+          <fo:region-start extent="40pt" background-color="grey"/>
+          <fo:region-end extent="40pt" background-color="grey"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:static-content flow-name="xsl-region-before">
+        <fo:block font-size="12pt">fo:block in region-before</fo:block>
+      </fo:static-content>
+      <fo:static-content flow-name="xsl-region-after">
+        <fo:block font-size="12pt">fo:block in region-after</fo:block>
+      </fo:static-content>
+      <fo:static-content flow-name="xsl-region-start">
+        <fo:block font-size="12pt">fo:block in region-start</fo:block>
+      </fo:static-content>
+      <fo:static-content flow-name="xsl-region-end">
+        <fo:block font-size="12pt">fo:block in region-end</fo:block>
+      </fo:static-content>
+      <fo:flow
+        flow-name="xsl-region-body"
+        font-size="10pt">
+        <fo:block space-after="12pt" font-size="12pt">region-before and region-after with yellow backgrounds. region-start and region-end with grey backgrounds.</fo:block>
+      </fo:flow>
+</fo:page-sequence>
+</fo:root>
