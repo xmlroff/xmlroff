@@ -6,7 +6,7 @@
 <!-- If a named template isn't in this file, see conversion-lib.xsl. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2010 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -70,7 +70,7 @@
  * fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>.h: '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -265,7 +265,7 @@ G_END_DECLS
  * fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>-private.h: Structures private to '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -491,7 +491,7 @@ G_END_DECLS
  * fo-</xsl:text><xsl:value-of select="$object"/><xsl:text>.c: '</xsl:text><xsl:value-of select="$object"/><xsl:text>' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -1467,15 +1467,13 @@ fo_</xsl:text>
 <xsl:value-of select="$lowercase-object-spaces"/>
 <xsl:text>           GError   **error)
 {
-  Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> *fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text> (fo));
   g_return_if_fail (FO_IS_CONTEXT (current_context));
   g_return_if_fail (FO_IS_CONTEXT (parent_context));
   g_return_if_fail (error == NULL || *error == NULL);
 
-  fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text> = FO_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text> (fo);
+  Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> *fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text> = FO_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text> (fo);
 
 </xsl:text>
 
@@ -1617,13 +1615,23 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr
 
   if (start_index != end_index)
     {
-      PangoAttribute *pango_attr;
+      /* FIXME: what is supposed to happen here? */
+
+      PangoAttribute *pango_attr G_GNUC_UNUSED;
 
     }
 
   *attr_glist = g_list_concat (my_attr_glist,
 			       *attr_glist);
 }
+</xsl:text>
+</xsl:if>
+
+<xsl:if test="$properties">
+  <xsl:text>
+/*
+ * These get/set functions are completely auto-generated.
+ */
 </xsl:text>
 </xsl:if>
 

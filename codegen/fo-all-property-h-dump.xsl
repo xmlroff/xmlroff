@@ -4,7 +4,7 @@
 <!-- Read the XSL spec and dump fo-all-property.h file -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2008-2010 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -39,7 +39,7 @@
  * fo-all-property.h: Header file that includes all property header files
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2008 Menteith Consulting Ltd
+ * Copyright (C) 2008-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */

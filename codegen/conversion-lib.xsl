@@ -4,7 +4,7 @@
 <!-- Common templates used when generating C code from XSL spec -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2010 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"

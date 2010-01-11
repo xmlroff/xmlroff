@@ -4,7 +4,7 @@
 <!-- Read the XSL spec and generate .c and .h files for FoContext object. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2010 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -229,7 +229,7 @@
  * fo-context.h: Context formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -350,7 +350,7 @@ G_END_DECLS
  * fo-context-private.h: Structures private to the FoContext formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -442,7 +442,7 @@ G_END_DECLS
  * fo-context.c: Context formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -511,16 +511,16 @@ enum {
 
   <xsl:text>};
 
-static void fo_context_class_init  (FoContextClass *klass);
-static void fo_context_set_property (GObject         *object,
-                                  guint            prop_id,
-                                  const GValue    *value,
-                                  GParamSpec      *pspec);
-static void fo_context_get_property   (GObject         *object,
-                                       guint            prop_id,
-                                       GValue          *value,
-                                       GParamSpec      *pspec);
-static void fo_context_finalize    (GObject           *object);
+static void fo_context_class_init   (FoContextClass *klass);
+static void fo_context_set_property (GObject        *object,
+				                             guint           prop_id,
+				                             const GValue   *value,
+				                             GParamSpec     *pspec);
+static void fo_context_get_property (GObject        *object,
+				                             guint           prop_id,
+				                             GValue         *value,
+				                             GParamSpec     *pspec);
+static void fo_context_finalize     (GObject        *object);
 
 static void fo_context_property_slist_foreach (gpointer   property,
 					       gpointer   context);

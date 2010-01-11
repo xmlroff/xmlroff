@@ -6,7 +6,7 @@
 <!-- If a named template isn't in this file, see conversion-lib.xsl. -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2010 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -158,7 +158,7 @@
  * fo-property-</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>.h: '</xsl:text><xsl:value-of select="$property"/><xsl:text>' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -1061,14 +1061,14 @@ G_END_DECLS
  * fo-property-</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>.c: '</xsl:text><xsl:value-of select="$property-filename"/><xsl:text>' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include &lt;string.h>
 </xsl:text>
-<xsl:text>#include "libfo/fo-utils.h"
+<xsl:text>#include "fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
