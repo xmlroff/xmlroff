@@ -44,6 +44,8 @@
       <testcases profile="simple-page-master" base="simple-page-master">
         <testresult id="region-before-after" results="region-before-after.pdf" agreement="full" specproblem="no" testproblem="no"/>
         <testresult id="region-before-after-2" results="region-before-after-2.pdf" agreement="issues" specproblem="no" testproblem="no">Empty third page.</testresult>
+        <testresult id="region-before-after-start-end-1" results="region-before-after-start-end-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="region-before-after-start-end-2" results="region-before-after-start-end-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
       </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
