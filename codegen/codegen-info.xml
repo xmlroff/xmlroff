@@ -3,12 +3,13 @@
 <!-- Control file for dumping .c and .h files from XSL spec -->
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
-<!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2007-2009 Menteith Consulting Ltd -->
 <!-- See COPYING for the status of this software. -->
 
 <codegen-info>
 <fos>
 <fo name="basic-link"
+    parent-type="marker-parent"
     inline="yes"
     mixed="yes"
     cbpbp="yes"/>
@@ -46,6 +47,8 @@
     validate-content="fo_fo_validate_content_empty"
     inline="yes"
     cbpbp="yes"/>
+<fo name="conditional-page-master-reference"
+    validate-content="fo_fo_validate_content_empty"/>
 <fo name="external-graphic"
     validate-content="fo_fo_validate_content_empty"
     inline="yes"
@@ -98,6 +101,7 @@
     inline="yes"
     cbpbp="yes"/>
 <fo name="page-sequence" area="yes"/>
+<fo name="page-sequence-master"/>
 <fo name="region-after"
     parent-type="region"
     validate-content="fo_fo_validate_content_empty"
@@ -123,8 +127,13 @@
     validate-content="fo_fo_validate_content_empty"
     reference="yes"
     cbpbp="yes"/>
+<fo name="repeatable-page-master-reference"
+    validate-content="fo_fo_validate_content_empty"/>
+<fo name="repeatable-page-master-alternatives"/>
 <fo name="simple-page-master"
     reference="yes"/>
+<fo name="single-page-master-reference"
+    validate-content="fo_fo_validate_content_empty"/>
 <fo name="static-content"
     validate-content="fo_fo_validate_content_block_plus"
     cbpbp="yes"/>
@@ -231,7 +240,7 @@ GType fo_enum_table_layout_method_get_type (void);
 <property name="background-color"/>
 <property name="background-image"/>
 <property name="baseline-shift" is-text-property="yes"/>
-<!--<property name="blank-or-not-blank"/>-->
+<property name="blank-or-not-blank"/>
 <property name="block-progression-dimension" type="length-range"/>
 <property name="border"
     resolve-enum="fo_property_util_resolve_wsc_enum"
@@ -461,7 +470,7 @@ GType fo_enum_table_layout_method_get_type (void);
     resolve-enum="fo_property_util_resolve_auto_enum"/>
 <property name="master-name"/>
 <property name="master-reference"/>
-<!--<property name="maximum-repeats"/>-->
+<property name="maximum-repeats"/>
 <property name="media-usage"
     init-value="fo_enum_get_enum_by_nick (&quot;auto&quot;)"/>
 <property name="number-columns-repeated"
@@ -470,7 +479,7 @@ GType fo_enum_table_layout_method_get_type (void);
     resolve-enum="fo_property_util_resolve_no_enum"/>
 <property name="number-rows-spanned"
     resolve-enum="fo_property_util_resolve_no_enum"/>
-<!--<property name="odd-or-even"/>-->
+<property name="odd-or-even"/>
 <property name="orphans">
 <defines>
 #define FO_PROPERTY_ORPHANS_INITIAL	2
@@ -488,7 +497,7 @@ GType fo_enum_table_layout_method_get_type (void);
 <property name="padding-start" type="length-conditional"/>
 <property name="padding-top"/>
 <property name="page-height"/>
-<!--<property name="page-position"/>-->
+<property name="page-position"/>
 <property name="page-width"/>
 <property name="precedence"/>
 <property name="provisional-distance-between-starts"
