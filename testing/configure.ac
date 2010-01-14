@@ -85,7 +85,35 @@ if test "x$COMPOSITE" = "xno" ; then
 fi
 AC_DEFINE_UNQUOTED(COMPOSITE, "$COMPOSITE", [Full path to ImageMagick 'composite' program.])
 
+#
+# Perl
+#
 AC_CHECK_PROGS(PERL, perl5 perl)
+
+dnl
+dnl Check for svn2cl for generating ChangeLog
+dnl
+enable_svn2cl=yes
+changelog_oldest=364
+AC_PATH_PROG([SVN2CL], [svn2cl])
+if test -z "$SVN2CL"; then
+  enable_svn2cl=no
+fi
+
+AM_CONDITIONAL(ENABLE_SVN2CL, test x$enable_svn2cl != xno)
+
+AC_ARG_WITH(changelog-oldest,
+	    AC_HELP_STRING([--with-changelog-oldest=NUMBER],
+			   [Oldest revision to include in ChangeLog]))
+
+if test "x$with_changelog_oldest" = "x" ; then
+  # Update this when moving current ChangeLog to ChangeLog.pre-nn.
+  CHANGELOG_OLDEST=$changelog_oldest
+else
+  CHANGELOG_OLDEST=$with_changelog_oldest
+fi
+
+AC_SUBST(CHANGELOG_OLDEST)
 
 ############################################################
 #
@@ -137,7 +165,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(project_name,
 	    AC_HELP_STRING([--with-project-name],
-			   [Project name used in URLs. (default=$project_name_default)]),
+			   [Project name used in URLs. (default=xmlroff)]),
 	      project_name="$withval", :)
 
 if test "x$with_project_name" = "x" ; then
@@ -501,7 +529,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(basename,
 	    AC_HELP_STRING([--with-basename],
-			   [Basename for use in URLs. (default=`basename $PWD`)]),
+			   [Basename for use in URLs. (default=current directory)]),
 	    basename="$withval", :)
 if test "x$with_basename" = "x" ; then
   BASENAME=$basename_default
@@ -535,7 +563,7 @@ if test -f "$TEST_RESULTS" ; then
 fi
 AC_ARG_WITH(color,
 	    AC_HELP_STRING([--with-color],
-			   [Color for use in URLs. (default=$COLOR)]),
+			   [Base color for report color scheme. (default=#DDEEFF)]),
 	    color="$withval", :)
 if test "x$with_color" = "x" ; then
   COLOR=$color_default
@@ -571,16 +599,17 @@ AC_OUTPUT
 echo "
 Configurable settings (and where set):
 
-command-patterns:    \"$COMMAND_PATTERNS\" ($command_patterns_setter)
-default-stylesheet:  \"$DEFAULT_STYLESHEET\" ($default_stylesheet_setter)
 test-results:        \"$TEST_RESULTS\" ($test_results_setter)
-testsuites:          \"$TESTSUITES\" ($testsuites_setter)
-test-subset:         \"$TEST_SUBSET\" ($test_subset_setter)
-xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
-xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
-project-name:        \"$PROJECT_NAME\" ($project_name_setter)
-trac:                \"$TRAC\" ($trac_setter)
+
 basename:            \"$BASENAME\" ($basename_setter)
 color:               \"$COLOR\" ($color_setter)
+command-patterns:    \"$COMMAND_PATTERNS\" ($command_patterns_setter)
+default-stylesheet:  \"$DEFAULT_STYLESHEET\" ($default_stylesheet_setter)
+project-name:        \"$PROJECT_NAME\" ($project_name_setter)
+test-subset:         \"$TEST_SUBSET\" ($test_subset_setter)
+testsuites:          \"$TESTSUITES\" ($testsuites_setter)
+trac:                \"$TRAC\" ($trac_setter)
+xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
+xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
 
 The 'configure' options that you used are recorded in 'config.log'."

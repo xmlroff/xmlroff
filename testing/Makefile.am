@@ -11,7 +11,7 @@ TESTING_PARAM=config.xsl
 RESULTS_PACKAGE=$(PROJECT_NAME)-$(BASENAME)
 
 EXTRA_DIST = \
-	$(STYLE_CSS)			\
+	$(STYLE_CSS).in			\
 	bottom-left.png			\
 	bottom-right.png		\
 	cairo-pdf-results.xml		\
@@ -106,6 +106,13 @@ dist-results:
 	(tar cf - `find . -maxdepth 2 -name \*.pdf` | (cd $(RESULTS_PACKAGE)-$(VERSION) ; tar xf -))
 	(tar cf - $(RESULTS_PACKAGE)-$(VERSION) | gzip -c > $(RESULTS_PACKAGE)-$(VERSION).tar.gz)
 	-rm -rf $(RESULTS_PACKAGE)-$(VERSION)
+
+FORCE:
+
+ChangeLog:	FORCE
+if ENABLE_SVN2CL
+	svn2cl --include-actions --authors=AUTHORS --group-by-day --separate-daylogs --include-rev --ignore-message-starting='#' --revision HEAD:$(CHANGELOG_OLDEST)
+endif
 
 #
 # Reliably "tag" the Subversion repository to mark the current release.
