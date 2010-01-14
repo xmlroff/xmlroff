@@ -1,3 +1,14 @@
+Changes between 0.6.1 and 0.6.2
+
+ * Added separate CSS file for reports (#46)
+ * Added --with-color configure options for setting report colour
+   scheme (useful when working with multiple test results at once)
+ * Added --with-basename configure option for use with Apache conf
+ * Added --with-test-subset for subsetting tests to run
+ * Removed 'DIFF', 'STEREO', etc., indicators from summary report
+ * Slight improvement to standalone web server
+ * Updated README
+
 Changes between 0.6.0 and 0.6.1
 
  * Added standalone web server for viewing results (#15)
