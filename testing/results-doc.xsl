@@ -81,19 +81,9 @@
             </xsl:for-each>
             <xsl:value-of select="$id"/>
           </title>
-          <style type="text/css">
-    .coloured {background-color: #DDEEFF}
-    .coloured2 {background-color: #CCDDFF}
-    .coloured3 {background-color: #BBCCFF}
-            body { background-color: grey}
-            h1 { background-color: white}
-            h2 { background-color: yellow}
-	    span.png-title { font-size: 150%; font-weight: bold}
-            tr.per-page-banner { background-color: yellow}
-            <xsl:call-template name="coverage-styles"/>
-          </style>
+          <link rel="stylesheet" type="text/css" href="../style.css"/>
         </head>
-        <body>
+        <body class="results">
           <div>
             <h1 class="coloured">
               <span style="font-size: 60%">

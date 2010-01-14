@@ -4,12 +4,14 @@ TESTSUITES=@TESTSUITES@
 XSLTPROC=xsltproc
 
 REPORT_HTML = index.html
+STYLE_CSS = style.css
 REPORT_PARAM =
 TESTING_PARAM=config.xsl
 
 RESULTS_PACKAGE=$(PROJECT_NAME)-$(BASENAME)
 
 EXTRA_DIST = \
+	$(STYLE_CSS)			\
 	bottom-left.png			\
 	bottom-right.png		\
 	cairo-pdf-results.xml		\
@@ -78,7 +80,7 @@ testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSO
 	perl testsuccess.pl . > $(TESTSUCCESS)
 	touch $@
 
-$(REPORT_HTML):	testsuccess.xsl results-doc.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl
+$(REPORT_HTML):	testsuccess.xsl results-doc.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl $(STYLE_CSS)
 	$(XSLTPROC) -o $@ --novalid \
 	--stringparam date "`date`" $(REPORT_PARAM) \
 	testsuccess.xsl @TEST_RESULTS@

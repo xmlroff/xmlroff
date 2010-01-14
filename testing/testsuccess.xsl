@@ -86,40 +86,7 @@
         <title>
           <xsl:value-of select="$page-title"/>
         </title>
-        <style type="text/css">
-          body { background-color: white}
-          .summary {text-align: center; align: center; margin-top:12pt; margin-left: auto; margin-right: auto}
-    td.full {background-color: green; color: white; text-align: center}
-    td.future {background-color: palegreen; text-align: center}
-    td.differ {background-color: yellow; text-align: center}
-    td.test {background-color: orange; text-align: center}
-    td.spec {background-color: red; text-align: center}
-    td.other {background-color: white; text-align: center}
-    td.not-yet-verified {background-color: silver; text-align: center}
-    .coloured {background-color: #DDEEFF}
-    td.testcases4 {border-top: 3pt solid white; border-bottom: solid white; vertical-align: middle}
-    .coloured2 {background-color: #CCDDFF}
-    td.testcases3 {border-top: 3pt solid white; border-bottom: solid white}
-    .coloured3 {background-color: #BBCCFF}
-    td.testcases2 {border-top: 6pt solid white; border-bottom: solid white}
-    .coloured4 {background-color: #99BBFF}
-    td.coloured4 {border-top: 18pt solid white; vertical-align: middle}
-    .coloured5 {background-color: #99AAFF}
-    tr.diff {background-color: #FFEEEE}
-    .right {background-image: url("top-right.png"); background-repeat: no-repeat; background-position: right top;}
-    .left {background-image: url("top-left.png"); background-repeat: no-repeat; background-position: left top;}
-    .last.right {background-image: url("bottom-right.png"); background-position: right bottom;}
-    .last.left {background-image: url("bottom-left.png"); background-position: left bottom;}
-    @media screen {
-    h2, h3, h4 {margin: 6pt}
-    }
-    .test-id {margin-left: 6pt}
-    @media print {
-    .summary {border: solid thin black}
-    .summary td {border: solid thin black }
-    .navtable {display: none}
-  }
-        </style>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
       </head>
       <body>
         <h1>

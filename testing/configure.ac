@@ -517,8 +517,53 @@ AC_DEFINE_UNQUOTED(BASENAME_SETTER,
 	           "$basename_setter",
 	           [Where BASENAME setting was set.])
 
+#
+# Color of project
+#
+# Used when constructing URLs
+#
+color_default="#DDEEFF"
+color_setter=$default_setter
+
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_color=["`$PERL -n -e'if(/<\?xt-color\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_color" != "x" ; then
+    color_default="$results_color"
+    color_setter=$results_setter
+  fi
+fi
+AC_ARG_WITH(color,
+	    AC_HELP_STRING([--with-color],
+			   [Color for use in URLs. (default=$COLOR)]),
+	    color="$withval", :)
+if test "x$with_color" = "x" ; then
+  COLOR=$color_default
+else
+  COLOR=$with_color
+  color_setter=$option_setter
+fi
+
+AC_SUBST(COLOR)
+COLOR2=`echo $COLOR | $PERL -n -e'\$prop=0.9;\$_ =~ s/#//;\$red = hex(substr(\$_,0,2));\$green = hex(substr(\$_,2,2));\$blue = hex(substr(\$_,4,2)); printf("#%02X%02X%02X",\$red*\$prop,\$green*\$prop,\$blue*\$prop)'`
+COLOR3=`echo $COLOR | $PERL -n -e'\$prop=0.8;\$_ =~ s/#//;\$red = hex(substr(\$_,0,2));\$green = hex(substr(\$_,2,2));\$blue = hex(substr(\$_,4,2)); printf("#%02X%02X%02X",\$red*\$prop,\$green*\$prop,\$blue*\$prop)'`
+COLOR4=`echo $COLOR | $PERL -n -e'\$prop=0.6;\$_ =~ s/#//;\$red = hex(substr(\$_,0,2));\$green = hex(substr(\$_,2,2));\$blue = hex(substr(\$_,4,2)); printf("#%02X%02X%02X",\$red*\$prop,\$green*\$prop,\$blue*\$prop)'`
+COLOR5=`echo $COLOR | $PERL -n -e'\$prop=0.4;\$_ =~ s/#//;\$red = hex(substr(\$_,0,2));\$green = hex(substr(\$_,2,2));\$blue = hex(substr(\$_,4,2)); printf("#%02X%02X%02X",\$red*\$prop,\$green*\$prop,\$blue*\$prop)'`
+
+AC_SUBST(COLOR2)
+AC_SUBST(COLOR3)
+AC_SUBST(COLOR4)
+AC_SUBST(COLOR5)
+AC_DEFINE_UNQUOTED(COLOR,
+	           "$COLOR",
+                   [Color for use in URLs.])
+AC_DEFINE_UNQUOTED(COLOR_SETTER,
+	           "$color_setter",
+	           [Where COLOR setting was set.])
+
 AC_CONFIG_FILES([
 Makefile
+style.css
 testing.conf
 ])
 AC_OUTPUT
@@ -536,5 +581,6 @@ xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
 project-name:        \"$PROJECT_NAME\" ($project_name_setter)
 trac:                \"$TRAC\" ($trac_setter)
 basename:            \"$BASENAME\" ($basename_setter)
+color:               \"$COLOR\" ($color_setter)
 
 The 'configure' options that you used are recorded in 'config.log'."

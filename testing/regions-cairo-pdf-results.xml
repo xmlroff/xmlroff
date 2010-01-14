@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<?xt-xsl-processor-flags --backend cairo?><?xt-basename branches/regions/testing-cairo-pdf?><testsuite profile="Regions -- Cairo PDF"><testcases base="testsuite" profile="xmlroff Test Suite">
+<?xt-xsl-processor-flags --backend cairo?><?xt-basename branches/regions/testing-cairo-pdf?><?xt-color #DDFFDD?><testsuite profile="Regions -- Cairo PDF"><testcases base="testsuite" profile="xmlroff Test Suite">
   
   <testcases profile="expression" base="expression">
     
