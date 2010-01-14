@@ -405,15 +405,24 @@ used for the test run, this module supports storing some parameters as
 processing instructions in the test results file and using those
 parameters when setting up to re-run the tests.
 
-The 'configure' options and their corresponding PIs (in the notional
-"xmlroff testing" namespace) are:
+The 'configure' options and their corresponding PIs (with "xt-" prefix
+meaning "xmlroff testing") are:
 
- --with-xsl-processor         xt-xsl-processor
- --with-xsl-processor-flags   xt-xsl-processor-flags
+ --with-basename              xt-basename
+ --with-color                 xt-color
  --with-command-patterns      xt-command-patterns
  --with-default-stylesheet    xt-default-stylesheet
+ --with-project-name          xt-project-name
+ --with-test-subset           xt-test-subset
  --with-testsuites            xt-testsuites
  --with-trac                  xt-trac
+ --with-xsl-processor         xt-xsl-processor
+ --with-xsl-processor-flags   xt-xsl-processor-flags
+
+The option without a PI (since you need it to find the file with the
+PIs) is:
+
+ --with-test-results
 
 The priority for setting a parameter, from lowest to highest, is:
 
@@ -483,11 +492,13 @@ Usage:
 
    xsltproc --novalid test2sh.xsl test2sh.xsl
 
-The parameters controlling the transformation are set in
-config.xsl:
+Applicable 'configure' parameters are:
 
- - The 'testsuites' parameter is the filename of the XML document
-   referring to multiple test suite descriptions.
+ - '--with-testsuites' sets the filename of the XML document referring
+   to multiple test suite descriptions.
+
+ - '--with-test-subset' restricts tests to those testcases with a
+   matching @profile value.
 
 The stylesheet expects that the current directory will have a
 subdirectory with the same name as the subdirectory of each of the
@@ -651,8 +662,12 @@ The parameters controlling the transformation are set when you run
 
    '--without-trac' disables creating links for ticket references.
 
-The summary report and the individual reports include information from
-both the test case description and the xmlroff test results.
+ - '--with-color' sets the base colour for the reports.  The colour
+   and lighter shades of the colour are used for backgrounds in the
+   generated HTML.
+
+The summary report (and the individual reports) include information
+from both the test case description and the xmlroff test results.
 
 The test case description information is obtained by following file
 references in the file referred to by the '--with-testsuites' option
@@ -677,6 +692,13 @@ Each row contains:
 
  - An indication of the number of output pages and, when individual
    reports are being produced, the types of the result files present.
+
+
+result-doc.xsl
+--------------
+
+Imported by testsuccess.xsl and used to generate individual report
+HTML for each test.
 
 The individual reports contain:
 
@@ -777,7 +799,12 @@ that has been found so far is:
 2. Adjust the paths in the 'testing.conf' copy as necessary to
    match your setup.
 
-3. Restart apache.
+   The '--with-project-name' and '--with-basename' values are used in
+   'testing.conf'.
+
+3. Restart apache, e.g.:
+
+      sudo /etc/init.d/apache2 restart
 
 4. Make the group id sticky (i.e., 'chmod g+s ...') for the current
    directory and all the generated directories.
@@ -823,4 +850,4 @@ license.  See the file COPYING for details.
 
 
 Tony Graham
-14 March 2009
+14 January 2010
