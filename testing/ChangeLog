@@ -1,151 +1,218 @@
-09/24/08 18:09:03 tkg [506]
-	* trunk/testing/cairo-pdf-results.xml (modified)
-	Added more tests.  Changed PI prefix.
+2010-01-14  Tony Graham
 
-09/24/08 18:07:50 tkg [505]
-	* trunk/testing/test2makefile.xsl (modified)
-	Not using stylesheet as dependency if it contains 'http:'.
+	* [r649] ChangeLog: Updated for 0.6.2.
 
-09/19/08 20:35:04 tkg [499]
-	* trunk/testing/h2pl.pl (modified)
-	Outputting filename in initial comment.
+	* [r648] Makefile.am, configure.ac: Automated producing ChangeLog.
 
-09/19/08 20:33:59 tkg [498]
-	* trunk/testing/png+ref2stereo.pl (modified)
-	Using CONVERT and COMPOSITE from config.pl.
+	* [r647] README: Updated.
 
-09/19/08 20:30:52 tkg [497]
-	* trunk/testing/test2makefile.xsl (modified)
-	Needed to also zero diffs in 'accept-all' target.
+	* [r646] AUTHORS: Added username for benefit of svn2cl.
 
-09/19/08 20:29:52 tkg [496]
-	* trunk/testing/Makefile.am (modified)
-	Added make-fop-testsuite.pl to distribution.
+	* [r645] NEWS: Updated for 0.6.2.
 
-09/18/08 20:57:39 tkg [495]
-	* trunk/testing/test2makefile.xsl (modified)
-	Added generating 'accept-all' rule for accepting current output as
-	reference.
+	* [r644] testing.conf.in: Fixed a typo.
 
-09/18/08 20:23:52 tkg [494]
-	* trunk/testing/NEWS (modified)
-	Updated for 0.6.1.
+	* [r643] Makefile.am, configure.ac, regions-cairo-pdf-results.xml,
+	  results-doc.xsl, style.css.in, testsuccess.xsl: Added
+	  'style.css.in' for separate CSS file for reports with colour
+	  scheme set by setting base colour as 'configure' option or PI in
+	  test results XML. Closes #46.
 
-09/18/08 14:47:26 tkg [493]
-	* trunk/testing/configure.ac (modified)
-	* trunk/testing/testsuccess.xsl (modified)
-	Moved '/ticket/' in Trac ticket URLs from hardcoded in XSLT to part
-	of configuration option so testing framework also plays nicely with
-	other bug trackers, e.g., Bugzilla.
+2010-01-12  Tony Graham
 
-09/18/08 14:30:38 tkg [492]
-	* trunk/testing/make-fop-testsuite.pl (modified)
-	Not rewriting test file name.
+	* [r638] regions-cairo-pdf-results.xml: Added 'xt-basenmae' PI.
 
-09/18/08 14:30:02 tkg [491]
-	* trunk/testing/configure.ac (modified)
-	* trunk/testing/testsuites2testresults.xsl (modified)
-	Outputting option PIs when creating initial test results XML file.
+2010-01-11  Tony Graham
 
-09/18/08 11:35:19 tkg [490]
-	* trunk/testing/make-fop-testsuite.pl (modified)
-	Re-escaping '&amp;' and '&lt;' in string from XML::XPath.
+	* [r637] regions-cairo-pdf-results.xml: Added simple tests for
+	  'precedence'.
 
-09/18/08 11:11:32 tkg [489]
-	* trunk/testing/configure.ac (modified)
-	Added --with-covert and --with-configure options for locating
-	'convert' and 'configure' respectively.  Useful on Windows with
-	Cygwin since Windows has a completely different 'convert' program
-	that may be earlier in the path.
+2010-01-10  Tony Graham
 
-09/03/08 11:41:16 tkg [473]
-	* trunk/testing/testing-server.pl (modified)
-	Adde --debug option.  Added initial comment.
+	* [r631] configure.ac: Added '--with-basename'.
 
-09/03/08 11:40:47 tkg [472]
-	* trunk/testing/README (modified)
-	Added standalone web server.
+	* [r630] results-doc.xsl, testsuccess.xsl: Moved two named
+	  templates into stylesheet that uses them.
 
-09/03/08 11:40:12 tkg [471]
-	* trunk/testing/NEWS (modified)
-	Upped version to 0.6.1.  Added standalone web server.
+	* [r629] testing-server.pl: Getting closer to running update
+	  script.
 
-09/02/08 14:51:56 tkg [470]
-	* trunk/testing/testing-server.pl (added)
-	Simple webserver for viewing test reports.  Re #15.
+	* [r628] regions-cairo-pdf-results.xml: Baseline for next phase of
+	  changes.
 
-09/02/08 14:49:43 tkg [469]
-	* trunk/testing/Makefile.am (modified)
-	* trunk/testing/testsuccess.xsl (modified)
-	Using test results file as input to testsuccess.xsl so easier to run
-	stylesheet inside a web server program.
+	* [r627] regions-cairo-pdf-results.xml: Test results for 'regions'
+	  branch with Cairo backend and PDF output.
 
-09/02/08 14:46:04 tkg [468]
-	* trunk/testing/configure.ac (modified)
-	Upped version to 0.6.1.
+2010-01-08  Tony Graham
 
-09/01/08 15:45:01 tkg [467]
-	* trunk/testing/make-fop-testsuite.pl (added)
-	Makes a starter XSL-style 'testsuite.xml' from FOP area tree test
-	file.
+	* [r626] update-results.pl: Fixed typos.
 
-07/10/08 14:08:27 tkg [464]
-	* trunk/testing/ChangeLog (modified)
-	Updated.
+	* [r625] Makefile.am, testsuccess.xsl: Moved individual report XSL
+	  to results-doc.xsl.
 
-07/10/08 14:07:46 tkg [463]
-	* trunk/testing/Makefile.am (modified)
-	Added docbook-testdocs.conf to distribution.
+	* [r624] results-doc.xsl: XSL stylesheet to generate individual
+	  HTML report for a test.
 
-07/10/08 13:59:22 tkg [461]
-	* trunk/testing/cairo-ps-results.xml (modified)
-	Updated for 0.6.0.
+2009-11-23  Tony Graham
 
-07/10/08 13:57:43 tkg [460]
-	* trunk/testing/testresults.xml (modified)
-	Updated for 0.6.0.
+	* [r623] common.xsl: Modified 'merge-dirnawes' to handle 'http:'
+	  URL + absolute filename.
 
-07/10/08 13:54:37 tkg [459]
-	* trunk/testing/NEWS (modified)
-	Updated for 0.6.0.
+	* [r622] README: Minor edits.
 
-07/10/08 13:48:11 tkg [458]
-	* trunk/testing/README (modified)
-	Added instructions for checking out DocBook callout symbols. (Closes
-	#80.)
+	* [r621] Makefile.am: Added make-fop-testsuite.pl and
+	  make-testsuite.pl to $EXTRA_DIST.
 
-07/10/08 13:11:51 tkg [457]
-	* trunk/testing/docbook-testdocs.conf (modified)
-	Corrected comments to apply to DocBook testdocs.
+	* [r620] configure.ac: Fixed a typo in help string.
 
-07/06/08 21:34:32 tkg [438]
-	* trunk/testing/cairo-pdf-results.xml (modified)
-	Updated.
+	* [r619] ChangeLog.pre-0.6: Added some missing entries.
 
-03/11/08 10:17:48 tkg [384]
-	* trunk/testing/COPYING (modified)
-	* trunk/testing/configure.ac (modified)
-	Thanks to the efforts of Jon Bosak of Sun and of Mike Anastasio of
-	Sun's Intellectual Property Law Group, Sun has approved the re-
-	release of xmlroff under this BSD license (essentially the same as
-	the old one with the nuclear paragraph removed).  Changes made
-	since Sun released the original source code and ceased its
-	involvement with the project are similarly relicensed.
+2009-10-25  Tony Graham
 
-	Version number upped to 0.6.0 to mark the change in license terms.
+	* [r607] configure.ac: Minor edits to some help strings.
 
-03/08/08 21:56:17 tkg [363]
-	* trunk/testing/configure.ac (modified)
-	Upped version to 0.5.5.
+2009-02-23  Tony Graham
 
-03/08/08 21:55:16 tkg [362]
-	* trunk/testing/testresults.xml (modified)
-	Updated for xmlroff 0.5.5.
+	* [r542] testing-server.pl: Testing server index.html doesn't have
+	  to be at /index.html so can play well with test files in
+	  ../testsuite/*.
 
-03/08/08 21:54:03 tkg [361]
-	* trunk/testing/cairo-pdf-results.xml (modified)
-	Updated for xmlroff 0.5.5.
+2008-10-24  Tony Graham
 
-03/08/08 21:52:53 tkg [360]
-	* trunk/testing/cairo-ps-results.xml (modified)
-	Updated for xmlroff 0.5.5.
+	* [r524] Makefile.am: Getting results package name from project
+	  name and current directory name.
+
+2008-10-15  Tony Graham
+
+	* [r519] testsuccess.xsl: Added using 'project-name' configure
+	  parameter. Removed 'DIFF', 'STEREO', etc., indicators.
+
+	* [r518] testing.conf.in, update-results.pl: Added using
+	  'project-name' configure parameter.
+
+	* [r517] configure.ac: Added 'project-name' configure parameter.
+	  Upped version to 0.6.2.
+
+	* [r516] testing-server.pl: Added configurable port number.
+
+	* [r515] make-fop-testsuite.pl: Added '--title' to usage.
+
+2008-10-14  Tony Graham
+
+	* [r514] README: Added notes about using setfacl to give Apache
+	  permission to modify files.
+
+	* [r513] configure.ac, test2sh.xsl: Added simple configure-time
+	  subsetting of which tests to run.
+
+2008-09-24  Tony Graham
+
+	* [r508] Makefile.am: Added testing-server.pl.
+
+	* [r507] ChangeLog: Updated for 0.6.1.
+
+	* [r506] cairo-pdf-results.xml: Added more tests. Changed PI
+	  prefix.
+
+	* [r505] test2makefile.xsl: Not using stylesheet as dependency if
+	  it contains 'http:'.
+
+2008-09-19  Tony Graham
+
+	* [r499] h2pl.pl: Outputting filename in initial comment.
+
+	* [r498] png+ref2stereo.pl: Using CONVERT and COMPOSITE from
+	  config.pl.
+
+	* [r497] test2makefile.xsl: Needed to also zero diffs in
+	  'accept-all' target.
+
+	* [r496] Makefile.am: Added make-fop-testsuite.pl to distribution.
+
+2008-09-18  Tony Graham
+
+	* [r495] test2makefile.xsl: Added generating 'accept-all' rule for
+	  accepting current output as reference.
+
+	* [r494] NEWS: Updated for 0.6.1.
+
+	* [r493] configure.ac, testsuccess.xsl: Moved '/ticket/' in Trac
+	  ticket URLs from hardcoded in XSLT to part of configuration
+	  option so testing framework also plays nicely with other bug
+	  trackers, e.g., Bugzilla.
+
+	* [r492] make-fop-testsuite.pl: Not rewriting test file name.
+
+	* [r491] configure.ac, testsuites2testresults.xsl: Outputting
+	  option PIs when creating initial test results XML file.
+
+	* [r490] make-fop-testsuite.pl: Re-escaping '&' and '<' in string
+	  from XML::XPath.
+
+	* [r489] configure.ac: Added --with-covert and --with-configure
+	  options for locating 'convert' and 'configure' respectively.
+	  Useful on Windows with Cygwin since Windows has a completely
+	  different 'convert' program that may be earlier in the path.
+
+2008-09-03  Tony Graham
+
+	* [r473] testing-server.pl: Adde --debug option. Added initial
+	  comment.
+
+	* [r472] README: Added standalone web server.
+
+	* [r471] NEWS: Upped version to 0.6.1. Added standalone web server.
+
+2008-09-02  Tony Graham
+
+	* [r470] testing-server.pl: Simple webserver for viewing test
+	  reports. Re #15.
+
+	* [r469] Makefile.am, testsuccess.xsl: Using test results file as
+	  input to testsuccess.xsl so easier to run stylesheet inside a web
+	  server program.
+
+	* [r468] configure.ac: Upped version to 0.6.1.
+
+2008-09-01  Tony Graham
+
+	* [r467] make-fop-testsuite.pl: Makes a starter XSL-style
+	  'testsuite.xml' from FOP area tree test file.
+
+2008-07-10  Tony Graham
+
+	* [r464] ChangeLog: Updated.
+
+	* [r463] Makefile.am: Added docbook-testdocs.conf to distribution.
+
+	* [r462] ChangeLog, ChangeLog.pre-0.6[CPY]: Updated for 0.6.0.
+
+	* [r461] cairo-ps-results.xml: Updated for 0.6.0.
+
+	* [r460] testresults.xml: Updated for 0.6.0.
+
+	* [r459] NEWS: Updated for 0.6.0.
+
+	* [r458] README: Added instructions for checking out DocBook
+	  callout symbols. (Closes #80.)
+
+	* [r457] docbook-testdocs.conf: Corrected comments to apply to
+	  DocBook testdocs.
+
+2008-07-06  Tony Graham
+
+	* [r438] cairo-pdf-results.xml: Updated.
+
+2008-03-11  Tony Graham
+
+	* [r384] COPYING, configure.ac: Thanks to the efforts of Jon Bosak
+	  of Sun and of Mike Anastasio of Sun's Intellectual Property Law
+	  Group, Sun has approved the re-release of xmlroff under this BSD
+	  license (essentially the same as the old one with the nuclear
+	  paragraph removed). Changes made since Sun released the original
+	  source code and ceased its involvement with the project are
+	  similarly relicensed.
+	  
+	  Version number upped to 0.6.0 to mark the change in license
+	  terms.
+
