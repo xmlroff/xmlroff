@@ -662,102 +662,59 @@ enum {
   </xsl:if>
 
   <xsl:text>
-static void fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init  (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class *klass);
+static void _class_init            (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class *klass);
 </xsl:text>
 
 <xsl:if test="$fo-block-fo-iface">
-  <xsl:text>static void fo_</xsl:text>
-  <xsl:value-of select="$lowercase-object"/>
-  <xsl:text>_block_fo_init (FoBlockFoIface *iface);&#10;</xsl:text>
+  <xsl:text>static void _block_fo_init         (FoBlockFoIface *iface);&#10;</xsl:text>
 </xsl:if>
 
 <xsl:if test="$fo-cbpbp-fo-iface">
-  <xsl:text>static void fo_</xsl:text>
-  <xsl:value-of select="$lowercase-object"/>
-  <xsl:text>_cbpbp_fo_init (FoCBPBPFoIface *iface);&#10;</xsl:text>
+  <xsl:text>static void _cbpbp_fo_init         (FoCBPBPFoIface *iface);&#10;</xsl:text>
 </xsl:if>
 
 <xsl:if test="$fo-inline-fo-iface">
-  <xsl:text>static void fo_</xsl:text>
-  <xsl:value-of select="$lowercase-object"/>
-  <xsl:text>_inline_fo_init (FoInlineFoIface *iface);&#10;</xsl:text>
+  <xsl:text>static void _inline_fo_init        (FoInlineFoIface *iface);&#10;</xsl:text>
 </xsl:if>
 
 <xsl:if test="$fo-table-border-fo-iface">
-  <xsl:text>static void fo_</xsl:text>
-  <xsl:value-of select="$lowercase-object"/>
-  <xsl:text>_table_border_fo_init (FoTableBorderFoIface *iface);&#10;</xsl:text>
+  <xsl:text>static void _table_border_fo_init  (FoTableBorderFoIface *iface);&#10;</xsl:text>
 </xsl:if>
+
+<xsl:text>static void _finalize              (GObject      *object);
+</xsl:text>
 
 <xsl:if test="$properties">
-<xsl:text>static void fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_get_property (GObject      *object,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               guint         prop_id,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               GValue       *value,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               GParamSpec   *pspec);
-static void fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_set_property (GObject      *object,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               guint         prop_id,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               const GValue *value,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               GParamSpec   *pspec);
+  <xsl:text>static void _get_property          (GObject      *object,
+                                    guint         prop_id,
+                                    GValue       *value,
+                                    GParamSpec   *pspec);
+static void _set_property          (GObject      *object,
+                                    guint         prop_id,
+                                    const GValue *value,
+                                    GParamSpec   *pspec);
 </xsl:text>
 </xsl:if>
 
-<xsl:text>static void fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_finalize    (GObject           *object);
-</xsl:text>
 <xsl:if test="not($validate-content)">
-<xsl:text>static gboolean fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_validate_content (FoFo    *fo,
-                   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>                   GError **error);
+<xsl:text>static gboolean _validate_content  (FoFo         *fo,
+                                    GError     **error);
 </xsl:text>
 </xsl:if>
 <xsl:if test="not($validate)">
-<xsl:text>static void fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_validate (FoFo      *fo,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>           FoContext *current_context,
-               </xsl:text>
-               <xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>           FoContext *parent_context,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>           GError   **error);
+  <xsl:text>static void _validate              (FoFo         *fo,
+                                    FoContext    *current_context,
+                                    FoContext    *parent_context,
+                                    GError      **error);
 </xsl:text></xsl:if>
-<xsl:text>static void fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_update_from_context (FoFo      *fo,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>                      FoContext *context);
-static void fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_debug_dump_properties (FoFo *fo,
-               </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>                        gint  depth);
+<xsl:text>static void _update_from_context   (FoFo         *fo,
+                                    FoContext    *context);
+static void _debug_dump_properties (FoFo         *fo,
+                                    gint          depth);
 </xsl:text>
 
 <xsl:if test="$fo-inline-fo-iface">
-  <xsl:text>static void fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr_list (FoFo    *fo_inline_fo,
+  <xsl:text>static void _get_text_attr_list (FoFo    *fo_inline_fo,
 				             FoDoc   *fo_doc,
 					     GString *text,
 					     GList  **attr_glist,
@@ -787,7 +744,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 	  sizeof (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class),
 	  NULL,           /* base_init */
 	  NULL,           /* base_finalize */
-	  (GClassInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init,
+	  (GClassInitFunc) _class_init,
 	  NULL,           /* class_finalize */
 	  NULL,           /* class_data */
 	  sizeof (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>),
@@ -801,7 +758,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 <xsl:if test="$fo-inline-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_inline_fo_info =
 	{
-	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_inline_fo_init, /* interface_init */
+	  (GInterfaceInitFunc) _inline_fo_init, /* interface_init */
 	  NULL,
 	  NULL
 	};
@@ -812,7 +769,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 <xsl:if test="$fo-block-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_block_fo_info =
 	{
-	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init,	 /* interface_init */
+	  (GInterfaceInitFunc) _block_fo_init,	 /* interface_init */
 	  NULL,
 	  NULL
 	};
@@ -823,7 +780,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 <xsl:if test="$fo-cbpbp-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_cbpbp_fo_info =
 	{
-	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init,	 /* interface_init */
+	  (GInterfaceInitFunc) _cbpbp_fo_init,	 /* interface_init */
 	  NULL,
 	  NULL
 	};
@@ -834,7 +791,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 <xsl:if test="$fo-table-border-fo-iface">
   <xsl:text>      static const GInterfaceInfo fo_table_border_fo_info =
 	{
-	  (GInterfaceInitFunc) fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_table_border_fo_init, /* interface_init */
+	  (GInterfaceInitFunc) _table_border_fo_init, /* interface_init */
 	  NULL,
 	  NULL
 	};
@@ -881,26 +838,26 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_type (voi
 }
 
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init:
+ * _class_init:
  * @klass: #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class object to initialise.
  * 
  * Implements #GClassInitFunc for #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class.
  **/
-void
-fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class *klass)
+static void
+_class_init (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Class *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoFoClass *fofo_class = FO_FO_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_finalize;
+  object_class->finalize = _finalize;
 </xsl:text>
 
 <xsl:if test="$properties">
   <xsl:text>
-  object_class->get_property = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_property;
-  object_class->set_property = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_set_property;
+  object_class->get_property = _get_property;
+  object_class->set_property = _set_property;
 </xsl:text>
 </xsl:if>
 
@@ -912,23 +869,22 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init (F
     <xsl:value-of select="$validate-content"/>
   </xsl:when>
   <xsl:otherwise>
-    <xsl:text>fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_validate_content</xsl:text>
+    <xsl:text>_validate_content</xsl:text>
   </xsl:otherwise>
 </xsl:choose>
 <xsl:text>;
-  fofo_class->validate2 =
-    </xsl:text>
+  fofo_class->validate2 = </xsl:text>
 <xsl:choose>
   <xsl:when test="$validate">
     <xsl:value-of select="$validate"/>
   </xsl:when>
   <xsl:otherwise>
-    <xsl:text>fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_validate</xsl:text>
+    <xsl:text>_validate</xsl:text>
   </xsl:otherwise>
 </xsl:choose>
 <xsl:text>;
-  fofo_class->update_from_context = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_update_from_context;
-  fofo_class->debug_dump_properties = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_debug_dump_properties;
+  fofo_class->update_from_context = _update_from_context;
+  fofo_class->debug_dump_properties = _debug_dump_properties;
 </xsl:text>
 
 <xsl:if test="$allowed-fos[. = $object][../@mixed = 'yes']">
@@ -1001,13 +957,13 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_class_init (F
 
 <xsl:if test="$fo-inline-fo-iface">
   <xsl:text>/**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_inline_fo_init:
+ * _inline_fo_init:
  * @iface: #FoInlineFoIFace structure for this class.
  * 
  * Initialize #FoInlineFoIface interface for this class.
  **/
-void
-fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_inline_fo_init (FoInlineFoIface *iface)
+static void
+_inline_fo_init (FoInlineFoIface *iface)
 {
   iface->get_text_attr_list = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr_list;
 }
@@ -1017,12 +973,12 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_inline_fo_ini
 
 <xsl:if test="$fo-block-fo-iface">
   <xsl:text>/**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init:
+ * _block_fo_init:
  * @iface: #FoBlockFoIFace structure for this class.
  * 
  * Initialize #FoBlockFoIface interface for this class.
  **/
-void
+static void
 fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init (FoBlockFoIface *iface)
 {
   iface->get_background_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_background_color;
@@ -1056,13 +1012,13 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_block_fo_init
 
 <xsl:if test="$fo-cbpbp-fo-iface">
   <xsl:text>/**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init:
+ * _cbpbp_fo_init:
  * @iface: #FoCBPBPFoIFace structure for this class.
  * 
  * Initialize #FoCBPBPFoIface interface for this class.
  **/
-void
-fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init (FoCBPBPFoIface *iface)
+static void
+_cbpbp_fo_init (FoCBPBPFoIface *iface)
 {
   iface->get_background_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_background_color;
   iface->get_border_after_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_after_color;
@@ -1088,13 +1044,13 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_cbpbp_fo_init
 
 <xsl:if test="$fo-table-border-fo-iface">
   <xsl:text>/**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_table_border_fo_init:
+ * _table_border_fo_init:
  * @iface: #FoTableBorderFoIFace structure for this class.
  * 
  * Initialize #FoTableBorderFoIface interface for this class.
  **/
-void
-fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_table_border_fo_init (FoTableBorderFoIface *iface)
+static void
+_table_border_fo_init (FoTableBorderFoIface *iface)
 {
   iface->get_background_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_background_color;
   iface->get_border_after_color = fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_border_after_color;
@@ -1119,13 +1075,13 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_table_border_
 </xsl:if>
 
 <xsl:text>/**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_finalize:
+ * _finalize:
  * @object: #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> object to finalize.
  * 
  * Implements #GObjectFinalizeFunc for #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>.
  **/
-void
-fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_finalize (GObject *object)
+static void
+_finalize (GObject *object)
 {
   FoFo *fo = FO_FO (object);
 
@@ -1179,7 +1135,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_finalize (GOb
 <xsl:if test="$properties">
   <xsl:text>
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_property:
+ * _get_property:
  * @object:  #GObject whose property will be retrieved.
  * @prop_id: Property ID assigned when property registered.
  * @value:   GValue to set with property value.
@@ -1187,19 +1143,11 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_finalize (GOb
  * 
  * Implements #GObjectGetPropertyFunc for #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>.
  **/
-void
-fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_get_property (GObject    *object,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               guint       prop_id,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               GValue     *value,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               GParamSpec *pspec)
+static void
+_get_property (GObject    *object,
+               guint       prop_id,
+               GValue     *value,
+               GParamSpec *pspec)
 {
   FoFo *fo_fo;
 
@@ -1268,7 +1216,7 @@ fo_</xsl:text>
 }
 
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_set_property:
+ * _set_property:
  * @object:  #GObject whose property will be set.
  * @prop_id: Property ID assigned when property registered.
  * @value:   New value for property.
@@ -1276,19 +1224,11 @@ fo_</xsl:text>
  * 
  * Implements #GObjectSetPropertyFunc for #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>.
  **/
-void
-fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_set_property (GObject      *object,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               guint         prop_id,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               const GValue *value,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>               GParamSpec   *pspec)
+static void
+_set_property (GObject      *object,
+               guint         prop_id,
+               const GValue *value,
+               GParamSpec   *pspec)
 {
   FoFo *fo_fo;
 
@@ -1398,7 +1338,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_error_quark (
   <xsl:if test="not($validate-content)">
   <xsl:text>
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_validate_content:
+ * _validate_content:
  * @fo:    #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> object to validate.
  * @error: #GError indicating error condition, if any.
  * 
@@ -1410,12 +1350,8 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_error_quark (
  * Return value: %FALSE if content model okay, %TRUE if not.
  **/
 gboolean
-fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_validate_content (FoFo    *fo,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>                   GError **error)
+_validate_content (FoFo    *fo,
+                   GError **error)
 {
   /*GError *tmp_error = NULL;*/
 
@@ -1443,7 +1379,7 @@ error:
 <xsl:if test="not($validate)">
   <xsl:text>
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_validate:
+ * _validate:
  * @fo:              #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> object to validate.
  * @current_context: #FoContext associated with current object.
  * @parent_context:  #FoContext associated with parent FO.
@@ -1453,19 +1389,11 @@ error:
  * @current_context, then update @fo property values.  Set @error if
  * an error occurred.
  **/
-void
-fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_validate (FoFo      *fo,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>           FoContext *current_context,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>           FoContext *parent_context,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>           GError   **error)
+static void
+_validate (FoFo      *fo,
+           FoContext *current_context,
+           FoContext *parent_context,
+           GError   **error)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text> (fo));
@@ -1512,19 +1440,15 @@ fo_</xsl:text>
 
 <xsl:text>
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_update_from_context:
+ * _update_from_context:
  * @fo:      The #FoFo object.
  * @context: The #FoContext object from which to update the properties of @fo.
  * 
  * Sets the properties of @fo to the corresponding property values in @context.
  **/
-void
-fo_</xsl:text>
-<xsl:value-of select="$lowercase-object"/>
-<xsl:text>_update_from_context (FoFo      *fo,
-   </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-<xsl:text>                      FoContext *context)
+static void
+_update_from_context (FoFo      *fo,
+                      FoContext *context)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_</xsl:text><xsl:value-of select="$uppercase-object"/><xsl:text> (fo));
@@ -1571,7 +1495,7 @@ fo_</xsl:text>
 <xsl:if test="$fo-inline-fo-iface">
   <xsl:text>
 /**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr_list:
+ * _get_text_attr_list:
  * @fo_inline_fo: The #FoInlineFo object.
  * @fo_doc:       The #FoDoc that will render @fo_inline_fo.
  * @text:         The text of the inline FO.
@@ -1580,7 +1504,7 @@ fo_</xsl:text>
  * 
  * Gets the text of the inline FO and its associated list of #PangoAttribute.
  **/
-void
+static void
 fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_get_text_attr_list (FoFo *fo_inline_fo,
 				 FoDoc   *fo_doc,
 				 GString *text,

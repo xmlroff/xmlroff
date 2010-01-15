@@ -670,7 +670,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_set_</xsl:tex
 
   if (new_</xsl:text><xsl:value-of select="$lowercase-use-property"/><xsl:text> != NULL)
     {
-      g_object_ref (new_</xsl:text><xsl:value-of select="$lowercase-use-property"/><xsl:text>);
+      g_object_ref_sink (new_</xsl:text><xsl:value-of select="$lowercase-use-property"/><xsl:text>);
     }
   if (fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>-></xsl:text><xsl:value-of select="$lowercase-use-property"/><xsl:text> != NULL)
     {
@@ -726,7 +726,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_set_</xsl:tex
       select="substring($spaces, 1, string-length($lowercase-object))"/>
 
     <xsl:text>/**
- * fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_debug_dump_properties:
+ * _debug_dump_properties:
 </xsl:text>
     <xsl:choose>
       <xsl:when test="$object = 'context'">
@@ -742,8 +742,8 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_set_</xsl:tex
  * Calls #fo_object_debug_dump on each property of @fo then calls
  * debug_dump_properties method of parent class.
  **/
-void
-fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_debug_dump_properties (</xsl:text>
+static void
+_debug_dump_properties (</xsl:text>
     <xsl:choose>
       <xsl:when test="$object = 'context'">
         <xsl:text>FoContext *fo_context</xsl:text>
@@ -752,9 +752,7 @@ fo_</xsl:text><xsl:value-of select="$lowercase-object"/><xsl:text>_debug_dump_pr
         <xsl:text>FoFo *fo</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
-    <xsl:text>,&#10;                           </xsl:text>
-<xsl:value-of select="$lowercase-object-spaces"/>
-    <xsl:text>gint  depth)
+    <xsl:text>,&#10;                        gint  depth)
 {
 </xsl:text>
 
