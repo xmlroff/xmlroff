@@ -112,6 +112,7 @@
         </xsl:choose>
       </xsl:for-each>
 
+      <xsl:text>    &amp;fo-property-util;&#10;</xsl:text>
       <xsl:text>  &lt;/chapter>&#10;</xsl:text>
     </exsl:document>
   </xsl:template>

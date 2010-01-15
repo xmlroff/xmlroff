@@ -112,6 +112,7 @@
         </xsl:choose>
       </xsl:for-each>
 
+      <xsl:text>&lt;!ENTITY fo-property-util SYSTEM "xml/fo-property-util.xml">&#10;</xsl:text>
     </exsl:document>
   </xsl:template>
 
