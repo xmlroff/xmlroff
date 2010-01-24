@@ -527,8 +527,6 @@ G_END_DECLS
             <xsl:value-of select="$resolve-enum"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>fo_property_</xsl:text>
-            <xsl:value-of select="$property-identifier"/>
             <xsl:text>_resolve_enum</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
@@ -551,8 +549,6 @@ G_END_DECLS
             <xsl:value-of select="$resolve-enum"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:text>fo_property_</xsl:text>
-            <xsl:value-of select="$property-identifier"/>
             <xsl:text>_resolve_enum</xsl:text>
           </xsl:otherwise>
         </xsl:choose>
@@ -1122,41 +1118,28 @@ struct _FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Cl
   FoPropertyClass parent_class;
 };
 
-static void fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_init         (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>      *property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>);
+static void _init         (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>      *property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>);
 </xsl:text>
 
-<xsl:text>static void fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_class_init   (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class *klass);
-static void fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_finalize     (GObject       *object);
+<xsl:text>static void _class_init   (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class *klass);
 </xsl:text>
   <xsl:if test="$is-text-property">
-    <xsl:text>static void fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_text_property_init (FoPropertyTextPropertyIface *iface);&#10;</xsl:text>
+    <xsl:text>static void _text_property_init (FoPropertyTextPropertyIface *iface);&#10;</xsl:text>
 </xsl:if>
 <xsl:text>
 </xsl:text>
 
 <xsl:if test="not($resolve-enum)">
-    <xsl:text>static FoDatatype * fo_property_</xsl:text>
-<xsl:value-of select="$property-identifier"/>
-<xsl:text>_resolve_enum (const gchar *token,
-                                </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>               FoContext   *context,
-                                </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>               GError     **error);
+  <xsl:text>static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
 </xsl:text>
 </xsl:if>
 
 <xsl:if test="not($validate)">
-  <xsl:text>static FoDatatype * fo_property_</xsl:text>
-<xsl:value-of select="$property-identifier"/>
-<xsl:text>_validate (FoDatatype *datatype,
-                                </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>           FoContext  *context,
-                                </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>           GError    **error);
+  <xsl:text>static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 </xsl:text>
 </xsl:if>
 
@@ -1189,12 +1172,12 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
         sizeof (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 </xsl:text>
@@ -1202,7 +1185,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
   <xsl:text>
       static const GInterfaceInfo fo_property_text_property_info =
       {
-	(GInterfaceInitFunc) fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_text_property_init, /* interface_init */
+	(GInterfaceInitFunc) _text_property_init, /* interface_init */
         NULL,
         NULL
       };
@@ -1226,40 +1209,41 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
 }
 
 /**
- * fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_init:
+ * _init:
  * @</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>: #FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>.
  **/
-void
-fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> *</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>)
+static void
+_init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> *</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>)
 {
   FO_PROPERTY (</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>)->value =
     </xsl:text><xsl:choose>
       <xsl:when test="$initial-value-string">
-        <xsl:text>g_object_ref (fo_enum_get_enum_by_nick ("</xsl:text>
-        <xsl:value-of select="$initial-value-string"/>
-        <xsl:text>"))</xsl:text>
+        <xsl:text>g_object_ref (fo_enum_get_enum_by_value (FO_ENUM_ENUM_</xsl:text>
+        <xsl:call-template name="to-upper">
+          <xsl:with-param name="string" select="$initial-value-string"/>
+        </xsl:call-template>
+        <xsl:text>))</xsl:text>
       </xsl:when>
       <xsl:otherwise>NULL</xsl:otherwise>
     </xsl:choose><xsl:text>;
 }
 
 /**
- * fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_class_init:
+ * _class_init:
  * @klass: #FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class object to initialise.
  * 
  * Implements #GClassInitFunc for #FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class.
  **/
-void
-fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_class_init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class *klass)
+static void
+_class_init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_finalize;
 </xsl:text>
 
     <xsl:if test="$expr-eval">
@@ -1286,7 +1270,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_c
           <xsl:value-of select="$resolve-enum"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:text>fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_resolve_enum</xsl:text>
+          <xsl:text>_resolve_enum</xsl:text>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:text>;
@@ -1297,7 +1281,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_c
           <xsl:value-of select="$validate"/>
         </xsl:when>
         <xsl:otherwise>
-  <xsl:text>fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_validate</xsl:text>
+  <xsl:text>_validate</xsl:text>
         </xsl:otherwise>
       </xsl:choose>
 <xsl:text>;
@@ -1305,32 +1289,16 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_c
     fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_get_initial;
 }
 
-/**
- * fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_finalize:
- * @object: #FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>.
- **/
-void
-fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_finalize (GObject *object)
-{
-  FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> *</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>;
-
-  </xsl:text><xsl:value-of select="$property-identifier"/><xsl:text> = FO_PROPERTY_</xsl:text><xsl:value-of select="$property-macro"/><xsl:text> (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
 </xsl:text>
 <xsl:if test="$is-text-property">
   <xsl:text>/**
- * fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_text_property_init:
+ * _text_property_init:
  * @iface: #FoPropertyTextPropertyIFace structure for this class.
  * 
  * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
-void
-fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_text_property_init (FoPropertyTextPropertyIface *iface)
+static void
+_text_property_init (FoPropertyTextPropertyIface *iface)
 {
   iface->new_attr = fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_new_attr;
 }
@@ -1359,7 +1327,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_n
 <xsl:if test="not($resolve-enum)">
   <xsl:text>
 /**
- * fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -1373,16 +1341,10 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_n
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_</xsl:text>
-<xsl:value-of select="$property-identifier"/>
-<xsl:text>_resolve_enum (const gchar *token,
-            </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>               FoContext   *context,
-            </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>               GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+               FoContext   *context,
+               GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
@@ -1417,7 +1379,7 @@ fo_property_</xsl:text>
 <xsl:if test="not($validate)">
   <xsl:text>
 /**
- * fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -1429,15 +1391,9 @@ fo_property_</xsl:text>
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_</xsl:text>
-<xsl:value-of select="$property-identifier"/>
-<xsl:text>_validate (FoDatatype *datatype,
-            </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>           FoContext  *context,
-            </xsl:text>
-<xsl:value-of select="$property-identifier-spaces"/>
-<xsl:text>           GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
