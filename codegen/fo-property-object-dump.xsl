@@ -1220,7 +1220,7 @@ _init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> *<
   FO_PROPERTY (</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>)->value =
     </xsl:text><xsl:choose>
       <xsl:when test="$initial-value-string">
-        <xsl:text>g_object_ref (fo_enum_get_enum_by_value (FO_ENUM_ENUM_</xsl:text>
+        <xsl:text>g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_</xsl:text>
         <xsl:call-template name="to-upper">
           <xsl:with-param name="string" select="$initial-value-string"/>
         </xsl:call-template>
@@ -1361,7 +1361,7 @@ _resolve_enum (const gchar *token,
 </xsl:call-template>
 <xsl:text>)
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -1650,7 +1650,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
               select="'fo_property_util_resolve_auto_enum'"/>
             <xsl:with-param name="validate" select="$validate"/>
             <xsl:with-param name="init-value"
-              select="'fo_enum_get_enum_auto ()'"/>
+              select="'fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO)'"/>
           </xsl:call-template>
           <xsl:call-template name="process-property">
             <xsl:with-param name="property"
@@ -1664,7 +1664,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
               select="'fo_property_util_resolve_auto_enum'"/>
             <xsl:with-param name="validate" select="$validate"/>
             <xsl:with-param name="init-value"
-              select="'fo_enum_get_enum_auto ()'"/>
+              select="'fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO)'"/>
           </xsl:call-template>
           <xsl:call-template name="process-property">
             <xsl:with-param name="property"
@@ -1678,7 +1678,7 @@ fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_g
               select="'fo_property_util_resolve_auto_enum'"/>
             <xsl:with-param name="validate" select="$validate"/>
             <xsl:with-param name="init-value"
-              select="'fo_enum_get_enum_auto ()'"/>
+              select="'fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO)'"/>
           </xsl:call-template>
         </xsl:when>
 	<!-- Spaces have '.minimum', '.optimum', '.maximum', '.precedence',
