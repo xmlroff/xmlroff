@@ -386,6 +386,7 @@ fo_property_resolve_enum_default (const gchar *token G_GNUC_UNUSED,
   g_set_error (error,
 	       FO_PROPERTY_ERROR,
 	       FO_PROPERTY_ERROR_NO_ENUMERATION,
+	       "%s",
 	       fo_property_error_messages[FO_PROPERTY_ERROR_NO_ENUMERATION]);
   return NULL;
 }

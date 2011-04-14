@@ -302,7 +302,7 @@ main (gint    argc,
 
   if (compat_stylesheet == TRUE)
     {
-      printf (libfo_compat_get_stylesheet ());
+      printf ("%s", libfo_compat_get_stylesheet ());
       exit (0);
     }
 
@@ -325,6 +325,7 @@ main (gint    argc,
       g_set_error(&error,
 		  XMLROFF_ERROR,
 		  XMLROFF_ERROR_NO_FILE,
+		  "%s",
 		  xmlroff_error_messages [XMLROFF_ERROR_NO_FILE]);
 
       goto option_error;

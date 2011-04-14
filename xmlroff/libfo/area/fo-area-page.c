@@ -904,6 +904,7 @@ fo_area_page_size_request (FoArea *child)
 	{
 	  GError *error = g_error_new (FO_AREA_PAGE_ERROR,
 				       FO_AREA_PAGE_ERROR_OVERFLOW,
+				       "%s",
 				       fo_area_page_error_messages[FO_AREA_PAGE_ERROR_OVERFLOW]);
 
 	  fo_object_log_warning (FO_OBJECT (child),

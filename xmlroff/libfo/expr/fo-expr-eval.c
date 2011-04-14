@@ -168,6 +168,7 @@ fo_expr_eval_new_error (FoExprContext  *context,
 
   error = g_error_new (FO_EXPR_EVAL_ERROR,
 		       error_type,
+		       "%s",
 		       error_string);
 
   return fo_error_new_with_value (error);
@@ -220,6 +221,7 @@ fo_expr_eval_propagate_error (FoExprContext *context,
 
   new_error = g_error_new (FO_EXPR_EVAL_ERROR,
 			   error_type,
+			   "%s",
 			   error_string);
 
   return fo_error_new_with_value (new_error);
@@ -1338,6 +1340,7 @@ fo_expr_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_NULL_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_NULL_RESULT]));
     }
   else if (FO_IS_ERROR (result_datatype))
@@ -1345,6 +1348,7 @@ fo_expr_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_ERROR_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_ERROR_RESULT]));
     }
   else if (!fo_expr_context_stack_is_empty (context))
@@ -1685,6 +1689,7 @@ fo_expr_padding_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_NULL_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_NULL_RESULT]));
     }
   else if (FO_IS_ERROR (result_datatype))
@@ -1692,6 +1697,7 @@ fo_expr_padding_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_ERROR_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_ERROR_RESULT]));
     }
   else if (!fo_expr_context_stack_is_empty (context))
@@ -1838,6 +1844,7 @@ fo_expr_border_color_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_NULL_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_NULL_RESULT]));
     }
   else if (FO_IS_ERROR (result_datatype))
@@ -1845,6 +1852,7 @@ fo_expr_border_color_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_ERROR_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_ERROR_RESULT]));
     }
   else if (!fo_expr_context_stack_is_empty (context))
@@ -1978,6 +1986,7 @@ fo_expr_border_style_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_NULL_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_NULL_RESULT]));
     }
   else if (FO_IS_ERROR (result_datatype))
@@ -1985,6 +1994,7 @@ fo_expr_border_style_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_ERROR_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_ERROR_RESULT]));
     }
   else if (!fo_expr_context_stack_is_empty (context))
@@ -2306,6 +2316,7 @@ fo_expr_wsc_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_NULL_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_NULL_RESULT]));
     }
   else if (FO_IS_ERROR (result_datatype))
@@ -2313,6 +2324,7 @@ fo_expr_wsc_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_ERROR_RESULT,
+		   "%s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_ERROR_RESULT]));
     }
   else if (!fo_expr_context_stack_is_empty (context))

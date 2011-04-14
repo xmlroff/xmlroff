@@ -142,6 +142,7 @@ fo_basic_bubble_up_error (GError     **dest,
   g_set_error (dest,
 	       new_domain,
 	       new_code,
+	       "%s",
 	       error_string);
 
   g_free (error_string);

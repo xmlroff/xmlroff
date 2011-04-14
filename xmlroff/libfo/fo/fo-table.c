@@ -1812,6 +1812,7 @@ fo_table_resolve_proportional_widths (FoFo    *fo,
       g_set_error (error,
 		   FO_TABLE_ERROR,
 		   FO_TABLE_ERROR_LAYOUT_METHOD_UNKNOWN,
+		   "%s",
 		   fo_table_error_messages[FO_TABLE_ERROR_LAYOUT_METHOD_UNKNOWN]);
       return;
     }
@@ -1829,6 +1830,7 @@ fo_table_resolve_proportional_widths (FoFo    *fo,
 	  g_set_error (error,
 		       FO_TABLE_ERROR,
 		       FO_TABLE_ERROR_FIXED_NO_COLUMN,
+		       "%s",
 		       fo_table_error_messages[FO_TABLE_ERROR_FIXED_NO_COLUMN]);
 	  return;
 	}
@@ -1923,6 +1925,7 @@ fo_table_resolve_proportional_widths (FoFo    *fo,
 	  g_set_error (error,
 		       FO_TABLE_ERROR,
 		       FO_TABLE_ERROR_NO_AREA,
+		       "%s",
 		       fo_table_error_messages[FO_TABLE_ERROR_NO_AREA]);
 	  return;
 	}
@@ -2625,6 +2628,7 @@ fo_table_resolve_layout_method (FoFo *fo)
 	      GError *local_error =
 		g_error_new (FO_TABLE_ERROR,
 			     FO_TABLE_ERROR_FIXED_BUT_AUTO,
+			     "%s",
 			     fo_table_error_messages[FO_TABLE_ERROR_FIXED_BUT_AUTO]);
 
 	      fo_object_log_warning (FO_OBJECT (fo),
@@ -2705,6 +2709,7 @@ fo_table_validate (FoFo      *fo,
       GError *local_error =
 	g_error_new (FO_TABLE_ERROR,
 		     FO_TABLE_ERROR_FALLBACK_TO_FIXED,
+		     "%s",
 		     fo_table_error_messages[FO_TABLE_ERROR_FALLBACK_TO_FIXED]);
 
       fo_object_log_warning (FO_OBJECT (fo),
