@@ -23,7 +23,7 @@
       select="($results/ancestor::*/@base)[1]"/>
     <xsl:param name="id"/>
 
-    <xsl:variable name="test"
+    <xsl:param name="test"
       select="$testsuite-nodes[@profile = $results-top-base/../@profile]//test[@id = $id]"/>
 
     <xsl:if test="$DEBUG">
@@ -70,6 +70,23 @@
       </xsl:for-each>
     </xsl:variable>
 
+		<xsl:call-template name="results-html">
+			<xsl:with-param name="results" select="$results" />
+			<xsl:with-param name="id" select="$id" />
+			<xsl:with-param name="test" select="$test" />
+			<xsl:with-param name="pdf" select="$pdf" />
+			<xsl:with-param name="results-top-base" select="$results-top-base" />
+			<xsl:with-param name="test-file-dirname" select="$test-file-dirname" />
+		</xsl:call-template>
+</xsl:template>
+
+<xsl:template name="results-html">
+	<xsl:param name="results"/>
+	<xsl:param name="id"/>
+	<xsl:param name="test"/>
+	<xsl:param name="pdf"/>
+	<xsl:param name="results-top-base"/>
+	<xsl:param name="test-file-dirname"/>
       <html>
         <head>
           <title>
@@ -137,13 +154,13 @@
                 </xsl:if>
               </td>
               <td style="background-color: white">
-                <b>Result </b>
+                <b>Results </b>
                 <xsl:choose>
-                  <xsl:when test="$test/@result">
+                  <xsl:when test="$test/@results">
                     <xsl:call-template name="munged-a">
-                      <xsl:with-param name="href" select="$test/@result"/>
+                      <xsl:with-param name="href" select="$test/@results"/>
                       <xsl:with-param name="content">
-                        <xsl:value-of select="$test/@result"/>
+                        <xsl:value-of select="$test/@results"/>
                       </xsl:with-param>
                       <xsl:with-param name="test-file-dirname"
                         select="$test-file-dirname"/>
@@ -277,24 +294,29 @@
     <xsl:param name="results"/>
     <xsl:param name="id"/>
     <xsl:param name="results-top-base"/>
-    <table bgcolor="white" border="0" cellspacing="0">
-      <xsl:for-each select="$results">
+    <xsl:if test="$DEBUG">
+      <xsl:message>results-doc::</xsl:message>
+      <xsl:message>results: '<xsl:value-of select="$results"/>'</xsl:message>
+      <xsl:message>results-top-base: '<xsl:value-of select="$results-top-base"/>'</xsl:message>
+      <xsl:message>profile: '<xsl:value-of select="$results-top-base/../@profile"/>'</xsl:message>
+    </xsl:if>
         <form action="/{$PROJECT_NAME}/{$BASENAME}/update-results.pl" method="post">
           <input type="hidden" name="id" value="{$id}"/>
           <input type="hidden" name="top-base" value="{$results-top-base}"/>
           <input type="hidden" name="path" value="{($results/ancestor::*/@base)[1]}/{$id}"/>
+    <table bgcolor="white" border="0" cellspacing="0">
           <tr>
             <td style="background-color: white">Agreement:</td>
             <td style="background-color: white">
               <select name="agreement">
                 <option value="full">
-                  <xsl:if test="@agreement='full'">
+                  <xsl:if test="$results/@agreement='full'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>Full</xsl:text>
                 </option>
                 <option value="issues">
-                  <xsl:if test="@agreement='issues'">
+                  <xsl:if test="$results/@agreement='issues'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>Issues</xsl:text>
@@ -307,25 +329,25 @@
             <td style="background-color: white">
               <select name="futuresupport">
                 <option value="full">
-                  <xsl:if test="@futuresupport='full'">
+                  <xsl:if test="$results/@futuresupport='full'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>Full</xsl:text>
                 </option>
                 <option value="partial">
-                  <xsl:if test="@futuresupport='partial'">
+                  <xsl:if test="$results/@futuresupport='partial'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>Partial</xsl:text>
                 </option>
                 <option value="none">
-                  <xsl:if test="@futuresupport='none'">
+                  <xsl:if test="$results/@futuresupport='none'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>None</xsl:text>
                 </option>
                 <option>
-                  <xsl:if test="not(@futuresupport)">
+                  <xsl:if test="not($results/@futuresupport)">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                 </option>
@@ -337,13 +359,13 @@
             <td style="background-color: white">
               <select name="specproblem">
                 <option value="yes">
-                  <xsl:if test="@specproblem='yes'">
+                  <xsl:if test="$results/@specproblem='yes'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>Yes</xsl:text>
                 </option>
                 <option value="no">
-                  <xsl:if test="not(@specproblem) or @specproblem='no'">
+                  <xsl:if test="not($results/@specproblem) or $results/@specproblem='no'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>No</xsl:text>
@@ -356,13 +378,13 @@
             <td style="background-color: white">
               <select name="testproblem">
                 <option value="yes">
-                  <xsl:if test="@testproblem='yes'">
+                  <xsl:if test="$results/@testproblem='yes'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>Yes</xsl:text>
                 </option>
                 <option value="no">
-                  <xsl:if test="not(@testproblem) or @testproblem='no'">
+                  <xsl:if test="not($results/@testproblem) or $results/@testproblem='no'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                   </xsl:if>
                   <xsl:text>No</xsl:text>
@@ -389,24 +411,22 @@
 source for this report and <b>does not</b> regenerate this HTML page.
             </td>
           </tr>
-        </form>
-      </xsl:for-each>
     </table>
+        </form>
   </xsl:template>
 
   <xsl:template name="results-static">
     <xsl:param name="results"/>
     <table bgcolor="white" border="0" cellspacing="0">
-      <xsl:for-each select="$results">
         <tr>
           <td style="background-color: white">Agreement:</td>
           <td width="10%">
             <xsl:attribute name="class">
               <xsl:choose>
-                <xsl:when test="@agreement = 'issues' and . = $not-verified-string">
+                <xsl:when test="$results/@agreement = 'issues' and . = $not-verified-string">
                   <xsl:text>other</xsl:text>
                 </xsl:when>
-                <xsl:when test="@agreement = 'full'">
+                <xsl:when test="$results/@agreement = 'full'">
                   <xsl:text>full</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -415,7 +435,7 @@ source for this report and <b>does not</b> regenerate this HTML page.
               </xsl:choose>
             </xsl:attribute>
             <xsl:choose>
-              <xsl:when test="@agreement = 'full'">
+              <xsl:when test="$results/@agreement = 'full'">
                 <xsl:text>Full</xsl:text>
               </xsl:when>
               <xsl:otherwise>
@@ -429,13 +449,13 @@ source for this report and <b>does not</b> regenerate this HTML page.
           <td style="background-color: white">Future support:</td>
           <td style="background-color: white">
             <xsl:choose>
-              <xsl:when test="@futuresupport = 'full'">
+              <xsl:when test="$results/@futuresupport = 'full'">
                 <xsl:text>Full</xsl:text>
               </xsl:when>
-              <xsl:when test="@futuresupport = 'partial'">
+              <xsl:when test="$results/@futuresupport = 'partial'">
                 <xsl:text>Partial</xsl:text>
               </xsl:when>
-              <xsl:when test="not(@futuresupport)">
+              <xsl:when test="not($results/@futuresupport)">
                 <xsl:text>&#160;</xsl:text>
               </xsl:when>
               <xsl:otherwise>
@@ -450,14 +470,14 @@ source for this report and <b>does not</b> regenerate this HTML page.
           <td>
             <xsl:attribute name="class">
               <xsl:choose>
-                <xsl:when test="@specproblem = 'yes'">
+                <xsl:when test="$results/@specproblem = 'yes'">
                   <xsl:text>spec</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>other</xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
             <xsl:choose>
-              <xsl:when test="@specproblem = 'yes'">
+              <xsl:when test="$results/@specproblem = 'yes'">
                 <xsl:text>Yes</xsl:text>
               </xsl:when>
               <xsl:otherwise>
@@ -472,7 +492,7 @@ source for this report and <b>does not</b> regenerate this HTML page.
           <td>
             <xsl:attribute name="class">
               <xsl:choose>
-                <xsl:when test="@testproblem = 'yes'">
+                <xsl:when test="$results/@testproblem = 'yes'">
                   <xsl:text>test</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -481,7 +501,7 @@ source for this report and <b>does not</b> regenerate this HTML page.
               </xsl:choose>
             </xsl:attribute>
             <xsl:choose>
-              <xsl:when test="@testproblem = 'yes'">
+              <xsl:when test="$results/@testproblem = 'yes'">
                 <xsl:text>Yes</xsl:text>
               </xsl:when>
               <xsl:otherwise>
@@ -497,7 +517,6 @@ source for this report and <b>does not</b> regenerate this HTML page.
             <xsl:apply-templates/>
           </td>
         </tr>
-      </xsl:for-each>
     </table>
   </xsl:template>
 

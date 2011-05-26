@@ -368,4 +368,52 @@
     </xsl:choose>
   </xsl:template>
 
+  <xsl:template name="munged-a">
+    <xsl:param name="href"/>
+    <xsl:param name="content"/>
+    <xsl:param name="test-file-dirname"/>
+
+    <xsl:variable name="href-dirname">
+      <xsl:call-template name="dirname">
+        <xsl:with-param name="string" select="$href"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <xsl:variable name="full-href">
+      <xsl:call-template name="merge-dirnames">
+        <xsl:with-param name="dirname1" select="$test-file-dirname"/>
+        <xsl:with-param name="dirname2" select="$href-dirname"/>
+			</xsl:call-template>
+      <xsl:call-template name="basename">
+        <xsl:with-param name="string" select="$href"/>
+      </xsl:call-template>
+    </xsl:variable>
+
+    <!-- Heuristic to work out which href value to use. -->
+    <xsl:variable name="use-href">
+      <xsl:choose>
+        <xsl:when test="starts-with($full-href, '/usr/local/src/xslfo')">
+          <xsl:text>/xmlroff</xsl:text>
+          <xsl:value-of select="substring-after($full-href, 'usr/local/src/xslfo')"/>
+        </xsl:when>
+        <xsl:when test="starts-with($full-href, '/usr/local/src/TestSuite')">
+          <xsl:text>/xmlroff</xsl:text>
+          <xsl:value-of select="substring-after($full-href, 'usr/local/src')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$full-href"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:if test="$DEBUG">
+      <xsl:message>munged-a:: full-href: '<xsl:value-of select="$full-href"/>; test-file-dirname: '<xsl:value-of select="$test-file-dirname"/>'</xsl:message>
+      <xsl:message>munged-a:: use-href: '<xsl:value-of select="$use-href"/>; content: '<xsl:value-of select="$content"/>'</xsl:message>
+    </xsl:if>
+    
+    <a href="{$use-href}">
+      <xsl:copy-of select="$content"/>
+    </a>
+  </xsl:template>
+
 </xsl:stylesheet>
