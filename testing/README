@@ -637,6 +637,7 @@ cases and their results, plus an individual report for each test case.
 Usage:
 
    xsltproc -o testsuccess.html --novalid \
+      --stringparam date "`date`" \
       testsuccess.xsl testsuccess.xml
 
 The parameters controlling the transformation are set when you run
