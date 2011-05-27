@@ -80,7 +80,7 @@ testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSO
 	perl testsuccess.pl . > $(TESTSUCCESS)
 	touch $@
 
-$(REPORT_HTML):	testsuccess.xsl results-doc.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl $(STYLE_CSS)
+$(REPORT_HTML):	testsuccess.xsl results-doc.xsl results-xml.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl $(STYLE_CSS)
 	$(XSLTPROC) -o $@ --novalid \
 	--stringparam date "`date`" $(REPORT_PARAM) \
 	testsuccess.xsl @TEST_RESULTS@

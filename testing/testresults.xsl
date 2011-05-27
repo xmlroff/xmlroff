@@ -20,7 +20,8 @@
   <xsl:import href="results-doc.xsl"/>
 
   <xsl:output method="html"/>
-<xsl:param name="date" />
+	<xsl:param name="date" select="/testsuite/@date" />
+
 	<xsl:template match="testresult">
 		<xsl:call-template name="results-html">
 			<xsl:with-param name="pdf" select="following-sibling::pdf"/>

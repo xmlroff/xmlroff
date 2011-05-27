@@ -7,6 +7,7 @@
 
 <!-- Copyright (C) 2001 Sun Microsystems -->
 <!-- Copyright (C) 2007-2009 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2011 Mentea -->
 
 <!-- See COPYING for the status of this software. -->
 
@@ -19,7 +20,10 @@
   <xsl:import href="common.xsl"/>
   
   <xsl:import href="coverage.xsl"/>
+	<!-- Individual results as HTML. -->
   <xsl:import href="results-doc.xsl"/>
+	<!-- Individual results as XML. -->
+  <xsl:import href="results-xml.xsl"/>
   
   <xsl:output method="html" indent="no" encoding="UTF-8"/>
 
@@ -185,7 +189,7 @@
             <td>
               <xsl:for-each select="$testsuccess-node/directory/pdf[diff/*[@size != 0]]">
                 <xsl:sort/>
-                <a href="{ancestor::directory/@name}/{substring-before(@name, '.pdf')}.html" target="_blank">
+                <a href="{ancestor::directory/@name}/{substring-before(@name, '.pdf')}.xml" target="_blank">
                   <xsl:value-of select="substring-before(@name, '.pdf')"/>
                 </a>
                 <xsl:text> </xsl:text>
@@ -407,7 +411,7 @@
           </xsl:variable>
           <xsl:choose>
             <xsl:when test="$OUTPUT_INDIVIDUAL = 'yes'">
-              <a href="{($results/ancestor::*/@base)}/{$id}.html" target="_blank">
+              <a href="{($results/ancestor::*/@base)}/{$id}.xml" target="_blank">
                 <!-- Are there also diff files? -->
                 <xsl:if test="($pdf/diff/@count != 0) and
                               ($pdf/diff/*[@size != 0])">
@@ -417,8 +421,24 @@
                 </xsl:if>
                 <xsl:value-of select="$page-count"/>
               </a>
+							<!-- No longer making HTML output. -->
+							<!--
               <exsl:document href="./{$results-top-base}/{$id}.html" encoding="UTF-8">
                 <xsl:call-template name="results-doc">
+                  <xsl:with-param name="pdf" select="$pdf"/>
+                  <xsl:with-param name="results" select="$results/.."/>
+                  <xsl:with-param name="results-top-base" select="$results-top-base"/>
+                  <xsl:with-param name="id" select="$id"/>
+                </xsl:call-template>
+              </exsl:document>
+							-->
+							<!-- Redo as XML. -->
+              <exsl:document
+									href="./{$results-top-base}/{$id}.xml"
+									method="xml"
+									indent="yes"
+									encoding="UTF-8">
+                <xsl:call-template name="results-xml">
                   <xsl:with-param name="pdf" select="$pdf"/>
                   <xsl:with-param name="results" select="$results/.."/>
                   <xsl:with-param name="results-top-base" select="$results-top-base"/>
