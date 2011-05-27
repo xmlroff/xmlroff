@@ -1,0 +1,14 @@
+*.in
+*.stamp
+Makefile
+aclocal.m4
+autom4te.cache
+config.h
+config.pl
+config.xsl
+config.log
+config.status
+testsuccess.xml
+index.html
+stamp-h1
+
