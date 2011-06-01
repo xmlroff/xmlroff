@@ -107,6 +107,24 @@
         </xsl:if>
         <xsl:text>&lt;string></xsl:text>
       </xsl:when>
+      <xsl:when test="$datatype = 'country'">
+        <xsl:if test="$debug">
+          <xsl:message>Expanding &lt;country></xsl:message>
+        </xsl:if>
+        <xsl:text>&lt;string></xsl:text>
+      </xsl:when>
+      <xsl:when test="$datatype = 'language'">
+        <xsl:if test="$debug">
+          <xsl:message>Expanding &lt;language></xsl:message>
+        </xsl:if>
+        <xsl:text>&lt;string></xsl:text>
+      </xsl:when>
+      <xsl:when test="$datatype = 'script'">
+        <xsl:if test="$debug">
+          <xsl:message>Expanding &lt;script></xsl:message>
+        </xsl:if>
+        <xsl:text>&lt;string></xsl:text>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
 

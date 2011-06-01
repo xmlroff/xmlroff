@@ -395,6 +395,7 @@ GType fo_enum_table_layout_method_get_type (void);
 <property name="content-type"
     resolve-enum="fo_property_util_resolve_auto_enum"/>
 <property name="content-width"/>
+<property name="country"/>
 <property name="direction"/>
 <property name="display-align"/>
 <property name="dominant-baseline"
@@ -432,11 +433,13 @@ GType fo_enum_table_layout_method_get_type (void);
 <property name="font-style" is-text-property="yes"/>
 <property name="font-variant" is-text-property="yes"/>
 <property name="font-weight" is-text-property="yes"/>
+<property name="force-page-count"/>
 <property name="format"/>
 <property name="grouping-separator"/>
 <property name="grouping-size"/>
 <property name="height"/>
 <property name="id"/>
+<property name="initial-page-number"/>
 <property name="inline-progression-dimension" type="length-range"/>
 <property name="keep-together"
     type="keep"
@@ -447,6 +450,7 @@ GType fo_enum_table_layout_method_get_type (void);
 <property name="keep-with-previous"
     type="keep"
     resolve-enum="fo_property_util_resolve_auto_always_enum"/>
+<property name="language"/>
 <property name="letter-value"/>
 <property name="linefeed-treatment"/>
 <property name="line-height"
