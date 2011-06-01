@@ -127,7 +127,7 @@
         <xsl:text> NULL</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:text>&#10;    g_object_ref (fo_property_</xsl:text>
+        <xsl:text>&#10;    g_object_ref_sink (fo_property_</xsl:text>
           <xsl:value-of select="$lowercase-property"/>
           <xsl:text>_get_initial ())</xsl:text>
       </xsl:otherwise>
@@ -197,7 +197,7 @@
       primary-></xsl:text>
         <xsl:value-of select="$lowercase-property"/>
         <xsl:text> =
-        g_object_ref (secondary-></xsl:text>
+        g_object_ref_sink (secondary-></xsl:text>
         <xsl:value-of select="$lowercase-property"/>
         <xsl:text>);
     }&#10;</xsl:text>
@@ -210,7 +210,7 @@
       primary-></xsl:text>
         <xsl:value-of select="$lowercase-property"/>
         <xsl:text> =
-        g_object_ref (fo_property_</xsl:text>
+        g_object_ref_sink (fo_property_</xsl:text>
         <xsl:value-of select="$lowercase-property"/>
         <xsl:text>_get_initial ());
     }&#10;</xsl:text>
@@ -265,8 +265,8 @@ void fo_context_merge (FoContext *primary,
 		       FoContext *secondary);
 void fo_context_update_from_slist (FoContext *context,
 				   GSList *property_list);
-void fo_context_debug_dump_properties (FoContext *fo_context,
-                                       gint       depth);
+void fo_context_debug_dump (FoObject *fo_context,
+                            gint      depth);
 
 </xsl:text>
 
@@ -524,12 +524,12 @@ static void fo_context_get_property (GObject        *object,
 				                             guint           prop_id,
 				                             GValue         *value,
 				                             GParamSpec     *pspec);
-static void fo_context_finalize     (GObject        *object);
+static void _dispose                (GObject        *object);
 
 static void fo_context_property_slist_foreach (gpointer   property,
 					       gpointer   context);
-static void fo_context_debug_dump             (FoObject  *object,
-					       gint       depth);
+static void _debug_dump             (FoObject  *object,
+					                           gint       depth);
 
 static FoProperty* fo_context_get_space_before_minimum (FoContext *fo_context);
 static FoProperty* fo_context_get_space_before_optimum (FoContext *fo_context);
@@ -672,7 +672,7 @@ fo_context_class_init (FoContextClass *klass)
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_context_finalize;
+  object_class->dispose = _dispose;
 
   object_class->set_property = fo_context_set_property;
   object_class->get_property = fo_context_get_property;
@@ -751,13 +751,13 @@ fo_context_class_init (FoContextClass *klass)
 <xsl:text>}
 
 /**
- * fo_context_finalize:
- * @object: #FoContext object to finalize.
+ * _dispose:
+ * @object: #FoContext object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoContext.
+ * Implements #GObjectDisposeFunc for #FoContext.
  **/
 void
-fo_context_finalize (GObject *object)
+_dispose (GObject *object)
 {
   FoContext *context;
 
@@ -817,7 +817,7 @@ fo_context_finalize (GObject *object)
   </xsl:for-each>
 
 <xsl:text>
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 
@@ -1182,7 +1182,7 @@ fo_context_merge (FoContext *primary, FoContext *secondary)
 {
   if (primary == NULL &amp;&amp; secondary != NULL)
     {
-      primary = g_object_ref (secondary);
+      primary = g_object_ref_sink (secondary);
     }
 
 </xsl:text>
@@ -1370,8 +1370,8 @@ fo_context_debug_dump (FoObject *object,
   g_free (object_sprintf);
   g_free (indent);
 
-  fo_context_debug_dump_properties (FO_CONTEXT (object),
-				    depth + 2);
+  _debug_dump_properties (FO_CONTEXT (object),
+	                        depth + 2);
 }
 
 </xsl:text>
