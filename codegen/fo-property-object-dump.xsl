@@ -7,6 +7,7 @@
 
 <!-- Copyright (C) 2001-2006 Sun Microsystems -->
 <!-- Copyright (C) 2007-2010 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2011 Mentea -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -159,6 +160,7 @@
  *
  * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -1058,6 +1060,7 @@ G_END_DECLS
  *
  * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
