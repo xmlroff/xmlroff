@@ -1,0 +1,14 @@
+fo
+property
+*.c
+*.ent
+*.h
+*.in
+*.m4
+autom4te.cache
+configure
+config.log
+config.status
+install-sh
+Makefile
+missing
