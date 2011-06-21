@@ -143,6 +143,27 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template name="to-safe-xml">
+    <xsl:param name="string"/>
+    <xsl:if test="$string">
+      <xsl:choose>
+        <xsl:when test="contains($string, '&lt;')">
+          <xsl:value-of select="substring-before($string,
+																                 '&lt;')"/>
+          <xsl:text>&amp;lt;</xsl:text>
+          <xsl:call-template name="to-safe-xml">
+            <xsl:with-param name="string"
+              select="substring-after($string, '&lt;')"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <!-- if no space, just do value of the rest of string -->
+          <xsl:value-of select="$string"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:template>
+
   <!-- property-to-get-set-prototypes
        Generate the prototypes for the functions to get and set
        a property of an object -->

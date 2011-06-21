@@ -12,7 +12,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:exsl="http://exslt.org/common"
-                extension-element-prefixes="exsl"
+								xmlns:str="http://exslt.org/strings"
+                extension-element-prefixes="exsl str"
                 version="1.0">
 
   <xsl:output method="text"/>
@@ -1120,7 +1121,11 @@ G_END_DECLS
   <xsl:otherwise>FALSE</xsl:otherwise>
 </xsl:choose><xsl:text>
  *
- * Value: </xsl:text><xsl:value-of select="normalize-space($value-string)"/><xsl:text>
+ * Value: </xsl:text>
+  <xsl:call-template name="to-safe-xml">
+		<xsl:with-param name="string" select="normalize-space($value-string)"/>
+	</xsl:call-template>
+<xsl:text>
  *
  * Initial value: </xsl:text><xsl:value-of select="normalize-space($initial-value-string)"/><xsl:text>
  *
