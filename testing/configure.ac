@@ -172,6 +172,7 @@ if test "x$with_project_name" = "x" ; then
   PROJECT_NAME=$project_name_default
 else
   PROJECT_NAME=$with_project_name
+  project_name_setter=$option_setter
 fi
 AC_DEFINE_UNQUOTED(PROJECT_NAME,"$PROJECT_NAME", [Project name used in URLs.])
 AC_SUBST(PROJECT_NAME)
