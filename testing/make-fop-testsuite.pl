@@ -1,6 +1,7 @@
-#! /usr/local/bin/perl
+#! /usr/bin/perl
 #
 # Copyright (c) 2007-2008 Menteith Consulting Ltd
+# Copyright (c) 2011 Mentea
 #
 # Write a starter 'testsuite.xml' file for the XML files in
 # subdirectories of the specified directory.
