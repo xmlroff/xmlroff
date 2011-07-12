@@ -65,7 +65,7 @@ dotests.stamp: dotests.pl $(TESTING_PARAM) $(XSL_PROCESSOR) test2sh.stamp
 	perl dotests.pl .
 	touch $@
 
-png+ref2stereo.stamp: png+ref2stereo.pl dotests.stamp
+png+ref2stereo.stamp: png+ref2stereo.pl dotests.stamp config.pl
 	perl png+ref2stereo.pl .
 	touch $@
 

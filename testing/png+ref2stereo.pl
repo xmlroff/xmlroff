@@ -1,7 +1,8 @@
-#! /usr/local/bin/perl
+#! /usr/bin/perl
 #
 # Copyright (c) 2001, 2002, 2004 Sun Microsystems
 # Copyright (c) 2007-2008 Menteith Consulting Ltd
+# Copyright (c) 2011 Mentea
 #
 # Perl script to create 'stereo' images of PNG files and their
 # reference versions.
@@ -22,18 +23,17 @@ require("config.pl");
 # Usage statement
 $cUsage = <<"EndOfUsage";
 Usage:
-perl $0 [-force] TestDir
+perl $0 TestDir
 
 where:
- -force         = Force generation of PNG files
   TestDir       = Directory containing the test directories
 EndOfUsage
 
 ############################################################
 # Main program
 
-my $force;
-$result = GetOptions ("force"  => \$force);  # flag
+my $debug;
+$result = GetOptions ("debug"  => \$debug);  # flag
 
 # Die if we don't have any files
 if (@ARGV != 1) {
@@ -115,9 +115,9 @@ foreach $gTestDir (@lTestDirs) {
 	}
 
 	if (-e "ref/$lPDFFile") {
-	    # 'diff' needs to ignore the 'CreationDate' line since
-	    # it change each time the test is run.
-	    system "diff -N -a -I \"^/ID\" -I \"^/CreationDate\" ref/$lPDFFile $lPDFFile 1>diff/$lPDFFile 2>>diff/$lPDFFile";
+	    # 'diff' needs to ignore the 'CreationDate' and other lines
+	    # since these change each time the test is run.
+	    system "diff -N -a -I \"^/ID\" -I \"^/CreationDate\" -I \"^<dc:\" -I \"^<xmp:\" ref/$lPDFFile $lPDFFile 1>diff/$lPDFFile 2>>diff/$lPDFFile";
 	    if ($? >> 8 > 2) {
 		$gError++;
 		warn("Creating 'diff' of \"$lPDFFile\" failed.");
@@ -144,15 +144,16 @@ foreach $gTestDir (@lTestDirs) {
 	    @lPwdPNGFiles = sort (grep (/^$lBasename\.\d{2}\.png$/, readdir (PWD)));
 
 	    foreach $lPNGFile (@lPwdPNGFiles) {
-		system "diff -N $lPNGFile ref/$lPNGFile 1>diff/$lPNGFile 2>>diff/$lPNGFile";
-		if ($? >> 8 > 2) {
-		    $gError++;
-		    warn("Creating 'diff' of \"$lPNGFile\" failed.");
+		if (system "$IDENTIFY -quiet -format \"%#\" $lPNGFile" != "$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile") {
+		    unlink("diff/$lPNGFile");
+		    system "touch diff/$lPNGFile";
 		}
 		if (-e "ref/$lPNGFile" &&
 		    (!-e "stereo/$lPNGFile" || -M $lPNGFile < -M "stereo/$lPNGFile") &&
 		    (!-e "diff/$lPNGFile" || -s _)) {
-		    $rc = 0xffff & system "$COMPOSITE -stereo $lPNGFile ref/$lPNGFile stereo/$lPNGFile";
+		    $command = "$COMPARE $lPNGFile ref/$lPNGFile stereo/$lPNGFile";
+		    #print STDERR "$command\n";
+		    $rc = 0xffff & system $command;
 		    if ($rc != 0) {
 			$gError++;
 			die("Creating 'stereo' of \"$lPNGFile\" failed." .

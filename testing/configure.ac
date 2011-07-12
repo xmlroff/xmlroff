@@ -86,6 +86,50 @@ fi
 AC_DEFINE_UNQUOTED(COMPOSITE, "$COMPOSITE", [Full path to ImageMagick 'composite' program.])
 
 #
+# ImageMagick 'compare' program.
+#
+compare_default=compare
+AC_ARG_WITH(compare,
+	    AC_HELP_STRING([--with-compare],
+			   [Full path to ImageMagick 'compare' program.]),
+	    compare="$withval", :)
+if test "x$with_compare" = "x" ; then
+  COMPARE=$compare_default
+else
+  COMPARE=$with_compare
+fi
+AC_PATH_PROG(COMPARE, compare, no)
+if test "x$COMPARE" = "xno" ; then
+  AC_MSG_ERROR([
+*** ImageMagick 'compare' is required. The latest version of ImageMagick
+*** is always available from http://www.imagemagick.org/.
+  ])
+fi
+AC_DEFINE_UNQUOTED(COMPARE, "$COMPARE", [Full path to ImageMagick 'compare' program.])
+
+#
+# ImageMagick 'identify' program.
+#
+identify_default=identify
+AC_ARG_WITH(identify,
+	    AC_HELP_STRING([--with-identify],
+			   [Full path to ImageMagick 'identify' program.]),
+	    identify="$withval", :)
+if test "x$with_identify" = "x" ; then
+  IDENTIFY=$identify_default
+else
+  IDENTIFY=$with_identify
+fi
+AC_PATH_PROG(IDENTIFY, identify, no)
+if test "x$IDENTIFY" = "xno" ; then
+  AC_MSG_ERROR([
+*** ImageMagick 'identify' is required. The latest version of ImageMagick
+*** is always available from http://www.imagemagick.org/.
+  ])
+fi
+AC_DEFINE_UNQUOTED(IDENTIFY, "$IDENTIFY", [Full path to ImageMagick 'identify' program.])
+
+#
 # Perl
 #
 AC_CHECK_PROGS(PERL, perl5 perl)
