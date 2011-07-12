@@ -1,3 +1,8 @@
+#! /usr/bin/perl
+#
+# Copyright (c) 2011 Mentea
+#
+# Based on 'HTTP::Daemon::Threaded' sample.
 #
 #       now fire up a server
 #
@@ -34,7 +39,7 @@ my $httpd = HTTP::Daemon::Threaded->new(
     WebLogger               => $weblog,
     DocRoot                 => './',        # root directory for default file handler
     Handlers                => [
-	'^\/posted$', 'TestCGI',                # uses CGI
+	'^\/update-results.pl$', 'TestCGI',                # uses CGI
 	'^\/postxml$', 'TestHTTPReq',   # uses HTTP::Request/Response directly
 	'^.*\/scripty\.js$', '*',       # default file handler
 	'^.*\/(\w|-)+\.html$', '*',         # default file handler

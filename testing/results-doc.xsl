@@ -77,6 +77,9 @@
 			<xsl:with-param name="pdf" select="$pdf" />
 			<xsl:with-param name="results-top-base" select="$results-top-base" />
 			<xsl:with-param name="test-file-dirname" select="$test-file-dirname" />
+			<xsl:with-param
+					name="scripts-base"
+					select="concat('/', $PROJECT_NAME, '/', $BASENAME)"/>
 		</xsl:call-template>
 </xsl:template>
 
@@ -87,6 +90,7 @@
 	<xsl:param name="pdf"/>
 	<xsl:param name="results-top-base"/>
 	<xsl:param name="test-file-dirname"/>
+	<xsl:param name="scripts-base"/>
       <html>
         <head>
           <title>
@@ -210,6 +214,7 @@
                       <xsl:with-param name="id" select="$id"/>
                       <xsl:with-param name="results" select="$results"/>
                       <xsl:with-param name="results-top-base" select="$results-top-base"/>
+                      <xsl:with-param name="sccipts-base" select="$scripts-base"/>
                     </xsl:call-template>
                   </xsl:when>
                   <xsl:otherwise>
@@ -294,13 +299,14 @@
     <xsl:param name="results"/>
     <xsl:param name="id"/>
     <xsl:param name="results-top-base"/>
+		<xsl:param name="scripts-base"/>
     <xsl:if test="$DEBUG">
       <xsl:message>results-doc::</xsl:message>
       <xsl:message>results: '<xsl:value-of select="$results"/>'</xsl:message>
       <xsl:message>results-top-base: '<xsl:value-of select="$results-top-base"/>'</xsl:message>
       <xsl:message>profile: '<xsl:value-of select="$results-top-base/../@profile"/>'</xsl:message>
     </xsl:if>
-        <form action="/{$PROJECT_NAME}/{$BASENAME}/update-results.pl" method="post">
+        <form action="{$scripts-base}/update-results.pl" method="post">
           <input type="hidden" name="id" value="{$id}"/>
           <input type="hidden" name="top-base" value="{$results-top-base}"/>
           <input type="hidden" name="path" value="{($results/ancestor::*/@base)[1]}/{$id}"/>

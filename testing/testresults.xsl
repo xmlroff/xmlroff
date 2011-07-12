@@ -30,6 +30,7 @@
 			<xsl:with-param name="id" select="@id"/>
 			<xsl:with-param name="test" select="following-sibling::test"/>
 			<xsl:with-param name="test-file-dirname" select="concat('../../', ancestor::testcases[last()]/@base, '/')"/>
+			<xsl:with-param name="scripts-base" select="''"/>
 		</xsl:call-template>
 	</xsl:template>
 
