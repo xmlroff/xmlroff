@@ -1,0 +1,11 @@
+.deps
+*.bak
+*.pdf
+*.stamp
+*.tar.gz
+html
+Makefile
+Makefile.in
+tmpl
+xml
+xmlroff*
