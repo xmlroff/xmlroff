@@ -147,6 +147,8 @@ foreach $gTestDir (@lTestDirs) {
 		if (system "$IDENTIFY -quiet -format \"%#\" $lPNGFile" != "$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile") {
 		    unlink("diff/$lPNGFile");
 		    system "touch diff/$lPNGFile";
+		} else {
+		    unlink("diff/$lPNGFile");
 		}
 		if (-e "ref/$lPNGFile" &&
 		    (!-e "stereo/$lPNGFile" || -M $lPNGFile < -M "stereo/$lPNGFile") &&
