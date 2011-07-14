@@ -118,7 +118,7 @@ foreach $gTestDir (@lTestDirs) {
 	    # 'diff' needs to ignore the 'CreationDate' and other lines
 	    # since these change each time the test is run.
 	    system "diff -N -a -I \"^/ID\" -I \"^/CreationDate\" -I \"^<dc:\" -I \"^<xmp:\" ref/$lPDFFile $lPDFFile 1>diff/$lPDFFile 2>>diff/$lPDFFile";
-	    if ($? >> 8 > 2) {
+	    if ($? >> 8 > 1) {
 		$gError++;
 		warn("Creating 'diff' of \"$lPDFFile\" failed.");
 	    }
@@ -145,10 +145,10 @@ foreach $gTestDir (@lTestDirs) {
 
 	    foreach $lPNGFile (@lPwdPNGFiles) {
 		if (system "$IDENTIFY -quiet -format \"%#\" $lPNGFile" != "$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile") {
-		    unlink("diff/$lPNGFile");
-		    system "touch diff/$lPNGFile";
+		    system "echo -n 1 > diff/$lPNGFile";
 		} else {
 		    unlink("diff/$lPNGFile");
+		    system "touch diff/$lPNGFile";
 		}
 		if (-e "ref/$lPNGFile" &&
 		    (!-e "stereo/$lPNGFile" || -M $lPNGFile < -M "stereo/$lPNGFile") &&
