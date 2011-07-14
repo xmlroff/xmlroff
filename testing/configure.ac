@@ -161,7 +161,7 @@ AC_SUBST(CHANGELOG_OLDEST)
 
 ############################################################
 #
-# Symbols that are used in config.xsl.
+# Symbols that are used in config.h, config.pl, and config.xsl.
 #
 
 # Strings to indicate the source of a setting.
@@ -591,6 +591,40 @@ AC_DEFINE_UNQUOTED(BASENAME_SETTER,
 	           [Where BASENAME setting was set.])
 
 #
+# Server port
+#
+# Used by standalone server programs
+#
+server_port_default=8080
+server_port_setter=$default_setter
+
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_server_port=["`$PERL -n -e'if(/<\?xt-server-port\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_server_port" != "x" ; then
+    server_port_default="$results_server_port"
+    server_port_setter=$results_setter
+  fi
+fi
+AC_ARG_WITH(server_port,
+	    AC_HELP_STRING([--with-server-port],
+			   [Server port for by standalone servers. (default=8080)]),
+	    server_port="$withval", :)
+if test "x$with_server_port" = "x" ; then
+  SERVER_PORT=$server_port_default
+else
+  SERVER_PORT=$with_server_port
+  server_port_setter=$option_setter
+fi
+AC_SUBST(SERVER_PORT)
+AC_DEFINE_UNQUOTED(SERVER_PORT,
+	           "$SERVER_PORT",
+                   [Server for use by standalone servers.])
+AC_DEFINE_UNQUOTED(SERVER_PORT_SETTER,
+	           "$server_port_setter",
+	           [Where SERVER_PORT setting was set.])
+
+#
 # Color of project
 #
 # Used when constructing URLs
@@ -656,5 +690,7 @@ testsuites:          \"$TESTSUITES\" ($testsuites_setter)
 trac:                \"$TRAC\" ($trac_setter)
 xsl-processor:       \"$XSL_PROCESSOR\" ($xsl_processor_setter)
 xsl-processor-flags: \"$XSL_PROCESSOR_FLAGS\" ($xsl_processor_flags_setter)
+
+server-port:         \"$SERVER_PORT\" ($server_port_setter)
 
 The 'configure' options that you used are recorded in 'config.log'."

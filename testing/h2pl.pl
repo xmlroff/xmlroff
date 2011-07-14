@@ -72,6 +72,8 @@ while (<HEADERFILE>) {
 	print PERLFILE "\$$1=\"false\";\n";
     } elsif (/^#define ([^ ]+) (\d+)$/) {
 	print PERLFILE "\$$1=$2;\n";
+    } elsif (/^#define ([^ ]+) \"(\d+(\.\d+)?)\"$/) {
+	print PERLFILE "\$$1=$2;\n";
     } elsif (/^#define ([^ ]+) \"([^"]*)\"$/) {
 	print PERLFILE "\$$1=\"$2\";\n";
     } else {

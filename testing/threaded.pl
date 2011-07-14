@@ -15,6 +15,9 @@ use MyEventLog;
 use MyWebLog;
 use TestCGI;
 
+use vars qw($SERVER_PORT);
+require("config.pl");
+
 use strict;
 use warnings;
 #
@@ -30,7 +33,7 @@ my $evtlog = MyEventLog->new();
 my $weblog = MyWebLog->new();
 
 my $httpd = HTTP::Daemon::Threaded->new(
-    Port                    => 8081,
+    Port                    => 8082,
     MaxClients              => 20,
     ContentParams   => $contparams,
     SessionCache    => $sessions,
