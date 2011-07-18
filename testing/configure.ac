@@ -404,6 +404,7 @@ if test "x$with_testsuites" = "x" ; then
   TESTSUITES=$testsuites_default
 else
   TESTSUITES=$with_testsuites
+  testsuites_setter=$option_setter
 fi
 AC_SUBST(TESTSUITES)
 AC_DEFINE_UNQUOTED(TESTSUITES,
@@ -435,6 +436,7 @@ if test "x$with_test_subset" = "x" ; then
   TEST_SUBSET=$test_subset_default
 else
   TEST_SUBSET=$with_test_subset
+  test_subset_setter=$option_setter
 fi
 AC_SUBST(TEST_SUBSET)
 AC_DEFINE_UNQUOTED(TEST_SUBSET,
