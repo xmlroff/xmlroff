@@ -23,8 +23,6 @@
 
   <xsl:strip-space elements="*"/>
 
-  <xsl:param name="debug" select="false()"/>
-
   <!-- Use an unlikely character as indication of unsubstituted
        format string.   U+FFFD is REPLACEMENT CHARACTER. -->
   <xsl:variable name="unsubstituted-indicator">&#xFFFD;</xsl:variable>
