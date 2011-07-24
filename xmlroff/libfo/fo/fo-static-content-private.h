@@ -1,8 +1,8 @@
 /* Fo
  * fo-static-content-private.h: Structures private to 'static-content' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -18,6 +18,8 @@ G_BEGIN_DECLS
 struct _FoStaticContent
 {
   FoFo parent_instance;
+
+  FoFo *region_master;
 
   FoProperty *flow_name;
 };

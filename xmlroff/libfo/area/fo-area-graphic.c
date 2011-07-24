@@ -2,7 +2,7 @@
  * fo-area-graphic.c: Graphic inline-area object
  *
  * Copyright (C) 2001-2004 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -139,10 +139,10 @@ fo_area_graphic_size_request (FoArea *child)
 {
   FoArea *use_child_area;
   FoArea *parent;
-  gfloat total_child_height = 0;
-  gfloat graphic_child_available_bpdim;
-  gfloat child_height;
-  gfloat child_space_before, child_space_after;
+  gdouble total_child_height = 0;
+  gdouble graphic_child_available_bpdim;
+  gdouble child_height;
+  gdouble child_space_before, child_space_after;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);

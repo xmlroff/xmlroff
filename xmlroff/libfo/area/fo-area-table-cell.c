@@ -2,17 +2,12 @@
  * fo-area-table-cell.c: Area object for 'table-cell' formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo-utils.h"
-#include "fo-area.h"
-#include "fo-area-private.h"
-#include "fo-area-reference.h"
-#include "fo-area-reference-private.h"
-#include "fo-area-table-cell.h"
 #include "fo-area-table-cell-private.h"
 #include "fo-area-table-cell-proxy.h"
 #include "fo/fo-block-fo.h"
@@ -33,9 +28,9 @@ static void fo_area_table_cell_debug_dump_properties (FoArea *area,
 							      gint depth);
 static FoArea* fo_area_table_cell_size_request (FoArea *child);
 static FoArea* fo_area_table_cell_split_before_height (FoArea *area,
-						      gfloat max_height);
+						      gdouble max_height);
 static gboolean fo_area_table_cell_split_before_height_check (FoArea *area,
-							     gfloat max_height);
+							     gdouble max_height);
 static void fo_area_table_cell_size_adjust (FoArea *area,
 					    gpointer data);
 
@@ -48,11 +43,10 @@ static gpointer parent_class;
 
 /**
  * fo_area_table_cell_get_type:
- * @void: 
- * 
- * Register the FoAreaTableCell object type.
- * 
- * Return value: GType value of the FoAreaTableCell object type.
+ *
+ * Register the #FoAreaTableCell object type.
+ *
+ * Return value: #GType value of the #FoAreaTableCell object type.
  **/
 GType
 fo_area_table_cell_get_type (void)
@@ -62,24 +56,24 @@ fo_area_table_cell_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoAreaTableCellClass),
-        (GBaseInitFunc) NULL,
-        (GBaseFinalizeFunc) NULL,
-        (GClassInitFunc) fo_area_table_cell_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoAreaTableCell),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
-      
+	{
+	  sizeof (FoAreaTableCellClass),
+	  (GBaseInitFunc) NULL,
+	  (GBaseFinalizeFunc) NULL,
+	  (GClassInitFunc) fo_area_table_cell_class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoAreaTableCell),
+	  0,              /* n_preallocs */
+	  NULL,		/* instance_init */
+	  NULL		/* value_table */
+	};
+
       object_type = g_type_register_static (FO_TYPE_AREA_REFERENCE,
                                             "FoAreaTableCell",
                                             &object_info, 0);
     }
-  
+
   return object_type;
 }
 
@@ -89,14 +83,14 @@ fo_area_table_cell_class_init (FoAreaTableCellClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
-  
+
   object_class->finalize = fo_area_table_cell_finalize;
 
   FO_AREA_CLASS (klass)->debug_dump_properties = fo_area_table_cell_debug_dump_properties;
   FO_AREA_CLASS (klass)->size_request = fo_area_table_cell_size_request;
   FO_AREA_CLASS (klass)->split_before_height = fo_area_table_cell_split_before_height;
   FO_AREA_CLASS (klass)->split_before_height_check = fo_area_table_cell_split_before_height_check;
-  FO_AREA_CLASS (klass)->update_after_clone = 
+  FO_AREA_CLASS (klass)->update_after_clone =
     fo_area_table_cell_update_after_clone;
 }
 
@@ -113,9 +107,9 @@ fo_area_table_cell_finalize (GObject *object)
 
 /**
  * fo_area_table_cell_new:
- * 
+ *
  * Creates a new #FoAreaTableCell initialized to default value.
- * 
+ *
  * Return value: the new #FoAreaTableCell
  **/
 FoArea*
@@ -129,7 +123,7 @@ fo_area_table_cell_new (void)
  * fo_area_table_cell_debug_dump_properties:
  * @area:  The #FoArea object
  * @depth: Indent level to add to the output
- * 
+ *
  * Logs the value of each significant property of @area then calls
  * debug_dump_properties method of parent class.
  **/
@@ -153,7 +147,7 @@ fo_area_table_cell_debug_dump_properties (FoArea *area,
  * fo_area_table_cell_size_adjust:
  * @area: #FoArea node to be placed within parent
  * @data: Not used
- * 
+ *
  * Place @area within its parent and adjust the parent's next-x and
  * next-y properties accordingly.
  **/
@@ -189,15 +183,15 @@ fo_area_table_cell_size_adjust (FoArea  *area,
  * @area: #FoArea to be either placed within the parent area or split
  *        into two areas
  * @data: Not used
- * 
- * 
+ *
+ *
  **/
 void
 fo_area_table_cell_set_or_split (FoArea  *area,
 				 gpointer data G_GNUC_UNUSED)
 {
   FoArea *table_cell;
-  gfloat table_cell_child_available_bpdim;
+  gdouble table_cell_child_available_bpdim;
 
   g_return_if_fail (FO_IS_AREA (area));
   g_return_if_fail (FO_IS_AREA_TABLE_CELL (fo_area_parent (area)));
@@ -243,12 +237,12 @@ fo_area_table_cell_set_or_split (FoArea  *area,
 /**
  * fo_area_table_cell_size_request:
  * @child: Child area
- * 
+ *
  * Check that the parent area of @child has sufficient space for
  * @child.  If not enough space, request that the parent has
  * sufficient space allocated for it, then adjust @child and its
  * siblings as necessary to fit into the resized parent area.
- * 
+ *
  * Return value: Pointer to the last area generated from @child after
  * any reallocation and resizing
  **/
@@ -269,11 +263,11 @@ fo_area_table_cell_size_request (FoArea *child)
   /* The table cell containing the area that issued this request. */
   FoArea *table_cell = fo_area_parent (child);
   /* The length available for all children of this table cell. */
-  gfloat table_cell_child_available_bpdim =
+  gdouble table_cell_child_available_bpdim =
     fo_area_get_child_available_bpdim (table_cell);
 
   /* Find the total height of all children. */
-  gfloat total_child_height = 0.0;
+  gdouble total_child_height = 0.0;
   fo_area_children_foreach (table_cell,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
@@ -281,7 +275,7 @@ fo_area_table_cell_size_request (FoArea *child)
 
   /* Ideally, this table cell would be just big enough for its borders
      and padding plus the height needed for its children. */
-  gfloat table_cell_target_height =
+  gdouble table_cell_target_height =
     total_child_height +
     fo_area_area_get_border_before (table_cell) +
     fo_area_area_get_padding_before (table_cell) +
@@ -293,7 +287,7 @@ fo_area_table_cell_size_request (FoArea *child)
   FoDatatype *fo_cell_bpdim =
     fo_property_get_value (fo_table_cell_get_block_progression_dimension (table_cell->generated_by));
 
-  gfloat table_cell_use_height = 0.0;
+  gdouble table_cell_use_height = 0.0;
   if (FO_IS_LENGTH_RANGE (fo_cell_bpdim))
     {
       FoDatatype *min_datatype =
@@ -408,7 +402,7 @@ fo_area_table_cell_size_request (FoArea *child)
       FoEnumEnum display_align =
 	fo_enum_get_value (fo_cell_display_align);
 
-      gfloat next_y;
+      gdouble next_y;
       switch (display_align)
 	{
 	case FO_ENUM_ENUM_AUTO:
@@ -480,11 +474,11 @@ fo_area_table_cell_size_request (FoArea *child)
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_table_cell_split_before_height (FoArea *area,
-					gfloat max_height)
+					gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_TABLE_CELL (area), NULL);
   g_return_val_if_fail (fo_area_n_children (area) > 0, NULL);
@@ -562,9 +556,9 @@ fo_area_table_cell_split_before_height (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */
@@ -606,11 +600,11 @@ fo_area_table_cell_split_before_height (FoArea *area,
 /* leave @area as area remaining after split */
 gboolean
 fo_area_table_cell_split_before_height_check (FoArea *area,
-					     gfloat max_height)
+					     gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_TABLE_CELL (area), FALSE);
   g_return_val_if_fail (fo_area_n_children (area) > 0, FALSE);
@@ -684,9 +678,9 @@ fo_area_table_cell_split_before_height_check (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */
@@ -721,9 +715,9 @@ fo_area_table_cell_split_before_height_check (FoArea *area,
  * fo_area_table_cell_update_after_clone:
  * @clone:    New object cloned from @original
  * @original: Original area object
- * 
- * Update the FoAreaTableCell-specific instance variables of @clone to
- * match those of @original
+ *
+ * Update the #FoAreaTableCell-specific instance variables of @clone to
+ * match those of @original.
  **/
 void
 fo_area_table_cell_update_after_clone (FoArea *clone,

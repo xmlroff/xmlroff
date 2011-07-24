@@ -101,7 +101,7 @@ void
 fo_property_media_usage_init (FoPropertyMediaUsage *media_usage)
 {
   FO_PROPERTY (media_usage)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("auto"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("auto"));
 }
 
 /**
@@ -195,7 +195,7 @@ fo_property_media_usage_resolve_enum (const gchar *token,
       (strcmp (token, "bounded-in-one-dimension") == 0) ||
       (strcmp (token, "unbounded") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

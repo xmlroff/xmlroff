@@ -92,7 +92,7 @@ void
 fo_property_line_stacking_strategy_init (FoPropertyLineStackingStrategy *line_stacking_strategy)
 {
   FO_PROPERTY (line_stacking_strategy)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("max-height"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("max-height"));
 }
 
 /**
@@ -185,7 +185,7 @@ fo_property_line_stacking_strategy_resolve_enum (const gchar *token,
       (strcmp (token, "font-height") == 0) ||
       (strcmp (token, "max-height") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

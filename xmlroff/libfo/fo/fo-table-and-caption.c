@@ -1,13 +1,14 @@
 /* Fo
  * fo-table-and-caption.c: 'table-and-caption' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo/fo-block-fo-private.h"
+#include "fo/fo-cbpbp-fo-private.h"
 #include "fo/fo-table-and-caption-private.h"
 #include "fo/fo-table-caption.h"
 #include "fo/fo-table.h"
@@ -138,6 +139,7 @@ enum {
 
 static void fo_table_and_caption_class_init  (FoTableAndCaptionClass *klass);
 static void fo_table_and_caption_block_fo_init (FoBlockFoIface *iface);
+static void fo_table_and_caption_cbpbp_fo_init (FoCBPBPFoIface *iface);
 static void fo_table_and_caption_get_property (GObject      *object,
                                                guint         prop_id,
                                                GValue       *value,
@@ -175,25 +177,32 @@ fo_table_and_caption_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoTableAndCaptionClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_table_and_caption_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoTableAndCaption),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoTableAndCaptionClass),
+	  NULL,           /* base_init */
+	  NULL,           /* base_finalize */
+	  (GClassInitFunc) fo_table_and_caption_class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoTableAndCaption),
+	  0,              /* n_preallocs */
+	  NULL,		  /* instance_init */
+	  NULL		  /* value_table */
+	};
 
       static const GInterfaceInfo fo_block_fo_info =
-      {
-	(GInterfaceInitFunc) fo_table_and_caption_block_fo_init,	 /* interface_init */
-        NULL,
-        NULL
-      };
+	{
+	  (GInterfaceInitFunc) fo_table_and_caption_block_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
+
+      static const GInterfaceInfo fo_cbpbp_fo_info =
+	{
+	  (GInterfaceInitFunc) fo_table_and_caption_cbpbp_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
                                             "FoTableAndCaption",
@@ -201,6 +210,9 @@ fo_table_and_caption_get_type (void)
       g_type_add_interface_static (object_type,
                                    FO_TYPE_BLOCK_FO,
                                    &fo_block_fo_info);
+      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &fo_cbpbp_fo_info);
     }
 
   return object_type;
@@ -225,8 +237,10 @@ fo_table_and_caption_class_init (FoTableAndCaptionClass *klass)
   object_class->get_property = fo_table_and_caption_get_property;
   object_class->set_property = fo_table_and_caption_set_property;
 
-  fofo_class->validate_content = fo_table_and_caption_validate_content;
-  fofo_class->validate2 = fo_table_and_caption_validate;
+  fofo_class->validate_content =
+    fo_table_and_caption_validate_content;
+  fofo_class->validate2 =
+    fo_table_and_caption_validate;
   fofo_class->update_from_context = fo_table_and_caption_update_from_context;
   fofo_class->debug_dump_properties = fo_table_and_caption_debug_dump_properties;
 
@@ -748,6 +762,34 @@ fo_table_and_caption_block_fo_init (FoBlockFoIface *iface)
 }
 
 /**
+ * fo_table_and_caption_cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
+ * 
+ * Initialize #FoCBPBPFoIface interface for this class.
+ **/
+void
+fo_table_and_caption_cbpbp_fo_init (FoCBPBPFoIface *iface)
+{
+  iface->get_background_color = fo_table_and_caption_get_background_color;
+  iface->get_border_after_color = fo_table_and_caption_get_border_after_color;
+  iface->get_border_after_style = fo_table_and_caption_get_border_after_style;
+  iface->get_border_after_width = fo_table_and_caption_get_border_after_width;
+  iface->get_border_before_color = fo_table_and_caption_get_border_before_color;
+  iface->get_border_before_style = fo_table_and_caption_get_border_before_style;
+  iface->get_border_before_width = fo_table_and_caption_get_border_before_width;
+  iface->get_border_end_color = fo_table_and_caption_get_border_end_color;
+  iface->get_border_end_style = fo_table_and_caption_get_border_end_style;
+  iface->get_border_end_width = fo_table_and_caption_get_border_end_width;
+  iface->get_border_start_color = fo_table_and_caption_get_border_start_color;
+  iface->get_border_start_style = fo_table_and_caption_get_border_start_style;
+  iface->get_border_start_width = fo_table_and_caption_get_border_start_width;
+  iface->get_padding_after = fo_table_and_caption_get_padding_after;
+  iface->get_padding_before = fo_table_and_caption_get_padding_before;
+  iface->get_padding_end = fo_table_and_caption_get_padding_end;
+  iface->get_padding_start = fo_table_and_caption_get_padding_start;
+}
+
+/**
  * fo_table_and_caption_finalize:
  * @object: #FoTableAndCaption object to finalize.
  * 
@@ -756,9 +798,69 @@ fo_table_and_caption_block_fo_init (FoBlockFoIface *iface)
 void
 fo_table_and_caption_finalize (GObject *object)
 {
-  FoTableAndCaption *fo_table_and_caption;
+  FoFo *fo = FO_FO (object);
 
-  fo_table_and_caption = FO_TABLE_AND_CAPTION (object);
+  /* Release references to all property objects. */
+  fo_table_and_caption_set_background_color (fo, NULL);
+  fo_table_and_caption_set_background_image (fo, NULL);
+  fo_table_and_caption_set_border_after_color (fo, NULL);
+  fo_table_and_caption_set_border_after_style (fo, NULL);
+  fo_table_and_caption_set_border_after_width (fo, NULL);
+  fo_table_and_caption_set_border_before_color (fo, NULL);
+  fo_table_and_caption_set_border_before_style (fo, NULL);
+  fo_table_and_caption_set_border_before_width (fo, NULL);
+  fo_table_and_caption_set_border_bottom_color (fo, NULL);
+  fo_table_and_caption_set_border_bottom_style (fo, NULL);
+  fo_table_and_caption_set_border_bottom_width (fo, NULL);
+  fo_table_and_caption_set_border_end_color (fo, NULL);
+  fo_table_and_caption_set_border_end_style (fo, NULL);
+  fo_table_and_caption_set_border_end_width (fo, NULL);
+  fo_table_and_caption_set_border_left_color (fo, NULL);
+  fo_table_and_caption_set_border_left_style (fo, NULL);
+  fo_table_and_caption_set_border_left_width (fo, NULL);
+  fo_table_and_caption_set_border_right_color (fo, NULL);
+  fo_table_and_caption_set_border_right_style (fo, NULL);
+  fo_table_and_caption_set_border_right_width (fo, NULL);
+  fo_table_and_caption_set_border_start_color (fo, NULL);
+  fo_table_and_caption_set_border_start_style (fo, NULL);
+  fo_table_and_caption_set_border_start_width (fo, NULL);
+  fo_table_and_caption_set_border_top_color (fo, NULL);
+  fo_table_and_caption_set_border_top_style (fo, NULL);
+  fo_table_and_caption_set_border_top_width (fo, NULL);
+  fo_table_and_caption_set_break_after (fo, NULL);
+  fo_table_and_caption_set_break_before (fo, NULL);
+  fo_table_and_caption_set_end_indent (fo, NULL);
+  fo_table_and_caption_set_id (fo, NULL);
+  fo_table_and_caption_set_keep_together (fo, NULL);
+  fo_table_and_caption_set_keep_together_within_column (fo, NULL);
+  fo_table_and_caption_set_keep_together_within_line (fo, NULL);
+  fo_table_and_caption_set_keep_together_within_page (fo, NULL);
+  fo_table_and_caption_set_keep_with_next (fo, NULL);
+  fo_table_and_caption_set_keep_with_next_within_column (fo, NULL);
+  fo_table_and_caption_set_keep_with_next_within_line (fo, NULL);
+  fo_table_and_caption_set_keep_with_next_within_page (fo, NULL);
+  fo_table_and_caption_set_keep_with_previous (fo, NULL);
+  fo_table_and_caption_set_keep_with_previous_within_column (fo, NULL);
+  fo_table_and_caption_set_keep_with_previous_within_line (fo, NULL);
+  fo_table_and_caption_set_keep_with_previous_within_page (fo, NULL);
+  fo_table_and_caption_set_margin_bottom (fo, NULL);
+  fo_table_and_caption_set_margin_left (fo, NULL);
+  fo_table_and_caption_set_margin_right (fo, NULL);
+  fo_table_and_caption_set_margin_top (fo, NULL);
+  fo_table_and_caption_set_padding_after (fo, NULL);
+  fo_table_and_caption_set_padding_before (fo, NULL);
+  fo_table_and_caption_set_padding_bottom (fo, NULL);
+  fo_table_and_caption_set_padding_end (fo, NULL);
+  fo_table_and_caption_set_padding_left (fo, NULL);
+  fo_table_and_caption_set_padding_right (fo, NULL);
+  fo_table_and_caption_set_padding_start (fo, NULL);
+  fo_table_and_caption_set_padding_top (fo, NULL);
+  fo_table_and_caption_set_role (fo, NULL);
+  fo_table_and_caption_set_source_document (fo, NULL);
+  fo_table_and_caption_set_space_after (fo, NULL);
+  fo_table_and_caption_set_space_before (fo, NULL);
+  fo_table_and_caption_set_start_indent (fo, NULL);
+  fo_table_and_caption_set_text_align (fo, NULL);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -1421,14 +1523,15 @@ fo_table_and_caption_update_from_context (FoFo      *fo,
 
 /**
  * fo_table_and_caption_debug_dump_properties:
- * @fo: The #FoFo object
- * @depth: Indent level to add to the output
+ * @fo:    The #FoFo object.
+ * @depth: Indent level to add to the output.
  * 
  * Calls #fo_object_debug_dump on each property of @fo then calls
- * debug_dump_properties method of parent class
+ * debug_dump_properties method of parent class.
  **/
 void
-fo_table_and_caption_debug_dump_properties (FoFo *fo, gint depth)
+fo_table_and_caption_debug_dump_properties (FoFo *fo,
+                                            gint  depth)
 {
   FoTableAndCaption *fo_table_and_caption;
 
@@ -1503,11 +1606,11 @@ fo_table_and_caption_debug_dump_properties (FoFo *fo, gint depth)
 
 /**
  * fo_table_and_caption_get_background_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "background-color" property of @fo_fo
+ * Gets the "background-color" property of @fo_fo.
  *
- * Return value: The "background-color" property value
+ * Return value: The "background-color" property value.
 **/
 FoProperty *
 fo_table_and_caption_get_background_color (FoFo *fo_fo)
@@ -1522,10 +1625,10 @@ fo_table_and_caption_get_background_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_background_color:
- * @fo_fo: The #FoFo object
- * @new_background_color: The new "background-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_background_color: The new "background-color" property value.
  * 
- * Sets the "background-color" property of @fo_fo to @new_background_color
+ * Sets the "background-color" property of @fo_fo to @new_background_color.
  **/
 void
 fo_table_and_caption_set_background_color (FoFo *fo_fo,
@@ -1535,7 +1638,8 @@ fo_table_and_caption_set_background_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY (new_background_color));
+  g_return_if_fail ((new_background_color == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
 
   if (new_background_color != NULL)
     {
@@ -1551,13 +1655,13 @@ fo_table_and_caption_set_background_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_background_image:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "background-image" property of @fo_fo
+ * Gets the "background-image" property of @fo_fo.
  *
- * Return value: The "background-image" property value
+ * Return value: The "background-image" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_background_image (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1570,10 +1674,10 @@ fo_table_and_caption_get_background_image (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_background_image:
- * @fo_fo: The #FoFo object
- * @new_background_image: The new "background-image" property value
+ * @fo_fo: The #FoFo object.
+ * @new_background_image: The new "background-image" property value.
  * 
- * Sets the "background-image" property of @fo_fo to @new_background_image
+ * Sets the "background-image" property of @fo_fo to @new_background_image.
  **/
 void
 fo_table_and_caption_set_background_image (FoFo *fo_fo,
@@ -1583,7 +1687,8 @@ fo_table_and_caption_set_background_image (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
+  g_return_if_fail ((new_background_image == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
 
   if (new_background_image != NULL)
     {
@@ -1599,13 +1704,13 @@ fo_table_and_caption_set_background_image (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_after_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-after-color" property of @fo_fo
+ * Gets the "border-after-color" property of @fo_fo.
  *
- * Return value: The "border-after-color" property value
+ * Return value: The "border-after-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_after_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1618,10 +1723,10 @@ fo_table_and_caption_get_border_after_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_after_color:
- * @fo_fo: The #FoFo object
- * @new_border_after_color: The new "border-after-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_after_color: The new "border-after-color" property value.
  * 
- * Sets the "border-after-color" property of @fo_fo to @new_border_after_color
+ * Sets the "border-after-color" property of @fo_fo to @new_border_after_color.
  **/
 void
 fo_table_and_caption_set_border_after_color (FoFo *fo_fo,
@@ -1631,7 +1736,8 @@ fo_table_and_caption_set_border_after_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
+  g_return_if_fail ((new_border_after_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
 
   if (new_border_after_color != NULL)
     {
@@ -1647,13 +1753,13 @@ fo_table_and_caption_set_border_after_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_after_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-after-style" property of @fo_fo
+ * Gets the "border-after-style" property of @fo_fo.
  *
- * Return value: The "border-after-style" property value
+ * Return value: The "border-after-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_after_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1666,10 +1772,10 @@ fo_table_and_caption_get_border_after_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_after_style:
- * @fo_fo: The #FoFo object
- * @new_border_after_style: The new "border-after-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_after_style: The new "border-after-style" property value.
  * 
- * Sets the "border-after-style" property of @fo_fo to @new_border_after_style
+ * Sets the "border-after-style" property of @fo_fo to @new_border_after_style.
  **/
 void
 fo_table_and_caption_set_border_after_style (FoFo *fo_fo,
@@ -1679,7 +1785,8 @@ fo_table_and_caption_set_border_after_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
+  g_return_if_fail ((new_border_after_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
 
   if (new_border_after_style != NULL)
     {
@@ -1695,13 +1802,13 @@ fo_table_and_caption_set_border_after_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_after_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-after-width" property of @fo_fo
+ * Gets the "border-after-width" property of @fo_fo.
  *
- * Return value: The "border-after-width" property value
+ * Return value: The "border-after-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_after_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1714,10 +1821,10 @@ fo_table_and_caption_get_border_after_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_after_width:
- * @fo_fo: The #FoFo object
- * @new_border_after_width: The new "border-after-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_after_width: The new "border-after-width" property value.
  * 
- * Sets the "border-after-width" property of @fo_fo to @new_border_after_width
+ * Sets the "border-after-width" property of @fo_fo to @new_border_after_width.
  **/
 void
 fo_table_and_caption_set_border_after_width (FoFo *fo_fo,
@@ -1727,7 +1834,8 @@ fo_table_and_caption_set_border_after_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
+  g_return_if_fail ((new_border_after_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
 
   if (new_border_after_width != NULL)
     {
@@ -1743,13 +1851,13 @@ fo_table_and_caption_set_border_after_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_before_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-before-color" property of @fo_fo
+ * Gets the "border-before-color" property of @fo_fo.
  *
- * Return value: The "border-before-color" property value
+ * Return value: The "border-before-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_before_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1762,10 +1870,10 @@ fo_table_and_caption_get_border_before_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_before_color:
- * @fo_fo: The #FoFo object
- * @new_border_before_color: The new "border-before-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_before_color: The new "border-before-color" property value.
  * 
- * Sets the "border-before-color" property of @fo_fo to @new_border_before_color
+ * Sets the "border-before-color" property of @fo_fo to @new_border_before_color.
  **/
 void
 fo_table_and_caption_set_border_before_color (FoFo *fo_fo,
@@ -1775,7 +1883,8 @@ fo_table_and_caption_set_border_before_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
+  g_return_if_fail ((new_border_before_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
 
   if (new_border_before_color != NULL)
     {
@@ -1791,13 +1900,13 @@ fo_table_and_caption_set_border_before_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_before_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-before-style" property of @fo_fo
+ * Gets the "border-before-style" property of @fo_fo.
  *
- * Return value: The "border-before-style" property value
+ * Return value: The "border-before-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_before_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1810,10 +1919,10 @@ fo_table_and_caption_get_border_before_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_before_style:
- * @fo_fo: The #FoFo object
- * @new_border_before_style: The new "border-before-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_before_style: The new "border-before-style" property value.
  * 
- * Sets the "border-before-style" property of @fo_fo to @new_border_before_style
+ * Sets the "border-before-style" property of @fo_fo to @new_border_before_style.
  **/
 void
 fo_table_and_caption_set_border_before_style (FoFo *fo_fo,
@@ -1823,7 +1932,8 @@ fo_table_and_caption_set_border_before_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
+  g_return_if_fail ((new_border_before_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
 
   if (new_border_before_style != NULL)
     {
@@ -1839,13 +1949,13 @@ fo_table_and_caption_set_border_before_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_before_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-before-width" property of @fo_fo
+ * Gets the "border-before-width" property of @fo_fo.
  *
- * Return value: The "border-before-width" property value
+ * Return value: The "border-before-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_before_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1858,10 +1968,10 @@ fo_table_and_caption_get_border_before_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_before_width:
- * @fo_fo: The #FoFo object
- * @new_border_before_width: The new "border-before-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_before_width: The new "border-before-width" property value.
  * 
- * Sets the "border-before-width" property of @fo_fo to @new_border_before_width
+ * Sets the "border-before-width" property of @fo_fo to @new_border_before_width.
  **/
 void
 fo_table_and_caption_set_border_before_width (FoFo *fo_fo,
@@ -1871,7 +1981,8 @@ fo_table_and_caption_set_border_before_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
+  g_return_if_fail ((new_border_before_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
 
   if (new_border_before_width != NULL)
     {
@@ -1887,13 +1998,13 @@ fo_table_and_caption_set_border_before_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_bottom_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-bottom-color" property of @fo_fo
+ * Gets the "border-bottom-color" property of @fo_fo.
  *
- * Return value: The "border-bottom-color" property value
+ * Return value: The "border-bottom-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_bottom_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1906,10 +2017,10 @@ fo_table_and_caption_get_border_bottom_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_bottom_color:
- * @fo_fo: The #FoFo object
- * @new_border_bottom_color: The new "border-bottom-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_bottom_color: The new "border-bottom-color" property value.
  * 
- * Sets the "border-bottom-color" property of @fo_fo to @new_border_bottom_color
+ * Sets the "border-bottom-color" property of @fo_fo to @new_border_bottom_color.
  **/
 void
 fo_table_and_caption_set_border_bottom_color (FoFo *fo_fo,
@@ -1919,7 +2030,8 @@ fo_table_and_caption_set_border_bottom_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
+  g_return_if_fail ((new_border_bottom_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
 
   if (new_border_bottom_color != NULL)
     {
@@ -1935,13 +2047,13 @@ fo_table_and_caption_set_border_bottom_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_bottom_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-bottom-style" property of @fo_fo
+ * Gets the "border-bottom-style" property of @fo_fo.
  *
- * Return value: The "border-bottom-style" property value
+ * Return value: The "border-bottom-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_bottom_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -1954,10 +2066,10 @@ fo_table_and_caption_get_border_bottom_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_bottom_style:
- * @fo_fo: The #FoFo object
- * @new_border_bottom_style: The new "border-bottom-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_bottom_style: The new "border-bottom-style" property value.
  * 
- * Sets the "border-bottom-style" property of @fo_fo to @new_border_bottom_style
+ * Sets the "border-bottom-style" property of @fo_fo to @new_border_bottom_style.
  **/
 void
 fo_table_and_caption_set_border_bottom_style (FoFo *fo_fo,
@@ -1967,7 +2079,8 @@ fo_table_and_caption_set_border_bottom_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
+  g_return_if_fail ((new_border_bottom_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
 
   if (new_border_bottom_style != NULL)
     {
@@ -1983,13 +2096,13 @@ fo_table_and_caption_set_border_bottom_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_bottom_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-bottom-width" property of @fo_fo
+ * Gets the "border-bottom-width" property of @fo_fo.
  *
- * Return value: The "border-bottom-width" property value
+ * Return value: The "border-bottom-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_bottom_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2002,10 +2115,10 @@ fo_table_and_caption_get_border_bottom_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_bottom_width:
- * @fo_fo: The #FoFo object
- * @new_border_bottom_width: The new "border-bottom-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_bottom_width: The new "border-bottom-width" property value.
  * 
- * Sets the "border-bottom-width" property of @fo_fo to @new_border_bottom_width
+ * Sets the "border-bottom-width" property of @fo_fo to @new_border_bottom_width.
  **/
 void
 fo_table_and_caption_set_border_bottom_width (FoFo *fo_fo,
@@ -2015,7 +2128,8 @@ fo_table_and_caption_set_border_bottom_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
+  g_return_if_fail ((new_border_bottom_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
 
   if (new_border_bottom_width != NULL)
     {
@@ -2031,13 +2145,13 @@ fo_table_and_caption_set_border_bottom_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_end_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-end-color" property of @fo_fo
+ * Gets the "border-end-color" property of @fo_fo.
  *
- * Return value: The "border-end-color" property value
+ * Return value: The "border-end-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_end_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2050,10 +2164,10 @@ fo_table_and_caption_get_border_end_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_end_color:
- * @fo_fo: The #FoFo object
- * @new_border_end_color: The new "border-end-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_end_color: The new "border-end-color" property value.
  * 
- * Sets the "border-end-color" property of @fo_fo to @new_border_end_color
+ * Sets the "border-end-color" property of @fo_fo to @new_border_end_color.
  **/
 void
 fo_table_and_caption_set_border_end_color (FoFo *fo_fo,
@@ -2063,7 +2177,8 @@ fo_table_and_caption_set_border_end_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
+  g_return_if_fail ((new_border_end_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
 
   if (new_border_end_color != NULL)
     {
@@ -2079,13 +2194,13 @@ fo_table_and_caption_set_border_end_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_end_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-end-style" property of @fo_fo
+ * Gets the "border-end-style" property of @fo_fo.
  *
- * Return value: The "border-end-style" property value
+ * Return value: The "border-end-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_end_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2098,10 +2213,10 @@ fo_table_and_caption_get_border_end_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_end_style:
- * @fo_fo: The #FoFo object
- * @new_border_end_style: The new "border-end-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_end_style: The new "border-end-style" property value.
  * 
- * Sets the "border-end-style" property of @fo_fo to @new_border_end_style
+ * Sets the "border-end-style" property of @fo_fo to @new_border_end_style.
  **/
 void
 fo_table_and_caption_set_border_end_style (FoFo *fo_fo,
@@ -2111,7 +2226,8 @@ fo_table_and_caption_set_border_end_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
+  g_return_if_fail ((new_border_end_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
 
   if (new_border_end_style != NULL)
     {
@@ -2127,13 +2243,13 @@ fo_table_and_caption_set_border_end_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_end_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-end-width" property of @fo_fo
+ * Gets the "border-end-width" property of @fo_fo.
  *
- * Return value: The "border-end-width" property value
+ * Return value: The "border-end-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_end_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2146,10 +2262,10 @@ fo_table_and_caption_get_border_end_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_end_width:
- * @fo_fo: The #FoFo object
- * @new_border_end_width: The new "border-end-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_end_width: The new "border-end-width" property value.
  * 
- * Sets the "border-end-width" property of @fo_fo to @new_border_end_width
+ * Sets the "border-end-width" property of @fo_fo to @new_border_end_width.
  **/
 void
 fo_table_and_caption_set_border_end_width (FoFo *fo_fo,
@@ -2159,7 +2275,8 @@ fo_table_and_caption_set_border_end_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
+  g_return_if_fail ((new_border_end_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
 
   if (new_border_end_width != NULL)
     {
@@ -2175,13 +2292,13 @@ fo_table_and_caption_set_border_end_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_left_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-left-color" property of @fo_fo
+ * Gets the "border-left-color" property of @fo_fo.
  *
- * Return value: The "border-left-color" property value
+ * Return value: The "border-left-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_left_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2194,10 +2311,10 @@ fo_table_and_caption_get_border_left_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_left_color:
- * @fo_fo: The #FoFo object
- * @new_border_left_color: The new "border-left-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_left_color: The new "border-left-color" property value.
  * 
- * Sets the "border-left-color" property of @fo_fo to @new_border_left_color
+ * Sets the "border-left-color" property of @fo_fo to @new_border_left_color.
  **/
 void
 fo_table_and_caption_set_border_left_color (FoFo *fo_fo,
@@ -2207,7 +2324,8 @@ fo_table_and_caption_set_border_left_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
+  g_return_if_fail ((new_border_left_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
 
   if (new_border_left_color != NULL)
     {
@@ -2223,13 +2341,13 @@ fo_table_and_caption_set_border_left_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_left_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-left-style" property of @fo_fo
+ * Gets the "border-left-style" property of @fo_fo.
  *
- * Return value: The "border-left-style" property value
+ * Return value: The "border-left-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_left_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2242,10 +2360,10 @@ fo_table_and_caption_get_border_left_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_left_style:
- * @fo_fo: The #FoFo object
- * @new_border_left_style: The new "border-left-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_left_style: The new "border-left-style" property value.
  * 
- * Sets the "border-left-style" property of @fo_fo to @new_border_left_style
+ * Sets the "border-left-style" property of @fo_fo to @new_border_left_style.
  **/
 void
 fo_table_and_caption_set_border_left_style (FoFo *fo_fo,
@@ -2255,7 +2373,8 @@ fo_table_and_caption_set_border_left_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
+  g_return_if_fail ((new_border_left_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
 
   if (new_border_left_style != NULL)
     {
@@ -2271,13 +2390,13 @@ fo_table_and_caption_set_border_left_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_left_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-left-width" property of @fo_fo
+ * Gets the "border-left-width" property of @fo_fo.
  *
- * Return value: The "border-left-width" property value
+ * Return value: The "border-left-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_left_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2290,10 +2409,10 @@ fo_table_and_caption_get_border_left_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_left_width:
- * @fo_fo: The #FoFo object
- * @new_border_left_width: The new "border-left-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_left_width: The new "border-left-width" property value.
  * 
- * Sets the "border-left-width" property of @fo_fo to @new_border_left_width
+ * Sets the "border-left-width" property of @fo_fo to @new_border_left_width.
  **/
 void
 fo_table_and_caption_set_border_left_width (FoFo *fo_fo,
@@ -2303,7 +2422,8 @@ fo_table_and_caption_set_border_left_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
+  g_return_if_fail ((new_border_left_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
 
   if (new_border_left_width != NULL)
     {
@@ -2319,13 +2439,13 @@ fo_table_and_caption_set_border_left_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_right_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-right-color" property of @fo_fo
+ * Gets the "border-right-color" property of @fo_fo.
  *
- * Return value: The "border-right-color" property value
+ * Return value: The "border-right-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_right_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2338,10 +2458,10 @@ fo_table_and_caption_get_border_right_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_right_color:
- * @fo_fo: The #FoFo object
- * @new_border_right_color: The new "border-right-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_right_color: The new "border-right-color" property value.
  * 
- * Sets the "border-right-color" property of @fo_fo to @new_border_right_color
+ * Sets the "border-right-color" property of @fo_fo to @new_border_right_color.
  **/
 void
 fo_table_and_caption_set_border_right_color (FoFo *fo_fo,
@@ -2351,7 +2471,8 @@ fo_table_and_caption_set_border_right_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
+  g_return_if_fail ((new_border_right_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
 
   if (new_border_right_color != NULL)
     {
@@ -2367,13 +2488,13 @@ fo_table_and_caption_set_border_right_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_right_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-right-style" property of @fo_fo
+ * Gets the "border-right-style" property of @fo_fo.
  *
- * Return value: The "border-right-style" property value
+ * Return value: The "border-right-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_right_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2386,10 +2507,10 @@ fo_table_and_caption_get_border_right_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_right_style:
- * @fo_fo: The #FoFo object
- * @new_border_right_style: The new "border-right-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_right_style: The new "border-right-style" property value.
  * 
- * Sets the "border-right-style" property of @fo_fo to @new_border_right_style
+ * Sets the "border-right-style" property of @fo_fo to @new_border_right_style.
  **/
 void
 fo_table_and_caption_set_border_right_style (FoFo *fo_fo,
@@ -2399,7 +2520,8 @@ fo_table_and_caption_set_border_right_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
+  g_return_if_fail ((new_border_right_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
 
   if (new_border_right_style != NULL)
     {
@@ -2415,13 +2537,13 @@ fo_table_and_caption_set_border_right_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_right_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-right-width" property of @fo_fo
+ * Gets the "border-right-width" property of @fo_fo.
  *
- * Return value: The "border-right-width" property value
+ * Return value: The "border-right-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_right_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2434,10 +2556,10 @@ fo_table_and_caption_get_border_right_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_right_width:
- * @fo_fo: The #FoFo object
- * @new_border_right_width: The new "border-right-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_right_width: The new "border-right-width" property value.
  * 
- * Sets the "border-right-width" property of @fo_fo to @new_border_right_width
+ * Sets the "border-right-width" property of @fo_fo to @new_border_right_width.
  **/
 void
 fo_table_and_caption_set_border_right_width (FoFo *fo_fo,
@@ -2447,7 +2569,8 @@ fo_table_and_caption_set_border_right_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
+  g_return_if_fail ((new_border_right_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
 
   if (new_border_right_width != NULL)
     {
@@ -2463,13 +2586,13 @@ fo_table_and_caption_set_border_right_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_start_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-start-color" property of @fo_fo
+ * Gets the "border-start-color" property of @fo_fo.
  *
- * Return value: The "border-start-color" property value
+ * Return value: The "border-start-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_start_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2482,10 +2605,10 @@ fo_table_and_caption_get_border_start_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_start_color:
- * @fo_fo: The #FoFo object
- * @new_border_start_color: The new "border-start-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_start_color: The new "border-start-color" property value.
  * 
- * Sets the "border-start-color" property of @fo_fo to @new_border_start_color
+ * Sets the "border-start-color" property of @fo_fo to @new_border_start_color.
  **/
 void
 fo_table_and_caption_set_border_start_color (FoFo *fo_fo,
@@ -2495,7 +2618,8 @@ fo_table_and_caption_set_border_start_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
+  g_return_if_fail ((new_border_start_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
 
   if (new_border_start_color != NULL)
     {
@@ -2511,13 +2635,13 @@ fo_table_and_caption_set_border_start_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_start_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-start-style" property of @fo_fo
+ * Gets the "border-start-style" property of @fo_fo.
  *
- * Return value: The "border-start-style" property value
+ * Return value: The "border-start-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_start_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2530,10 +2654,10 @@ fo_table_and_caption_get_border_start_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_start_style:
- * @fo_fo: The #FoFo object
- * @new_border_start_style: The new "border-start-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_start_style: The new "border-start-style" property value.
  * 
- * Sets the "border-start-style" property of @fo_fo to @new_border_start_style
+ * Sets the "border-start-style" property of @fo_fo to @new_border_start_style.
  **/
 void
 fo_table_and_caption_set_border_start_style (FoFo *fo_fo,
@@ -2543,7 +2667,8 @@ fo_table_and_caption_set_border_start_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
+  g_return_if_fail ((new_border_start_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
 
   if (new_border_start_style != NULL)
     {
@@ -2559,13 +2684,13 @@ fo_table_and_caption_set_border_start_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_start_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-start-width" property of @fo_fo
+ * Gets the "border-start-width" property of @fo_fo.
  *
- * Return value: The "border-start-width" property value
+ * Return value: The "border-start-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_start_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2578,10 +2703,10 @@ fo_table_and_caption_get_border_start_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_start_width:
- * @fo_fo: The #FoFo object
- * @new_border_start_width: The new "border-start-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_start_width: The new "border-start-width" property value.
  * 
- * Sets the "border-start-width" property of @fo_fo to @new_border_start_width
+ * Sets the "border-start-width" property of @fo_fo to @new_border_start_width.
  **/
 void
 fo_table_and_caption_set_border_start_width (FoFo *fo_fo,
@@ -2591,7 +2716,8 @@ fo_table_and_caption_set_border_start_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
+  g_return_if_fail ((new_border_start_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
 
   if (new_border_start_width != NULL)
     {
@@ -2607,13 +2733,13 @@ fo_table_and_caption_set_border_start_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_top_color:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-top-color" property of @fo_fo
+ * Gets the "border-top-color" property of @fo_fo.
  *
- * Return value: The "border-top-color" property value
+ * Return value: The "border-top-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_top_color (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2626,10 +2752,10 @@ fo_table_and_caption_get_border_top_color (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_top_color:
- * @fo_fo: The #FoFo object
- * @new_border_top_color: The new "border-top-color" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_top_color: The new "border-top-color" property value.
  * 
- * Sets the "border-top-color" property of @fo_fo to @new_border_top_color
+ * Sets the "border-top-color" property of @fo_fo to @new_border_top_color.
  **/
 void
 fo_table_and_caption_set_border_top_color (FoFo *fo_fo,
@@ -2639,7 +2765,8 @@ fo_table_and_caption_set_border_top_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
+  g_return_if_fail ((new_border_top_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
 
   if (new_border_top_color != NULL)
     {
@@ -2655,13 +2782,13 @@ fo_table_and_caption_set_border_top_color (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_top_style:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-top-style" property of @fo_fo
+ * Gets the "border-top-style" property of @fo_fo.
  *
- * Return value: The "border-top-style" property value
+ * Return value: The "border-top-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_top_style (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2674,10 +2801,10 @@ fo_table_and_caption_get_border_top_style (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_top_style:
- * @fo_fo: The #FoFo object
- * @new_border_top_style: The new "border-top-style" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_top_style: The new "border-top-style" property value.
  * 
- * Sets the "border-top-style" property of @fo_fo to @new_border_top_style
+ * Sets the "border-top-style" property of @fo_fo to @new_border_top_style.
  **/
 void
 fo_table_and_caption_set_border_top_style (FoFo *fo_fo,
@@ -2687,7 +2814,8 @@ fo_table_and_caption_set_border_top_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
+  g_return_if_fail ((new_border_top_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
 
   if (new_border_top_style != NULL)
     {
@@ -2703,13 +2831,13 @@ fo_table_and_caption_set_border_top_style (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_border_top_width:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "border-top-width" property of @fo_fo
+ * Gets the "border-top-width" property of @fo_fo.
  *
- * Return value: The "border-top-width" property value
+ * Return value: The "border-top-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_border_top_width (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2722,10 +2850,10 @@ fo_table_and_caption_get_border_top_width (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_border_top_width:
- * @fo_fo: The #FoFo object
- * @new_border_top_width: The new "border-top-width" property value
+ * @fo_fo: The #FoFo object.
+ * @new_border_top_width: The new "border-top-width" property value.
  * 
- * Sets the "border-top-width" property of @fo_fo to @new_border_top_width
+ * Sets the "border-top-width" property of @fo_fo to @new_border_top_width.
  **/
 void
 fo_table_and_caption_set_border_top_width (FoFo *fo_fo,
@@ -2735,7 +2863,8 @@ fo_table_and_caption_set_border_top_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
+  g_return_if_fail ((new_border_top_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
 
   if (new_border_top_width != NULL)
     {
@@ -2751,13 +2880,13 @@ fo_table_and_caption_set_border_top_width (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_break_after:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "break-after" property of @fo_fo
+ * Gets the "break-after" property of @fo_fo.
  *
- * Return value: The "break-after" property value
+ * Return value: The "break-after" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_break_after (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2770,10 +2899,10 @@ fo_table_and_caption_get_break_after (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_break_after:
- * @fo_fo: The #FoFo object
- * @new_break_after: The new "break-after" property value
+ * @fo_fo: The #FoFo object.
+ * @new_break_after: The new "break-after" property value.
  * 
- * Sets the "break-after" property of @fo_fo to @new_break_after
+ * Sets the "break-after" property of @fo_fo to @new_break_after.
  **/
 void
 fo_table_and_caption_set_break_after (FoFo *fo_fo,
@@ -2783,7 +2912,8 @@ fo_table_and_caption_set_break_after (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BREAK_AFTER (new_break_after));
+  g_return_if_fail ((new_break_after == NULL) ||
+		    FO_IS_PROPERTY_BREAK_AFTER (new_break_after));
 
   if (new_break_after != NULL)
     {
@@ -2799,13 +2929,13 @@ fo_table_and_caption_set_break_after (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_break_before:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "break-before" property of @fo_fo
+ * Gets the "break-before" property of @fo_fo.
  *
- * Return value: The "break-before" property value
+ * Return value: The "break-before" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_break_before (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2818,10 +2948,10 @@ fo_table_and_caption_get_break_before (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_break_before:
- * @fo_fo: The #FoFo object
- * @new_break_before: The new "break-before" property value
+ * @fo_fo: The #FoFo object.
+ * @new_break_before: The new "break-before" property value.
  * 
- * Sets the "break-before" property of @fo_fo to @new_break_before
+ * Sets the "break-before" property of @fo_fo to @new_break_before.
  **/
 void
 fo_table_and_caption_set_break_before (FoFo *fo_fo,
@@ -2831,7 +2961,8 @@ fo_table_and_caption_set_break_before (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_BREAK_BEFORE (new_break_before));
+  g_return_if_fail ((new_break_before == NULL) ||
+		    FO_IS_PROPERTY_BREAK_BEFORE (new_break_before));
 
   if (new_break_before != NULL)
     {
@@ -2847,13 +2978,13 @@ fo_table_and_caption_set_break_before (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_end_indent:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "end-indent" property of @fo_fo
+ * Gets the "end-indent" property of @fo_fo.
  *
- * Return value: The "end-indent" property value
+ * Return value: The "end-indent" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_end_indent (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2866,10 +2997,10 @@ fo_table_and_caption_get_end_indent (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_end_indent:
- * @fo_fo: The #FoFo object
- * @new_end_indent: The new "end-indent" property value
+ * @fo_fo: The #FoFo object.
+ * @new_end_indent: The new "end-indent" property value.
  * 
- * Sets the "end-indent" property of @fo_fo to @new_end_indent
+ * Sets the "end-indent" property of @fo_fo to @new_end_indent.
  **/
 void
 fo_table_and_caption_set_end_indent (FoFo *fo_fo,
@@ -2879,7 +3010,8 @@ fo_table_and_caption_set_end_indent (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_END_INDENT (new_end_indent));
+  g_return_if_fail ((new_end_indent == NULL) ||
+		    FO_IS_PROPERTY_END_INDENT (new_end_indent));
 
   if (new_end_indent != NULL)
     {
@@ -2895,13 +3027,13 @@ fo_table_and_caption_set_end_indent (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_id:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "id" property of @fo_fo
+ * Gets the "id" property of @fo_fo.
  *
- * Return value: The "id" property value
+ * Return value: The "id" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_id (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2914,10 +3046,10 @@ fo_table_and_caption_get_id (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_id:
- * @fo_fo: The #FoFo object
- * @new_id: The new "id" property value
+ * @fo_fo: The #FoFo object.
+ * @new_id: The new "id" property value.
  * 
- * Sets the "id" property of @fo_fo to @new_id
+ * Sets the "id" property of @fo_fo to @new_id.
  **/
 void
 fo_table_and_caption_set_id (FoFo *fo_fo,
@@ -2927,7 +3059,8 @@ fo_table_and_caption_set_id (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_ID (new_id));
+  g_return_if_fail ((new_id == NULL) ||
+		    FO_IS_PROPERTY_ID (new_id));
 
   if (new_id != NULL)
     {
@@ -2943,13 +3076,13 @@ fo_table_and_caption_set_id (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_together:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-together" property of @fo_fo
+ * Gets the "keep-together" property of @fo_fo.
  *
- * Return value: The "keep-together" property value
+ * Return value: The "keep-together" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_together (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -2962,10 +3095,10 @@ fo_table_and_caption_get_keep_together (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_together:
- * @fo_fo: The #FoFo object
- * @new_keep_together: The new "keep-together" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_together: The new "keep-together" property value.
  * 
- * Sets the "keep-together" property of @fo_fo to @new_keep_together
+ * Sets the "keep-together" property of @fo_fo to @new_keep_together.
  **/
 void
 fo_table_and_caption_set_keep_together (FoFo *fo_fo,
@@ -2975,7 +3108,8 @@ fo_table_and_caption_set_keep_together (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_TOGETHER (new_keep_together));
+  g_return_if_fail ((new_keep_together == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER (new_keep_together));
 
   if (new_keep_together != NULL)
     {
@@ -2991,13 +3125,13 @@ fo_table_and_caption_set_keep_together (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_together_within_column:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-together-within-column" property of @fo_fo
+ * Gets the "keep-together-within-column" property of @fo_fo.
  *
- * Return value: The "keep-together-within-column" property value
+ * Return value: The "keep-together-within-column" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_together_within_column (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3010,10 +3144,10 @@ fo_table_and_caption_get_keep_together_within_column (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_together_within_column:
- * @fo_fo: The #FoFo object
- * @new_keep_together_within_column: The new "keep-together-within-column" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_together_within_column: The new "keep-together-within-column" property value.
  * 
- * Sets the "keep-together-within-column" property of @fo_fo to @new_keep_together_within_column
+ * Sets the "keep-together-within-column" property of @fo_fo to @new_keep_together_within_column.
  **/
 void
 fo_table_and_caption_set_keep_together_within_column (FoFo *fo_fo,
@@ -3023,7 +3157,8 @@ fo_table_and_caption_set_keep_together_within_column (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_COLUMN (new_keep_together_within_column));
+  g_return_if_fail ((new_keep_together_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_COLUMN (new_keep_together_within_column));
 
   if (new_keep_together_within_column != NULL)
     {
@@ -3039,13 +3174,13 @@ fo_table_and_caption_set_keep_together_within_column (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_together_within_line:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-together-within-line" property of @fo_fo
+ * Gets the "keep-together-within-line" property of @fo_fo.
  *
- * Return value: The "keep-together-within-line" property value
+ * Return value: The "keep-together-within-line" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_together_within_line (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3058,10 +3193,10 @@ fo_table_and_caption_get_keep_together_within_line (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_together_within_line:
- * @fo_fo: The #FoFo object
- * @new_keep_together_within_line: The new "keep-together-within-line" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_together_within_line: The new "keep-together-within-line" property value.
  * 
- * Sets the "keep-together-within-line" property of @fo_fo to @new_keep_together_within_line
+ * Sets the "keep-together-within-line" property of @fo_fo to @new_keep_together_within_line.
  **/
 void
 fo_table_and_caption_set_keep_together_within_line (FoFo *fo_fo,
@@ -3071,7 +3206,8 @@ fo_table_and_caption_set_keep_together_within_line (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_LINE (new_keep_together_within_line));
+  g_return_if_fail ((new_keep_together_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_LINE (new_keep_together_within_line));
 
   if (new_keep_together_within_line != NULL)
     {
@@ -3087,13 +3223,13 @@ fo_table_and_caption_set_keep_together_within_line (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_together_within_page:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-together-within-page" property of @fo_fo
+ * Gets the "keep-together-within-page" property of @fo_fo.
  *
- * Return value: The "keep-together-within-page" property value
+ * Return value: The "keep-together-within-page" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_together_within_page (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3106,10 +3242,10 @@ fo_table_and_caption_get_keep_together_within_page (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_together_within_page:
- * @fo_fo: The #FoFo object
- * @new_keep_together_within_page: The new "keep-together-within-page" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_together_within_page: The new "keep-together-within-page" property value.
  * 
- * Sets the "keep-together-within-page" property of @fo_fo to @new_keep_together_within_page
+ * Sets the "keep-together-within-page" property of @fo_fo to @new_keep_together_within_page.
  **/
 void
 fo_table_and_caption_set_keep_together_within_page (FoFo *fo_fo,
@@ -3119,7 +3255,8 @@ fo_table_and_caption_set_keep_together_within_page (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_PAGE (new_keep_together_within_page));
+  g_return_if_fail ((new_keep_together_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_PAGE (new_keep_together_within_page));
 
   if (new_keep_together_within_page != NULL)
     {
@@ -3135,13 +3272,13 @@ fo_table_and_caption_set_keep_together_within_page (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_next:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-next" property of @fo_fo
+ * Gets the "keep-with-next" property of @fo_fo.
  *
- * Return value: The "keep-with-next" property value
+ * Return value: The "keep-with-next" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_next (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3154,10 +3291,10 @@ fo_table_and_caption_get_keep_with_next (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_next:
- * @fo_fo: The #FoFo object
- * @new_keep_with_next: The new "keep-with-next" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_next: The new "keep-with-next" property value.
  * 
- * Sets the "keep-with-next" property of @fo_fo to @new_keep_with_next
+ * Sets the "keep-with-next" property of @fo_fo to @new_keep_with_next.
  **/
 void
 fo_table_and_caption_set_keep_with_next (FoFo *fo_fo,
@@ -3167,7 +3304,8 @@ fo_table_and_caption_set_keep_with_next (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT (new_keep_with_next));
+  g_return_if_fail ((new_keep_with_next == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT (new_keep_with_next));
 
   if (new_keep_with_next != NULL)
     {
@@ -3183,13 +3321,13 @@ fo_table_and_caption_set_keep_with_next (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_next_within_column:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-next-within-column" property of @fo_fo
+ * Gets the "keep-with-next-within-column" property of @fo_fo.
  *
- * Return value: The "keep-with-next-within-column" property value
+ * Return value: The "keep-with-next-within-column" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_next_within_column (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3202,10 +3340,10 @@ fo_table_and_caption_get_keep_with_next_within_column (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_next_within_column:
- * @fo_fo: The #FoFo object
- * @new_keep_with_next_within_column: The new "keep-with-next-within-column" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_next_within_column: The new "keep-with-next-within-column" property value.
  * 
- * Sets the "keep-with-next-within-column" property of @fo_fo to @new_keep_with_next_within_column
+ * Sets the "keep-with-next-within-column" property of @fo_fo to @new_keep_with_next_within_column.
  **/
 void
 fo_table_and_caption_set_keep_with_next_within_column (FoFo *fo_fo,
@@ -3215,7 +3353,8 @@ fo_table_and_caption_set_keep_with_next_within_column (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_COLUMN (new_keep_with_next_within_column));
+  g_return_if_fail ((new_keep_with_next_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_COLUMN (new_keep_with_next_within_column));
 
   if (new_keep_with_next_within_column != NULL)
     {
@@ -3231,13 +3370,13 @@ fo_table_and_caption_set_keep_with_next_within_column (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_next_within_line:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-next-within-line" property of @fo_fo
+ * Gets the "keep-with-next-within-line" property of @fo_fo.
  *
- * Return value: The "keep-with-next-within-line" property value
+ * Return value: The "keep-with-next-within-line" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_next_within_line (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3250,10 +3389,10 @@ fo_table_and_caption_get_keep_with_next_within_line (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_next_within_line:
- * @fo_fo: The #FoFo object
- * @new_keep_with_next_within_line: The new "keep-with-next-within-line" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_next_within_line: The new "keep-with-next-within-line" property value.
  * 
- * Sets the "keep-with-next-within-line" property of @fo_fo to @new_keep_with_next_within_line
+ * Sets the "keep-with-next-within-line" property of @fo_fo to @new_keep_with_next_within_line.
  **/
 void
 fo_table_and_caption_set_keep_with_next_within_line (FoFo *fo_fo,
@@ -3263,7 +3402,8 @@ fo_table_and_caption_set_keep_with_next_within_line (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_LINE (new_keep_with_next_within_line));
+  g_return_if_fail ((new_keep_with_next_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_LINE (new_keep_with_next_within_line));
 
   if (new_keep_with_next_within_line != NULL)
     {
@@ -3279,13 +3419,13 @@ fo_table_and_caption_set_keep_with_next_within_line (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_next_within_page:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-next-within-page" property of @fo_fo
+ * Gets the "keep-with-next-within-page" property of @fo_fo.
  *
- * Return value: The "keep-with-next-within-page" property value
+ * Return value: The "keep-with-next-within-page" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_next_within_page (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3298,10 +3438,10 @@ fo_table_and_caption_get_keep_with_next_within_page (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_next_within_page:
- * @fo_fo: The #FoFo object
- * @new_keep_with_next_within_page: The new "keep-with-next-within-page" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_next_within_page: The new "keep-with-next-within-page" property value.
  * 
- * Sets the "keep-with-next-within-page" property of @fo_fo to @new_keep_with_next_within_page
+ * Sets the "keep-with-next-within-page" property of @fo_fo to @new_keep_with_next_within_page.
  **/
 void
 fo_table_and_caption_set_keep_with_next_within_page (FoFo *fo_fo,
@@ -3311,7 +3451,8 @@ fo_table_and_caption_set_keep_with_next_within_page (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_PAGE (new_keep_with_next_within_page));
+  g_return_if_fail ((new_keep_with_next_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_PAGE (new_keep_with_next_within_page));
 
   if (new_keep_with_next_within_page != NULL)
     {
@@ -3327,13 +3468,13 @@ fo_table_and_caption_set_keep_with_next_within_page (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_previous:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-previous" property of @fo_fo
+ * Gets the "keep-with-previous" property of @fo_fo.
  *
- * Return value: The "keep-with-previous" property value
+ * Return value: The "keep-with-previous" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_previous (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3346,10 +3487,10 @@ fo_table_and_caption_get_keep_with_previous (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_previous:
- * @fo_fo: The #FoFo object
- * @new_keep_with_previous: The new "keep-with-previous" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_previous: The new "keep-with-previous" property value.
  * 
- * Sets the "keep-with-previous" property of @fo_fo to @new_keep_with_previous
+ * Sets the "keep-with-previous" property of @fo_fo to @new_keep_with_previous.
  **/
 void
 fo_table_and_caption_set_keep_with_previous (FoFo *fo_fo,
@@ -3359,7 +3500,8 @@ fo_table_and_caption_set_keep_with_previous (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS (new_keep_with_previous));
+  g_return_if_fail ((new_keep_with_previous == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS (new_keep_with_previous));
 
   if (new_keep_with_previous != NULL)
     {
@@ -3375,13 +3517,13 @@ fo_table_and_caption_set_keep_with_previous (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_previous_within_column:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-previous-within-column" property of @fo_fo
+ * Gets the "keep-with-previous-within-column" property of @fo_fo.
  *
- * Return value: The "keep-with-previous-within-column" property value
+ * Return value: The "keep-with-previous-within-column" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_previous_within_column (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3394,10 +3536,10 @@ fo_table_and_caption_get_keep_with_previous_within_column (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_previous_within_column:
- * @fo_fo: The #FoFo object
- * @new_keep_with_previous_within_column: The new "keep-with-previous-within-column" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_previous_within_column: The new "keep-with-previous-within-column" property value.
  * 
- * Sets the "keep-with-previous-within-column" property of @fo_fo to @new_keep_with_previous_within_column
+ * Sets the "keep-with-previous-within-column" property of @fo_fo to @new_keep_with_previous_within_column.
  **/
 void
 fo_table_and_caption_set_keep_with_previous_within_column (FoFo *fo_fo,
@@ -3407,7 +3549,8 @@ fo_table_and_caption_set_keep_with_previous_within_column (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_COLUMN (new_keep_with_previous_within_column));
+  g_return_if_fail ((new_keep_with_previous_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_COLUMN (new_keep_with_previous_within_column));
 
   if (new_keep_with_previous_within_column != NULL)
     {
@@ -3423,13 +3566,13 @@ fo_table_and_caption_set_keep_with_previous_within_column (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_previous_within_line:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-previous-within-line" property of @fo_fo
+ * Gets the "keep-with-previous-within-line" property of @fo_fo.
  *
- * Return value: The "keep-with-previous-within-line" property value
+ * Return value: The "keep-with-previous-within-line" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_previous_within_line (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3442,10 +3585,10 @@ fo_table_and_caption_get_keep_with_previous_within_line (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_previous_within_line:
- * @fo_fo: The #FoFo object
- * @new_keep_with_previous_within_line: The new "keep-with-previous-within-line" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_previous_within_line: The new "keep-with-previous-within-line" property value.
  * 
- * Sets the "keep-with-previous-within-line" property of @fo_fo to @new_keep_with_previous_within_line
+ * Sets the "keep-with-previous-within-line" property of @fo_fo to @new_keep_with_previous_within_line.
  **/
 void
 fo_table_and_caption_set_keep_with_previous_within_line (FoFo *fo_fo,
@@ -3455,7 +3598,8 @@ fo_table_and_caption_set_keep_with_previous_within_line (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_LINE (new_keep_with_previous_within_line));
+  g_return_if_fail ((new_keep_with_previous_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_LINE (new_keep_with_previous_within_line));
 
   if (new_keep_with_previous_within_line != NULL)
     {
@@ -3471,13 +3615,13 @@ fo_table_and_caption_set_keep_with_previous_within_line (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_keep_with_previous_within_page:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "keep-with-previous-within-page" property of @fo_fo
+ * Gets the "keep-with-previous-within-page" property of @fo_fo.
  *
- * Return value: The "keep-with-previous-within-page" property value
+ * Return value: The "keep-with-previous-within-page" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_keep_with_previous_within_page (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3490,10 +3634,10 @@ fo_table_and_caption_get_keep_with_previous_within_page (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_keep_with_previous_within_page:
- * @fo_fo: The #FoFo object
- * @new_keep_with_previous_within_page: The new "keep-with-previous-within-page" property value
+ * @fo_fo: The #FoFo object.
+ * @new_keep_with_previous_within_page: The new "keep-with-previous-within-page" property value.
  * 
- * Sets the "keep-with-previous-within-page" property of @fo_fo to @new_keep_with_previous_within_page
+ * Sets the "keep-with-previous-within-page" property of @fo_fo to @new_keep_with_previous_within_page.
  **/
 void
 fo_table_and_caption_set_keep_with_previous_within_page (FoFo *fo_fo,
@@ -3503,7 +3647,8 @@ fo_table_and_caption_set_keep_with_previous_within_page (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE (new_keep_with_previous_within_page));
+  g_return_if_fail ((new_keep_with_previous_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE (new_keep_with_previous_within_page));
 
   if (new_keep_with_previous_within_page != NULL)
     {
@@ -3519,13 +3664,13 @@ fo_table_and_caption_set_keep_with_previous_within_page (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_margin_bottom:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "margin-bottom" property of @fo_fo
+ * Gets the "margin-bottom" property of @fo_fo.
  *
- * Return value: The "margin-bottom" property value
+ * Return value: The "margin-bottom" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_margin_bottom (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3538,10 +3683,10 @@ fo_table_and_caption_get_margin_bottom (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_margin_bottom:
- * @fo_fo: The #FoFo object
- * @new_margin_bottom: The new "margin-bottom" property value
+ * @fo_fo: The #FoFo object.
+ * @new_margin_bottom: The new "margin-bottom" property value.
  * 
- * Sets the "margin-bottom" property of @fo_fo to @new_margin_bottom
+ * Sets the "margin-bottom" property of @fo_fo to @new_margin_bottom.
  **/
 void
 fo_table_and_caption_set_margin_bottom (FoFo *fo_fo,
@@ -3551,7 +3696,8 @@ fo_table_and_caption_set_margin_bottom (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_MARGIN_BOTTOM (new_margin_bottom));
+  g_return_if_fail ((new_margin_bottom == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_BOTTOM (new_margin_bottom));
 
   if (new_margin_bottom != NULL)
     {
@@ -3567,13 +3713,13 @@ fo_table_and_caption_set_margin_bottom (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_margin_left:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "margin-left" property of @fo_fo
+ * Gets the "margin-left" property of @fo_fo.
  *
- * Return value: The "margin-left" property value
+ * Return value: The "margin-left" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_margin_left (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3586,10 +3732,10 @@ fo_table_and_caption_get_margin_left (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_margin_left:
- * @fo_fo: The #FoFo object
- * @new_margin_left: The new "margin-left" property value
+ * @fo_fo: The #FoFo object.
+ * @new_margin_left: The new "margin-left" property value.
  * 
- * Sets the "margin-left" property of @fo_fo to @new_margin_left
+ * Sets the "margin-left" property of @fo_fo to @new_margin_left.
  **/
 void
 fo_table_and_caption_set_margin_left (FoFo *fo_fo,
@@ -3599,7 +3745,8 @@ fo_table_and_caption_set_margin_left (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_MARGIN_LEFT (new_margin_left));
+  g_return_if_fail ((new_margin_left == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_LEFT (new_margin_left));
 
   if (new_margin_left != NULL)
     {
@@ -3615,13 +3762,13 @@ fo_table_and_caption_set_margin_left (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_margin_right:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "margin-right" property of @fo_fo
+ * Gets the "margin-right" property of @fo_fo.
  *
- * Return value: The "margin-right" property value
+ * Return value: The "margin-right" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_margin_right (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3634,10 +3781,10 @@ fo_table_and_caption_get_margin_right (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_margin_right:
- * @fo_fo: The #FoFo object
- * @new_margin_right: The new "margin-right" property value
+ * @fo_fo: The #FoFo object.
+ * @new_margin_right: The new "margin-right" property value.
  * 
- * Sets the "margin-right" property of @fo_fo to @new_margin_right
+ * Sets the "margin-right" property of @fo_fo to @new_margin_right.
  **/
 void
 fo_table_and_caption_set_margin_right (FoFo *fo_fo,
@@ -3647,7 +3794,8 @@ fo_table_and_caption_set_margin_right (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_MARGIN_RIGHT (new_margin_right));
+  g_return_if_fail ((new_margin_right == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_RIGHT (new_margin_right));
 
   if (new_margin_right != NULL)
     {
@@ -3663,13 +3811,13 @@ fo_table_and_caption_set_margin_right (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_margin_top:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "margin-top" property of @fo_fo
+ * Gets the "margin-top" property of @fo_fo.
  *
- * Return value: The "margin-top" property value
+ * Return value: The "margin-top" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_margin_top (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3682,10 +3830,10 @@ fo_table_and_caption_get_margin_top (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_margin_top:
- * @fo_fo: The #FoFo object
- * @new_margin_top: The new "margin-top" property value
+ * @fo_fo: The #FoFo object.
+ * @new_margin_top: The new "margin-top" property value.
  * 
- * Sets the "margin-top" property of @fo_fo to @new_margin_top
+ * Sets the "margin-top" property of @fo_fo to @new_margin_top.
  **/
 void
 fo_table_and_caption_set_margin_top (FoFo *fo_fo,
@@ -3695,7 +3843,8 @@ fo_table_and_caption_set_margin_top (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_MARGIN_TOP (new_margin_top));
+  g_return_if_fail ((new_margin_top == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_TOP (new_margin_top));
 
   if (new_margin_top != NULL)
     {
@@ -3711,13 +3860,13 @@ fo_table_and_caption_set_margin_top (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_after:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-after" property of @fo_fo
+ * Gets the "padding-after" property of @fo_fo.
  *
- * Return value: The "padding-after" property value
+ * Return value: The "padding-after" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_after (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3730,10 +3879,10 @@ fo_table_and_caption_get_padding_after (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_after:
- * @fo_fo: The #FoFo object
- * @new_padding_after: The new "padding-after" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_after: The new "padding-after" property value.
  * 
- * Sets the "padding-after" property of @fo_fo to @new_padding_after
+ * Sets the "padding-after" property of @fo_fo to @new_padding_after.
  **/
 void
 fo_table_and_caption_set_padding_after (FoFo *fo_fo,
@@ -3743,7 +3892,8 @@ fo_table_and_caption_set_padding_after (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
+  g_return_if_fail ((new_padding_after == NULL) ||
+		    FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
 
   if (new_padding_after != NULL)
     {
@@ -3759,13 +3909,13 @@ fo_table_and_caption_set_padding_after (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_before:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-before" property of @fo_fo
+ * Gets the "padding-before" property of @fo_fo.
  *
- * Return value: The "padding-before" property value
+ * Return value: The "padding-before" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_before (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3778,10 +3928,10 @@ fo_table_and_caption_get_padding_before (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_before:
- * @fo_fo: The #FoFo object
- * @new_padding_before: The new "padding-before" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_before: The new "padding-before" property value.
  * 
- * Sets the "padding-before" property of @fo_fo to @new_padding_before
+ * Sets the "padding-before" property of @fo_fo to @new_padding_before.
  **/
 void
 fo_table_and_caption_set_padding_before (FoFo *fo_fo,
@@ -3791,7 +3941,8 @@ fo_table_and_caption_set_padding_before (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
+  g_return_if_fail ((new_padding_before == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
 
   if (new_padding_before != NULL)
     {
@@ -3807,13 +3958,13 @@ fo_table_and_caption_set_padding_before (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_bottom:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-bottom" property of @fo_fo
+ * Gets the "padding-bottom" property of @fo_fo.
  *
- * Return value: The "padding-bottom" property value
+ * Return value: The "padding-bottom" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_bottom (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3826,10 +3977,10 @@ fo_table_and_caption_get_padding_bottom (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_bottom:
- * @fo_fo: The #FoFo object
- * @new_padding_bottom: The new "padding-bottom" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_bottom: The new "padding-bottom" property value.
  * 
- * Sets the "padding-bottom" property of @fo_fo to @new_padding_bottom
+ * Sets the "padding-bottom" property of @fo_fo to @new_padding_bottom.
  **/
 void
 fo_table_and_caption_set_padding_bottom (FoFo *fo_fo,
@@ -3839,7 +3990,8 @@ fo_table_and_caption_set_padding_bottom (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
+  g_return_if_fail ((new_padding_bottom == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
 
   if (new_padding_bottom != NULL)
     {
@@ -3855,13 +4007,13 @@ fo_table_and_caption_set_padding_bottom (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_end:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-end" property of @fo_fo
+ * Gets the "padding-end" property of @fo_fo.
  *
- * Return value: The "padding-end" property value
+ * Return value: The "padding-end" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_end (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3874,10 +4026,10 @@ fo_table_and_caption_get_padding_end (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_end:
- * @fo_fo: The #FoFo object
- * @new_padding_end: The new "padding-end" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_end: The new "padding-end" property value.
  * 
- * Sets the "padding-end" property of @fo_fo to @new_padding_end
+ * Sets the "padding-end" property of @fo_fo to @new_padding_end.
  **/
 void
 fo_table_and_caption_set_padding_end (FoFo *fo_fo,
@@ -3887,7 +4039,8 @@ fo_table_and_caption_set_padding_end (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_END (new_padding_end));
+  g_return_if_fail ((new_padding_end == NULL) ||
+		    FO_IS_PROPERTY_PADDING_END (new_padding_end));
 
   if (new_padding_end != NULL)
     {
@@ -3903,13 +4056,13 @@ fo_table_and_caption_set_padding_end (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_left:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-left" property of @fo_fo
+ * Gets the "padding-left" property of @fo_fo.
  *
- * Return value: The "padding-left" property value
+ * Return value: The "padding-left" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_left (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3922,10 +4075,10 @@ fo_table_and_caption_get_padding_left (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_left:
- * @fo_fo: The #FoFo object
- * @new_padding_left: The new "padding-left" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_left: The new "padding-left" property value.
  * 
- * Sets the "padding-left" property of @fo_fo to @new_padding_left
+ * Sets the "padding-left" property of @fo_fo to @new_padding_left.
  **/
 void
 fo_table_and_caption_set_padding_left (FoFo *fo_fo,
@@ -3935,7 +4088,8 @@ fo_table_and_caption_set_padding_left (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
+  g_return_if_fail ((new_padding_left == NULL) ||
+		    FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
 
   if (new_padding_left != NULL)
     {
@@ -3951,13 +4105,13 @@ fo_table_and_caption_set_padding_left (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_right:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-right" property of @fo_fo
+ * Gets the "padding-right" property of @fo_fo.
  *
- * Return value: The "padding-right" property value
+ * Return value: The "padding-right" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_right (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -3970,10 +4124,10 @@ fo_table_and_caption_get_padding_right (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_right:
- * @fo_fo: The #FoFo object
- * @new_padding_right: The new "padding-right" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_right: The new "padding-right" property value.
  * 
- * Sets the "padding-right" property of @fo_fo to @new_padding_right
+ * Sets the "padding-right" property of @fo_fo to @new_padding_right.
  **/
 void
 fo_table_and_caption_set_padding_right (FoFo *fo_fo,
@@ -3983,7 +4137,8 @@ fo_table_and_caption_set_padding_right (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
+  g_return_if_fail ((new_padding_right == NULL) ||
+		    FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
 
   if (new_padding_right != NULL)
     {
@@ -3999,13 +4154,13 @@ fo_table_and_caption_set_padding_right (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_start:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-start" property of @fo_fo
+ * Gets the "padding-start" property of @fo_fo.
  *
- * Return value: The "padding-start" property value
+ * Return value: The "padding-start" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_start (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4018,10 +4173,10 @@ fo_table_and_caption_get_padding_start (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_start:
- * @fo_fo: The #FoFo object
- * @new_padding_start: The new "padding-start" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_start: The new "padding-start" property value.
  * 
- * Sets the "padding-start" property of @fo_fo to @new_padding_start
+ * Sets the "padding-start" property of @fo_fo to @new_padding_start.
  **/
 void
 fo_table_and_caption_set_padding_start (FoFo *fo_fo,
@@ -4031,7 +4186,8 @@ fo_table_and_caption_set_padding_start (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_START (new_padding_start));
+  g_return_if_fail ((new_padding_start == NULL) ||
+		    FO_IS_PROPERTY_PADDING_START (new_padding_start));
 
   if (new_padding_start != NULL)
     {
@@ -4047,13 +4203,13 @@ fo_table_and_caption_set_padding_start (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_padding_top:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "padding-top" property of @fo_fo
+ * Gets the "padding-top" property of @fo_fo.
  *
- * Return value: The "padding-top" property value
+ * Return value: The "padding-top" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_padding_top (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4066,10 +4222,10 @@ fo_table_and_caption_get_padding_top (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_padding_top:
- * @fo_fo: The #FoFo object
- * @new_padding_top: The new "padding-top" property value
+ * @fo_fo: The #FoFo object.
+ * @new_padding_top: The new "padding-top" property value.
  * 
- * Sets the "padding-top" property of @fo_fo to @new_padding_top
+ * Sets the "padding-top" property of @fo_fo to @new_padding_top.
  **/
 void
 fo_table_and_caption_set_padding_top (FoFo *fo_fo,
@@ -4079,7 +4235,8 @@ fo_table_and_caption_set_padding_top (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
+  g_return_if_fail ((new_padding_top == NULL) ||
+		    FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
 
   if (new_padding_top != NULL)
     {
@@ -4095,13 +4252,13 @@ fo_table_and_caption_set_padding_top (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_role:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "role" property of @fo_fo
+ * Gets the "role" property of @fo_fo.
  *
- * Return value: The "role" property value
+ * Return value: The "role" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_role (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4114,10 +4271,10 @@ fo_table_and_caption_get_role (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_role:
- * @fo_fo: The #FoFo object
- * @new_role: The new "role" property value
+ * @fo_fo: The #FoFo object.
+ * @new_role: The new "role" property value.
  * 
- * Sets the "role" property of @fo_fo to @new_role
+ * Sets the "role" property of @fo_fo to @new_role.
  **/
 void
 fo_table_and_caption_set_role (FoFo *fo_fo,
@@ -4127,7 +4284,8 @@ fo_table_and_caption_set_role (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_ROLE (new_role));
+  g_return_if_fail ((new_role == NULL) ||
+		    FO_IS_PROPERTY_ROLE (new_role));
 
   if (new_role != NULL)
     {
@@ -4143,13 +4301,13 @@ fo_table_and_caption_set_role (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_source_document:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "source-document" property of @fo_fo
+ * Gets the "source-document" property of @fo_fo.
  *
- * Return value: The "source-document" property value
+ * Return value: The "source-document" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_source_document (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4162,10 +4320,10 @@ fo_table_and_caption_get_source_document (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_source_document:
- * @fo_fo: The #FoFo object
- * @new_source_document: The new "source-document" property value
+ * @fo_fo: The #FoFo object.
+ * @new_source_document: The new "source-document" property value.
  * 
- * Sets the "source-document" property of @fo_fo to @new_source_document
+ * Sets the "source-document" property of @fo_fo to @new_source_document.
  **/
 void
 fo_table_and_caption_set_source_document (FoFo *fo_fo,
@@ -4175,7 +4333,8 @@ fo_table_and_caption_set_source_document (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_SOURCE_DOCUMENT (new_source_document));
+  g_return_if_fail ((new_source_document == NULL) ||
+		    FO_IS_PROPERTY_SOURCE_DOCUMENT (new_source_document));
 
   if (new_source_document != NULL)
     {
@@ -4191,13 +4350,13 @@ fo_table_and_caption_set_source_document (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_space_after:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "space-after" property of @fo_fo
+ * Gets the "space-after" property of @fo_fo.
  *
- * Return value: The "space-after" property value
+ * Return value: The "space-after" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_space_after (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4210,10 +4369,10 @@ fo_table_and_caption_get_space_after (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_space_after:
- * @fo_fo: The #FoFo object
- * @new_space_after: The new "space-after" property value
+ * @fo_fo: The #FoFo object.
+ * @new_space_after: The new "space-after" property value.
  * 
- * Sets the "space-after" property of @fo_fo to @new_space_after
+ * Sets the "space-after" property of @fo_fo to @new_space_after.
  **/
 void
 fo_table_and_caption_set_space_after (FoFo *fo_fo,
@@ -4223,7 +4382,8 @@ fo_table_and_caption_set_space_after (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_SPACE_AFTER (new_space_after));
+  g_return_if_fail ((new_space_after == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER (new_space_after));
 
   if (new_space_after != NULL)
     {
@@ -4239,13 +4399,13 @@ fo_table_and_caption_set_space_after (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_space_before:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "space-before" property of @fo_fo
+ * Gets the "space-before" property of @fo_fo.
  *
- * Return value: The "space-before" property value
+ * Return value: The "space-before" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_space_before (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4258,10 +4418,10 @@ fo_table_and_caption_get_space_before (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_space_before:
- * @fo_fo: The #FoFo object
- * @new_space_before: The new "space-before" property value
+ * @fo_fo: The #FoFo object.
+ * @new_space_before: The new "space-before" property value.
  * 
- * Sets the "space-before" property of @fo_fo to @new_space_before
+ * Sets the "space-before" property of @fo_fo to @new_space_before.
  **/
 void
 fo_table_and_caption_set_space_before (FoFo *fo_fo,
@@ -4271,7 +4431,8 @@ fo_table_and_caption_set_space_before (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_SPACE_BEFORE (new_space_before));
+  g_return_if_fail ((new_space_before == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE (new_space_before));
 
   if (new_space_before != NULL)
     {
@@ -4287,13 +4448,13 @@ fo_table_and_caption_set_space_before (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_start_indent:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "start-indent" property of @fo_fo
+ * Gets the "start-indent" property of @fo_fo.
  *
- * Return value: The "start-indent" property value
+ * Return value: The "start-indent" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_start_indent (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4306,10 +4467,10 @@ fo_table_and_caption_get_start_indent (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_start_indent:
- * @fo_fo: The #FoFo object
- * @new_start_indent: The new "start-indent" property value
+ * @fo_fo: The #FoFo object.
+ * @new_start_indent: The new "start-indent" property value.
  * 
- * Sets the "start-indent" property of @fo_fo to @new_start_indent
+ * Sets the "start-indent" property of @fo_fo to @new_start_indent.
  **/
 void
 fo_table_and_caption_set_start_indent (FoFo *fo_fo,
@@ -4319,7 +4480,8 @@ fo_table_and_caption_set_start_indent (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_START_INDENT (new_start_indent));
+  g_return_if_fail ((new_start_indent == NULL) ||
+		    FO_IS_PROPERTY_START_INDENT (new_start_indent));
 
   if (new_start_indent != NULL)
     {
@@ -4335,13 +4497,13 @@ fo_table_and_caption_set_start_indent (FoFo *fo_fo,
 
 /**
  * fo_table_and_caption_get_text_align:
- * @fo_fo: The @FoFo object
+ * @fo_fo: The @FoFo object.
  * 
- * Gets the "text-align" property of @fo_fo
+ * Gets the "text-align" property of @fo_fo.
  *
- * Return value: The "text-align" property value
+ * Return value: The "text-align" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_and_caption_get_text_align (FoFo *fo_fo)
 {
   FoTableAndCaption *fo_table_and_caption = (FoTableAndCaption *) fo_fo;
@@ -4354,10 +4516,10 @@ fo_table_and_caption_get_text_align (FoFo *fo_fo)
 
 /**
  * fo_table_and_caption_set_text_align:
- * @fo_fo: The #FoFo object
- * @new_text_align: The new "text-align" property value
+ * @fo_fo: The #FoFo object.
+ * @new_text_align: The new "text-align" property value.
  * 
- * Sets the "text-align" property of @fo_fo to @new_text_align
+ * Sets the "text-align" property of @fo_fo to @new_text_align.
  **/
 void
 fo_table_and_caption_set_text_align (FoFo *fo_fo,
@@ -4367,7 +4529,8 @@ fo_table_and_caption_set_text_align (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_and_caption != NULL);
   g_return_if_fail (FO_IS_TABLE_AND_CAPTION (fo_table_and_caption));
-  g_return_if_fail (FO_IS_PROPERTY_TEXT_ALIGN (new_text_align));
+  g_return_if_fail ((new_text_align == NULL) ||
+		    FO_IS_PROPERTY_TEXT_ALIGN (new_text_align));
 
   if (new_text_align != NULL)
     {

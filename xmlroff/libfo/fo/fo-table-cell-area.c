@@ -2,7 +2,7 @@
  * fo-table-cell-area.c: Generate area for 'table-cell' formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -75,7 +75,8 @@ fo_table_cell_area_new2 (FoFo                *fo_node,
 #endif
 
   fo_area_set_generated_by (new_area, fo_node);
-  FO_FO (fo_node)->areas = g_list_append (FO_FO (fo_node)->areas, new_area);
+  fo_fo_area_list_append (fo_node,
+			  new_area);
 
   fo_area_add_child (use_parent_area,
 		     new_area);

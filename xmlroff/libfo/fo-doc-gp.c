@@ -2,12 +2,13 @@
  * fo-doc-gp.c: 'GNOME Print'-specific child type of FoDoc
  *
  * Copyright (C) 2001-2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "config.h"
+#include "fo-doc-gp-private.h"
 #include <pango/pango.h>
 #include <libgnomeprint/gnome-print-job.h>
 #include <libgnomeprint/gnome-print-pango.h>
@@ -15,7 +16,6 @@
 #include "area/fo-area-area.h"
 #include "area/fo-area-layout.h"
 #include "util/fo-pixbuf.h"
-#include "fo-doc-gp-private.h"
 #include "fo-doc-commands.h"
 #include "fo-layout-gp-private.h"
 #include "libfo-pango.h"
@@ -34,14 +34,14 @@ const char *fo_doc_gp_error_messages [] = {
   N_("Cannot open output document: '%s'")
 };
 
-static void fo_doc_gp_init          (FoDocGP      *object);
-static void fo_doc_gp_base_init     (FoDocGPClass *klass);
-static void fo_doc_gp_class_init    (FoDocGPClass *klass);
-static void fo_doc_gp_finalize      (GObject      *object);
+static void _init          (FoDocGP      *object);
+static void _base_init     (FoDocGPClass *klass);
+static void _class_init    (FoDocGPClass *klass);
+static void _dispose      (GObject      *object);
 
 static const LibfoVersionInfo * _version_info ();
 
-static FoLayout *    fo_doc_gp_get_new_layout   (FoDoc        *fo_doc);
+static FoLayout *    _get_new_layout   (FoDoc        *fo_doc);
 
 static void          fo_doc_gp_begin_page       (FoDoc        *fo_doc,
 						 gdouble        width,
@@ -158,14 +158,14 @@ fo_doc_gp_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoDocGPClass),
-        (GBaseInitFunc) fo_doc_gp_base_init,
+        (GBaseInitFunc) _base_init,
         NULL,		/* base_finalize */
-        (GClassInitFunc) fo_doc_gp_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoDocGP),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_doc_gp_init,
+        (GInstanceInitFunc) _init,
 	NULL
       };
       
@@ -179,13 +179,13 @@ fo_doc_gp_get_type (void)
 }
 
 /**
- * fo_doc_gp_init:
+ * _init:
  * @fo_doc_gp: #FoDocGP object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoDocGP.
  **/
 void
-fo_doc_gp_init (FoDocGP *fo_doc_gp)
+_init (FoDocGP *fo_doc_gp)
 {
   /*
   char *test;
@@ -225,7 +225,7 @@ fo_doc_gp_init (FoDocGP *fo_doc_gp)
     pango_gp_get_context (fo_doc_gp->context);
 */
     FO_DOC (fo_doc_gp)->pango_context =
-	gnome_print_pango_create_context (gnome_print_pango_get_default_font_map());
+	gnome_print_pango_create_context (gnome_print_pango_get_default_font_map ());
     /* gnome_print_pango_update_context() currently doesn't do anything,
        and calling it at this point with null context causes a warning message.
     */
@@ -236,13 +236,13 @@ fo_doc_gp_init (FoDocGP *fo_doc_gp)
 }
 
 /**
- * fo_doc_gp_base_init:
+ * _base_init:
  * @klass: #FoDocGPClass base class object to initialise
  * 
  * Implements #GBaseInitFunc for #FoDocGPClass
  **/
-void
-fo_doc_gp_base_init (FoDocGPClass *klass)
+static void
+_base_init (FoDocGPClass *klass)
 {
   FoLibfoModuleClass *fo_libfo_module_class =
     FO_LIBFO_MODULE_CLASS (klass);
@@ -257,7 +257,7 @@ fo_doc_gp_base_init (FoDocGPClass *klass)
 
   fo_doc_class->open_file        = fo_doc_gp_open_file;
 
-  fo_doc_class->get_new_layout   = fo_doc_gp_get_new_layout;
+  fo_doc_class->get_new_layout   = _get_new_layout;
 
   fo_doc_class->begin_page       = fo_doc_gp_begin_page;
   fo_doc_class->end_page         = fo_doc_gp_end_page;
@@ -289,29 +289,29 @@ fo_doc_gp_base_init (FoDocGPClass *klass)
 }
 
 /**
- * fo_doc_gp_class_init:
+ * _class_init:
  * @klass: #FoDocGPClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoDocGPClass.
  **/
-void
-fo_doc_gp_class_init (FoDocGPClass *klass)
+static void
+_class_init (FoDocGPClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_doc_gp_finalize;
+  object_class->dispose = _dispose;
 }
 
 /**
- * fo_doc_gp_finalize:
- * @object: #FoDocGP object to finalize.
+ * _dispose:
+ * @object: #FoDocGP object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoDocGP.
+ * Implements #GObjectDisposeFunc for #FoDocGP.
  **/
-void
-fo_doc_gp_finalize (GObject *object)
+static void
+_dispose (GObject *object)
 {
   FoDocGP *fo_doc_gp;
 
@@ -341,29 +341,34 @@ fo_doc_gp_finalize (GObject *object)
   if (fo_doc_gp->base_filename != NULL)
     {
       g_free (fo_doc_gp->base_filename);
+      fo_doc_gp->base_filename != NULL;
     }
 
   if (fo_doc_gp->current_filename != NULL)
     {
       g_free (fo_doc_gp->current_filename);
+      fo_doc_gp->current_filename = NULL;
     }
 
   if (fo_doc_gp->config != NULL)
     {
       g_object_unref (fo_doc_gp->config);
+      fo_doc_gp->config = NULL;
     }
 
   if (fo_doc_gp->context != NULL)
     {
       g_object_unref (fo_doc_gp->context);
+      fo_doc_gp->context = NULL;
     }
 
   if (fo_doc_gp->job != NULL)
     {
       g_object_unref (fo_doc_gp->job);
+      fo_doc_gp->job = NULL;
     }
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
@@ -431,21 +436,19 @@ fo_doc_gp_open_file (FoDoc          *fo_doc,
 }
 
 /**
- * fo_doc_gp_get_new_layout:
+ * _get_new_layout:
  * @fo_doc: #FoDoc.
  * 
  * Get a new #FoLayout for use with @fo_doc.
  *
  * Return value: New #FoLayout.
  **/
-FoLayout *
-fo_doc_gp_get_new_layout (FoDoc *fo_doc)
+static FoLayout *
+_get_new_layout (FoDoc *fo_doc)
 {
-  FoLayout *fo_layout;
-
   g_return_val_if_fail (FO_IS_DOC_GP (fo_doc), NULL);
 
-  fo_layout = fo_layout_gp_new ();
+  FoLayout *fo_layout = fo_layout_gp_new ();
 
   fo_layout->fo_doc = fo_doc;
   fo_layout->pango_layout =
@@ -617,6 +620,7 @@ fo_doc_gp_begin_page (FoDoc  *fo_doc,
 				     height,
 				     GNOME_PRINT_PS_UNIT);
 
+      fo_doc_gp->config = new_config;
       fo_doc_gp->job = gnome_print_job_new (new_config);
 
       if (fo_doc_gp->job == NULL)

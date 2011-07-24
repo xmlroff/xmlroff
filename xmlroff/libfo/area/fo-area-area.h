@@ -2,7 +2,7 @@
  * fo-area-area.h: Area area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -26,57 +26,57 @@ typedef struct _FoAreaAreaClass FoAreaAreaClass;
 #define FO_AREA_AREA_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA_AREA, FoAreaAreaClass))
 
 
-GType         fo_area_area_get_type      (void) G_GNUC_CONST;
-FoArea *fo_area_area_new (void);
+GType    fo_area_area_get_type      (void) G_GNUC_CONST;
+FoArea * fo_area_area_new (void);
 
-void fo_area_area_set_x (FoArea *fo_area,
-			 gfloat new_x);
-gfloat fo_area_area_get_x (FoArea *fo_area);
-void fo_area_area_set_y (FoArea *fo_area,
-			 gfloat new_y);
-gfloat fo_area_area_get_y (FoArea *fo_area);
-void fo_area_area_set_width (FoArea *fo_area,
-			     gfloat new_width);
-gfloat fo_area_area_get_width (FoArea *fo_area);
-void fo_area_area_set_height (FoArea *fo_area,
-			      gfloat new_height);
-gfloat fo_area_area_get_height (FoArea *fo_area);
-void fo_area_area_set_border_before (FoArea *fo_area,
-				     gfloat new_border_before);
-gfloat fo_area_area_get_border_before (FoArea *fo_area);
-void fo_area_area_set_border_after (FoArea *fo_area,
-				    gfloat new_border_after);
-gfloat fo_area_area_get_border_after (FoArea *fo_area);
-void fo_area_area_set_border_start (FoArea *fo_area,
-				    gfloat new_border_start);
-gfloat fo_area_area_get_border_start (FoArea *fo_area);
-void fo_area_area_set_border_end (FoArea *fo_area,
-				  gfloat new_border_end);
-gfloat fo_area_area_get_border_end (FoArea *fo_area);
-void fo_area_area_set_padding_before (FoArea *fo_area,
-				      gfloat new_padding_before);
-gfloat fo_area_area_get_padding_before (FoArea *fo_area);
-void fo_area_area_set_padding_after (FoArea *fo_area,
-				     gfloat new_padding_after);
-gfloat fo_area_area_get_padding_after (FoArea *fo_area);
-void fo_area_area_set_padding_start (FoArea *fo_area,
-				     gfloat new_padding_start);
-gfloat fo_area_area_get_padding_start (FoArea *fo_area);
-void fo_area_area_set_padding_end (FoArea *fo_area,
-				   gfloat new_padding_end);
-gfloat fo_area_area_get_padding_end (FoArea *fo_area);
-void fo_area_area_set_start_indent (FoArea *fo_area,
-				    gfloat new_start_indent);
-gfloat fo_area_area_get_start_indent (FoArea *fo_area);
-void fo_area_area_set_end_indent (FoArea *fo_area,
-				  gfloat new_end_indent);
-gfloat fo_area_area_get_end_indent (FoArea *fo_area);
-void fo_area_area_set_space_before (FoArea *fo_area,
-				    gfloat new_space_before);
-gfloat fo_area_area_get_space_before (FoArea *fo_area);
-void fo_area_area_set_space_after (FoArea *fo_area,
-				   gfloat new_space_after);
-gfloat fo_area_area_get_space_after (FoArea *fo_area);
+gdouble  fo_area_area_get_x (FoArea *fo_area);
+void     fo_area_area_set_x (FoArea *fo_area,
+			     gdouble new_x);
+gdouble  fo_area_area_get_y (FoArea *fo_area);
+void     fo_area_area_set_y (FoArea *fo_area,
+			     gdouble new_y);
+gdouble  fo_area_area_get_width (FoArea *fo_area);
+void     fo_area_area_set_width (FoArea *fo_area,
+				 gdouble new_width);
+gdouble  fo_area_area_get_height (FoArea *fo_area);
+void     fo_area_area_set_height (FoArea *fo_area,
+				  gdouble new_height);
+gdouble  fo_area_area_get_border_before (FoArea *fo_area);
+void     fo_area_area_set_border_before (FoArea *fo_area,
+					 gdouble new_border_before);
+gdouble  fo_area_area_get_border_after (FoArea *fo_area);
+void     fo_area_area_set_border_after (FoArea *fo_area,
+					gdouble new_border_after);
+gdouble  fo_area_area_get_border_start (FoArea *fo_area);
+void     fo_area_area_set_border_start (FoArea *fo_area,
+					gdouble new_border_start);
+gdouble  fo_area_area_get_border_end (FoArea *fo_area);
+void     fo_area_area_set_border_end (FoArea *fo_area,
+				      gdouble new_border_end);
+gdouble  fo_area_area_get_padding_before (FoArea *fo_area);
+void     fo_area_area_set_padding_before (FoArea *fo_area,
+					  gdouble new_padding_before);
+gdouble  fo_area_area_get_padding_after (FoArea *fo_area);
+void     fo_area_area_set_padding_after (FoArea *fo_area,
+					 gdouble new_padding_after);
+gdouble  fo_area_area_get_padding_start (FoArea *fo_area);
+void     fo_area_area_set_padding_start (FoArea *fo_area,
+					 gdouble new_padding_start);
+gdouble  fo_area_area_get_padding_end (FoArea *fo_area);
+void     fo_area_area_set_padding_end (FoArea *fo_area,
+				       gdouble new_padding_end);
+gdouble  fo_area_area_get_start_indent (FoArea *fo_area);
+void     fo_area_area_set_start_indent (FoArea *fo_area,
+					gdouble new_start_indent);
+gdouble  fo_area_area_get_end_indent (FoArea *fo_area);
+void     fo_area_area_set_end_indent (FoArea *fo_area,
+				      gdouble new_end_indent);
+gdouble  fo_area_area_get_space_before (FoArea *fo_area);
+void     fo_area_area_set_space_before (FoArea *fo_area,
+					gdouble new_space_before);
+gdouble  fo_area_area_get_space_after (FoArea *fo_area);
+void     fo_area_area_set_space_after (FoArea *fo_area,
+				       gdouble new_space_after);
 
 G_END_DECLS
 

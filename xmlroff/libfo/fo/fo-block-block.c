@@ -2,7 +2,7 @@
  * fo-block-block.c: Block-level block formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -77,5 +77,6 @@ fo_block_block_finalize (GObject *object)
 FoFo*
 fo_block_block_new (void)
 {
-  return FO_FO (g_object_new (fo_block_block_get_type (), NULL));
+  return FO_FO (g_object_new (fo_block_block_get_type (),
+			      NULL));
 }

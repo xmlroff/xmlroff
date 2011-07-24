@@ -2,7 +2,7 @@
  * fo-doc-cairo.c: libfo output document based on Cairo.
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -35,10 +35,10 @@
  * Cairo backend.
  */
 
-static void fo_doc_cairo_init          (FoDocCairo      *object);
-static void fo_doc_cairo_base_init     (FoDocCairoClass *klass);
-static void fo_doc_cairo_class_init    (FoDocCairoClass *klass);
-static void fo_doc_cairo_finalize      (GObject         *object);
+static void _init          (FoDocCairo      *object);
+static void _base_init     (FoDocCairoClass *klass);
+static void _class_init    (FoDocCairoClass *klass);
+static void _dispose       (GObject         *object);
 
 static const LibfoVersionInfo * _version_info ();
 
@@ -162,14 +162,14 @@ fo_doc_cairo_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoDocCairoClass),
-        (GBaseInitFunc) fo_doc_cairo_base_init,
+        (GBaseInitFunc) _base_init,
         NULL,		/* base_finalize */
-        (GClassInitFunc) fo_doc_cairo_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoDocCairo),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_doc_cairo_init,
+        (GInstanceInitFunc) _init,
 	NULL
       };
       
@@ -183,13 +183,13 @@ fo_doc_cairo_get_type (void)
 }
 
 /**
- * fo_doc_cairo_init:
+ * _init:
  * @fo_doc_cairo: #FoDocCairo object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoDocCairo.
  **/
-void
-fo_doc_cairo_init (FoDocCairo *fo_doc_cairo)
+static void
+_init (FoDocCairo *fo_doc_cairo)
 {
   PangoFontMap *font_map = pango_cairo_font_map_get_default ();
   pango_cairo_font_map_set_resolution ((PangoCairoFontMap*) font_map, 72);
@@ -198,13 +198,13 @@ fo_doc_cairo_init (FoDocCairo *fo_doc_cairo)
 }
 
 /**
- * fo_doc_cairo_base_init:
+ * _base_init:
  * @klass: #FoDocCairoClass base class object to initialise
  * 
  * Implements #GBaseInitFunc for #FoDocCairoClass
  **/
-void
-fo_doc_cairo_base_init (FoDocCairoClass *klass)
+static void
+_base_init (FoDocCairoClass *klass)
 {
   FoLibfoModuleClass *fo_libfo_module_class =
     FO_LIBFO_MODULE_CLASS (klass);
@@ -253,37 +253,39 @@ fo_doc_cairo_base_init (FoDocCairoClass *klass)
 }
 
 /**
- * fo_doc_cairo_class_init:
+ * _class_init:
  * @klass: #FoDocCairoClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoDocCairoClass.
  **/
-void
-fo_doc_cairo_class_init (FoDocCairoClass *klass)
+static void
+_class_init (FoDocCairoClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_doc_cairo_finalize;
+  object_class->dispose = _dispose;
 }
 
 /**
- * fo_doc_cairo_finalize:
- * @object: #FoDocCairo object to finalize.
+ * _dispose:
+ * @object: #FoDocCairo object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoDocCairo.
+ * Implements #GObjectDisposeFunc for #FoDocCairo.
  **/
-void
-fo_doc_cairo_finalize (GObject *object)
+static void
+_dispose (GObject *object)
 {
-  FoDocCairo *fo_doc_cairo;
+  FoDocCairo *fo_doc_cairo = FO_DOC_CAIRO (object);
 
-  fo_doc_cairo = FO_DOC_CAIRO (object);
+  if (fo_doc_cairo->cr != NULL)
+    {
+      cairo_destroy (fo_doc_cairo->cr);
+      fo_doc_cairo->cr = NULL;
+    }
 
-  cairo_destroy (fo_doc_cairo->cr);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**

@@ -95,11 +95,13 @@ IGNORE_HFILES=					\
 	fo-multi-toggle-private.h		\
 	fo-node-private.h			\
 	fo-numeric-private.h			\
+	fo-page-master-private.h		\
 	fo-page-number-citation-private.h	\
 	fo-page-number-private.h		\
 	fo-page-sequence-master-private.h	\
 	fo-page-sequence-area.h			\
 	fo-page-sequence-private.h		\
+	fo-page-sequence-walker-private.h	\
 	fo-property-border-private.h		\
 	fo-property-margin-private.h		\
 	fo-property-padding-private.h		\
@@ -183,6 +185,7 @@ xml_DATA = \
 GTKDOC_CFLAGS = \
 	$(GLIB_CFLAGS)		\
 	-I$(top_srcdir)		\
+	-I$(top_srcdir)/libfo	\
 	-I$(top_builddir)
 
 GTKDOC_LIBS = \

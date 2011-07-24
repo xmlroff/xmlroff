@@ -91,7 +91,7 @@ void
 fo_property_keep_together_within_column_init (FoPropertyKeepTogetherWithinColumn *keep_together_within_column)
 {
   FO_PROPERTY (keep_together_within_column)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**

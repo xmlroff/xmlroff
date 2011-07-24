@@ -2,12 +2,13 @@
  * fo-character.c: 'character' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo/fo-inline-fo.h"
+#include "fo/fo-cbpbp-fo-private.h"
 #include "fo/fo-character-private.h"
 #include "fo-context-util.h"
 #include "property/fo-property-text-property.h"
@@ -136,6 +137,7 @@ enum {
 };
 
 static void fo_character_class_init  (FoCharacterClass *klass);
+static void fo_character_cbpbp_fo_init (FoCBPBPFoIface *iface);
 static void fo_character_inline_fo_init (FoInlineFoIface *iface);
 static void fo_character_get_property (GObject      *object,
                                        guint         prop_id,
@@ -154,11 +156,11 @@ static void fo_character_update_from_context (FoFo      *fo,
                                               FoContext *context);
 static void fo_character_debug_dump_properties (FoFo *fo,
                                                 gint  depth);
-static void fo_character_get_text_attr_list (FoFo *fo_inline_fo,
-					     FoDoc   *fo_doc,
+static void fo_character_get_text_attr_list (FoFo    *fo_inline_fo,
+				             FoDoc   *fo_doc,
 					     GString *text,
-					     GList **attr_glist,
-					     guint debug_level);
+					     GList  **attr_glist,
+					     guint    debug_level);
 
 static gpointer parent_class;
 
@@ -197,12 +199,22 @@ fo_character_get_type (void)
         NULL
       };
 
+      static const GInterfaceInfo fo_cbpbp_fo_info =
+      {
+	(GInterfaceInitFunc) fo_character_cbpbp_fo_init,	 /* interface_init */
+        NULL,
+        NULL
+      };
+
       object_type = g_type_register_static (FO_TYPE_FO,
                                             "FoCharacter",
                                             &object_info, 0);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_INLINE_FO,
                                    &fo_inline_fo_info);
+      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &fo_cbpbp_fo_info);
     }
 
   return object_type;
@@ -718,6 +730,34 @@ void
 fo_character_inline_fo_init (FoInlineFoIface *iface)
 {
   iface->get_text_attr_list = fo_character_get_text_attr_list;
+}
+
+/**
+ * fo_character_cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
+ * 
+ * Initialize #FoCBPBPFoIface interface for this class.
+ **/
+void
+fo_character_cbpbp_fo_init (FoCBPBPFoIface *iface)
+{
+  iface->get_background_color = fo_character_get_background_color;
+  iface->get_border_after_color = fo_character_get_border_after_color;
+  iface->get_border_after_style = fo_character_get_border_after_style;
+  iface->get_border_after_width = fo_character_get_border_after_width;
+  iface->get_border_before_color = fo_character_get_border_before_color;
+  iface->get_border_before_style = fo_character_get_border_before_style;
+  iface->get_border_before_width = fo_character_get_border_before_width;
+  iface->get_border_end_color = fo_character_get_border_end_color;
+  iface->get_border_end_style = fo_character_get_border_end_style;
+  iface->get_border_end_width = fo_character_get_border_end_width;
+  iface->get_border_start_color = fo_character_get_border_start_color;
+  iface->get_border_start_style = fo_character_get_border_start_style;
+  iface->get_border_start_width = fo_character_get_border_start_width;
+  iface->get_padding_after = fo_character_get_padding_after;
+  iface->get_padding_before = fo_character_get_padding_before;
+  iface->get_padding_end = fo_character_get_padding_end;
+  iface->get_padding_start = fo_character_get_padding_start;
 }
 
 /**

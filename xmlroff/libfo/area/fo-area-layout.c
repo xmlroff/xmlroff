@@ -2,7 +2,7 @@
  * fo-area-layout.c: Layout area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -35,17 +35,17 @@ static void fo_area_layout_set_property (GObject           *object,
 					 guint              prop_id,
 					 const GValue      *value,
 					 GParamSpec        *pspec);
-static void fo_area_layout_finalize     (GObject           *object);
+static void _dispose     (GObject           *object);
 
-static void fo_area_layout_debug_dump_properties  (FoArea *area,
-						   gint   depth);
+static void _debug_dump_properties  (FoArea *area,
+				     gint   depth);
 static void fo_area_layout_update_after_clone     (FoArea *clone,
 						   FoArea *original);
 static FoArea* fo_area_layout_split_before_height (FoArea *area,
-						   gfloat  max_height);
+						   gdouble  max_height);
 static gboolean fo_area_layout_split_before_height_check (FoArea *area,
-							  gfloat max_height);
-static void fo_area_layout_resolve_text_align (FoArea *area);
+							  gdouble max_height);
+static void _resolve_text_align (FoArea *area);
 
 static gpointer parent_class;
 
@@ -100,20 +100,18 @@ fo_area_layout_class_init (FoAreaLayoutClass *klass)
 
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_area_layout_finalize;
+  object_class->dispose = _dispose;
 
   object_class->set_property = fo_area_layout_set_property;
   object_class->get_property = fo_area_layout_get_property;
 
-  fo_area_class->debug_dump_properties =
-    fo_area_layout_debug_dump_properties;
+  fo_area_class->debug_dump_properties = _debug_dump_properties;
   fo_area_class->update_after_clone = fo_area_layout_update_after_clone;
   fo_area_class->split_before_height =
     fo_area_layout_split_before_height;
   fo_area_class->split_before_height_check =
     fo_area_layout_split_before_height_check;
-  fo_area_class->resolve_text_align =
-    fo_area_layout_resolve_text_align;
+  fo_area_class->resolve_text_align = _resolve_text_align;
 
   g_object_class_install_property
     (object_class,
@@ -125,22 +123,21 @@ fo_area_layout_class_init (FoAreaLayoutClass *klass)
 }
 
 /**
- * fo_area_layout_finalize:
- * @object: FoAreaLayout object to finalize
+ * _dispose:
+ * @object: FoAreaLayout object to dispose
  * 
- * Implements GObjectFinalizeFunc for FoAreaLayout
+ * Implements GObjectDisposeFunc for FoAreaLayout
  **/
-void
-fo_area_layout_finalize (GObject *object)
+static void
+_dispose (GObject *object)
 {
-  FoAreaLayout *fo_area_layout;
-
-  fo_area_layout = FO_AREA_LAYOUT (object);
+  FoAreaLayout *fo_area_layout = FO_AREA_LAYOUT (object);
 
   g_object_unref (fo_area_layout->layout);
+  g_free (fo_area_layout->text);
   g_slist_free (fo_area_layout->line_heights);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
@@ -276,7 +273,7 @@ fo_area_layout_set_layout (FoArea   *fo_area_layout,
       g_slist_free (FO_AREA_LAYOUT (fo_area_layout)->line_heights);
     }
 
-  FO_AREA_LAYOUT (fo_area_layout)->layout = g_object_ref (new_layout);
+  FO_AREA_LAYOUT (fo_area_layout)->layout = g_object_ref_sink (new_layout);
 
   gint cumulative_height = 0;
   GSList *line_heights = NULL;
@@ -289,8 +286,8 @@ fo_area_layout_set_layout (FoArea   *fo_area_layout,
   gint line_index;
   for (line_index = 0; line_index < line_count; line_index++)
     {
-      pango_layout_line_get_extents (pango_layout_get_line (fo_layout_get_pango_layout (new_layout),
-							    line_index),
+      pango_layout_line_get_extents (pango_layout_get_line_readonly (fo_layout_get_pango_layout (new_layout),
+								     line_index),
 				     NULL,
 				     (PangoRectangle *) &logical);
 
@@ -376,7 +373,8 @@ fo_area_layout_set_line_last (FoArea *fo_area_layout,
 }
 
 static void
-fo_area_layout_debug_dump_line_height (gpointer value, gpointer data)
+_debug_dump_line_height (gpointer value,
+			 gpointer data)
 {
   gchar *indent = g_strnfill (GPOINTER_TO_INT (data) * 2, ' ');
 
@@ -389,31 +387,29 @@ fo_area_layout_debug_dump_line_height (gpointer value, gpointer data)
 }
 
 /**
- * fo_area_layout_debug_dump_properties:
+ * _debug_dump_properties:
  * @area:  The #FoArea object
  * @depth: Indent level to add to the output
  * 
  * Logs the value of each significant property of @area then calls
  * debug_dump_properties method of parent class.
  **/
-void
-fo_area_layout_debug_dump_properties (FoArea *area,
-				      gint depth)
+static void
+_debug_dump_properties (FoArea *area,
+			gint depth)
 {
-  FoAreaLayout *layout;
-  gchar *indent = g_strnfill (depth * 2, ' ');
-
   g_return_if_fail (area != NULL);
   g_return_if_fail (FO_IS_AREA_LAYOUT (area));
 
-  layout = FO_AREA_LAYOUT (area);
+  FoAreaLayout *layout = FO_AREA_LAYOUT (area);
+  gchar *indent = g_strnfill (depth * 2, ' ');
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 "%sline heights: %p",
 	 indent, layout->line_heights);
   g_slist_foreach (layout->line_heights,
-		   fo_area_layout_debug_dump_line_height,
+		   _debug_dump_line_height,
 		   GINT_TO_POINTER (depth + 1));
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
@@ -425,11 +421,14 @@ fo_area_layout_debug_dump_properties (FoArea *area,
 	 "%sline-last:    %d",
 	 indent,
 	 layout->line_last);
+
+  gchar *fo_layout_string = fo_object_debug_sprintf (layout->layout);
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
-	 "%sFoLayout: %p",
+	 "%s%s",
 	 indent,
-	 layout->layout);
+	 fo_layout_string);
+  g_free (fo_layout_string);
 
   g_free (indent);
 
@@ -448,8 +447,6 @@ void
 fo_area_layout_update_after_clone (FoArea *clone,
 				   FoArea *original)
 {
-  FoAreaLayout *original_layout, *clone_layout;
-
   g_return_if_fail (clone != NULL);
   g_return_if_fail (FO_IS_AREA_LAYOUT (clone));
   g_return_if_fail (original != NULL);
@@ -457,8 +454,8 @@ fo_area_layout_update_after_clone (FoArea *clone,
 
   FO_AREA_CLASS (parent_class)->update_after_clone (clone, original);
 
-  original_layout = FO_AREA_LAYOUT (original);
-  clone_layout = FO_AREA_LAYOUT (clone);
+  FoAreaLayout *original_layout = FO_AREA_LAYOUT (original);
+  FoAreaLayout *clone_layout = FO_AREA_LAYOUT (clone);
 
   clone_layout->layout = g_object_ref (original_layout->layout);
   clone_layout->text = original_layout->text;
@@ -479,7 +476,8 @@ fo_area_layout_update_after_clone (FoArea *clone,
  * Return value: The part of @area spit from @area, or NULL if unsplit.
  **/
 FoArea *
-fo_area_layout_split_before_height (FoArea *area, gfloat max_height)
+fo_area_layout_split_before_height (FoArea *area,
+				    gdouble max_height)
 {
   FoAreaLayout *layout;
   FoArea *new_area;
@@ -488,7 +486,7 @@ fo_area_layout_split_before_height (FoArea *area, gfloat max_height)
   gint line_first, line_last;
   gint widows, orphans;
   gint pre_widow_max;
-  gfloat line_first_pre_height = 0;
+  gdouble line_first_pre_height = 0;
 
   g_return_val_if_fail (FO_IS_AREA_LAYOUT (area), area);
 
@@ -604,7 +602,7 @@ fo_area_layout_split_before_height (FoArea *area, gfloat max_height)
 				 line_index);
 #endif
 
-		      new_area = fo_area_clone (area);
+		      new_area = g_object_ref_sink (fo_area_clone (area));
 
 		      fo_area_set_is_first (new_area, FALSE);
 		      fo_area_set_is_last (area, FALSE);
@@ -670,7 +668,8 @@ fo_area_layout_split_before_height (FoArea *area, gfloat max_height)
  * Return value: TRUE if can split, otherwise FALSE.
  **/
 gboolean
-fo_area_layout_split_before_height_check (FoArea *area, gfloat max_height)
+fo_area_layout_split_before_height_check (FoArea *area,
+					  gdouble max_height)
 {
   FoAreaLayout *layout;
   GSList *line_heights;
@@ -678,7 +677,7 @@ fo_area_layout_split_before_height_check (FoArea *area, gfloat max_height)
   gint line_first, line_last;
   gint widows, orphans;
   gint pre_widow_max;
-  gfloat line_first_pre_height = 0;
+  gdouble line_first_pre_height = 0;
 
   g_return_val_if_fail (FO_IS_AREA_LAYOUT (area), FALSE);
 
@@ -814,13 +813,13 @@ fo_area_layout_split_before_height_check (FoArea *area, gfloat max_height)
 }
 
 /**
- * fo_area_layout_resolve_text_align:
+ * _resolve_text_align:
  * @area:   #FoArea.
  * 
  * Determine the Pango alignment from the XSL 'text-align' property.
  **/
 static void
-fo_area_layout_resolve_text_align (FoArea *area)
+_resolve_text_align (FoArea *area)
 {
   FoAreaLayout *area_layout;
   FoEnumEnum area_align;
@@ -835,7 +834,8 @@ fo_area_layout_resolve_text_align (FoArea *area)
 
   area_align = fo_enum_get_value (fo_property_get_value (fo_block_get_text_align (area->generated_by)));
 
-  page_number_mod_2 = fo_area_page_get_page_number (area->page) % 2;
+  page_number_mod_2 =
+    fo_area_page_get_page_number (fo_area_get_page (area)) % 2;
   base_dir =
     pango_context_get_base_dir (pango_layout_get_context (fo_layout_get_pango_layout (area_layout->layout)));
   /* FIXME this will get more complicated when necessary to support

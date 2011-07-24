@@ -91,7 +91,7 @@ void
 fo_property_break_before_init (FoPropertyBreakBefore *break_before)
 {
   FO_PROPERTY (break_before)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
@@ -186,7 +186,7 @@ fo_property_break_before_resolve_enum (const gchar *token,
       (strcmp (token, "even-page") == 0) ||
       (strcmp (token, "odd-page") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

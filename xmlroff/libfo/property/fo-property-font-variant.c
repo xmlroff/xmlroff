@@ -106,7 +106,7 @@ void
 fo_property_font_variant_init (FoPropertyFontVariant *font_variant)
 {
   FO_PROPERTY (font_variant)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -209,7 +209,7 @@ fo_property_font_variant_resolve_enum (const gchar *token,
   if ((strcmp (token, "normal") == 0) ||
       (strcmp (token, "small-caps") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

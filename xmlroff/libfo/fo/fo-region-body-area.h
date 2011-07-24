@@ -2,7 +2,7 @@
  * fo-region-body-area.h: Generate area for region-body formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -17,11 +17,9 @@
 
 G_BEGIN_DECLS
 
-void fo_region_body_area_new (FoFo    *fo,
-			      FoDoc   *fo_doc,
-			      FoArea  *parent_area,
-			      FoArea **new_area,
-			      guint    debug_level);
+void fo_region_body_area_new (FoFo                *fo,
+			      FoFoAreaNew2Context *context,
+			      GError             **error);
 
 G_END_DECLS
 

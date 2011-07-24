@@ -2,7 +2,7 @@
  * fo-area-table-cell.c: Area object for table-cell formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2008 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,7 +11,7 @@
 #define __FO_AREA_TABLE_CELL_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/area/fo-area-area.h>
+#include <libfo/area/fo-area.h>
 
 G_BEGIN_DECLS
 
@@ -26,8 +26,9 @@ typedef struct _FoAreaTableCellClass FoAreaTableCellClass;
 #define FO_AREA_TABLE_CELL_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA_TABLE_CELL, FoAreaTableCellClass))
 
 
-GType   fo_area_table_cell_get_type      (void) G_GNUC_CONST;
-FoArea *fo_area_table_cell_new (void);
+GType    fo_area_table_cell_get_type      (void) G_GNUC_CONST;
+FoArea * fo_area_table_cell_new (void);
+
 G_END_DECLS
 
 #endif /* !__FO_AREA_TABLE_CELL_H__ */

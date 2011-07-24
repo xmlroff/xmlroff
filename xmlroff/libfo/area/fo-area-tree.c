@@ -2,7 +2,7 @@
  * fo-area_tree.c: Formatting object area_tree root
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -90,6 +90,13 @@ fo_area_tree_finalize (GObject *object)
   FoAreaTree *area_tree;
 
   area_tree = FO_AREA_TREE (object);
+
+  fo_node_traverse (FO_NODE (area_tree),
+		    G_POST_ORDER,
+		    G_TRAVERSE_ALL,
+		    -1,
+		    fo_area_release,
+		    NULL);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }

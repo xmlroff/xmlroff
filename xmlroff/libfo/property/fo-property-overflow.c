@@ -92,7 +92,7 @@ void
 fo_property_overflow_init (FoPropertyOverflow *overflow)
 {
   FO_PROPERTY (overflow)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
@@ -187,7 +187,7 @@ fo_property_overflow_resolve_enum (const gchar *token,
       (strcmp (token, "error-if-overflow") == 0) ||
       (strcmp (token, "auto") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

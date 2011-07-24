@@ -90,7 +90,7 @@ void
 fo_property_block_progression_dimension_minimum_init (FoPropertyBlockProgressionDimensionMinimum *block_progression_dimension_minimum)
 {
   FO_PROPERTY (block_progression_dimension_minimum)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**

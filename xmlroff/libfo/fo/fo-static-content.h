@@ -2,7 +2,7 @@
  * fo-static-content.h: 'static-content' formatting object
  *
  * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -41,9 +41,10 @@ typedef struct _FoStaticContentClass FoStaticContentClass;
 GType        fo_static_content_get_type (void) G_GNUC_CONST;
 FoFo *       fo_static_content_new      (void);
 
-FoProperty * fo_static_content_get_flow_name (FoFo       *fo_fo);
-void         fo_static_content_set_flow_name (FoFo       *fo_fo,
-                                              FoProperty *new_flow_name);
+FoFo *       fo_static_content_get_region_master (FoFo       *fo_fo);
+FoProperty * fo_static_content_get_flow_name     (FoFo       *fo_fo);
+void         fo_static_content_set_flow_name     (FoFo       *fo_fo,
+						  FoProperty *new_flow_name);
 
 G_END_DECLS
 

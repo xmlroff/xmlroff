@@ -2,7 +2,7 @@
  * fo-doc.c: Wrapper for libfo output document
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -50,8 +50,9 @@ enum {
   PROP_FORMATS
 };
 
-static void          fo_doc_base_init    (FoDocClass *klass);
-static void          fo_doc_class_init   (FoDocClass *klass);
+static void          _base_init    (FoDocClass *klass);
+static void          _class_init   (FoDocClass *klass);
+static void          _dispose     (GObject      *object);
 static void          fo_doc_get_property (GObject    *object,
 					  guint       param_id,
 					  GValue     *value,
@@ -167,9 +168,9 @@ fo_doc_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoDocClass),
-        (GBaseInitFunc) fo_doc_base_init,
+        (GBaseInitFunc) _base_init,
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_doc_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoDoc),
@@ -188,13 +189,13 @@ fo_doc_get_type (void)
 }
 
 /**
- * fo_doc_base_init:
+ * _base_init:
  * @klass: #FoDocClass base class object to initialise.
  * 
  * Implements #GBaseInitFunc for #FoDocClass.
  **/
-void
-fo_doc_base_init (FoDocClass *klass)
+static void
+_base_init (FoDocClass *klass)
 {
   klass->formats             = FO_FLAG_FORMAT_UNKNOWN;
 
@@ -233,19 +234,20 @@ fo_doc_base_init (FoDocClass *klass)
 }
 
 /**
- * fo_doc_class_init:
+ * _class_init:
  * @klass: #FoDocClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoDocClass.
  **/
-void
-fo_doc_class_init (FoDocClass *klass)
+static void
+_class_init (FoDocClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
   object_class->get_property = fo_doc_get_property;
+  object_class->dispose = _dispose;
 
   g_object_class_install_property
     (object_class,
@@ -256,6 +258,26 @@ fo_doc_class_init (FoDocClass *klass)
 			 FO_TYPE_FLAGS_FORMAT,
 			 FO_FLAG_FORMAT_UNKNOWN,
 			 G_PARAM_READABLE));
+}
+
+/**
+ * _dispose:
+ * @object: #FoDocGP object to dispose.
+ * 
+ * Implements #GObjectDisposeFunc for #FoDocGP.
+ **/
+static void
+_dispose (GObject *object)
+{
+  FoDoc *fo_doc = FO_DOC (object);
+
+  /* Allow a subtype to free the PangoContext (or even to not use a
+     PangoContext). */
+  if (fo_doc->pango_context != NULL)
+    {
+      g_object_unref (fo_doc->pango_context);
+      fo_doc->pango_context = NULL;
+    }
 }
 
 /**

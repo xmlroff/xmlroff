@@ -1,8 +1,8 @@
 /* Fo
  * fo-property-letter-value.c: 'letter-value' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -15,11 +15,20 @@
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-letter-value.h"
 
-/* letter-value */
-/* Inherited: FALSE */
-/* Shorthand: FALSE */
-/* auto | alphabetic | traditional */
-/* Initial value: auto */
+/**
+ * SECTION:fo-property-letter-value
+ * @short_description: 'letter-value' property
+ *
+ * Inherited: FALSE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: auto | alphabetic | traditional
+ *
+ * Initial value: auto
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;letter-value">http://www.w3.org/TR/xsl11/&num;letter-value</ulink>
+ */
 
 struct _FoPropertyLetterValue
 {
@@ -31,16 +40,15 @@ struct _FoPropertyLetterValueClass
   FoPropertyClass parent_class;
 };
 
-static void fo_property_letter_value_init         (FoPropertyLetterValue      *property_letter_value);
-static void fo_property_letter_value_class_init   (FoPropertyLetterValueClass *klass);
-static void fo_property_letter_value_finalize     (GObject       *object);
+static void _init         (FoPropertyLetterValue      *property_letter_value);
+static void _class_init   (FoPropertyLetterValueClass *klass);
 
-static FoDatatype* fo_property_letter_value_resolve_enum (const gchar *token,
-                                                          FoContext   *context,
-                                                          GError     **error);
-static FoDatatype* fo_property_letter_value_validate (FoDatatype *datatype,
-                                                      FoContext  *context,
-                                                      GError    **error);
+static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
+static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 
 static const gchar class_name[] = "letter-value";
 static gpointer parent_class;
@@ -65,12 +73,12 @@ fo_property_letter_value_get_type (void)
         sizeof (FoPropertyLetterValueClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_letter_value_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoPropertyLetterValue),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_letter_value_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 
@@ -83,58 +91,41 @@ fo_property_letter_value_get_type (void)
 }
 
 /**
- * fo_property_letter_value_init:
+ * _init:
  * @letter_value: #FoPropertyLetterValue object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoPropertyLetterValue.
  **/
-void
-fo_property_letter_value_init (FoPropertyLetterValue *letter_value)
+static void
+_init (FoPropertyLetterValue *letter_value)
 {
   FO_PROPERTY (letter_value)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
- * fo_property_letter_value_class_init:
+ * _class_init:
  * @klass: #FoPropertyLetterValueClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoPropertyLetterValueClass.
  **/
-void
-fo_property_letter_value_class_init (FoPropertyLetterValueClass *klass)
+static void
+_class_init (FoPropertyLetterValueClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_letter_value_finalize;
 
   property_class->is_inherited = FALSE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
-    fo_property_letter_value_resolve_enum;
+    _resolve_enum;
   property_class->validate =
-    fo_property_letter_value_validate;
+    _validate;
   property_class->get_initial =
     fo_property_letter_value_get_initial;
-}
-
-/**
- * fo_property_letter_value_finalize:
- * @object: #FoPropertyLetterValue object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyLetterValue.
- **/
-void
-fo_property_letter_value_finalize (GObject *object)
-{
-  FoPropertyLetterValue *letter_value;
-
-  letter_value = FO_PROPERTY_LETTER_VALUE (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 
@@ -158,7 +149,7 @@ fo_property_letter_value_new (void)
 }
 
 /**
- * fo_property_letter_value_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -172,26 +163,20 @@ fo_property_letter_value_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_letter_value_resolve_enum (const gchar *token,
-                                       FoContext   *context,
-                                       GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+	       FoContext   *context,
+	       GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-  if (strcmp (token, "auto") == 0)
+  if ((strcmp (token, "auto") == 0) ||
+      (strcmp (token, "alphabetic") == 0) ||
+      (strcmp (token, "traditional") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_auto ());
-    }
-  else if (strcmp (token, "alphabetic") == 0)
-    {
-      return g_object_ref (fo_enum_get_alphabetic ());
-    }
-  else if (strcmp (token, "traditional") == 0)
-    {
-      return g_object_ref (fo_enum_get_traditional ());
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -206,7 +191,7 @@ fo_property_letter_value_resolve_enum (const gchar *token,
 }
 
 /**
- * fo_property_letter_value_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -218,9 +203,9 @@ fo_property_letter_value_resolve_enum (const gchar *token,
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_letter_value_validate (FoDatatype *datatype,
-                                   FoContext  *context,
-                                   GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
@@ -234,22 +219,43 @@ fo_property_letter_value_validate (FoDatatype *datatype,
 
   if (FO_IS_ENUM (datatype))
     {
-      return datatype;
+      FoEnumEnum value = fo_enum_get_value (datatype);
+
+      if ((value == FO_ENUM_ENUM_AUTO) ||
+          (value == FO_ENUM_ENUM_ALPHABETIC) ||
+          (value == FO_ENUM_ENUM_TRADITIONAL))
+	{
+	  return datatype;
+	}
+      else
+	{
+	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
+
+	  g_set_error (error,
+		       FO_FO_ERROR,
+		       FO_FO_ERROR_ENUMERATION_TOKEN,
+		       _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
+		       class_name,
+		       datatype_sprintf,
+		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
+
+	  g_object_unref (datatype);
+
+	  g_free (datatype_sprintf);
+
+	  return NULL;
+	}
     }
   else if (FO_IS_STRING (datatype))
     {
       token = fo_string_get_value (datatype);
 
       new_datatype =
-        fo_property_letter_value_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
-      if (tmp_error != NULL)
-	{
-	  g_propagate_error (error, tmp_error);
-	  return NULL;
-	}
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
     }
@@ -258,15 +264,11 @@ fo_property_letter_value_validate (FoDatatype *datatype,
       token = fo_name_get_value (datatype);
 
       new_datatype =
-        fo_property_letter_value_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
-      if (tmp_error != NULL)
-	{
-	  g_propagate_error (error, tmp_error);
-	  return NULL;
-	}
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
     }

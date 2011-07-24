@@ -90,7 +90,7 @@ void
 fo_property_keep_together_within_page_init (FoPropertyKeepTogetherWithinPage *keep_together_within_page)
 {
   FO_PROPERTY (keep_together_within_page)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**

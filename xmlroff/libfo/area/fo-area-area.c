@@ -1,8 +1,9 @@
+
 /* Fo
  * fo-area-area.c: Area area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -31,7 +32,7 @@ enum {
   PROP_PADDING_END
 };
 
-static void fo_area_area_base_class_init (FoAreaAreaClass *klass);
+static void _base_class_init (FoAreaAreaClass *klass);
 static void fo_area_area_class_init  (FoAreaAreaClass *klass);
 static void fo_area_area_set_property (GObject         *object,
 				       guint            prop_id,
@@ -45,10 +46,10 @@ static void fo_area_area_finalize    (GObject           *object);
 
 static void fo_area_area_debug_dump_properties (FoArea *area,
 						gint depth);
-static FoArea* fo_area_area_split_before_height (FoArea *area,
-						 gfloat max_height);
-static gboolean fo_area_area_split_before_height_check (FoArea *area,
-							gfloat max_height);
+static FoArea* _split_before_height (FoArea *area,
+				     gdouble max_height);
+static gboolean _split_before_height_check (FoArea *area,
+					    gdouble max_height);
 static void fo_area_area_update_after_clone (FoArea *clone,
 					     FoArea *original);
 static void fo_area_area_resolve_child_ipdim (FoArea *fo_area);
@@ -65,7 +66,7 @@ fo_area_area_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoAreaAreaClass),
-        (GBaseInitFunc) fo_area_area_base_class_init,
+        (GBaseInitFunc) _base_class_init,
         (GBaseFinalizeFunc) NULL,
         (GClassInitFunc) fo_area_area_class_init,
         NULL,           /* class_finalize */
@@ -85,11 +86,11 @@ fo_area_area_get_type (void)
 }
 
 static void
-fo_area_area_base_class_init (FoAreaAreaClass *klass)
+_base_class_init (FoAreaAreaClass *klass)
 {
-  FO_AREA_CLASS (klass)->split_before_height = fo_area_area_split_before_height;
+  FO_AREA_CLASS (klass)->split_before_height = _split_before_height;
   FO_AREA_CLASS (klass)->split_before_height_check =
-    fo_area_area_split_before_height_check;
+    _split_before_height_check;
 }
 
 static void
@@ -311,7 +312,7 @@ fo_area_area_resolve_child_ipdim (FoArea *fo_area)
 **/
 void
 fo_area_area_set_x (FoArea *fo_area,
-		    gfloat new_x)
+		    gdouble new_x)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -330,7 +331,7 @@ fo_area_area_set_x (FoArea *fo_area,
  *
  * Return value: The "x" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_x (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -350,7 +351,7 @@ fo_area_area_get_x (FoArea *fo_area)
 **/
 void
 fo_area_area_set_y (FoArea *fo_area,
-		         gfloat new_y)
+		         gdouble new_y)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -369,7 +370,7 @@ fo_area_area_set_y (FoArea *fo_area,
  *
  * Return value: The "y" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_y (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -389,7 +390,7 @@ fo_area_area_get_y (FoArea *fo_area)
 **/
 void
 fo_area_area_set_width (FoArea *fo_area,
-		         gfloat new_width)
+		         gdouble new_width)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -409,7 +410,7 @@ fo_area_area_set_width (FoArea *fo_area,
  *
  * Return value: The "width" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_width (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -429,7 +430,7 @@ fo_area_area_get_width (FoArea *fo_area)
 **/
 void
 fo_area_area_set_height (FoArea *fo_area,
-		         gfloat new_height)
+		         gdouble new_height)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -448,7 +449,7 @@ fo_area_area_set_height (FoArea *fo_area,
  *
  * Return value: The "height" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_height (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -468,7 +469,7 @@ fo_area_area_get_height (FoArea *fo_area)
 **/
 void
 fo_area_area_set_border_before (FoArea *fo_area,
-	       gfloat new_border_before)
+	       gdouble new_border_before)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -487,7 +488,7 @@ fo_area_area_set_border_before (FoArea *fo_area,
  *
  * Return value: The "border_before" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_border_before (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -507,7 +508,7 @@ fo_area_area_get_border_before (FoArea *fo_area)
 **/
 void
 fo_area_area_set_border_after (FoArea *fo_area,
-	       gfloat new_border_after)
+	       gdouble new_border_after)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -526,7 +527,7 @@ fo_area_area_set_border_after (FoArea *fo_area,
  *
  * Return value: The "border_after" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_border_after (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -546,7 +547,7 @@ fo_area_area_get_border_after (FoArea *fo_area)
 **/
 void
 fo_area_area_set_border_start (FoArea *fo_area,
-	       gfloat new_border_start)
+	       gdouble new_border_start)
 {
   FoAreaArea *fo_area_area;
 
@@ -568,7 +569,7 @@ fo_area_area_set_border_start (FoArea *fo_area,
  *
  * Return value: The "border_start" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_border_start (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -588,7 +589,7 @@ fo_area_area_get_border_start (FoArea *fo_area)
 **/
 void
 fo_area_area_set_border_end (FoArea *fo_area,
-	       gfloat new_border_end)
+	       gdouble new_border_end)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -608,7 +609,7 @@ fo_area_area_set_border_end (FoArea *fo_area,
  *
  * Return value: The "border_end" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_border_end (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -628,7 +629,7 @@ fo_area_area_get_border_end (FoArea *fo_area)
 **/
 void
 fo_area_area_set_padding_before (FoArea *fo_area,
-	       gfloat new_padding_before)
+	       gdouble new_padding_before)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -647,7 +648,7 @@ fo_area_area_set_padding_before (FoArea *fo_area,
  *
  * Return value: The "padding_before" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_padding_before (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -667,7 +668,7 @@ fo_area_area_get_padding_before (FoArea *fo_area)
 **/
 void
 fo_area_area_set_padding_after (FoArea *fo_area,
-	       gfloat new_padding_after)
+	       gdouble new_padding_after)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -686,7 +687,7 @@ fo_area_area_set_padding_after (FoArea *fo_area,
  *
  * Return value: The "padding_after" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_padding_after (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -706,7 +707,7 @@ fo_area_area_get_padding_after (FoArea *fo_area)
 **/
 void
 fo_area_area_set_padding_start (FoArea *fo_area,
-	       gfloat new_padding_start)
+	       gdouble new_padding_start)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -726,7 +727,7 @@ fo_area_area_set_padding_start (FoArea *fo_area,
  *
  * Return value: The "padding_start" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_padding_start (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -746,7 +747,7 @@ fo_area_area_get_padding_start (FoArea *fo_area)
 **/
 void
 fo_area_area_set_padding_end (FoArea *fo_area,
-	       gfloat new_padding_end)
+	       gdouble new_padding_end)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -766,7 +767,7 @@ fo_area_area_set_padding_end (FoArea *fo_area,
  *
  * Return value: The "padding_end" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_padding_end (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -786,7 +787,7 @@ fo_area_area_get_padding_end (FoArea *fo_area)
 **/
 void
 fo_area_area_set_start_indent (FoArea *fo_area,
-			       gfloat new_start_indent)
+			       gdouble new_start_indent)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -805,7 +806,7 @@ fo_area_area_set_start_indent (FoArea *fo_area,
  *
  * Return value: The "start_indent" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_start_indent (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -825,7 +826,7 @@ fo_area_area_get_start_indent (FoArea *fo_area)
 **/
 void
 fo_area_area_set_end_indent (FoArea *fo_area,
-			     gfloat new_end_indent)
+			     gdouble new_end_indent)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -844,7 +845,7 @@ fo_area_area_set_end_indent (FoArea *fo_area,
  *
  * Return value: The "end_indent" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_end_indent (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -864,7 +865,7 @@ fo_area_area_get_end_indent (FoArea *fo_area)
 **/
 void
 fo_area_area_set_space_before (FoArea *fo_area,
-			       gfloat new_space_before)
+			       gdouble new_space_before)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -883,7 +884,7 @@ fo_area_area_set_space_before (FoArea *fo_area,
  *
  * Return value: The "space_before" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_space_before (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -903,7 +904,7 @@ fo_area_area_get_space_before (FoArea *fo_area)
 **/
 void
 fo_area_area_set_space_after (FoArea *fo_area,
-			     gfloat new_space_after)
+			     gdouble new_space_after)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
 
@@ -922,7 +923,7 @@ fo_area_area_set_space_after (FoArea *fo_area,
  *
  * Return value: The "space_after" property value
 **/
-gfloat
+gdouble
 fo_area_area_get_space_after (FoArea *fo_area)
 {
   FoAreaArea *fo_area_area = (FoAreaArea *) fo_area;
@@ -1046,13 +1047,11 @@ fo_area_area_update_after_clone (FoArea *clone,
 
 /* return the new area containing what comes after the split */
 /* leave @area as area remaining after split */
-FoArea*
-fo_area_area_split_before_height (FoArea *area,
-				  gfloat  max_height)
+static FoArea *
+_split_before_height (FoArea *area,
+		      gdouble  max_height)
 {
-  FoAreaArea *area_area;
-  FoArea *use_child_area;
-  gfloat total_child_height = 0;
+  gdouble total_child_height = 0;
 
   g_return_val_if_fail (FO_IS_AREA_AREA (area), NULL);
   g_return_val_if_fail (max_height > 0, NULL);
@@ -1069,18 +1068,19 @@ fo_area_area_split_before_height (FoArea *area,
 	     fo_object_debug_sprintf (fo_area_parent (area)));
 #endif
 
-  area_area = (FoAreaArea *) area;
+  FoAreaArea *area_area = (FoAreaArea *) area;
   /* if the current area is less than max height, then no new area */
   if (fo_area_area_get_height (area) < max_height)
     return NULL;
 
-  use_child_area = fo_area_first_child (area);
+  FoArea *use_child_area =
+     fo_area_first_child (area);
 
-  while (use_child_area)
+  while (use_child_area != NULL)
     {
       /* area->y <= 0, so invert so calculations look sensible */
-      gfloat minus_child_y = - fo_area_area_get_y (use_child_area);
-      gfloat child_height = fo_area_area_get_height (use_child_area);
+      gdouble minus_child_y = - fo_area_area_get_y (use_child_area);
+      gdouble child_height = fo_area_area_get_height (use_child_area);
 
 
       if (minus_child_y >= max_height)
@@ -1137,15 +1137,15 @@ fo_area_area_split_before_height (FoArea *area,
 		}
 	      else
 		{
-		  gfloat minus_prev_y =
+		  gdouble minus_prev_y =
 		    fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-		  gfloat prev_height =
+		  gdouble prev_height =
 		    fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 		  /* If can't split between use_child_area and previous, maybe
 		     can split at lower height */
-		  return fo_area_area_split_before_height (area,
-							   minus_prev_y +
-							   prev_height);
+		  return _split_before_height (area,
+					       minus_prev_y +
+					       prev_height);
 		}
 	    }
 	}
@@ -1287,13 +1287,13 @@ fo_area_area_split_before_height (FoArea *area,
 }
 
 /* return %TRUE if the area will split within the height */
-gboolean
-fo_area_area_split_before_height_check (FoArea *area,
-					gfloat  max_height)
+static gboolean
+_split_before_height_check (FoArea *area,
+			    gdouble  max_height)
 {
   FoAreaArea *area_area;
   FoArea *use_child_area;
-  gfloat total_child_height = 0;
+  gdouble total_child_height = 0;
 
   g_return_val_if_fail (FO_IS_AREA_AREA (area), FALSE);
   g_return_val_if_fail (max_height > 0, FALSE);
@@ -1322,8 +1322,8 @@ fo_area_area_split_before_height_check (FoArea *area,
   while (use_child_area)
     {
       /* area->y <= 0, so invert so calculations look sensible */
-      gfloat minus_child_y = -((FoAreaArea *) use_child_area)->y;
-      gfloat child_height = ((FoAreaArea *) use_child_area)->height;
+      gdouble minus_child_y = -((FoAreaArea *) use_child_area)->y;
+      gdouble child_height = ((FoAreaArea *) use_child_area)->height;
 
 
       if (minus_child_y + child_height > max_height)

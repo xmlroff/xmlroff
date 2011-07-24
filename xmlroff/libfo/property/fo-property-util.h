@@ -2,7 +2,7 @@
  * fo-property-util.h: Utility functions for properties.
  *
  * Copyright (C) 2001-2004 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -38,6 +38,12 @@ FoDatatype * fo_property_util_resolve_condity_enum     (const gchar *token,
 FoDatatype * fo_property_util_resolve_force_enum       (const gchar *token,
 							FoContext   *context,
 							GError     **error);
+FoDatatype * fo_property_util_resolve_true_false_enum  (const gchar *token,
+							FoContext   *context,
+							GError     **error);
+FoDatatype * fo_property_util_validate_boolean         (FoDatatype *datatype,
+							FoContext  *context,
+							GError    **error);
 FoDatatype * fo_property_util_validate_color           (FoDatatype  *datatype,
 							FoContext   *context,
 							GError     **error);

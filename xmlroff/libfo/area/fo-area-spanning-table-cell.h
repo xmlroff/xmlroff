@@ -2,7 +2,7 @@
  * fo-area-spanning-table-cell.c: Area object for spanning-table-cell formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -26,14 +26,14 @@ typedef struct _FoAreaSpanningTableCellClass FoAreaSpanningTableCellClass;
 #define FO_AREA_SPANNING_TABLE_CELL_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA_SPANNING_TABLE_CELL, FoAreaSpanningTableCellClass))
 
 
-GType   fo_area_spanning_table_cell_get_type      (void) G_GNUC_CONST;
-FoArea *fo_area_spanning_table_cell_new (void);
-FoArea* fo_area_spanning_table_cell_new_with_rows_spanned (gint rows_spanned);
+GType    fo_area_spanning_table_cell_get_type      (void) G_GNUC_CONST;
+FoArea * fo_area_spanning_table_cell_new (void);
+FoArea * fo_area_spanning_table_cell_new_with_rows_spanned (gint rows_spanned);
 
-FoArea* fo_area_spanning_table_cell_get_nth_row_proxy (FoArea *fo_area,
-						       gint    row_number);
-gfloat  fo_area_spanning_table_cell_get_real_height   (FoArea *fo_area);
-gfloat  fo_area_spanning_table_cell_get_real_available_height (FoArea *fo_area);
+FoArea * fo_area_spanning_table_cell_get_nth_row_proxy (FoArea *fo_area,
+							gint    row_number);
+gdouble  fo_area_spanning_table_cell_get_real_height   (FoArea *fo_area);
+gdouble  fo_area_spanning_table_cell_get_real_available_height (FoArea *fo_area);
 G_END_DECLS
 
 #endif /* !__FO_AREA_SPANNING_TABLE_CELL_H__ */

@@ -2,45 +2,66 @@
  * fo-flow.c: 'flow' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
+#include "fo/fo-cbpbp-fo-private.h"
 #include "fo/fo-flow-private.h"
 #include "property/fo-property-flow-name.h"
 #include "fo/fo-flow-area.h"
 #include "fo/fo-simple-page-master.h"
-#include "fo/fo-page-sequence-private.h"
+#include "fo/fo-page-sequence.h"
 #include "fo/fo-region-body.h"
+#include "fo/fo-region.h"
 
 enum {
   PROP_0,
   PROP_FLOW_NAME
 };
 
-static void fo_flow_class_init  (FoFlowClass *klass);
-static void fo_flow_get_property (GObject      *object,
-                                  guint         prop_id,
-                                  GValue       *value,
-                                  GParamSpec   *pspec);
-static void fo_flow_set_property (GObject      *object,
-                                  guint         prop_id,
-                                  const GValue *value,
-                                  GParamSpec   *pspec);
-static void fo_flow_finalize    (GObject           *object);
-static gboolean fo_flow_validate_content (FoFo    *fo,
-                                          GError **error);
-static void fo_flow_validate (FoFo      *fo,
-                              FoContext *current_context,
-                              FoContext *parent_context,
-                              GError   **error);
-static void fo_flow_update_from_context (FoFo      *fo,
-                                         FoContext *context);
-static void fo_flow_debug_dump_properties (FoFo *fo,
-                                           gint  depth);
+static void _class_init            (FoFlowClass    *klass);
+static void _cbpbp_fo_init         (FoCBPBPFoIface *iface);
+static void _get_property          (GObject        *object,
+				    guint           prop_id,
+				    GValue         *value,
+				    GParamSpec     *pspec);
+static void _set_property          (GObject        *object,
+				    guint           prop_id,
+				    const GValue   *value,
+				    GParamSpec     *pspec);
+static void _dispose               (GObject        *object);
+static gboolean _validate_content  (FoFo           *fo,
+				    GError        **error);
+static void _validate              (FoFo           *fo,
+				    FoContext      *current_context,
+				    FoContext      *parent_context,
+				    GError        **error);
+static void _update_from_context   (FoFo           *fo,
+				    FoContext      *context);
+static void _debug_dump_properties (FoFo           *fo,
+				    gint            depth);
 
-static const gchar class_name[] = "FoFlow";
+/* Functions implementing FoCBPBPFo interface. */
+static FoProperty * fo_flow_get_background_color    (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_after_color  (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_after_style  (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_after_width  (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_before_color (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_before_style (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_before_width (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_end_color    (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_end_style    (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_end_width    (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_start_color  (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_start_style  (FoFo *fo_flow);
+static FoProperty * fo_flow_get_border_start_width  (FoFo *fo_flow);
+static FoProperty * fo_flow_get_padding_after       (FoFo *fo_flow);
+static FoProperty * fo_flow_get_padding_before      (FoFo *fo_flow);
+static FoProperty * fo_flow_get_padding_end         (FoFo *fo_flow);
+static FoProperty * fo_flow_get_padding_start       (FoFo *fo_flow);
+
 static gpointer parent_class;
 
 /**
@@ -58,51 +79,65 @@ fo_flow_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoFlowClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_flow_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoFlow),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoFlowClass),
+	  NULL,           /* base_init */
+	  NULL,           /* base_finalize */
+	  (GClassInitFunc) _class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoFlow),
+	  0,              /* n_preallocs */
+	  NULL,		  /* instance_init */
+	  NULL		  /* value_table */
+        };
 
-      object_type = g_type_register_static (FO_TYPE_FO,
-                                            class_name,
+      static const GInterfaceInfo fo_cbpbp_fo_info =
+	{
+	  (GInterfaceInitFunc) _cbpbp_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
+
+      object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
+                                            "FoFlow",
                                             &object_info, 0);
+      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &fo_cbpbp_fo_info);
     }
 
   return object_type;
 }
 
 /**
- * fo_flow_class_init:
+ * _class_init:
  * @klass: #FoFlowClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoFlowClass.
  **/
-void
-fo_flow_class_init (FoFlowClass *klass)
+static void
+_class_init (FoFlowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoFoClass *fofo_class = FO_FO_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_flow_finalize;
+  object_class->dispose = _dispose;
 
-  object_class->get_property = fo_flow_get_property;
-  object_class->set_property = fo_flow_set_property;
+  object_class->get_property = _get_property;
+  object_class->set_property = _set_property;
 
-  fofo_class->validate_content = fo_flow_validate_content;
-  fofo_class->validate2 = fo_flow_validate;
-  fofo_class->update_from_context = fo_flow_update_from_context;
-  fofo_class->debug_dump_properties = fo_flow_debug_dump_properties;
+  fofo_class->validate_content =
+    _validate_content;
+  fofo_class->validate2 =
+    _validate;
+  fofo_class->update_from_context = _update_from_context;
+  fofo_class->debug_dump_properties = _debug_dump_properties;
   fofo_class->area_new2 = fo_flow_area_new2;
+  fofo_class->get_area_fo =
+    fo_flow_get_region_master;
 
   g_object_class_install_property
     (object_class,
@@ -115,23 +150,52 @@ fo_flow_class_init (FoFlowClass *klass)
 }
 
 /**
- * fo_flow_finalize:
- * @object: #FoFlow object to finalize.
+ * _cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
  * 
- * Implements #GObjectFinalizeFunc for #FoFlow.
+ * Initialize #FoCBPBPFoIface interface for this class.
  **/
-void
-fo_flow_finalize (GObject *object)
+static void
+_cbpbp_fo_init (FoCBPBPFoIface *iface)
 {
-  FoFlow *fo_flow;
-
-  fo_flow = FO_FLOW (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  iface->get_background_color = fo_flow_get_background_color;
+  iface->get_border_after_color = fo_flow_get_border_after_color;
+  iface->get_border_after_style = fo_flow_get_border_after_style;
+  iface->get_border_after_width = fo_flow_get_border_after_width;
+  iface->get_border_before_color = fo_flow_get_border_before_color;
+  iface->get_border_before_style = fo_flow_get_border_before_style;
+  iface->get_border_before_width = fo_flow_get_border_before_width;
+  iface->get_border_end_color = fo_flow_get_border_end_color;
+  iface->get_border_end_style = fo_flow_get_border_end_style;
+  iface->get_border_end_width = fo_flow_get_border_end_width;
+  iface->get_border_start_color = fo_flow_get_border_start_color;
+  iface->get_border_start_style = fo_flow_get_border_start_style;
+  iface->get_border_start_width = fo_flow_get_border_start_width;
+  iface->get_padding_after = fo_flow_get_padding_after;
+  iface->get_padding_before = fo_flow_get_padding_before;
+  iface->get_padding_end = fo_flow_get_padding_end;
+  iface->get_padding_start = fo_flow_get_padding_start;
 }
 
 /**
- * fo_flow_get_property:
+ * _dispose:
+ * @object: #FoFlow object to dispose.
+ * 
+ * Implements #GObjectDisposeFunc for #FoFlow.
+ **/
+static void
+_dispose (GObject *object)
+{
+  FoFo *fo = FO_FO (object);
+
+  /* Release references to all property objects. */
+  fo_flow_set_flow_name (fo, NULL);
+
+  G_OBJECT_CLASS (parent_class)->dispose (object);
+}
+
+/**
+ * _get_property:
  * @object:  #GObject whose property will be retrieved.
  * @prop_id: Property ID assigned when property registered.
  * @value:   GValue to set with property value.
@@ -140,10 +204,10 @@ fo_flow_finalize (GObject *object)
  * Implements #GObjectGetPropertyFunc for #FoFlow.
  **/
 void
-fo_flow_get_property (GObject    *object,
-                      guint       prop_id,
-                      GValue     *value,
-                      GParamSpec *pspec)
+_get_property (GObject    *object,
+	       guint       prop_id,
+	       GValue     *value,
+	       GParamSpec *pspec)
 {
   FoFo *fo_fo;
 
@@ -161,7 +225,7 @@ fo_flow_get_property (GObject    *object,
 }
 
 /**
- * fo_flow_set_property:
+ * set_property:
  * @object:  #GObject whose property will be set.
  * @prop_id: Property ID assigned when property registered.
  * @value:   New value for property.
@@ -170,10 +234,10 @@ fo_flow_get_property (GObject    *object,
  * Implements #GObjectSetPropertyFunc for #FoFlow.
  **/
 void
-fo_flow_set_property (GObject      *object,
-                      guint         prop_id,
-                      const GValue *value,
-                      GParamSpec   *pspec)
+_set_property (GObject      *object,
+	       guint         prop_id,
+	       const GValue *value,
+	       GParamSpec   *pspec)
 {
   FoFo *fo_fo;
 
@@ -205,7 +269,7 @@ fo_flow_new (void)
 }
 
 /**
- * fo_flow_validate_content:
+ * _validate_content:
  * @fo:    #FoFlow object to validate.
  * @error: #GError indicating error condition, if any.
  * 
@@ -217,8 +281,8 @@ fo_flow_new (void)
  * Return value: %FALSE if content model okay, %TRUE if not.
  **/
 gboolean
-fo_flow_validate_content (FoFo    *fo,
-                          GError **error)
+_validate_content (FoFo    *fo,
+		   GError **error)
 {
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_FLOW (fo), TRUE);
@@ -230,7 +294,7 @@ fo_flow_validate_content (FoFo    *fo,
 }
 
 /**
- * fo_flow_validate:
+ * _validate:
  * @fo:              #FoFlow object to validate.
  * @current_context: #FoContext associated with current object.
  * @parent_context:  #FoContext associated with parent FO.
@@ -241,29 +305,24 @@ fo_flow_validate_content (FoFo    *fo,
  * an error occurred.
  **/
 void
-fo_flow_validate (FoFo      *fo,
-                  FoContext *current_context,
-                  FoContext *parent_context,
-                  GError   **error)
+_validate (FoFo      *fo,
+	   FoContext *current_context,
+	   FoContext *parent_context,
+	   GError   **error)
 {
-  FoFlow *fo_flow;
-  FoPageSequence *page_sequence;
-  FoFo *region_master;
-  FoDatatype *flow_name_datatype;
-  gchar *flow_name;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_FLOW (fo));
   g_return_if_fail (FO_IS_CONTEXT (current_context));
   g_return_if_fail (FO_IS_CONTEXT (parent_context));
   g_return_if_fail (error == NULL || *error == NULL);
 
-  fo_flow = FO_FLOW (fo);
+  FoFlow *fo_flow = FO_FLOW (fo);
 
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
 
-  flow_name_datatype = fo_property_get_value (fo_flow_get_flow_name (fo));
+  FoDatatype *flow_name_datatype =
+    fo_property_get_value (fo_flow_get_flow_name (fo));
 
   if (flow_name_datatype == NULL) {
     g_set_error (error,
@@ -273,19 +332,18 @@ fo_flow_validate (FoFo      *fo,
 		 "flow-name");
   }
 
-  flow_name =
+  gchar *flow_name =
     fo_name_get_value (flow_name_datatype);
 
-  /*
-  if (fo->parent)
-    page_sequence = FO_PAGE_SEQUENCE (fo->parent);
-  else
-  */
-    page_sequence = FO_PAGE_SEQUENCE (fo_node_parent (FO_NODE (fo)));
+  FoFo *page_sequence =
+    FO_FO (fo_node_parent (FO_NODE (fo)));
 
+  FoFo *region_master = NULL;
   if (page_sequence != NULL)
     {
-      region_master = fo_simple_page_master_region_name_get (page_sequence->page_master, flow_name);
+      region_master =
+	fo_simple_page_master_region_name_get (fo_page_sequence_get_page_master (page_sequence),
+					       flow_name);
       /*
       g_print ("Master: %s\n", fo_object_sprintf (page_master));
 
@@ -298,21 +356,23 @@ fo_flow_validate (FoFo      *fo,
       g_assert_not_reached();
     }
 
+  g_free (flow_name);
+
   fo_context_set_writing_mode (current_context,
-			       fo_region_body_get_writing_mode (fo_flow->region_master));
+			       fo_region_get_writing_mode (fo_flow->region_master));
 
 }
 
 /**
- * fo_flow_update_from_context:
+ * _update_from_context:
  * @fo:      The #FoFo object.
  * @context: The #FoContext object from which to update the properties of @fo.
  * 
  * Sets the properties of @fo to the corresponding property values in @context.
  **/
 void
-fo_flow_update_from_context (FoFo      *fo,
-                             FoContext *context)
+_update_from_context (FoFo      *fo,
+		      FoContext *context)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_FLOW (fo));
@@ -320,11 +380,11 @@ fo_flow_update_from_context (FoFo      *fo,
   g_return_if_fail (FO_IS_CONTEXT (context));
 
   fo_flow_set_flow_name (fo,
-			  fo_context_get_flow_name (context));
+			 fo_context_get_flow_name (context));
 }
 
 /**
- * fo_flow_debug_dump_properties:
+ * _debug_dump_properties:
  * @fo:    The #FoFo object.
  * @depth: Indent level to add to the output.
  * 
@@ -332,8 +392,8 @@ fo_flow_update_from_context (FoFo      *fo,
  * debug_dump_properties method of parent class.
  **/
 void
-fo_flow_debug_dump_properties (FoFo *fo,
-                               gint  depth)
+_debug_dump_properties (FoFo *fo,
+			gint  depth)
 {
   FoFlow *fo_flow;
 
@@ -348,6 +408,295 @@ fo_flow_debug_dump_properties (FoFo *fo,
 }
 
 /**
+ * fo_flow_get_background_color:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #background-color property of @fo_flow
+ *
+ * Return value: The "background-color" property value
+**/
+FoProperty *
+fo_flow_get_background_color (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_background_color (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_after_color:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-after-color property of @fo_flow
+ *
+ * Return value: The "border-after-color" property value
+**/
+FoProperty *
+fo_flow_get_border_after_color (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_after_color (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_after_style:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-after-style property of @fo_flow
+ *
+ * Return value: The "border-after-style" property value
+**/
+FoProperty *
+fo_flow_get_border_after_style (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_after_style (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_after_width:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-after-width property of @fo_flow
+ *
+ * Return value: The "border-after-width" property value
+**/
+FoProperty *
+fo_flow_get_border_after_width (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_after_width (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_before_color:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-before-color property of @fo_flow
+ *
+ * Return value: The "border-before-color" property value
+**/
+FoProperty *
+fo_flow_get_border_before_color (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_before_color (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_before_style:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-before-style property of @fo_flow
+ *
+ * Return value: The "border-before-style" property value
+**/
+FoProperty *
+fo_flow_get_border_before_style (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_before_style (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_before_width:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-before-width property of @fo_flow
+ *
+ * Return value: The "border-before-width" property value
+**/
+FoProperty*
+fo_flow_get_border_before_width (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_before_width (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_end_color:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-end-color property of @fo_flow
+ *
+ * Return value: The "border-end-color" property value
+**/
+FoProperty *
+fo_flow_get_border_end_color (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_end_color (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_end_style:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-end-style property of @fo_flow
+ *
+ * Return value: The "border-end-style" property value
+**/
+FoProperty *
+fo_flow_get_border_end_style (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_end_style (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_end_width:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-end-width property of @fo_flow
+ *
+ * Return value: The "border-end-width" property value
+**/
+FoProperty *
+fo_flow_get_border_end_width (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_end_width (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_start_color:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-start-color property of @fo_flow
+ *
+ * Return value: The "border-start-color" property value
+**/
+FoProperty *
+fo_flow_get_border_start_color (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_start_color (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_start_style:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-start-style property of @fo_flow
+ *
+ * Return value: The "border-start-style" property value
+**/
+FoProperty *
+fo_flow_get_border_start_style (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_start_style (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_border_start_width:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #border-start-width property of @fo_flow
+ *
+ * Return value: The "border-start-width" property value
+**/
+FoProperty *
+fo_flow_get_border_start_width (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_border_start_width (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_padding_after:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #padding-after property of @fo_flow
+ *
+ * Return value: The "padding-after" property value
+**/
+FoProperty *
+fo_flow_get_padding_after (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_padding_after (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_padding_before:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #padding-before property of @fo_flow
+ *
+ * Return value: The "padding-before" property value
+**/
+FoProperty *
+fo_flow_get_padding_before (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_padding_before (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_padding_end:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #padding-end property of @fo_flow
+ *
+ * Return value: The "padding-end" property value
+**/
+FoProperty *
+fo_flow_get_padding_end (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_padding_end (fo_flow_get_region_master (fo_flow));
+}
+
+/**
+ * fo_flow_get_padding_start:
+ * @fo_flow: The @FoFlow object
+ *
+ * Gets the #padding-start property of @fo_flow
+ *
+ * Return value: The "padding-start" property value
+**/
+FoProperty *
+fo_flow_get_padding_start (FoFo *fo_flow)
+{
+  g_return_val_if_fail (fo_flow != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FLOW (fo_flow), NULL);
+
+  return fo_cbpbp_fo_get_padding_start (fo_flow_get_region_master (fo_flow));
+}
+
+/**
  * fo_flow_get_region_master:
  * @fo_fo: The @FoFlow object
  *
@@ -355,7 +704,7 @@ fo_flow_debug_dump_properties (FoFo *fo,
  *
  * Return value: The "region_master" value
 **/
-FoFo*
+FoFo *
 fo_flow_get_region_master (FoFo *fo_fo)
 {
   g_return_val_if_fail (fo_fo != NULL, NULL);
@@ -372,7 +721,7 @@ fo_flow_get_region_master (FoFo *fo_fo)
  *
  * Return value: The "flow-name" property value.
 **/
-FoProperty*
+FoProperty *
 fo_flow_get_flow_name (FoFo *fo_fo)
 {
   FoFlow *fo_flow = (FoFlow *) fo_fo;
@@ -398,7 +747,8 @@ fo_flow_set_flow_name (FoFo *fo_fo,
 
   g_return_if_fail (fo_flow != NULL);
   g_return_if_fail (FO_IS_FLOW (fo_flow));
-  g_return_if_fail (FO_IS_PROPERTY_FLOW_NAME (new_flow_name));
+  g_return_if_fail ((new_flow_name == NULL) ||
+		    FO_IS_PROPERTY_FLOW_NAME (new_flow_name));
 
   if (new_flow_name != NULL)
     {

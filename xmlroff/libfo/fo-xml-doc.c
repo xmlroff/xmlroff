@@ -2,7 +2,7 @@
  * fo-xml-doc.c: Boxed object type for libxml2 xmlDoc document
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -110,7 +110,7 @@ fo_xml_doc_new (void)
 }
 
 static gint
-context_to_libxml2_options (FoLibfoContext *context)
+_context_to_libxml2_options (FoLibfoContext *context)
 {
   /* Begin with unchanging defaults. */
   gint options = XML_PARSE_NOENT;
@@ -135,8 +135,8 @@ context_to_libxml2_options (FoLibfoContext *context)
  * 
  * Creates a new #FoXmlDoc.
  * 
- * Return value: the newly created #FoXmlDoc. Use fo_xml_doc_unref to free the
- * result.
+ * Return value: the newly created #FoXmlDoc. Use #fo_xml_doc_unref to
+ * free the result.
  **/
 FoXmlDoc *
 fo_xml_doc_new_from_filename (const gchar    *filename,
@@ -145,9 +145,10 @@ fo_xml_doc_new_from_filename (const gchar    *filename,
 {
   FoXmlDoc *fo_xml_doc = fo_xml_doc_new ();
 
-  fo_xml_doc->xml_doc = xmlReadFile (filename,
-				     NULL,
-				     context_to_libxml2_options (libfo_context));
+  fo_xml_doc->xml_doc =
+    xmlReadFile (filename,
+		 NULL,
+		 _context_to_libxml2_options (libfo_context));
 
   if (fo_xml_doc->xml_doc == NULL)
     {
@@ -176,8 +177,8 @@ fo_xml_doc_new_from_filename (const gchar    *filename,
  * 
  * Creates a new #FoXmlDoc.
  * 
- * Return value: the newly created #FoXmlDoc. Use #fo_xml_doc_unref to free the
- * result.
+ * Return value: the newly created #FoXmlDoc. Use #fo_xml_doc_unref to
+ * free the result.
  **/
 FoXmlDoc *
 fo_xml_doc_new_from_memory (const gchar    *buffer,
@@ -189,11 +190,12 @@ fo_xml_doc_new_from_memory (const gchar    *buffer,
 {
   FoXmlDoc *fo_xml_doc = fo_xml_doc_new ();
 
-  fo_xml_doc->xml_doc = xmlReadMemory (buffer, 
-				       size, 
-				       URL, 
-				       encoding, 
-				       context_to_libxml2_options (libfo_context));
+  fo_xml_doc->xml_doc =
+    xmlReadMemory (buffer, 
+		   size, 
+		   URL, 
+		   encoding, 
+		   _context_to_libxml2_options (libfo_context));
 
   if (fo_xml_doc->xml_doc == NULL)
     {
@@ -221,8 +223,8 @@ fo_xml_doc_new_from_memory (const gchar    *buffer,
  * 
  * Creates a new #FoXmlDoc.
  * 
- * Return value: the newly created #FoXmlDoc. Use #fo_xml_doc_unref to free the
- * result.
+ * Return value: the newly created #FoXmlDoc. Use #fo_xml_doc_unref to
+ * free the result.
  **/
 FoXmlDoc *
 fo_xml_doc_new_from_string (const gchar    *curr,
@@ -231,13 +233,13 @@ fo_xml_doc_new_from_string (const gchar    *curr,
 			    FoLibfoContext *libfo_context,
 			    GError        **error)
 {
-  
   FoXmlDoc *fo_xml_doc = fo_xml_doc_new ();
 
-  fo_xml_doc->xml_doc = xmlReadDoc ((xmlChar *) curr,
-				    URL, 
-				    encoding, 
-				    context_to_libxml2_options (libfo_context));
+  fo_xml_doc->xml_doc =
+    xmlReadDoc ((xmlChar *) curr,
+		URL, 
+		encoding, 
+		_context_to_libxml2_options (libfo_context));
 
   if (fo_xml_doc->xml_doc == NULL)
     {
@@ -251,6 +253,23 @@ fo_xml_doc_new_from_string (const gchar    *curr,
 		   _(fo_xml_doc_error_messages[FO_XML_DOC_ERROR_MEMORY_PARSE_FAILED]));
 
     }
+
+  return fo_xml_doc;
+}
+
+/**
+ * fo_xml_doc_new_from_xml_doc:
+ * @fo_xml_doc: #FoXmlDoc.
+ * @xml_doc:    #xmlDocPtr.
+ * 
+ * Set the output #xmlDocPtr in @fo_xml_doc.  Voids the parsed result.
+ **/
+FoXmlDoc *
+fo_xml_doc_new_from_xml_doc (xmlDocPtr xml_doc)
+{
+  FoXmlDoc *fo_xml_doc = fo_xml_doc_new ();
+
+  fo_xml_doc->xml_doc = xml_doc;
 
   return fo_xml_doc;
 }
@@ -292,10 +311,14 @@ fo_xml_doc_unref  (FoXmlDoc  *fo_xml_doc)
   if (fo_xml_doc->ref_count == 0)
     {
       if (fo_xml_doc->filename != NULL)
-	g_free (fo_xml_doc->filename);
+	{
+	  g_free (fo_xml_doc->filename);
+	}
 
       if (fo_xml_doc->xml_doc != NULL)
-	xmlFreeDoc (fo_xml_doc->xml_doc);
+	{
+	  xmlFreeDoc (fo_xml_doc->xml_doc);
+	}
 
       g_free (fo_xml_doc);
     }
@@ -322,25 +345,13 @@ fo_xml_doc_get_xml_doc (FoXmlDoc *fo_xml_doc)
  * @fo_xml_doc: #FoXmlDoc.
  * @xml_doc:    #xmlDocPtr.
  * 
- * Set the output #xmlDocPtr in @fo_xml_doc.  Voids the parsed result.
+ * Set the #xmlDocPtr in @fo_xml_doc.  Voids the parsed result.
  **/
 void
 fo_xml_doc_set_xml_doc (FoXmlDoc    *fo_xml_doc,
 			xmlDocPtr    xml_doc)
 {
   g_return_if_fail (fo_xml_doc != NULL);
-
-  if (fo_xml_doc->filename != NULL)
-    {
-      g_free (fo_xml_doc->filename);
-      fo_xml_doc->filename = NULL;
-    }
-
-  if (fo_xml_doc->xml_doc != NULL)
-    {
-      xmlFreeDoc (fo_xml_doc->xml_doc);
-      fo_xml_doc->xml_doc = NULL;
-    }
 
   fo_xml_doc->xml_doc = xml_doc;
 }
@@ -359,12 +370,8 @@ fo_xml_doc_set_filename (FoXmlDoc    *fo_xml_doc,
   g_return_if_fail (fo_xml_doc != NULL);
 
   if (fo_xml_doc->filename != NULL)
-    g_free (fo_xml_doc->filename);
-
-  if (fo_xml_doc->xml_doc != NULL)
     {
-      xmlFreeDoc (fo_xml_doc->xml_doc);
-      fo_xml_doc->xml_doc = NULL;
+      g_free (fo_xml_doc->filename);
     }
 
   fo_xml_doc->filename = g_strdup (filename);

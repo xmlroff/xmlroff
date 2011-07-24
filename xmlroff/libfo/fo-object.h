@@ -2,7 +2,7 @@
  * fo-object.h: Base object of formatting object system
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -27,13 +27,13 @@ typedef struct _FoObjectClass FoObjectClass;
 
 struct _FoObject
 {
-  GObject parent_instance;
+  GInitiallyUnowned parent_instance;
 
 };
 
 struct _FoObjectClass
 {
-  GObjectClass parent_class;
+  GInitiallyUnownedClass parent_class;
 
   void     (* debug_dump)	      (FoObject     *object,
 				       gint          depth);

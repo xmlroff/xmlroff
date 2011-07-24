@@ -278,9 +278,12 @@ fo_length_range_new_auto (void)
 
   length_range = fo_length_range_new ();
 
-  fo_length_range_set_minimum (length_range, fo_enum_get_enum_auto());
-  fo_length_range_set_optimum (length_range, fo_enum_get_enum_auto());
-  fo_length_range_set_maximum (length_range, fo_enum_get_enum_auto());
+  fo_length_range_set_minimum (length_range,
+			       fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
+  fo_length_range_set_optimum (length_range,
+			       fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
+  fo_length_range_set_maximum (length_range,
+			       fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
   
   return length_range;
 }

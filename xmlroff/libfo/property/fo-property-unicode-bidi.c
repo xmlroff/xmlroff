@@ -92,7 +92,7 @@ void
 fo_property_unicode_bidi_init (FoPropertyUnicodeBidi *unicode_bidi)
 {
   FO_PROPERTY (unicode_bidi)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -185,7 +185,7 @@ fo_property_unicode_bidi_resolve_enum (const gchar *token,
       (strcmp (token, "embed") == 0) ||
       (strcmp (token, "bidi-override") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

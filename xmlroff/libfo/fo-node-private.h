@@ -29,6 +29,8 @@ struct _FoNodeClass
 
   void     (* debug_dump_properties)     (FoNode   *fo_node,
 					  gint     depth);
+  void     (* debug_dump_tree)           (FoNode   *fo_node,
+					  gint     depth);
   /* tree functions that may be restricted */
   FoNode*  (* insert)                    (FoNode *parent,
 					  gint    position,

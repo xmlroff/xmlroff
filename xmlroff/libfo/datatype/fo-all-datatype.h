@@ -2,7 +2,7 @@
  * fo-all-datatype.h:
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -16,6 +16,7 @@ G_BEGIN_DECLS
 #include <libfo/datatype/fo-numeric.h>
 #include <libfo/datatype/fo-unknown.h>
 #include <libfo/datatype/fo-expression.h>
+#include <libfo/datatype/fo-enum-factory.h>
 
 /* Datatype objects */
 #include <libfo/datatype/fo-boolean.h>

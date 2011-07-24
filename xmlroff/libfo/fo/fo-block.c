@@ -2,12 +2,14 @@
  * fo-block.c: 'block' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo/fo-block-fo-private.h"
+#include "fo/fo-cbpbp-fo-private.h"
 #include "fo/fo-block-private.h"
 #include "fo/fo-inline-fo.h"
 #include "fo/fo-neutral-fo.h"
@@ -184,9 +186,10 @@ enum {
   PROP_WRAP_OPTION
 };
 
-static void fo_block_base_class_init  (FoBlockClass *klass);
-static void fo_block_class_init  (FoBlockClass *klass);
-static void fo_block_block_fo_init (FoBlockFoIface *iface);
+static void _base_class_init  (FoBlockClass   *klass);
+static void _class_init       (FoBlockClass   *klass);
+static void _block_fo_init    (FoBlockFoIface *iface);
+static void _cbpbp_fo_init    (FoCBPBPFoIface *iface);
 static void fo_block_get_property (GObject      *object,
                                    guint         prop_id,
                                    GValue       *value,
@@ -195,17 +198,17 @@ static void fo_block_set_property (GObject      *object,
                                    guint         prop_id,
                                    const GValue *value,
                                    GParamSpec   *pspec);
-static void fo_block_finalize    (GObject           *object);
-static gboolean fo_block_validate_content (FoFo    *fo,
-                                           GError **error);
-static void fo_block_validate (FoFo      *fo,
-                               FoContext *current_context,
-                               FoContext *parent_context,
-                               GError   **error);
-static void fo_block_update_from_context (FoFo      *fo,
-                                          FoContext *context);
-static void fo_block_debug_dump_properties (FoFo *fo,
-                                            gint  depth);
+static void     _dispose               (GObject   *object);
+static gboolean _validate_content      (FoFo      *fo,
+					GError   **error);
+static void     _validate              (FoFo      *fo,
+					FoContext *current_context,
+					FoContext *parent_context,
+					GError   **error);
+static void     _update_from_context   (FoFo      *fo,
+					FoContext *context);
+static void     _debug_dump_properties (FoFo      *fo,
+					gint       depth);
 
 static gpointer parent_class;
 
@@ -224,24 +227,31 @@ fo_block_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoBlockClass),
-        (GBaseInitFunc) fo_block_base_class_init,
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_block_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoBlock),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoBlockClass),
+	  (GBaseInitFunc)  _base_class_init,
+	  NULL,            /* base_finalize */
+	  (GClassInitFunc) _class_init,
+	  NULL,            /* class_finalize */
+	  NULL,            /* class_data */
+	  sizeof (FoBlock),
+	  0,               /* n_preallocs */
+	  NULL,	 	   /* instance_init */
+	  NULL		   /* value_table */
+	};
 
       static const GInterfaceInfo fo_block_fo_info =
       {
-	(GInterfaceInitFunc) fo_block_block_fo_init,	 /* interface_init */
-	NULL,			                         /* interface_finalize */
-	NULL			                         /* interface_data */
+	(GInterfaceInitFunc) _block_fo_init,	 /* interface_init */
+        NULL,
+        NULL
+      };
+
+      static const GInterfaceInfo fo_cbpbp_fo_info =
+      {
+	(GInterfaceInitFunc) _cbpbp_fo_init,	 /* interface_init */
+        NULL,
+        NULL
       };
 
       object_type = g_type_register_static (FO_TYPE_MARKER_PARENT,
@@ -250,50 +260,55 @@ fo_block_get_type (void)
       g_type_add_interface_static (object_type,
                                    FO_TYPE_BLOCK_FO,
                                    &fo_block_fo_info);
+      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &fo_cbpbp_fo_info);
     }
 
   return object_type;
 }
 
 /**
- * fo_block_base_class_init:
+ * _base_class_init:
  * @klass: #FoBlockClass base class object to initialise.
  * 
  * Implements #GBaseInitFunc for #FoBlockClass.
  **/
-void
-fo_block_base_class_init (FoBlockClass *klass)
+static void
+_base_class_init (FoBlockClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->dispose = _dispose;
+
   FoFoClass *fo_fo_class = FO_FO_CLASS (klass);
 
-  fo_fo_class->debug_dump_properties = fo_block_debug_dump_properties;
-  fo_fo_class->update_from_context = fo_block_update_from_context;
-  fo_fo_class->validate_content = fo_block_validate_content;
-  fo_fo_class->validate2 = fo_block_validate;
+  fo_fo_class->debug_dump_properties = _debug_dump_properties;
+  fo_fo_class->update_from_context = _update_from_context;
+  fo_fo_class->validate_content = _validate_content;
+  fo_fo_class->validate2 = _validate;
   fo_fo_class->area_new = fo_block_area_new3;
   fo_fo_class->area_new2 = fo_block_area_new2;
   fo_fo_class->allow_mixed_content = TRUE;
 }
 
 /**
- * fo_block_class_init:
+ * _class_init:
  * @klass: #FoBlockClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoBlockClass.
  **/
-void
-fo_block_class_init (FoBlockClass *klass)
+static void
+_class_init (FoBlockClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_block_finalize;
-
   object_class->get_property = fo_block_get_property;
   object_class->set_property = fo_block_set_property;
 
-  /* Class functions are set in fo_block_base_class_init() */
+  /* Class functions are set in _base_class_init() */
 
   g_object_class_install_property
     (object_class,
@@ -914,13 +929,13 @@ fo_block_class_init (FoBlockClass *klass)
 }
 
 /**
- * fo_block_block_fo_init:
+ * _block_fo_init:
  * @iface: #FoBlockFoIFace structure for this class.
  * 
  * Initialize #FoBlockFoIface interface for this class.
  **/
-void
-fo_block_block_fo_init (FoBlockFoIface *iface)
+static void
+_block_fo_init (FoBlockFoIface *iface)
 {
   iface->get_background_color = fo_block_get_background_color;
   iface->get_border_after_color = fo_block_get_border_after_color;
@@ -949,13 +964,41 @@ fo_block_block_fo_init (FoBlockFoIface *iface)
 }
 
 /**
- * fo_block_finalize:
- * @object: #FoBlock object to finalize.
+ * _cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
  * 
- * Implements #GObjectFinalizeFunc for #FoBlock.
+ * Initialize #FoCBPBPFoIface interface for this class.
  **/
-void
-fo_block_finalize (GObject *object)
+static void
+_cbpbp_fo_init (FoCBPBPFoIface *iface)
+{
+  iface->get_background_color = fo_block_get_background_color;
+  iface->get_border_after_color = fo_block_get_border_after_color;
+  iface->get_border_after_style = fo_block_get_border_after_style;
+  iface->get_border_after_width = fo_block_get_border_after_width;
+  iface->get_border_before_color = fo_block_get_border_before_color;
+  iface->get_border_before_style = fo_block_get_border_before_style;
+  iface->get_border_before_width = fo_block_get_border_before_width;
+  iface->get_border_end_color = fo_block_get_border_end_color;
+  iface->get_border_end_style = fo_block_get_border_end_style;
+  iface->get_border_end_width = fo_block_get_border_end_width;
+  iface->get_border_start_color = fo_block_get_border_start_color;
+  iface->get_border_start_style = fo_block_get_border_start_style;
+  iface->get_border_start_width = fo_block_get_border_start_width;
+  iface->get_padding_after = fo_block_get_padding_after;
+  iface->get_padding_before = fo_block_get_padding_before;
+  iface->get_padding_end = fo_block_get_padding_end;
+  iface->get_padding_start = fo_block_get_padding_start;
+}
+
+/**
+ * _dispose:
+ * @object: #FoBlock object to dispose.
+ * 
+ * Implements #GObjectDisposeFunc for #FoBlock.
+ **/
+static void
+_dispose (GObject *object)
 {
   FoFo *fo = FO_FO (object);
 
@@ -1038,7 +1081,7 @@ fo_block_finalize (GObject *object)
   fo_block_set_widows (fo, NULL);
   fo_block_set_wrap_option (fo, NULL);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
@@ -1572,7 +1615,7 @@ fo_block_new (void)
 }
 
 /**
- * fo_block_validate_content:
+ * _validate_content:
  * @fo:    #FoBlock object to validate.
  * @error: #GError indicating error condition, if any.
  * 
@@ -1584,24 +1627,24 @@ fo_block_new (void)
  * Return value: %FALSE if content model okay, %TRUE if not.
  **/
 gboolean
-fo_block_validate_content (FoFo    *fo,
-                           GError **error)
+_validate_content (FoFo    *fo,
+		   GError **error)
 {
   GError *tmp_error;
-  gboolean parent_result = FALSE;
-  gboolean is_not_pcdata_inline_block_neutral = FALSE;
 
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_BLOCK (fo), TRUE);
   g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
 
-  parent_result = FO_FO_CLASS (parent_class)->validate_content (fo, error);
+  gboolean parent_result =
+    FO_FO_CLASS (parent_class)->validate_content (fo, error);
 
   if (parent_result == TRUE)
     {
       return parent_result;
     }
 
+  gboolean is_not_pcdata_inline_block_neutral = FALSE;
   /* FIXME: doesn't account for markers or initial-property-set */
   fo_node_children_foreach (FO_NODE (fo),
 			    G_TRAVERSE_ALL,
@@ -1752,13 +1795,13 @@ fo_block_validate_content (FoFo    *fo,
 
       g_assert (fo_node_n_children (FO_NODE (fo)) == 0);
       fo_node_unlink (FO_NODE (fo));
-      g_object_unref (fo);
+      /*g_object_unref (fo);*/
     }
   return FALSE;
 }
 
 /**
- * fo_block_validate:
+ * _validate:
  * @fo:              #FoBlock object to validate.
  * @current_context: #FoContext associated with current object.
  * @parent_context:  #FoContext associated with parent FO.
@@ -1769,10 +1812,10 @@ fo_block_validate_content (FoFo    *fo,
  * an error occurred.
  **/
 void
-fo_block_validate (FoFo      *fo,
-                   FoContext *current_context,
-                   FoContext *parent_context,
-                   GError   **error)
+_validate (FoFo      *fo,
+	   FoContext *current_context,
+	   FoContext *parent_context,
+	   GError   **error)
 {
   FoBlock *fo_block;
 
@@ -1794,22 +1837,22 @@ fo_block_validate (FoFo      *fo,
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
   fo_block_set_line_height (fo,
-    fo_property_line_height_resolve (fo_block->line_height,
-				     fo_block->font_size));
+			    fo_property_line_height_resolve (fo_block->line_height,
+							     fo_block->font_size));
   /*fo_fo_register_id (fo,
     fo_property_get_value (fo_block->id));*/
 }
 
 /**
- * fo_block_update_from_context:
+ * _update_from_context:
  * @fo:      The #FoFo object.
  * @context: The #FoContext object from which to update the properties of @fo.
  * 
  * Sets the properties of @fo to the corresponding property values in @context.
  **/
 void
-fo_block_update_from_context (FoFo      *fo,
-                              FoContext *context)
+_update_from_context (FoFo      *fo,
+		      FoContext *context)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_BLOCK (fo));
@@ -1973,7 +2016,7 @@ fo_block_update_from_context (FoFo      *fo,
 }
 
 /**
- * fo_block_debug_dump_properties:
+ * _debug_dump_properties:
  * @fo:    The #FoFo object.
  * @depth: Indent level to add to the output.
  * 
@@ -1981,8 +2024,8 @@ fo_block_update_from_context (FoFo      *fo,
  * debug_dump_properties method of parent class.
  **/
 void
-fo_block_debug_dump_properties (FoFo *fo,
-                                gint  depth)
+_debug_dump_properties (FoFo *fo,
+			gint  depth)
 {
   FoBlock *fo_block;
 

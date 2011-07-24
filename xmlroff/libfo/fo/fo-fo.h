@@ -2,7 +2,8 @@
  * fo-fo.h: Base formatting object of formatting object system
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -56,11 +57,24 @@ extern const char *fo_fo_error_messages[FO_FO_ERROR_LAST];
 
 typedef struct _FoFoAreaNew2Context FoFoAreaNew2Context;
 
+/**
+ * FoFoAreaNew2Context:
+ * @fo_doc:                #FoDoc to contain area
+ * @parent_area:           Parent #FoArea to which to link @new_area
+ * @new_area:              Pointer to new area created by a #fo_area_new2() function
+ * @truncate               Whether to truncate further processing
+ * @continue_after_error:  Whether to continue after an error occurs
+ * @debug_level:           Level of debug output to produce
+ * @warning_mode:          Level of warnings to produce
+ *
+ * Context for creating a new area for an #FoFo.
+ */
 struct _FoFoAreaNew2Context
 {
   FoDoc        *fo_doc;
   FoArea       *parent_area;
   FoArea      **new_area;
+  gboolean      truncate;
   gboolean      continue_after_error;
   FoDebugFlag   debug_level;
   FoWarningFlag warning_mode;
@@ -69,8 +83,7 @@ struct _FoFoAreaNew2Context
 typedef struct _FoFoAreaIterator FoFoAreaIterator;
 
 GType         fo_fo_get_type      (void) G_GNUC_CONST;
-FoFo *fo_fo_new           (void);
-void fo_fo_debug_dump_properties (FoFo *fo, gint depth);
+
 void fo_fo_set_context         (FoFo      *fo_fo,
 				FoContext *new_context);
 FoContext* fo_fo_get_context   (FoFo      *fo_fo);
@@ -125,10 +138,21 @@ void fo_fo_validate_block_or_whitespace (FoNode   *fo_node,
 #endif
 void fo_fo_validate_pcdata_inline_block_neutral (FoNode  *fo_node,
 						 gpointer data);
-FoFoAreaIterator* fo_fo_get_area_iterator      (FoFo *fo);
-FoArea*           fo_fo_area_iterator_get_area (const FoFoAreaIterator *iterator);
-gboolean          fo_fo_area_iterator_next     (FoFoAreaIterator *iterator);
+FoFoAreaIterator * fo_fo_get_area_iterator      (FoFo *fo);
+FoArea *           fo_fo_area_iterator_get_area (const FoFoAreaIterator *iterator);
+gboolean           fo_fo_area_iterator_next     (FoFoAreaIterator *iterator);
 
+void fo_fo_area_list_append (FoFo   *fo,
+			     FoArea *new_area);
+void fo_fo_area_list_insert_after (FoFo   *fo,
+				   FoArea *sibling,
+				   FoArea *new_area);
+void fo_fo_area_list_remove (FoFo   *fo,
+			     FoArea *area);
+FoFo *             fo_fo_get_area_fo            (FoFo *fo);
+
+gboolean   fo_fo_release (FoNode  *fo_node,
+			  gpointer data);
 G_END_DECLS
 
 #endif /* !__FO_FO_H__ */

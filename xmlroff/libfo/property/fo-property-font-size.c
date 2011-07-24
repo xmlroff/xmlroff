@@ -8,7 +8,7 @@
  */
 
 #include <string.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
@@ -33,6 +33,7 @@
 #define FO_FONT_SIZE_LARGE	FO_FONT_SIZE_MEDIUM * FO_FONT_SIZE_STEP
 #define FO_FONT_SIZE_X_LARGE	FO_FONT_SIZE_LARGE * FO_FONT_SIZE_STEP
 #define FO_FONT_SIZE_XX_LARGE	FO_FONT_SIZE_X_LARGE * FO_FONT_SIZE_STEP
+
 /**
  * SECTION:fo-property-font-size
  * @short_description: 'font-size' property

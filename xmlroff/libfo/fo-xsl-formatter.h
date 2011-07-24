@@ -2,7 +2,7 @@
  * fo-xsl-formatter.h: Boxed object type for libfo XSL formatter
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */

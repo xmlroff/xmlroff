@@ -1,8 +1,8 @@
 /* Fo
  * fo-table-row-private.h: Structures private to 'table-row' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -10,15 +10,14 @@
 #ifndef __FO_TABLE_ROW_PRIVATE_H__
 #define __FO_TABLE_ROW_PRIVATE_H__
 
-#include <libfo/fo/fo-fo-private.h>
-#include <libfo/fo/fo-table-row.h>
-#include <libfo/property/fo-property.h>
+#include "fo/fo-marker-parent-private.h"
+#include "fo/fo-table-row.h"
 
 G_BEGIN_DECLS
 
 struct _FoTableRow
 {
-  FoFo parent_instance;
+  FoMarkerParent parent_instance;
 
   FoProperty *background_color;
   FoProperty *background_image;
@@ -81,7 +80,7 @@ struct _FoTableRow
 
 struct _FoTableRowClass
 {
-  FoFoClass parent_class;
+  FoMarkerParentClass parent_class;
 };
 
 G_END_DECLS

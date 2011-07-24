@@ -92,7 +92,7 @@ void
 fo_property_white_space_collapse_init (FoPropertyWhiteSpaceCollapse *white_space_collapse)
 {
   FO_PROPERTY (white_space_collapse)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("true"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("true"));
 }
 
 /**
@@ -184,7 +184,7 @@ fo_property_white_space_collapse_resolve_enum (const gchar *token,
   if ((strcmp (token, "false") == 0) ||
       (strcmp (token, "true") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

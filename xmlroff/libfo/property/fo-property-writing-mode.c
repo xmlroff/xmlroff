@@ -92,7 +92,7 @@ void
 fo_property_writing_mode_init (FoPropertyWritingMode *writing_mode)
 {
   FO_PROPERTY (writing_mode)->value =
-    g_object_ref (fo_enum_get_enum_by_nick("lr-tb"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick("lr-tb"));
 }
 
 /**
@@ -188,7 +188,7 @@ fo_property_writing_mode_resolve_enum (const gchar *token,
       (strcmp (token, "rl") == 0) ||
       (strcmp (token, "tb") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -241,7 +241,7 @@ fo_property_writing_mode_validate (FoDatatype *datatype,
 	}
       else if (value == FO_ENUM_ENUM_LR)
 	{
-	  new_datatype = g_object_ref (fo_enum_get_enum_by_nick ("lr-tb"));
+	  new_datatype = g_object_ref (fo_enum_factory_get_enum_by_nick ("lr-tb"));
 
 	  g_object_unref (datatype);
 
@@ -249,7 +249,7 @@ fo_property_writing_mode_validate (FoDatatype *datatype,
 	}
       else if (value == FO_ENUM_ENUM_RL)
 	{
-	  new_datatype = g_object_ref (fo_enum_get_enum_by_nick ("rl-tb"));
+	  new_datatype = g_object_ref (fo_enum_factory_get_enum_by_nick ("rl-tb"));
 
 	  g_object_unref (datatype);
 
@@ -257,7 +257,7 @@ fo_property_writing_mode_validate (FoDatatype *datatype,
 	}
       else if (value == FO_ENUM_ENUM_TB)
 	{
-	  new_datatype = g_object_ref (fo_enum_get_enum_by_nick ("tb-rl"));
+	  new_datatype = g_object_ref (fo_enum_factory_get_enum_by_nick ("tb-rl"));
 
 	  g_object_unref (datatype);
 

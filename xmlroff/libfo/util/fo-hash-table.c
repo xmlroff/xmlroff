@@ -2,7 +2,7 @@
  * fo-hashtable.c: HashTable hashtable
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -23,13 +23,14 @@ struct _FoHashTableClass
   FoObjectClass parent_class;
 };
 
-static void     fo_hash_table_class_init         (FoHashTableClass *klass);
-static void     fo_hash_table_finalize           (GObject          *object);
+static void     _init           (FoHashTable      *hash_table);
+static void     _class_init     (FoHashTableClass *klass);
+static void     _finalize       (GObject          *object);
 
-static guint    fo_hash_table_hash_func          (gconstpointer     key);
-static gboolean fo_hash_table_key_equal_func     (gconstpointer     a,
-						  gconstpointer     b);
-static void     fo_hash_table_destroy_func   (gpointer data);
+static guint    _hash_func      (gconstpointer     key);
+static gboolean _key_equal_func (gconstpointer     a,
+				 gconstpointer     b);
+static void     _destroy_func   (gpointer          data);
 
 static gpointer parent_class;
 
@@ -48,18 +49,18 @@ fo_hash_table_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoHashTableClass),
-        (GBaseInitFunc) NULL,
-        (GBaseFinalizeFunc) NULL,
-        (GClassInitFunc) fo_hash_table_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoHashTable),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoHashTableClass),
+	  (GBaseInitFunc) NULL,
+	  (GBaseFinalizeFunc) NULL,
+	  (GClassInitFunc) _class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoHashTable),
+	  0,              /* n_preallocs */
+	  (GInstanceInitFunc) _init,
+	  NULL		/* value_table */
+	};
       
       object_type = g_type_register_static (FO_TYPE_OBJECT,
                                             "FoHashTable",
@@ -71,35 +72,50 @@ fo_hash_table_get_type (void)
 }
 
 /**
- * fo_hash_table_class_init:
+ * _init:
+ * @hash_table: #FoHash_Table object to initialise
+ * 
+ * Implements #GInstanceInitFunc for #FoHashTable
+ **/
+static void
+_init (FoHashTable *hash_table)
+{
+  hash_table->hash_table = g_hash_table_new_full(_hash_func,
+						 _key_equal_func,
+						 _destroy_func,
+						 _destroy_func);
+}
+
+/**
+ * _class_init:
  * @klass: #FoHashTableClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoHashTableClass.
  **/
-void
-fo_hash_table_class_init (FoHashTableClass *klass)
+static void
+_class_init (FoHashTableClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_hash_table_finalize;
+  object_class->finalize = _finalize;
 }
 
 /**
- * fo_hash_table_finalize:
+ * _finalize:
  * @object: #FoHashTable object to finalize.
  * 
  * Implements #GObjectFinalizeFunc for #FoHashTable.
  **/
-void
-fo_hash_table_finalize (GObject *object)
+static void
+_finalize (GObject *object)
 {
   FoHashTable *fo_hash_table;
 
   fo_hash_table = FO_HASH_TABLE (object);
 
-  g_hash_table_destroy(fo_hash_table->hash_table);
+  g_hash_table_destroy (fo_hash_table->hash_table);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -114,37 +130,29 @@ fo_hash_table_finalize (GObject *object)
 FoHashTable *
 fo_hash_table_new (void)
 {
-  FoHashTable *fo_hash_table;
-
-  fo_hash_table = FO_HASH_TABLE (g_object_new (fo_hash_table_get_type (), NULL));
-  
-  fo_hash_table->hash_table = g_hash_table_new_full(fo_hash_table_hash_func,
-						    fo_hash_table_key_equal_func,
-						    fo_hash_table_destroy_func,
-						    fo_hash_table_destroy_func);
-
-  return fo_hash_table;
+  return FO_HASH_TABLE (g_object_new (fo_hash_table_get_type (),
+				      NULL));
 }
 
 /**
- * fo_hash_table_destroy_func:
+ * _destroy_func:
  * @data: Data to be destroyed.
  * 
  * #GDestroyNotify function called when a key or value is removed from
  * a #FoHashTable.
  **/
-void
-fo_hash_table_destroy_func (gpointer data)
+static void
+_destroy_func (gpointer data)
 {
   if ((data != NULL) &&
       FO_IS_OBJECT (data))
-      {
-	  g_object_unref(data);
-      }
+    {
+      g_object_unref (data);
+    }
 }
 
 /**
- * fo_hash_table_hash_func:
+ * _hash_func:
  * @key: Key to hash.
  * 
  * Creates the hash code for @key using the 'hash' function for the
@@ -152,22 +160,22 @@ fo_hash_table_destroy_func (gpointer data)
  * 
  * Return value: Hash code for @key.
  **/
-guint
-fo_hash_table_hash_func   (gconstpointer     key)
+static guint
+_hash_func (gconstpointer key)
 {
-    guint result = 0;
+  guint result = 0;
 
   if ((key != NULL) &&
       (FO_IS_OBJECT (key)))
-  {
+    {
       result = FO_OBJECT_GET_CLASS (key)->hash_func (key);
-  }
+    }
 
-      return result;
+  return result;
 }
 
 /**
- * fo_hash_table_key_equal_func:
+ * _key_equal_func:
  * @a: First key to compare.
  * @b: Second key to compare.
  * 
@@ -176,11 +184,11 @@ fo_hash_table_hash_func   (gconstpointer     key)
  * 
  * Return value: %TRUE if @a and @b are equal.
  **/
-gboolean
-fo_hash_table_key_equal_func  (gconstpointer     a,
-			       gconstpointer     b)
+static gboolean
+_key_equal_func (gconstpointer a,
+		 gconstpointer b)
 {
-    return FO_OBJECT_GET_CLASS (a)->equal_func (a, b);
+  return FO_OBJECT_GET_CLASS (a)->equal_func (a, b);
 }
 
 /**
@@ -205,8 +213,8 @@ fo_hash_table_insert (FoHashTable *fo_hash_table,
   g_return_if_fail (FO_IS_OBJECT (value));
 
   g_hash_table_insert (fo_hash_table->hash_table,
-		       g_object_ref(key),
-		       g_object_ref(value));
+		       g_object_ref (key),
+		       g_object_ref (value));
 }
 
 /**
@@ -295,7 +303,7 @@ fo_hash_table_lookup (FoHashTable *fo_hash_table,
 guint
 fo_hash_table_size (FoHashTable *fo_hash_table)
 {
-    return g_hash_table_size(fo_hash_table->hash_table);
+    return g_hash_table_size (fo_hash_table->hash_table);
 }
 
 /**

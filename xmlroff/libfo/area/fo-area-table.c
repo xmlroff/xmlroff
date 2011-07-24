@@ -2,12 +2,17 @@
  * fo-area-table.c: Area object for 'table' formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo-utils.h"
+#include "fo-area.h"
+#include "fo-area-private.h"
+#include "fo-area-reference.h"
+#include "fo-area-reference-private.h"
+#include "fo-area-table.h"
 #include "fo-area-table-private.h"
 #include "fo-area-table-continuation.h"
 #include "fo-area-table-header.h"
@@ -29,9 +34,9 @@ static void fo_area_table_debug_dump_properties (FoArea *area,
 							      gint depth);
 static FoArea* fo_area_table_size_request (FoArea *child);
 static FoArea* fo_area_table_split_before_height (FoArea *area,
-						  gfloat max_height);
+						  gdouble max_height);
 static gboolean fo_area_table_split_before_height_check (FoArea *area,
-							 gfloat max_height);
+							 gdouble max_height);
 static void fo_area_table_size_adjust (FoArea *area,
 				       gpointer data);
 static void fo_area_table_set_or_split (FoArea *area,
@@ -206,7 +211,7 @@ fo_area_table_set_or_split (FoArea  *area,
 			    gpointer data G_GNUC_UNUSED)
 {
   FoArea *table;
-  gfloat table_child_available_bpdim;
+  gdouble table_child_available_bpdim;
 
   g_return_if_fail (FO_IS_AREA (area));
   g_return_if_fail (FO_IS_AREA_TABLE (fo_area_parent (area)));
@@ -268,11 +273,11 @@ fo_area_table_size_request (FoArea *child)
   FoArea *return_child;
   FoArea *child_original_next_part;
   FoDatatype *fo_bpdim;
-  gfloat table_child_available_bpdim;
-  gfloat table_use_height = 0.0;
-  gfloat table_target_height = 0.0;
-  gfloat child_height;
-  gfloat total_child_height = 0.0;
+  gdouble table_child_available_bpdim;
+  gdouble table_use_height = 0.0;
+  gdouble table_target_height = 0.0;
+  gdouble child_height;
+  gdouble total_child_height = 0.0;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -445,11 +450,11 @@ fo_area_table_size_request (FoArea *child)
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_table_split_before_height (FoArea *area,
-				   gfloat max_height)
+				   gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_TABLE (area), NULL);
   g_return_val_if_fail (fo_area_n_children (area) > 0, NULL);
@@ -530,9 +535,9 @@ fo_area_table_split_before_height (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */
@@ -575,11 +580,11 @@ fo_area_table_split_before_height (FoArea *area,
 /* return %TRUE if the area will split within the height */
 gboolean
 fo_area_table_split_before_height_check (FoArea *area,
-					 gfloat max_height)
+					 gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_TABLE (area), FALSE);
   g_return_val_if_fail (fo_area_n_children (area) > 0, FALSE);
@@ -652,9 +657,9 @@ fo_area_table_split_before_height_check (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */

@@ -2,7 +2,7 @@
  * fo-table-area.c: Generate area for 'table' formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -10,15 +10,14 @@
 #include "fo-table-area.h"
 #include "fo-table-private.h"
 #include "area/fo-area-table.h"
-#include "area/fo-all-area.h"
 #include "fo-block-fo.h"
 #include "property/fo-property-inline-progression-dimension.h"
 #include "property/fo-property-writing-mode.h"
 
 void
-fo_table_area_new2 (FoFo *fo,
-		    FoFoAreaNew2Context *context,
-		    GError **error)
+fo_table_area_new (FoFo *fo,
+		   FoFoAreaNew2Context *context,
+		   GError **error)
 {
   FoDatatype *ipdim_datatype;
   gfloat available_width;
@@ -40,8 +39,10 @@ fo_table_area_new2 (FoFo *fo,
   g_warning ("*** end table parent");
 #endif
 
-  fo_area_set_generated_by (FO_AREA (new_area), fo);
-  FO_FO (fo)->areas = g_list_append (FO_FO (fo)->areas, new_area);
+  fo_area_set_generated_by (new_area,
+			    fo);
+  fo_fo_area_list_append (fo,
+			  new_area);
   fo_block_fo_update_area (fo, new_area);
   use_parent_area = fo_area_break_resolve (use_parent_area, new_area);
   fo_area_border_padding_space_resolve (use_parent_area, new_area);

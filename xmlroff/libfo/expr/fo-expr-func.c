@@ -3,7 +3,8 @@
  *
  * Copyright (C) 1998-2002 Daniel Veillard.
  * Copyright (C) 2001-2002 Sun Microsystems.
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  * All Rights Reserved.
  *
  * Based on an XSL expression language evaluator that was based on the

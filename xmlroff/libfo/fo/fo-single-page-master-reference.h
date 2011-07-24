@@ -1,8 +1,9 @@
 /* Fo
- * fo-single_page_master_reference.h: 'single-page-master-reference' formatting object
+ * fo-single-page-master-reference.h: 'single-page-master-reference' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -16,7 +17,18 @@
 
 G_BEGIN_DECLS
 
+/**
+ * FoSinglePageMasterReference:
+ *
+ * Instance of the 'single-page-master-reference' formatting object.
+ **/
 typedef struct _FoSinglePageMasterReference      FoSinglePageMasterReference;
+
+/**
+ * FoSinglePageMasterReferenceClass:
+ *
+ * Class structure for the 'single-page-master-reference' formatting object.
+ **/
 typedef struct _FoSinglePageMasterReferenceClass FoSinglePageMasterReferenceClass;
 
 #define FO_TYPE_SINGLE_PAGE_MASTER_REFERENCE              (fo_single_page_master_reference_get_type ())
@@ -29,10 +41,6 @@ typedef struct _FoSinglePageMasterReferenceClass FoSinglePageMasterReferenceClas
 
 GType        fo_single_page_master_reference_get_type (void) G_GNUC_CONST;
 FoFo *       fo_single_page_master_reference_new      (void);
-
-FoProperty * fo_single_page_master_reference_get_master_reference (FoFo       *fo_fo);
-void         fo_single_page_master_reference_set_master_reference (FoFo       *fo_fo,
-                                                                   FoProperty *new_master_reference);
 
 G_END_DECLS
 

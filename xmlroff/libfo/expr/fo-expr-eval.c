@@ -4,12 +4,13 @@
  * Copyright (C) 1998-2002 Daniel Veillard.
  * Copyright (C) 2007 Menteith Consulting Ltd
  * Copyright (C) 2001-2004 Sun Microsystems.
+ * Copyright (C) 2011 Mentea
  *
  * Based on a previous xmlroff XSL expression language evaluator that
  * was based on the 'XML Path Language implementation' in 'xpath.c'
  * from libxml2 by Daniel Veillard.
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  **/
 
 #include "fo-expr-eval.h"

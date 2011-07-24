@@ -101,7 +101,7 @@ void
 fo_property_background_color_init (FoPropertyBackgroundColor *background_color)
 {
   FO_PROPERTY (background_color)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("transparent"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("transparent"));
 }
 
 /**

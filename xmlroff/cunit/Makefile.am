@@ -18,6 +18,8 @@ test_SOURCES = \
 	test-fo-context.h	\
 	test-fo-doc.c	\
 	test-fo-doc.h	\
+	test-fo-enum-factory.c	\
+	test-fo-enum-factory.h	\
 	test-fo-expr-eval.c	\
 	test-fo-expr-eval.h	\
 	test-fo-length-range.c	\
@@ -26,6 +28,8 @@ test_SOURCES = \
 	test-fo-libfo-context.h	\
 	test-fo-libfo-module.c	\
 	test-fo-libfo-module.h	\
+	test-fo-node.c	\
+	test-fo-node.h	\
 	test-libfo-version.c	\
 	test-libfo-version.h
 

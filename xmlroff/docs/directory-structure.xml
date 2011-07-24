@@ -57,6 +57,36 @@
 
 </section>
 
+<section id="xmlroff-examples">
+<title>xmlroff/examples</title>
+
+<para>Example configuration files for xmlroff and examples of xmlroff in action.</para>
+
+<section id="xmlroff-examples-io">
+<title>xmlroff/examples/io</title>
+
+<para>Example command-line xmlroff applications that demonstrate the different ways of using the top-level interfaces to the 'libfo' library.</para>
+
+</section>
+
+<section id="xmlroff-examples-javadoc">
+<title>xmlroff/examples/javadoc</title>
+
+<para>An example of using xmlroff to create PDF from Javadoc XML.</para>
+
+</section>
+
+<section id="xmlroff-examples-ubl">
+<title>xmlroff/examples/ubl</title>
+
+<para>An example of using xmlroff to format a UBL purchase order (PO).</para>
+
+<para>Uses a stylesheet by Norman Walsh.</para>
+
+</section>
+
+</section>
+
 <section id="xmlroff-expr">
 <title>xmlroff/libfo/expr</title>
 

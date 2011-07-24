@@ -2,7 +2,8 @@
  * fo-context-private.h: Structures private to the FoContext formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -24,6 +25,7 @@ struct _FoContext
   FoProperty *background_color;
   FoProperty *background_image;
   FoProperty *baseline_shift;
+  FoProperty *blank_or_not_blank;
   FoProperty *block_progression_dimension;
   FoProperty *block_progression_dimension_minimum;
   FoProperty *block_progression_dimension_optimum;
@@ -76,6 +78,7 @@ struct _FoContext
   FoProperty *content_height;
   FoProperty *content_type;
   FoProperty *content_width;
+  FoProperty *country;
   FoProperty *direction;
   FoProperty *display_align;
   FoProperty *dominant_baseline;
@@ -88,11 +91,13 @@ struct _FoContext
   FoProperty *font_style;
   FoProperty *font_variant;
   FoProperty *font_weight;
+  FoProperty *force_page_count;
   FoProperty *format;
   FoProperty *grouping_separator;
   FoProperty *grouping_size;
   FoProperty *height;
   FoProperty *id;
+  FoProperty *initial_page_number;
   FoProperty *inline_progression_dimension;
   FoProperty *inline_progression_dimension_minimum;
   FoProperty *inline_progression_dimension_optimum;
@@ -109,6 +114,7 @@ struct _FoContext
   FoProperty *keep_with_previous_within_column;
   FoProperty *keep_with_previous_within_line;
   FoProperty *keep_with_previous_within_page;
+  FoProperty *language;
   FoProperty *letter_value;
   FoProperty *line_height;
   FoProperty *line_stacking_strategy;
@@ -120,10 +126,12 @@ struct _FoContext
   FoProperty *margin_top;
   FoProperty *master_name;
   FoProperty *master_reference;
+  FoProperty *maximum_repeats;
   FoProperty *media_usage;
   FoProperty *number_columns_repeated;
   FoProperty *number_columns_spanned;
   FoProperty *number_rows_spanned;
+  FoProperty *odd_or_even;
   FoProperty *orphans;
   FoProperty *overflow;
   FoProperty *padding;
@@ -144,10 +152,13 @@ struct _FoContext
   FoProperty *padding_start_condity;
   FoProperty *padding_top;
   FoProperty *page_height;
+  FoProperty *page_position;
   FoProperty *page_width;
+  FoProperty *precedence;
   FoProperty *provisional_distance_between_starts;
   FoProperty *provisional_label_separation;
   FoProperty *ref_id;
+  FoProperty *reference_orientation;
   FoProperty *region_name;
   FoProperty *role;
   FoProperty *scaling;

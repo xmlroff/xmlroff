@@ -31,7 +31,9 @@
 #include "test-fo-color.h"
 #include "test-fo-context.h"
 #include "test-fo-doc.h"
+#include "test-fo-enum-factory.h"
 #include "test-fo-expr-eval.h"
+#include "test-fo-node.h"
 #include "test-fo-length-range.h"
 #include "test-fo-libfo-context.h"
 #include "test-fo-libfo-module.h"
@@ -83,6 +85,14 @@ int main ()
       return (error);
     }
 
+  error = CU_register_suites (test_fo_enum_factory_get_suites());
+  if (error != CUE_SUCCESS)
+    {
+      printf ("%s\n" ,
+	      CU_get_error_msg ());
+      return (error);
+    }
+
   error = CU_register_suites (test_fo_length_range_get_suites());
   if (error != CUE_SUCCESS)
     {
@@ -100,6 +110,14 @@ int main ()
     }
 
   error = CU_register_suites (test_fo_libfo_module_get_suites());
+  if (error != CUE_SUCCESS)
+    {
+      printf ("%s\n" ,
+	      CU_get_error_msg ());
+      return (error);
+    }
+
+  error = CU_register_suites (test_fo_node_get_suites());
   if (error != CUE_SUCCESS)
     {
       printf ("%s\n" ,

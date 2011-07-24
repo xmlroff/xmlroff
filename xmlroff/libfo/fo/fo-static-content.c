@@ -1,13 +1,17 @@
 /* Fo
  * fo-static-content.c: 'static-content' formatting object
  *
- * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
+#include "fo/fo-cbpbp-fo-private.h"
 #include "fo/fo-static-content-private.h"
+#include "fo/fo-static-content-area.h"
+#include "fo/fo-simple-page-master.h"
+#include "fo/fo-page-sequence.h"
 #include "property/fo-property-flow-name.h"
 
 enum {
@@ -16,6 +20,7 @@ enum {
 };
 
 static void fo_static_content_class_init  (FoStaticContentClass *klass);
+static void fo_static_content_cbpbp_fo_init (FoCBPBPFoIface *iface);
 static void fo_static_content_get_property (GObject      *object,
                                             guint         prop_id,
                                             GValue       *value,
@@ -25,8 +30,6 @@ static void fo_static_content_set_property (GObject      *object,
                                             const GValue *value,
                                             GParamSpec   *pspec);
 static void fo_static_content_finalize    (GObject           *object);
-static gboolean fo_static_content_validate_content (FoFo    *fo,
-                                                    GError **error);
 static void fo_static_content_validate (FoFo      *fo,
                                         FoContext *current_context,
                                         FoContext *parent_context,
@@ -45,6 +48,24 @@ static void fo_static_content_children_properties_resolve (FoFo       *this_fo,
 							   FoWarningFlag warning_mode,
 							   GError      **error);
 
+static FoProperty * fo_static_content_get_background_color    (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_after_color  (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_after_style  (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_after_width  (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_before_color (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_before_style (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_before_width (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_end_color    (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_end_style    (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_end_width    (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_start_color  (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_start_style  (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_border_start_width  (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_padding_after       (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_padding_before      (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_padding_end         (FoFo *fo_static_content);
+static FoProperty * fo_static_content_get_padding_start       (FoFo *fo_flow);
+
 static gpointer parent_class;
 
 /**
@@ -62,22 +83,32 @@ fo_static_content_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoStaticContentClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_static_content_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoStaticContent),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoStaticContentClass),
+	  NULL,           /* base_init */
+	  NULL,           /* base_finalize */
+	  (GClassInitFunc) fo_static_content_class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoStaticContent),
+	  0,              /* n_preallocs */
+	  NULL,		  /* instance_init */
+	  NULL		  /* value_table */
+	};
+
+      static const GInterfaceInfo fo_cbpbp_fo_info =
+	{
+	  (GInterfaceInitFunc) fo_static_content_cbpbp_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
 
       object_type = g_type_register_static (FO_TYPE_FO,
                                             "FoStaticContent",
                                             &object_info, 0);
+      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &fo_cbpbp_fo_info);
     }
 
   return object_type;
@@ -102,12 +133,15 @@ fo_static_content_class_init (FoStaticContentClass *klass)
   object_class->get_property = fo_static_content_get_property;
   object_class->set_property = fo_static_content_set_property;
 
-  fofo_class->validate_content = fo_static_content_validate_content;
-  fofo_class->validate2 = fo_static_content_validate;
+  fofo_class->validate_content =
+    fo_fo_validate_content_block_plus;
+  fofo_class->validate2 =
+    fo_static_content_validate;
   fofo_class->update_from_context = fo_static_content_update_from_context;
   fofo_class->debug_dump_properties = fo_static_content_debug_dump_properties;
-  fofo_class->children_properties_resolve =
-    fo_static_content_children_properties_resolve;
+  fofo_class->area_new2 = fo_static_content_area_new;
+  fofo_class->get_area_fo =
+    fo_static_content_get_region_master;
 
   g_object_class_install_property
     (object_class,
@@ -120,6 +154,34 @@ fo_static_content_class_init (FoStaticContentClass *klass)
 }
 
 /**
+ * fo_static_content_cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
+ * 
+ * Initialize #FoCBPBPFoIface interface for this class.
+ **/
+void
+fo_static_content_cbpbp_fo_init (FoCBPBPFoIface *iface)
+{
+  iface->get_background_color = fo_static_content_get_background_color;
+  iface->get_border_after_color = fo_static_content_get_border_after_color;
+  iface->get_border_after_style = fo_static_content_get_border_after_style;
+  iface->get_border_after_width = fo_static_content_get_border_after_width;
+  iface->get_border_before_color = fo_static_content_get_border_before_color;
+  iface->get_border_before_style = fo_static_content_get_border_before_style;
+  iface->get_border_before_width = fo_static_content_get_border_before_width;
+  iface->get_border_end_color = fo_static_content_get_border_end_color;
+  iface->get_border_end_style = fo_static_content_get_border_end_style;
+  iface->get_border_end_width = fo_static_content_get_border_end_width;
+  iface->get_border_start_color = fo_static_content_get_border_start_color;
+  iface->get_border_start_style = fo_static_content_get_border_start_style;
+  iface->get_border_start_width = fo_static_content_get_border_start_width;
+  iface->get_padding_after = fo_static_content_get_padding_after;
+  iface->get_padding_before = fo_static_content_get_padding_before;
+  iface->get_padding_end = fo_static_content_get_padding_end;
+  iface->get_padding_start = fo_static_content_get_padding_start;
+}
+
+/**
  * fo_static_content_finalize:
  * @object: #FoStaticContent object to finalize.
  * 
@@ -128,9 +190,10 @@ fo_static_content_class_init (FoStaticContentClass *klass)
 void
 fo_static_content_finalize (GObject *object)
 {
-  FoStaticContent *fo_static_content;
+  FoFo *fo = FO_FO (object);
 
-  fo_static_content = FO_STATIC_CONTENT (object);
+  /* Release references to all property objects. */
+  fo_static_content_set_flow_name (fo, NULL);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -249,31 +312,6 @@ fo_static_content_children_properties_resolve (FoFo         *this_fo,
 }
 
 /**
- * fo_static_content_validate_content:
- * @fo:    #FoStaticContent object to validate.
- * @error: #GError indicating error condition, if any.
- * 
- * Validate the content model, i.e., the structure, of the object.
- * Return value matches #GNodeTraverseFunc model: %FALSE indicates
- * content model is correct, or %TRUE indicates an error.  When used
- * with fo_node_traverse(), returning %TRUE stops the traversal.
- * 
- * Return value: %FALSE if content model okay, %TRUE if not.
- **/
-gboolean
-fo_static_content_validate_content (FoFo    *fo,
-                                    GError **error)
-{
-  g_return_val_if_fail (fo != NULL, TRUE);
-  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo), TRUE);
-  g_return_val_if_fail (error == NULL || *error == NULL, TRUE);
-
-  fo_fo_trim_whitespace_children (fo);
-
-  return fo_fo_validate_content_block_plus (fo, error);
-}
-
-/**
  * fo_static_content_validate:
  * @fo:              #FoStaticContent object to validate.
  * @current_context: #FoContext associated with current object.
@@ -290,18 +328,52 @@ fo_static_content_validate (FoFo      *fo,
                             FoContext *parent_context,
                             GError   **error)
 {
-  FoStaticContent *fo_static_content;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_STATIC_CONTENT (fo));
   g_return_if_fail (FO_IS_CONTEXT (current_context));
   g_return_if_fail (FO_IS_CONTEXT (parent_context));
   g_return_if_fail (error == NULL || *error == NULL);
 
-  fo_static_content = FO_STATIC_CONTENT (fo);
-
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
+
+  FoStaticContent *fo_static_content = FO_STATIC_CONTENT (fo);
+
+  FoDatatype *flow_name_datatype =
+    fo_property_get_value (fo_static_content_get_flow_name (fo));
+
+  if (flow_name_datatype == NULL) {
+    g_set_error (error,
+		 FO_FO_ERROR,
+		 FO_FO_ERROR_DATATYPE_NULL,
+		 _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE_NULL]),
+		 "flow-name");
+    return;
+  }
+
+  gchar *flow_name =
+    fo_name_get_value (flow_name_datatype);
+
+  FoFo *page_sequence =
+    FO_FO (fo_node_parent (FO_NODE (fo)));
+
+  FoFo *region_master = NULL;
+  if (page_sequence != NULL)
+    {
+      region_master =
+	fo_simple_page_master_region_name_get (fo_page_sequence_get_page_master (page_sequence),
+					       flow_name);
+      /*
+      g_print ("Master: %s\n", fo_object_sprintf (page_master));
+
+      fo_object_debug_dump (page_master, 0);
+      */
+      fo_static_content->region_master = region_master;
+    }
+  else
+    {
+      g_assert_not_reached();
+    }
 }
 
 /**
@@ -349,14 +421,324 @@ fo_static_content_debug_dump_properties (FoFo *fo,
 }
 
 /**
+ * fo_static_content_get_background_color:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #background-color property of @fo_static_content
+ *
+ * Return value: The "background-color" property value
+**/
+FoProperty *
+fo_static_content_get_background_color (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_background_color (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_after_color:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-after-color property of @fo_static_content
+ *
+ * Return value: The "border-after-color" property value
+**/
+FoProperty *
+fo_static_content_get_border_after_color (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_after_color (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_after_style:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-after-style property of @fo_static_content
+ *
+ * Return value: The "border-after-style" property value
+**/
+FoProperty *
+fo_static_content_get_border_after_style (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_after_style (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_after_width:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-after-width property of @fo_static_content
+ *
+ * Return value: The "border-after-width" property value
+**/
+FoProperty *
+fo_static_content_get_border_after_width (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_after_width (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_before_color:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-before-color property of @fo_static_content
+ *
+ * Return value: The "border-before-color" property value
+**/
+FoProperty *
+fo_static_content_get_border_before_color (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_before_color (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_before_style:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-before-style property of @fo_static_content
+ *
+ * Return value: The "border-before-style" property value
+**/
+FoProperty *
+fo_static_content_get_border_before_style (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_before_style (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_before_width:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-before-width property of @fo_static_content
+ *
+ * Return value: The "border-before-width" property value
+**/
+FoProperty*
+fo_static_content_get_border_before_width (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_before_width (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_end_color:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-end-color property of @fo_static_content
+ *
+ * Return value: The "border-end-color" property value
+**/
+FoProperty *
+fo_static_content_get_border_end_color (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_end_color (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_end_style:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-end-style property of @fo_static_content
+ *
+ * Return value: The "border-end-style" property value
+**/
+FoProperty *
+fo_static_content_get_border_end_style (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_end_style (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_end_width:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-end-width property of @fo_static_content
+ *
+ * Return value: The "border-end-width" property value
+**/
+FoProperty *
+fo_static_content_get_border_end_width (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_end_width (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_start_color:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-start-color property of @fo_static_content
+ *
+ * Return value: The "border-start-color" property value
+**/
+FoProperty *
+fo_static_content_get_border_start_color (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_start_color (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_start_style:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-start-style property of @fo_static_content
+ *
+ * Return value: The "border-start-style" property value
+**/
+FoProperty *
+fo_static_content_get_border_start_style (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_start_style (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_border_start_width:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #border-start-width property of @fo_static_content
+ *
+ * Return value: The "border-start-width" property value
+**/
+FoProperty *
+fo_static_content_get_border_start_width (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_border_start_width (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_padding_after:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #padding-after property of @fo_static_content
+ *
+ * Return value: The "padding-after" property value
+**/
+FoProperty *
+fo_static_content_get_padding_after (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_padding_after (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_padding_before:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #padding-before property of @fo_static_content
+ *
+ * Return value: The "padding-before" property value
+**/
+FoProperty *
+fo_static_content_get_padding_before (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_padding_before (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_padding_end:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #padding-end property of @fo_static_content
+ *
+ * Return value: The "padding-end" property value
+**/
+FoProperty *
+fo_static_content_get_padding_end (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_padding_end (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_padding_start:
+ * @fo_static_content: The #FoStaticContent object
+ *
+ * Gets the #padding-start property of @fo_static_content
+ *
+ * Return value: The "padding-start" property value
+**/
+FoProperty *
+fo_static_content_get_padding_start (FoFo *fo_static_content)
+{
+  g_return_val_if_fail (fo_static_content != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_static_content), NULL);
+
+  return fo_cbpbp_fo_get_padding_start (fo_static_content_get_region_master (fo_static_content));
+}
+
+/**
+ * fo_static_content_get_region_master:
+ * @fo_fo: The #FoStaticContent object
+ *
+ * Gets the #region_master instance variable of @static_content
+ *
+ * Return value: The "region_master" value
+**/
+FoFo *
+fo_static_content_get_region_master (FoFo *fo_fo)
+{
+  g_return_val_if_fail (fo_fo != NULL, NULL);
+  g_return_val_if_fail (FO_IS_STATIC_CONTENT (fo_fo), NULL);
+
+  return FO_STATIC_CONTENT (fo_fo)->region_master;
+}
+
+/*
+ * These get/set functions are completely auto-generated.
+ */
+
+/**
  * fo_static_content_get_flow_name:
- * @fo_fo: The @FoFo object.
+ * @fo_fo: The #FoFo object.
  * 
  * Gets the "flow-name" property of @fo_fo.
  *
  * Return value: The "flow-name" property value.
 **/
-FoProperty*
+FoProperty *
 fo_static_content_get_flow_name (FoFo *fo_fo)
 {
   FoStaticContent *fo_static_content = (FoStaticContent *) fo_fo;
@@ -369,10 +751,10 @@ fo_static_content_get_flow_name (FoFo *fo_fo)
 
 /**
  * fo_static_content_set_flow_name:
- * @fo_fo: The #FoFo object
- * @new_flow_name: The new "flow-name" property value
+ * @fo_fo: The #FoFo object.
+ * @new_flow_name: The new "flow-name" property value.
  * 
- * Sets the "flow-name" property of @fo_fo to @new_flow_name
+ * Sets the "flow-name" property of @fo_fo to @new_flow_name.
  **/
 void
 fo_static_content_set_flow_name (FoFo *fo_fo,
@@ -382,7 +764,8 @@ fo_static_content_set_flow_name (FoFo *fo_fo,
 
   g_return_if_fail (fo_static_content != NULL);
   g_return_if_fail (FO_IS_STATIC_CONTENT (fo_static_content));
-  g_return_if_fail (FO_IS_PROPERTY_FLOW_NAME (new_flow_name));
+  g_return_if_fail ((new_flow_name == NULL) ||
+		    FO_IS_PROPERTY_FLOW_NAME (new_flow_name));
 
   if (new_flow_name != NULL)
     {

@@ -10,8 +10,7 @@
 #ifndef __FO_AREA_TABLE_PRIVATE_H__
 #define __FO_AREA_TABLE_PRIVATE_H__
 
-#include "area/fo-area-table.h"
-#include "area/fo-area-reference-private.h"
+#include <libfo/area/fo-area-reference-private.h>
 
 G_BEGIN_DECLS
 

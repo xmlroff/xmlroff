@@ -92,7 +92,7 @@ void
 fo_property_text_align_init (FoPropertyTextAlign *text_align)
 {
   FO_PROPERTY (text_align)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("start"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("start"));
 }
 
 /**
@@ -190,7 +190,7 @@ fo_property_text_align_resolve_enum (const gchar *token,
       (strcmp (token, "left") == 0) ||
       (strcmp (token, "right") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

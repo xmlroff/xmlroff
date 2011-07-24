@@ -113,7 +113,7 @@ void
 fo_property_alignment_baseline_init (FoPropertyAlignmentBaseline *alignment_baseline)
 {
   FO_PROPERTY (alignment_baseline)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
@@ -228,7 +228,7 @@ fo_property_alignment_baseline_resolve_enum (const gchar *token,
       (strcmp (token, "hanging") == 0) ||
       (strcmp (token, "mathematical") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

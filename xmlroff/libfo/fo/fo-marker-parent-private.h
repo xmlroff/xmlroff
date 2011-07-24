@@ -1,8 +1,8 @@
 /* Fo
- * fo-marker-parent-private.h: Formatting object that is parent of possible fo:marker
+ * fo-marker-parent-private.h: Abstract formatting object that is parent of possible fo:marker
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */

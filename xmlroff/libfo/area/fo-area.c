@@ -2,7 +2,7 @@
  * fo-area.c: Base area object of area object system
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -29,11 +29,36 @@
 #include "area/fo-area-area.h"
 #include "area/fo-area-reference.h"
 #include "area/fo-area-page.h"
-/* FIXME: should be get and set functions for everything from FoFo */
-#include "fo/fo-fo-private.h"
+
+GType
+fo_area_flags_class_get_type (void)
+{
+  static GType ftype = 0;
+  if (ftype == 0)
+    {
+      static const GFlagsValue values[] = {
+        { FO_AREA_FLAG_CLASS_UNKNOWN, "FO_AREA_FLAG_CLASS_UNKNOWN", "unknown" },
+        { FO_AREA_FLAG_CLASS_NORMAL, "FO_AREA_FLAG_CLASS_NORMAL", "normal" },
+        { FO_AREA_FLAG_CLASS_ABSOLUTE, "FO_AREA_FLAG_CLASS_ABSOLUTE", "absolute" },
+        { FO_AREA_FLAG_CLASS_FIXED, "FO_AREA_FLAG_CLASS_FIXED", "fixed" },
+        { FO_AREA_FLAG_CLASS_BEFORE_FLOAT, "FO_AREA_FLAG_CLASS_BEFORE_FLOAT", "before-float" },
+        { FO_AREA_FLAG_CLASS_SIDE_FLOAT, "FO_AREA_FLAG_CLASS_SIDE_FLOAT", "side-float" },
+        { FO_AREA_FLAG_CLASS_FOOTNOTE, "FO_AREA_FLAG_CLASS_FOOTNOTE", "footnote" },
+        { FO_AREA_FLAG_CLASS_ANCHOR, "FO_AREA_FLAG_CLASS_ANCHOR", "anchor" },
+        { FO_AREA_FLAG_CLASS_STACKABLE, "FO_AREA_FLAG_CLASS_STACKABLE", "stackable" },
+        { FO_AREA_FLAG_CLASS_PAGE_LEVEL_OUT_OF_LINE, "FO_AREA_FLAG_CLASS_PAGE_LEVEL_OUT_OF_LINE", "page-level-out-of-line" },
+        { FO_AREA_FLAG_CLASS_REFERENCE_LEVEL_OUT_OF_LINE, "FO_AREA_FLAG_CLASS_REFERENCE_LEVEL_OUT_OF_LINE", "reference-level-out-of-line" },
+        { FO_AREA_FLAG_CLASS_OUT_OF_LINE, "FO_AREA_FLAG_CLASS_OUT_OF_LINE", "out-of-line" },
+        { 0, NULL, NULL }
+      };
+      ftype = g_flags_register_static ("FoAreaFlagsClass", values);
+    }
+  return ftype;
+}
 
 enum {
   PROP_0,
+  PROP_CLASS,
   PROP_PAGE_SEQUENCE,
   PROP_IS_FIRST,
   PROP_IS_LAST,
@@ -46,8 +71,8 @@ enum {
   PROP_GENERATED_BY
 };
 
-static void fo_area_init        (FoArea      *object);
-static void fo_area_base_class_init  (FoAreaClass *klass);
+static void _init        (FoArea      *object);
+static void _base_class_init  (FoAreaClass *klass);
 static void fo_area_class_init  (FoAreaClass *klass);
 static void fo_area_get_property (GObject         *object,
 				  guint            prop_id,
@@ -57,44 +82,46 @@ static void fo_area_set_property (GObject         *object,
                                   guint            prop_id,
                                   const GValue    *value,
                                   GParamSpec      *pspec);
-static void fo_area_finalize    (GObject           *object);
+static void _dispose    (GObject           *object);
 
 static void     fo_area_debug_dump (FoObject *object,
 				    gint depth);
 static gchar*   fo_area_sprintf (FoObject *object);
-static void     fo_area_debug_dump_properties_default (FoArea *area,
-						       gint depth);
+static void     _debug_dump_properties_default (FoArea *area,
+						gint depth);
 static void     fo_area_draw (FoArea *area, gpointer output);
 static FoArea*  fo_area_clone_default (FoArea *original);
 static void     fo_area_update_after_clone_default        (FoArea *clone,
 							   FoArea *original);
 static FoArea*  fo_area_split_before_height_default       (FoArea *area,
-							   gfloat  height);
+							   gdouble  height);
 static gboolean fo_area_split_before_height_check_default (FoArea *area,
-							   gfloat  height);
+							   gdouble  height);
 static FoArea*  fo_area_split_after_height_default        (FoArea *area,
-							   gfloat  height);
+							   gdouble  height);
 static gboolean fo_area_split_after_height_check_default  (FoArea *area,
-							   gfloat  height);
-static FoArea*  fo_area_size_request_default              (FoArea *child);
+							   gdouble  height);
+static FoArea*  _size_request              (FoArea *child);
 static void     fo_area_default_resolve_text_align        (FoArea *area);
-static void     fo_area_node_unlink_with_next_siblings    (FoNode *area);
-static FoNode*  fo_area_node_insert_with_next_siblings    (FoNode *parent,
-							   gint    position,
-							   FoNode *area);
-static FoNode*  fo_area_node_insert (FoNode *parent,
-				     gint    position,
+static void     _node_unlink_with_next_siblings    (FoNode *area);
+static FoNode*  _node_insert_with_next_siblings    (FoNode *parent,
+						    gint    position,
+						    FoNode *area);
+static FoNode*  _node_insert (FoNode *parent,
+			      gint    position,
+			      FoNode *area);
+static FoNode*  _node_insert_before (FoNode *parent,
+				     FoNode *sibling,
 				     FoNode *area);
-static FoNode*  fo_area_node_insert_before (FoNode *parent,
-					    FoNode *sibling,
-					    FoNode *area);
-static FoNode*  fo_area_node_insert_after (FoNode *parent,
-					   FoNode *sibling,
-					   FoNode *area);
-static FoNode*  fo_area_node_prepend (FoNode *parent,
-				      FoNode *area);
-static FoNode*  fo_area_node_append (FoNode *parent,
-				     FoNode *area);
+static FoNode*  _node_insert_after (FoNode *parent,
+				    FoNode *sibling,
+				    FoNode *area);
+static FoNode*  _node_prepend (FoNode *parent,
+			       FoNode *area);
+static FoNode*  _node_append (FoNode *parent,
+			      FoNode *area);
+static gboolean _release_default (FoNode     *fo_node,
+				  gpointer    data);
 
 static gpointer parent_class;
 
@@ -115,14 +142,14 @@ fo_area_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoAreaClass),
-        (GBaseInitFunc) fo_area_base_class_init,
+        (GBaseInitFunc) _base_class_init,
         (GBaseFinalizeFunc) NULL,
         (GClassInitFunc) fo_area_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoArea),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_area_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
       
@@ -136,44 +163,45 @@ fo_area_get_type (void)
 }
 
 /**
- * fo_area_init:
+ * _init:
  * @fo_area: #FoArea object to initialise
  * 
  * Implements #GInstanceInitFunc for #FoArea
  **/
-void
-fo_area_init (FoArea *object)
+static void
+_init (FoArea *object)
 {
   object->is_first = TRUE;
   object->is_last = TRUE;
 }
 
 /**
- * fo_area_base_class_init:
+ * _base_class_init:
  * @klass: #FoAreaClass base class object to initialise
  * 
  * Implements #GBaseInitFunc for #FoAreaClass
  **/
-void
-fo_area_base_class_init (FoAreaClass *klass)
+static void
+_base_class_init (FoAreaClass *klass)
 {
   FoObjectClass *fo_object_class = FO_OBJECT_CLASS (klass);
-  FoNodeClass *fo_node_class = FO_NODE_CLASS (klass);
 
   fo_object_class->debug_dump = fo_area_debug_dump;
   fo_object_class->print_sprintf = fo_area_sprintf;
 
-  fo_node_class->insert = fo_area_node_insert;
-  fo_node_class->insert_before = fo_area_node_insert_before;
-  fo_node_class->insert_after = fo_area_node_insert_after;
-  fo_node_class->insert_with_next_siblings =
-    fo_area_node_insert_with_next_siblings;
-  fo_node_class->unlink_with_next_siblings =
-    fo_area_node_unlink_with_next_siblings;
-  fo_node_class->prepend = fo_area_node_prepend;
-  fo_node_class->append = fo_area_node_append;
+  FoNodeClass *fo_node_class = FO_NODE_CLASS (klass);
 
-  klass->debug_dump_properties = fo_area_debug_dump_properties_default;
+  fo_node_class->insert = _node_insert;
+  fo_node_class->insert_before = _node_insert_before;
+  fo_node_class->insert_after = _node_insert_after;
+  fo_node_class->insert_with_next_siblings =
+    _node_insert_with_next_siblings;
+  fo_node_class->unlink_with_next_siblings =
+    _node_unlink_with_next_siblings;
+  fo_node_class->prepend = _node_prepend;
+  fo_node_class->append = _node_append;
+
+  klass->debug_dump_properties = _debug_dump_properties_default;
   klass->add_child = fo_area_real_add_child;
   klass->clone = fo_area_clone_default;
   klass->update_after_clone = fo_area_update_after_clone_default;
@@ -181,8 +209,10 @@ fo_area_base_class_init (FoAreaClass *klass)
   klass->split_before_height_check = fo_area_split_before_height_check_default;
   klass->split_after_height = fo_area_split_after_height_default;
   klass->split_after_height_check = fo_area_split_after_height_check_default;
-  klass->size_request = fo_area_size_request_default;
+  klass->size_request = _size_request;
   klass->resolve_text_align = fo_area_default_resolve_text_align;
+  klass->release =
+    _release_default;
 }
 
 /**
@@ -198,7 +228,7 @@ fo_area_class_init (FoAreaClass *klass)
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_area_finalize;
+  object_class->dispose = _dispose;
 
   object_class->get_property = fo_area_get_property;
   object_class->set_property = fo_area_set_property;
@@ -206,6 +236,15 @@ fo_area_class_init (FoAreaClass *klass)
   klass->debug_dump_properties = fo_area_debug_dump_properties;
   klass->draw = fo_area_draw;
 
+  g_object_class_install_property
+    (object_class,
+     PROP_CLASS,
+     g_param_spec_flags ("class",
+			 _("Area class"),
+			 _("XSL area-class trait"),
+			 FO_TYPE_AREA_FLAGS_CLASS,
+			 FO_AREA_FLAG_CLASS_UNKNOWN,
+			 G_PARAM_READABLE));
   g_object_class_install_property
     (object_class,
      PROP_PAGE_SEQUENCE,
@@ -309,19 +348,26 @@ fo_area_class_init (FoAreaClass *klass)
 }
 
 /**
- * fo_area_finalize:
- * @object: #FoArea object to finalize
+ * _dispose:
+ * @object: #FoArea object to dispose
  * 
- * Implements #GObjectFinalizeFunc for #FoArea
+ * Implements #GObject dispose() function for #FoArea
  **/
 void
-fo_area_finalize (GObject *object)
+_dispose (GObject *object)
 {
-  FoArea *area;
+  FoArea *area = FO_AREA (object);
 
-  area = FO_AREA (object);
+  fo_area_set_page (area, NULL);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  if (area->generated_by != NULL)
+    {
+      fo_fo_area_list_remove (area->generated_by,
+			      area);
+      area->generated_by = NULL;
+    }
+
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 
@@ -344,6 +390,10 @@ fo_area_get_property (GObject        *object,
   
   switch (param_id)
     {
+    case PROP_CLASS:
+      g_value_set_flags (value,
+			 area->class);
+      break;
     case PROP_PAGE_SEQUENCE:
       g_value_set_object (value,
                           area->page_sequence ? G_OBJECT (area->page_sequence) : NULL);
@@ -458,6 +508,23 @@ fo_area_new (void)
 }
 
 /**
+ * fo_area_get_class:
+ * @fo_area: The @FoArea object
+ *
+ * Gets the #class property of @area
+ *
+ * Return value: The "class" property value
+**/
+FoAreaFlagsClass
+fo_area_get_class (FoArea *fo_area)
+{
+  g_return_val_if_fail (fo_area != NULL, 0);
+  g_return_val_if_fail (FO_IS_AREA (fo_area), 0);
+
+  return fo_area->class;
+}
+
+/**
  * fo_area_get_is_first:
  * @fo_area: The @FoArea object
  *
@@ -522,6 +589,19 @@ fo_area_set_page (FoArea *fo_area,
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
+  g_return_if_fail ((page_area == NULL) ||
+		    FO_IS_AREA_PAGE (page_area));
+
+  if (page_area != NULL)
+    {
+      g_object_ref (page_area);
+    }
+
+  if ((fo_area->page != NULL) &&
+      ((GObject *) fo_area->page)->ref_count > 0)
+    {
+      g_object_unref (fo_area->page);
+    }
 
   fo_area->page = page_area;
   /*g_object_notify (G_OBJECT (fo_area), "page");*/
@@ -640,7 +720,7 @@ fo_area_set_is_last (FoArea *fo_area,
  *
  * Return value: The "next_x" property value
 **/
-gfloat
+gdouble
 fo_area_get_next_x (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -658,7 +738,7 @@ fo_area_get_next_x (FoArea *fo_area)
 **/
 void
 fo_area_set_next_x (FoArea *fo_area,
-	       gfloat new_next_x)
+	       gdouble new_next_x)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
@@ -675,7 +755,7 @@ fo_area_set_next_x (FoArea *fo_area,
  *
  * Return value: The "next-y" property value
 **/
-gfloat
+gdouble
 fo_area_get_next_y (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -693,7 +773,7 @@ fo_area_get_next_y (FoArea *fo_area)
 **/
 void
 fo_area_set_next_y (FoArea *fo_area,
-	       gfloat new_next_y)
+	       gdouble new_next_y)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
@@ -710,7 +790,7 @@ fo_area_set_next_y (FoArea *fo_area,
  *
  * Return value: The "available-width" property value
 **/
-gfloat
+gdouble
 fo_area_get_available_width (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -728,7 +808,7 @@ fo_area_get_available_width (FoArea *fo_area)
 **/
 void
 fo_area_set_available_width (FoArea *fo_area,
-			     gfloat new_available_width)
+			     gdouble new_available_width)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
@@ -745,7 +825,7 @@ fo_area_set_available_width (FoArea *fo_area,
  *
  * Return value: The "available_height" property value
 **/
-gfloat
+gdouble
 fo_area_get_available_height (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -763,7 +843,7 @@ fo_area_get_available_height (FoArea *fo_area)
 **/
 void
 fo_area_set_available_height (FoArea *fo_area,
-			      gfloat new_available_height)
+			      gdouble new_available_height)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
@@ -780,7 +860,7 @@ fo_area_set_available_height (FoArea *fo_area,
  *
  * Return value: The "child-available-ipdim" property value
 **/
-gfloat
+gdouble
 fo_area_get_child_available_ipdim (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -799,7 +879,7 @@ fo_area_get_child_available_ipdim (FoArea *fo_area)
 **/
 void
 fo_area_set_child_available_ipdim (FoArea *fo_area,
-				   gfloat new_child_available_ipdim)
+				   gdouble new_child_available_ipdim)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
@@ -816,7 +896,7 @@ fo_area_set_child_available_ipdim (FoArea *fo_area,
  *
  * Return value: The "child-available-bpdim" property value
 **/
-gfloat
+gdouble
 fo_area_get_child_available_bpdim (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -835,7 +915,7 @@ fo_area_get_child_available_bpdim (FoArea *fo_area)
 **/
 void
 fo_area_set_child_available_bpdim (FoArea *fo_area,
-				   gfloat new_child_available_bpdim)
+				   gdouble new_child_available_bpdim)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA (fo_area));
@@ -1012,7 +1092,7 @@ fo_area_add_child (FoArea *parent, FoArea *child)
 }
 
 /**
- * fo_area_debug_dump_properties_default:
+ * _debug_dump_properties_default:
  * @area:  #FoArea or subclass object
  * @depth: Indent level to add to the output
  * 
@@ -1020,8 +1100,8 @@ fo_area_add_child (FoArea *parent, FoArea *child)
  * FoArea subclass does not override the debug_dump_properties class
  * method.
  **/
-void
-fo_area_debug_dump_properties_default (FoArea *area, gint depth)
+static void
+_debug_dump_properties_default (FoArea *area, gint depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
 
@@ -1053,6 +1133,12 @@ fo_area_debug_dump_properties (FoArea *area, gint depth)
   g_return_if_fail (area != NULL);
   g_return_if_fail (FO_IS_AREA (area));
 
+  g_log (G_LOG_DOMAIN,
+	 G_LOG_LEVEL_DEBUG,
+	 "%sclass:                 %s",
+	 indent,
+	 g_flags_get_first_value (g_type_class_peek_static (FO_TYPE_AREA_FLAGS_CLASS),
+				  area->class)->value_nick);
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 "%sis-first:              %s",
@@ -1194,7 +1280,7 @@ fo_area_update_after_clone_default (FoArea *clone,
   g_return_if_fail (FO_IS_AREA (original));
 
   fo_area_set_page_sequence (clone, original->page_sequence);
-  fo_area_set_page (clone, original->page);
+  fo_area_set_page (clone, fo_area_get_page (original));
   fo_area_set_reference (clone, original->reference);
   clone->is_first = FALSE;
   clone->prev_part = original;
@@ -1202,16 +1288,17 @@ fo_area_update_after_clone_default (FoArea *clone,
   original->next_part = clone;
   clone->generated_by = original->generated_by;
 
-  /* FIXME: should be get and set functions for everything from FoFo */
-  clone->generated_by->areas =
-    g_list_insert (clone->generated_by->areas,
-		   clone,
-		   g_list_index (clone->generated_by->areas,
-				original) + 1);
+  fo_fo_area_list_insert_after (clone->generated_by,
+				original,
+				clone);
 
-  fo_area_insert_after (fo_area_parent (original), original, clone);
+  if (fo_area_parent (original) != NULL)
+    {
+      fo_area_insert_after (fo_area_parent (original),
+			    original,
+			    clone);
+    }
 }
-
 
 /**
  * fo_area_clone:
@@ -1306,18 +1393,18 @@ void
 fo_area_border_padding_space_resolve (FoArea *parent_area, FoArea *child_area)
 {
   FoFo *child_fo;
-  gfloat child_available_ipdim, child_available_bpdim;
-  gfloat parent_next_x, parent_next_y;
-  gfloat border_start_width = 0;
-  gfloat border_end_width = 0;
-  gfloat border_before_width = 0;
-  gfloat border_after_width = 0;
-  gfloat padding_start = 0;
-  gfloat padding_end = 0;
-  gfloat padding_before = 0;
-  gfloat padding_after = 0;
-  gfloat start_indent = 0, end_indent = 0;
-  gfloat space_before = 0, space_after = 0;
+  gdouble child_available_ipdim, child_available_bpdim;
+  gdouble parent_next_x, parent_next_y;
+  gdouble border_start_width = 0;
+  gdouble border_end_width = 0;
+  gdouble border_before_width = 0;
+  gdouble border_after_width = 0;
+  gdouble padding_start = 0;
+  gdouble padding_end = 0;
+  gdouble padding_before = 0;
+  gdouble padding_after = 0;
+  gdouble start_indent = 0, end_indent = 0;
+  gdouble space_before = 0, space_after = 0;
   gboolean is_first, is_last;
 
   g_return_if_fail (parent_area != NULL);
@@ -1563,7 +1650,8 @@ fo_area_break_resolve (FoArea *parent_area,
 	    ((prev_break_after_prop != NULL) &&
 	     (prev_break_after == FO_ENUM_ENUM_ODD_PAGE)))))
 	{
-	  g_message ("break_resolve:: make another new page: %d", ++page_number);
+	  g_message ("break_resolve:: make another new page: %d",
+		     ++page_number);
 	  clone = fo_area_clone (clone);
 	  fo_area_dump_path_to_root (clone);
 	  /*
@@ -1589,7 +1677,8 @@ fo_area_break_resolve (FoArea *parent_area,
  * Return value: The part of @area spit from @area, or NULL if unsplit.
  **/
 FoArea*
-fo_area_split_before_height (FoArea *area, gfloat height)
+fo_area_split_before_height (FoArea *area,
+			     gdouble height)
 {
   return FO_AREA_GET_CLASS (area)->split_before_height (area, height);
 }
@@ -1607,7 +1696,7 @@ fo_area_split_before_height (FoArea *area, gfloat height)
  **/
 FoArea*
 fo_area_split_before_height_default (FoArea *area,
-				     gfloat  height G_GNUC_UNUSED)
+				     gdouble  height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_before_height' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1624,7 +1713,7 @@ fo_area_split_before_height_default (FoArea *area,
  * Return value: TRUE if can split, otherwise FALSE.
  **/
 gboolean
-fo_area_split_before_height_check (FoArea *area, gfloat height)
+fo_area_split_before_height_check (FoArea *area, gdouble height)
 {
   return FO_AREA_GET_CLASS (area)->split_before_height_check (area,
 							      height);
@@ -1643,7 +1732,7 @@ fo_area_split_before_height_check (FoArea *area, gfloat height)
  **/
 gboolean
 fo_area_split_before_height_check_default (FoArea *area,
-					   gfloat height G_GNUC_UNUSED)
+					   gdouble height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_before_height_check' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1660,7 +1749,7 @@ fo_area_split_before_height_check_default (FoArea *area,
  * Return value: The part of @area spit from @area, or NULL if unsplit.
  **/
 FoArea*
-fo_area_split_after_height (FoArea *area, gfloat height)
+fo_area_split_after_height (FoArea *area, gdouble height)
 {
   return FO_AREA_GET_CLASS (area)->split_after_height (area, height);
 }
@@ -1678,7 +1767,7 @@ fo_area_split_after_height (FoArea *area, gfloat height)
  **/
 FoArea*
 fo_area_split_after_height_default (FoArea *area,
-				    gfloat  height G_GNUC_UNUSED)
+				    gdouble  height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_after_height' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1695,7 +1784,7 @@ fo_area_split_after_height_default (FoArea *area,
  * Return value: TRUE if can split, otherwise FALSE.
  **/
 gboolean
-fo_area_split_after_height_check (FoArea *area, gfloat height)
+fo_area_split_after_height_check (FoArea *area, gdouble height)
 {
   return FO_AREA_GET_CLASS (area)->split_after_height_check (area,
 							      height);
@@ -1714,7 +1803,7 @@ fo_area_split_after_height_check (FoArea *area, gfloat height)
  **/
 gboolean
 fo_area_split_after_height_check_default (FoArea *area,
-					  gfloat  height G_GNUC_UNUSED)
+					  gdouble  height G_GNUC_UNUSED)
 {
   g_warning ("%s does not have a 'split_after_height_check' function.",
 	     g_type_name (G_TYPE_FROM_INSTANCE (area)));
@@ -1830,7 +1919,7 @@ void
 fo_area_accumulate_height (FoArea *area,
 			   gpointer data)
 {
-  gfloat *total = (gfloat *) data;
+  gdouble *total = (gdouble *) data;
 #if defined(LIBFO_DEBUG) && 0
   g_message ("add_height:: height: %f; area: %s; generated by: %s",
 	     fo_area_area_get_height (area),
@@ -1896,7 +1985,7 @@ fo_area_set_or_split (FoArea  *area,
 		      gpointer data G_GNUC_UNUSED)
 {
   FoArea *parent = fo_area_parent (area);
-  gfloat child_available_bpdim = fo_area_get_child_available_bpdim (parent);
+  gdouble child_available_bpdim = fo_area_get_child_available_bpdim (parent);
 
   if ((child_available_bpdim -
        (fo_area_get_next_y (parent) -
@@ -1933,7 +2022,7 @@ fo_area_set_or_split (FoArea  *area,
 }
 
 /**
- * fo_area_size_request_default:
+ * _size_request:
  * @child: Child area
  * 
  * Check that the parent area of @child has sufficient space for
@@ -1944,17 +2033,17 @@ fo_area_set_or_split (FoArea  *area,
  * Return value: Pointer to the last area generated from @child after
  * any reallocation and resizing
  **/
-FoArea*
-fo_area_size_request_default (FoArea *child)
+static FoArea *
+_size_request (FoArea *child)
 {
   FoArea *parent;
   FoArea *child_original_next_part;
   FoArea *return_child;
-  gfloat total_child_height = 0;
-  gfloat child_available_ipdim;
-  gfloat child_available_bpdim;
-  gfloat child_height;
-  gfloat child_space_before, child_space_after;
+  gdouble total_child_height = 0;
+  gdouble child_available_ipdim;
+  gdouble child_available_bpdim;
+  gdouble child_height;
+  gdouble child_space_before, child_space_after;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -2130,7 +2219,7 @@ fo_area_update_child_after_insert (FoArea *parent,
 }
 
 /**
- * fo_area_node_insert:
+ * _node_insert:
  * @parent: 
  * @position: 
  * @area: 
@@ -2139,10 +2228,10 @@ fo_area_update_child_after_insert (FoArea *parent,
  * 
  * Return value: 
  **/
-FoNode*
-fo_area_node_insert (FoNode *parent,
-		     gint    position,
-		     FoNode *area)
+static FoNode *
+_node_insert (FoNode *parent,
+	      gint    position,
+	      FoNode *area)
 {
   return ((FoNode *) fo_area_insert (((FoArea *) parent),
 				     position,
@@ -2180,7 +2269,7 @@ fo_area_insert (FoArea *parent,
 }
 
 /**
- * fo_area_node_insert_before:
+ * _node_insert_before:
  * @parent: 
  * @sibling: 
  * @area: 
@@ -2189,10 +2278,10 @@ fo_area_insert (FoArea *parent,
  * 
  * Return value: 
  **/
-FoNode*
-fo_area_node_insert_before (FoNode *parent,
-			    FoNode *sibling,
-			    FoNode *area)
+static FoNode *
+_node_insert_before (FoNode *parent,
+		     FoNode *sibling,
+		     FoNode *area)
 {
   return ((FoNode *) fo_area_insert_before (((FoArea *) parent),
 					    ((FoArea *) sibling),
@@ -2231,7 +2320,7 @@ fo_area_insert_before (FoArea *parent,
 }
 
 /**
- * fo_area_node_insert_after:
+ * _node_insert_after:
  * @parent: 
  * @sibling: 
  * @area: 
@@ -2240,10 +2329,10 @@ fo_area_insert_before (FoArea *parent,
  * 
  * Return value: 
  **/
-FoNode*
-fo_area_node_insert_after (FoNode *parent,
-			   FoNode *sibling,
-			   FoNode *area)
+static FoNode *
+_node_insert_after (FoNode *parent,
+		    FoNode *sibling,
+		    FoNode *area)
 {
   return ((FoNode *) fo_area_insert_after (((FoArea *) parent),
 					   ((FoArea *) sibling),
@@ -2281,7 +2370,7 @@ fo_area_insert_after (FoArea *parent,
   return new_area;
 }
 /**
- * fo_area_node_prepend:
+ * _node_prepend:
  * @parent: the #FoNode to place the new #FoNode under.
  * @area: the #FoNode to insert.
  * 
@@ -2289,10 +2378,9 @@ fo_area_insert_after (FoArea *parent,
  * 
  * Return value: the inserted #FoNode.
  **/
- 
-FoNode*
-fo_area_node_prepend (FoNode *parent,
-		      FoNode *area)
+static FoNode *
+_node_prepend (FoNode *parent,
+	       FoNode *area)
 {
   return ((FoNode *) fo_area_prepend (((FoArea *) parent),
 				      ((FoArea *) area)));
@@ -2327,7 +2415,7 @@ fo_area_prepend (FoArea *parent,
 }
 
 /**
- * fo_area_node_append:
+ * _node_append:
  * @parent: the #FoNode to place the new #FoNode under.
  * @area: the #FoNode to insert.
  * 
@@ -2335,9 +2423,9 @@ fo_area_prepend (FoArea *parent,
  * 
  * Return value: the inserted #FoNode.
  **/
-FoNode*
-fo_area_node_append (FoNode *parent,
-		     FoNode *area)
+static FoNode *
+_node_append (FoNode *parent,
+	      FoNode *area)
 {
   return ((FoNode *) fo_area_append (((FoArea *) parent),
 				      ((FoArea *) area)));
@@ -2712,15 +2800,15 @@ fo_area_traverse (FoArea 	     *root,
 }
 
 /**
- * fo_area_node_unlink_with_next_siblings:
+ * _node_unlink_with_next_siblings:
  * @area: First #FoNode to unlink.
  * 
  * Unlinks @area and its following siblings.
  *
  * #FoArea implementation of fo_node_unlink_with_next_siblings().
  **/
-void
-fo_area_node_unlink_with_next_siblings (FoNode *area)
+static void
+_node_unlink_with_next_siblings (FoNode *area)
 {
   fo_area_unlink_with_next_siblings (((FoArea *) area));
 }
@@ -2738,7 +2826,7 @@ fo_area_unlink_with_next_siblings (FoArea *area)
 }
 
 /**
- * fo_area_node_insert_with_next_siblings:
+ * _node_insert_with_next_siblings:
  * @parent:   #FoNode to be parent of @area and its siblings.
  * @position: Offset at which to insert @area and its siblings.
  * @area:     #FoNode, possibly with following siblings.
@@ -2747,10 +2835,10 @@ fo_area_unlink_with_next_siblings (FoArea *area)
  * 
  * Return value: @parent with @area and siblings inserted.
  **/
-FoNode*
-fo_area_node_insert_with_next_siblings (FoNode *parent,
-					gint    position,
-					FoNode *area)
+static FoNode *
+_node_insert_with_next_siblings (FoNode *parent,
+				 gint    position,
+				 FoNode *area)
 {
   return ((FoNode *) fo_area_insert_with_next_siblings (((FoArea *) parent),
 							position,
@@ -2767,7 +2855,7 @@ fo_area_node_insert_with_next_siblings (FoNode *parent,
  * 
  * Return value: @parent with @area and siblings inserted.
  **/
-FoArea*
+FoArea *
 fo_area_insert_with_next_siblings (FoArea *parent,
 				   gint    position,
 				   FoArea *area)
@@ -2775,4 +2863,76 @@ fo_area_insert_with_next_siblings (FoArea *parent,
   return FO_AREA (FO_NODE_CLASS (parent_class)->insert_with_next_siblings (FO_NODE (parent),
 									   position,
 									   FO_NODE (area)));
+}
+
+/**
+ * fo_area_release:
+ * @fo_node: #FoNode for which to release subtree
+ * @data:    Context in which to resolve the properties.
+ * 
+ * Releases the subtree rooted at @fo_node.
+ *
+ * Should be used with #fo_node_traverse() and %G_POST_ORDER order so
+ * child nodes release their subtrees before @fo_node releases the
+ * children.
+ * 
+ * Return value: %TRUE if an error occurred, %FALSE otherwise.
+ **/
+gboolean
+fo_area_release (FoNode  *fo_node,
+		 gpointer data)
+{
+  g_return_val_if_fail (FO_IS_AREA (fo_node), TRUE);
+
+  FoNodeTraverseFunc func = FO_AREA_GET_CLASS (fo_node)->release;
+
+  if (func != NULL)
+    {
+      return func (fo_node,
+		   data);
+    }
+  else
+    {
+      return FALSE;
+    }
+}
+
+static void
+_release_children (FoNode *node,
+		   gpointer data G_GNUC_UNUSED)
+{
+  fo_node_unlink (node);
+}
+
+/**
+ * _release_default:
+ * @fo_node:      #FoFo
+ * @data:         Context within which to resolve property expressions
+ * 
+ * Every #FoFo object was created from a result tree element that is
+ * in the XSL FO namespace.  The object's specified property values
+ * are created from the result tree element's attributes.
+ *
+ * This function evaluates each of the property attributes of the
+ * result tree element for @fo_node.
+ * 
+ * Return value: %FALSE if completed successfully, %TRUE otherwise
+ **/
+gboolean
+_release_default (FoNode     *fo_node,
+		  gpointer    data G_GNUC_UNUSED)
+{
+  /*
+  g_message ("before::");
+  fo_object_debug_dump (FO_OBJECT (fo_node), 0);
+  */
+  fo_node_children_foreach (fo_node,
+			    G_TRAVERSE_ALL,
+			    _release_children,
+			    NULL);
+    /*
+  g_message ("after::");
+  fo_object_debug_dump (FO_OBJECT (fo_node), 0);
+  */
+  return FALSE;
 }

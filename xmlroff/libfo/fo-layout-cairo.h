@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 
 GType      fo_layout_cairo_get_type  (void);
 FoLayout * fo_layout_cairo_new       (void);
-FoLayout * fo_layout_cairo_new_from_fo_doc      (FoDoc   *fo_doc);
 
 G_END_DECLS
 

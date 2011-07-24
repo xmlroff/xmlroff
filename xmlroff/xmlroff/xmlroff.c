@@ -2,7 +2,7 @@
  * xmlroff.c: Demonstration command line XSL formatter program
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting
+ * Copyright (C) 2007-2009 Menteith Consulting
  *
  * See COPYING for the status of this software.
  */
@@ -138,18 +138,15 @@ int
 main (gint    argc,
       gchar **argv)
 {
-  GOptionContext *ctx;   /* context for parsing command-line options */
-  FoLibfoContext *libfo_context;
-  FoXmlDoc *xml_doc = NULL;
-  FoXmlDoc *result_tree = NULL;
-  FoXslFormatter *fo_xsl_formatter;
-  FoDoc *fo_doc = NULL;
   GError *error = NULL;
+
+   /* Context and variables for parsing command-line options. */
+  GOptionContext *ctx;
   gchar *out_file = "layout.pdf";
   const gchar *xml_file = NULL;
   const gchar *xslt_file = NULL;
   const gchar *backend_string = NULL;
-  const gchar *format_string = NULL;
+  gchar *format_string = NULL;
   FoFlagsFormat format_mode = FO_FLAG_FORMAT_UNKNOWN;
   FoDebugFlag debug_mode = FO_DEBUG_NONE;
   FoWarningFlag warning_mode = FO_WARNING_FO | FO_WARNING_PROPERTY;
@@ -278,7 +275,6 @@ main (gint    argc,
 
   ctx = g_option_context_new (NULL);
 
-#ifdef HAVE_G_OPTION_CONTEXT_SET_SUMMARY
   g_option_context_set_summary(ctx,
     "xmlroff is a free, fast and high-quality XSL formatter that is\n"
     "useful for DocBook formatting. It produces PDF or PostScript output.\n"
@@ -287,7 +283,6 @@ main (gint    argc,
     "xmlroff processes the XML-FO 'file', or an arbitrary\n"
     "XML file can optionally be first transformed via a specified XSLT\n"
     "'stylesheet'.");
-#endif /* HAVE_G_OPTION_CONTEXT_SET_SUMMARY */
 
   g_option_context_add_main_entries (ctx, options, PACKAGE);
   goption_success = g_option_context_parse (ctx, &argc, &argv, &error);
@@ -302,7 +297,8 @@ main (gint    argc,
 
   if (compat_stylesheet == TRUE)
     {
-      printf ("%s", libfo_compat_get_stylesheet ());
+      printf ("%s",
+	      libfo_compat_get_stylesheet ());
       exit (0);
     }
 
@@ -352,7 +348,8 @@ main (gint    argc,
     }
 
   fo_libfo_init ();
-  libfo_context = fo_libfo_context_new ();
+  FoLibfoContext *libfo_context =
+    g_object_ref_sink (fo_libfo_context_new ());
 
   fo_libfo_context_set_validation (libfo_context,
 				   validation);
@@ -369,6 +366,8 @@ main (gint    argc,
     {
       gchar *lower_format = g_ascii_strdown (format_string,
 					     -1);
+      g_free (format_string);
+
       if (strcmp (lower_format, "auto") == 0)
 	{
 	  format_mode = FO_FLAG_FORMAT_AUTO;
@@ -401,6 +400,7 @@ main (gint    argc,
   fo_libfo_context_set_format (libfo_context,
 			       format_mode);
 
+  FoDoc *fo_doc = NULL;
   if (backend_string == NULL)
     {
 #if ENABLE_GP
@@ -454,6 +454,8 @@ main (gint    argc,
   fo_libfo_context_set_warning_mode (libfo_context,
 				     warning_mode);
 
+  FoXmlDoc *xml_doc = NULL;
+  FoXmlDoc *result_tree = NULL;
   if (xslt_file != NULL)
     {
       /* When there is an XSLT file specified, need to
@@ -505,10 +507,13 @@ main (gint    argc,
       exit_if_error (error);
     }
 
-  fo_xsl_formatter = fo_xsl_formatter_new ();
+  FoXslFormatter *fo_xsl_formatter =
+    g_object_ref_sink (fo_xsl_formatter_new ());
 
   fo_xsl_formatter_set_result_tree (fo_xsl_formatter,
 				    result_tree);
+  fo_xml_doc_unref (result_tree);
+
   exit_if_error (error);
 
   fo_xsl_formatter_set_fo_doc (fo_xsl_formatter,
@@ -525,9 +530,12 @@ main (gint    argc,
 			 &error);
 
   exit_if_error (error);
-
+  /*
+  fo_object_debug_dump (fo_xsl_formatter_get_fo_tree (fo_xsl_formatter), 0);
+  */
   g_object_unref (fo_xsl_formatter);
   g_object_unref (fo_doc);
+  g_object_unref (libfo_context);
   fo_libfo_shutdown ();
 
   return(0);

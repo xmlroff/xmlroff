@@ -1,8 +1,8 @@
 /* Fo
  * fo-property-scaling.c: 'scaling' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -15,11 +15,20 @@
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-scaling.h"
 
-/* scaling */
-/* Inherited: FALSE */
-/* Shorthand: FALSE */
-/* uniform | non-uniform | inherit */
-/* Initial value: uniform */
+/**
+ * SECTION:fo-property-scaling
+ * @short_description: 'scaling' property
+ *
+ * Inherited: FALSE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: uniform | non-uniform | inherit
+ *
+ * Initial value: uniform
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;scaling">http://www.w3.org/TR/xsl11/&num;scaling</ulink>
+ */
 
 struct _FoPropertyScaling
 {
@@ -31,16 +40,15 @@ struct _FoPropertyScalingClass
   FoPropertyClass parent_class;
 };
 
-static void fo_property_scaling_init         (FoPropertyScaling      *property_scaling);
-static void fo_property_scaling_class_init   (FoPropertyScalingClass *klass);
-static void fo_property_scaling_finalize     (GObject       *object);
+static void _init         (FoPropertyScaling      *property_scaling);
+static void _class_init   (FoPropertyScalingClass *klass);
 
-static FoDatatype* fo_property_scaling_resolve_enum (const gchar *token,
-                                                     FoContext   *context,
-                                                     GError     **error);
-static FoDatatype* fo_property_scaling_validate (FoDatatype *datatype,
-                                                 FoContext  *context,
-                                                 GError    **error);
+static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
+static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 
 static const gchar class_name[] = "scaling";
 static gpointer parent_class;
@@ -65,12 +73,12 @@ fo_property_scaling_get_type (void)
         sizeof (FoPropertyScalingClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_scaling_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoPropertyScaling),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_scaling_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 
@@ -83,58 +91,41 @@ fo_property_scaling_get_type (void)
 }
 
 /**
- * fo_property_scaling_init:
+ * _init:
  * @scaling: #FoPropertyScaling object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoPropertyScaling.
  **/
-void
-fo_property_scaling_init (FoPropertyScaling *scaling)
+static void
+_init (FoPropertyScaling *scaling)
 {
   FO_PROPERTY (scaling)->value =
-    g_object_ref (fo_enum_get_enum_uniform ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_UNIFORM));
 }
 
 /**
- * fo_property_scaling_class_init:
+ * _class_init:
  * @klass: #FoPropertyScalingClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoPropertyScalingClass.
  **/
-void
-fo_property_scaling_class_init (FoPropertyScalingClass *klass)
+static void
+_class_init (FoPropertyScalingClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_scaling_finalize;
 
   property_class->is_inherited = FALSE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
-    fo_property_scaling_resolve_enum;
+    _resolve_enum;
   property_class->validate =
-    fo_property_scaling_validate;
+    _validate;
   property_class->get_initial =
     fo_property_scaling_get_initial;
-}
-
-/**
- * fo_property_scaling_finalize:
- * @object: #FoPropertyScaling object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyScaling.
- **/
-void
-fo_property_scaling_finalize (GObject *object)
-{
-  FoPropertyScaling *scaling;
-
-  scaling = FO_PROPERTY_SCALING (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 
@@ -158,7 +149,7 @@ fo_property_scaling_new (void)
 }
 
 /**
- * fo_property_scaling_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -172,10 +163,10 @@ fo_property_scaling_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_scaling_resolve_enum (const gchar *token,
-                                  FoContext   *context,
-                                  GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+               FoContext   *context,
+               GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
@@ -184,7 +175,7 @@ fo_property_scaling_resolve_enum (const gchar *token,
   if ((strcmp (token, "uniform") == 0) ||
       (strcmp (token, "non-uniform") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -199,7 +190,7 @@ fo_property_scaling_resolve_enum (const gchar *token,
 }
 
 /**
- * fo_property_scaling_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -211,9 +202,9 @@ fo_property_scaling_resolve_enum (const gchar *token,
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_scaling_validate (FoDatatype *datatype,
-                              FoContext  *context,
-                              GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
@@ -227,22 +218,42 @@ fo_property_scaling_validate (FoDatatype *datatype,
 
   if (FO_IS_ENUM (datatype))
     {
-      return datatype;
+      FoEnumEnum value = fo_enum_get_value (datatype);
+
+      if ((value == FO_ENUM_ENUM_UNIFORM) ||
+          (value == FO_ENUM_ENUM_NON_UNIFORM))
+	{
+	  return datatype;
+	}
+      else
+	{
+	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
+
+	  g_set_error (error,
+		       FO_FO_ERROR,
+		       FO_FO_ERROR_ENUMERATION_TOKEN,
+		       _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
+		       class_name,
+		       datatype_sprintf,
+		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
+
+	  g_object_unref (datatype);
+
+	  g_free (datatype_sprintf);
+
+	  return NULL;
+	}
     }
   else if (FO_IS_STRING (datatype))
     {
       token = fo_string_get_value (datatype);
 
       new_datatype =
-        fo_property_scaling_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
-      if (tmp_error != NULL)
-	{
-	  g_propagate_error (error, tmp_error);
-	  return NULL;
-	}
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
     }
@@ -251,15 +262,11 @@ fo_property_scaling_validate (FoDatatype *datatype,
       token = fo_name_get_value (datatype);
 
       new_datatype =
-        fo_property_scaling_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
-      if (tmp_error != NULL)
-	{
-	  g_propagate_error (error, tmp_error);
-	  return NULL;
-	}
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
     }

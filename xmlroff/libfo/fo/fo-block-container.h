@@ -2,7 +2,7 @@
  * fo-block-container.h: 'block-container' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -221,6 +221,9 @@ void         fo_block_container_set_padding_start (FoFo       *fo_fo,
 FoProperty * fo_block_container_get_padding_top (FoFo       *fo_fo);
 void         fo_block_container_set_padding_top (FoFo       *fo_fo,
                                                  FoProperty *new_padding_top);
+FoProperty * fo_block_container_get_reference_orientation (FoFo       *fo_fo);
+void         fo_block_container_set_reference_orientation (FoFo       *fo_fo,
+                                                           FoProperty *new_reference_orientation);
 FoProperty * fo_block_container_get_space_after (FoFo       *fo_fo);
 void         fo_block_container_set_space_after (FoFo       *fo_fo,
                                                  FoProperty *new_space_after);

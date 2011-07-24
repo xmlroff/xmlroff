@@ -92,7 +92,7 @@ void
 fo_property_width_init (FoPropertyWidth *width)
 {
   FO_PROPERTY (width)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("auto"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("auto"));
 }
 
 /**
@@ -183,7 +183,7 @@ fo_property_width_resolve_enum (const gchar *token,
 
   if (strcmp (token, "auto") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

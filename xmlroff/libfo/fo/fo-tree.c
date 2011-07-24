@@ -2,7 +2,7 @@
  * fo-tree.c: Formatting object tree root
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -36,7 +36,7 @@ struct _FoTree
   GHashTable *id_hash;
   GHashTable *master_name_hash;
   GHashTable *page_sequence_master_name_hash;
-  FoFo *default_master;
+  FoFo       *default_master;
 };
 
 struct _FoTreeClass
@@ -45,15 +45,16 @@ struct _FoTreeClass
   
 };
 
-static void fo_tree_init        (FoTree      *tree);
-static void fo_tree_class_init  (FoTreeClass *klass);
-static void fo_tree_finalize    (GObject           *object);
-static void fo_tree_free_hash_key (gpointer key,
-				   gpointer value,
-				   gpointer user_data);
-static void fo_tree_debug_dump_properties (FoFo *fo, gint depth);
-static gboolean fo_tree_validate_content (FoFo *fo,
-					  GError **error);
+static void _init                  (FoTree      *tree);
+static void _class_init            (FoTreeClass *klass);
+static void _dispose               (GObject     *object);
+static void _free_hash_key         (gpointer     key,
+				    gpointer     value,
+				    gpointer     user_data);
+static void _debug_dump_properties (FoFo        *fo,
+				    gint         depth);
+static gboolean _validate_content  (FoFo        *fo,
+				    GError     **error);
 
 static gpointer parent_class;
 
@@ -76,12 +77,12 @@ fo_tree_get_type (void)
         sizeof (FoTreeClass),
         (GBaseInitFunc) NULL,
         (GBaseFinalizeFunc) NULL,
-        (GClassInitFunc) fo_tree_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoTree),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_tree_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
       
@@ -94,13 +95,13 @@ fo_tree_get_type (void)
 }
 
 /**
- * fo_tree_init:
+ * _init:
  * @tree: #FoTree object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoTree.
  **/
-void
-fo_tree_init (FoTree *tree)
+static void
+_init (FoTree *tree)
 {
   tree->id_hash = g_hash_table_new (g_str_hash,
 				    g_str_equal);
@@ -113,53 +114,60 @@ fo_tree_init (FoTree *tree)
 }
 
 /**
- * fo_tree_class_init:
+ * _class_init:
  * @klass: #FoTreeClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoTreeClass.
  **/
-void
-fo_tree_class_init (FoTreeClass *klass)
+static void
+_class_init (FoTreeClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoFoClass *fo_fo_class = FO_FO_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_tree_finalize;
+  object_class->dispose = _dispose;
 
-  fo_fo_class->debug_dump_properties = fo_tree_debug_dump_properties;
-  fo_fo_class->validate_content = fo_tree_validate_content;
+  fo_fo_class->debug_dump_properties = _debug_dump_properties;
+  fo_fo_class->validate_content = _validate_content;
   /* No properties so no need to resolve property attributes. */
   fo_fo_class->resolve_property_attributes = NULL;
 }
 
 static void
-fo_tree_finalize (GObject *object)
+_dispose (GObject *object)
 {
   FoTree *tree;
 
   tree = FO_TREE (object);
 
   g_hash_table_foreach (tree->id_hash,
-			fo_tree_free_hash_key,
+			_free_hash_key,
 			NULL);
   g_hash_table_destroy (tree->id_hash);
   tree->id_hash = NULL;
 
   g_hash_table_foreach (tree->master_name_hash,
-			fo_tree_free_hash_key,
+			_free_hash_key,
 			NULL);
   g_hash_table_destroy (tree->master_name_hash);
   tree->master_name_hash = NULL;
 
   g_hash_table_foreach (tree->page_sequence_master_name_hash,
-			fo_tree_free_hash_key,
+			_free_hash_key,
 			NULL);
   g_hash_table_destroy (tree->page_sequence_master_name_hash);
   tree->page_sequence_master_name_hash = NULL;
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  fo_node_traverse (FO_NODE (tree),
+		    G_POST_ORDER,
+		    G_TRAVERSE_ALL,
+		    -1,
+		    fo_fo_release,
+		    NULL);
+
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 
@@ -173,13 +181,14 @@ fo_tree_finalize (GObject *object)
 FoFo*
 fo_tree_new (void)
 {
-  return FO_FO (g_object_new (fo_tree_get_type (), NULL));
+  return FO_FO (g_object_new (fo_tree_get_type (),
+			      NULL));
 }
 
 static void
-fo_tree_free_hash_key (gpointer key,
-		       gpointer value G_GNUC_UNUSED,
-		       gpointer user_data G_GNUC_UNUSED)
+_free_hash_key (gpointer key,
+		gpointer value G_GNUC_UNUSED,
+		gpointer user_data G_GNUC_UNUSED)
 {
   g_free (key);
 }
@@ -293,8 +302,18 @@ fo_tree_master_name_get (FoFo        *tree,
   g_return_val_if_fail (FO_IS_TREE (tree), NULL);
   g_return_val_if_fail (name != NULL, NULL);
 
-  return g_hash_table_lookup (FO_TREE (tree)->master_name_hash,
-			      name);
+  FoFo *master =
+    g_hash_table_lookup (FO_TREE (tree)->master_name_hash,
+			 name);
+
+  if (master == NULL)
+    {
+      master =
+	fo_tree_page_sequence_master_name_get (tree,
+					       name);
+    }
+
+  return master;
 }
 
 /**
@@ -356,7 +375,7 @@ fo_tree_page_sequence_master_name_get (FoFo *tree,
  * 
  * Gets the default page master of @tree.
  * 
- * Return value: The default page sequence master of @fo.
+ * Return value: The default page sequence master of @tree.
  **/
 FoFo*
 fo_tree_default_master_get (FoFo *tree)
@@ -375,9 +394,9 @@ typedef struct _FoTreeSortedHashDumpData
 } FoTreeSortedHashDumpData;
 
 static void
-fo_tree_hash_key_to_list (gpointer key,
-			  gpointer value G_GNUC_UNUSED,
-			  gpointer data)
+_hash_key_to_list (gpointer key,
+		   gpointer value G_GNUC_UNUSED,
+		   gpointer data)
 {
   FoTreeSortedHashDumpData *hash_dump_data =
     (FoTreeSortedHashDumpData *) data;
@@ -388,8 +407,8 @@ fo_tree_hash_key_to_list (gpointer key,
 }
 
 static void
-fo_tree_debug_dump_hash_from_keys (gpointer data,
-				   gpointer user_data)
+_debug_dump_hash_from_keys (gpointer data,
+			    gpointer user_data)
 {
   FoTreeSortedHashDumpData *hash_dump_data =
     (FoTreeSortedHashDumpData *) user_data;
@@ -404,29 +423,29 @@ fo_tree_debug_dump_hash_from_keys (gpointer data,
 }
 
 static void
-fo_tree_debug_dump_sorted_hash (GHashTable *hash,
-				gint depth)
+_debug_dump_sorted_hash (GHashTable *hash,
+			 gint depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
   FoTreeSortedHashDumpData hash_dump_data = { hash, NULL, indent };
 
   g_hash_table_foreach (hash,
-			fo_tree_hash_key_to_list,
+			_hash_key_to_list,
 			&hash_dump_data);
 
   hash_dump_data.keys = g_slist_sort (hash_dump_data.keys,
 				      (GCompareFunc) strcmp);
 
   g_slist_foreach (hash_dump_data.keys,
-		   fo_tree_debug_dump_hash_from_keys,
+		   _debug_dump_hash_from_keys,
 		   (gpointer) &hash_dump_data);
 
   g_slist_free (hash_dump_data.keys);
   g_free (indent);
 }
 
-void
-fo_tree_debug_dump_properties (FoFo *fo, gint depth)
+static void
+_debug_dump_properties (FoFo *fo, gint depth)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_TREE (fo));
@@ -445,8 +464,8 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 	     G_LOG_LEVEL_DEBUG,
 	     "%smaster-name hash:",
 	     indent);
-      fo_tree_debug_dump_sorted_hash (fo_tree->master_name_hash,
-				      depth + 1);
+      _debug_dump_sorted_hash (fo_tree->master_name_hash,
+			       depth + 1);
     }
 
   if (fo_tree->page_sequence_master_name_hash != NULL)
@@ -455,8 +474,8 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 	     G_LOG_LEVEL_DEBUG,
 	     "%spage-sequence-master-name hash:",
 	     indent);
-      fo_tree_debug_dump_sorted_hash (fo_tree->page_sequence_master_name_hash,
-				      depth + 1);
+      _debug_dump_sorted_hash (fo_tree->page_sequence_master_name_hash,
+			       depth + 1);
     }
 
   if (fo_tree->id_hash != NULL)
@@ -465,8 +484,8 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
 	     G_LOG_LEVEL_DEBUG,
 	     "%sid hash:",
 	     indent);
-      fo_tree_debug_dump_sorted_hash (fo_tree->id_hash,
-				      depth + 1);
+      _debug_dump_sorted_hash (fo_tree->id_hash,
+			       depth + 1);
     }
 
   g_free (indent);
@@ -474,9 +493,9 @@ fo_tree_debug_dump_properties (FoFo *fo, gint depth)
   FO_FO_CLASS (parent_class)->debug_dump_properties (fo, depth + 2);
 }
 
-gboolean
-fo_tree_validate_content (FoFo *fo,
-			  GError **error)
+static gboolean
+_validate_content (FoFo *fo,
+		   GError **error)
 {
   GError *tmp_error;
 

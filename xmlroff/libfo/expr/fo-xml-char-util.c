@@ -4,11 +4,12 @@
  * Copyright (C) 1998-2002 Daniel Veillard.
  * Copyright (C) 2001-2002 Sun Microsystems.
  * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  * All Rights Reserved.
  *
  * Based on 'parserInternals.c' from libxml2 by Daniel Veillard.
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  **/
 
 #include <glib.h>

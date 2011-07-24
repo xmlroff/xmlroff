@@ -1,8 +1,8 @@
 /* Fo
  * fo-basic-link-private.h: Structures private to 'basic-link' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -10,9 +10,8 @@
 #ifndef __FO_BASIC_LINK_PRIVATE_H__
 #define __FO_BASIC_LINK_PRIVATE_H__
 
-#include <libfo/fo/fo-fo.h>
-#include <libfo/fo/fo-marker-parent-private.h>
-#include <libfo/fo/fo-basic-link.h>
+#include "fo/fo-marker-parent-private.h"
+#include "fo/fo-basic-link.h"
 
 G_BEGIN_DECLS
 

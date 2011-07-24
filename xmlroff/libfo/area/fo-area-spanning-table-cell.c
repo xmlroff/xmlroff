@@ -2,7 +2,7 @@
  * fo-area-spanning-table-cell.c: Area object for spanning-table-cell formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -27,16 +27,16 @@
 #include "property/fo-property-keep-with-previous-within-column.h"
 #include "property/fo-property-keep-with-previous-within-page.h"
 
-static void fo_area_spanning_table_cell_class_init  (FoAreaSpanningTableCellClass *klass);
-static void fo_area_spanning_table_cell_finalize    (GObject           *object);
+static void _class_init  (FoAreaSpanningTableCellClass *klass);
+static void _finalize    (GObject           *object);
 
-static void fo_area_spanning_table_cell_debug_dump_properties (FoArea *area,
-							      gint depth);
-static FoArea* fo_area_spanning_table_cell_size_request (FoArea *child);
-static FoArea* fo_area_spanning_table_cell_split_before_height (FoArea *area,
-						      gfloat max_height);
-static gboolean fo_area_spanning_table_cell_split_before_height_check (FoArea *area,
-							     gfloat max_height);
+static void     _debug_dump_properties     (FoArea *area,
+					    gint    depth);
+static FoArea*  _size_request              (FoArea *child);
+static FoArea*  _split_before_height       (FoArea *area,
+					    gdouble max_height);
+static gboolean _split_before_height_check (FoArea *area,
+					    gdouble max_height);
 
 static gpointer parent_class;
 
@@ -60,7 +60,7 @@ fo_area_spanning_table_cell_get_type (void)
         sizeof (FoAreaSpanningTableCellClass),
         (GBaseInitFunc) NULL,
         (GBaseFinalizeFunc) NULL,
-        (GClassInitFunc) fo_area_spanning_table_cell_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoAreaSpanningTableCell),
@@ -77,23 +77,35 @@ fo_area_spanning_table_cell_get_type (void)
   return object_type;
 }
 
+/**
+ * _class_init:
+ * @klass: #FoAreaSpanningTableCellClass object to initialise.
+ * 
+ * Implements #GClassInitFunc for #FoAreaSpanningTableCellClass.
+ **/
 static void
-fo_area_spanning_table_cell_class_init (FoAreaSpanningTableCellClass *klass)
+_class_init (FoAreaSpanningTableCellClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_area_spanning_table_cell_finalize;
+  object_class->finalize = _finalize;
 
-  FO_AREA_CLASS (klass)->debug_dump_properties = fo_area_spanning_table_cell_debug_dump_properties;
-  FO_AREA_CLASS (klass)->size_request = fo_area_spanning_table_cell_size_request;
-  FO_AREA_CLASS (klass)->split_before_height = fo_area_spanning_table_cell_split_before_height;
-  FO_AREA_CLASS (klass)->split_before_height_check = fo_area_spanning_table_cell_split_before_height_check;
+  FO_AREA_CLASS (klass)->debug_dump_properties = _debug_dump_properties;
+  FO_AREA_CLASS (klass)->size_request = _size_request;
+  FO_AREA_CLASS (klass)->split_before_height = _split_before_height;
+  FO_AREA_CLASS (klass)->split_before_height_check = _split_before_height_check;
 }
 
+/**
+ * _finalize:
+ * @object: #FoAreaSpanningTableCell object to finalize.
+ * 
+ * Implements #GObjectFinalizeFunc for #FoAreaSpanningTableCell.
+ **/
 static void
-fo_area_spanning_table_cell_finalize (GObject *object)
+_finalize (GObject *object)
 {
   FoAreaSpanningTableCell *fo_area_spanning_table_cell;
 
@@ -122,7 +134,7 @@ fo_area_spanning_table_cell_accumulate_proxy_available_height (gpointer value,
 							       gpointer data)
 {
   FoArea *proxy = FO_AREA (value);
-  gfloat *total = (gfloat *) data;
+  gdouble *total = (gdouble *) data;
   
   *total += fo_area_get_available_height (proxy);
 }
@@ -168,9 +180,9 @@ fo_area_spanning_table_cell_signal_test (FoArea     *signallee,
 					 GParamSpec *param G_GNUC_UNUSED,
 					 FoArea     *signaller G_GNUC_UNUSED)
 {
-  gfloat old_real_available_height;
-  gfloat new_real_available_height;
-  gfloat real_height;
+  gdouble old_real_available_height;
+  gdouble new_real_available_height;
+  gdouble real_height;
 
   old_real_available_height = FO_AREA_SPANNING_TABLE_CELL (signallee)->real_available_height;
   real_height = FO_AREA_SPANNING_TABLE_CELL (signallee)->real_height;
@@ -201,7 +213,7 @@ fo_area_spanning_table_cell_signal_test (FoArea     *signallee,
 		      fo_area_area_get_border_start (signallee) +
 		      fo_area_area_get_padding_start (signallee));
 
-  gfloat total_child_height = 0.0;
+  gdouble total_child_height = 0.0;
   fo_area_children_foreach (signallee,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
@@ -214,7 +226,7 @@ fo_area_spanning_table_cell_signal_test (FoArea     *signallee,
   FoEnumEnum display_align =
     fo_enum_get_value (fo_cell_display_align);
 
-  gfloat next_y;
+  gdouble next_y;
   switch (display_align)
     {
     case FO_ENUM_ENUM_AUTO:
@@ -350,7 +362,7 @@ fo_area_spanning_table_cell_debug_dump_proxy (gpointer value, gpointer data)
 }
 
 /**
- * fo_area_spanning_table_cell_debug_dump_properties:
+ * _debug_dump_properties:
  * @area:  The #FoArea object
  * @depth: Indent level to add to the output
  * 
@@ -358,8 +370,8 @@ fo_area_spanning_table_cell_debug_dump_proxy (gpointer value, gpointer data)
  * debug_dump_properties method of parent class.
  **/
 void
-fo_area_spanning_table_cell_debug_dump_properties (FoArea *area,
-					  gint depth)
+_debug_dump_properties (FoArea *area,
+			gint    depth)
 {
   FoAreaSpanningTableCell *spanning_table_cell;
   gchar *indent = g_strnfill (depth * 2, ' ');
@@ -407,7 +419,7 @@ fo_area_spanning_table_cell_debug_dump_properties (FoArea *area,
  *
  * Return value: The "real_height" property value
 **/
-gfloat
+gdouble
 fo_area_spanning_table_cell_get_real_height (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -424,7 +436,7 @@ fo_area_spanning_table_cell_get_real_height (FoArea *fo_area)
  *
  * Return value: The "real-available-height" property value
 **/
-gfloat
+gdouble
 fo_area_spanning_table_cell_get_real_available_height (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -434,7 +446,7 @@ fo_area_spanning_table_cell_get_real_available_height (FoArea *fo_area)
 }
 
 /**
- * fo_area_spanning_table_cell_size_request:
+ * _size_request:
  * @child: Child area
  * 
  * Check that the parent area of @child has sufficient space for
@@ -445,8 +457,8 @@ fo_area_spanning_table_cell_get_real_available_height (FoArea *fo_area)
  * Return value: Pointer to the last area generated from @child after
  * any reallocation and resizing
  **/
-FoArea*
-fo_area_spanning_table_cell_size_request (FoArea *child)
+static FoArea *
+_size_request (FoArea *child)
 {
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -463,7 +475,7 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
   FoArea *parent = fo_area_parent (child);
 
   /* Find the total height of all children. */
-  gfloat total_child_height = 0.0;
+  gdouble total_child_height = 0.0;
   fo_area_children_foreach (parent,
 			    G_TRAVERSE_ALL,
 			    &fo_area_accumulate_height,
@@ -471,7 +483,7 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 
   /* Ideally, this table cell would be just big enough for its borders
      and padding plus the height needed for its children. */
-  gfloat parent_target_height = total_child_height +
+  gdouble parent_target_height = total_child_height +
     fo_area_area_get_border_before (parent) +
     fo_area_area_get_padding_before (parent) +
     fo_area_area_get_padding_after (parent) +
@@ -484,7 +496,7 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
   FoDatatype *fo_cell_bpdim =
     fo_property_get_value (fo_table_cell_get_block_progression_dimension (parent->generated_by));
 
-  gfloat parent_use_height = 0.0;
+  gdouble parent_use_height = 0.0;
   if (FO_IS_LENGTH_RANGE (fo_cell_bpdim))
     {
       FoDatatype *min_datatype =
@@ -539,7 +551,7 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
       g_assert_not_reached ();
     }
 
-  gfloat parent_real_available_height =
+  gdouble parent_real_available_height =
     fo_area_get_available_height (parent);
 
   g_list_foreach (FO_AREA_SPANNING_TABLE_CELL (parent)->proxies,
@@ -558,7 +570,7 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
      is allowed by the FoFo). */
   if (parent_real_available_height < parent_use_height)
     {
-      gfloat remaining_height = parent_use_height;
+      gdouble remaining_height = parent_use_height;
       gint row_number;
 
       fo_area_area_set_height (parent,
@@ -626,7 +638,7 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
       FoEnumEnum display_align =
 	fo_enum_get_value (fo_cell_display_align);
 
-      gfloat next_y;
+      gdouble next_y;
       switch (display_align)
 	{
 	case FO_ENUM_ENUM_AUTO:
@@ -697,12 +709,12 @@ fo_area_spanning_table_cell_size_request (FoArea *child)
 /* return the new area containing what comes after the split */
 /* leave @area as area remaining after split */
 FoArea*
-fo_area_spanning_table_cell_split_before_height (FoArea *area,
-					gfloat max_height)
+_split_before_height (FoArea *area,
+		      gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_SPANNING_TABLE_CELL (area), NULL);
   g_return_val_if_fail (fo_area_n_children (area) > 0, NULL);
@@ -771,7 +783,7 @@ fo_area_spanning_table_cell_split_before_height (FoArea *area,
 	       fo_enum_get_value (child_kwpwc_datatype) == FO_ENUM_ENUM_AUTO))
 	    {
 	      /* If got to here, all relevant keeps are 'auto' */
-	      FoArea *clone = fo_area_clone (area);
+	      FoArea *clone = g_object_ref_sink (fo_area_clone (area));
 
 	      fo_area_unlink_with_next_siblings (use_child_area);
 	      fo_area_insert_with_next_siblings (clone, 0, use_child_area);
@@ -780,28 +792,29 @@ fo_area_spanning_table_cell_split_before_height (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */
-	      return fo_area_spanning_table_cell_split_before_height (area,
-							     minus_prev_y +
-							     prev_height);
+	      return _split_before_height (area,
+					   minus_prev_y +
+					   prev_height);
 	    }
 	}
     }
   else
     {
       /* max_height falls within use_child_area */
-      gboolean child_can_split = fo_area_split_before_height_check (use_child_area,
-								    max_height -
-								    minus_child_y);
+      gboolean child_can_split =
+	fo_area_split_before_height_check (use_child_area,
+					   max_height -
+					   minus_child_y);
 
       if (child_can_split)
 	{
-	  FoArea *clone = fo_area_clone (area);
+	  FoArea *clone = g_object_ref_sink (fo_area_clone (area));
 	  FoArea *split_child = fo_area_split_before_height (use_child_area,
 							     max_height -
 							     minus_child_y);
@@ -814,8 +827,8 @@ fo_area_spanning_table_cell_split_before_height (FoArea *area,
 	{
 	  /* If can't split use_child_area, maybe
 	     can split at lower height */
-	  return fo_area_spanning_table_cell_split_before_height (area,
-							 minus_child_y);
+	  return _split_before_height (area,
+				       minus_child_y);
 	}
     }
 }
@@ -823,12 +836,12 @@ fo_area_spanning_table_cell_split_before_height (FoArea *area,
 /* return the new area containing what comes after the split */
 /* leave @area as area remaining after split */
 gboolean
-fo_area_spanning_table_cell_split_before_height_check (FoArea *area,
-					     gfloat max_height)
+_split_before_height_check (FoArea *area,
+			    gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_SPANNING_TABLE_CELL (area), FALSE);
   g_return_val_if_fail (fo_area_n_children (area) > 0, FALSE);
@@ -901,15 +914,15 @@ fo_area_spanning_table_cell_split_before_height_check (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */
-	      return fo_area_spanning_table_cell_split_before_height_check (area,
-								   minus_prev_y +
-								   prev_height);
+	      return _split_before_height_check (area,
+						 minus_prev_y +
+						 prev_height);
 	    }
 	}
     }
@@ -928,8 +941,8 @@ fo_area_spanning_table_cell_split_before_height_check (FoArea *area,
 	{
 	  /* If can't split use_child_area, maybe
 	     can split at lower height */
-	  return fo_area_spanning_table_cell_split_before_height_check (area,
-							       minus_child_y);
+	  return _split_before_height_check (area,
+					     minus_child_y);
 	}
     }
 }

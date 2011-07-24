@@ -112,7 +112,7 @@ void
 fo_property_line_height_init (FoPropertyLineHeight *line_height)
 {
   FO_PROPERTY (line_height)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -216,7 +216,7 @@ fo_property_line_height_resolve_enum (const gchar *token,
 
   if (strcmp (token, "normal") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

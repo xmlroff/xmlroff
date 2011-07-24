@@ -2,7 +2,8 @@
  * fo-all-property.h: Header file that includes all property header files
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2008-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -25,6 +26,7 @@ G_BEGIN_DECLS
 #include <libfo/property/fo-property-background-color.h>
 #include <libfo/property/fo-property-background-image.h>
 #include <libfo/property/fo-property-baseline-shift.h>
+#include <libfo/property/fo-property-blank-or-not-blank.h>
 #include <libfo/property/fo-property-block-progression-dimension.h>
 #include <libfo/property/fo-property-block-progression-dimension-minimum.h>
 #include <libfo/property/fo-property-block-progression-dimension-optimum.h>
@@ -77,6 +79,7 @@ G_BEGIN_DECLS
 #include <libfo/property/fo-property-content-height.h>
 #include <libfo/property/fo-property-content-type.h>
 #include <libfo/property/fo-property-content-width.h>
+#include <libfo/property/fo-property-country.h>
 #include <libfo/property/fo-property-direction.h>
 #include <libfo/property/fo-property-display-align.h>
 #include <libfo/property/fo-property-dominant-baseline.h>
@@ -89,11 +92,13 @@ G_BEGIN_DECLS
 #include <libfo/property/fo-property-font-style.h>
 #include <libfo/property/fo-property-font-variant.h>
 #include <libfo/property/fo-property-font-weight.h>
+#include <libfo/property/fo-property-force-page-count.h>
 #include <libfo/property/fo-property-format.h>
 #include <libfo/property/fo-property-grouping-separator.h>
 #include <libfo/property/fo-property-grouping-size.h>
 #include <libfo/property/fo-property-height.h>
 #include <libfo/property/fo-property-id.h>
+#include <libfo/property/fo-property-initial-page-number.h>
 #include <libfo/property/fo-property-inline-progression-dimension.h>
 #include <libfo/property/fo-property-inline-progression-dimension-minimum.h>
 #include <libfo/property/fo-property-inline-progression-dimension-optimum.h>
@@ -110,6 +115,7 @@ G_BEGIN_DECLS
 #include <libfo/property/fo-property-keep-with-previous-within-column.h>
 #include <libfo/property/fo-property-keep-with-previous-within-line.h>
 #include <libfo/property/fo-property-keep-with-previous-within-page.h>
+#include <libfo/property/fo-property-language.h>
 #include <libfo/property/fo-property-letter-value.h>
 #include <libfo/property/fo-property-linefeed-treatment.h>
 #include <libfo/property/fo-property-line-height.h>
@@ -121,10 +127,12 @@ G_BEGIN_DECLS
 #include <libfo/property/fo-property-margin-top.h>
 #include <libfo/property/fo-property-master-name.h>
 #include <libfo/property/fo-property-master-reference.h>
+#include <libfo/property/fo-property-maximum-repeats.h>
 #include <libfo/property/fo-property-media-usage.h>
 #include <libfo/property/fo-property-number-columns-repeated.h>
 #include <libfo/property/fo-property-number-columns-spanned.h>
 #include <libfo/property/fo-property-number-rows-spanned.h>
+#include <libfo/property/fo-property-odd-or-even.h>
 #include <libfo/property/fo-property-orphans.h>
 #include <libfo/property/fo-property-overflow.h>
 #include <libfo/property/fo-property-padding.h>
@@ -145,9 +153,12 @@ G_BEGIN_DECLS
 #include <libfo/property/fo-property-padding-start-length.h>
 #include <libfo/property/fo-property-padding-top.h>
 #include <libfo/property/fo-property-page-height.h>
+#include <libfo/property/fo-property-page-position.h>
 #include <libfo/property/fo-property-page-width.h>
+#include <libfo/property/fo-property-precedence.h>
 #include <libfo/property/fo-property-provisional-distance-between-starts.h>
 #include <libfo/property/fo-property-provisional-label-separation.h>
+#include <libfo/property/fo-property-reference-orientation.h>
 #include <libfo/property/fo-property-ref-id.h>
 #include <libfo/property/fo-property-region-name.h>
 #include <libfo/property/fo-property-role.h>

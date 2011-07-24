@@ -106,7 +106,7 @@ void
 fo_property_font_style_init (FoPropertyFontStyle *font_style)
 {
   FO_PROPERTY (font_style)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -211,7 +211,7 @@ fo_property_font_style_resolve_enum (const gchar *token,
       (strcmp (token, "oblique") == 0) ||
       (strcmp (token, "backslant") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

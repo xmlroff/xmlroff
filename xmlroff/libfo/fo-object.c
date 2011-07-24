@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2001 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -20,14 +21,14 @@
  * functions.
  */
 
-static void     fo_object_base_class_init                (FoObjectClass *klass);
-static void     fo_object_class_init                     (FoObjectClass *klass);
-static void     fo_object_finalize                       (GObject       *object);
+static void     _base_class_init                (FoObjectClass *klass);
+static void     _class_init                     (FoObjectClass *klass);
+static void     _dispose                       (GObject       *object);
 
-static void     fo_object_debug_dump_default             (FoObject      *object,
-							  gint           depth);
-static gchar*   fo_object_debug_sprintf_default          (FoObject      *object);
-static gchar*   fo_object_sprintf_default                (FoObject      *object);
+static void     _debug_dump_default             (FoObject      *object,
+						 gint           depth);
+static gchar*   _debug_sprintf_default          (FoObject      *object);
+static gchar*   _sprintf_default                (FoObject      *object);
 static void     fo_object_log_error_default              (FoObject      *object,
 							  GError       **error);
 static void     fo_object_log_warning_default            (FoObject      *object,
@@ -63,9 +64,9 @@ fo_object_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoObjectClass),
-        (GBaseInitFunc) fo_object_base_class_init,
+        (GBaseInitFunc) _base_class_init,
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_object_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoObject),
@@ -74,7 +75,7 @@ fo_object_get_type (void)
 	NULL		/* value_table */
       };
       
-      object_type = g_type_register_static (G_TYPE_OBJECT,
+      object_type = g_type_register_static (G_TYPE_INITIALLY_UNOWNED,
                                             "FoObject",
                                             &object_info,
 					    G_TYPE_FLAG_ABSTRACT);
@@ -84,17 +85,17 @@ fo_object_get_type (void)
 }
 
 /**
- * fo_object_base_init:
+ * _base_class_init:
  * @klass: #FoObjectClass object to initialise.
  * 
  * Implements #GClassBaseInit for #FoObjectClass.
  **/
-void
-fo_object_base_class_init (FoObjectClass *klass)
+static void
+_base_class_init (FoObjectClass *klass)
 {
-  klass->debug_dump             = fo_object_debug_dump_default;
-  klass->debug_sprintf          = fo_object_debug_sprintf_default;
-  klass->print_sprintf          = fo_object_sprintf_default;
+  klass->debug_dump             = _debug_dump_default;
+  klass->debug_sprintf          = _debug_sprintf_default;
+  klass->print_sprintf          = _sprintf_default;
   klass->log_error              = fo_object_log_error_default;
   klass->log_warning            = fo_object_log_warning_default;
   klass->log_debug              = fo_object_log_debug_default;
@@ -105,35 +106,33 @@ fo_object_base_class_init (FoObjectClass *klass)
 }
 
 /**
- * fo_object_class_init:
+ * _class_init:
  * @klass: #FoObjectClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoObjectClass.
  **/
-void
-fo_object_class_init (FoObjectClass *klass)
+static void
+_class_init (FoObjectClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_object_finalize;
+  object_class->dispose = _dispose;
 }
 
 /**
- * fo_object_finalize:
- * @object: #FoObject object to finalize.
+ * _dispose:
+ * @object: #FoObject object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoObject.
+ * Implements #GObjectDisposeFunc for #FoObject.
  **/
-void
-fo_object_finalize (GObject *object)
+static void
+_dispose (GObject *object)
 {
-  FoObject *fo_object;
+  FoObject *fo_object = FO_OBJECT (object);
 
-  fo_object = FO_OBJECT (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 
@@ -259,10 +258,11 @@ fo_object_sprintf (gpointer object)
     }
   else if (!FO_IS_OBJECT (object))
     {
-      return g_strdup_printf ("GObject but not an FoObject:: %s (%p : %d)",
+      return g_strdup_printf ("GObject but not an FoObject:: %s (%p : %d%s)",
 			      g_type_name (G_TYPE_FROM_INSTANCE (object)),
 			      object,
-			      ((GObject *) object)->ref_count);
+			      ((GObject *) object)->ref_count,
+			      g_object_is_floating (object) ? " (floating)" : "");
     }
   else
     {
@@ -271,7 +271,7 @@ fo_object_sprintf (gpointer object)
 }
 
 /**
- * fo_object_debug_dump_default:
+ * _debug_dump_default:
  * @object: The #FoObject object.
  * @depth:  Indent level to add to the output.
  * 
@@ -279,8 +279,8 @@ fo_object_sprintf (gpointer object)
  *
  * Return value: Result of debug_sprintf method of class of @object.
  **/
-void
-fo_object_debug_dump_default (FoObject *object,
+static void
+_debug_dump_default (FoObject *object,
 			      gint      depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
@@ -302,15 +302,15 @@ fo_object_debug_dump_default (FoObject *object,
 }
 
 /**
- * fo_object_debug_sprintf_default:
+ * _debug_sprintf_default:
  * @object: The #FoObject object.
  * 
  * Default debug_sprintf method.
  *
  * Return value: Type name, address, and reference count of @object.
  **/
-gchar*
-fo_object_debug_sprintf_default (FoObject *object)
+static gchar*
+_debug_sprintf_default (FoObject *object)
 {
   g_return_val_if_fail (object != NULL, NULL);
   g_return_val_if_fail (FO_IS_OBJECT (object), NULL);
@@ -321,23 +321,24 @@ fo_object_debug_sprintf_default (FoObject *object)
     }
   else
     {
-      return g_strdup_printf ("%s (%p : %d)",
+      return g_strdup_printf ("%s (%p : %d%s)",
 			      g_type_name (G_TYPE_FROM_INSTANCE (object)),
 			      object,
-			      ((GObject *) object)->ref_count);
+			      ((GObject *) object)->ref_count,
+			      g_object_is_floating (object) ? " (floating)" : "");
     }
 }
 
 /**
- * fo_object_sprintf_default:
+ * _sprintf_default:
  * @object: The #FoObject object.
  * 
  * Default sprintf method.
  *
  * Return value: Text warning that @object does not have a 'sprintf' function.
  **/
-gchar*
-fo_object_sprintf_default (FoObject *object)
+static gchar*
+_sprintf_default (FoObject *object)
 {
   return g_strdup_printf ("%s has no 'sprintf' function.",
 			  g_type_name (G_TYPE_FROM_INSTANCE (object)));

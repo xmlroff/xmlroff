@@ -31,6 +31,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-type-condity-private.h	\
 	fo-property-background-image.c	\
 	fo-property-background-image.h	\
+	fo-property-blank-or-not-blank.c	\
+	fo-property-blank-or-not-blank.h	\
 	fo-property-block-progression-dimension.c	\
 	fo-property-block-progression-dimension.h	\
 	fo-property-block-progression-dimension-minimum.c	\
@@ -134,6 +136,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-content-type.h	\
 	fo-property-content-width.c	\
 	fo-property-content-width.h	\
+	fo-property-country.c	\
+	fo-property-country.h	\
 	fo-property-direction.c		\
 	fo-property-direction.h		\
 	fo-property-display-align.c	\
@@ -144,6 +148,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-extent.h		\
 	fo-property-flow-name.c		\
 	fo-property-flow-name.h		\
+	fo-property-force-page-count.c	\
+	fo-property-force-page-count.h	\
 	fo-property-format.c	\
 	fo-property-format.h	\
 	fo-property-grouping-separator.c	\
@@ -154,6 +160,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-height.h	\
 	fo-property-id.c	\
 	fo-property-id.h	\
+	fo-property-initial-page-number.c	\
+	fo-property-initial-page-number.h	\
 	fo-property-inline-progression-dimension.c	\
 	fo-property-inline-progression-dimension.h	\
 	fo-property-inline-progression-dimension-minimum.c	\
@@ -180,6 +188,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-keep-with-previous-within-column.h	\
 	fo-property-keep-with-previous-within-page.c	\
 	fo-property-keep-with-previous-within-page.h	\
+	fo-property-language.c	\
+	fo-property-language.h	\
 	fo-property-letter-value.c	\
 	fo-property-letter-value.h	\
 	fo-property-linefeed-treatment.c	\
@@ -200,6 +210,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-master-name.h	\
 	fo-property-master-reference.c	\
 	fo-property-master-reference.h	\
+	fo-property-maximum-repeats.c	\
+	fo-property-maximum-repeats.h	\
 	fo-property-media-usage.c	\
 	fo-property-media-usage.h	\
 	fo-property-number-columns-repeated.c	\
@@ -208,6 +220,8 @@ libfo_property_la_SOURCES =	\
 	fo-property-number-columns-spanned.h	\
 	fo-property-number-rows-spanned.c	\
 	fo-property-number-rows-spanned.h	\
+	fo-property-odd-or-even.c	\
+	fo-property-odd-or-even.h	\
 	fo-property-orphans.c	\
 	fo-property-orphans.h	\
 	fo-property-overflow.c	\
@@ -248,14 +262,20 @@ libfo_property_la_SOURCES =	\
 	fo-property-padding.h	\
 	fo-property-page-height.c	\
 	fo-property-page-height.h	\
+	fo-property-page-position.c	\
+	fo-property-page-position.h	\
 	fo-property-page-width.c	\
 	fo-property-page-width.h	\
+	fo-property-precedence.c	\
+	fo-property-precedence.h	\
 	fo-property-provisional-distance-between-starts.c	\
 	fo-property-provisional-distance-between-starts.h	\
 	fo-property-provisional-label-separation.c	\
 	fo-property-provisional-label-separation.h	\
 	fo-property-ref-id.c	\
 	fo-property-ref-id.h	\
+	fo-property-reference-orientation.c	\
+	fo-property-reference-orientation.h	\
 	fo-property-region-name.c	\
 	fo-property-region-name.h	\
 	fo-property-role.c	\

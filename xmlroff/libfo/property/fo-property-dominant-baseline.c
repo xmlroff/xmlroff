@@ -1,8 +1,8 @@
 /* Fo
  * fo-property-dominant-baseline.c: 'dominant-baseline' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -13,17 +13,27 @@
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
 /*
+Don't use until property is reimplemented in Pango.
 #include "property/fo-property-text-property.h"
 */
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-font-style.h"
 #include "property/fo-property-dominant-baseline.h"
 
-/* dominant-baseline */
-/* Inherited: FALSE */
-/* Shorthand: FALSE */
-/* auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | inherit */
-/* Initial value: auto */
+/**
+ * SECTION:fo-property-dominant-baseline
+ * @short_description: 'dominant-baseline' property
+ *
+ * Inherited: FALSE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | inherit
+ *
+ * Initial value: auto
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;dominant-baseline">http://www.w3.org/TR/xsl11/&num;dominant-baseline</ulink>
+ */
 
 struct _FoPropertyDominantBaseline
 {
@@ -35,18 +45,17 @@ struct _FoPropertyDominantBaselineClass
   FoPropertyClass parent_class;
 };
 
-static void fo_property_dominant_baseline_init         (FoPropertyDominantBaseline      *property_dominant_baseline);
-static void fo_property_dominant_baseline_class_init   (FoPropertyDominantBaselineClass *klass);
-static void fo_property_dominant_baseline_finalize     (GObject       *object);
+static void _init         (FoPropertyDominantBaseline      *property_dominant_baseline);
+static void _class_init   (FoPropertyDominantBaselineClass *klass);
 
-static FoDatatype* fo_property_dominant_baseline_resolve_enum (const gchar *token,
-                                                               FoContext   *context,
-                                                               GError     **error);
-static FoDatatype* fo_property_dominant_baseline_validate (FoDatatype *datatype,
-                                                           FoContext  *context,
-                                                           GError    **error);
+static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
+static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 /*
-static void fo_property_dominant_baseline_text_property_init (FoPropertyTextPropertyIface *iface);
+static void _text_property_init (FoPropertyTextPropertyIface *iface);
 PangoAttribute * fo_property_dominant_baseline_new_attr_from_context (FoProperty *property,
 								      FoContext  *context);
 */
@@ -73,18 +82,18 @@ fo_property_dominant_baseline_get_type (void)
         sizeof (FoPropertyDominantBaselineClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_dominant_baseline_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoPropertyDominantBaseline),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_dominant_baseline_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
       /*
       static const GInterfaceInfo fo_property_text_property_info =
       {
-	(GInterfaceInitFunc) fo_property_dominant_baseline_text_property_init, / * interface_init * /
+	(GInterfaceInitFunc) _text_property_init, / * interface_init * /
         NULL,
         NULL
       };
@@ -103,71 +112,54 @@ fo_property_dominant_baseline_get_type (void)
 }
 
 /**
- * fo_property_dominant_baseline_init:
+ * _init:
  * @dominant_baseline: #FoPropertyDominantBaseline object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoPropertyDominantBaseline.
  **/
-void
-fo_property_dominant_baseline_init (FoPropertyDominantBaseline *dominant_baseline)
+static void
+_init (FoPropertyDominantBaseline *dominant_baseline)
 {
   FO_PROPERTY (dominant_baseline)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
- * fo_property_dominant_baseline_class_init:
+ * _class_init:
  * @klass: #FoPropertyDominantBaselineClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoPropertyDominantBaselineClass.
  **/
-void
-fo_property_dominant_baseline_class_init (FoPropertyDominantBaselineClass *klass)
+static void
+_class_init (FoPropertyDominantBaselineClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_dominant_baseline_finalize;
 
   property_class->is_inherited = FALSE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
-    fo_property_dominant_baseline_resolve_enum;
+    _resolve_enum;
   property_class->validate =
-    fo_property_dominant_baseline_validate;
+    _validate;
   property_class->get_initial =
     fo_property_dominant_baseline_get_initial;
 }
 
 /**
- * fo_property_dominant_baseline_finalize:
- * @object: #FoPropertyDominantBaseline object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyDominantBaseline.
- **/
-void
-fo_property_dominant_baseline_finalize (GObject *object)
-{
-  FoPropertyDominantBaseline *dominant_baseline;
-
-  dominant_baseline = FO_PROPERTY_DOMINANT_BASELINE (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-/**
- * fo_property_dominant_baseline_text_property_init:
+ * _text_property_init:
  * @iface: #FoPropertyTextPropertyIFace structure for this class.
  * 
  * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
 /*
-void
-fo_property_dominant_baseline_text_property_init (FoPropertyTextPropertyIface *iface)
+static void
+_text_property_init (FoPropertyTextPropertyIface *iface)
 {
-  iface->new_attr_from_context = fo_property_dominant_baseline_new_attr_from_context;
+  iface->new_attr = fo_property_dominant_baseline_new_attr;
 }
 */
 
@@ -191,7 +183,7 @@ fo_property_dominant_baseline_new (void)
 }
 
 /**
- * fo_property_dominant_baseline_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -205,10 +197,10 @@ fo_property_dominant_baseline_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_dominant_baseline_resolve_enum (const gchar *token,
-                                            FoContext   *context,
-                                            GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+               FoContext   *context,
+               GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
@@ -227,7 +219,7 @@ fo_property_dominant_baseline_resolve_enum (const gchar *token,
       (strcmp (token, "text-after-edge") == 0) ||
       (strcmp (token, "text-before-edge") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -242,7 +234,7 @@ fo_property_dominant_baseline_resolve_enum (const gchar *token,
 }
 
 /**
- * fo_property_dominant_baseline_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -254,9 +246,9 @@ fo_property_dominant_baseline_resolve_enum (const gchar *token,
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_dominant_baseline_validate (FoDatatype *datatype,
-                                        FoContext  *context,
-                                        GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
@@ -311,7 +303,7 @@ fo_property_dominant_baseline_validate (FoDatatype *datatype,
       token = fo_string_get_value (datatype);
 
       new_datatype =
-        fo_property_dominant_baseline_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
@@ -324,7 +316,7 @@ fo_property_dominant_baseline_validate (FoDatatype *datatype,
       token = fo_name_get_value (datatype);
 
       new_datatype =
-        fo_property_dominant_baseline_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 

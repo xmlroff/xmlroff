@@ -373,9 +373,9 @@ fo_block_fo_get_keep_with_previous (FoFo *fo_block_fo)
  * fo_block_fo_get_padding_after:
  * @fo_block_fo: The @FoBlockFo object
  *
- * Gets the #padding-after-color property of @fo_block_fo
+ * Gets the #padding-after property of @fo_block_fo
  *
- * Return value: The "padding-after-color" property value
+ * Return value: The "padding-after" property value
 **/
 FoProperty*
 fo_block_fo_get_padding_after (FoFo *fo_block_fo)
@@ -390,9 +390,9 @@ fo_block_fo_get_padding_after (FoFo *fo_block_fo)
  * fo_block_fo_get_padding_before:
  * @fo_block_fo: The @FoBlockFo object
  *
- * Gets the #padding-before-color property of @fo_block_fo
+ * Gets the #padding-before property of @fo_block_fo
  *
- * Return value: The "padding-before-color" property value
+ * Return value: The "padding-before" property value
 **/
 FoProperty*
 fo_block_fo_get_padding_before (FoFo *fo_block_fo)
@@ -407,9 +407,9 @@ fo_block_fo_get_padding_before (FoFo *fo_block_fo)
  * fo_block_fo_get_padding_end:
  * @fo_block_fo: The @FoBlockFo object
  *
- * Gets the #padding-end-color property of @fo_block_fo
+ * Gets the #padding-end property of @fo_block_fo
  *
- * Return value: The "padding-end-color" property value
+ * Return value: The "padding-end" property value
 **/
 FoProperty*
 fo_block_fo_get_padding_end (FoFo *fo_block_fo)
@@ -424,9 +424,9 @@ fo_block_fo_get_padding_end (FoFo *fo_block_fo)
  * fo_block_fo_get_padding_start:
  * @fo_block_fo: The @FoBlockFo object
  *
- * Gets the #padding-start-color property of @fo_block_fo
+ * Gets the #padding-start property of @fo_block_fo
  *
- * Return value: The "padding-start-color" property value
+ * Return value: The "padding-start" property value
 **/
 FoProperty*
 fo_block_fo_get_padding_start (FoFo *fo_block_fo)

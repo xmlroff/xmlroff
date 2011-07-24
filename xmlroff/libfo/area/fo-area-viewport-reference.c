@@ -2,7 +2,7 @@
  * fo-area-viewport-reference.c: Combined viewport and reference area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -13,8 +13,8 @@
 static void fo_area_viewport_reference_class_init  (FoAreaViewportReferenceClass *klass);
 static void fo_area_viewport_reference_finalize    (GObject           *object);
 
-static void fo_area_viewport_reference_debug_dump_properties (FoArea *area,
-							      gint depth);
+static void     _debug_dump_properties (FoArea *area,
+					gint    depth);
 
 static gpointer parent_class;
 
@@ -58,7 +58,7 @@ fo_area_viewport_reference_class_init (FoAreaViewportReferenceClass *klass)
   object_class->finalize = fo_area_viewport_reference_finalize;
 
   area_class->debug_dump_properties =
-    fo_area_viewport_reference_debug_dump_properties;
+    _debug_dump_properties;
 }
 
 static void
@@ -87,20 +87,10 @@ fo_area_viewport_reference_new (void)
 
 
 void
-fo_area_viewport_reference_debug_dump_properties (FoArea *area, gint depth)
+_debug_dump_properties (FoArea *area, gint depth)
 {
   g_return_if_fail (area != NULL);
   g_return_if_fail (FO_IS_AREA_VIEWPORT_REFERENCE (area));
 
   FO_AREA_CLASS (parent_class)->debug_dump_properties (area, depth + 1);
-}
-
-FoArea*
-fo_area_viewport_reference_add_child (FoArea *parent, FoArea *child)
-{
-  g_return_val_if_fail (parent != NULL, NULL);
-  g_return_val_if_fail (FO_IS_AREA_VIEWPORT_REFERENCE (parent), NULL);
-  g_return_val_if_fail (child != NULL, NULL);
-
-  return fo_area_real_add_child (parent, child);
 }

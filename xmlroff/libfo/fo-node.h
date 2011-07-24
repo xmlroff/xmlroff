@@ -2,7 +2,7 @@
  * fo-node.h: Base class for objects that are nodes in a tree
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -117,14 +117,12 @@ void    fo_node_children_foreach (FoNode 	    *fo_node,
 FoNode * fo_node_next_sibling (FoNode *fo_node);
 FoNode * fo_node_first_child  (FoNode *fo_node);
 FoNode * fo_node_parent       (FoNode *fo_node);
-#define fo_node_unlink(fo_node)      \
-          g_node_unlink(((FoNode *) (fo_node))->node)
-
-void    fo_node_unlink_with_next_siblings (FoNode *fo_node);
-FoNode* fo_node_insert_with_next_siblings (FoNode *parent,
-					   gint    position,
-					   FoNode *fo_node);
-void    fo_node_debug_dump_tree (FoNode *fo_node,
+void     fo_node_unlink                    (FoNode *fo_node);
+void     fo_node_unlink_with_next_siblings (FoNode *fo_node);
+FoNode * fo_node_insert_with_next_siblings (FoNode *parent,
+					    gint    position,
+					    FoNode *fo_node);
+void     fo_node_debug_dump_tree (FoNode *fo_node,
 				 gint    depth);
 
 G_END_DECLS

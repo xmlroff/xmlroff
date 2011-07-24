@@ -1,8 +1,9 @@
 /* Fo
- * fo-fo.c: Base formatting object of formatting object system
+ * fo-fo.c: Abstract base formatting object of formatting object system
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -30,6 +31,13 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
+
+/**
+ * SECTION:fo-fo
+ * @short_description: Abstract base formatting object
+ *
+ * Abstract base formatting object of formatting object system.
+ */
 
 struct _FoFoAreaIterator
 {
@@ -63,50 +71,65 @@ enum {
   PROP_ELEMENT
 };
 
-static void fo_fo_base_class_init  (FoFoClass *klass);
-static void fo_fo_class_init  (FoFoClass *klass);
-static void fo_fo_set_property (GObject         *object,
-                                  guint            prop_id,
-                                  const GValue    *value,
-                                  GParamSpec      *pspec);
-static void fo_fo_get_property   (GObject         *object,
-                                       guint            prop_id,
-                                       GValue          *value,
-                                       GParamSpec      *pspec);
-static void fo_fo_finalize    (GObject           *object);
+static void _base_class_init  (FoFoClass *klass);
+static void _class_init       (FoFoClass *klass);
+static void _set_property (GObject         *object,
+			   guint            prop_id,
+			   const GValue    *value,
+			   GParamSpec      *pspec);
+static void _get_property (GObject         *object,
+			   guint            prop_id,
+			   GValue          *value,
+			   GParamSpec      *pspec);
+static void _dispose      (GObject         *object);
 
-static void fo_fo_debug_dump (FoObject *object, gint depth);
-static void fo_fo_debug_dump_properties_default (FoFo *area,
-						   gint depth);
-static gchar* fo_fo_sprintf (FoObject *object);
-static void   fo_fo_update_from_context_default (FoFo *fo,
-						 FoContext *context);
-static gboolean fo_fo_resolve_property_attributes_default (FoNode  *fo_node,
-							   gpointer data);
-static gboolean fo_fo_validate_content_default            (FoFo *fo,
-							   GError **error);
-static void   fo_fo_validate_default (FoFo *fo,
-				      FoContext *current_context,
-				      FoContext *parent_context);
-static void   fo_fo_validate2_default (FoFo *fo,
-				       FoContext *current_context,
-				       FoContext *parent_context,
-				       GError   **error);
-static FoFo * fo_fo_clone_default    (FoFo         *original);
-static void   fo_fo_update_after_clone_default (FoFo *clone,
-						FoFo *original);
-static void   fo_fo_area_new_default (FoFo    *fo,
-				      FoDoc   *fo_doc,
-				      FoArea  *parent_area,
-				      FoArea **new_area,
-				      guint    debug_level);
-static void fo_fo_area_new2_default (FoFo *fo,
-				     FoFoAreaNew2Context *context,
-				     GError **error);
-static FoNode* fo_fo_prepend (FoNode *parent,
-			      FoNode *fo);
-static FoNode* fo_fo_append (FoNode *parent,
-			     FoNode *fo);
+static void _debug_dump (FoObject *object,
+			 gint depth);
+static void _debug_dump_properties         (FoFo *fo,
+					    gint  depth);
+static void _debug_dump_properties_default (FoFo *fo,
+					    gint  depth);
+static gchar* _sprintf (FoObject *object);
+static void   _update_from_context_default (FoFo *fo,
+					    FoContext *context);
+static gboolean _resolve_property_attributes_default (FoNode  *fo_node,
+						      gpointer data);
+static void _children_properties_resolve_default (FoFo       *this_fo,
+						  FoArea     *this_fo_parent_area,
+						  FoArea    **new_area,
+						  GHashTable *prop_eval_hash,
+						  FoDoc      *fo_doc,
+						  gboolean    continue_after_error,
+						  FoDebugFlag   debug_level,
+						  FoWarningFlag warning_mode,
+						  GError    **error);
+static FoFo *   _get_area_fo_default (FoFo *fo);
+static gboolean _validate_content_default            (FoFo    *fo,
+						      GError **error);
+static void   _validate_default (FoFo *fo,
+				 FoContext *current_context,
+				 FoContext *parent_context);
+static void   _validate2_default (FoFo *fo,
+				  FoContext *current_context,
+				  FoContext *parent_context,
+				  GError   **error);
+static FoFo * _clone_default    (FoFo         *original);
+static void   _update_after_clone_default (FoFo *clone,
+					   FoFo *original);
+static void   _area_new_default (FoFo    *fo,
+				 FoDoc   *fo_doc,
+				 FoArea  *parent_area,
+				 FoArea **new_area,
+				 guint    debug_level);
+static void _area_new2_default (FoFo *fo,
+				FoFoAreaNew2Context *context,
+				GError **error);
+static FoNode* _prepend (FoNode *parent,
+			 FoNode *fo);
+static FoNode* _append  (FoNode *parent,
+			 FoNode *fo);
+static gboolean _release_default (FoNode  *fo_node,
+				       gpointer data);
 
 static gpointer parent_class;
 
@@ -125,18 +148,18 @@ fo_fo_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoFoClass),
-        (GBaseInitFunc) fo_fo_base_class_init,
-        (GBaseFinalizeFunc) NULL,
-        (GClassInitFunc) fo_fo_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoFo),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL
-      };
+	{
+	  sizeof (FoFoClass),
+	  (GBaseInitFunc) _base_class_init,
+	  (GBaseFinalizeFunc) NULL,
+	  (GClassInitFunc) _class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoFo),
+	  0,              /* n_preallocs */
+	  NULL,		/* instance_init */
+	  NULL
+	};
       
       object_type = g_type_register_static (FO_TYPE_NODE,
                                             "FoFo",
@@ -148,59 +171,62 @@ fo_fo_get_type (void)
 }
 
 /**
- * fo_fo_base_class_init:
+ * _base_class_init:
  * @klass: #FoFoClass base class object to initialise.
  * 
  * Implements #GBaseInitFunc for #FoFoClass.
  **/
-void
-fo_fo_base_class_init (FoFoClass *klass)
+static void
+_base_class_init (FoFoClass *klass)
 {
   FoObjectClass *fo_object_class = FO_OBJECT_CLASS (klass);
   FoNodeClass *fo_node_class = FO_NODE_CLASS (klass);
 
-  fo_object_class->print_sprintf = fo_fo_sprintf;
-  fo_object_class->debug_dump = fo_fo_debug_dump;
+  fo_object_class->print_sprintf = _sprintf;
+  fo_object_class->debug_dump = _debug_dump;
 
-  fo_node_class->prepend = fo_fo_prepend;
-  fo_node_class->append = fo_fo_append;
+  fo_node_class->prepend = _prepend;
+  fo_node_class->append = _append;
 
-  klass->debug_dump_properties = fo_fo_debug_dump_properties_default;
-  klass->clone = fo_fo_clone_default;
-  klass->update_after_clone = fo_fo_update_after_clone_default;
-  klass->update_from_context = fo_fo_update_from_context_default;
-  klass->validate_content = fo_fo_validate_content_default;
-  klass->validate = fo_fo_validate_default;
-  klass->validate2 = fo_fo_validate2_default;
+  klass->debug_dump_properties = _debug_dump_properties_default;
+  klass->clone = _clone_default;
+  klass->update_after_clone = _update_after_clone_default;
+  klass->update_from_context = _update_from_context_default;
+  klass->get_area_fo = _get_area_fo_default;
+  klass->validate_content = _validate_content_default;
+  klass->validate = _validate_default;
+  klass->validate2 = _validate2_default;
   klass->children_properties_resolve =
-    fo_fo_children_properties_resolve_default;
+    _children_properties_resolve_default;
   klass->resolve_property_attributes =
-    fo_fo_resolve_property_attributes_default;
-  klass->area_new = fo_fo_area_new_default;
-  klass->area_new2 = fo_fo_area_new2_default;
+    _resolve_property_attributes_default;
+  klass->area_new = _area_new_default;
+  klass->area_new2 = _area_new2_default;
+  klass->release =
+    _release_default;
   klass->generate_reference_area = FALSE;
   klass->allow_mixed_content = FALSE;
 }
 
 /**
- * fo_fo_class_init:
+ * _class_init:
  * @klass: #FoFoClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoFoClass.
  **/
-void
-fo_fo_class_init (FoFoClass *klass)
+static void
+_class_init (FoFoClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_fo_finalize;
+  object_class->dispose = _dispose;
 
-  object_class->set_property = fo_fo_set_property;
-  object_class->get_property = fo_fo_get_property;
+  object_class->set_property = _set_property;
+  object_class->get_property = _get_property;
 
-  klass->debug_dump_properties = fo_fo_debug_dump_properties;
+  klass->debug_dump_properties = _debug_dump_properties;
 
   g_object_class_install_property
     (object_class,
@@ -245,13 +271,13 @@ fo_fo_class_init (FoFoClass *klass)
 }
 
 /**
- * fo_fo_finalize:
- * @object: #FoFo object to finalize.
+ * _dispose:
+ * @object: #FoFo object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoFo.
+ * Implements #GObjectDisposeFunc for #FoFo.
  **/
 void
-fo_fo_finalize (GObject *object)
+_dispose (GObject *object)
 {
   FoFo *fo;
 
@@ -260,32 +286,16 @@ fo_fo_finalize (GObject *object)
   if (fo->element != NULL)
     {
       fo_xml_node_unref (fo->element);
+      fo->element = NULL;
     }
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
-}
+  fo_fo_set_context (fo, NULL);
 
-
-/**
- * fo_fo_set_property:
- * @object:  #GObject whose property will be set.
- * @prop_id: Property ID assigned when property registered.
- * @value:   New value for property.
- * @pspec:   Parameter specification for this property type.
- * 
- * Implements #GObjectSetPropertyFunc for #FoFo.
- **/
-void
-fo_fo_set_property (GObject      *object,
-		    guint         param_id,
-		    const GValue *value G_GNUC_UNUSED,
-		    GParamSpec   *pspec)
-{
-  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
- * fo_fo_get_property:
+ * _get_property:
  * @object:  #GObject whose property will be retreived
  * @prop_id: Property ID assigned when property registered
  * @value:   #GValue to set with property value
@@ -293,11 +303,11 @@ fo_fo_set_property (GObject      *object,
  * 
  * Implements #GObjectGetPropertyFunc for #FoFo
  **/
-void
-fo_fo_get_property (GObject        *object,
-		    guint           param_id,
-		    GValue         *value,
-		    GParamSpec     *pspec)
+static void
+_get_property (GObject        *object,
+	       guint           param_id,
+	       GValue         *value,
+	       GParamSpec     *pspec)
 {
   FoFo *fo = FO_FO (object);
   
@@ -325,44 +335,21 @@ fo_fo_get_property (GObject        *object,
 }
 
 /**
- * fo_fo_new:
+ * _set_property:
+ * @object:  #GObject whose property will be set.
+ * @prop_id: Property ID assigned when property registered.
+ * @value:   New value for property.
+ * @pspec:   Parameter specification for this property type.
  * 
- * Creates a new #FoFo initialized to default value.
- * 
- * Return value: the new #FoFo
+ * Implements #GObjectSetPropertyFunc for #FoFo.
  **/
-FoFo *
-fo_fo_new (void)
+static void
+_set_property (GObject      *object,
+	       guint         param_id,
+	       const GValue *value G_GNUC_UNUSED,
+	       GParamSpec   *pspec)
 {
-  FoFo *object;
-
-  object = FO_FO (g_object_new (fo_fo_get_type (), NULL));
-  
-  return object;
-}
-
-/**
- * fo_fo_set_context:
- * @fo_fo: The #FoFo object
- * @new_context: The new context
- * 
- * Sets the #context of @fo_fo to @new_context
- **/
-void
-fo_fo_set_context (FoFo *fo_fo,
-		   FoContext* new_context)
-{
-  g_return_if_fail (fo_fo != NULL);
-  g_return_if_fail (FO_IS_FO (fo_fo));
-  g_return_if_fail (new_context != NULL);
-  g_return_if_fail (FO_IS_CONTEXT (new_context));
-
-  if (new_context)
-    g_object_ref (G_OBJECT (new_context));
-  if (fo_fo->context)
-    g_object_unref (G_OBJECT (fo_fo->context));
-  fo_fo->context = new_context;
-  /*g_object_notify (G_OBJECT (fo_fo), "context");*/
+  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 }
 
 /**
@@ -380,6 +367,35 @@ fo_fo_get_context (FoFo *fo_fo)
   g_return_val_if_fail (FO_IS_FO (fo_fo), NULL);
 
   return fo_fo->context;
+}
+
+/**
+ * fo_fo_set_context:
+ * @fo_fo: The #FoFo object
+ * @new_context: The new context
+ * 
+ * Sets the #context of @fo_fo to @new_context
+ **/
+void
+fo_fo_set_context (FoFo *fo_fo,
+		   FoContext* new_context)
+{
+  g_return_if_fail (fo_fo != NULL);
+  g_return_if_fail (FO_IS_FO (fo_fo));
+  g_return_if_fail ((new_context == NULL) ||
+		    FO_IS_CONTEXT (new_context));
+
+  if (new_context)
+    {
+      g_object_ref_sink (G_OBJECT (new_context));
+    }
+  if (fo_fo->context)
+    {
+      g_object_unref (G_OBJECT (fo_fo->context));
+    }
+
+  fo_fo->context = new_context;
+  /*g_object_notify (G_OBJECT (fo_fo), "context");*/
 }
 
 /**
@@ -449,7 +465,7 @@ fo_fo_set_element (FoFo      *fo_fo,
 
   if (fo_fo->element != NULL)
     {
-      g_object_unref (new_element);
+      fo_xml_node_unref (fo_fo->element);
     }
 
   fo_fo->element = fo_xml_node_ref (new_element);
@@ -490,14 +506,14 @@ fo_fo_get_allow_mixed_content (FoFo *fo_fo)
 }
 
 /**
- * fo_fo_debug_dump:
+ * _debug_dump:
  * @object: #FoObject to be dumped.
  * @depth:  Indent level to add to the output.
  * 
  * Implements #fo_object_debug_dump for #FoFo class.
  **/
 void
-fo_fo_debug_dump (FoObject *object,
+_debug_dump (FoObject *object,
 		  gint      depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
@@ -533,56 +549,59 @@ fo_fo_debug_dump (FoObject *object,
 }
 
 /**
- * fo_fo_debug_dump_properties_default:
+ * _debug_dump_properties_default:
  * @fo: 
  * @depth: Indent level to add to the output.
  * 
  * 
  **/
 void
-fo_fo_debug_dump_properties_default (FoFo *fo,
+_debug_dump_properties_default (FoFo *fo,
 				     gint  depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
 
   g_return_if_fail (FO_IS_FO (fo));
 
-  fo_fo_debug_dump_properties (fo, depth + 1);
+  _debug_dump_properties (fo, depth + 1);
 
   g_free (indent);
 }
 
 /**
- * fo_fo_debug_dump_area:
+ * _debug_dump_area:
  * @value: 
  * @data: 
  * 
  * 
  **/
 static void
-fo_fo_debug_dump_area (gpointer value,
+_debug_dump_area (gpointer value,
 		       gpointer data)
 {
   gchar *indent = g_strnfill (GPOINTER_TO_INT (data) * 2, ' ');
+  gchar *area_sprintf = fo_object_debug_sprintf (value);
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
-	 "%s%p",
-	 indent, value);
+	 "%s%s",
+	 indent,
+	 area_sprintf);
 
+  g_free (area_sprintf);
   g_free (indent);
 }
 
 /**
- * fo_fo_debug_dump_properties:
+ * _debug_dump_properties:
  * @fo:    #FoFo whose properties to dump
  * @depth: Indication of relative depth to be applied to the output.
  * 
  * Log debug messages for most of the instance variables and some of
  * the class variables of @fo.
  **/
-void
-fo_fo_debug_dump_properties (FoFo *fo,
+static void
+_debug_dump_properties (FoFo *fo,
 			     gint  depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
@@ -608,11 +627,13 @@ fo_fo_debug_dump_properties (FoFo *fo,
 	 indent,
 	 fo->element);
 
+  gchar *context_sprintf = fo_object_debug_sprintf (fo->context);
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
-	 "%scontext: %p",
+	 "%scontext: %s",
 	 indent,
-	 fo->context);
+	 context_sprintf);
+  g_free (context_sprintf);
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
@@ -622,7 +643,7 @@ fo_fo_debug_dump_properties (FoFo *fo,
   if (fo->areas)
     {
       g_list_foreach (fo->areas,
-		      fo_fo_debug_dump_area,
+		      _debug_dump_area,
 		      GINT_TO_POINTER (depth + 1));
     }
   else
@@ -636,8 +657,8 @@ fo_fo_debug_dump_properties (FoFo *fo,
   g_free (indent);
 }
 
-gchar*
-fo_fo_sprintf (FoObject *object)
+static gchar*
+_sprintf (FoObject *object)
 {
   g_return_val_if_fail (object != NULL, NULL);
   g_return_val_if_fail (FO_IS_FO (object), NULL);
@@ -647,7 +668,7 @@ fo_fo_sprintf (FoObject *object)
 }
 
 /**
- * fo_fo_update_from_context_default:
+ * _update_from_context_default:
  * @fo:      FoFo to be updated
  * @context: FoContext from which to update the FoFo
  * 
@@ -658,9 +679,9 @@ fo_fo_sprintf (FoObject *object)
  * Logs a debug message that the class does not have an
  * 'update_from_context' function.
  **/
-void
-fo_fo_update_from_context_default (FoFo      *fo,
-				   FoContext *context G_GNUC_UNUSED)
+static void
+_update_from_context_default (FoFo      *fo,
+			      FoContext *context G_GNUC_UNUSED)
 {
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
@@ -673,8 +694,8 @@ fo_fo_update_from_context_default (FoFo      *fo,
  * @fo_fo:   #FoFo to be updated
  * @context: #FoContext from which to update the #FoFo
  * 
- * Calls the FoFo-specific _update_from_context() function to update
- * the FoFo's property values from the larger set of property values
+ * Calls the #FoFo-specific _update_from_context() function to update
+ * the #FoFo's property values from the larger set of property values
  * maintained in the #FoContext.
  **/
 void
@@ -691,8 +712,59 @@ fo_fo_update_from_context (FoFo      *fo_fo,
 }
 
 /**
- * fo_fo_validate_content_default:
- * @fo:    FoFo whose content is to be validated
+ * _get_area_fo_default:
+ * @fo: #FoFo for which to get #FoFo that defines area-related properties
+ * 
+ * The general case is that the current #FoFo defines all the
+ * properties that are needed when drawing an area generated by the
+ * #FoFo.
+ * 
+ * Returns: @fo
+ **/
+FoFo *
+_get_area_fo_default (FoFo *fo)
+{
+  return fo;
+}
+
+/**
+ * fo_fo_get_area_fo:
+ * @fo: #FoFo for which to get #FoFo that defines area-related properties
+ * 
+ * Most FOs have all the properties for all aspects of the areas that
+ * the FOs generate.  However, some FOs, such as #FoFlow, do not have
+ * the properties specifying the background colour, etc. of the areas
+ * that they generate.  Those properties are specified by the
+ * #FoRegionBody, etc., to which the FO refers.
+ * 
+ * This function returns the #FoFo that has the area-related
+ * properties necessary when drawing an area generated by @fo.  In the
+ * general case, this will be @fo, but for some #FoFo, this will be
+ * another #FoFo.
+ *
+ * Returns: the #FoFo that has the area-related properties necessary
+ * when drawing an area generated by @fo
+ **/
+FoFo *
+fo_fo_get_area_fo (FoFo *fo)
+{
+  g_return_val_if_fail (fo != NULL, NULL);
+  g_return_val_if_fail (FO_IS_FO (fo), NULL);
+
+#if defined(LIBFO_DEBUG) && 0
+  g_log (G_LOG_DOMAIN,
+	 G_LOG_LEVEL_DEBUG,
+	 "fo_fo_get_area_fo:: %s",
+	 fo_object_sprintf (FO_OBJECT (fo)));
+#endif
+
+  return FO_FO_GET_CLASS (fo)->get_area_fo (fo);
+}
+
+
+/**
+ * _validate_content_default:
+ * @fo:    #FoFo whose content is to be validated
  * @error: GError
  * 
  * Default _validate_content() function that is used when the FO does
@@ -703,9 +775,9 @@ fo_fo_update_from_context (FoFo      *fo_fo,
  * 
  * Return value: FALSE
  **/
-gboolean
-fo_fo_validate_content_default (FoFo    *fo G_GNUC_UNUSED,
-				GError **error G_GNUC_UNUSED)
+static gboolean
+_validate_content_default (FoFo    *fo G_GNUC_UNUSED,
+			   GError **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -718,7 +790,7 @@ fo_fo_validate_content_default (FoFo    *fo G_GNUC_UNUSED,
 
 /**
  * fo_fo_validate_content:
- * @fo:    FoFo whose content is to be validated
+ * @fo:    #FoFo whose content is to be validated
  * @error: GError
  * 
  * Calls the FoFo-specific _validate_content() function to validate
@@ -734,11 +806,14 @@ fo_fo_validate_content (FoFo *fo,
   g_return_val_if_fail (fo != NULL, TRUE);
   g_return_val_if_fail (FO_IS_FO (fo), TRUE);
 
-#if defined(LIBFO_DEBUG) && 0
+#if 0
+  gchar *fo_sprintf =
+    fo_object_debug_sprintf (fo);
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 "fo_fo_validate_content:: %s",
-	 fo_object_sprintf (FO_OBJECT (fo)));
+	 fo_sprintf);
+  g_free (fo_sprintf);
 #endif
 
   return FO_FO_GET_CLASS (fo)->validate_content (fo, error);
@@ -767,7 +842,7 @@ fo_fo_validate (FoFo *fo,
 }
 
 /**
- * fo_fo_validate_default:
+ * _validate_default:
  * @fo:              #FoFo to validate.
  * @current_context: #FoContext of @fo.
  * @parent_context:  #FoContext of parent of @fo.
@@ -777,10 +852,10 @@ fo_fo_validate (FoFo *fo,
  * This will only be called for #FoFo that do not have either a
  * _validate2 or _validate function of their own.
  **/
-void
-fo_fo_validate_default (FoFo *fo,
-			FoContext *current_context,
-			FoContext *parent_context)
+static void
+_validate_default (FoFo *fo,
+		   FoContext *current_context,
+		   FoContext *parent_context)
 {
   fo_context_merge (current_context, parent_context);
   fo_fo_update_from_context (fo, current_context);
@@ -797,7 +872,7 @@ fo_fo_validate_default (FoFo *fo,
 }
 
 /**
- * fo_fo_validate2_default:
+ * _validate2_default:
  * @fo:              #FoFo to validate.
  * @current_context: #FoContext of @fo.
  * @parent_context:  #FoContext of parent of @fo.
@@ -806,11 +881,11 @@ fo_fo_validate_default (FoFo *fo,
  * Default behaviour is to fallback to using the FO's _validate
  * function.
  **/
-void
-fo_fo_validate2_default (FoFo *fo,
-			 FoContext *current_context,
-			 FoContext *parent_context,
-			 GError   **error G_GNUC_UNUSED)
+static void
+_validate2_default (FoFo *fo,
+		    FoContext *current_context,
+		    FoContext *parent_context,
+		    GError   **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -846,7 +921,7 @@ fo_fo_clone (FoFo *original)
 }
 
 /**
- * fo_fo_clone_default:
+ * _clone_default:
  * @original: Fo object to be cloned
  * 
  * Make a clone of @original and insert the clone after @original in
@@ -855,8 +930,8 @@ fo_fo_clone (FoFo *original)
  * 
  * Return value: Clone of @original
  **/
-FoFo*
-fo_fo_clone_default (FoFo *original)
+static FoFo*
+_clone_default (FoFo *original)
 {
   FoFo *clone;
 
@@ -892,16 +967,16 @@ fo_fo_update_after_clone (FoFo *clone,
 }
 
 /**
- * fo_fo_update_after_clone_default:
+ * _update_after_clone_default:
  * @clone:    New #FoFo object cloned from @original.
  * @original: Original #FoFo object.
  * 
  * Update the FoFo-specific instance variables of @clone to match
  * those of @original.
  **/
-void
-fo_fo_update_after_clone_default (FoFo *clone,
-				  FoFo *original)
+static void
+_update_after_clone_default (FoFo *clone,
+			     FoFo *original)
 {
   g_return_if_fail (clone != NULL);
   g_return_if_fail (FO_IS_FO (clone));
@@ -1013,7 +1088,7 @@ xslAttrListIteratorDestroy (xslAttrListIteratorPtr iterator)
 typedef GType (*FoTypeFunc) (void);
 
 /**
- * fo_fo_resolve_property_attributes_default:
+ * _resolve_property_attributes_default:
  * @fo_node:      #FoFo
  * @data:         Context within which to resolve property expressions
  * 
@@ -1026,9 +1101,9 @@ typedef GType (*FoTypeFunc) (void);
  * 
  * Return value: %FALSE if completed successfully, %TRUE otherwise
  **/
-gboolean
-fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
-					   gpointer    data)
+static gboolean
+_resolve_property_attributes_default (FoNode     *fo_node,
+				      gpointer    data)
 {
   FoPropertyResolveContext *prop_context =
     (FoPropertyResolveContext *) data;
@@ -1319,12 +1394,14 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
 	}
 
     if (!xslAttrListIteratorNext (iterator))
-      break;
+      {
+	break;
+      }
   }
 
   xslAttrListIteratorDestroy (iterator);
 
-  FoContext *current_context = fo_context_new ();
+  FoContext *current_context = g_object_ref_sink (fo_context_new ());
   if (node_properties != NULL)
     {
       fo_context_update_from_slist (current_context, node_properties);
@@ -1346,8 +1423,11 @@ fo_fo_resolve_property_attributes_default (FoNode     *fo_node,
       return TRUE;
     }
 
-  fo_context_merge (current_context, parent_context);
-  fo_fo_set_context (fo_fo, current_context);
+  fo_context_merge (current_context,
+		    parent_context);
+  fo_fo_set_context (fo_fo,
+		     current_context);
+  g_object_unref (current_context);
 
   return FALSE;
 }
@@ -1383,7 +1463,7 @@ fo_fo_resolve_property_attributes (FoNode  *fo_node,
 }
 
 /**
- * fo_fo_children_properties_resolve_default:
+ * _children_properties_resolve_default:
  * @this_fo:              #FoFo for which to resolve properties.
  * @this_fo_parent_area:  Parent #FoArea to which to add new areas.
  * @new_area:             New area, if any.
@@ -1397,15 +1477,15 @@ fo_fo_resolve_property_attributes (FoNode  *fo_node,
  * Resolves the properties of the children of @this_fo.
  **/
 void
-fo_fo_children_properties_resolve_default (FoFo         *this_fo,
-					   FoArea       *this_fo_parent_area,
-					   FoArea      **new_area,
-					   GHashTable   *prop_eval_hash,
-					   FoDoc        *fo_doc,
-					   gboolean      continue_after_error,
-					   FoDebugFlag   debug_level,
-					   FoWarningFlag warning_mode,
-					   GError      **error)
+_children_properties_resolve_default (FoFo         *this_fo,
+				      FoArea       *this_fo_parent_area,
+				      FoArea      **new_area,
+				      GHashTable   *prop_eval_hash,
+				      FoDoc        *fo_doc,
+				      gboolean      continue_after_error,
+				      FoDebugFlag   debug_level,
+				      FoWarningFlag warning_mode,
+				      GError      **error)
 {
   GError *tmp_error = NULL;
 
@@ -1445,6 +1525,7 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
   area_new2_context.fo_doc               = fo_doc;
   area_new2_context.parent_area          = this_fo_parent_area;
   area_new2_context.new_area             = &this_fo_area;
+  area_new2_context.truncate             = FALSE;
   area_new2_context.continue_after_error = continue_after_error;
   area_new2_context.debug_level          = debug_level;
 
@@ -1453,6 +1534,11 @@ fo_fo_children_properties_resolve_default (FoFo         *this_fo,
 		   &tmp_error);
 
   *new_area = this_fo_area;
+
+  if (area_new2_context.truncate)
+    {
+      return;
+    }
 
   FoArea *child_fo_parent_area;
   if (*new_area != NULL)
@@ -1581,7 +1667,7 @@ fo_fo_area_new (FoFo    *fo,
 }
 
 /**
- * fo_fo_area_new_default:
+ * _area_new_default:
  * @fo:          #FoFo for which to create a new area.
  * @fo_doc:      Output #FoDoc
  * @parent_area: #FoArea to which to add new area.
@@ -1592,11 +1678,11 @@ fo_fo_area_new (FoFo    *fo,
  * @parent_area.
  **/
 static void
-fo_fo_area_new_default (FoFo    *fo,
-			FoDoc   *fo_doc G_GNUC_UNUSED,
-			FoArea  *parent_area G_GNUC_UNUSED,
-			FoArea **new_area,
-			guint    debug_level G_GNUC_UNUSED)
+_area_new_default (FoFo    *fo,
+		   FoDoc   *fo_doc G_GNUC_UNUSED,
+		   FoArea  *parent_area G_GNUC_UNUSED,
+		   FoArea **new_area,
+		   guint    debug_level G_GNUC_UNUSED)
 {
   *new_area = NULL;
 
@@ -1625,14 +1711,16 @@ void fo_fo_area_new2 (FoFo *fo,
 	 fo_object_debug_sprintf (fo));
 #endif  
   if (FO_FO_GET_CLASS (fo)->area_new2 != NULL)
-    FO_FO_GET_CLASS (fo)->area_new2 (fo,
-				     context,
-				     error);
+    {
+      FO_FO_GET_CLASS (fo)->area_new2 (fo,
+				       context,
+				       error);
+    }
 }
 
-void fo_fo_area_new2_default (FoFo *fo G_GNUC_UNUSED,
-			      FoFoAreaNew2Context *context G_GNUC_UNUSED,
-			      GError **error G_GNUC_UNUSED)
+void _area_new2_default (FoFo *fo G_GNUC_UNUSED,
+			 FoFoAreaNew2Context *context G_GNUC_UNUSED,
+			 GError **error G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -1644,9 +1732,9 @@ void fo_fo_area_new2_default (FoFo *fo G_GNUC_UNUSED,
 
 /* Tree-related functions */
 
-FoNode*
-fo_fo_prepend (FoNode *parent,
-	       FoNode *fo)
+static FoNode*
+_prepend (FoNode *parent,
+	  FoNode *fo)
 {
   FoFo *parent_fo, *fo_fo;
 
@@ -1657,16 +1745,20 @@ fo_fo_prepend (FoNode *parent,
   fo_fo = FO_FO (fo);
 
   if (FO_IS_FLOW (fo_fo))
-    fo_fo->flow = fo_fo;
+    {
+      fo_fo->flow = fo_fo;
+    }
   else
-    fo_fo->flow = parent_fo->flow;
+    {
+      fo_fo->flow = parent_fo->flow;
+    }
 
   return FO_NODE_CLASS (parent_class)->prepend (parent, fo);
 }
 
-FoNode*
-fo_fo_append (FoNode *parent,
-	      FoNode *fo)
+static FoNode*
+_append (FoNode *parent,
+	 FoNode *fo)
 {
   FoFo *parent_fo, *fo_fo;
 
@@ -1677,18 +1769,29 @@ fo_fo_append (FoNode *parent,
   fo_fo = FO_FO (fo);
 
   if (FO_IS_TREE (fo_fo))
-    fo_fo->tree = fo_fo;
+    {
+      fo_fo->tree = fo_fo;
+    }
   else
-    fo_fo->tree = parent_fo->tree;
+    {
+      fo_fo->tree = parent_fo->tree;
+    }
 
   if (FO_IS_FLOW (fo_fo))
-    fo_fo->flow = fo_fo;
+    {
+      fo_fo->flow = fo_fo;
+    }
   else
-    fo_fo->flow = parent_fo->flow;
+    {
+      fo_fo->flow = parent_fo->flow;
+    }
 
   /* FIXME: Is this either necessary or correct? */
-  if (parent_fo->context)
-    fo_fo->context = g_object_ref (parent_fo->context);
+  if (parent_fo->context != NULL)
+    {
+      fo_fo_set_context (fo_fo,
+			 fo_fo_get_context (parent_fo));
+    }
 
   return FO_NODE_CLASS (parent_class)->append (parent, fo);
 }
@@ -1951,6 +2054,86 @@ fo_fo_area_iterator_next (FoFoAreaIterator *iterator)
   return (iterator->area_list != NULL) ? TRUE : FALSE;
 }
 
+static void
+_area_list_notify (gpointer data,
+		   GObject *where_the_object_was)
+{
+  FoFo *fo = (FoFo *) data;
+  g_log (G_LOG_DOMAIN,
+	 G_LOG_LEVEL_DEBUG,
+	 "_area_list_notify");
+  fo->areas =
+  g_list_remove (fo->areas,
+		 where_the_object_was);
+}
+
+/**
+ * fo_fo_area_list_append:
+ * @fo:       #FoFo
+ * @new_area: New #FoArea generated by @fo
+ *
+ * Adds @new_area to the list of areas generated by @fo.
+ **/
+void
+fo_fo_area_list_append (FoFo   *fo,
+			FoArea *new_area)
+{
+  g_atomic_int_inc (&fo->areas_mod_count);
+  fo->areas =
+    g_list_append (fo->areas,
+		   new_area);
+  g_object_weak_ref (G_OBJECT (new_area),
+		     _area_list_notify,
+		     fo);
+}
+
+/**
+ * fo_fo_area_list_insert_after:
+ * @fo:   #FoFo
+ * @sibling: 
+ * @new_area: 
+ *
+ * Adds @new_area after @sibling in the list of areas generated by
+ * @fo.
+ **/
+void
+fo_fo_area_list_insert_after (FoFo   *fo,
+			      FoArea *sibling,
+			      FoArea *new_area)
+{
+  g_atomic_int_inc (&fo->areas_mod_count);
+  fo->areas =
+    g_list_insert (fo->areas,
+		   new_area,
+		   g_list_index (fo->areas,
+				 sibling) + 1);
+  g_object_weak_ref (G_OBJECT (new_area),
+		     _area_list_notify,
+		     fo);
+}
+
+/**
+ * fo_fo_area_list_remove:
+ * @fo:   #FoFo
+ * @area: #FoArea to remove from area list of @fo
+ *
+ * Removes a #FoArea from the area list of @fo. If the area list
+ * contains @area twice (which it shouldn't), only the first is
+ * removed. If the area list does not contain @area, the list is
+ * unchanged.
+ **/
+void
+fo_fo_area_list_remove (FoFo   *fo,
+			FoArea *area)
+{
+  fo->areas =
+    g_list_remove (fo->areas,
+		   area);
+  g_object_weak_unref (G_OBJECT (area),
+		       _area_list_notify,
+		       fo);
+}
+
 void
 fo_fo_register_id (FoFo       *fo,
 		   FoDatatype *id)
@@ -1960,8 +2143,85 @@ fo_fo_register_id (FoFo       *fo,
 
   if (fo->tree != NULL)
     {
+      gchar *id_string = fo_id_get_value (id);
       fo_tree_id_add (fo->tree,
-		      fo_id_get_value (id),
+		      id_string,
 		      fo);
+      g_free (id_string);
     }
+}
+
+/**
+ * fo_fo_release:
+ * @fo_node: #FoNode for which to release subtree
+ * @data:    Context in which to resolve the properties.
+ * 
+ * Releases the subtree rooted at @fo_node.
+ *
+ * Should be used with #fo_node_traverse() and %G_POST_ORDER order so
+ * child nodes release their subtrees before @fo_node releases the
+ * children.
+ * 
+ * Return value: %TRUE if an error occurred, %FALSE otherwise.
+ **/
+gboolean
+fo_fo_release (FoNode  *fo_node,
+	       gpointer data)
+{
+  FoNodeTraverseFunc func;
+
+  g_return_val_if_fail (FO_IS_FO (fo_node), TRUE);
+
+  func = FO_FO_GET_CLASS (fo_node)->release;
+
+  if (func != NULL)
+    {
+      return func (fo_node,
+		   data);
+    }
+  else
+    {
+      return FALSE;
+    }
+}
+
+static void
+_release_children (FoNode *node,
+		   gpointer data G_GNUC_UNUSED)
+{
+  fo_node_unlink (node);
+}
+
+/**
+ * _release_default:
+ * @fo_node:      #FoFo
+ * @data:         Context within which to resolve property expressions
+ * 
+ * Every #FoFo object was created from a result tree element that is
+ * in the XSL FO namespace.  The object's specified property values
+ * are created from the result tree element's attributes.
+ *
+ * This function evaluates each of the property attributes of the
+ * result tree element for @fo_node.
+ * 
+ * Return value: %FALSE if completed successfully, %TRUE otherwise
+ **/
+gboolean
+_release_default (FoNode     *fo_node,
+		       gpointer    data)
+{
+  FoFo *current_fo = FO_FO (fo_node);
+  /*
+  g_message ("before::");
+  fo_object_debug_dump (FO_OBJECT (fo_node), 0);
+  */
+  fo_node_children_foreach (fo_node,
+			    G_TRAVERSE_ALL,
+			    _release_children,
+			    NULL);
+    /*
+  g_message ("after::");
+  fo_object_debug_dump (FO_OBJECT (fo_node), 0);
+  */
+  return FALSE;
 }

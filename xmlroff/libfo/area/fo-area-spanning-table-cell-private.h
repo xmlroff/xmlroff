@@ -2,7 +2,7 @@
  * fo-area-spanning-table-cell-private.h: Private information for spanning-table-cell area objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -29,8 +29,8 @@ struct _FoAreaSpanningTableCell
 {
   FoAreaTableCell parent_instance;
 
-  gfloat real_height;
-  gfloat real_available_height;
+  gdouble real_height;
+  gdouble real_available_height;
   gint   rows_spanned;
   GList *proxies;
   FoAreaSpanningTableCellRowInfo *row_info;

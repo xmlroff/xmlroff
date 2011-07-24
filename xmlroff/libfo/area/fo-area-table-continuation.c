@@ -2,7 +2,7 @@
  * fo-area-table-continuation.c: Area object for 'table-continuation' formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -33,9 +33,9 @@ static void fo_area_table_continuation_debug_dump_properties (FoArea *area,
 							      gint depth);
 static FoArea* fo_area_table_continuation_size_request (FoArea *child);
 static FoArea* fo_area_table_continuation_split_before_height (FoArea *area,
-						      gfloat max_height);
+						      gdouble max_height);
 static gboolean fo_area_table_continuation_split_before_height_check (FoArea *area,
-							     gfloat max_height);
+							     gdouble max_height);
 static void fo_area_table_continuation_size_adjust (FoArea *area,
 					    gpointer data);
 
@@ -216,7 +216,7 @@ fo_area_table_continuation_set_or_split (FoArea  *area,
 					 gpointer data G_GNUC_UNUSED)
 {
   FoArea *table_continuation;
-  gfloat table_continuation_child_available_bpdim;
+  gdouble table_continuation_child_available_bpdim;
 
   g_return_if_fail (FO_IS_AREA (area));
   g_return_if_fail (FO_IS_AREA_TABLE_CONTINUATION (fo_area_parent (area)));
@@ -279,11 +279,11 @@ fo_area_table_continuation_size_request (FoArea *child)
   FoArea *return_child;
   FoArea *child_original_next_part;
   FoDatatype *fo_continuation_bpdim;
-  gfloat table_continuation_child_available_bpdim;
-  gfloat table_continuation_use_height = 0.0;
-  gfloat table_continuation_target_height = 0.0;
-  gfloat child_height;
-  gfloat total_child_height = 0.0;
+  gdouble table_continuation_child_available_bpdim;
+  gdouble table_continuation_use_height = 0.0;
+  gdouble table_continuation_target_height = 0.0;
+  gdouble child_height;
+  gdouble total_child_height = 0.0;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -299,7 +299,7 @@ fo_area_table_continuation_size_request (FoArea *child)
   table_continuation_child_available_bpdim =
     fo_area_get_child_available_bpdim (table_continuation);
 
-  gfloat table_continuation_header_height = 0.0;
+  gdouble table_continuation_header_height = 0.0;
   if ((FO_AREA_TABLE_CONTINUATION (table_continuation)->table != NULL) &&
       (FO_AREA_TABLE_CONTINUATION (table_continuation)->table_header != NULL))
     {
@@ -474,11 +474,11 @@ fo_area_table_continuation_size_request (FoArea *child)
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_table_continuation_split_before_height (FoArea *area,
-					gfloat max_height)
+					gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_TABLE_CONTINUATION (area), NULL);
   g_return_val_if_fail (fo_area_n_children (area) > 0, NULL);
@@ -556,9 +556,9 @@ fo_area_table_continuation_split_before_height (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */
@@ -600,11 +600,11 @@ fo_area_table_continuation_split_before_height (FoArea *area,
 /* leave @area as area remaining after split */
 gboolean
 fo_area_table_continuation_split_before_height_check (FoArea *area,
-					     gfloat max_height)
+					     gdouble max_height)
 {
   FoArea *use_child_area;
-  gfloat minus_child_y = 0.0;
-  gfloat child_height = 0.0;
+  gdouble minus_child_y = 0.0;
+  gdouble child_height = 0.0;
 
   g_return_val_if_fail (FO_IS_AREA_TABLE_CONTINUATION (area), FALSE);
   g_return_val_if_fail (fo_area_n_children (area) > 0, FALSE);
@@ -677,9 +677,9 @@ fo_area_table_continuation_split_before_height_check (FoArea *area,
 	    }
 	  else
 	    {
-	      gfloat minus_prev_y =
+	      gdouble minus_prev_y =
 		fo_area_area_get_y (fo_area_prev_sibling (use_child_area));
-	      gfloat prev_height =
+	      gdouble prev_height =
 		fo_area_area_get_height (fo_area_prev_sibling (use_child_area));
 	      /* If can't split between use_child_area and previous, maybe
 		 can split at lower height */

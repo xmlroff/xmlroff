@@ -1,8 +1,9 @@
 /* Fo
  * fo-repeatable-page-master-reference.h: 'repeatable-page-master-reference' formatting object
  *
- * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -16,7 +17,18 @@
 
 G_BEGIN_DECLS
 
+/**
+ * FoRepeatablePageMasterReference:
+ *
+ * Instance of the 'repeatable-page-master-reference' formatting object.
+ **/
 typedef struct _FoRepeatablePageMasterReference      FoRepeatablePageMasterReference;
+
+/**
+ * FoRepeatablePageMasterReferenceClass:
+ *
+ * Class structure for the 'repeatable-page-master-reference' formatting object.
+ **/
 typedef struct _FoRepeatablePageMasterReferenceClass FoRepeatablePageMasterReferenceClass;
 
 #define FO_TYPE_REPEATABLE_PAGE_MASTER_REFERENCE              (fo_repeatable_page_master_reference_get_type ())
@@ -30,9 +42,9 @@ typedef struct _FoRepeatablePageMasterReferenceClass FoRepeatablePageMasterRefer
 GType        fo_repeatable_page_master_reference_get_type (void) G_GNUC_CONST;
 FoFo *       fo_repeatable_page_master_reference_new      (void);
 
-FoProperty * fo_repeatable_page_master_reference_get_master_reference (FoFo       *fo_fo);
-void         fo_repeatable_page_master_reference_set_master_reference (FoFo       *fo_fo,
-                                                                       FoProperty *new_master_reference);
+FoProperty * fo_repeatable_page_master_reference_get_maximum_repeats (FoFo       *fo_fo);
+void         fo_repeatable_page_master_reference_set_maximum_repeats (FoFo       *fo_fo,
+                                                                      FoProperty *new_maximum_repeats);
 
 G_END_DECLS
 

@@ -40,6 +40,8 @@ libfo_area_la_SOURCES =	\
 	fo-area-page.h				\
 	fo-area-reference.c			\
 	fo-area-reference.h			\
+	fo-area-region.c			\
+	fo-area-reegion.h			\
 	fo-area-reference-private.h		\
 	fo-area-spanning-table-cell.c		\
 	fo-area-spanning-table-cell.h		\

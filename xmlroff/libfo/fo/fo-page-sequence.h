@@ -2,7 +2,8 @@
  * fo-page-sequence.h: 'page-sequence' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -41,6 +42,14 @@ typedef struct _FoPageSequenceClass FoPageSequenceClass;
 GType        fo_page_sequence_get_type (void) G_GNUC_CONST;
 FoFo *       fo_page_sequence_new      (void);
 
+FoFo *       fo_page_sequence_get_page_master (FoFo *fo_fo);
+
+FoProperty * fo_page_sequence_get_country (FoFo       *fo_fo);
+void         fo_page_sequence_set_country (FoFo       *fo_fo,
+                                           FoProperty *new_country);
+FoProperty * fo_page_sequence_get_force_page_count (FoFo       *fo_fo);
+void         fo_page_sequence_set_force_page_count (FoFo       *fo_fo,
+                                                    FoProperty *new_force_page_count);
 FoProperty * fo_page_sequence_get_format (FoFo       *fo_fo);
 void         fo_page_sequence_set_format (FoFo       *fo_fo,
                                           FoProperty *new_format);
@@ -53,6 +62,12 @@ void         fo_page_sequence_set_grouping_size (FoFo       *fo_fo,
 FoProperty * fo_page_sequence_get_id (FoFo       *fo_fo);
 void         fo_page_sequence_set_id (FoFo       *fo_fo,
                                       FoProperty *new_id);
+FoProperty * fo_page_sequence_get_initial_page_number (FoFo       *fo_fo);
+void         fo_page_sequence_set_initial_page_number (FoFo       *fo_fo,
+                                                       FoProperty *new_initial_page_number);
+FoProperty * fo_page_sequence_get_language (FoFo       *fo_fo);
+void         fo_page_sequence_set_language (FoFo       *fo_fo,
+                                            FoProperty *new_language);
 FoProperty * fo_page_sequence_get_letter_value (FoFo       *fo_fo);
 void         fo_page_sequence_set_letter_value (FoFo       *fo_fo,
                                                 FoProperty *new_letter_value);

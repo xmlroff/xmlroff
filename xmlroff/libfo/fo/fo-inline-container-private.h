@@ -1,8 +1,8 @@
 /* Fo
  * fo-inline-container-private.h: Structures private to 'inline-container' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -10,9 +10,8 @@
 #ifndef __FO_INLINE_CONTAINER_PRIVATE_H__
 #define __FO_INLINE_CONTAINER_PRIVATE_H__
 
-#include <libfo/fo/fo-fo.h>
-#include <libfo/fo/fo-marker-parent-private.h>
-#include <libfo/fo/fo-inline-container.h>
+#include "fo/fo-marker-parent-private.h"
+#include "fo/fo-inline-container.h"
 
 G_BEGIN_DECLS
 
@@ -78,6 +77,7 @@ struct _FoInlineContainer
   FoProperty *padding_right;
   FoProperty *padding_start;
   FoProperty *padding_top;
+  FoProperty *reference_orientation;
   FoProperty *space_end;
   FoProperty *space_start;
   FoProperty *width;

@@ -19,26 +19,26 @@ struct _FoAreaArea
 {
   FoArea parent_instance;
 
-  gfloat x;
-  gfloat y;
-  gfloat height;
-  gfloat width;
+  gdouble x;
+  gdouble y;
+  gdouble height;
+  gdouble width;
 
-  gfloat border_before;
-  gfloat border_after;
-  gfloat border_start;
-  gfloat border_end;
+  gdouble border_before;
+  gdouble border_after;
+  gdouble border_start;
+  gdouble border_end;
 
-  gfloat padding_before;
-  gfloat padding_after;
-  gfloat padding_start;
-  gfloat padding_end;
+  gdouble padding_before;
+  gdouble padding_after;
+  gdouble padding_start;
+  gdouble padding_end;
 
-  gfloat start_indent;
-  gfloat end_indent;
+  gdouble start_indent;
+  gdouble end_indent;
 
-  gfloat space_before;
-  gfloat space_after;
+  gdouble space_before;
+  gdouble space_after;
 
 };
 

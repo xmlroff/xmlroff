@@ -2,7 +2,7 @@
  * fo-area.h: Base area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -32,6 +32,41 @@ typedef struct _FoAreaClass FoAreaClass;
 
 G_BEGIN_DECLS
 
+/**
+ * FoAreaFlagsClass:
+ * @FO_AREA_FLAG_CLASS_UNKNOWN:      Invalid area class
+ * @FO_AREA_FLAG_CLASS_NORMAL:       Normal area
+ * @FO_AREA_FLAG_CLASS_ABSOLUTE:     Absolutely positioned
+ * @FO_AREA_FLAG_CLASS_FIXED:        Fixed position
+ * @FO_AREA_FLAG_CLASS_BEFORE_FLOAT: Positioned in before-float-reference-area
+ * @FO_AREA_FLAG_CLASS_SIDE_FLOAT:   Side-float
+ * @FO_AREA_FLAG_CLASS_FOOTNOTE:     Positioned in footnote-reference-area
+ * @FO_AREA_FLAG_CLASS_ANCHOR:       Anchor for float
+ * @FO_AREA_FLAG_CLASS_STACKABLE:                   Derived class
+ * @FO_AREA_FLAG_CLASS_PAGE_LEVEL_OUT_OF_LINE:      Derived class
+ * @FO_AREA_FLAG_CLASS_REFERENCE_LEVEL_OUT_OF_LINE: Derived class
+ * @FO_AREA_FLAG_CLASS_OUT_OF_LINE:                 Derived class
+ *
+ * Area class as defined in XSL specification.
+ */
+typedef enum {
+  FO_AREA_FLAG_CLASS_UNKNOWN = 0,
+  FO_AREA_FLAG_CLASS_NORMAL = 1 << 0,
+  FO_AREA_FLAG_CLASS_ABSOLUTE = 1 << 1,
+  FO_AREA_FLAG_CLASS_FIXED = 1 << 2,
+  FO_AREA_FLAG_CLASS_BEFORE_FLOAT = 1 << 3,
+  FO_AREA_FLAG_CLASS_SIDE_FLOAT = 1 << 4,
+  FO_AREA_FLAG_CLASS_FOOTNOTE = 1 << 5,
+  FO_AREA_FLAG_CLASS_ANCHOR = 1 << 6,
+  FO_AREA_FLAG_CLASS_STACKABLE = FO_AREA_FLAG_CLASS_NORMAL | FO_AREA_FLAG_CLASS_FOOTNOTE | FO_AREA_FLAG_CLASS_BEFORE_FLOAT,
+  FO_AREA_FLAG_CLASS_PAGE_LEVEL_OUT_OF_LINE = FO_AREA_FLAG_CLASS_FOOTNOTE | FO_AREA_FLAG_CLASS_BEFORE_FLOAT | FO_AREA_FLAG_CLASS_FIXED,
+  FO_AREA_FLAG_CLASS_REFERENCE_LEVEL_OUT_OF_LINE = FO_AREA_FLAG_CLASS_SIDE_FLOAT | FO_AREA_FLAG_CLASS_ABSOLUTE,
+  FO_AREA_FLAG_CLASS_OUT_OF_LINE = FO_AREA_FLAG_CLASS_PAGE_LEVEL_OUT_OF_LINE | FO_AREA_FLAG_CLASS_REFERENCE_LEVEL_OUT_OF_LINE
+} FoAreaFlagsClass;
+
+GType fo_area_flags_class_get_type (void);
+#define FO_TYPE_AREA_FLAGS_CLASS fo_area_flags_class_get_type ()
+
 #define FO_TYPE_AREA              (fo_area_get_type ())
 #define FO_AREA(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), FO_TYPE_AREA, FoArea))
 #define FO_AREA_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), FO_TYPE_AREA, FoAreaClass))
@@ -42,6 +77,7 @@ G_BEGIN_DECLS
 
 GType    fo_area_get_type      (void) G_GNUC_CONST;
 FoArea*  fo_area_new           (void);
+FoAreaFlagsClass  fo_area_get_class (FoArea *fo_area);
 FoArea*  fo_area_get_page (FoArea *fo_area);
 void     fo_area_set_page (FoArea  *fo_area,
 				 FoArea  *new_page_area);
@@ -57,24 +93,24 @@ void     fo_area_set_is_first (FoArea  *fo_area,
 gboolean fo_area_get_is_last (FoArea *fo_area);
 void     fo_area_set_is_last (FoArea  *fo_area,
 			      gboolean new_is_last);
-gfloat   fo_area_get_next_x (FoArea *fo_area);
+gdouble   fo_area_get_next_x (FoArea *fo_area);
 void     fo_area_set_next_x (FoArea *fo_area,
-			     gfloat  new_next_x);
-gfloat   fo_area_get_next_y (FoArea *fo_area);
+			     gdouble  new_next_x);
+gdouble   fo_area_get_next_y (FoArea *fo_area);
 void     fo_area_set_next_y (FoArea *fo_area,
-			     gfloat  new_next_y);
-gfloat   fo_area_get_available_width (FoArea *fo_area);
+			     gdouble  new_next_y);
+gdouble   fo_area_get_available_width (FoArea *fo_area);
 void     fo_area_set_available_width (FoArea *fo_area,
-				      gfloat new_available_width);
-gfloat   fo_area_get_available_height (FoArea *fo_area);
+				      gdouble new_available_width);
+gdouble   fo_area_get_available_height (FoArea *fo_area);
 void     fo_area_set_available_height (FoArea *fo_area,
-				       gfloat new_available_height);
-gfloat   fo_area_get_child_available_ipdim (FoArea *fo_area);
+				       gdouble new_available_height);
+gdouble   fo_area_get_child_available_ipdim (FoArea *fo_area);
 void     fo_area_set_child_available_ipdim (FoArea *fo_area,
-					    gfloat new_child_available_ipdim);
-gfloat   fo_area_get_child_available_bpdim (FoArea *fo_area);
+					    gdouble new_child_available_ipdim);
+gdouble   fo_area_get_child_available_bpdim (FoArea *fo_area);
 void     fo_area_set_child_available_bpdim (FoArea *fo_area,
-					    gfloat new_child_available_bpdim);
+					    gdouble new_child_available_bpdim);
 FoFo*    fo_area_get_generated_by (FoArea *fo_area);
 void     fo_area_set_generated_by (FoArea *fo_area,
 				   FoFo   *new_fo);
@@ -92,9 +128,9 @@ FoArea*  fo_area_clone (FoArea *original);
 void     fo_area_update_after_clone (FoArea *clone,
 				     FoArea *original);
 FoArea*  fo_area_split_before_height (FoArea *area,
-				      gfloat  height);
+				      gdouble  height);
 gboolean fo_area_split_before_height_check (FoArea *area,
-					    gfloat  height);
+					    gdouble  height);
 void     fo_area_resolve_text_align (FoArea *area);
 
 /* tree functions */

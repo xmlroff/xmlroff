@@ -2,6 +2,7 @@
  * libfo-version.c: libfo version
  *
  * Copyright (C) 2008-2009 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * Inspired by Pango and Cairo version APIs.
  *

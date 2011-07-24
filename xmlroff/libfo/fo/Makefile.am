@@ -32,8 +32,20 @@ fo_area_c_files = \
 	fo-list-item-body-area.h \
 	fo-list-item-label-area.c \
 	fo-list-item-label-area.h \
+	fo-region-after-area.c \
+	fo-region-after-area.h \
+	fo-region-before-area.c \
+	fo-region-before-area.h \
+	fo-region-start-area.c \
+	fo-region-start-area.h \
+	fo-region-end-area.c \
+	fo-region-end-area.h \
 	fo-region-body-area.c \
 	fo-region-body-area.h \
+	fo-simple-page-master-area.c \
+	fo-simple-page-master-area.h \
+	fo-static-content-area.c \
+	fo-static-content-area.h \
 	fo-table-area.c \
 	fo-table-area.h \
 	fo-table-body-area.c \
@@ -67,11 +79,18 @@ libfo_fo_la_SOURCES =	\
 	fo-block-fo.c \
 	fo-block-fo.h \
 	fo-block-fo-private.h \
+	fo-cbpbp-fo.c \
+	fo-cbpbp-fo.h \
+	fo-cbpbp-fo-private.h \
 	fo-table-border-fo.c \
 	fo-table-border-fo.h \
 	fo-table-border-fo-private.h \
 	fo-neutral-fo.c \
 	fo-neutral-fo.h \
+	fo-fixed-page-sequence-walker.c \
+	fo-fixed-page-sequence-walker.h \
+	fo-sequenced-page-sequence-walker.c \
+	fo-sequenced-page-sequence-walker.h \
 	fo-text.c \
 	fo-text.h \
 	fo-tree.c \
@@ -173,6 +192,12 @@ libfo_fo_la_SOURCES =	\
 	fo-multi-toggle.c \
 	fo-multi-toggle.h \
 	fo-multi-toggle-private.h \
+	fo-page-master.c \
+	fo-page-master.h \
+	fo-page-master-private.h \
+	fo-page-master-reference.c \
+	fo-page-master-reference.h \
+	fo-page-master-reference-private.h \
 	fo-page-number.c \
 	fo-page-number.h \
 	fo-page-number-private.h \
@@ -185,18 +210,30 @@ libfo_fo_la_SOURCES =	\
 	fo-page-sequence-master.c \
 	fo-page-sequence-master.h \
 	fo-page-sequence-master-private.h \
+	fo-page-sequence-walker.c \
+	fo-page-sequence-walker.h \
+	fo-page-sequence-walker-private.h \
+	fo-region.c \
+	fo-region.h \
+	fo-region-private.h \
 	fo-region-after.c \
 	fo-region-after.h \
 	fo-region-after-private.h \
 	fo-region-before.c \
 	fo-region-before.h \
 	fo-region-before-private.h \
+	fo-region-before-after.c \
+	fo-region-before-after.h \
+	fo-region-before-after-private.h \
 	fo-region-body.c \
 	fo-region-body.h \
 	fo-region-body-private.h \
 	fo-region-end.c \
 	fo-region-end.h \
 	fo-region-end-private.h \
+	fo-region-outer.c \
+	fo-region-outer.h \
+	fo-region-outer-private.h \
 	fo-region-start.c \
 	fo-region-start.h \
 	fo-region-start-private.h \

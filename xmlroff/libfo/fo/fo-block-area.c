@@ -2,7 +2,7 @@
  * fo-block-area.c: Block formatting object area creation
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -29,7 +29,8 @@
 
 #if 0
 static void
-fo_block_debug_dump_item (gpointer data, gpointer user_data)
+_debug_dump_item (gpointer data,
+		  gpointer user_data)
 {
   const PangoItem *item = (const PangoItem *) data;
   const PangoEngine *engine = (const PangoEngine *) item->analysis.shape_engine;
@@ -62,7 +63,7 @@ fo_block_debug_dump_item (gpointer data, gpointer user_data)
 }
 
 static void
-fo_block_debug_dump_item_glist (GList *item_glist)
+_debug_dump_item_glist (GList *item_glist)
 {
   g_list_foreach (item_glist,
 		  fo_block_debug_dump_item,
@@ -70,7 +71,7 @@ fo_block_debug_dump_item_glist (GList *item_glist)
 }
 
 static gint
-fo_block_area_glist_find_attr_type (gpointer pango_attr, gpointer attr_klass)
+_glist_find_attr_type (gpointer pango_attr, gpointer attr_klass)
 {
   /*
   g_log (G_LOG_DOMAIN,
@@ -340,7 +341,7 @@ fo_block_area_new (FoFo *block,
       fo_object_debug_dump (fo_layout, 0);
     }
 
-  *new_area = fo_area_layout_new_with_layout (fo_layout);
+  *new_area = g_object_ref_sink (fo_area_layout_new_with_layout (fo_layout));
 
   FoRectangle logical;
   fo_layout_get_extents (fo_layout,
@@ -374,8 +375,10 @@ fo_block_area_new (FoFo *block,
   gfloat space_after =
     fo_length_get_value (fo_property_get_value (fo_block_get_space_after (block)));
   fo_area_area_set_space_after (*new_area, space_after);
-  fo_area_set_generated_by (*new_area, FO_FO (block));
-  FO_FO (block)->areas = g_list_append (FO_FO (block)->areas, *new_area);
+  fo_area_set_generated_by (*new_area,
+			    block);
+  fo_fo_area_list_append (block,
+			  *new_area);
 
   g_object_unref (font_desc);
 }

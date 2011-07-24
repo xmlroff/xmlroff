@@ -185,7 +185,7 @@ fo_image_new (void)
  *
  * If @uri is a relative URI, it is resolved relative to @base.
  * 
- * Return value: the newly created #FoImageo or #NULL.
+ * Return value: the newly created #FoImage or #NULL.
  **/
 FoImage *
 fo_image_new_from_uri (const gchar *uri,

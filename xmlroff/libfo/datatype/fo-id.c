@@ -1,8 +1,8 @@
 /* Fo
  * fo-id.c: Id datatype
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -28,7 +28,7 @@ struct _FoId
 struct _FoIdClass
 {
   FoDatatypeClass parent_class;
-  
+
 };
 
 static void fo_id_class_init   (FoIdClass     *klass);
@@ -53,9 +53,9 @@ static gpointer parent_class;
 
 /**
  * fo_id_get_type:
- * 
+ *
  * Register the #FoId object type.
- * 
+ *
  * Return value: #GType value of the #FoId object type.
  **/
 GType
@@ -78,28 +78,28 @@ fo_id_get_type (void)
         NULL,		/* instance_init */
 	NULL		/* value_table */
       };
-      
+
       object_type = g_type_register_static (FO_TYPE_DATATYPE,
                                             "FoId",
                                             &object_info, 0);
     }
-  
+
   return object_type;
 }
 
 /**
  * fo_id_class_init:
  * @klass: #FoIdClass class object to initialise.
- * 
+ *
  * Implements #GClassInitFunc for #FoIdClass.
  **/
 void
 fo_id_class_init (FoIdClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  
+
   parent_class = g_type_class_peek_parent (klass);
-  
+
   object_class->finalize = fo_id_finalize;
 
   object_class->set_property = fo_id_set_property;
@@ -120,7 +120,7 @@ fo_id_class_init (FoIdClass *klass)
 /**
  * fo_id_finalize:
  * @object: #FoId object to finalize.
- * 
+ *
  * Implements #GObjectFinalizeFunc for #FoId.
  **/
 void
@@ -141,7 +141,7 @@ fo_id_finalize (GObject *object)
  * @prop_id: Property ID assigned when property registered.
  * @value:   #GValue to set with property value.
  * @pspec:   Parameter specification for this property type.
- * 
+ *
  * Implements #GObjectGetPropertyFunc for #FoId.
  **/
 void
@@ -171,7 +171,7 @@ fo_id_get_property (GObject         *object,
  * @prop_id: Property ID assigned when property registered.
  * @value:   New value for property.
  * @pspec:   Parameter specification for this property type.
- * 
+ *
  * Implements #GObjectSetPropertyFunc for #FoId.
  **/
 void
@@ -197,9 +197,9 @@ fo_id_set_property (GObject         *object,
 
 /**
  * fo_id_new:
- * 
+ *
  * Creates a new #FoId initialized to default value.
- * 
+ *
  * Return value: the new #FoId
  **/
 FoDatatype *
@@ -208,16 +208,16 @@ fo_id_new (void)
   FoDatatype *id;
 
   id = FO_DATATYPE (g_object_new (fo_id_get_type (), NULL));
-  
+
   return id;
 }
 
 /**
  * fo_id_new_with_value:
  * @value: Id of new #FoId.
- * 
+ *
  * Creates a new #FoId initialized to @value.
- * 
+ *
  * Return value: the new #FoId.
  **/
 FoDatatype *
@@ -226,17 +226,17 @@ fo_id_new_with_value (const gchar* value)
   FoDatatype *id = fo_id_new ();
 
   fo_id_set_value (id, value);
-  
+
   return id;
 }
 
 /**
  * fo_id_get_value:
  * @id: #FoId.
- * 
+ *
  * Get the value of @id.
- * 
- * Return value: String value of @id.
+ *
+ * Return value: String value of @id.  Must be freed by caller.
  **/
 gchar*
 fo_id_get_value (FoDatatype *id)
@@ -251,7 +251,7 @@ fo_id_get_value (FoDatatype *id)
  * fo_id_set_value:
  * @id:    #FoId.
  * @new_value: New value for @id.
- * 
+ *
  * Set the value of @id.
  **/
 void
@@ -268,9 +268,9 @@ fo_id_set_value (FoDatatype *id,
 /**
  * fo_id_copy:
  * @datatype: #FoId to be copied.
- * 
+ *
  * Create a copy of @datatype.
- * 
+ *
  * Return value: New #FoId.
  **/
 FoDatatype*
@@ -290,11 +290,11 @@ fo_id_copy(FoDatatype *datatype)
 /**
  * fo_id_sprintf:
  * @object: #FoId to be printed.
- * 
+ *
  * Creates string representation of value of @object.
  *
  * String must be freed by caller.
- * 
+ *
  * Return value: String representation of @object.
  **/
 gchar*

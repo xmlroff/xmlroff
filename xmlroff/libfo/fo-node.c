@@ -2,13 +2,12 @@
  * fo-node.c: Base class for objects that are nodes in a tree
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
 #include "fo-utils.h"
-#include "fo-node.h"
 #include "fo-node-private.h"
 
 /**
@@ -37,39 +36,41 @@ static void     fo_node_set_property    (GObject       *object,
 					 const GValue  *value,
 					 GParamSpec    *pspec);
 
-static void     fo_node_finalize                          (GObject  *object);
+static void     _dispose                   (GObject  *object);
 
-static void     fo_node_debug_dump                        (FoObject *object,
-							   gint      depth);
-static gchar*   fo_node_sprintf                           (FoObject *object);
-static FoNode*  fo_node_insert_default                    (FoNode   *parent,
-							   gint      position,
-							   FoNode   *fo_node);
-static FoNode*  fo_node_insert_before_default             (FoNode   *parent,
-							   FoNode   *sibling,
-							   FoNode   *fo_node);
-static FoNode*  fo_node_insert_after_default              (FoNode   *parent,
-							   FoNode   *sibling,
-							   FoNode   *fo_node);
-static void     fo_node_unlink_with_next_siblings_default (FoNode   *fo_node);
-static FoNode*  fo_node_insert_with_next_siblings_default (FoNode   *parent,
-							   gint      position,
-							   FoNode   *fo_node);
-static FoNode*  fo_node_prepend_default                   (FoNode   *parent,
-							   FoNode   *fo_node);
-static FoNode*  fo_node_append_default                    (FoNode   *parent,
-							   FoNode   *fo_node);
-static void     fo_node_log_warning                       (FoObject *object,
-							   GError  **warning);
-static void     fo_node_log_error                         (FoObject *object,
-							   GError  **error);
-static gboolean fo_node_log_or_propagate_error            (FoObject *fo_object,
-							   GError  **dest,
-							   GError   *src);
-static gboolean fo_node_maybe_propagate_error             (FoObject *fo_object,
-							   GError  **dest,
-							   GError   *src,
-							   gboolean  continue_after_error);
+static void     _debug_dump                        (FoObject *object,
+						    gint      depth);
+static void     _debug_dump_tree                   (FoNode   *fo_node,
+						    gint      depth);
+static gchar*   _sprintf                           (FoObject *object);
+static FoNode*  _insert_default                    (FoNode   *parent,
+						    gint      position,
+						    FoNode   *fo_node);
+static FoNode*  _insert_before_default             (FoNode   *parent,
+						    FoNode   *sibling,
+						    FoNode   *fo_node);
+static FoNode*  _insert_after_default              (FoNode   *parent,
+						    FoNode   *sibling,
+						    FoNode   *fo_node);
+static void     _unlink_with_next_siblings_default (FoNode   *fo_node);
+static FoNode*  _insert_with_next_siblings_default (FoNode   *parent,
+						    gint      position,
+						    FoNode   *fo_node);
+static FoNode*  _prepend_default                   (FoNode   *parent,
+						    FoNode   *fo_node);
+static FoNode*  _append_default                    (FoNode   *parent,
+						    FoNode   *fo_node);
+static void     _log_warning                (FoObject *object,
+					     GError  **warning);
+static void     _log_error                  (FoObject *object,
+					     GError  **error);
+static gboolean _log_or_propagate_error     (FoObject *fo_object,
+					     GError  **dest,
+					     GError   *src);
+static gboolean _maybe_propagate_error      (FoObject *fo_object,
+					     GError  **dest,
+					     GError   *src,
+					     gboolean  continue_after_error);
 
 static gpointer parent_class;
 
@@ -133,20 +134,23 @@ fo_node_base_class_init (FoNodeClass *klass)
 {
   FoObjectClass *fo_object_class = FO_OBJECT_CLASS (klass);
 
-  fo_object_class->debug_dump             = fo_node_debug_dump;
-  fo_object_class->print_sprintf          = fo_node_sprintf;
-  fo_object_class->log_warning            = fo_node_log_warning;
-  fo_object_class->log_error              = fo_node_log_error;
-  fo_object_class->log_or_propagate_error = fo_node_log_or_propagate_error;
-  fo_object_class->maybe_propagate_error  = fo_node_maybe_propagate_error;
+  fo_object_class->debug_dump             = _debug_dump;
+  fo_object_class->print_sprintf          = _sprintf;
+  fo_object_class->log_warning            = _log_warning;
+  fo_object_class->log_error              = _log_error;
+  fo_object_class->log_or_propagate_error = _log_or_propagate_error;
+  fo_object_class->maybe_propagate_error  = _maybe_propagate_error;
 
-  klass->insert = fo_node_insert_default;
-  klass->insert_before = fo_node_insert_before_default;
-  klass->insert_after = fo_node_insert_after_default;
-  klass->insert_with_next_siblings = fo_node_insert_with_next_siblings_default;
-  klass->unlink_with_next_siblings = fo_node_unlink_with_next_siblings_default;
-  klass->prepend = fo_node_prepend_default;
-  klass->append = fo_node_append_default;
+  klass->debug_dump_tree = _debug_dump_tree;
+  klass->insert = _insert_default;
+  klass->insert_before = _insert_before_default;
+  klass->insert_after = _insert_after_default;
+  klass->insert_with_next_siblings =
+    _insert_with_next_siblings_default;
+  klass->unlink_with_next_siblings =
+    _unlink_with_next_siblings_default;
+  klass->prepend = _prepend_default;
+  klass->append = _append_default;
 }
 
 /**
@@ -162,7 +166,7 @@ fo_node_class_init (FoNodeClass *klass)
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_node_finalize;
+  object_class->dispose = _dispose;
 
   object_class->set_property = fo_node_set_property;
   object_class->get_property = fo_node_get_property;
@@ -194,22 +198,26 @@ fo_node_class_init (FoNodeClass *klass)
 }
 
 /**
- * fo_node_finalize:
+ * _dispose:
  * @object: #FoNode object to finalize.
  * 
  * Implements #GObjectFinalizeFunc for #FoNode.
  **/
 void
-fo_node_finalize (GObject *object)
+_dispose (GObject *object)
 {
   FoNode *node;
 
   node = FO_NODE (object);
   /* Node should already be removed from the FoNode tree, since this
      destroys the GNode subtree remaining under node */
-  g_node_destroy (node->node);
+  if (node->node != NULL)
+    {
+      g_node_destroy (node->node);
+      node->node = NULL;
+    }
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
@@ -287,24 +295,21 @@ fo_node_new (void)
 }
 
 /**
- * fo_node_debug_dump:
+ * _debug_dump:
  * @object: #FoObject to be dumped.
  * @depth:  Relative indent to add to the output.
  * 
  * Implements #FoObject debug_dump method for #FoNode.
  **/
-void
-fo_node_debug_dump (FoObject *object,
-		    gint      depth)
+static void
+_debug_dump (FoObject *object,
+	     gint      depth)
 {
-  gchar *indent = g_strnfill (depth * 2, ' ');
-  gchar* object_sprintf;
-  FoNode *child;
-
   g_return_if_fail (object != NULL);
   g_return_if_fail (FO_IS_NODE (object));
 
-  object_sprintf = fo_object_debug_sprintf (object);
+  gchar *indent = g_strnfill (depth * 2, ' ');
+  gchar* object_sprintf = fo_object_debug_sprintf (object);
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
@@ -317,8 +322,8 @@ fo_node_debug_dump (FoObject *object,
 
   FO_NODE_GET_CLASS (object)->debug_dump_properties (FO_NODE (object),
 						     depth + 2);
-  child = fo_node_first_child (FO_NODE (object));
-  while (child)
+  FoNode *child = fo_node_first_child (FO_NODE (object));
+  while (child != NULL)
     {
       fo_object_debug_dump (child,
 			    depth + 1);
@@ -328,15 +333,15 @@ fo_node_debug_dump (FoObject *object,
 }
 
 /**
- * fo_node_debug_dump_tree:
- * @fo_node: #FoNode to be dumped.
- * @depth:   Relative indent to add to the output.
+ * _debug_dump_tree:
+ * @node:  #FoNode to be dumped.
+ * @depth: Relative indent to add to the output.
  * 
- * Logs the tree structure beginning at @fo_node.
+ * Implements #FoNode debug_dump_tree method for #FoNode.
  **/
-void
-fo_node_debug_dump_tree (FoNode *fo_node,
-			 gint    depth)
+static void
+_debug_dump_tree (FoNode *fo_node,
+		  gint    depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
   gchar* fo_node_sprintf;
@@ -357,7 +362,7 @@ fo_node_debug_dump_tree (FoNode *fo_node,
   g_free (indent);
 
   child = fo_node_first_child (fo_node);
-  while (child)
+  while (child != NULL)
     {
       fo_node_debug_dump_tree (child,
 			       depth + 1);
@@ -367,7 +372,53 @@ fo_node_debug_dump_tree (FoNode *fo_node,
 }
 
 /**
- * fo_node_sprintf:
+ * fo_node_debug_dump_tree:
+ * @fo_node: #FoNode to be dumped.
+ * @depth:   Relative indent to add to the output.
+ * 
+ * Logs the tree structure beginning at @fo_node.
+ **/
+void
+fo_node_debug_dump_tree (FoNode *fo_node,
+			 gint    depth)
+{
+  gchar *indent = g_strnfill (depth * 2, ' ');
+
+  if (fo_node == NULL)
+    {
+      g_log (G_LOG_DOMAIN,
+	     G_LOG_LEVEL_DEBUG,
+	     "%s(null)",
+	     indent);
+    }
+  else if (!G_IS_OBJECT (fo_node))
+    {
+      g_log (G_LOG_DOMAIN,
+	     G_LOG_LEVEL_DEBUG,
+	     "%sNot a GObject: %p",
+	     indent,
+	     fo_node);
+    }
+  else if (!FO_IS_NODE (fo_node))
+    {
+      g_log (G_LOG_DOMAIN,
+	     G_LOG_LEVEL_DEBUG,
+	     "%sGObject but not an FoFo_Node:: %s (%p : %d)",
+	     indent,
+	     g_type_name (G_TYPE_FROM_INSTANCE (fo_node)),
+	     fo_node,
+	     ((GObject *) fo_node)->ref_count);
+    }
+  else
+    {
+      FO_NODE_GET_CLASS (fo_node)->debug_dump_tree (fo_node, depth);
+    }
+
+  g_free (indent);
+}
+
+/**
+ * _sprintf:
  * @object: #FoNode to be printed.
  * 
  * Creates string representation of value of @object.
@@ -376,8 +427,8 @@ fo_node_debug_dump_tree (FoNode *fo_node,
  * 
  * Return value: String representation of @object.
  **/
-gchar*
-fo_node_sprintf (FoObject *object)
+static gchar*
+_sprintf (FoObject *object)
 {
   g_return_val_if_fail (object != NULL, NULL);
   g_return_val_if_fail (FO_IS_NODE (object), NULL);
@@ -552,7 +603,7 @@ fo_node_dump_path_to_root (FoNode *node)
 }
 
 /**
- * fo_node_insert_default:
+ * _insert_default:
  * @parent:   The #FoNode to place @fo_node under.
  * @position: The position to place @fo_node at, with respect to its
  *            siblings.  If @position is -1, @fo_node is inserted as
@@ -563,13 +614,15 @@ fo_node_dump_path_to_root (FoNode *node)
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
-fo_node_insert_default (FoNode *parent,
-			gint    position,
-			FoNode *fo_node)
+static FoNode *
+_insert_default (FoNode *parent,
+		 gint    position,
+		 FoNode *fo_node)
 {
   g_return_val_if_fail (FO_IS_NODE (parent), fo_node);
   g_return_val_if_fail (FO_IS_NODE (fo_node), fo_node);
+
+  g_object_ref_sink (fo_node);
 
   return ((FoNode *) g_node_insert (parent->node,
 				    position,
@@ -588,7 +641,7 @@ fo_node_insert_default (FoNode *parent,
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
+FoNode *
 fo_node_insert (FoNode *parent,
 		gint    position,
 		FoNode *fo_node)
@@ -602,7 +655,7 @@ fo_node_insert (FoNode *parent,
 }
 
 /**
- * fo_node_insert_before_default:
+ * _insert_before_default:
  * @parent:  The #FoNode to place @fo_node under.
  * @sibling: The sibling #FoNode to place @fo_node before.  If
  *           @sibling is NULL, @fo_node is inserted as the last child
@@ -613,14 +666,16 @@ fo_node_insert (FoNode *parent,
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
-fo_node_insert_before_default (FoNode *parent,
-			       FoNode *sibling,
-			       FoNode *fo_node)
+static FoNode *
+_insert_before_default (FoNode *parent,
+			FoNode *sibling,
+			FoNode *fo_node)
 {
   g_return_val_if_fail (FO_IS_NODE (parent), fo_node);
   g_return_val_if_fail (sibling == NULL || FO_IS_NODE (sibling), fo_node);
   g_return_val_if_fail (FO_IS_NODE (fo_node), fo_node);
+
+  g_object_ref_sink (fo_node);
 
   return ((FoNode *) g_node_insert_before (parent->node,
 					   sibling->node,
@@ -654,7 +709,7 @@ fo_node_insert_before (FoNode *parent,
 }
 
 /**
- * fo_node_insert_after_default:
+ * _insert_after_default:
  * @parent:  The #FoNode to place @fo_node under.
  * @sibling: The sibling #FoNode to place @fo_node after.  If
  *           @sibling is NULL, @fo_node is inserted as the first child
@@ -665,14 +720,16 @@ fo_node_insert_before (FoNode *parent,
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
-fo_node_insert_after_default (FoNode *parent,
-			      FoNode *sibling,
-			      FoNode *fo_node)
+static FoNode *
+_insert_after_default (FoNode *parent,
+		       FoNode *sibling,
+		       FoNode *fo_node)
 {
   g_return_val_if_fail (FO_IS_NODE (parent), fo_node);
   g_return_val_if_fail (sibling == NULL || FO_IS_NODE (sibling), fo_node);
   g_return_val_if_fail (FO_IS_NODE (fo_node), fo_node);
+
+  g_object_ref_sink (fo_node);
 
   return ((FoNode *) g_node_insert_after (parent->node,
 					  sibling->node,
@@ -691,7 +748,7 @@ fo_node_insert_after_default (FoNode *parent,
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
+FoNode *
 fo_node_insert_after (FoNode *parent,
 		      FoNode *sibling,
 		      FoNode *fo_node)
@@ -706,7 +763,7 @@ fo_node_insert_after (FoNode *parent,
 }
 
 /**
- * fo_node_prepend_default:
+ * _prepend_default:
  * @parent:  The #FoNode to place @fo_node under.
  * @fo_node: The #FoNode to insert.
  * 
@@ -714,12 +771,14 @@ fo_node_insert_after (FoNode *parent,
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
-fo_node_prepend_default (FoNode *parent,
-			 FoNode *fo_node)
+static FoNode *
+_prepend_default (FoNode *parent,
+		  FoNode *fo_node)
 {
   g_return_val_if_fail (FO_IS_NODE (parent), fo_node);
   g_return_val_if_fail (FO_IS_NODE (fo_node), fo_node);
+
+  g_object_ref_sink (fo_node);
 
   return ((FoNode *) g_node_prepend (parent->node,
 				     fo_node->node)->data);
@@ -746,7 +805,7 @@ fo_node_prepend (FoNode *parent,
 }
 
 /**
- * fo_node_append_default:
+ * _append_default:
  * @parent:  The #FoNode to place @fo_node under.
  * @fo_node: The #FoNode to insert.
  * 
@@ -754,12 +813,14 @@ fo_node_prepend (FoNode *parent,
  * 
  * Return value: The inserted #FoNode.
  **/
-FoNode*
-fo_node_append_default (FoNode *parent,
-			FoNode *fo_node)
+static FoNode*
+_append_default (FoNode *parent,
+		 FoNode *fo_node)
 {
   g_return_val_if_fail (FO_IS_NODE (parent), fo_node);
   g_return_val_if_fail (FO_IS_NODE (fo_node), fo_node);
+
+  g_object_ref_sink (fo_node);
 
   return ((FoNode *) g_node_append (parent->node,
 				    fo_node->node)->data);
@@ -792,7 +853,7 @@ typedef struct _FoNodeFuncData
 } FoNodeFuncData;
 
 /**
- * fo_node_g_node_children_foreach_func:
+ * _g_node_children_foreach_func:
  * @node: The #GNode for an #FoNode.
  * @data: #FoNodeFuncData with #FoNodeForeachFunc and 'real' user data.
  * 
@@ -800,7 +861,7 @@ typedef struct _FoNodeFuncData
  * corresponding to @node and the 'real' user data as arguments.
  **/
 static void
-fo_node_g_node_children_foreach_func (GNode    *node,
+_g_node_children_foreach_func (GNode    *node,
 				      gpointer  data)
 {
   const FoNodeFuncData *fo_node_func_data = (FoNodeFuncData *) data;
@@ -830,7 +891,7 @@ fo_node_children_foreach (FoNode 	    *fo_node,
 
   g_node_children_foreach (fo_node->node,
 			   flags,
-			   fo_node_g_node_children_foreach_func,
+			   _g_node_children_foreach_func,
 			   &g_node_children_foreach_data);
 }
 
@@ -841,7 +902,7 @@ typedef struct _FoNodeTraverseFuncData
 } FoNodeTraverseFuncData;
 
 /**
- * fo_node_g_node_traverse_func:
+ * _g_node_traverse_func:
  * @node: The #GNode for an #FoNode.
  * @data: #FoNodeFuncData with #FoNodeTraverseFunc and 'real' user data.
  * 
@@ -851,14 +912,14 @@ typedef struct _FoNodeTraverseFuncData
  * Return value: The value returned by the #FoNodeTraverseFunc.
  **/
 static gboolean
-fo_node_g_node_traverse_func (GNode    *node,
-			      gpointer  data)
+_g_node_traverse_func (GNode    *node,
+		       gpointer  data)
 {
-  const FoNodeTraverseFuncData *fo_node_traverse_func_data =
+  const FoNodeTraverseFuncData *traverse_func_data =
     (FoNodeTraverseFuncData *) data;
 
-  return fo_node_traverse_func_data->func (node->data,
-					   fo_node_traverse_func_data->node_func_data);
+  return traverse_func_data->func (node->data,
+				   traverse_func_data->node_func_data);
 }
 
 /**
@@ -890,12 +951,15 @@ fo_node_traverse (FoNode 	     *root,
 {
   FoNodeTraverseFuncData g_node_traverse_data = {func, data};
 
-  g_node_traverse (root->node,
-		   order,
-		   flags,
-		   max_depth,
-		   fo_node_g_node_traverse_func,
-		   &g_node_traverse_data);
+  if (root->node != NULL)
+    {
+      g_node_traverse (root->node,
+		       order,
+		       flags,
+		       max_depth,
+		       _g_node_traverse_func,
+		       &g_node_traverse_data);
+    }
 }
 
 /**
@@ -953,7 +1017,7 @@ fo_node_parent (FoNode *fo_node)
 }
 
 /**
- * fo_node_unlink_with_next_siblings_default:
+ * _unlink_with_next_siblings_default:
  * @fo_node: First #FoNode to be unlinked
  * 
  * Unlink @fo_node and its next siblings (i.e., 'following siblings'
@@ -964,25 +1028,30 @@ fo_node_parent (FoNode *fo_node)
  * its following siblings are valid roots since they each have a next
  * and/or a previous sibling, even if they don't have a parent.
  **/
-void
-fo_node_unlink_with_next_siblings_default (FoNode *fo_node)
+static void
+_unlink_with_next_siblings_default (FoNode *fo_node)
 {
-  GNode *use_node;
-
   g_return_if_fail (fo_node != NULL);
   g_return_if_fail (FO_IS_NODE (fo_node));
 
-  use_node = fo_node->node;
+  GNode *use_node = fo_node->node;
 
-  if (use_node->prev)
-    use_node->prev->next = NULL;
-  else if (use_node->parent)
-    use_node->parent->children = NULL;
-
-  use_node->prev = NULL;
-
-  while (use_node)
+  if (use_node->prev != NULL)
     {
+      use_node->prev->next = NULL;
+      use_node->prev = NULL;
+    }
+  else if (use_node->parent != NULL)
+    {
+      /* If there was no 'prev', this could be the first child of a
+	 parent. */
+      use_node->parent->children = NULL;
+    }
+
+  while (use_node != NULL)
+    {
+      g_object_force_floating (use_node->data);
+
       use_node->parent = NULL;
       use_node = use_node->next;
     }
@@ -1010,6 +1079,28 @@ fo_node_unlink_with_next_siblings (FoNode *fo_node)
 }
 
 /**
+ * fo_node_unlink:
+ * @fo_node: the #FoNode to unlink, which becomes the root of a new
+ *           tree
+ *
+ * Unlinks a #FoNode from a tree, resulting in two separate trees.
+ **/
+void
+fo_node_unlink (FoNode *fo_node)
+{
+  /* Only unref fo_node if it's currently in a tree. */
+  gboolean will_unref = (fo_node->node->prev != NULL) ||
+    (fo_node->node->parent != NULL);
+
+  g_node_unlink (fo_node->node);
+
+  if (will_unref)
+    {
+      g_object_unref (fo_node);
+    }
+}
+
+/**
  * fo_node_insert_with_next_siblings_default:
  * @parent:   The #FoNode to place @fo_node under.
  * @position: The position to place @fo_node at, with respect to its
@@ -1025,25 +1116,29 @@ fo_node_unlink_with_next_siblings (FoNode *fo_node)
  *
  * Return value: The inserted #FoNode.
  **/
-FoNode*
-fo_node_insert_with_next_siblings_default (FoNode *parent,
-					   gint    position,
-					   FoNode *fo_node)
+static FoNode *
+_insert_with_next_siblings_default (FoNode *parent,
+				    gint    position,
+				    FoNode *fo_node)
 {
-  FoNode *use_node;
-
   g_return_val_if_fail (parent != NULL, fo_node);
   g_return_val_if_fail (FO_IS_NODE (parent), fo_node);
   g_return_val_if_fail (fo_node != NULL, fo_node);
   g_return_val_if_fail (FO_IS_NODE (fo_node), fo_node);
 
-  use_node = fo_node;
+  FoNode *use_node = fo_node;
 
-  while (use_node)
+  while (use_node != NULL)
     {
       FoNode *next_sibling = fo_node_next_sibling (use_node);
+
+      /* Keep a reference while use_node is unlinked. */
+      g_object_ref_sink (use_node);
+
       fo_node_unlink (use_node);
       fo_node_insert (parent, position++, use_node);
+      g_object_unref (use_node);
+
       use_node = next_sibling;
     }
 
@@ -1066,7 +1161,7 @@ fo_node_insert_with_next_siblings_default (FoNode *parent,
  *
  * Return value: The inserted #FoNode.
  **/
-FoNode*
+FoNode *
 fo_node_insert_with_next_siblings (FoNode *parent,
 				   gint    position,
 				   FoNode *fo_node)
@@ -1082,7 +1177,7 @@ fo_node_insert_with_next_siblings (FoNode *parent,
 }
 
 /**
- * fo_node_path_step_sprintf:
+ * _path_step_sprintf:
  * @fo_node: The #FoNode
  * 
  * Creates a string representation of the XPath step for @fo_node.
@@ -1092,30 +1187,29 @@ fo_node_insert_with_next_siblings (FoNode *parent,
  * Return value: String representing the XPath step for @fo_node.
  **/
 static gchar*
-fo_node_path_step_sprintf (FoNode *fo_node)
+_path_step_sprintf (FoNode *fo_node)
 {
-  FoNode *sibling_node;
-  gchar *node_name;
-  gint count = 1;
-  GString *path_step = g_string_new (NULL);
-
   g_return_val_if_fail (FO_IS_NODE (fo_node), NULL);
 
-  node_name = fo_object_sprintf (FO_OBJECT (fo_node));
+  gchar *node_name = fo_object_sprintf (FO_OBJECT (fo_node));
 
-  sibling_node = fo_node_prev_sibling (fo_node);
+  FoNode *sibling_node = fo_node_prev_sibling (fo_node);
 
-  while (sibling_node)
+  gint count = 1;
+  while (sibling_node != NULL)
     {
-      if (G_TYPE_FROM_INSTANCE (sibling_node) == G_TYPE_FROM_INSTANCE (fo_node))
+      if (G_TYPE_FROM_INSTANCE (sibling_node) ==
+	  G_TYPE_FROM_INSTANCE (fo_node))
 	count++;
       sibling_node = fo_node_prev_sibling (sibling_node);
     }
 
+  GString *path_step = g_string_new (NULL);
   g_string_printf (path_step,
-		   "/%s[%d]",
+		   "/%s[%d%s]",
 		   node_name,
-		   count);
+		   count,
+		   g_object_is_floating (fo_node) ? " (floating)" : "");
 
   g_free (node_name);
 
@@ -1137,24 +1231,20 @@ fo_node_path_step_sprintf (FoNode *fo_node)
 static gchar*
 fo_node_path_to_root_sprintf (FoNode *fo_node)
 {
-  FoNode *use_node;
-  GString *path;
-  gchar *node_name;
-
   g_return_val_if_fail (fo_node != NULL, NULL);
   g_return_val_if_fail (FO_IS_NODE (fo_node), NULL);
 
-  node_name = fo_node_path_step_sprintf (fo_node);
-  path = g_string_new (node_name);
+  gchar *node_name = _path_step_sprintf (fo_node);
+  GString *path = g_string_new (node_name);
   g_free (node_name);
   
-  use_node = fo_node_parent (FO_NODE (fo_node));
+  FoNode *use_node = fo_node_parent (FO_NODE (fo_node));
 
-  while (use_node)
+  while (use_node != NULL)
     {
       gchar *old_path = g_strdup (path->str);
 
-      node_name = fo_node_path_step_sprintf (use_node);
+      node_name = _path_step_sprintf (use_node);
 
       g_string_printf (path,
 		       "%s%s",
@@ -1171,38 +1261,35 @@ fo_node_path_to_root_sprintf (FoNode *fo_node)
 }
 
 /**
- * fo_node_log_warning:
+ * _log_warning:
  * @object: #FoNode that is subject of @warning.
  * @warning: #GError with information about warning that occurred.
  * 
  * Logs both the warning represented by @warning and the #FoNode path from
  * @object to the root of its #FoNode tree.
  **/
-void
-fo_node_log_warning (FoObject *object,
-		     GError  **warning)
+static void
+_log_warning (FoObject *object,
+	      GError  **warning)
 {
-  FoNode *use_node;
-  GString *path = g_string_new (NULL);
-  gchar *node_name;
-
   g_return_if_fail (object != NULL);
   g_return_if_fail (FO_IS_NODE (object));
   g_return_if_fail (warning != NULL && *warning != NULL);
 
-  node_name = fo_node_path_step_sprintf (FO_NODE (object));
+  gchar *node_name = _path_step_sprintf (FO_NODE (object));
+  GString *path = g_string_new (NULL);
   g_string_printf (path,
 		   "%s",
 		   node_name);
   g_free (node_name);
   
-  use_node = fo_node_parent (FO_NODE (object));
+  FoNode *use_node = fo_node_parent (FO_NODE (object));
 
-  while (use_node)
+  while (use_node != NULL)
     {
       gchar *old_path = g_strdup (path->str);
 
-      node_name = fo_node_path_step_sprintf (use_node);
+      node_name = _path_step_sprintf (use_node);
 
       g_string_printf (path,
 		       "%s%s",
@@ -1225,38 +1312,35 @@ fo_node_log_warning (FoObject *object,
 }
 
 /**
- * fo_node_log_error:
+ * _log_error:
  * @object: The #FoNode.
  * @error:  #GError indicating the error.
  * 
  * Logs both the error represented by @error and the #FoNode path from
  * @object to the root of its #FoNode tree.
  **/
-void
-fo_node_log_error (FoObject *object,
-		   GError  **error)
+static void
+_log_error (FoObject *object,
+	    GError  **error)
 {
-  FoNode *use_node;
-  GString *path = g_string_new (NULL);
-  gchar *node_name;
-
   g_return_if_fail (object != NULL);
   g_return_if_fail (FO_IS_NODE (object));
   g_return_if_fail (error != NULL && *error != NULL);
 
-  node_name = fo_node_path_step_sprintf (FO_NODE (object));
+  gchar *node_name = _path_step_sprintf (FO_NODE (object));
+  GString *path = g_string_new (NULL);
   g_string_printf (path,
 		   "%s",
 		   node_name);
   g_free (node_name);
   
-  use_node = fo_node_parent (FO_NODE (object));
+  FoNode *use_node = fo_node_parent (FO_NODE (object));
 
-  while (use_node)
+  while (use_node != NULL)
     {
       gchar *old_path = g_strdup (path->str);
 
-      node_name = fo_node_path_step_sprintf (use_node);
+      node_name = _path_step_sprintf (use_node);
 
       g_string_printf (path,
 		       "%s%s",
@@ -1279,7 +1363,7 @@ fo_node_log_error (FoObject *object,
 }
 
 /**
- * fo_node_log_or_propagate_error:
+ * _log_or_propagate_error:
  * @fo_object: #FoObject that is the subject of @src.
  * @dest:      #GError to which to propagate @src, or NULL.
  * @src:       #GError with information about error that occurred.
@@ -1289,10 +1373,10 @@ fo_node_log_error (FoObject *object,
  * 
  * Return value: %TRUE if error propagated, otherwise %FALSE.
  **/
-gboolean
-fo_node_log_or_propagate_error (FoObject *fo_object,
-				GError  **dest,
-				GError   *src)
+static gboolean
+_log_or_propagate_error (FoObject *fo_object,
+			 GError  **dest,
+			 GError   *src)
 {
   GError *new_error;
   GString *new_message = g_string_new (NULL);
@@ -1334,7 +1418,7 @@ fo_node_log_or_propagate_error (FoObject *fo_object,
 }
 
 /**
- * fo_node_maybe_propagate_error:
+ * _maybe_propagate_error:
  * @fo_object:            #FoObject that is the subject of @src.
  * @dest:                 #GError to which to propagate @src, or NULL.
  * @src:                  #GError with information about error that occurred.
@@ -1345,11 +1429,11 @@ fo_node_log_or_propagate_error (FoObject *fo_object,
  * 
  * Return value: %TRUE if error propagated, otherwise %FALSE.
  **/
-gboolean
-fo_node_maybe_propagate_error (FoObject *fo_object,
-			       GError  **dest,
-			       GError   *src,
-			       gboolean  continue_after_error)
+static gboolean
+_maybe_propagate_error (FoObject *fo_object,
+			GError  **dest,
+			GError   *src,
+			gboolean  continue_after_error)
 {
   GError *new_error;
   GString *new_message = g_string_new (NULL);

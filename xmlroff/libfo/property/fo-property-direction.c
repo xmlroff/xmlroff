@@ -1,8 +1,8 @@
 /* Fo
  * fo-property-direction.c: 'direction' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-20 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -15,11 +15,20 @@
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-direction.h"
 
-/* direction */
-/* Inherited: TRUE */
-/* Shorthand: FALSE */
-/* ltr | rtl | inherit */
-/* Initial value: ltr */
+/**
+ * SECTION:fo-property-direction
+ * @short_description: 'direction' property
+ *
+ * Inherited: TRUE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: ltr | rtl | inherit
+ *
+ * Initial value: ltr
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;direction">http://www.w3.org/TR/xsl11/&num;direction</ulink>
+ */
 
 struct _FoPropertyDirection
 {
@@ -35,12 +44,12 @@ static void fo_property_direction_init         (FoPropertyDirection      *proper
 static void fo_property_direction_class_init   (FoPropertyDirectionClass *klass);
 static void fo_property_direction_finalize     (GObject       *object);
 
-static FoDatatype* fo_property_direction_resolve_enum (const gchar *token,
-                                                       FoContext   *context,
-                                                       GError     **error);
-static FoDatatype* fo_property_direction_validate (FoDatatype *datatype,
-                                                   FoContext  *context,
-                                                   GError    **error);
+static FoDatatype * fo_property_direction_resolve_enum (const gchar *token,
+                                                        FoContext   *context,
+                                                        GError     **error);
+static FoDatatype * fo_property_direction_validate (FoDatatype *datatype,
+                                                    FoContext  *context,
+                                                    GError    **error);
 
 static const gchar class_name[] = "direction";
 static gpointer parent_class;
@@ -92,7 +101,7 @@ void
 fo_property_direction_init (FoPropertyDirection *direction)
 {
   FO_PROPERTY (direction)->value =
-    g_object_ref (fo_enum_get_enum_ltr ());
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("ltr"));
 }
 
 /**
@@ -184,7 +193,7 @@ fo_property_direction_resolve_enum (const gchar *token,
   if ((strcmp (token, "ltr") == 0) ||
       (strcmp (token, "rtl") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

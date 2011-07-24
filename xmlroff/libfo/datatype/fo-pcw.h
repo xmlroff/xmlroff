@@ -11,6 +11,7 @@
 #define __FO_PCW_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/datatype/fo-datatype.h>
 
 G_BEGIN_DECLS
 

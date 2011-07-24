@@ -2,7 +2,7 @@
  * fo-area-reference-private.h: Private information for reference area objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -19,9 +19,9 @@ struct _FoAreaReference
 {
   FoAreaArea parent_instance;
 
-  FoEnumAreaDirection bpd; /* block progression direction */
-  FoEnumAreaDirection ipd; /* inline progression direction */
-  FoEnumAreaDirection sd;  /* shift direction */
+  FoEnumAreaDirection bpd;	/* block progression direction */
+  FoEnumAreaDirection ipd;	/* inline progression direction */
+  FoEnumAreaDirection sd;	/* shift direction */
 };
 
 struct _FoAreaReferenceClass

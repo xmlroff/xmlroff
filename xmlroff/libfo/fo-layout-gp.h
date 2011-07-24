@@ -2,7 +2,7 @@
  * fo-layout.h: Object type for PangoLayout
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 
 GType      fo_layout_gp_get_type  (void);
 FoLayout * fo_layout_gp_new       (void);
-FoLayout * fo_layout_gp_new_from_fo_doc      (FoDoc   *fo_doc);
 
 G_END_DECLS
 

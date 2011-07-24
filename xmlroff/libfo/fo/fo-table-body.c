@@ -2,11 +2,12 @@
  * fo-table-body.c: 'table-body' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
 
+#include "fo/fo-cbpbp-fo-private.h"
 #include "fo/fo-table-border-fo-private.h"
 #include "fo/fo-table-body-private.h"
 #include "fo/fo-table.h"
@@ -100,6 +101,7 @@ enum {
 };
 
 static void fo_table_body_class_init  (FoTableBodyClass *klass);
+static void fo_table_body_cbpbp_fo_init (FoCBPBPFoIface *iface);
 static void fo_table_body_table_border_fo_init (FoTableBorderFoIface *iface);
 static void fo_table_body_get_property (GObject      *object,
                                         guint         prop_id,
@@ -136,18 +138,25 @@ fo_table_body_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoTableBodyClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_table_body_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoTableBody),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL		/* value_table */
-      };
+	{
+	  sizeof (FoTableBodyClass),
+	  NULL,           /* base_init */
+	  NULL,           /* base_finalize */
+	  (GClassInitFunc) fo_table_body_class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoTableBody),
+	  0,              /* n_preallocs */
+	  NULL,		  /* instance_init */
+	  NULL		  /* value_table */
+	};
+
+      static const GInterfaceInfo fo_cbpbp_fo_info =
+	{
+	  (GInterfaceInitFunc) fo_table_body_cbpbp_fo_init,	 /* interface_init */
+	  NULL,
+	  NULL
+	};
 
       static const GInterfaceInfo fo_table_border_fo_info =
       {
@@ -159,6 +168,9 @@ fo_table_body_get_type (void)
       object_type = g_type_register_static (FO_TYPE_TABLE_PART,
                                             "FoTableBody",
                                             &object_info, 0);
+      g_type_add_interface_static (object_type,
+                                   FO_TYPE_CBPBP_FO,
+                                   &fo_cbpbp_fo_info);
       g_type_add_interface_static (object_type,
                                    FO_TYPE_TABLE_BORDER_FO,
                                    &fo_table_border_fo_info);
@@ -526,6 +538,34 @@ fo_table_body_class_init (FoTableBodyClass *klass)
 }
 
 /**
+ * fo_table_body_cbpbp_fo_init:
+ * @iface: #FoCBPBPFoIFace structure for this class.
+ * 
+ * Initialize #FoCBPBPFoIface interface for this class.
+ **/
+void
+fo_table_body_cbpbp_fo_init (FoCBPBPFoIface *iface)
+{
+  iface->get_background_color = fo_table_body_get_background_color;
+  iface->get_border_after_color = fo_table_body_get_border_after_color;
+  iface->get_border_after_style = fo_table_body_get_border_after_style;
+  iface->get_border_after_width = fo_table_body_get_border_after_width;
+  iface->get_border_before_color = fo_table_body_get_border_before_color;
+  iface->get_border_before_style = fo_table_body_get_border_before_style;
+  iface->get_border_before_width = fo_table_body_get_border_before_width;
+  iface->get_border_end_color = fo_table_body_get_border_end_color;
+  iface->get_border_end_style = fo_table_body_get_border_end_style;
+  iface->get_border_end_width = fo_table_body_get_border_end_width;
+  iface->get_border_start_color = fo_table_body_get_border_start_color;
+  iface->get_border_start_style = fo_table_body_get_border_start_style;
+  iface->get_border_start_width = fo_table_body_get_border_start_width;
+  iface->get_padding_after = fo_table_body_get_padding_after;
+  iface->get_padding_before = fo_table_body_get_padding_before;
+  iface->get_padding_end = fo_table_body_get_padding_end;
+  iface->get_padding_start = fo_table_body_get_padding_start;
+}
+
+/**
  * fo_table_body_table_border_fo_init:
  * @iface: #FoTableBorderFoIFace structure for this class.
  * 
@@ -562,9 +602,50 @@ fo_table_body_table_border_fo_init (FoTableBorderFoIface *iface)
 void
 fo_table_body_finalize (GObject *object)
 {
-  FoTableBody *fo_table_body;
+  FoFo *fo = FO_FO (object);
 
-  fo_table_body = FO_TABLE_BODY (object);
+  /* Release references to all property objects. */
+  fo_table_body_set_background_color (fo, NULL);
+  fo_table_body_set_background_image (fo, NULL);
+  fo_table_body_set_border_after_color (fo, NULL);
+  fo_table_body_set_border_after_precedence (fo, NULL);
+  fo_table_body_set_border_after_style (fo, NULL);
+  fo_table_body_set_border_after_width (fo, NULL);
+  fo_table_body_set_border_before_color (fo, NULL);
+  fo_table_body_set_border_before_precedence (fo, NULL);
+  fo_table_body_set_border_before_style (fo, NULL);
+  fo_table_body_set_border_before_width (fo, NULL);
+  fo_table_body_set_border_bottom_color (fo, NULL);
+  fo_table_body_set_border_bottom_style (fo, NULL);
+  fo_table_body_set_border_bottom_width (fo, NULL);
+  fo_table_body_set_border_end_color (fo, NULL);
+  fo_table_body_set_border_end_precedence (fo, NULL);
+  fo_table_body_set_border_end_style (fo, NULL);
+  fo_table_body_set_border_end_width (fo, NULL);
+  fo_table_body_set_border_left_color (fo, NULL);
+  fo_table_body_set_border_left_style (fo, NULL);
+  fo_table_body_set_border_left_width (fo, NULL);
+  fo_table_body_set_border_right_color (fo, NULL);
+  fo_table_body_set_border_right_style (fo, NULL);
+  fo_table_body_set_border_right_width (fo, NULL);
+  fo_table_body_set_border_start_color (fo, NULL);
+  fo_table_body_set_border_start_precedence (fo, NULL);
+  fo_table_body_set_border_start_style (fo, NULL);
+  fo_table_body_set_border_start_width (fo, NULL);
+  fo_table_body_set_border_top_color (fo, NULL);
+  fo_table_body_set_border_top_style (fo, NULL);
+  fo_table_body_set_border_top_width (fo, NULL);
+  fo_table_body_set_id (fo, NULL);
+  fo_table_body_set_padding_after (fo, NULL);
+  fo_table_body_set_padding_before (fo, NULL);
+  fo_table_body_set_padding_bottom (fo, NULL);
+  fo_table_body_set_padding_end (fo, NULL);
+  fo_table_body_set_padding_left (fo, NULL);
+  fo_table_body_set_padding_right (fo, NULL);
+  fo_table_body_set_padding_start (fo, NULL);
+  fo_table_body_set_padding_top (fo, NULL);
+  fo_table_body_set_role (fo, NULL);
+  fo_table_body_set_source_document (fo, NULL);
 
   G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -1098,7 +1179,7 @@ fo_table_body_debug_dump_properties (FoFo *fo,
  *
  * Return value: The "background-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_background_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1124,7 +1205,8 @@ fo_table_body_set_background_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
+  g_return_if_fail ((new_background_color == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
 
   if (new_background_color != NULL)
     {
@@ -1146,7 +1228,7 @@ fo_table_body_set_background_color (FoFo *fo_fo,
  *
  * Return value: The "background-image" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_background_image (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1172,7 +1254,8 @@ fo_table_body_set_background_image (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
+  g_return_if_fail ((new_background_image == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
 
   if (new_background_image != NULL)
     {
@@ -1194,7 +1277,7 @@ fo_table_body_set_background_image (FoFo *fo_fo,
  *
  * Return value: The "border-after-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_after_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1220,7 +1303,8 @@ fo_table_body_set_border_after_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
+  g_return_if_fail ((new_border_after_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
 
   if (new_border_after_color != NULL)
     {
@@ -1242,7 +1326,7 @@ fo_table_body_set_border_after_color (FoFo *fo_fo,
  *
  * Return value: The "border-after-precedence" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_after_precedence (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1268,7 +1352,8 @@ fo_table_body_set_border_after_precedence (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_PRECEDENCE (new_border_after_precedence));
+  g_return_if_fail ((new_border_after_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_PRECEDENCE (new_border_after_precedence));
 
   if (new_border_after_precedence != NULL)
     {
@@ -1290,7 +1375,7 @@ fo_table_body_set_border_after_precedence (FoFo *fo_fo,
  *
  * Return value: The "border-after-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_after_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1316,7 +1401,8 @@ fo_table_body_set_border_after_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
+  g_return_if_fail ((new_border_after_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
 
   if (new_border_after_style != NULL)
     {
@@ -1338,7 +1424,7 @@ fo_table_body_set_border_after_style (FoFo *fo_fo,
  *
  * Return value: The "border-after-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_after_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1364,7 +1450,8 @@ fo_table_body_set_border_after_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
+  g_return_if_fail ((new_border_after_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
 
   if (new_border_after_width != NULL)
     {
@@ -1386,7 +1473,7 @@ fo_table_body_set_border_after_width (FoFo *fo_fo,
  *
  * Return value: The "border-before-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_before_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1412,7 +1499,8 @@ fo_table_body_set_border_before_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
+  g_return_if_fail ((new_border_before_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
 
   if (new_border_before_color != NULL)
     {
@@ -1434,7 +1522,7 @@ fo_table_body_set_border_before_color (FoFo *fo_fo,
  *
  * Return value: The "border-before-precedence" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_before_precedence (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1460,7 +1548,8 @@ fo_table_body_set_border_before_precedence (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_PRECEDENCE (new_border_before_precedence));
+  g_return_if_fail ((new_border_before_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_PRECEDENCE (new_border_before_precedence));
 
   if (new_border_before_precedence != NULL)
     {
@@ -1482,7 +1571,7 @@ fo_table_body_set_border_before_precedence (FoFo *fo_fo,
  *
  * Return value: The "border-before-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_before_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1508,7 +1597,8 @@ fo_table_body_set_border_before_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
+  g_return_if_fail ((new_border_before_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
 
   if (new_border_before_style != NULL)
     {
@@ -1530,7 +1620,7 @@ fo_table_body_set_border_before_style (FoFo *fo_fo,
  *
  * Return value: The "border-before-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_before_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1556,7 +1646,8 @@ fo_table_body_set_border_before_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
+  g_return_if_fail ((new_border_before_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
 
   if (new_border_before_width != NULL)
     {
@@ -1578,7 +1669,7 @@ fo_table_body_set_border_before_width (FoFo *fo_fo,
  *
  * Return value: The "border-bottom-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_bottom_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1604,7 +1695,8 @@ fo_table_body_set_border_bottom_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
+  g_return_if_fail ((new_border_bottom_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
 
   if (new_border_bottom_color != NULL)
     {
@@ -1626,7 +1718,7 @@ fo_table_body_set_border_bottom_color (FoFo *fo_fo,
  *
  * Return value: The "border-bottom-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_bottom_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1652,7 +1744,8 @@ fo_table_body_set_border_bottom_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
+  g_return_if_fail ((new_border_bottom_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
 
   if (new_border_bottom_style != NULL)
     {
@@ -1674,7 +1767,7 @@ fo_table_body_set_border_bottom_style (FoFo *fo_fo,
  *
  * Return value: The "border-bottom-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_bottom_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1700,7 +1793,8 @@ fo_table_body_set_border_bottom_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
+  g_return_if_fail ((new_border_bottom_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
 
   if (new_border_bottom_width != NULL)
     {
@@ -1722,7 +1816,7 @@ fo_table_body_set_border_bottom_width (FoFo *fo_fo,
  *
  * Return value: The "border-end-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_end_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1748,7 +1842,8 @@ fo_table_body_set_border_end_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
+  g_return_if_fail ((new_border_end_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
 
   if (new_border_end_color != NULL)
     {
@@ -1770,7 +1865,7 @@ fo_table_body_set_border_end_color (FoFo *fo_fo,
  *
  * Return value: The "border-end-precedence" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_end_precedence (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1796,7 +1891,8 @@ fo_table_body_set_border_end_precedence (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_PRECEDENCE (new_border_end_precedence));
+  g_return_if_fail ((new_border_end_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_PRECEDENCE (new_border_end_precedence));
 
   if (new_border_end_precedence != NULL)
     {
@@ -1818,7 +1914,7 @@ fo_table_body_set_border_end_precedence (FoFo *fo_fo,
  *
  * Return value: The "border-end-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_end_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1844,7 +1940,8 @@ fo_table_body_set_border_end_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
+  g_return_if_fail ((new_border_end_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
 
   if (new_border_end_style != NULL)
     {
@@ -1866,7 +1963,7 @@ fo_table_body_set_border_end_style (FoFo *fo_fo,
  *
  * Return value: The "border-end-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_end_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1892,7 +1989,8 @@ fo_table_body_set_border_end_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
+  g_return_if_fail ((new_border_end_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
 
   if (new_border_end_width != NULL)
     {
@@ -1914,7 +2012,7 @@ fo_table_body_set_border_end_width (FoFo *fo_fo,
  *
  * Return value: The "border-left-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_left_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1940,7 +2038,8 @@ fo_table_body_set_border_left_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
+  g_return_if_fail ((new_border_left_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
 
   if (new_border_left_color != NULL)
     {
@@ -1962,7 +2061,7 @@ fo_table_body_set_border_left_color (FoFo *fo_fo,
  *
  * Return value: The "border-left-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_left_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -1988,7 +2087,8 @@ fo_table_body_set_border_left_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
+  g_return_if_fail ((new_border_left_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
 
   if (new_border_left_style != NULL)
     {
@@ -2010,7 +2110,7 @@ fo_table_body_set_border_left_style (FoFo *fo_fo,
  *
  * Return value: The "border-left-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_left_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2036,7 +2136,8 @@ fo_table_body_set_border_left_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
+  g_return_if_fail ((new_border_left_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
 
   if (new_border_left_width != NULL)
     {
@@ -2058,7 +2159,7 @@ fo_table_body_set_border_left_width (FoFo *fo_fo,
  *
  * Return value: The "border-right-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_right_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2084,7 +2185,8 @@ fo_table_body_set_border_right_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
+  g_return_if_fail ((new_border_right_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
 
   if (new_border_right_color != NULL)
     {
@@ -2106,7 +2208,7 @@ fo_table_body_set_border_right_color (FoFo *fo_fo,
  *
  * Return value: The "border-right-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_right_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2132,7 +2234,8 @@ fo_table_body_set_border_right_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
+  g_return_if_fail ((new_border_right_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
 
   if (new_border_right_style != NULL)
     {
@@ -2154,7 +2257,7 @@ fo_table_body_set_border_right_style (FoFo *fo_fo,
  *
  * Return value: The "border-right-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_right_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2180,7 +2283,8 @@ fo_table_body_set_border_right_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
+  g_return_if_fail ((new_border_right_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
 
   if (new_border_right_width != NULL)
     {
@@ -2202,7 +2306,7 @@ fo_table_body_set_border_right_width (FoFo *fo_fo,
  *
  * Return value: The "border-start-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_start_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2228,7 +2332,8 @@ fo_table_body_set_border_start_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
+  g_return_if_fail ((new_border_start_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
 
   if (new_border_start_color != NULL)
     {
@@ -2250,7 +2355,7 @@ fo_table_body_set_border_start_color (FoFo *fo_fo,
  *
  * Return value: The "border-start-precedence" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_start_precedence (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2276,7 +2381,8 @@ fo_table_body_set_border_start_precedence (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_PRECEDENCE (new_border_start_precedence));
+  g_return_if_fail ((new_border_start_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_PRECEDENCE (new_border_start_precedence));
 
   if (new_border_start_precedence != NULL)
     {
@@ -2298,7 +2404,7 @@ fo_table_body_set_border_start_precedence (FoFo *fo_fo,
  *
  * Return value: The "border-start-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_start_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2324,7 +2430,8 @@ fo_table_body_set_border_start_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
+  g_return_if_fail ((new_border_start_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
 
   if (new_border_start_style != NULL)
     {
@@ -2346,7 +2453,7 @@ fo_table_body_set_border_start_style (FoFo *fo_fo,
  *
  * Return value: The "border-start-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_start_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2372,7 +2479,8 @@ fo_table_body_set_border_start_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
+  g_return_if_fail ((new_border_start_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
 
   if (new_border_start_width != NULL)
     {
@@ -2394,7 +2502,7 @@ fo_table_body_set_border_start_width (FoFo *fo_fo,
  *
  * Return value: The "border-top-color" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_top_color (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2420,7 +2528,8 @@ fo_table_body_set_border_top_color (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
+  g_return_if_fail ((new_border_top_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
 
   if (new_border_top_color != NULL)
     {
@@ -2442,7 +2551,7 @@ fo_table_body_set_border_top_color (FoFo *fo_fo,
  *
  * Return value: The "border-top-style" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_top_style (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2468,7 +2577,8 @@ fo_table_body_set_border_top_style (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
+  g_return_if_fail ((new_border_top_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
 
   if (new_border_top_style != NULL)
     {
@@ -2490,7 +2600,7 @@ fo_table_body_set_border_top_style (FoFo *fo_fo,
  *
  * Return value: The "border-top-width" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_border_top_width (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2516,7 +2626,8 @@ fo_table_body_set_border_top_width (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
+  g_return_if_fail ((new_border_top_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
 
   if (new_border_top_width != NULL)
     {
@@ -2538,7 +2649,7 @@ fo_table_body_set_border_top_width (FoFo *fo_fo,
  *
  * Return value: The "id" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_id (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2564,7 +2675,8 @@ fo_table_body_set_id (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_ID (new_id));
+  g_return_if_fail ((new_id == NULL) ||
+		    FO_IS_PROPERTY_ID (new_id));
 
   if (new_id != NULL)
     {
@@ -2586,7 +2698,7 @@ fo_table_body_set_id (FoFo *fo_fo,
  *
  * Return value: The "padding-after" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_after (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2612,7 +2724,8 @@ fo_table_body_set_padding_after (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
+  g_return_if_fail ((new_padding_after == NULL) ||
+		    FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
 
   if (new_padding_after != NULL)
     {
@@ -2634,7 +2747,7 @@ fo_table_body_set_padding_after (FoFo *fo_fo,
  *
  * Return value: The "padding-before" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_before (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2660,7 +2773,8 @@ fo_table_body_set_padding_before (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
+  g_return_if_fail ((new_padding_before == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
 
   if (new_padding_before != NULL)
     {
@@ -2682,7 +2796,7 @@ fo_table_body_set_padding_before (FoFo *fo_fo,
  *
  * Return value: The "padding-bottom" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_bottom (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2708,7 +2822,8 @@ fo_table_body_set_padding_bottom (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
+  g_return_if_fail ((new_padding_bottom == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
 
   if (new_padding_bottom != NULL)
     {
@@ -2730,7 +2845,7 @@ fo_table_body_set_padding_bottom (FoFo *fo_fo,
  *
  * Return value: The "padding-end" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_end (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2756,7 +2871,8 @@ fo_table_body_set_padding_end (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_END (new_padding_end));
+  g_return_if_fail ((new_padding_end == NULL) ||
+		    FO_IS_PROPERTY_PADDING_END (new_padding_end));
 
   if (new_padding_end != NULL)
     {
@@ -2778,7 +2894,7 @@ fo_table_body_set_padding_end (FoFo *fo_fo,
  *
  * Return value: The "padding-left" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_left (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2804,7 +2920,8 @@ fo_table_body_set_padding_left (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
+  g_return_if_fail ((new_padding_left == NULL) ||
+		    FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
 
   if (new_padding_left != NULL)
     {
@@ -2826,7 +2943,7 @@ fo_table_body_set_padding_left (FoFo *fo_fo,
  *
  * Return value: The "padding-right" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_right (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2852,7 +2969,8 @@ fo_table_body_set_padding_right (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
+  g_return_if_fail ((new_padding_right == NULL) ||
+		    FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
 
   if (new_padding_right != NULL)
     {
@@ -2874,7 +2992,7 @@ fo_table_body_set_padding_right (FoFo *fo_fo,
  *
  * Return value: The "padding-start" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_start (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2900,7 +3018,8 @@ fo_table_body_set_padding_start (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_START (new_padding_start));
+  g_return_if_fail ((new_padding_start == NULL) ||
+		    FO_IS_PROPERTY_PADDING_START (new_padding_start));
 
   if (new_padding_start != NULL)
     {
@@ -2922,7 +3041,7 @@ fo_table_body_set_padding_start (FoFo *fo_fo,
  *
  * Return value: The "padding-top" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_padding_top (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2948,7 +3067,8 @@ fo_table_body_set_padding_top (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
+  g_return_if_fail ((new_padding_top == NULL) ||
+		    FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
 
   if (new_padding_top != NULL)
     {
@@ -2970,7 +3090,7 @@ fo_table_body_set_padding_top (FoFo *fo_fo,
  *
  * Return value: The "role" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_role (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -2996,7 +3116,8 @@ fo_table_body_set_role (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_ROLE (new_role));
+  g_return_if_fail ((new_role == NULL) ||
+		    FO_IS_PROPERTY_ROLE (new_role));
 
   if (new_role != NULL)
     {
@@ -3018,7 +3139,7 @@ fo_table_body_set_role (FoFo *fo_fo,
  *
  * Return value: The "source-document" property value.
 **/
-FoProperty*
+FoProperty *
 fo_table_body_get_source_document (FoFo *fo_fo)
 {
   FoTableBody *fo_table_body = (FoTableBody *) fo_fo;
@@ -3044,7 +3165,8 @@ fo_table_body_set_source_document (FoFo *fo_fo,
 
   g_return_if_fail (fo_table_body != NULL);
   g_return_if_fail (FO_IS_TABLE_BODY (fo_table_body));
-  g_return_if_fail (FO_IS_PROPERTY_SOURCE_DOCUMENT (new_source_document));
+  g_return_if_fail ((new_source_document == NULL) ||
+		    FO_IS_PROPERTY_SOURCE_DOCUMENT (new_source_document));
 
   if (new_source_document != NULL)
     {

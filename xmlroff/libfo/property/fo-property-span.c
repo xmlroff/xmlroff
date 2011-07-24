@@ -92,7 +92,7 @@ void
 fo_property_span_init (FoPropertySpan *span)
 {
   FO_PROPERTY (span)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("none"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("none"));
 }
 
 /**
@@ -184,7 +184,7 @@ fo_property_span_resolve_enum (const gchar *token,
   if ((strcmp (token, "none") == 0) ||
       (strcmp (token, "all") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

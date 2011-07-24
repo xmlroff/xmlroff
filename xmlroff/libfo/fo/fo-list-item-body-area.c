@@ -2,7 +2,7 @@
  * fo-list-item-body-area.c: Generate area for list-item-body formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -13,8 +13,8 @@
 
 void
 fo_list_item_body_area_new2 (FoFo         *fo,
-			      FoFoAreaNew2Context *context,
-			      GError **error)
+			     FoFoAreaNew2Context *context,
+			     GError **error)
 {
   FoListItemBody *list_item_body = (FoListItemBody *) fo;
   FoArea *use_parent_area;
@@ -28,11 +28,15 @@ fo_list_item_body_area_new2 (FoFo         *fo,
   new_area = fo_area_area_new ();
   use_parent_area = context->parent_area;
 
-  fo_area_set_generated_by (FO_AREA (new_area), fo);
-  FO_FO (fo)->areas = g_list_append (FO_FO (fo)->areas, new_area);
-  fo_area_add_child (use_parent_area, new_area);
+  fo_area_set_generated_by (new_area,
+			    fo);
+  fo_fo_area_list_append (fo,
+			  new_area);
+  fo_area_add_child (use_parent_area,
+		     new_area);
   new_area = fo_area_size_request (new_area);
-  fo_area_area_set_width (new_area, fo_area_get_available_width (new_area));
+  fo_area_area_set_width (new_area,
+			  fo_area_get_available_width (new_area));
 
   *(context->new_area) = new_area;
 }

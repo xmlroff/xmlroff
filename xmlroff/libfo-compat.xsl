@@ -9,6 +9,7 @@
 <!--
      Copyright (c) 2003-2006 Sun Microsystems. All Rights Reserved.
      Copyright (c) 2007-2009 Menteith Consulting
+     Copyright (c) 2011 Mentea
 
      Redistribution and use in source and binary forms, with or without
      modification, are permitted provided that the following conditions are
@@ -139,30 +140,22 @@
            @background-position-horizontal |
            @background-position-vertical |
            @background-repeat |
-           @blank-or-not-blank |
            @column-count |
            @column-gap |
            @content-type |
-           @extent |
            @external-destination |
            @font-selection-strategy |
-           @force-page-count |
-           @height |
            @hyphenate |
            @hyphenation-character |
            @hyphenation-push-character-count |
            @hyphenation-remain-character-count |
-           @initial-page-number |
            @internal-destination |
-           @language |
            @last-line-end-indent |
            @leader-alignment |
            @leader-pattern |
            @leader-pattern-width |
            @line-height-shift-adjustment |
            @margin |
-           @odd-or-even |
-           @page-position |
            @text-align-last">
     <xsl:if test="$verbose">
       <xsl:message>Removing unsupported '<xsl:value-of select="name()"/>' property.</xsl:message>
@@ -261,12 +254,13 @@
       <xsl:apply-templates select="fo:page-sequence"/>
     </xsl:copy>
   </xsl:template>
-
+<!--
   <xsl:template match="fo:static-content">
     <xsl:if test="$verbose">
       <xsl:message>Removing unsupported 'fo:static-content'.</xsl:message>
     </xsl:if>
   </xsl:template>
+-->
 
   <xsl:template match="fo:table[@table-layout='fixed' and not(@width)]">
     <xsl:if test="$verbose">

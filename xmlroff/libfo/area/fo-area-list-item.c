@@ -2,7 +2,7 @@
  * fo-area-list-item.c: Area object for list-item formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -30,13 +30,13 @@ static void fo_area_list_item_debug_dump_properties (FoArea *area,
 							      gint depth);
 static FoArea* fo_area_list_item_size_request (FoArea *child);
 static FoArea* fo_area_list_item_split_before_height (FoArea *area,
-						      gfloat max_height);
+						      gdouble max_height);
 static gboolean fo_area_list_item_split_before_height_check (FoArea *area,
-							     gfloat max_height);
+							     gdouble max_height);
 static FoArea* fo_area_list_item_split_after_height (FoArea *area,
-						     gfloat max_height);
+						     gdouble max_height);
 static gboolean fo_area_list_item_split_after_height_check (FoArea *area,
-							    gfloat max_height);
+							    gdouble max_height);
 
 static gpointer parent_class;
 
@@ -156,10 +156,10 @@ fo_area_list_item_size_request (FoArea *child)
 {
   FoArea *use_child_area;
   FoArea *list_item;
-  gfloat max_child_height = 0;
-  gfloat list_item_child_available_bpdim;
-  gfloat child_height;
-  gfloat child_space_before, child_space_after;
+  gdouble max_child_height = 0;
+  gdouble list_item_child_available_bpdim;
+  gdouble child_height;
+  gdouble child_space_before, child_space_after;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -355,20 +355,20 @@ fo_area_list_item_size_request (FoArea *child)
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_list_item_split_before_height (FoArea *area,
-				       gfloat max_height)
+				       gdouble max_height)
 {
   FoAreaArea *area_area;
   FoArea *clone = NULL;
   FoArea *child_0 = NULL;
   FoArea *split_child_0 = NULL;
-  gfloat  child_0_height = 0;
-  gfloat  child_0_minus_y = 0;
+  gdouble  child_0_height = 0;
+  gdouble  child_0_minus_y = 0;
   gboolean child_0_will_split = FALSE;
   gboolean child_0_will_fit = TRUE;
   FoArea *child_1 = NULL;
   FoArea *split_child_1 = NULL;
-  gfloat  child_1_height = 0;
-  gfloat  child_1_minus_y = 0;
+  gdouble  child_1_height = 0;
+  gdouble  child_1_minus_y = 0;
   gboolean child_1_will_split = FALSE;
   gboolean child_1_will_fit = TRUE;
 
@@ -472,8 +472,8 @@ fo_area_list_item_split_before_height (FoArea *area,
       (child_1 && child_1_will_split &&
        !(!child_0_will_fit && !child_0_will_split)))
     {
-      gfloat max_remaining_child_height = 0;
-      gfloat max_split_child_height = 0;
+      gdouble max_remaining_child_height = 0;
+      gdouble max_split_child_height = 0;
 
 #if defined(LIBFO_DEBUG) && 0
       g_message ("list_item_split_before_height (%p):: will split list-item",
@@ -552,16 +552,16 @@ fo_area_list_item_split_before_height (FoArea *area,
 /* leave @area as area remaining after split */
 gboolean
 fo_area_list_item_split_before_height_check (FoArea *area,
-					     gfloat max_height)
+					     gdouble max_height)
 {
   FoArea *child_0 = NULL;
-  gfloat  child_0_height = 0;
-  gfloat  child_0_minus_y = 0;
+  gdouble  child_0_height = 0;
+  gdouble  child_0_minus_y = 0;
   gboolean child_0_will_split = FALSE;
   gboolean child_0_will_fit = TRUE;
   FoArea *child_1 = NULL;
-  gfloat  child_1_height = 0;
-  gfloat  child_1_minus_y = 0;
+  gdouble  child_1_height = 0;
+  gdouble  child_1_minus_y = 0;
   gboolean child_1_will_split = FALSE;
   gboolean child_1_will_fit = TRUE;
 
@@ -624,20 +624,20 @@ fo_area_list_item_split_before_height_check (FoArea *area,
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_list_item_split_after_height (FoArea *area,
-				      gfloat max_height)
+				      gdouble max_height)
 {
   FoAreaArea *area_area;
   FoArea *clone = NULL;
   FoArea *child_0 = NULL;
   FoArea *split_child_0 = NULL;
-  gfloat  child_0_height = 0;
-  gfloat  child_0_minus_y = 0;
+  gdouble  child_0_height = 0;
+  gdouble  child_0_minus_y = 0;
   gboolean child_0_will_split = FALSE;
   gboolean child_0_will_fit = TRUE;
   FoArea *child_1 = NULL;
   FoArea *split_child_1 = NULL;
-  gfloat  child_1_height = 0;
-  gfloat  child_1_minus_y = 0;
+  gdouble  child_1_height = 0;
+  gdouble  child_1_minus_y = 0;
   gboolean child_1_will_split = FALSE;
   gboolean child_1_will_fit = TRUE;
 
@@ -741,8 +741,8 @@ fo_area_list_item_split_after_height (FoArea *area,
       (child_1 && child_1_will_split &&
        !(!child_0_will_fit && !child_0_will_split)))
     {
-      gfloat max_remaining_child_height = 0;
-      gfloat max_split_child_height = 0;
+      gdouble max_remaining_child_height = 0;
+      gdouble max_split_child_height = 0;
 
 #if defined(LIBFO_DEBUG) && 0
       g_message ("list_item_split_before_height (%p):: will split list-item",
@@ -821,16 +821,16 @@ fo_area_list_item_split_after_height (FoArea *area,
 /* leave @area as area remaining after split */
 gboolean
 fo_area_list_item_split_after_height_check (FoArea *area,
-					    gfloat max_height)
+					    gdouble max_height)
 {
   FoArea *child_0 = NULL;
-  gfloat  child_0_height = 0;
-  gfloat  child_0_minus_y = 0;
+  gdouble  child_0_height = 0;
+  gdouble  child_0_minus_y = 0;
   gboolean child_0_will_split = FALSE;
   gboolean child_0_will_fit = TRUE;
   FoArea *child_1 = NULL;
-  gfloat  child_1_height = 0;
-  gfloat  child_1_minus_y = 0;
+  gdouble  child_1_height = 0;
+  gdouble  child_1_minus_y = 0;
   gboolean child_1_will_split = FALSE;
   gboolean child_1_will_fit = TRUE;
 

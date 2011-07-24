@@ -59,7 +59,7 @@ clean_suite (void)
 static void
 test_fo_doc_new_finalize (void)
 {
-  FoDoc *doc = fo_doc_new();
+  FoDoc *doc = fo_doc_new ();
 
   g_object_unref (doc);
 }

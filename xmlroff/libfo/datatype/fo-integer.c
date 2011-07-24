@@ -34,24 +34,22 @@ struct _FoIntegerClass
   
 };
 
-static FoDatatype * fo_integer_new          (void);
+static void fo_integer_init         (FoInteger      *integer);
+static void fo_integer_class_init   (FoIntegerClass *klass);
+static void fo_integer_set_property (GObject        *object,
+				     guint           prop_id,
+				     const GValue   *value,
+				     GParamSpec     *pspec);
+static void fo_integer_get_property (GObject        *object,
+				     guint           prop_id,
+				     GValue         *value,
+				     GParamSpec     *pspec);
+static void fo_integer_finalize     (GObject        *object);
 
-static void         fo_integer_init         (FoInteger      *integer);
-static void         fo_integer_class_init   (FoIntegerClass *klass);
-static void         fo_integer_set_property (GObject        *object,
-					     guint           prop_id,
-					     const GValue   *value,
-					     GParamSpec     *pspec);
-static void         fo_integer_get_property (GObject        *object,
-					     guint           prop_id,
-					     GValue         *value,
-					     GParamSpec     *pspec);
-static void         fo_integer_finalize     (GObject        *object);
-
-static FoDatatype * fo_integer_copy         (FoDatatype     *datatype);
-static gchar*       fo_integer_sprintf      (FoObject       *object);
-static void         fo_integer_set_value    (FoDatatype     *integer,
-					     gint            new_value);
+static FoDatatype* fo_integer_copy         (FoDatatype     *datatype);
+static gchar*      fo_integer_sprintf      (FoObject       *object);
+static void fo_integer_set_value    (FoDatatype     *integer,
+				     gint            new_value);
 
 static gpointer parent_class;
 

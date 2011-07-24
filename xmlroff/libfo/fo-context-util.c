@@ -450,7 +450,6 @@ fo_context_util_length_ranges_resolve (FoContext *context,
 					  length_range,
 					  NULL);
       fo_context_set_inline_progression_dimension (context, new_ipd);
-      g_object_unref (new_ipd);
       g_object_unref (length_range);
     }
   else
@@ -529,7 +528,6 @@ fo_context_util_spaces_resolve (FoContext *context,
 						   space,
 						   NULL);
       fo_context_set_space_before (context, new_space_before);
-      g_object_unref (new_space_before);
     }
   else
     {
@@ -581,7 +579,6 @@ fo_context_util_spaces_resolve (FoContext *context,
 						  space,
 						  NULL);
       fo_context_set_space_after (context, new_space_after);
-      g_object_unref (new_space_after);
     }
   else
     {
@@ -633,7 +630,6 @@ fo_context_util_spaces_resolve (FoContext *context,
 						  space,
 						  NULL);
       fo_context_set_space_start (context, new_space_start);
-      g_object_unref (new_space_start);
     }
   else
     {
@@ -679,7 +675,6 @@ fo_context_util_spaces_resolve (FoContext *context,
 						space,
 						NULL);
       fo_context_set_space_end (context, new_space_end);
-      g_object_unref (new_space_end);
     }
   else
     {

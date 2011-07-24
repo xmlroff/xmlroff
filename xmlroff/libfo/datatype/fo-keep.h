@@ -2,7 +2,7 @@
  * fo-keep.h: Keep datatype
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -42,9 +42,6 @@ FoDatatype * fo_keep_resolve           (FoDatatype *shortform,
 
 FoDatatype * fo_keep_get_keep_auto     (void);
 FoDatatype * fo_keep_get_keep_always   (void);
-
-FoDatatype * fo_keep_get_enum_auto     (void);
-FoDatatype * fo_keep_get_enum_always   (void);
 
 G_END_DECLS
 

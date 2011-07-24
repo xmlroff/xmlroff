@@ -2,7 +2,7 @@
  * fo-table-area.h: Generate area for table formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -16,9 +16,9 @@
 
 G_BEGIN_DECLS
 
-void fo_table_area_new2 (FoFo         *fo_node,
-			 FoFoAreaNew2Context *context,
-			 GError **error);
+void fo_table_area_new (FoFo         *fo_node,
+			FoFoAreaNew2Context *context,
+			GError **error);
 
 G_END_DECLS
 

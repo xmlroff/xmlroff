@@ -90,7 +90,7 @@ void
 fo_property_inline_progression_dimension_optimum_init (FoPropertyInlineProgressionDimensionOptimum *inline_progression_dimension_optimum)
 {
   FO_PROPERTY (inline_progression_dimension_optimum)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**

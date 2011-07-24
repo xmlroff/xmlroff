@@ -92,7 +92,7 @@ void
 fo_property_wrap_option_init (FoPropertyWrapOption *wrap_option)
 {
   FO_PROPERTY (wrap_option)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("wrap"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("wrap"));
 }
 
 /**
@@ -184,7 +184,7 @@ fo_property_wrap_option_resolve_enum (const gchar *token,
   if ((strcmp (token, "no-wrap") == 0) ||
       (strcmp (token, "wrap") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

@@ -2,7 +2,7 @@
  * fo-area-viewport-reference.h: Combined viewport and reference area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,7 +11,7 @@
 #define __FO_AREA_VIEWPORT_REFERENCE_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/area/fo-area-area.h>
+#include <libfo/area/fo-area.h>
 
 G_BEGIN_DECLS
 
@@ -26,8 +26,8 @@ typedef struct _FoAreaViewportReferenceClass FoAreaViewportReferenceClass;
 #define FO_AREA_VIEWPORT_REFERENCE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA_VIEWPORT_REFERENCE, FoAreaViewportReferenceClass))
 
 
-GType         fo_area_viewport_reference_get_type      (void) G_GNUC_CONST;
-FoArea *fo_area_viewport_reference_new (void);
+GType    fo_area_viewport_reference_get_type  (void) G_GNUC_CONST;
+FoArea * fo_area_viewport_reference_new       (void);
 
 G_END_DECLS
 

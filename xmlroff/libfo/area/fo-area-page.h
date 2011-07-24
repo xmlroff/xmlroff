@@ -2,7 +2,7 @@
  * fo-area-page.h: Page area object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,6 +11,7 @@
 #define __FO_AREA_PAGE_H__
 
 #include <libfo/fo-utils.h>
+#include <libfo/area/fo-area.h>
 
 G_BEGIN_DECLS
 
@@ -36,30 +37,30 @@ typedef struct _FoAreaPageClass FoAreaPageClass;
 #define FO_AREA_PAGE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_AREA_PAGE, FoAreaPageClass))
 
 
-GType         fo_area_page_get_type      (void) G_GNUC_CONST;
-FoArea *fo_area_page_new (void);
+GType    fo_area_page_get_type          (void) G_GNUC_CONST;
+FoArea * fo_area_page_new               (void);
 
-void fo_area_page_set_page_number (FoArea *fo_area_page,
-		      gint new_page_number);
-gint fo_area_page_get_page_number (FoArea *fo_area_page);
-void fo_area_page_set_page_width (FoArea *fo_area_page,
-		      gfloat new_page_width);
-gfloat fo_area_page_get_page_width (FoArea *fo_area_page);
-void fo_area_page_set_page_height (FoArea *fo_area_page,
-		      gfloat new_page_height);
-gfloat fo_area_page_get_page_height (FoArea *fo_area_page);
-void fo_area_page_set_margin_top (FoArea *fo_area_page,
-		      gfloat new_margin_top);
-gfloat fo_area_page_get_margin_top (FoArea *fo_area_page);
-void fo_area_page_set_margin_bottom (FoArea *fo_area_page,
-		      gfloat new_margin_bottom);
-gfloat fo_area_page_get_margin_bottom (FoArea *fo_area_page);
-void fo_area_page_set_margin_left (FoArea *fo_area_page,
-		      gfloat new_margin_left);
-gfloat fo_area_page_get_margin_left (FoArea *fo_area_page);
-void fo_area_page_set_margin_right (FoArea *fo_area_page,
-		      gfloat new_margin_right);
-gfloat fo_area_page_get_margin_right (FoArea *fo_area_page);
+void     fo_area_page_set_page_number   (FoArea *fo_area_page,
+					 gint    new_page_number);
+gint     fo_area_page_get_page_number   (FoArea *fo_area_page);
+void     fo_area_page_set_page_width    (FoArea *fo_area_page,
+					 gdouble new_page_width);
+gdouble  fo_area_page_get_page_width    (FoArea *fo_area_page);
+void     fo_area_page_set_page_height   (FoArea *fo_area_page,
+					 gdouble new_page_height);
+gdouble  fo_area_page_get_page_height   (FoArea *fo_area_page);
+void     fo_area_page_set_margin_top    (FoArea *fo_area_page,
+					 gdouble new_margin_top);
+gdouble  fo_area_page_get_margin_top    (FoArea *fo_area_page);
+void     fo_area_page_set_margin_bottom (FoArea *fo_area_page,
+					 gdouble new_margin_bottom);
+gdouble  fo_area_page_get_margin_bottom (FoArea *fo_area_page);
+void     fo_area_page_set_margin_left   (FoArea *fo_area_page,
+					 gdouble new_margin_left);
+gdouble  fo_area_page_get_margin_left   (FoArea *fo_area_page);
+void     fo_area_page_set_margin_right  (FoArea *fo_area_page,
+					 gdouble new_margin_right);
+gdouble  fo_area_page_get_margin_right  (FoArea *fo_area_page);
 
 G_END_DECLS
 

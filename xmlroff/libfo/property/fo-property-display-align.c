@@ -92,7 +92,7 @@ void
 fo_property_display_align_init (FoPropertyDisplayAlign *display_align)
 {
   FO_PROPERTY (display_align)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("auto"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("auto"));
 }
 
 /**
@@ -186,7 +186,7 @@ fo_property_display_align_resolve_enum (const gchar *token,
       (strcmp (token, "center") == 0) ||
       (strcmp (token, "after") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

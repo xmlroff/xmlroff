@@ -2,7 +2,7 @@
  * fo-xsl-formatter.c: Object type for libxslt XSLT processor
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -55,6 +55,8 @@ struct _FoXslFormatter
 
   FoFo     *fo_tree;
   FoArea   *area_tree;
+
+  FoEnumFactory *enum_factory;
 };
 
 struct _FoXslFormatterClass
@@ -70,19 +72,20 @@ enum {
   PROP_FO_DOC
 };
 
-static void fo_xsl_formatter_class_init   (FoXslFormatterClass *klass);
-static void fo_xsl_formatter_finalize     (GObject             *object);
+static void _init         (FoXslFormatter      *xsl_formatter);
+static void _class_init   (FoXslFormatterClass *klass);
+static void _dispose      (GObject             *object);
 
 static const LibfoVersionInfo * _version_info ();
 
-static void fo_xsl_formatter_get_property (GObject             *object,
-					   guint                prop_id,
-					   GValue              *value,
-					   GParamSpec          *pspec);
-static void fo_xsl_formatter_set_property (GObject             *object,
-					   guint                prop_id,
-					   const GValue        *value,
-					   GParamSpec          *pspec);
+static void _get_property (GObject             *object,
+			   guint                prop_id,
+			   GValue              *value,
+			   GParamSpec          *pspec);
+static void _set_property (GObject             *object,
+			   guint                prop_id,
+			   const GValue        *value,
+			   GParamSpec          *pspec);
 
 static gpointer parent_class;
 
@@ -134,12 +137,12 @@ GType fo_xsl_formatter_get_type (void)
         sizeof (FoXslFormatterClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_xsl_formatter_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoXslFormatter),
         0,              /* n_preallocs */
-	NULL,		/* instance_init */
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 
@@ -152,13 +155,26 @@ GType fo_xsl_formatter_get_type (void)
 }
 
 /**
- * fo_xsl_formatter_class_init:
+ * _init:
+ * @xsl_formatter: #FoXslFormatter object to initialise.
+ * 
+ * Implements #GInstanceInitFunc for #FoXslFormatter.
+ **/
+static void
+_init (FoXslFormatter *xsl_formatter)
+{
+  xsl_formatter->enum_factory =
+    fo_enum_factory_new ();
+}
+
+/**
+ * _class_init:
  * @klass: #FoXslFormatterClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoXslFormatterClass.
  **/
-void
-fo_xsl_formatter_class_init (FoXslFormatterClass *klass)
+static void
+_class_init (FoXslFormatterClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoLibfoModuleClass *fo_libfo_module_class =
@@ -166,9 +182,9 @@ fo_xsl_formatter_class_init (FoXslFormatterClass *klass)
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->get_property = fo_xsl_formatter_get_property;
-  object_class->set_property = fo_xsl_formatter_set_property;
-  object_class->finalize     = fo_xsl_formatter_finalize;
+  object_class->get_property = _get_property;
+  object_class->set_property = _set_property;
+  object_class->dispose      = _dispose;
 
   fo_libfo_module_class->version        = libfo_version;
   fo_libfo_module_class->version_string = libfo_version_string;
@@ -211,42 +227,52 @@ fo_xsl_formatter_class_init (FoXslFormatterClass *klass)
 }
 
 /**
- * fo_xsl_formatter_finalize:
+ * _dispose:
  * @object: #FoObject object to finalize.
  * 
- * Implements #GObjectFinalizeFunc for #FoXslFormatter.
+ * Implements #GObjectDisposeFunc for #FoXslFormatter.
  **/
-void
-fo_xsl_formatter_finalize  (GObject *object)
+static void
+_dispose (GObject *object)
 {
   FoXslFormatter *fo_xsl_formatter;
 
   fo_xsl_formatter = FO_XSL_FORMATTER (object);
 
-  if (fo_xsl_formatter->result_tree != NULL)
+  if (fo_xsl_formatter->fo_doc != NULL)
     {
-      fo_xml_doc_unref (fo_xsl_formatter->result_tree);
-    }
-
-  if (fo_xsl_formatter->fo_tree != NULL)
-    {
-      g_object_unref (fo_xsl_formatter->fo_tree);
+      g_object_unref (fo_xsl_formatter->fo_doc);
+      fo_xsl_formatter->fo_doc = NULL;
     }
 
   if (fo_xsl_formatter->area_tree != NULL)
     {
       g_object_unref (fo_xsl_formatter->area_tree);
+      fo_xsl_formatter->area_tree = NULL;
     }
 
-  if (fo_xsl_formatter->fo_doc != NULL)
+  if (fo_xsl_formatter->fo_tree != NULL)
     {
-      g_object_unref (fo_xsl_formatter->fo_doc);
+      g_object_unref (fo_xsl_formatter->fo_tree);
+      fo_xsl_formatter->fo_tree = NULL;
     }
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  if (fo_xsl_formatter->result_tree != NULL)
+    {
+      fo_xml_doc_unref (fo_xsl_formatter->result_tree);
+      fo_xsl_formatter->result_tree = NULL;
+    }
+
+  if (fo_xsl_formatter->enum_factory != NULL)
+    {
+      g_object_unref (fo_xsl_formatter->enum_factory);
+      fo_xsl_formatter->enum_factory = NULL;
+    }
+
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
-const LibfoVersionInfo *
+static const LibfoVersionInfo *
 _version_info ()
 {
   version_info.runtime = libfo_version ();
@@ -256,7 +282,7 @@ _version_info ()
 }
 
 /**
- * fo_xsl_formatter_get_property:
+ * _get_property:
  * @object:  #GObject whose property will be retreived
  * @prop_id: Property ID assigned when property registered
  * @value:   #GValue to set with property value
@@ -264,11 +290,11 @@ _version_info ()
  * 
  * Implements #GObjectGetPropertyFunc for #FoXslFormatter
  **/
-void
-fo_xsl_formatter_get_property (GObject        *object,
-			       guint           param_id,
-			       GValue         *value,
-			       GParamSpec     *pspec)
+static void
+_get_property (GObject        *object,
+	       guint           param_id,
+	       GValue         *value,
+	       GParamSpec     *pspec)
 {
   FoXslFormatter *xsl_formatter = FO_XSL_FORMATTER (object);
   
@@ -289,7 +315,7 @@ fo_xsl_formatter_get_property (GObject        *object,
 }
 
 /**
- * fo_xsl_formatter_set_property:
+ * _set_property:
  * @object:  #GObject whose property will be set
  * @prop_id: Property ID assigned when property registered
  * @value:   New value for property
@@ -297,11 +323,11 @@ fo_xsl_formatter_get_property (GObject        *object,
  * 
  * Implements #GObjectSetPropertyFunc for #FoXslFormatter
  **/
-void
-fo_xsl_formatter_set_property (GObject      *object,
-			       guint         param_id,
-			       const GValue *value,
-			       GParamSpec   *pspec)
+static void
+_set_property (GObject      *object,
+	       guint         param_id,
+	       const GValue *value,
+	       GParamSpec   *pspec)
 {
   FoXslFormatter *fo_xsl_formatter;
 
@@ -345,7 +371,7 @@ fo_xsl_formatter_new (void)
 }
 
 /**
- * fo_xml_element_node_to_fo_node:
+ * _xml_element_node_to_fo_node:
  * @node:  #xmlNodePtr for which to create a #FoFo.
  * @error: Indication of any error that occurred.
  * 
@@ -354,8 +380,8 @@ fo_xsl_formatter_new (void)
  * Return value: New @FoFo, or %NULL if an error occurred.
  **/
 static FoFo*
-fo_xml_element_node_to_fo_node (xmlNodePtr node,
-				GError **error)
+_xml_element_node_to_fo_node (xmlNodePtr node,
+			      GError **error)
 {
   FoFo *fo_node = NULL;
   gboolean ok = FALSE;
@@ -662,7 +688,7 @@ fo_xml_element_node_to_fo_node (xmlNodePtr node,
 }
 
 /**
- * fo_xml_node_to_fo_subtree:
+ * _xml_node_to_fo_subtree:
  * @node:      #xmlNodePtr for which to create a subtree.
  * @parent_fo: Parent #FoFo to which to add new subtree.
  * @error:     Indication of any error that occurred.
@@ -674,7 +700,7 @@ fo_xml_element_node_to_fo_node (xmlNodePtr node,
  * other node types except element nodes and document nodes.
  **/
 static void
-fo_new_xml_to_fo_tree (xmlNodePtr node,
+_new_xml_to_fo_tree (xmlNodePtr node,
 		       FoFo *parent_fo,
 		       GError **error)
 {
@@ -692,8 +718,8 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
 	  (strcmp ((gchar *) node->ns->href,
 		   XSL_FO_NAMESPACE) == 0 ))
 	{
-	  fo_node = fo_xml_element_node_to_fo_node (node,
-						    &tmp_error);
+	  fo_node = _xml_element_node_to_fo_node (node,
+						  &tmp_error);
 
 	  if (tmp_error != NULL)
 	    {
@@ -721,9 +747,9 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
 		 fo_xml_node_to_fo_node() */
 	      xmlNodePtr next_node = node->next;
 
-	      fo_new_xml_to_fo_tree (node,
-				     fo_node,
-				     &tmp_error);
+	      _new_xml_to_fo_tree (node,
+				   fo_node,
+				   &tmp_error);
 
 	      if (tmp_error != NULL)
 		{
@@ -801,9 +827,9 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
 		 fo_xml_node_to_fo_node() */
 	      xmlNodePtr next_node = node->next;
 
-	      fo_new_xml_to_fo_tree (node,
-				     parent_fo,
-				     &tmp_error);
+	      _new_xml_to_fo_tree (node,
+				   parent_fo,
+				   &tmp_error);
 	      if (tmp_error != NULL)
 		{
 		  g_propagate_error (error, tmp_error);
@@ -856,7 +882,7 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
 }
 
 /**
- * xml_doc_to_fo_and_area_trees:
+ * _xml_doc_to_fo_and_area_trees:
  * @res:                  Result tree.
  * @fo_doc:               #FoDoc to which to write output.
  * @fo_tree:              Pointer to generated FO tree.
@@ -868,47 +894,46 @@ fo_new_xml_to_fo_tree (xmlNodePtr node,
  * Generates FO and area trees from @res result tree.
  **/
 static void
-xml_doc_to_fo_and_area_trees (FoXmlDoc     *result_tree,
-			      FoDoc        *fo_doc,
-			      FoFo        **fo_tree,
-			      FoArea      **area_tree,
-			      gboolean      continue_after_error,
-			      FoDebugFlag   debug_level,
-			      FoWarningFlag warning_mode,
-			      GError      **error)
+_xml_doc_to_fo_and_area_trees (FoXmlDoc     *result_tree,
+			       FoDoc        *fo_doc,
+			       FoFo        **fo_tree,
+			       FoArea      **area_tree,
+			       gboolean      continue_after_error,
+			       FoDebugFlag   debug_level,
+			       FoWarningFlag warning_mode,
+			       GError      **error)
 {
-  xmlDocPtr res = fo_xml_doc_get_xml_doc (result_tree);
-  FoFo *new_fo_tree = fo_tree_new ();
-  FoArea *new_area_tree;
-  FoContext *new_fo_context;
-  GHashTable *prop_eval_hash = NULL;
-  FoArea *new_area = NULL;
   GError *tmp_error = NULL;
 
+  xmlDocPtr res = fo_xml_doc_get_xml_doc (result_tree);
   /* Check the xmlDocPtr isn't null */
   g_return_if_fail (res != NULL);
   /* Check the xmlDocPtr has a document element */
   g_return_if_fail (res->children != NULL);
   g_return_if_fail (error == NULL || *error == NULL);
 
-  prop_eval_hash = fo_property_eval_init_hash (prop_eval_hash);
-  new_fo_context = fo_context_new ();
+  GHashTable *prop_eval_hash = fo_property_eval_init_hash ();
+  FoContext *new_fo_context = g_object_ref_sink (fo_context_new ());
   fo_context_initialize (new_fo_context);
-  new_area_tree = fo_area_tree_new ();
-  new_fo_tree->areas = g_list_append (new_fo_tree->areas, new_area_tree);
-  fo_fo_set_context (new_fo_tree, new_fo_context);
+  FoArea *new_area_tree = g_object_ref_sink (fo_area_tree_new ());
+
+  FoFo *new_fo_tree = g_object_ref_sink (fo_tree_new ());
+  new_fo_tree->areas = g_list_append (new_fo_tree->areas,
+				      new_area_tree);
+  fo_fo_set_context (new_fo_tree,
+		     new_fo_context);
+  g_object_unref (new_fo_context);
   new_fo_tree->tree = new_fo_tree;
 
   /* Create the FO tree from the result document. */
-  fo_new_xml_to_fo_tree ((xmlNodePtr) res,
-			 new_fo_tree,
-			 &tmp_error);
+  _new_xml_to_fo_tree ((xmlNodePtr) res,
+		       new_fo_tree,
+		       &tmp_error);
 
   if (tmp_error != NULL)
     {
-      g_propagate_error (/*FO_OBJECT (new_fo_tree),*/
-					error,
-					tmp_error);
+      g_propagate_error (error,
+			 tmp_error);
       return;
     }
 
@@ -925,6 +950,7 @@ xml_doc_to_fo_and_area_trees (FoXmlDoc     *result_tree,
 #endif
   /* Recursively both resolve property values and generate areas
      starting at the top of the FO tree. */
+  FoArea *new_area = NULL;
   fo_fo_children_properties_resolve (new_fo_tree,
 				     new_area_tree,
 				     &new_area,
@@ -1032,14 +1058,14 @@ fo_xsl_formatter_format (FoXslFormatter *fo_xsl_formatter,
     }
   else
     {
-      xml_doc_to_fo_and_area_trees (fo_xsl_formatter->result_tree,
-				    fo_xsl_formatter->fo_doc,
-				    &(fo_xsl_formatter->fo_tree),
-				    &(fo_xsl_formatter->area_tree),
-				    fo_libfo_context_get_continue_after_error (libfo_context),
-				    fo_libfo_context_get_debug_mode (libfo_context),
-				    fo_libfo_context_get_warning_mode (libfo_context),
-				    &tmp_error);
+      _xml_doc_to_fo_and_area_trees (fo_xsl_formatter->result_tree,
+				     fo_xsl_formatter->fo_doc,
+				     &(fo_xsl_formatter->fo_tree),
+				     &(fo_xsl_formatter->area_tree),
+				     fo_libfo_context_get_continue_after_error (libfo_context),
+				     fo_libfo_context_get_debug_mode (libfo_context),
+				     fo_libfo_context_get_warning_mode (libfo_context),
+				     &tmp_error);
 
       if (debug & FO_DEBUG_FO)
 	{
@@ -1168,7 +1194,10 @@ fo_xsl_formatter_set_result_tree (FoXslFormatter *fo_xsl_formatter,
   g_return_if_fail (fo_xsl_formatter != NULL);
 
   if (fo_xsl_formatter->result_tree != NULL)
-    g_free (fo_xsl_formatter->result_tree);
+    {
+      fo_xml_doc_unref (fo_xsl_formatter->result_tree);
+      fo_xsl_formatter->result_tree = NULL;
+    }
 
   if (fo_xsl_formatter->fo_tree != NULL)
     {

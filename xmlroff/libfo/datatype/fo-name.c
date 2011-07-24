@@ -49,9 +49,9 @@ static gpointer parent_class;
 
 /**
  * fo_name_get_type:
- * 
+ *
  * Register the #FoName object type.
- * 
+ *
  * Return value: #GType value of the #FoName object type.
  **/
 GType
@@ -74,28 +74,28 @@ fo_name_get_type (void)
         NULL,		/* instance_init */
 	NULL		/* value_table */
       };
-      
+
       object_type = g_type_register_static (FO_TYPE_DATATYPE,
                                             "FoName",
                                             &object_info, 0);
     }
-  
+
   return object_type;
 }
 
 /**
  * fo_name_class_init:
  * @klass: #FoNameClass object to initialise.
- * 
+ *
  * Implements #GClassInitFunc for #FoNameClass.
  **/
 void
 fo_name_class_init (FoNameClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  
+
   parent_class = g_type_class_peek_parent (klass);
-  
+
   object_class->set_property = fo_name_set_property;
   object_class->get_property = fo_name_get_property;
 
@@ -118,7 +118,7 @@ fo_name_class_init (FoNameClass *klass)
  * @prop_id: Property ID assigned when property registered.
  * @value:   GValue to set with property value.
  * @pspec:   Parameter specification for this property type.
- * 
+ *
  * Implements #GObjectGetPropertyFunc for #FoName.
  **/
 void
@@ -148,7 +148,7 @@ fo_name_get_property (GObject         *object,
  * @prop_id: Property ID assigned when property registered.
  * @value:   New value for property.
  * @pspec:   Parameter specification for this property type.
- * 
+ *
  * Implements #GObjectSetPropertyFunc for #FoName.
  **/
 void
@@ -174,9 +174,9 @@ fo_name_set_property (GObject         *object,
 
 /**
  * fo_name_new:
- * 
+ *
  * Creates a new #FoName initialized to default value.
- * 
+ *
  * Return value: the new #FoName.
  **/
 FoDatatype *
@@ -189,9 +189,9 @@ fo_name_new (void)
 /**
  * fo_name_new_with_value:
  * @value: Value of the new #FoName.
- * 
+ *
  * Creates a new #FoName set to @value.
- * 
+ *
  * Return value: The new #FoName.
  **/
 FoDatatype*
@@ -207,9 +207,9 @@ fo_name_new_with_value (const gchar* value)
 /**
  * fo_name_get_value:
  * @name: #FoName.
- * 
+ *
  * Get the value of @name.
- * 
+ *
  * Return value: String value of @name.  String must be freed by caller.
  **/
 gchar*
@@ -225,7 +225,7 @@ fo_name_get_value (FoDatatype *name)
  * fo_name_set_value:
  * @name:      #FoName.
  * @new_value: New value for @name.
- * 
+ *
  * Set the value of @name.
  **/
 void
@@ -242,9 +242,9 @@ fo_name_set_value (FoDatatype  *name,
 /**
  * fo_name_copy:
  * @datatype: #FoName to be copied.
- * 
+ *
  * Create a copy of @datatype.
- * 
+ *
  * Return value: New #FoName.
  **/
 FoDatatype*
@@ -264,11 +264,11 @@ fo_name_copy(FoDatatype *datatype)
 /**
  * fo_name_sprintf:
  * @object: #FoName to be printed.
- * 
+ *
  * Creates string representation of value of @object.
  *
  * String must be freed by caller.
- * 
+ *
  * Return value: String representation of @object.
  **/
 gchar*
@@ -282,9 +282,9 @@ fo_name_sprintf (FoObject *object)
 
 /**
  * fo_name_get_name_empty:
- * 
+ *
  * Get an #FoName with the well-known value of an empty string.
- * 
+ *
  * Return value: The #FoName.
  **/
 FoDatatype *

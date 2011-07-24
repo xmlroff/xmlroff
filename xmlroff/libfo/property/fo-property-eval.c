@@ -3,9 +3,9 @@
  *                     procedures for evaluating them.
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
- * !See COPYING for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include "fo-property-eval.h"
@@ -13,26 +13,23 @@
 
 /**
  * fo_property_eval_init_hash:
- * @hash: Null #GHashTable pointer
  * 
- * Initialises @hash and inserts 'get_type' function for
- * every property.
+ * Initialises hash table and inserts 'get_type' function for every
+ * property.
  * 
  * Return value: Initialised #GHashTable
  **/
 GHashTable *
-fo_property_eval_init_hash (GHashTable *hash)
+fo_property_eval_init_hash (void)
 {
-
-  g_return_val_if_fail (hash == NULL, NULL);
-
-  hash = g_hash_table_new (g_str_hash, g_str_equal);
+  GHashTable *hash = g_hash_table_new (g_str_hash, g_str_equal);
 
   g_hash_table_insert (hash, "alignment-adjust", &fo_property_alignment_adjust_get_type);
   g_hash_table_insert (hash, "alignment-baseline", &fo_property_alignment_baseline_get_type);
   g_hash_table_insert (hash, "background-color", &fo_property_background_color_get_type);
   g_hash_table_insert (hash, "background-image", &fo_property_background_image_get_type);
   g_hash_table_insert (hash, "baseline-shift", &fo_property_baseline_shift_get_type);
+  g_hash_table_insert (hash, "blank-or-not-blank", &fo_property_blank_or_not_blank_get_type);
   g_hash_table_insert (hash, "block-progression-dimension", &fo_property_block_progression_dimension_get_type);
   g_hash_table_insert (hash, "block-progression-dimension.minimum", &fo_property_block_progression_dimension_minimum_get_type);
   g_hash_table_insert (hash, "block-progression-dimension.optimum", &fo_property_block_progression_dimension_optimum_get_type);
@@ -129,10 +126,12 @@ fo_property_eval_init_hash (GHashTable *hash)
   g_hash_table_insert (hash, "margin-top", &fo_property_margin_top_get_type);
   g_hash_table_insert (hash, "master-name", &fo_property_master_name_get_type);
   g_hash_table_insert (hash, "master-reference", &fo_property_master_reference_get_type);
+  g_hash_table_insert (hash, "maximum-repeats", &fo_property_maximum_repeats_get_type);
   g_hash_table_insert (hash, "media-usage", &fo_property_media_usage_get_type);
   g_hash_table_insert (hash, "number-columns-repeated", &fo_property_number_columns_repeated_get_type);
   g_hash_table_insert (hash, "number-columns-spanned", &fo_property_number_columns_spanned_get_type);
   g_hash_table_insert (hash, "number-rows-spanned", &fo_property_number_rows_spanned_get_type);
+  g_hash_table_insert (hash, "odd-or-even", &fo_property_odd_or_even_get_type);
   g_hash_table_insert (hash, "orphans", &fo_property_orphans_get_type);
   g_hash_table_insert (hash, "overflow", &fo_property_overflow_get_type);
   g_hash_table_insert (hash, "padding", &fo_property_padding_get_type);
@@ -153,9 +152,12 @@ fo_property_eval_init_hash (GHashTable *hash)
   g_hash_table_insert (hash, "padding-start.conditionality", &fo_property_padding_start_condity_get_type);
   g_hash_table_insert (hash, "padding-top", &fo_property_padding_top_get_type);
   g_hash_table_insert (hash, "page-height", &fo_property_page_height_get_type);
+  g_hash_table_insert (hash, "page-position", &fo_property_page_position_get_type);
   g_hash_table_insert (hash, "page-width", &fo_property_page_width_get_type);
+  g_hash_table_insert (hash, "precedence", &fo_property_precedence_get_type);
   g_hash_table_insert (hash, "provisional-distance-between-starts", &fo_property_provisional_distance_between_starts_get_type);
   g_hash_table_insert (hash, "provisional-label-separation", &fo_property_provisional_label_separation_get_type);
+  g_hash_table_insert (hash, "reference-orientation", &fo_property_reference_orientation_get_type);
   g_hash_table_insert (hash, "ref-id", &fo_property_ref_id_get_type);
   g_hash_table_insert (hash, "region-name", &fo_property_region_name_get_type);
   g_hash_table_insert (hash, "role", &fo_property_role_get_type);
@@ -200,5 +202,6 @@ fo_property_eval_init_hash (GHashTable *hash)
   g_hash_table_insert (hash, "width", &fo_property_width_get_type);
   g_hash_table_insert (hash, "wrap-option", &fo_property_wrap_option_get_type);
   g_hash_table_insert (hash, "writing-mode", &fo_property_writing_mode_get_type);
+
   return hash;
 }

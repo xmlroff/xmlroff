@@ -1,8 +1,8 @@
 /* Fo
- * fo-page_sequence_master.h: Page Sequence Master formatting object
+ * fo-page-sequence-master.h: 'page-sequence-master' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -16,7 +16,18 @@
 
 G_BEGIN_DECLS
 
+/**
+ * FoPageSequenceMaster:
+ *
+ * Instance of the 'page-sequence-master' formatting object.
+ **/
 typedef struct _FoPageSequenceMaster      FoPageSequenceMaster;
+
+/**
+ * FoPageSequenceMasterClass:
+ *
+ * Class structure for the 'page-sequence-master' formatting object.
+ **/
 typedef struct _FoPageSequenceMasterClass FoPageSequenceMasterClass;
 
 #define FO_TYPE_PAGE_SEQUENCE_MASTER              (fo_page_sequence_master_get_type ())
@@ -27,12 +38,8 @@ typedef struct _FoPageSequenceMasterClass FoPageSequenceMasterClass;
 #define FO_PAGE_SEQUENCE_MASTER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_PAGE_SEQUENCE_MASTER, FoPageSequenceMasterClass))
 
 
-GType         fo_page_sequence_master_get_type      (void) G_GNUC_CONST;
-FoFo *fo_page_sequence_master_new (void);
-
-void fo_page_sequence_master_set_master_name (FoFo *fo_fo,
-                                              FoProperty *new_master_name);
-FoProperty *fo_page_sequence_master_get_master_name (FoFo *fo_fo);
+GType        fo_page_sequence_master_get_type (void) G_GNUC_CONST;
+FoFo *       fo_page_sequence_master_new      (void);
 
 G_END_DECLS
 

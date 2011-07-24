@@ -2,7 +2,7 @@
  * fo-area-table-row.c: Area object for table-row formatting objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -34,9 +34,9 @@ static void fo_area_table_row_debug_dump_properties (FoArea *area,
 							      gint depth);
 static FoArea* fo_area_table_row_size_request (FoArea *child);
 static FoArea* fo_area_table_row_split_before_height (FoArea *area,
-						      gfloat max_height);
+						      gdouble max_height);
 static gboolean fo_area_table_row_split_before_height_check (FoArea *area,
-							     gfloat max_height);
+							     gdouble max_height);
 
 static gpointer parent_class;
 
@@ -173,11 +173,11 @@ fo_area_table_row_size_request (FoArea *child)
   FoArea *use_child_area;
   FoArea *table_row;
   FoDatatype *fo_row_bpdim;
-  gfloat max_child_height = 0;
-  gfloat table_row_child_available_ipdim;
-  gfloat table_row_child_available_bpdim;
-  gfloat table_row_use_height = 0;
-  gfloat child_height;
+  gdouble max_child_height = 0;
+  gdouble table_row_child_available_ipdim;
+  gdouble table_row_child_available_bpdim;
+  gdouble table_row_use_height = 0;
+  gdouble child_height;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -357,7 +357,7 @@ fo_area_table_row_size_request (FoArea *child)
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_table_row_split_before_height (FoArea *area,
-				       gfloat max_height)
+				       gdouble max_height)
 {
   FoArea *use_child_area;
   gboolean can_split = TRUE;
@@ -370,7 +370,7 @@ fo_area_table_row_split_before_height (FoArea *area,
 
   while (use_child_area && can_split)
     {
-      gfloat child_height = fo_area_area_get_height (use_child_area);
+      gdouble child_height = fo_area_area_get_height (use_child_area);
 
       can_split &= ((child_height <= max_height) ||
 		    fo_area_split_before_height_check (use_child_area,
@@ -383,8 +383,8 @@ fo_area_table_row_split_before_height (FoArea *area,
     {
       FoArea *split_child;
       FoArea *clone = fo_area_clone (area);
-      gfloat max_remaining_child_height = 0;
-      gfloat max_split_child_height = 0;
+      gdouble max_remaining_child_height = 0;
+      gdouble max_split_child_height = 0;
 
       /*
       area->is_last = FALSE;
@@ -400,22 +400,15 @@ fo_area_table_row_split_before_height (FoArea *area,
 	  split_child = fo_area_split_before_height (use_child_area,
 						     max_height);
 
-	  if (split_child != NULL)
-	    {
-	      fo_area_unlink (split_child);
-	      fo_area_append (clone, split_child);
+	  fo_area_unlink (split_child);
+	  fo_area_append (clone, split_child);
 
-	      max_remaining_child_height =
-		MAX (max_remaining_child_height,
-		     fo_area_area_get_height (use_child_area));
-	      max_split_child_height =
-		MAX (max_split_child_height,
-		     fo_area_area_get_height (split_child));
-	    }
-	  else
-	    {
-	      g_warning ("Did not split cell.");
-	    }
+	  max_remaining_child_height =
+	    MAX (max_remaining_child_height,
+		 fo_area_area_get_height (use_child_area));
+	  max_split_child_height =
+	    MAX (max_split_child_height,
+		 fo_area_area_get_height (split_child));
 
 	  use_child_area = fo_area_next_sibling (use_child_area);
 	}
@@ -439,7 +432,7 @@ fo_area_table_row_split_before_height (FoArea *area,
 /* leave @area as area remaining after split */
 gboolean
 fo_area_table_row_split_before_height_check (FoArea *area,
-					     gfloat max_height)
+					     gdouble max_height)
 {
   FoArea *use_child_area;
   gboolean can_split = TRUE;
@@ -452,7 +445,7 @@ fo_area_table_row_split_before_height_check (FoArea *area,
 
   while (use_child_area && can_split)
     {
-      gfloat child_height = fo_area_area_get_height (use_child_area);
+      gdouble child_height = fo_area_area_get_height (use_child_area);
 
       can_split &= ((child_height <= max_height) ||
 		    fo_area_split_before_height_check (use_child_area,

@@ -2,7 +2,7 @@
  * fo-block-layout.c: Layout-level block formatting object
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -11,17 +11,18 @@
 #include "fo-block-layout-private.h"
 
 static void fo_block_layout_class_init  (FoBlockLayoutClass *klass);
-static void fo_block_layout_finalize    (GObject           *object);
-static void fo_block_layout_debug_dump_properties (FoFo *fo, gint depth);
-static void fo_block_layout_children_properties_resolve (FoFo       *this_fo,
-							 FoArea     *this_fo_parent_area,
-							 FoArea    **new_area,
-							 GHashTable *prop_eval_hash,
-							 FoDoc      *fo_doc,
-							 gboolean    continue_after_error,
-							 FoDebugFlag   debug_level,
-							 FoWarningFlag warning_mode,
-							 GError    **error);
+static void fo_block_layout_dispose    (GObject           *object);
+static void _debug_dump_properties       (FoFo *fo,
+					  gint depth);
+static void _children_properties_resolve (FoFo       *this_fo,
+					  FoArea     *this_fo_parent_area,
+					  FoArea    **new_area,
+					  GHashTable *prop_eval_hash,
+					  FoDoc      *fo_doc,
+					  gboolean    continue_after_error,
+					  FoDebugFlag   debug_level,
+					  FoWarningFlag warning_mode,
+					  GError    **error);
 
 static gpointer parent_class;
 
@@ -62,22 +63,23 @@ fo_block_layout_class_init (FoBlockLayoutClass *klass)
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_block_layout_finalize;
+  /* object_class->dispose = fo_block_layout_dispose; */
 
-  fo_fo_class->debug_dump_properties = fo_block_layout_debug_dump_properties;
+  fo_fo_class->debug_dump_properties =
+    _debug_dump_properties;
   fo_fo_class->update_from_context = fo_block_layout_update_from_context;
   fo_fo_class->children_properties_resolve =
-    fo_block_layout_children_properties_resolve;
+    _children_properties_resolve;
 }
 
 static void
-fo_block_layout_finalize (GObject *object)
+fo_block_layout_dispose (GObject *object)
 {
   FoBlockLayout *fo_block_layout;
 
   fo_block_layout = FO_BLOCK_LAYOUT (object);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 
@@ -104,7 +106,7 @@ fo_block_layout_update_from_context (FoFo *fo, FoContext *context)
 }
 
 void
-fo_block_layout_debug_dump_properties (FoFo *fo, gint depth)
+_debug_dump_properties (FoFo *fo, gint depth)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_BLOCK (fo));
@@ -112,16 +114,16 @@ fo_block_layout_debug_dump_properties (FoFo *fo, gint depth)
   FO_FO_CLASS (parent_class)->debug_dump_properties (fo, depth + 1);
 }
 
-void
-fo_block_layout_children_properties_resolve (FoFo       *this_fo,
-					     FoArea     *this_fo_parent_area,
-					     FoArea    **new_area,
-					     GHashTable *prop_eval_hash,
-					     FoDoc      *fo_doc,
-					     gboolean    continue_after_error,
-					     FoDebugFlag   debug_level,
-					     FoWarningFlag warning_mode,
-					     GError    **error)
+static void
+_children_properties_resolve (FoFo       *this_fo,
+			      FoArea     *this_fo_parent_area,
+			      FoArea    **new_area,
+			      GHashTable *prop_eval_hash,
+			      FoDoc      *fo_doc,
+			      gboolean    continue_after_error,
+			      FoDebugFlag   debug_level,
+			      FoWarningFlag warning_mode,
+			      GError    **error)
 {
   GError *tmp_error = NULL;
   FoArea *this_fo_area = NULL;

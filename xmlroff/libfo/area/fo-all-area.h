@@ -3,7 +3,7 @@
  *                  objects
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -22,6 +22,7 @@ G_BEGIN_DECLS
 #include <libfo/area/fo-area-normal.h>
 #include <libfo/area/fo-area-page.h>
 #include <libfo/area/fo-area-reference.h>
+#include <libfo/area/fo-area-region.h>
 #include <libfo/area/fo-area-spanning-table-cell.h>
 #include <libfo/area/fo-area-table-body.h>
 #include <libfo/area/fo-area-table-cell-proxy.h>

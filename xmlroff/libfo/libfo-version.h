@@ -2,6 +2,7 @@
  * libfo-version.h: libfo version
  *
  * Copyright (C) 2008 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -130,6 +131,7 @@ int libfo_pixels_per_inch (void);
  * @LIBFO_MODULE_INVALID:        Not a module
  * @LIBFO_MODULE_XSL_FORMATTER:  XSL formatter
  * @LIBFO_MODULE_XSLT_PROCESSOR: XSLT processor
+ * @LIBFO_MODULE_XML_DOC:        XmlDoc
  * @LIBFO_MODULE_BACKEND:        Backend
  * @LIBFO_MODULE_PANGO:          Pango
  *

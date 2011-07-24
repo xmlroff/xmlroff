@@ -92,7 +92,7 @@ void
 fo_property_white_space_treatment_init (FoPropertyWhiteSpaceTreatment *white_space_treatment)
 {
   FO_PROPERTY (white_space_treatment)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("ignore-if-surrounding-linefeed"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("ignore-if-surrounding-linefeed"));
 }
 
 /**
@@ -187,7 +187,7 @@ fo_property_white_space_treatment_resolve_enum (const gchar *token,
       (strcmp (token, "ignore-if-after-linefeed") == 0) ||
       (strcmp (token, "ignore-if-surrounding-linefeed") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

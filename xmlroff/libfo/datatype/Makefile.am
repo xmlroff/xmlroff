@@ -1,3 +1,4 @@
+## libfo
 ## Process this file with automake to produce Makefile.in
 
 INCLUDES = \
@@ -32,7 +33,12 @@ libfo_datatype_la_SOURCES =	\
 	fo-char.h		\
 	fo-color.c		\
 	fo-color.h		\
+	fo-enum-factory.c		\
+	fo-enum-factory.h		\
+	fo-enum-factory-private.h	\
 	fo-enum.c		\
+	fo-enum.h		\
+	fo-enum-private.h	\
 	fo-error.c		\
 	fo-error.h		\
 	fo-id.c			\

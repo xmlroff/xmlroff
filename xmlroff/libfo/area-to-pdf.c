@@ -2,7 +2,7 @@
  * area-to-pdf.c: Convert area tree into PDF
  *
  * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -19,6 +19,8 @@
 #include "property/fo-property-border-top-style.h"
 #include "property/fo-property-color.h"
 #include "property/fo-property-font-size.h"
+#include "fo/fo-cbpbp-fo.h"
+
 
 typedef struct
 {
@@ -695,8 +697,6 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 {
   GValue value = { 0, {{0}, {0}} };
   FoFo *fo = fo_area_get_generated_by (area_node);
-  FoProperty *prop_color;
-  FoProperty *prop_border_style;
   FoDatatype *color;
   FoEnumEnum border_style;
   gdouble x = fo_area_area_get_x (area_node);
@@ -715,16 +715,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
   /* before == top */
   if (border_before != 0.0)
     {
-      g_object_get_property (G_OBJECT (fo),
-			     "border-top-style",
-			     &value);
-
-      /*
-	g_print ("%s\n", fo_object_sprintf (g_value_get_object (&value)));
-      */
-      prop_border_style = g_value_get_object (&value);
       border_style =
-	fo_enum_get_value (fo_property_get_value (prop_border_style));
+	fo_enum_get_value (fo_property_get_value (fo_cbpbp_fo_get_border_before_style (fo)));
 
       if ((border_style != FO_ENUM_ENUM_NONE) &&
 	  (border_style != FO_ENUM_ENUM_HIDDEN))
@@ -738,20 +730,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 					 -border_end,
 					 -border_before};
 
-	  g_object_get_property (G_OBJECT (fo),
-				 "border-top-color",
-				 &value);
-
-	  prop_color = g_value_get_object (&value);
-
-	  g_object_get_property (G_OBJECT (prop_color),
-				 "value",
-				 &value);
-
-	  /*
-	    g_print ("%s\n", fo_object_sprintf (g_value_get_object (&value)));
-	  */
-	  color = g_value_get_object (&value);
+	  color =
+	    fo_property_get_value (fo_cbpbp_fo_get_border_before_color (fo));
 
 	  fo_pdf_draw_one_border (fo_doc,
 				  color,
@@ -762,16 +742,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
   /* start == left */
   if (border_start != 0.0)
     {
-      g_object_get_property (G_OBJECT (fo),
-			     "border-left-style",
-			     &value);
-
-      /*
-	g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
-      */
-      prop_border_style = g_value_get_object (&value);
       border_style =
-	fo_enum_get_value (fo_property_get_value (prop_border_style));
+	fo_enum_get_value (fo_property_get_value (fo_cbpbp_fo_get_border_start_style (fo)));
 
       if ((border_style != FO_ENUM_ENUM_NONE) &&
 	  (border_style != FO_ENUM_ENUM_HIDDEN))
@@ -785,20 +757,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 					 border_start,
 					 border_after};
 
-	  g_object_get_property (G_OBJECT (fo),
-				 "border-left-color",
-				 &value);
-
-	  prop_color = g_value_get_object (&value);
-
-	  g_object_get_property (G_OBJECT (prop_color),
-				 "value",
-				 &value);
-
-	  /*
-	    g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
-	  */
-	  color = g_value_get_object (&value);
+	  color =
+	    fo_property_get_value (fo_cbpbp_fo_get_border_start_color (fo));
 
 	  fo_pdf_draw_one_border (fo_doc,
 				  color,
@@ -809,16 +769,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
   /* end == right */
   if (border_end != 0.0)
     {
-      g_object_get_property (G_OBJECT (fo),
-			     "border-right-style",
-			     &value);
-
-      /*
-	g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
-      */
-      prop_border_style = g_value_get_object (&value);
       border_style =
-	fo_enum_get_value (fo_property_get_value (prop_border_style));
+	fo_enum_get_value (fo_property_get_value (fo_cbpbp_fo_get_border_end_style (fo)));
 
       if ((border_style != FO_ENUM_ENUM_NONE) &&
 	  (border_style != FO_ENUM_ENUM_HIDDEN))
@@ -832,20 +784,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 					 -border_end,
 					 border_after};
 
-	  g_object_get_property (G_OBJECT (fo),
-				 "border-right-color",
-				 &value);
-
-	  prop_color = g_value_get_object (&value);
-
-	  g_object_get_property (G_OBJECT (prop_color),
-				 "value",
-				 &value);
-
-	  /*
-	    g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
-	  */
-	  color = g_value_get_object (&value);
+	  color =
+	    fo_property_get_value (fo_cbpbp_fo_get_border_end_color (fo));
 
 	  fo_pdf_draw_one_border (fo_doc,
 				  color,
@@ -856,15 +796,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
   /* after == bottom */
   if (border_after != 0.0)
     {
-      g_object_get_property (G_OBJECT (fo),
-			     "border-bottom-style",
-			     &value);
-      /*
-	g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
-      */
-      prop_border_style = g_value_get_object (&value);
       border_style =
-	fo_enum_get_value (fo_property_get_value (prop_border_style));
+	fo_enum_get_value (fo_property_get_value (fo_cbpbp_fo_get_border_after_style (fo)));
 
       if ((border_style != FO_ENUM_ENUM_NONE) &&
 	  (border_style != FO_ENUM_ENUM_HIDDEN))
@@ -878,20 +811,8 @@ fo_pdf_draw_borders (FoDoc  *fo_doc,
 					 -border_end,
 					 border_after};
 
-	  g_object_get_property (G_OBJECT (fo),
-				 "border-bottom-color",
-				 &value);
-
-	  prop_color = g_value_get_object (&value);
-
-	  g_object_get_property (G_OBJECT (prop_color),
-				 "value",
-				 &value);
-
-	  /*
-	    g_print ("%s", fo_object_sprintf (g_value_get_object (&value)));
-	  */
-	  color = g_value_get_object (&value);
+	  color =
+	    fo_property_get_value (fo_cbpbp_fo_get_border_after_color (fo));
 
 	  fo_pdf_draw_one_border (fo_doc,
 				  color,
@@ -1056,21 +977,12 @@ fo_area_tree_to_pdf (FoArea  *area_node,
       FoEnumEnum overflow;
       gdouble x = fo_area_area_get_x (area_node);
       gdouble y = fo_area_area_get_y (area_node);
+      /* FIXME: Why is this available width and height only? */
       gdouble width = fo_area_get_available_width (area_node);
       gdouble height = fo_area_get_available_height (area_node);
 
       /* background-color */
-      g_object_get_property (G_OBJECT (fo),
-			     "background-color",
-			     &value);
-
-      prop_background_color = g_value_get_object (&value);
-
-      g_object_get_property (G_OBJECT (prop_background_color),
-			     "value",
-			     &value);
-
-      background_color = g_value_get_object (&value);
+      background_color = fo_property_get_value (fo_cbpbp_fo_get_background_color (fo));
 
       fo_pdf_draw_background (fo_doc,
 			      x,
@@ -1088,7 +1000,7 @@ fo_area_tree_to_pdf (FoArea  *area_node,
 			fo_area_area_get_y (area_node));
 
       /* overflow */
-      g_object_get_property (G_OBJECT (fo),
+      g_object_get_property (G_OBJECT (fo_fo_get_area_fo (fo)),
 			     "overflow",
 			     &value);
       prop_overflow = g_value_get_object (&value);
@@ -1273,8 +1185,6 @@ fo_area_tree_to_pdf (FoArea  *area_node,
       /* borders */
       fo_pdf_draw_borders (fo_doc, area_node, width, height);
 
-      /* No fo_doc_save().  Instead, do reverse translate after
-	 drawing children. */
       fo_doc_translate (fo_doc,
 			fo_area_area_get_x (area_node),
 			fo_area_area_get_y (area_node));

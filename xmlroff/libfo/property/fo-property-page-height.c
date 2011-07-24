@@ -187,7 +187,7 @@ fo_property_page_height_resolve_enum (const gchar *token,
     }
   else if (strcmp (token, "indefinite") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

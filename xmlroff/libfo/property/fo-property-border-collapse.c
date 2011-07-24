@@ -92,7 +92,7 @@ void
 fo_property_border_collapse_init (FoPropertyBorderCollapse *border_collapse)
 {
   FO_PROPERTY (border_collapse)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("collapse"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("collapse"));
 }
 
 /**
@@ -185,7 +185,7 @@ fo_property_border_collapse_resolve_enum (const gchar *token,
       (strcmp (token, "collapse-with-precedence") == 0) ||
       (strcmp (token, "separate") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

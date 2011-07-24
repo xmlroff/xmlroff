@@ -200,6 +200,13 @@ fo_font_style_to_pango_style (FoEnumEnum font_style)
   return pango_font_style;
 }
 
+/**
+ * fo_font_desc_set_style:
+ * @font_desc: #FoFontDesc to set
+ * @style:     New font style
+ *
+ * Sets the font style of @font_desc to @style.
+ **/
 void
 fo_font_desc_set_style (FoFontDesc *font_desc,
 			FoEnumEnum  style)

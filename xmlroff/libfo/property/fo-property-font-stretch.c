@@ -105,7 +105,7 @@ void
 fo_property_font_stretch_init (FoPropertyFontStretch *font_stretch)
 {
   FO_PROPERTY (font_stretch)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("normal"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("normal"));
 }
 
 /**
@@ -328,15 +328,15 @@ fo_property_font_stretch_resolve_enum (const gchar *token,
       (strcmp (token, "extra-expanded") == 0) ||
       (strcmp (token, "ultra-expanded") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else if (strcmp (token, "wider") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_by_value (_wider_font_stretch (context)));
+      return g_object_ref (fo_enum_factory_get_enum_by_value (_wider_font_stretch (context)));
     }
   else if (strcmp (token, "narrower") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_by_value (_narrower_font_stretch (context)));
+      return g_object_ref (fo_enum_factory_get_enum_by_value (_narrower_font_stretch (context)));
     }
   else
     {

@@ -2,7 +2,7 @@
  * fo-xslt-transformer.c: Wrapper for libxslt XSLT processor
  *
  * Copyright (C) 2003-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -88,8 +88,6 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 				  FoXmlDoc          *stylesheet_doc,
 				  GError           **error)
 {
-  FoXmlDoc *result_tree = NULL;
-
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
   if (stylesheet_doc == NULL)
@@ -129,9 +127,9 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
   else
     {
       xmlDocPtr result_doc =
-	xsltApplyStylesheet(stylesheet,
-			    fo_xml_doc_get_xml_doc (xml_doc),
-			    NULL);
+	xsltApplyStylesheet (stylesheet,
+			     fo_xml_doc_get_xml_doc (xml_doc),
+			     NULL);
 
       if (result_doc == NULL)
 	{
@@ -145,20 +143,19 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 	}
 
       xsltFreeStylesheet (stylesheet);
+      fo_xml_doc_set_xml_doc (stylesheet_doc,
+			      NULL);
+      fo_xml_doc_unref (stylesheet_doc);
 
       gchar *base = fo_xml_doc_get_base (xml_doc);
 
-      result_tree = fo_xml_doc_new ();
-      fo_xml_doc_set_xml_doc (result_tree,
-			      result_doc);
+      FoXmlDoc *result_tree = fo_xml_doc_new_from_xml_doc (result_doc);
 
       fo_xml_doc_set_base (result_tree,
 			   base);
       g_free (base);
 
-
+      return result_tree;
     }
-  return result_tree;
-
 }
 

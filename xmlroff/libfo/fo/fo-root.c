@@ -2,7 +2,7 @@
  * fo-root.c: 'root' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -34,7 +34,7 @@ static void fo_root_set_property (GObject      *object,
                                   guint         prop_id,
                                   const GValue *value,
                                   GParamSpec   *pspec);
-static void fo_root_finalize    (GObject           *object);
+static void fo_root_dispose    (GObject           *object);
 static gboolean fo_root_validate_content (FoFo    *fo,
                                           GError **error);
 static void fo_root_validate (FoFo      *fo,
@@ -98,7 +98,7 @@ fo_root_class_init (FoRootClass *klass)
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_root_finalize;
+  object_class->dispose = fo_root_dispose;
 
   object_class->get_property = fo_root_get_property;
   object_class->set_property = fo_root_set_property;
@@ -121,20 +121,20 @@ fo_root_class_init (FoRootClass *klass)
 }
 
 /**
- * fo_root_finalize:
- * @object: #FoRoot object to finalize.
+ * fo_root_dispose:
+ * @object: #FoRoot object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoRoot.
+ * Implements #GObjectDisposeFunc for #FoRoot.
  **/
 void
-fo_root_finalize (GObject *object)
+fo_root_dispose (GObject *object)
 {
   FoFo *fo = FO_FO (object);
 
   /* Release references to all property objects. */
   fo_root_set_media_usage (fo, NULL);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
@@ -313,7 +313,7 @@ fo_root_resolve_media_usage (FoFo      *fo,
 
   if (datatype == NULL)
     {
-      FoDatatype *new_datatype =  g_object_ref (fo_enum_get_enum_by_nick ("paginate"));
+      FoDatatype *new_datatype =  g_object_ref (fo_enum_factory_get_enum_by_nick ("paginate"));
 
       FoProperty *new_media_usage = fo_property_media_usage_new ();
 
@@ -329,7 +329,7 @@ fo_root_resolve_media_usage (FoFo      *fo,
 
       if (value != FO_ENUM_ENUM_PAGINATE)
 	{
-	  FoDatatype *new_datatype =  g_object_ref (fo_enum_get_enum_by_nick ("paginate"));
+	  FoDatatype *new_datatype =  g_object_ref (fo_enum_factory_get_enum_by_nick ("paginate"));
 	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
 	  gchar *new_datatype_sprintf = fo_object_sprintf (new_datatype);
 	  GError *datatype_warning =

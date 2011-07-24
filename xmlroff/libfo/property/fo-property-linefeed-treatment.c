@@ -92,7 +92,7 @@ void
 fo_property_linefeed_treatment_init (FoPropertyLinefeedTreatment *linefeed_treatment)
 {
   FO_PROPERTY (linefeed_treatment)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("treat-as-space"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("treat-as-space"));
 }
 
 /**
@@ -186,7 +186,7 @@ fo_property_linefeed_treatment_resolve_enum (const gchar *token,
       (strcmp (token, "treat-as-space") == 0) ||
       (strcmp (token, "treat-as-zero-width-space") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

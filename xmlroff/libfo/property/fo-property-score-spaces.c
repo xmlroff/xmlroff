@@ -92,7 +92,7 @@ void
 fo_property_score_spaces_init (FoPropertyScoreSpaces *score_spaces)
 {
   FO_PROPERTY (score_spaces)->value =
-    g_object_ref (fo_enum_get_enum_by_nick ("true"));
+    g_object_ref (fo_enum_factory_get_enum_by_nick ("true"));
 }
 
 /**
@@ -184,7 +184,7 @@ fo_property_score_spaces_resolve_enum (const gchar *token,
   if ((strcmp (token, "true") == 0) ||
       (strcmp (token, "false") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

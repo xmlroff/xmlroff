@@ -1,8 +1,8 @@
 /* Fo
- * fo-layout.c: Object type for PangoLayout
+ * fo-layout.c: Abstract object type for PangoLayout
  *
  * Copyright (C) 2003 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -19,17 +19,17 @@ const char *fo_layout_error_messages [] = {
   N_("FoLayout error")
 };
 
-static void fo_layout_base_init  (FoLayoutClass *klass);
-static void fo_layout_class_init (FoLayoutClass *klass);
-static void fo_layout_finalize   (GObject       *object);
-static void fo_layout_debug_dump (FoObject      *object,
-				  gint           depth);
+static void _base_init  (FoLayoutClass *klass);
+static void _class_init (FoLayoutClass *klass);
+static void _dispose    (GObject       *object);
+static void _debug_dump (FoObject      *object,
+			 gint           depth);
 
-static void fo_layout_set_line_height_default (FoLayout *fo_layout,
-					       gfloat    line_height);
+static void _set_line_height_default (FoLayout *fo_layout,
+				      gfloat    line_height);
 
-static void fo_layout_set_line_stacking_strategy_default (FoLayout  *fo_layout,
-							  FoEnumEnum line_stacking_strategy);
+static void _set_line_stacking_strategy_default (FoLayout  *fo_layout,
+						 FoEnumEnum line_stacking_strategy);
 
 static gpointer parent_class;
 
@@ -69,10 +69,10 @@ fo_layout_get_type (void)
       static const GTypeInfo object_info =
       {
         sizeof (FoLayoutClass),
-        (GBaseInitFunc) fo_layout_base_init,
-        NULL,           /* base_finalize */
-        (GClassInitFunc) fo_layout_class_init,
-        NULL,           /* class_finalize */
+        (GBaseInitFunc) _base_init,
+        NULL,           /* base_dispose */
+        (GClassInitFunc) _class_init,
+        NULL,           /* class_dispose */
         NULL,           /* class_data */
         sizeof (FoLayout),
         0,              /* n_preallocs */
@@ -82,59 +82,60 @@ fo_layout_get_type (void)
 
       object_type = g_type_register_static (FO_TYPE_OBJECT,
                                             "FoLayout",
-                                            &object_info, 0);
+                                            &object_info,
+					    G_TYPE_FLAG_ABSTRACT);
     }
 
   return object_type;
 }
 
 /**
- * fo_layout_base_init:
+ * _base_init:
  * @klass: #FoLayoutClass base class object to initialise.
  * 
  * Implements #GBaseInitFunc for #FoLayoutClass.
  **/
-void
-fo_layout_base_init (FoLayoutClass *klass)
+static void
+_base_init (FoLayoutClass *klass)
 {
-  klass->set_line_height = fo_layout_set_line_height_default;
+  klass->set_line_height = _set_line_height_default;
   klass->set_line_stacking_strategy =
-    fo_layout_set_line_stacking_strategy_default;
+    _set_line_stacking_strategy_default;
+  FO_OBJECT_CLASS (klass)->debug_dump = _debug_dump;
 }
 /**
- * fo_layout_class_init:
+ * _class_init:
  * @klass: #FoLayout object to initialise.
  * 
  * Implements #GClassInitFunc for #FoLayoutClass.
  **/
-void
-fo_layout_class_init (FoLayoutClass *klass)
+static void
+_class_init (FoLayoutClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_layout_finalize;
-
-  FO_OBJECT_CLASS (klass)->debug_dump = fo_layout_debug_dump;
+  object_class->dispose = _dispose;
 }
 
 /**
- * fo_layout_finalize:
- * @object: #FoLayout object to finalize.
+ * _dispose:
+ * @object: #FoLayout object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoLayout.
+ * Implements #GObjectDisposeFunc for #FoLayout.
  **/
-void
-fo_layout_finalize (GObject *object)
+static void
+_dispose (GObject *object)
 {
   FoLayout *fo_layout;
 
   fo_layout = FO_LAYOUT (object);
 
-  /*g_object_unref (fo_layout->fo_doc);*/
+  g_object_unref (fo_layout->fo_doc);
+  g_object_unref (fo_layout->pango_layout);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 /**
@@ -147,13 +148,8 @@ fo_layout_finalize (GObject *object)
 FoLayout *
 fo_layout_new (void)
 {
-  FoLayout* fo_layout;
-
-  fo_layout =
-    g_object_new (fo_layout_get_type (),
-		  NULL);
-
-  return fo_layout;
+  return g_object_new (fo_layout_get_type (),
+		       NULL);
 }
 
 /**
@@ -167,14 +163,9 @@ fo_layout_new (void)
 FoLayout *
 fo_layout_new_from_fo_doc (FoDoc *fo_doc)
 {
-  FoLayout* fo_layout;
+  FoLayout* fo_layout = fo_layout_new ();
 
-  fo_layout =
-    g_object_new (fo_layout_get_type (),
-		  NULL);
-
-  /* FIXME: should be g_object_ref (fo_doc) but uncertain what unrefs layout */
-  fo_layout->fo_doc = fo_doc;
+  fo_layout->fo_doc = g_object_ref_sink (fo_doc);
   fo_layout->pango_layout =
     pango_layout_new (fo_doc_get_pango_context (fo_doc));
 
@@ -182,8 +173,8 @@ fo_layout_new_from_fo_doc (FoDoc *fo_doc)
 }
 
 static void
-fo_layout_pango_attr_list_add (gpointer data,
-			       gpointer pango_attr_list)
+_pango_attr_list_add (gpointer data,
+		      gpointer pango_attr_list)
 {
 #if defined(LIBFO_DEBUG) && 0
   g_log (G_LOG_DOMAIN,
@@ -212,7 +203,7 @@ fo_layout_set_attributes (FoLayout  *fo_layout,
   g_return_if_fail (FO_IS_LAYOUT (fo_layout));
 
   g_list_foreach (attr_glist,
-		  fo_layout_pango_attr_list_add,
+		  _pango_attr_list_add,
 		  attr_list);
 
   pango_layout_set_attributes (fo_layout->pango_layout,
@@ -424,15 +415,15 @@ fo_layout_get_pango_layout (FoLayout *fo_layout)
  * 
  * Set the 'line-height' of @fo_layout to @line_height.
  **/
-void
-fo_layout_set_line_height_default (FoLayout *fo_layout G_GNUC_UNUSED,
-				   gfloat    line_height G_GNUC_UNUSED)
+static void
+_set_line_height_default (FoLayout *fo_layout G_GNUC_UNUSED,
+			  gfloat    line_height G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 _("%s does not have a 'set_line_height' function."),
-	 fo_object_sprintf (fo_doc));
+	 fo_object_sprintf (fo_layout));
 #endif
 }
 
@@ -462,7 +453,7 @@ fo_layout_set_line_height (FoLayout *fo_layout,
  **/
 /*
 PangoLineStackingStrategy
-fo_layout_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum line_stacking_strategy)
+_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum line_stacking_strategy)
 {
   switch (line_stacking_strategy)
     {
@@ -478,22 +469,22 @@ fo_layout_line_stacking_strategy_to_pango_line_stacking_strategy (FoEnumEnum lin
 }
 */
 /**
- * fo_layout_set_line_stacking_strategy:
+ * _set_line_stacking_strategy_default:
  * @fo_layout:              #FoLayout.
  * @line_stacking_strategy: Line stacking strategy to use.
  * 
  * Set the 'line-stacking-strategy' property of @fo_layout to
  * @line_stacking_strategy.
  **/
-void
-fo_layout_set_line_stacking_strategy_default (FoLayout  *fo_layout G_GNUC_UNUSED,
+static void
+_set_line_stacking_strategy_default (FoLayout  *fo_layout G_GNUC_UNUSED,
 					      FoEnumEnum line_stacking_strategy G_GNUC_UNUSED)
 {
 #if defined(LIBFO_DEBUG)
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 _("%s does not have a 'set_line_stacking_strategy' function."),
-	 fo_object_sprintf (fo_doc));
+	 fo_object_sprintf (fo_layout));
 #endif
 }
 
@@ -536,9 +527,9 @@ static const char* stretch[] = {
   "Ultra expanded"
 };
 
-void
-fo_layout_debug_dump (FoObject *object,
-		      gint      depth G_GNUC_UNUSED)
+static void
+_debug_dump (FoObject *object,
+	     gint      depth G_GNUC_UNUSED)
 {
   FoLayout *fo_layout;
   gint start, end;

@@ -3,7 +3,7 @@
  *                               formatting objects that span rows
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -24,7 +24,7 @@ struct _FoAreaTableCellProxy
 
   FoArea *table_cell;
   gint    row_number;
-  gfloat  min_height;
+  gdouble  min_height;
 };
 
 struct _FoAreaTableCellProxyClass
@@ -39,9 +39,9 @@ static void fo_area_table_cell_proxy_debug_dump_properties (FoArea *area,
 							      gint depth);
 static FoArea* fo_area_table_cell_proxy_size_request (FoArea *child);
 static FoArea* fo_area_table_cell_proxy_split_before_height (FoArea *area,
-						      gfloat max_height);
+						      gdouble max_height);
 static gboolean fo_area_table_cell_proxy_split_before_height_check (FoArea *area,
-							     gfloat max_height);
+							     gdouble max_height);
 
 static gpointer parent_class;
 
@@ -214,7 +214,7 @@ fo_area_table_cell_proxy_get_row_number (FoArea *fo_area)
 **/
 void
 fo_area_table_cell_proxy_set_min_height (FoArea *fo_area,
-					 gfloat new_min_height)
+					 gdouble new_min_height)
 {
   g_return_if_fail (fo_area != NULL);
   g_return_if_fail (FO_IS_AREA_TABLE_CELL_PROXY (fo_area));
@@ -231,7 +231,7 @@ fo_area_table_cell_proxy_set_min_height (FoArea *fo_area,
  *
  * Return value: The "min-height" property value
 **/
-gfloat
+gdouble
 fo_area_table_cell_proxy_get_min_height (FoArea *fo_area)
 {
   g_return_val_if_fail (fo_area != NULL, 0);
@@ -307,10 +307,10 @@ fo_area_table_cell_proxy_size_request (FoArea *child)
   FoArea *use_child_area;
   FoArea *parent;
   FoDatatype *fo_row_bpdim;
-  gfloat max_child_height = 0;
-  gfloat parent_child_available_bpdim;
-  gfloat parent_use_height = 0;
-  gfloat child_height;
+  gdouble max_child_height = 0;
+  gdouble parent_child_available_bpdim;
+  gdouble parent_use_height = 0;
+  gdouble child_height;
 
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_AREA (child), NULL);
@@ -460,7 +460,7 @@ fo_area_table_cell_proxy_size_request (FoArea *child)
 /* leave @area as area remaining after split */
 FoArea*
 fo_area_table_cell_proxy_split_before_height (FoArea *area,
-				       gfloat max_height)
+				       gdouble max_height)
 {
   FoArea *use_child_area;
   gboolean can_split = TRUE;
@@ -473,7 +473,7 @@ fo_area_table_cell_proxy_split_before_height (FoArea *area,
 
   while (use_child_area && can_split)
     {
-      gfloat child_height = fo_area_area_get_height (use_child_area);
+      gdouble child_height = fo_area_area_get_height (use_child_area);
 
       can_split &= ((child_height <= max_height) ||
 		    fo_area_split_before_height_check (use_child_area,
@@ -486,8 +486,8 @@ fo_area_table_cell_proxy_split_before_height (FoArea *area,
     {
       FoArea *split_child;
       FoArea *clone = fo_area_clone (area);
-      gfloat max_remaining_child_height = 0;
-      gfloat max_split_child_height = 0;
+      gdouble max_remaining_child_height = 0;
+      gdouble max_split_child_height = 0;
 
       area->is_last = FALSE;
 
@@ -533,7 +533,7 @@ fo_area_table_cell_proxy_split_before_height (FoArea *area,
 /* leave @area as area remaining after split */
 gboolean
 fo_area_table_cell_proxy_split_before_height_check (FoArea *area,
-					     gfloat max_height)
+					     gdouble max_height)
 {
   FoArea *use_child_area;
   gboolean can_split = TRUE;
@@ -546,7 +546,7 @@ fo_area_table_cell_proxy_split_before_height_check (FoArea *area,
 
   while (use_child_area && can_split)
     {
-      gfloat child_height = fo_area_area_get_height (use_child_area);
+      gdouble child_height = fo_area_area_get_height (use_child_area);
 
       can_split &= ((child_height <= max_height) ||
 		    fo_area_split_before_height_check (use_child_area,

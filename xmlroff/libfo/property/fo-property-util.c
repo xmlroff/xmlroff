@@ -2,7 +2,7 @@
  * fo-property-util.c: Utility functions for properties.
  *
  * Copyright (C) 2001-2005 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -1024,7 +1024,7 @@ fo_property_util_resolve_color_transparent_enum (const gchar *token,
 
   if ((strcmp (token, "transparent") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -1060,7 +1060,7 @@ fo_property_util_resolve_auto_enum (const gchar *token,
 
   if (strcmp (token, "auto") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_auto ());
+      return g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
     }
   else
     {
@@ -1100,11 +1100,11 @@ fo_property_util_resolve_auto_always_enum (const gchar *token,
 
   if (strcmp (token, "auto") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_auto ());
+      return g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
     }
   else if (strcmp (token, "always") == 0)
     {
-      return g_object_ref (fo_enum_get_always ());
+      return g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_ALWAYS));
     }
   else
     {
@@ -1144,7 +1144,7 @@ fo_property_util_resolve_force_enum (const gchar *token,
 
   if (strcmp (token, "force") == 0)
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {
@@ -1154,6 +1154,164 @@ fo_property_util_resolve_force_enum (const gchar *token,
 		   _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
 		   "property",
 		   token);
+      return NULL;
+    }
+}
+
+/**
+ * fo_property_util_resolve_true_false_enum:
+ * @token:   Token from the XML attribute value to be evaluated as an
+ *           enumeration token.
+ * @context: #FoContext object from which to possibly inherit values.
+ * @error:   Information about any error that has occurred.
+ * 
+ * Compare @token against the enumeration tokens that are valid for the
+ * current FO property.  If @token is valid, returns either an #FoEnum datatype
+ * representing the enumeration token or a different datatype representing
+ * the enumeration token's resolved value.  If @token is not valid,
+ * sets @error and returns NULL.
+ * 
+ * Return value: Resolved enumeration value or %NULL.
+ **/
+FoDatatype *
+fo_property_util_resolve_true_false_enum (const gchar *token,
+					  FoContext   *context,
+					  GError     **error)
+{
+  g_return_val_if_fail (token != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+
+  if (strcmp (token, "true") == 0)
+    {
+      return g_object_ref (fo_boolean_get_true ());
+    }
+  else if (strcmp (token, "false") == 0)
+    {
+      return g_object_ref (fo_boolean_get_false ());
+    }
+  else
+    {
+      g_set_error (error,
+		   FO_FO_ERROR,
+		   FO_FO_ERROR_ENUMERATION_TOKEN,
+		   _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
+		   "property",
+		   token);
+      return NULL;
+    }
+}
+
+/**
+ * fo_property_validate_validate_boolean:
+ * @datatype: #FoDatatype to be validated against allowed datatypes and
+ *            values for current property.
+ * @context:  #FoContext object from which to possibly inherit values.
+ * @error:    Information about any error that has occurred.
+ * 
+ * Validates @datatype against allowed values.  Returns @datatype, a
+ * replacement datatype value, or NULL if validation failed.
+ * 
+ * Return value: Valid datatype value or NULL.
+ **/
+FoDatatype *
+fo_property_util_validate_boolean (FoDatatype *datatype,
+				   FoContext  *context,
+				   GError    **error)
+{
+  FoDatatype *new_datatype;
+  GError     *tmp_error = NULL;
+  gchar      *token;
+
+  g_return_val_if_fail (datatype != NULL, NULL);
+  g_return_val_if_fail (FO_IS_DATATYPE (datatype), NULL);
+  g_return_val_if_fail (context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+
+  if (FO_IS_BOOLEAN (datatype))
+    {
+      return datatype;
+    }
+  else if (FO_IS_ENUM (datatype))
+    {
+      FoEnumEnum value = fo_enum_get_value (datatype);
+
+      if (value == FO_ENUM_ENUM_TRUE)
+	{
+	  g_object_unref (datatype);
+	  return g_object_ref (fo_boolean_get_true ());
+	}
+      else if (value == FO_ENUM_ENUM_FALSE)
+	{
+	  g_object_unref (datatype);
+	  return g_object_ref (fo_boolean_get_false ());
+	}
+      else
+	{
+	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
+
+	  g_set_error (error,
+		       FO_FO_ERROR,
+		       FO_FO_ERROR_ENUMERATION_TOKEN,
+		       _(fo_fo_error_messages[FO_FO_ERROR_ENUMERATION_TOKEN]),
+		       "boolean property",
+		       datatype_sprintf,
+		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
+
+	  g_object_unref (datatype);
+
+	  g_free (datatype_sprintf);
+
+	  return NULL;
+	}
+    }
+  else if (FO_IS_STRING (datatype))
+    {
+      token = fo_string_get_value (datatype);
+
+      new_datatype =
+        fo_property_util_resolve_true_false_enum (token,
+						  context,
+						  &tmp_error);
+
+      g_object_unref (datatype);
+
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
+
+      return new_datatype;
+    }
+  else if (FO_IS_NAME (datatype))
+    {
+      token = fo_name_get_value (datatype);
+
+      new_datatype =
+        fo_property_util_resolve_true_false_enum (token,
+						  context,
+						  &tmp_error);
+
+      g_object_unref (datatype);
+
+      fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
+
+      return new_datatype;
+    }
+  else
+    {
+      gchar *datatype_sprintf = fo_object_sprintf (datatype);
+
+      g_set_error (error,
+		   FO_FO_ERROR,
+		   FO_FO_ERROR_DATATYPE,
+		   _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE]),
+		   "boolean property",
+		   datatype_sprintf,
+		   g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
+
+      g_object_unref (datatype);
+
+      g_free (datatype_sprintf);
+
       return NULL;
     }
 }
@@ -1615,7 +1773,7 @@ fo_property_util_validate_width (FoDatatype *datatype,
 FoDatatype*
 fo_property_util_get_style_initial (void)
 {
-  return fo_enum_get_enum_none ();
+  return fo_enum_factory_get_enum_by_nick ("none");
 }
 
 /**
@@ -1653,7 +1811,7 @@ fo_property_util_resolve_style_enum (const gchar *token,
       (strcmp (token, "inset") == 0) ||
       (strcmp (token, "outset") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

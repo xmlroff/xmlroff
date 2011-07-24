@@ -44,7 +44,7 @@ if test -d .svn ; then
   echo extra=$extra
   if test "$extra" != ""
   then
-      XMLROFF_VERSION_EXTRA="-r$extra"
+      XMLROFF_VERSION_EXTRA="-SVN$extra"
   fi
 fi
 
@@ -115,10 +115,9 @@ PKG_PROG_PKG_CONFIG([0.5])
 
 #
 # Checks for GLib
-# We need a minimum of 2.6.0.
-# If >= 2.12.0 is found we can use g_option_context_set_summary().
+# We need a minimum of 2.12.0.
 #
-GLIB_REQUIRED_VERSION=2.6.0
+GLIB_REQUIRED_VERSION=2.12.0
 
 have_glib=false
 PKG_CHECK_MODULES(GLIB,
@@ -132,31 +131,6 @@ if $have_glib ; then : ; else
 *** Glib is always available from ftp://ftp.gtk.org/.
   ])
 fi
-
-# xmlroff.c uses g_option_context_set_summary.  It was introduced in
-# glib 2.12, so need to check for it while minimum required version
-# is less than 2.12.0.
-OLD_CFLAGS="$CFLAGS"
-OLD_LIBS="$LIBS"
-CFLAGS="$CFLAGS $GLIB_CFLAGS"
-LIBS="$LIBS $GLIB_LIBS"
-AH_TEMPLATE([HAVE_G_OPTION_CONTEXT_SET_SUMMARY],
-            [Define to 1 if you have the `g_option_context_set_summary' function.])
-AC_CHECK_LIB([glib-2.0],
-             [g_option_context_set_summary],
-	     have_g_option_context_set_summary=yes)
-if test x$have_g_option_context_set_summary = "xyes" ; then
-  AC_DEFINE(HAVE_G_OPTION_CONTEXT_SET_SUMMARY)
-fi
-dnl Would like to just use AC_CHECK_FUNCS, but you either need to play
-dnl tricks with $LIBS or use AC_CHECK_LIB before using AC_CHECK_FUNCS,
-dnl so it was more obvious to use just AC_CHECK_LIB without AC_CHECK_FUNCS.
-dnl
-dnl AC_CHECK_FUNCS([g_option_context_set_summary])
-
-#GLIB_CFLAGS="-DG_DISABLE_DEPRECATED $GLIB_CFLAGS"
-CFLAGS="$OLD_CFLAGS"
-LIBS="$OLD_LIBS"
 
 dnl **************************
 dnl *** Checks for gtk-doc ***
@@ -185,6 +159,8 @@ PKG_CHECK_MODULES(GTK_DOC,
 		  gtk-doc >= $GTK_DOC_MIN_VERSION,
 		  have_gtk_doc=true,
 		  :)
+AC_MSG_RESULT($have_gtk_doc)
+
 AM_CONDITIONAL(HAVE_GTK_DOC, $have_gtk_doc)
 AC_SUBST(HAVE_GTK_DOC, $have_gtk_doc)
 
@@ -419,7 +395,7 @@ fi
 # Checks for Pango
 #
 PANGO_PACKAGES=
-PANGO_REQUIRED_VERSION=1.10
+PANGO_REQUIRED_VERSION=1.16
 
 if $enable_gp ; then
    PANGO_PACKAGES="$GNOMEPRINT_REQUIRES"
@@ -486,7 +462,7 @@ pixels_per_inch_default=96
 
 AC_ARG_WITH(pixels_per_inch,
 	      AC_HELP_STRING([--with-pixels-per-inch],
-			     [Pixels per inch (default=pixels_per_inch_default)]),
+			     [Pixels per inch (default=96)]),
 	      pixels_per_inch="$withval", :)
 
 if test "x$with_pixels_per_inch" = "x" ; then

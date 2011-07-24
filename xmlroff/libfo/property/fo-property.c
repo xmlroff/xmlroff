@@ -506,10 +506,7 @@ fo_property_new_from_expr_default (FoPropertyClass *property_class,
 				   FoFo *fo_node,
 				   GError **error)
 {
-  FoProperty *property;
-  FoDatatype *datatype;
   GError *tmp_error = NULL;
-  const gchar *property_name = NULL;
 
   g_return_val_if_fail (FO_IS_PROPERTY_CLASS (property_class), NULL);
   g_return_val_if_fail (expr != NULL, NULL);
@@ -520,9 +517,9 @@ fo_property_new_from_expr_default (FoPropertyClass *property_class,
      NULL);
   g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-  property_name = G_OBJECT_CLASS_NAME (property_class);
+  const gchar *property_name = G_OBJECT_CLASS_NAME (property_class);
 
-  datatype =
+  FoDatatype *datatype =
     property_class->expr_eval (expr,
 			       property_name,
 			       property_class->resolve_enum,
@@ -547,7 +544,9 @@ fo_property_new_from_expr_default (FoPropertyClass *property_class,
       return NULL;
     }
 
-  property =
+  g_object_ref_sink (datatype);
+
+  FoProperty *property =
     (FoProperty *) g_object_new (G_OBJECT_CLASS_TYPE (property_class),
 				 "value",
 				 datatype,

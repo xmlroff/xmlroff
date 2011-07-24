@@ -2,7 +2,7 @@
  * fo-keep.c: Keep datatype
  *
  * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
  *
  * See COPYING for the status of this software.
  */
@@ -39,26 +39,26 @@ struct _FoKeepClass
   
 };
 
-static void fo_keep_init         (FoKeep      *keep);
-static void fo_keep_class_init   (FoKeepClass *klass);
-static void fo_keep_set_property (GObject       *object,
-				  guint          prop_id,
-				  const GValue  *value,
-				  GParamSpec    *pspec);
-static void fo_keep_get_property (GObject       *object,
-				  guint          prop_id,
-				  GValue        *value,
-				  GParamSpec    *pspec);
-static void fo_keep_finalize     (GObject       *object);
+static void _init         (FoKeep      *keep);
+static void _class_init   (FoKeepClass *klass);
+static void _set_property (GObject       *object,
+			   guint          prop_id,
+			   const GValue  *value,
+			   GParamSpec    *pspec);
+static void _get_property (GObject       *object,
+			   guint          prop_id,
+			   GValue        *value,
+			   GParamSpec    *pspec);
+static void _dispose      (GObject       *object);
 
-static gchar*      fo_keep_sprintf           (FoObject   *object);
-static FoDatatype* fo_keep_copy              (FoDatatype *datatype);
-static void        fo_keep_set_within_line   (FoDatatype *keep,
-					      FoDatatype *new_within_line);
-static void        fo_keep_set_within_column (FoDatatype *keep,
-					      FoDatatype *new_within_column);
-static void        fo_keep_set_within_page   (FoDatatype *keep,
-					      FoDatatype *new_within_page);
+static gchar*       _sprintf           (FoObject   *object);
+static FoDatatype * _copy              (FoDatatype *datatype);
+static void         _set_within_line   (FoDatatype *keep,
+					FoDatatype *new_within_line);
+static void         _set_within_column (FoDatatype *keep,
+					FoDatatype *new_within_column);
+static void         _set_within_page   (FoDatatype *keep,
+					FoDatatype *new_within_page);
 
 static gpointer parent_class;
 
@@ -81,12 +81,12 @@ fo_keep_get_type (void)
         sizeof (FoKeepClass),
 	NULL,		/* base_init */
 	NULL,		/* base_finalize */
-        (GClassInitFunc) fo_keep_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoKeep),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_keep_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
       
@@ -99,39 +99,42 @@ fo_keep_get_type (void)
 }
 
 /**
- * fo_keep_init:
+ * _init:
  * @keep: #FoKeep object to initialise
  * 
  * Implements GInstanceInitFunc for #FoKeep
  **/
 void
-fo_keep_init (FoKeep *keep)
+_init (FoKeep *keep)
 {
-  keep->within_page = g_object_ref (fo_enum_get_enum_auto ());
-  keep->within_column = g_object_ref (fo_enum_get_enum_auto ());
-  keep->within_line = g_object_ref (fo_enum_get_enum_auto ());
+  keep->within_page =
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
+  keep->within_column =
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
+  keep->within_line =
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
- * fo_keep_class_init:
+ * _class_init:
  * @klass: FoKeepClass object to initialise
  * 
  * Implements GClassInitFunc for FoKeepClass
  **/
 void
-fo_keep_class_init (FoKeepClass *klass)
+_class_init (FoKeepClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_keep_finalize;
+  object_class->dispose = _dispose;
 
-  object_class->set_property = fo_keep_set_property;
-  object_class->get_property = fo_keep_get_property;
+  object_class->set_property = _set_property;
+  object_class->get_property = _get_property;
 
-  FO_DATATYPE_CLASS (klass)->copy = fo_keep_copy;
-  FO_OBJECT_CLASS (klass)->print_sprintf = fo_keep_sprintf;
+  FO_DATATYPE_CLASS (klass)->copy = _copy;
+  FO_OBJECT_CLASS (klass)->print_sprintf = _sprintf;
 
   g_object_class_install_property (object_class,
                                    PROP_WITHIN_LINE,
@@ -164,60 +167,40 @@ fo_keep_class_init (FoKeepClass *klass)
 }
 
 /**
- * fo_keep_finalize:
- * @object: FoKeep object to finalize
+ * _dispose:
+ * @object: FoKeep object to dispose
  * 
- * Implements GObjectFinalizeFunc for FoKeep
+ * Implements GObjectDisposeFunc for FoKeep
  **/
 void
-fo_keep_finalize (GObject *object)
+_dispose (GObject *object)
 {
-  FoKeep *keep;
+  FoKeep *keep = FO_KEEP (object);
 
-  keep = FO_KEEP (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-
-/**
- * fo_keep_set_property:
- * @object:  GObject whose property will be set
- * @prop_id: Property ID assigned when property registered
- * @value:   New value for property
- * @pspec:   Parameter specification for this property type
- * 
- * Implements #GObjectSetPropertyFunc for FoKeep
- **/
-void
-fo_keep_set_property (GObject         *object,
-                         guint            prop_id,
-                         const GValue    *value,
-                         GParamSpec      *pspec)
-{
-  FoDatatype *keep;
-
-  keep = FO_DATATYPE (object);
-
-  switch (prop_id)
+  if (keep->within_page != NULL)
     {
-    case PROP_WITHIN_LINE:
-      fo_keep_set_within_line (keep, g_value_get_object (value));
-      break;
-    case PROP_WITHIN_COLUMN:
-      fo_keep_set_within_column (keep, g_value_get_object (value));
-      break;
-    case PROP_WITHIN_PAGE:
-      fo_keep_set_within_page (keep, g_value_get_object (value));
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
+      g_object_unref (keep->within_page);
+      keep->within_page = NULL;
     }
+
+  if (keep->within_column != NULL)
+    {
+      g_object_unref (keep->within_column);
+      keep->within_column = NULL;
+    }
+
+  if (keep->within_line != NULL)
+    {
+      g_object_unref (keep->within_line);
+      keep->within_line = NULL;
+    }
+
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
+
 /**
- * fo_keep_get_property:
+ * _get_property:
  * @object:  GObject whose property will be retreived
  * @prop_id: Property ID assigned when property registered
  * @value:   GValue to set with property value
@@ -226,10 +209,10 @@ fo_keep_set_property (GObject         *object,
  * Implements #GObjectGetPropertyFunc for FoKeep
  **/
 void
-fo_keep_get_property (GObject         *object,
-                         guint            prop_id,
-                         GValue          *value,
-                         GParamSpec      *pspec)
+_get_property (GObject         *object,
+	       guint            prop_id,
+	       GValue          *value,
+	       GParamSpec      *pspec)
 {
   FoDatatype *keep;
 
@@ -253,6 +236,42 @@ fo_keep_get_property (GObject         *object,
 }
 
 /**
+ * _set_property:
+ * @object:  GObject whose property will be set
+ * @prop_id: Property ID assigned when property registered
+ * @value:   New value for property
+ * @pspec:   Parameter specification for this property type
+ * 
+ * Implements #GObjectSetPropertyFunc for FoKeep
+ **/
+void
+_set_property (GObject         *object,
+	       guint            prop_id,
+	       const GValue    *value,
+	       GParamSpec      *pspec)
+{
+  FoDatatype *keep;
+
+  keep = FO_DATATYPE (object);
+
+  switch (prop_id)
+    {
+    case PROP_WITHIN_LINE:
+      _set_within_line (keep, g_value_get_object (value));
+      break;
+    case PROP_WITHIN_COLUMN:
+      _set_within_column (keep, g_value_get_object (value));
+      break;
+    case PROP_WITHIN_PAGE:
+      _set_within_page (keep, g_value_get_object (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+/**
  * fo_keep_new:
  * 
  * Creates a new #FoKeep initialized to default value.
@@ -262,18 +281,8 @@ fo_keep_get_property (GObject         *object,
 FoDatatype *
 fo_keep_new (void)
 {
-  FoDatatype *keep;
-
-  keep = FO_DATATYPE (g_object_new (fo_keep_get_type (),
-				    "within-page",
-				    fo_enum_get_enum_auto (),
-				    "within-column",
-				    fo_enum_get_enum_auto (),
-				    "within-line",
-				    fo_enum_get_enum_auto (),
+  return FO_DATATYPE (g_object_new (fo_keep_get_type (),
 				    NULL));
-  
-  return keep;
 }
 
 /**
@@ -284,14 +293,14 @@ fo_keep_new (void)
  * 
  * Return value: The new #FoKeep
  **/
-FoDatatype*
+FoDatatype *
 fo_keep_new_with_value (FoDatatype *value)
 {
   FoDatatype *keep = fo_keep_new ();
 
-  fo_keep_set_within_page (keep, value);
-  fo_keep_set_within_column (keep, value);
-  fo_keep_set_within_line (keep, value);
+  _set_within_page (keep, value);
+  _set_within_column (keep, value);
+  _set_within_line (keep, value);
 
   return keep;
 }
@@ -325,46 +334,18 @@ fo_keep_get_keep_auto (void)
  * 
  * Return value: The new #FoKeep
  **/
-FoDatatype*
+FoDatatype *
 fo_keep_get_keep_always (void)
 {
   static FoDatatype *keep = NULL;
 
   if (keep == NULL)
     {
-      keep = fo_keep_new ();
-
-      fo_keep_set_within_page (keep, fo_enum_get_always ());
-      fo_keep_set_within_column (keep, fo_enum_get_always ());
-      fo_keep_set_within_line (keep, fo_enum_get_always());
+      keep =
+	fo_keep_new_with_value (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_ALWAYS));
     }
 
   return keep;
-}
-
-/**
- * fo_keep_set_within_page:
- * @datatype:     #FoKeep
- * @new_within_page:  New .within-page value
- * 
- * Sets the .within-page component of @datatype
- **/
-void
-fo_keep_set_within_page (FoDatatype *datatype,
-			     FoDatatype *new_within_page)
-{
-  FoKeep *keep = (FoKeep *) datatype;
-
-  g_return_if_fail (keep != NULL);
-  g_return_if_fail (FO_IS_KEEP (keep));
-  g_return_if_fail (FO_IS_DATATYPE (new_within_page));
-
-  if (new_within_page)
-    g_object_ref (G_OBJECT (new_within_page));
-  if (keep->within_page)
-    g_object_unref (G_OBJECT (keep->within_page));
-  keep->within_page = new_within_page;
-  /*g_object_notify(G_OBJECT(keep), "within-page");*/
 }
 
 /**
@@ -375,7 +356,7 @@ fo_keep_set_within_page (FoDatatype *datatype,
  * 
  * Return value: The .within-page value of @datatype
  **/
-FoDatatype*
+FoDatatype *
 fo_keep_get_within_page (FoDatatype *datatype)
 {
   g_return_val_if_fail (datatype != NULL, NULL);
@@ -385,28 +366,34 @@ fo_keep_get_within_page (FoDatatype *datatype)
 }
 
 /**
- * fo_keep_set_within_column:
+ * _set_within_page:
  * @datatype:     #FoKeep
- * @new_within_column:  New .within-column value
+ * @new_within_page:  New .within-page value
  * 
- * Sets the .within-column component of @datatype
+ * Sets the .within-page component of @datatype
  **/
-void
-fo_keep_set_within_column (FoDatatype *datatype,
-			     FoDatatype *new_within_column)
+static void
+_set_within_page (FoDatatype *datatype,
+		  FoDatatype *new_within_page)
 {
   FoKeep *keep = (FoKeep *) datatype;
 
   g_return_if_fail (keep != NULL);
   g_return_if_fail (FO_IS_KEEP (keep));
-  g_return_if_fail (FO_IS_DATATYPE (new_within_column));
+  g_return_if_fail ((new_within_page == NULL) ||
+		    FO_IS_DATATYPE (new_within_page));
 
-  if (new_within_column)
-    g_object_ref (G_OBJECT (new_within_column));
-  if (keep->within_column)
-    g_object_unref (G_OBJECT (keep->within_column));
-  keep->within_column = new_within_column;
-  /*g_object_notify(G_OBJECT(keep), "within-column");*/
+  if (new_within_page != NULL)
+    {
+      g_object_ref (new_within_page);
+    }
+  if (keep->within_page != NULL)
+    {
+      g_object_unref (keep->within_page);
+    }
+
+  keep->within_page = new_within_page;
+  /*g_object_notify(G_OBJECT(keep), "within-page");*/
 }
 
 /**
@@ -417,7 +404,7 @@ fo_keep_set_within_column (FoDatatype *datatype,
  * 
  * Return value: The .within-column value of @datatype
  **/
-FoDatatype*
+FoDatatype *
 fo_keep_get_within_column (FoDatatype *datatype)
 {
   g_return_val_if_fail (datatype != NULL, NULL);
@@ -427,28 +414,35 @@ fo_keep_get_within_column (FoDatatype *datatype)
 }
 
 /**
- * fo_keep_set_within_line:
+ * _set_within_column:
  * @datatype:     #FoKeep
- * @new_within_line:  New .within-line value
+ * @new_within_column:  New .within-column value
  * 
- * Sets the .within-line component of @datatype
+ * Sets the .within-column component of @datatype
  **/
-void
-fo_keep_set_within_line (FoDatatype *datatype,
-			 FoDatatype *new_within_line)
+static void
+_set_within_column (FoDatatype *datatype,
+		    FoDatatype *new_within_column)
 {
   FoKeep *keep = (FoKeep *) datatype;
 
   g_return_if_fail (keep != NULL);
   g_return_if_fail (FO_IS_KEEP (keep));
-  g_return_if_fail (FO_IS_DATATYPE (new_within_line));
+  g_return_if_fail ((new_within_column == NULL) ||
+		    FO_IS_DATATYPE (new_within_column));
 
-  if (new_within_line)
-    g_object_ref (G_OBJECT (new_within_line));
-  if (keep->within_line)
-    g_object_unref (G_OBJECT (keep->within_line));
-  keep->within_line = new_within_line;
-  /*g_object_notify(G_OBJECT(keep), "within-line");*/
+  if (new_within_column != NULL)
+    {
+      g_object_ref (new_within_column);
+    }
+
+  if (keep->within_column != NULL)
+    {
+      g_object_unref (keep->within_column);
+    }
+
+  keep->within_column = new_within_column;
+  /*g_object_notify(G_OBJECT(keep), "within-column");*/
 }
 
 /**
@@ -459,7 +453,7 @@ fo_keep_set_within_line (FoDatatype *datatype,
  * 
  * Return value: The .within-line value of @datatype
  **/
-FoDatatype*
+FoDatatype *
 fo_keep_get_within_line (FoDatatype *datatype)
 {
   g_return_val_if_fail (datatype != NULL, NULL);
@@ -468,28 +462,78 @@ fo_keep_get_within_line (FoDatatype *datatype)
   return FO_KEEP (datatype)->within_line;
 }
 
-gchar*
-fo_keep_sprintf (FoObject *object)
+/**
+ * _set_within_line:
+ * @datatype:     #FoKeep
+ * @new_within_line:  New .within-line value
+ * 
+ * Sets the .within-line component of @datatype
+ **/
+static void
+_set_within_line (FoDatatype *datatype,
+		  FoDatatype *new_within_line)
+{
+  FoKeep *keep = (FoKeep *) datatype;
+
+  g_return_if_fail (keep != NULL);
+  g_return_if_fail (FO_IS_KEEP (keep));
+  g_return_if_fail ((new_within_line == NULL) ||
+		    FO_IS_DATATYPE (new_within_line));
+
+  if (new_within_line != NULL)
+    {
+      g_object_ref (new_within_line);
+    }
+
+  if (keep->within_line != NULL)
+    {
+      g_object_unref (keep->within_line);
+    }
+
+  keep->within_line = new_within_line;
+  /*g_object_notify(G_OBJECT(keep), "within-line");*/
+}
+
+/**
+ * _sprintf:
+ * @object: 
+ *
+ * 
+ *
+ * Returns: 
+ **/
+static gchar*
+_sprintf (FoObject *object)
 {
   g_return_val_if_fail (object != NULL, NULL);
   g_return_val_if_fail (FO_IS_KEEP (object), NULL);
 
-  return g_strdup_printf ("page: %s; column: %s; line: %s",
-			  fo_object_sprintf (FO_KEEP (object)->within_page),
-			  fo_object_sprintf (FO_KEEP (object)->within_column),
-			  fo_object_sprintf (FO_KEEP (object)->within_line));
+  gchar *within_page = fo_object_sprintf (FO_KEEP (object)->within_page);
+  gchar *within_column = fo_object_sprintf (FO_KEEP (object)->within_column);
+  gchar *within_line = fo_object_sprintf (FO_KEEP (object)->within_line);
+
+  gchar *string = g_strdup_printf ("page: %s; column: %s; line: %s",
+				   within_page,
+				   within_column,
+				   within_line);
+
+  g_free (within_line);
+  g_free (within_column);
+  g_free (within_page);
+
+  return string;
 }
 
 /**
- * fo_keep_copy:
+ * _copy:
  * @datatype: Source #FoKeep
  * 
  * Creates a copy of @datatype
  * 
  * Return value: Copy of @datatype
  **/
-FoDatatype*
-fo_keep_copy (FoDatatype *datatype)
+static FoDatatype *
+_copy (FoDatatype *datatype)
 {
   FoDatatype* keep;
 
@@ -525,7 +569,7 @@ fo_keep_copy (FoDatatype *datatype)
  * Return value: Compound keep datatype, or NULL if an error
  *               occurred
  **/
-FoDatatype*
+FoDatatype *
 fo_keep_resolve (FoDatatype *shortform,
 		 FoDatatype *within_line,
 		 FoDatatype *within_column,
@@ -540,20 +584,26 @@ fo_keep_resolve (FoDatatype *shortform,
   g_return_val_if_fail (within_line == NULL ||
 			FO_IS_INTEGER (within_line) ||
 			(FO_IS_ENUM (within_line) &&
-			 ((fo_enum_get_value (within_line) == FO_ENUM_ENUM_AUTO) ||
-			  (fo_enum_get_value (within_line) == FO_ENUM_ENUM_ALWAYS))),
+			 ((fo_enum_get_value (within_line) ==
+			   FO_ENUM_ENUM_AUTO) ||
+			  (fo_enum_get_value (within_line) ==
+			   FO_ENUM_ENUM_ALWAYS))),
 			NULL);
   g_return_val_if_fail (within_column == NULL ||
 			FO_IS_INTEGER (within_column) ||
 			(FO_IS_ENUM (within_column) &&
-			 ((fo_enum_get_value (within_column) == FO_ENUM_ENUM_AUTO) ||
-			  (fo_enum_get_value (within_column) == FO_ENUM_ENUM_ALWAYS))),
+			 ((fo_enum_get_value (within_column) ==
+			   FO_ENUM_ENUM_AUTO) ||
+			  (fo_enum_get_value (within_column) ==
+			   FO_ENUM_ENUM_ALWAYS))),
 			NULL);
   g_return_val_if_fail (within_page == NULL ||
 			FO_IS_INTEGER (within_page) ||
 			(FO_IS_ENUM (within_page) &&
-			 ((fo_enum_get_value (within_page) == FO_ENUM_ENUM_AUTO) ||
-			  (fo_enum_get_value (within_page) == FO_ENUM_ENUM_ALWAYS))),
+			 ((fo_enum_get_value (within_page) ==
+			   FO_ENUM_ENUM_AUTO) ||
+			  (fo_enum_get_value (within_page) ==
+			   FO_ENUM_ENUM_ALWAYS))),
 			NULL);
 
   if (FO_IS_KEEP (shortform) &&
@@ -571,25 +621,25 @@ fo_keep_resolve (FoDatatype *shortform,
 	}
       else
 	{
-	  use_keep = fo_keep_copy (shortform);
+	  use_keep = _copy (shortform);
 	}
 
       if (within_line != NULL)
 	{
-	  fo_keep_set_within_line (use_keep,
-				   within_line);
+	  _set_within_line (use_keep,
+			    within_line);
 	}
 
       if (within_column != NULL)
 	{
-	  fo_keep_set_within_column (use_keep,
-				     within_column);
+	  _set_within_column (use_keep,
+			      within_column);
 	}
 
       if (within_page != NULL)
 	{
-	  fo_keep_set_within_page (use_keep,
-				   within_page);
+	  _set_within_page (use_keep,
+			    within_page);
 	}
     }
 

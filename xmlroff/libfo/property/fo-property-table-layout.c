@@ -92,7 +92,7 @@ void
 fo_property_table_layout_init (FoPropertyTableLayout *table_layout)
 {
   FO_PROPERTY (table_layout)->value =
-    g_object_ref (fo_enum_get_enum_auto ());
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_AUTO));
 }
 
 /**
@@ -184,7 +184,7 @@ fo_property_table_layout_resolve_enum (const gchar *token,
   if ((strcmp (token, "auto") == 0) ||
       (strcmp (token, "fixed") == 0))
     {
-      return g_object_ref (fo_enum_get_enum_by_nick (token));
+      return g_object_ref (fo_enum_factory_get_enum_by_nick (token));
     }
   else
     {

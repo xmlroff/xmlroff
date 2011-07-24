@@ -2,7 +2,8 @@
  * fo-context.h: Context formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -36,8 +37,8 @@ void fo_context_merge (FoContext *primary,
 		       FoContext *secondary);
 void fo_context_update_from_slist (FoContext *context,
 				   GSList *property_list);
-void fo_context_debug_dump_properties (FoContext *fo_context,
-                                       gint       depth);
+void fo_context_debug_dump (FoObject *fo_context,
+			    gint      depth);
 
 FoProperty * fo_context_get_alignment_adjust (FoContext  *fo_context);
 void         fo_context_set_alignment_adjust (FoContext  *fo_context,
@@ -54,6 +55,9 @@ void         fo_context_set_background_image (FoContext  *fo_context,
 FoProperty * fo_context_get_baseline_shift (FoContext  *fo_context);
 void         fo_context_set_baseline_shift (FoContext  *fo_context,
                                             FoProperty *new_baseline_shift);
+FoProperty * fo_context_get_blank_or_not_blank (FoContext  *fo_context);
+void         fo_context_set_blank_or_not_blank (FoContext  *fo_context,
+                                                FoProperty *new_blank_or_not_blank);
 FoProperty * fo_context_get_block_progression_dimension (FoContext  *fo_context);
 void         fo_context_set_block_progression_dimension (FoContext  *fo_context,
                                                          FoProperty *new_block_progression_dimension);
@@ -210,6 +214,9 @@ void         fo_context_set_content_type (FoContext  *fo_context,
 FoProperty * fo_context_get_content_width (FoContext  *fo_context);
 void         fo_context_set_content_width (FoContext  *fo_context,
                                            FoProperty *new_content_width);
+FoProperty * fo_context_get_country (FoContext  *fo_context);
+void         fo_context_set_country (FoContext  *fo_context,
+                                     FoProperty *new_country);
 FoProperty * fo_context_get_direction (FoContext  *fo_context);
 void         fo_context_set_direction (FoContext  *fo_context,
                                        FoProperty *new_direction);
@@ -246,6 +253,9 @@ void         fo_context_set_font_variant (FoContext  *fo_context,
 FoProperty * fo_context_get_font_weight (FoContext  *fo_context);
 void         fo_context_set_font_weight (FoContext  *fo_context,
                                          FoProperty *new_font_weight);
+FoProperty * fo_context_get_force_page_count (FoContext  *fo_context);
+void         fo_context_set_force_page_count (FoContext  *fo_context,
+                                              FoProperty *new_force_page_count);
 FoProperty * fo_context_get_format (FoContext  *fo_context);
 void         fo_context_set_format (FoContext  *fo_context,
                                     FoProperty *new_format);
@@ -261,6 +271,9 @@ void         fo_context_set_height (FoContext  *fo_context,
 FoProperty * fo_context_get_id (FoContext  *fo_context);
 void         fo_context_set_id (FoContext  *fo_context,
                                 FoProperty *new_id);
+FoProperty * fo_context_get_initial_page_number (FoContext  *fo_context);
+void         fo_context_set_initial_page_number (FoContext  *fo_context,
+                                                 FoProperty *new_initial_page_number);
 FoProperty * fo_context_get_inline_progression_dimension (FoContext  *fo_context);
 void         fo_context_set_inline_progression_dimension (FoContext  *fo_context,
                                                           FoProperty *new_inline_progression_dimension);
@@ -309,6 +322,9 @@ void         fo_context_set_keep_with_previous_within_line (FoContext  *fo_conte
 FoProperty * fo_context_get_keep_with_previous_within_page (FoContext  *fo_context);
 void         fo_context_set_keep_with_previous_within_page (FoContext  *fo_context,
                                                             FoProperty *new_keep_with_previous_within_page);
+FoProperty * fo_context_get_language (FoContext  *fo_context);
+void         fo_context_set_language (FoContext  *fo_context,
+                                      FoProperty *new_language);
 FoProperty * fo_context_get_letter_value (FoContext  *fo_context);
 void         fo_context_set_letter_value (FoContext  *fo_context,
                                           FoProperty *new_letter_value);
@@ -342,6 +358,9 @@ void         fo_context_set_master_name (FoContext  *fo_context,
 FoProperty * fo_context_get_master_reference (FoContext  *fo_context);
 void         fo_context_set_master_reference (FoContext  *fo_context,
                                               FoProperty *new_master_reference);
+FoProperty * fo_context_get_maximum_repeats (FoContext  *fo_context);
+void         fo_context_set_maximum_repeats (FoContext  *fo_context,
+                                             FoProperty *new_maximum_repeats);
 FoProperty * fo_context_get_media_usage (FoContext  *fo_context);
 void         fo_context_set_media_usage (FoContext  *fo_context,
                                          FoProperty *new_media_usage);
@@ -354,6 +373,9 @@ void         fo_context_set_number_columns_spanned (FoContext  *fo_context,
 FoProperty * fo_context_get_number_rows_spanned (FoContext  *fo_context);
 void         fo_context_set_number_rows_spanned (FoContext  *fo_context,
                                                  FoProperty *new_number_rows_spanned);
+FoProperty * fo_context_get_odd_or_even (FoContext  *fo_context);
+void         fo_context_set_odd_or_even (FoContext  *fo_context,
+                                         FoProperty *new_odd_or_even);
 FoProperty * fo_context_get_orphans (FoContext  *fo_context);
 void         fo_context_set_orphans (FoContext  *fo_context,
                                      FoProperty *new_orphans);
@@ -414,9 +436,15 @@ void         fo_context_set_padding_top (FoContext  *fo_context,
 FoProperty * fo_context_get_page_height (FoContext  *fo_context);
 void         fo_context_set_page_height (FoContext  *fo_context,
                                          FoProperty *new_page_height);
+FoProperty * fo_context_get_page_position (FoContext  *fo_context);
+void         fo_context_set_page_position (FoContext  *fo_context,
+                                           FoProperty *new_page_position);
 FoProperty * fo_context_get_page_width (FoContext  *fo_context);
 void         fo_context_set_page_width (FoContext  *fo_context,
                                         FoProperty *new_page_width);
+FoProperty * fo_context_get_precedence (FoContext  *fo_context);
+void         fo_context_set_precedence (FoContext  *fo_context,
+                                        FoProperty *new_precedence);
 FoProperty * fo_context_get_provisional_distance_between_starts (FoContext  *fo_context);
 void         fo_context_set_provisional_distance_between_starts (FoContext  *fo_context,
                                                                  FoProperty *new_provisional_distance_between_starts);
@@ -426,6 +454,9 @@ void         fo_context_set_provisional_label_separation (FoContext  *fo_context
 FoProperty * fo_context_get_ref_id (FoContext  *fo_context);
 void         fo_context_set_ref_id (FoContext  *fo_context,
                                     FoProperty *new_ref_id);
+FoProperty * fo_context_get_reference_orientation (FoContext  *fo_context);
+void         fo_context_set_reference_orientation (FoContext  *fo_context,
+                                                   FoProperty *new_reference_orientation);
 FoProperty * fo_context_get_region_name (FoContext  *fo_context);
 void         fo_context_set_region_name (FoContext  *fo_context,
                                          FoProperty *new_region_name);

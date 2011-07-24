@@ -2,7 +2,8 @@
  * fo-context.c: Context formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -21,6 +22,7 @@ enum {
   PROP_BACKGROUND_COLOR,
   PROP_BACKGROUND_IMAGE,
   PROP_BASELINE_SHIFT,
+  PROP_BLANK_OR_NOT_BLANK,
   PROP_BLOCK_PROGRESSION_DIMENSION,
   PROP_BLOCK_PROGRESSION_DIMENSION_MINIMUM,
   PROP_BLOCK_PROGRESSION_DIMENSION_OPTIMUM,
@@ -73,6 +75,7 @@ enum {
   PROP_CONTENT_HEIGHT,
   PROP_CONTENT_TYPE,
   PROP_CONTENT_WIDTH,
+  PROP_COUNTRY,
   PROP_DIRECTION,
   PROP_DISPLAY_ALIGN,
   PROP_DOMINANT_BASELINE,
@@ -85,11 +88,13 @@ enum {
   PROP_FONT_STYLE,
   PROP_FONT_VARIANT,
   PROP_FONT_WEIGHT,
+  PROP_FORCE_PAGE_COUNT,
   PROP_FORMAT,
   PROP_GROUPING_SEPARATOR,
   PROP_GROUPING_SIZE,
   PROP_HEIGHT,
   PROP_ID,
+  PROP_INITIAL_PAGE_NUMBER,
   PROP_INLINE_PROGRESSION_DIMENSION,
   PROP_INLINE_PROGRESSION_DIMENSION_MINIMUM,
   PROP_INLINE_PROGRESSION_DIMENSION_OPTIMUM,
@@ -106,6 +111,7 @@ enum {
   PROP_KEEP_WITH_PREVIOUS_WITHIN_COLUMN,
   PROP_KEEP_WITH_PREVIOUS_WITHIN_LINE,
   PROP_KEEP_WITH_PREVIOUS_WITHIN_PAGE,
+  PROP_LANGUAGE,
   PROP_LETTER_VALUE,
   PROP_LINE_HEIGHT,
   PROP_LINE_STACKING_STRATEGY,
@@ -117,10 +123,12 @@ enum {
   PROP_MARGIN_TOP,
   PROP_MASTER_NAME,
   PROP_MASTER_REFERENCE,
+  PROP_MAXIMUM_REPEATS,
   PROP_MEDIA_USAGE,
   PROP_NUMBER_COLUMNS_REPEATED,
   PROP_NUMBER_COLUMNS_SPANNED,
   PROP_NUMBER_ROWS_SPANNED,
+  PROP_ODD_OR_EVEN,
   PROP_ORPHANS,
   PROP_OVERFLOW,
   PROP_PADDING,
@@ -141,10 +149,13 @@ enum {
   PROP_PADDING_START_CONDITY,
   PROP_PADDING_TOP,
   PROP_PAGE_HEIGHT,
+  PROP_PAGE_POSITION,
   PROP_PAGE_WIDTH,
+  PROP_PRECEDENCE,
   PROP_PROVISIONAL_DISTANCE_BETWEEN_STARTS,
   PROP_PROVISIONAL_LABEL_SEPARATION,
   PROP_REF_ID,
+  PROP_REFERENCE_ORIENTATION,
   PROP_REGION_NAME,
   PROP_ROLE,
   PROP_SCALING,
@@ -199,12 +210,12 @@ static void fo_context_get_property (GObject        *object,
 				     guint           prop_id,
 				     GValue         *value,
 				     GParamSpec     *pspec);
-static void fo_context_finalize     (GObject        *object);
+static void _dispose     (GObject        *object);
 
-static void fo_context_property_slist_foreach (gpointer   property,
-					       gpointer   context);
-static void fo_context_debug_dump             (FoObject  *object,
-					       gint       depth);
+static void fo_context_property_slist_foreach (gpointer    property,
+					       gpointer    context);
+static void _debug_dump_properties            (FoContext  *object,
+					       gint        depth);
 
 static gpointer parent_class;
 
@@ -255,327 +266,347 @@ void
 fo_context_initialize (FoContext *context)
 {
   context->alignment_adjust =
-    g_object_ref (fo_property_alignment_adjust_get_initial ());
+    g_object_ref_sink (fo_property_alignment_adjust_get_initial ());
   context->alignment_baseline =
-    g_object_ref (fo_property_alignment_baseline_get_initial ());
+    g_object_ref_sink (fo_property_alignment_baseline_get_initial ());
   context->background_color =
-    g_object_ref (fo_property_background_color_get_initial ());
+    g_object_ref_sink (fo_property_background_color_get_initial ());
   context->background_image =
-    g_object_ref (fo_property_background_image_get_initial ());
+    g_object_ref_sink (fo_property_background_image_get_initial ());
   context->baseline_shift =
-    g_object_ref (fo_property_baseline_shift_get_initial ());
+    g_object_ref_sink (fo_property_baseline_shift_get_initial ());
+  context->blank_or_not_blank =
+    g_object_ref_sink (fo_property_blank_or_not_blank_get_initial ());
   context->block_progression_dimension =
-    g_object_ref (fo_property_block_progression_dimension_get_initial ());
+    g_object_ref_sink (fo_property_block_progression_dimension_get_initial ());
   context->block_progression_dimension_minimum = NULL;
   context->block_progression_dimension_optimum = NULL;
   context->block_progression_dimension_maximum = NULL;
   context->border =
-    g_object_ref (fo_property_border_get_initial ());
+    g_object_ref_sink (fo_property_border_get_initial ());
   context->border_after_color =
-    g_object_ref (fo_property_border_after_color_get_initial ());
+    g_object_ref_sink (fo_property_border_after_color_get_initial ());
   context->border_after_precedence =
-    g_object_ref (fo_property_border_after_precedence_get_initial ());
+    g_object_ref_sink (fo_property_border_after_precedence_get_initial ());
   context->border_after_style =
-    g_object_ref (fo_property_border_after_style_get_initial ());
+    g_object_ref_sink (fo_property_border_after_style_get_initial ());
   context->border_after_width =
-    g_object_ref (fo_property_border_after_width_get_initial ());
+    g_object_ref_sink (fo_property_border_after_width_get_initial ());
   context->border_before_color =
-    g_object_ref (fo_property_border_before_color_get_initial ());
+    g_object_ref_sink (fo_property_border_before_color_get_initial ());
   context->border_before_precedence =
-    g_object_ref (fo_property_border_before_precedence_get_initial ());
+    g_object_ref_sink (fo_property_border_before_precedence_get_initial ());
   context->border_before_style =
-    g_object_ref (fo_property_border_before_style_get_initial ());
+    g_object_ref_sink (fo_property_border_before_style_get_initial ());
   context->border_before_width =
-    g_object_ref (fo_property_border_before_width_get_initial ());
+    g_object_ref_sink (fo_property_border_before_width_get_initial ());
   context->border_bottom =
-    g_object_ref (fo_property_border_bottom_get_initial ());
+    g_object_ref_sink (fo_property_border_bottom_get_initial ());
   context->border_bottom_color =
-    g_object_ref (fo_property_border_bottom_color_get_initial ());
+    g_object_ref_sink (fo_property_border_bottom_color_get_initial ());
   context->border_bottom_style =
-    g_object_ref (fo_property_border_bottom_style_get_initial ());
+    g_object_ref_sink (fo_property_border_bottom_style_get_initial ());
   context->border_bottom_width =
-    g_object_ref (fo_property_border_bottom_width_get_initial ());
+    g_object_ref_sink (fo_property_border_bottom_width_get_initial ());
   context->border_collapse =
-    g_object_ref (fo_property_border_collapse_get_initial ());
+    g_object_ref_sink (fo_property_border_collapse_get_initial ());
   context->border_color =
-    g_object_ref (fo_property_border_color_get_initial ());
+    g_object_ref_sink (fo_property_border_color_get_initial ());
   context->border_end_color =
-    g_object_ref (fo_property_border_end_color_get_initial ());
+    g_object_ref_sink (fo_property_border_end_color_get_initial ());
   context->border_end_precedence =
-    g_object_ref (fo_property_border_end_precedence_get_initial ());
+    g_object_ref_sink (fo_property_border_end_precedence_get_initial ());
   context->border_end_style =
-    g_object_ref (fo_property_border_end_style_get_initial ());
+    g_object_ref_sink (fo_property_border_end_style_get_initial ());
   context->border_end_width =
-    g_object_ref (fo_property_border_end_width_get_initial ());
+    g_object_ref_sink (fo_property_border_end_width_get_initial ());
   context->border_left =
-    g_object_ref (fo_property_border_left_get_initial ());
+    g_object_ref_sink (fo_property_border_left_get_initial ());
   context->border_left_color =
-    g_object_ref (fo_property_border_left_color_get_initial ());
+    g_object_ref_sink (fo_property_border_left_color_get_initial ());
   context->border_left_style =
-    g_object_ref (fo_property_border_left_style_get_initial ());
+    g_object_ref_sink (fo_property_border_left_style_get_initial ());
   context->border_left_width =
-    g_object_ref (fo_property_border_left_width_get_initial ());
+    g_object_ref_sink (fo_property_border_left_width_get_initial ());
   context->border_right =
-    g_object_ref (fo_property_border_right_get_initial ());
+    g_object_ref_sink (fo_property_border_right_get_initial ());
   context->border_right_color =
-    g_object_ref (fo_property_border_right_color_get_initial ());
+    g_object_ref_sink (fo_property_border_right_color_get_initial ());
   context->border_right_style =
-    g_object_ref (fo_property_border_right_style_get_initial ());
+    g_object_ref_sink (fo_property_border_right_style_get_initial ());
   context->border_right_width =
-    g_object_ref (fo_property_border_right_width_get_initial ());
+    g_object_ref_sink (fo_property_border_right_width_get_initial ());
   context->border_separation =
-    g_object_ref (fo_property_border_separation_get_initial ());
+    g_object_ref_sink (fo_property_border_separation_get_initial ());
   context->border_start_color =
-    g_object_ref (fo_property_border_start_color_get_initial ());
+    g_object_ref_sink (fo_property_border_start_color_get_initial ());
   context->border_start_precedence =
-    g_object_ref (fo_property_border_start_precedence_get_initial ());
+    g_object_ref_sink (fo_property_border_start_precedence_get_initial ());
   context->border_start_style =
-    g_object_ref (fo_property_border_start_style_get_initial ());
+    g_object_ref_sink (fo_property_border_start_style_get_initial ());
   context->border_start_width =
-    g_object_ref (fo_property_border_start_width_get_initial ());
+    g_object_ref_sink (fo_property_border_start_width_get_initial ());
   context->border_style =
-    g_object_ref (fo_property_border_style_get_initial ());
+    g_object_ref_sink (fo_property_border_style_get_initial ());
   context->border_top =
-    g_object_ref (fo_property_border_top_get_initial ());
+    g_object_ref_sink (fo_property_border_top_get_initial ());
   context->border_top_color =
-    g_object_ref (fo_property_border_top_color_get_initial ());
+    g_object_ref_sink (fo_property_border_top_color_get_initial ());
   context->border_top_style =
-    g_object_ref (fo_property_border_top_style_get_initial ());
+    g_object_ref_sink (fo_property_border_top_style_get_initial ());
   context->border_top_width =
-    g_object_ref (fo_property_border_top_width_get_initial ());
+    g_object_ref_sink (fo_property_border_top_width_get_initial ());
   context->border_width =
-    g_object_ref (fo_property_border_width_get_initial ());
+    g_object_ref_sink (fo_property_border_width_get_initial ());
   context->break_after =
-    g_object_ref (fo_property_break_after_get_initial ());
+    g_object_ref_sink (fo_property_break_after_get_initial ());
   context->break_before =
-    g_object_ref (fo_property_break_before_get_initial ());
+    g_object_ref_sink (fo_property_break_before_get_initial ());
   context->character =
-    g_object_ref (fo_property_character_get_initial ());
+    g_object_ref_sink (fo_property_character_get_initial ());
   context->clip =
-    g_object_ref (fo_property_clip_get_initial ());
+    g_object_ref_sink (fo_property_clip_get_initial ());
   context->color =
-    g_object_ref (fo_property_color_get_initial ());
+    g_object_ref_sink (fo_property_color_get_initial ());
   context->column_number =
-    g_object_ref (fo_property_column_number_get_initial ());
+    g_object_ref_sink (fo_property_column_number_get_initial ());
   context->column_width =
-    g_object_ref (fo_property_column_width_get_initial ());
+    g_object_ref_sink (fo_property_column_width_get_initial ());
   context->content_height =
-    g_object_ref (fo_property_content_height_get_initial ());
+    g_object_ref_sink (fo_property_content_height_get_initial ());
   context->content_type =
-    g_object_ref (fo_property_content_type_get_initial ());
+    g_object_ref_sink (fo_property_content_type_get_initial ());
   context->content_width =
-    g_object_ref (fo_property_content_width_get_initial ());
+    g_object_ref_sink (fo_property_content_width_get_initial ());
+  context->country =
+    g_object_ref_sink (fo_property_country_get_initial ());
   context->direction =
-    g_object_ref (fo_property_direction_get_initial ());
+    g_object_ref_sink (fo_property_direction_get_initial ());
   context->display_align =
-    g_object_ref (fo_property_display_align_get_initial ());
+    g_object_ref_sink (fo_property_display_align_get_initial ());
   context->dominant_baseline =
-    g_object_ref (fo_property_dominant_baseline_get_initial ());
+    g_object_ref_sink (fo_property_dominant_baseline_get_initial ());
   context->end_indent =
-    g_object_ref (fo_property_end_indent_get_initial ());
+    g_object_ref_sink (fo_property_end_indent_get_initial ());
   context->extent =
-    g_object_ref (fo_property_extent_get_initial ());
+    g_object_ref_sink (fo_property_extent_get_initial ());
   context->flow_name =
-    g_object_ref (fo_property_flow_name_get_initial ());
+    g_object_ref_sink (fo_property_flow_name_get_initial ());
   context->font_family =
-    g_object_ref (fo_property_font_family_get_initial ());
+    g_object_ref_sink (fo_property_font_family_get_initial ());
   context->font_size =
-    g_object_ref (fo_property_font_size_get_initial ());
+    g_object_ref_sink (fo_property_font_size_get_initial ());
   context->font_stretch =
-    g_object_ref (fo_property_font_stretch_get_initial ());
+    g_object_ref_sink (fo_property_font_stretch_get_initial ());
   context->font_style =
-    g_object_ref (fo_property_font_style_get_initial ());
+    g_object_ref_sink (fo_property_font_style_get_initial ());
   context->font_variant =
-    g_object_ref (fo_property_font_variant_get_initial ());
+    g_object_ref_sink (fo_property_font_variant_get_initial ());
   context->font_weight =
-    g_object_ref (fo_property_font_weight_get_initial ());
+    g_object_ref_sink (fo_property_font_weight_get_initial ());
+  context->force_page_count =
+    g_object_ref_sink (fo_property_force_page_count_get_initial ());
   context->format =
-    g_object_ref (fo_property_format_get_initial ());
+    g_object_ref_sink (fo_property_format_get_initial ());
   context->grouping_separator =
-    g_object_ref (fo_property_grouping_separator_get_initial ());
+    g_object_ref_sink (fo_property_grouping_separator_get_initial ());
   context->grouping_size =
-    g_object_ref (fo_property_grouping_size_get_initial ());
+    g_object_ref_sink (fo_property_grouping_size_get_initial ());
   context->height =
-    g_object_ref (fo_property_height_get_initial ());
+    g_object_ref_sink (fo_property_height_get_initial ());
   context->id =
-    g_object_ref (fo_property_id_get_initial ());
+    g_object_ref_sink (fo_property_id_get_initial ());
+  context->initial_page_number =
+    g_object_ref_sink (fo_property_initial_page_number_get_initial ());
   context->inline_progression_dimension =
-    g_object_ref (fo_property_inline_progression_dimension_get_initial ());
+    g_object_ref_sink (fo_property_inline_progression_dimension_get_initial ());
   context->inline_progression_dimension_minimum = NULL;
   context->inline_progression_dimension_optimum = NULL;
   context->inline_progression_dimension_maximum = NULL;
   context->keep_together =
-    g_object_ref (fo_property_keep_together_get_initial ());
+    g_object_ref_sink (fo_property_keep_together_get_initial ());
   context->keep_together_within_column =
-    g_object_ref (fo_property_keep_together_within_column_get_initial ());
+    g_object_ref_sink (fo_property_keep_together_within_column_get_initial ());
   context->keep_together_within_line =
-    g_object_ref (fo_property_keep_together_within_line_get_initial ());
+    g_object_ref_sink (fo_property_keep_together_within_line_get_initial ());
   context->keep_together_within_page =
-    g_object_ref (fo_property_keep_together_within_page_get_initial ());
+    g_object_ref_sink (fo_property_keep_together_within_page_get_initial ());
   context->keep_with_next =
-    g_object_ref (fo_property_keep_with_next_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_next_get_initial ());
   context->keep_with_next_within_column =
-    g_object_ref (fo_property_keep_with_next_within_column_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_next_within_column_get_initial ());
   context->keep_with_next_within_line =
-    g_object_ref (fo_property_keep_with_next_within_line_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_next_within_line_get_initial ());
   context->keep_with_next_within_page =
-    g_object_ref (fo_property_keep_with_next_within_page_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_next_within_page_get_initial ());
   context->keep_with_previous =
-    g_object_ref (fo_property_keep_with_previous_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_previous_get_initial ());
   context->keep_with_previous_within_column =
-    g_object_ref (fo_property_keep_with_previous_within_column_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_previous_within_column_get_initial ());
   context->keep_with_previous_within_line =
-    g_object_ref (fo_property_keep_with_previous_within_line_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_previous_within_line_get_initial ());
   context->keep_with_previous_within_page =
-    g_object_ref (fo_property_keep_with_previous_within_page_get_initial ());
+    g_object_ref_sink (fo_property_keep_with_previous_within_page_get_initial ());
+  context->language =
+    g_object_ref_sink (fo_property_language_get_initial ());
   context->letter_value =
-    g_object_ref (fo_property_letter_value_get_initial ());
+    g_object_ref_sink (fo_property_letter_value_get_initial ());
   context->line_height =
-    g_object_ref (fo_property_line_height_get_initial ());
+    g_object_ref_sink (fo_property_line_height_get_initial ());
   context->line_stacking_strategy =
-    g_object_ref (fo_property_line_stacking_strategy_get_initial ());
+    g_object_ref_sink (fo_property_line_stacking_strategy_get_initial ());
   context->linefeed_treatment =
-    g_object_ref (fo_property_linefeed_treatment_get_initial ());
+    g_object_ref_sink (fo_property_linefeed_treatment_get_initial ());
   context->margin =
-    g_object_ref (fo_property_margin_get_initial ());
+    g_object_ref_sink (fo_property_margin_get_initial ());
   context->margin_bottom =
-    g_object_ref (fo_property_margin_bottom_get_initial ());
+    g_object_ref_sink (fo_property_margin_bottom_get_initial ());
   context->margin_left =
-    g_object_ref (fo_property_margin_left_get_initial ());
+    g_object_ref_sink (fo_property_margin_left_get_initial ());
   context->margin_right =
-    g_object_ref (fo_property_margin_right_get_initial ());
+    g_object_ref_sink (fo_property_margin_right_get_initial ());
   context->margin_top =
-    g_object_ref (fo_property_margin_top_get_initial ());
+    g_object_ref_sink (fo_property_margin_top_get_initial ());
   context->master_name =
-    g_object_ref (fo_property_master_name_get_initial ());
+    g_object_ref_sink (fo_property_master_name_get_initial ());
   context->master_reference =
-    g_object_ref (fo_property_master_reference_get_initial ());
+    g_object_ref_sink (fo_property_master_reference_get_initial ());
+  context->maximum_repeats =
+    g_object_ref_sink (fo_property_maximum_repeats_get_initial ());
   context->media_usage =
-    g_object_ref (fo_property_media_usage_get_initial ());
+    g_object_ref_sink (fo_property_media_usage_get_initial ());
   context->number_columns_repeated =
-    g_object_ref (fo_property_number_columns_repeated_get_initial ());
+    g_object_ref_sink (fo_property_number_columns_repeated_get_initial ());
   context->number_columns_spanned =
-    g_object_ref (fo_property_number_columns_spanned_get_initial ());
+    g_object_ref_sink (fo_property_number_columns_spanned_get_initial ());
   context->number_rows_spanned =
-    g_object_ref (fo_property_number_rows_spanned_get_initial ());
+    g_object_ref_sink (fo_property_number_rows_spanned_get_initial ());
+  context->odd_or_even =
+    g_object_ref_sink (fo_property_odd_or_even_get_initial ());
   context->orphans =
-    g_object_ref (fo_property_orphans_get_initial ());
+    g_object_ref_sink (fo_property_orphans_get_initial ());
   context->overflow =
-    g_object_ref (fo_property_overflow_get_initial ());
+    g_object_ref_sink (fo_property_overflow_get_initial ());
   context->padding =
-    g_object_ref (fo_property_padding_get_initial ());
+    g_object_ref_sink (fo_property_padding_get_initial ());
   context->padding_after =
-    g_object_ref (fo_property_padding_after_get_initial ());
+    g_object_ref_sink (fo_property_padding_after_get_initial ());
   context->padding_after_length = NULL;
   context->padding_after_condity =
-    g_object_ref (fo_property_padding_after_condity_get_initial ());
+    g_object_ref_sink (fo_property_padding_after_condity_get_initial ());
   context->padding_before =
-    g_object_ref (fo_property_padding_before_get_initial ());
+    g_object_ref_sink (fo_property_padding_before_get_initial ());
   context->padding_before_length = NULL;
   context->padding_before_condity =
-    g_object_ref (fo_property_padding_before_condity_get_initial ());
+    g_object_ref_sink (fo_property_padding_before_condity_get_initial ());
   context->padding_bottom =
-    g_object_ref (fo_property_padding_bottom_get_initial ());
+    g_object_ref_sink (fo_property_padding_bottom_get_initial ());
   context->padding_end =
-    g_object_ref (fo_property_padding_end_get_initial ());
+    g_object_ref_sink (fo_property_padding_end_get_initial ());
   context->padding_end_length = NULL;
   context->padding_end_condity =
-    g_object_ref (fo_property_padding_end_condity_get_initial ());
+    g_object_ref_sink (fo_property_padding_end_condity_get_initial ());
   context->padding_left =
-    g_object_ref (fo_property_padding_left_get_initial ());
+    g_object_ref_sink (fo_property_padding_left_get_initial ());
   context->padding_right =
-    g_object_ref (fo_property_padding_right_get_initial ());
+    g_object_ref_sink (fo_property_padding_right_get_initial ());
   context->padding_start =
-    g_object_ref (fo_property_padding_start_get_initial ());
+    g_object_ref_sink (fo_property_padding_start_get_initial ());
   context->padding_start_length = NULL;
   context->padding_start_condity =
-    g_object_ref (fo_property_padding_start_condity_get_initial ());
+    g_object_ref_sink (fo_property_padding_start_condity_get_initial ());
   context->padding_top =
-    g_object_ref (fo_property_padding_top_get_initial ());
+    g_object_ref_sink (fo_property_padding_top_get_initial ());
   context->page_height =
-    g_object_ref (fo_property_page_height_get_initial ());
+    g_object_ref_sink (fo_property_page_height_get_initial ());
+  context->page_position =
+    g_object_ref_sink (fo_property_page_position_get_initial ());
   context->page_width =
-    g_object_ref (fo_property_page_width_get_initial ());
+    g_object_ref_sink (fo_property_page_width_get_initial ());
+  context->precedence =
+    g_object_ref_sink (fo_property_precedence_get_initial ());
   context->provisional_distance_between_starts =
-    g_object_ref (fo_property_provisional_distance_between_starts_get_initial ());
+    g_object_ref_sink (fo_property_provisional_distance_between_starts_get_initial ());
   context->provisional_label_separation =
-    g_object_ref (fo_property_provisional_label_separation_get_initial ());
+    g_object_ref_sink (fo_property_provisional_label_separation_get_initial ());
   context->ref_id =
-    g_object_ref (fo_property_ref_id_get_initial ());
+    g_object_ref_sink (fo_property_ref_id_get_initial ());
+  context->reference_orientation =
+    g_object_ref_sink (fo_property_reference_orientation_get_initial ());
   context->region_name =
-    g_object_ref (fo_property_region_name_get_initial ());
+    g_object_ref_sink (fo_property_region_name_get_initial ());
   context->role =
-    g_object_ref (fo_property_role_get_initial ());
+    g_object_ref_sink (fo_property_role_get_initial ());
   context->scaling =
-    g_object_ref (fo_property_scaling_get_initial ());
+    g_object_ref_sink (fo_property_scaling_get_initial ());
   context->scaling_method =
-    g_object_ref (fo_property_scaling_method_get_initial ());
+    g_object_ref_sink (fo_property_scaling_method_get_initial ());
   context->score_spaces =
-    g_object_ref (fo_property_score_spaces_get_initial ());
+    g_object_ref_sink (fo_property_score_spaces_get_initial ());
   context->source_document =
-    g_object_ref (fo_property_source_document_get_initial ());
+    g_object_ref_sink (fo_property_source_document_get_initial ());
   context->space_after =
-    g_object_ref (fo_property_space_after_get_initial ());
+    g_object_ref_sink (fo_property_space_after_get_initial ());
   context->space_after_minimum = NULL;
   context->space_after_optimum = NULL;
   context->space_after_maximum = NULL;
   context->space_after_precedence =
-    g_object_ref (fo_property_space_after_precedence_get_initial ());
+    g_object_ref_sink (fo_property_space_after_precedence_get_initial ());
   context->space_after_condity =
-    g_object_ref (fo_property_space_after_condity_get_initial ());
+    g_object_ref_sink (fo_property_space_after_condity_get_initial ());
   context->space_before =
-    g_object_ref (fo_property_space_before_get_initial ());
+    g_object_ref_sink (fo_property_space_before_get_initial ());
   context->space_before_minimum = NULL;
   context->space_before_optimum = NULL;
   context->space_before_maximum = NULL;
   context->space_before_precedence =
-    g_object_ref (fo_property_space_before_precedence_get_initial ());
+    g_object_ref_sink (fo_property_space_before_precedence_get_initial ());
   context->space_before_condity =
-    g_object_ref (fo_property_space_before_condity_get_initial ());
+    g_object_ref_sink (fo_property_space_before_condity_get_initial ());
   context->space_end =
-    g_object_ref (fo_property_space_end_get_initial ());
+    g_object_ref_sink (fo_property_space_end_get_initial ());
   context->space_end_minimum = NULL;
   context->space_end_optimum = NULL;
   context->space_end_maximum = NULL;
   context->space_end_precedence =
-    g_object_ref (fo_property_space_end_precedence_get_initial ());
+    g_object_ref_sink (fo_property_space_end_precedence_get_initial ());
   context->space_end_condity =
-    g_object_ref (fo_property_space_end_condity_get_initial ());
+    g_object_ref_sink (fo_property_space_end_condity_get_initial ());
   context->space_start =
-    g_object_ref (fo_property_space_start_get_initial ());
+    g_object_ref_sink (fo_property_space_start_get_initial ());
   context->space_start_minimum = NULL;
   context->space_start_optimum = NULL;
   context->space_start_maximum = NULL;
   context->space_start_precedence =
-    g_object_ref (fo_property_space_start_precedence_get_initial ());
+    g_object_ref_sink (fo_property_space_start_precedence_get_initial ());
   context->space_start_condity =
-    g_object_ref (fo_property_space_start_condity_get_initial ());
+    g_object_ref_sink (fo_property_space_start_condity_get_initial ());
   context->span =
-    g_object_ref (fo_property_span_get_initial ());
+    g_object_ref_sink (fo_property_span_get_initial ());
   context->src =
-    g_object_ref (fo_property_src_get_initial ());
+    g_object_ref_sink (fo_property_src_get_initial ());
   context->start_indent =
-    g_object_ref (fo_property_start_indent_get_initial ());
+    g_object_ref_sink (fo_property_start_indent_get_initial ());
   context->table_layout =
-    g_object_ref (fo_property_table_layout_get_initial ());
+    g_object_ref_sink (fo_property_table_layout_get_initial ());
   context->text_align =
-    g_object_ref (fo_property_text_align_get_initial ());
+    g_object_ref_sink (fo_property_text_align_get_initial ());
   context->text_indent =
-    g_object_ref (fo_property_text_indent_get_initial ());
+    g_object_ref_sink (fo_property_text_indent_get_initial ());
   context->unicode_bidi =
-    g_object_ref (fo_property_unicode_bidi_get_initial ());
+    g_object_ref_sink (fo_property_unicode_bidi_get_initial ());
   context->white_space_collapse =
-    g_object_ref (fo_property_white_space_collapse_get_initial ());
+    g_object_ref_sink (fo_property_white_space_collapse_get_initial ());
   context->white_space_treatment =
-    g_object_ref (fo_property_white_space_treatment_get_initial ());
+    g_object_ref_sink (fo_property_white_space_treatment_get_initial ());
   context->widows =
-    g_object_ref (fo_property_widows_get_initial ());
+    g_object_ref_sink (fo_property_widows_get_initial ());
   context->width =
-    g_object_ref (fo_property_width_get_initial ());
+    g_object_ref_sink (fo_property_width_get_initial ());
   context->wrap_option =
-    g_object_ref (fo_property_wrap_option_get_initial ());
+    g_object_ref_sink (fo_property_wrap_option_get_initial ());
   context->writing_mode =
-    g_object_ref (fo_property_writing_mode_get_initial ());
+    g_object_ref_sink (fo_property_writing_mode_get_initial ());
 }
 
 /**
@@ -592,7 +623,7 @@ fo_context_class_init (FoContextClass *klass)
   
   parent_class = g_type_class_peek_parent (klass);
   
-  object_class->finalize = fo_context_finalize;
+  object_class->dispose = _dispose;
 
   object_class->set_property = fo_context_set_property;
   object_class->get_property = fo_context_get_property;
@@ -637,6 +668,14 @@ fo_context_class_init (FoContextClass *klass)
      g_param_spec_object ("baseline-shift",
 			  _("Baseline Shift"),
 			  _("Baseline Shift property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
+     PROP_BLANK_OR_NOT_BLANK,
+     g_param_spec_object ("blank-or-not-blank",
+			  _("Blank Or Not Blank"),
+			  _("Blank Or Not Blank property"),
 			  FO_TYPE_PROPERTY,
 			  G_PARAM_READABLE));
   g_object_class_install_property
@@ -1057,6 +1096,14 @@ fo_context_class_init (FoContextClass *klass)
 			  G_PARAM_READABLE));
   g_object_class_install_property
     (object_class,
+     PROP_COUNTRY,
+     g_param_spec_object ("country",
+			  _("Country"),
+			  _("Country property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
      PROP_DIRECTION,
      g_param_spec_object ("direction",
 			  _("Direction"),
@@ -1153,6 +1200,14 @@ fo_context_class_init (FoContextClass *klass)
 			  G_PARAM_READABLE));
   g_object_class_install_property
     (object_class,
+     PROP_FORCE_PAGE_COUNT,
+     g_param_spec_object ("force-page-count",
+			  _("Force Page Count"),
+			  _("Force Page Count property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
      PROP_FORMAT,
      g_param_spec_object ("format",
 			  _("Format"),
@@ -1189,6 +1244,14 @@ fo_context_class_init (FoContextClass *klass)
      g_param_spec_object ("id",
 			  _("Id"),
 			  _("Id property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
+     PROP_INITIAL_PAGE_NUMBER,
+     g_param_spec_object ("initial-page-number",
+			  _("Initial Page Number"),
+			  _("Initial Page Number property"),
 			  FO_TYPE_PROPERTY,
 			  G_PARAM_READABLE));
   g_object_class_install_property
@@ -1321,6 +1384,14 @@ fo_context_class_init (FoContextClass *klass)
 			  G_PARAM_READABLE));
   g_object_class_install_property
     (object_class,
+     PROP_LANGUAGE,
+     g_param_spec_object ("language",
+			  _("Language"),
+			  _("Language property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
      PROP_LETTER_VALUE,
      g_param_spec_object ("letter-value",
 			  _("Letter Value"),
@@ -1409,6 +1480,14 @@ fo_context_class_init (FoContextClass *klass)
 			  G_PARAM_READABLE));
   g_object_class_install_property
     (object_class,
+     PROP_MAXIMUM_REPEATS,
+     g_param_spec_object ("maximum-repeats",
+			  _("Maximum Repeats"),
+			  _("Maximum Repeats property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
      PROP_MEDIA_USAGE,
      g_param_spec_object ("media-usage",
 			  _("Media Usage"),
@@ -1437,6 +1516,14 @@ fo_context_class_init (FoContextClass *klass)
      g_param_spec_object ("number-rows-spanned",
 			  _("Number Rows Spanned"),
 			  _("Number Rows Spanned property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
+     PROP_ODD_OR_EVEN,
+     g_param_spec_object ("odd-or-even",
+			  _("Odd Or Even"),
+			  _("Odd Or Even property"),
 			  FO_TYPE_PROPERTY,
 			  G_PARAM_READABLE));
   g_object_class_install_property
@@ -1601,10 +1688,26 @@ fo_context_class_init (FoContextClass *klass)
 			  G_PARAM_READABLE));
   g_object_class_install_property
     (object_class,
+     PROP_PAGE_POSITION,
+     g_param_spec_object ("page-position",
+			  _("Page Position"),
+			  _("Page Position property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
      PROP_PAGE_WIDTH,
      g_param_spec_object ("page-width",
 			  _("Page Width"),
 			  _("Page Width property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
+     PROP_PRECEDENCE,
+     g_param_spec_object ("precedence",
+			  _("Precedence"),
+			  _("Precedence property"),
 			  FO_TYPE_PROPERTY,
 			  G_PARAM_READABLE));
   g_object_class_install_property
@@ -1629,6 +1732,14 @@ fo_context_class_init (FoContextClass *klass)
      g_param_spec_object ("ref-id",
 			  _("Ref Id"),
 			  _("Ref Id property"),
+			  FO_TYPE_PROPERTY,
+			  G_PARAM_READABLE));
+  g_object_class_install_property
+    (object_class,
+     PROP_REFERENCE_ORIENTATION,
+     g_param_spec_object ("reference-orientation",
+			  _("Reference Orientation"),
+			  _("Reference Orientation property"),
 			  FO_TYPE_PROPERTY,
 			  G_PARAM_READABLE));
   g_object_class_install_property
@@ -1978,13 +2089,13 @@ fo_context_class_init (FoContextClass *klass)
 }
 
 /**
- * fo_context_finalize:
- * @object: #FoContext object to finalize.
+ * _dispose:
+ * @object: #FoContext object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #FoContext.
+ * Implements #GObjectDisposeFunc for #FoContext.
  **/
 void
-fo_context_finalize (GObject *object)
+_dispose (GObject *object)
 {
   FoContext *context;
 
@@ -1995,6 +2106,7 @@ fo_context_finalize (GObject *object)
   fo_context_set_background_color (context, NULL);
   fo_context_set_background_image (context, NULL);
   fo_context_set_baseline_shift (context, NULL);
+  fo_context_set_blank_or_not_blank (context, NULL);
   fo_context_set_block_progression_dimension (context, NULL);
   fo_context_set_block_progression_dimension_minimum (context, NULL);
   fo_context_set_block_progression_dimension_optimum (context, NULL);
@@ -2047,6 +2159,7 @@ fo_context_finalize (GObject *object)
   fo_context_set_content_height (context, NULL);
   fo_context_set_content_type (context, NULL);
   fo_context_set_content_width (context, NULL);
+  fo_context_set_country (context, NULL);
   fo_context_set_direction (context, NULL);
   fo_context_set_display_align (context, NULL);
   fo_context_set_dominant_baseline (context, NULL);
@@ -2059,11 +2172,13 @@ fo_context_finalize (GObject *object)
   fo_context_set_font_style (context, NULL);
   fo_context_set_font_variant (context, NULL);
   fo_context_set_font_weight (context, NULL);
+  fo_context_set_force_page_count (context, NULL);
   fo_context_set_format (context, NULL);
   fo_context_set_grouping_separator (context, NULL);
   fo_context_set_grouping_size (context, NULL);
   fo_context_set_height (context, NULL);
   fo_context_set_id (context, NULL);
+  fo_context_set_initial_page_number (context, NULL);
   fo_context_set_inline_progression_dimension (context, NULL);
   fo_context_set_inline_progression_dimension_minimum (context, NULL);
   fo_context_set_inline_progression_dimension_optimum (context, NULL);
@@ -2080,6 +2195,7 @@ fo_context_finalize (GObject *object)
   fo_context_set_keep_with_previous_within_column (context, NULL);
   fo_context_set_keep_with_previous_within_line (context, NULL);
   fo_context_set_keep_with_previous_within_page (context, NULL);
+  fo_context_set_language (context, NULL);
   fo_context_set_letter_value (context, NULL);
   fo_context_set_line_height (context, NULL);
   fo_context_set_line_stacking_strategy (context, NULL);
@@ -2091,10 +2207,12 @@ fo_context_finalize (GObject *object)
   fo_context_set_margin_top (context, NULL);
   fo_context_set_master_name (context, NULL);
   fo_context_set_master_reference (context, NULL);
+  fo_context_set_maximum_repeats (context, NULL);
   fo_context_set_media_usage (context, NULL);
   fo_context_set_number_columns_repeated (context, NULL);
   fo_context_set_number_columns_spanned (context, NULL);
   fo_context_set_number_rows_spanned (context, NULL);
+  fo_context_set_odd_or_even (context, NULL);
   fo_context_set_orphans (context, NULL);
   fo_context_set_overflow (context, NULL);
   fo_context_set_padding (context, NULL);
@@ -2115,10 +2233,13 @@ fo_context_finalize (GObject *object)
   fo_context_set_padding_start_condity (context, NULL);
   fo_context_set_padding_top (context, NULL);
   fo_context_set_page_height (context, NULL);
+  fo_context_set_page_position (context, NULL);
   fo_context_set_page_width (context, NULL);
+  fo_context_set_precedence (context, NULL);
   fo_context_set_provisional_distance_between_starts (context, NULL);
   fo_context_set_provisional_label_separation (context, NULL);
   fo_context_set_ref_id (context, NULL);
+  fo_context_set_reference_orientation (context, NULL);
   fo_context_set_region_name (context, NULL);
   fo_context_set_role (context, NULL);
   fo_context_set_scaling (context, NULL);
@@ -2163,7 +2284,7 @@ fo_context_finalize (GObject *object)
   fo_context_set_wrap_option (context, NULL);
   fo_context_set_writing_mode (context, NULL);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 
@@ -2202,6 +2323,9 @@ fo_context_set_property (GObject         *object,
       break;
     case PROP_BASELINE_SHIFT:
       fo_context_set_baseline_shift (fo_context, g_value_get_object (value));
+      break;
+    case PROP_BLANK_OR_NOT_BLANK:
+      fo_context_set_blank_or_not_blank (fo_context, g_value_get_object (value));
       break;
     case PROP_BLOCK_PROGRESSION_DIMENSION:
       fo_context_set_block_progression_dimension (fo_context, g_value_get_object (value));
@@ -2359,6 +2483,9 @@ fo_context_set_property (GObject         *object,
     case PROP_CONTENT_WIDTH:
       fo_context_set_content_width (fo_context, g_value_get_object (value));
       break;
+    case PROP_COUNTRY:
+      fo_context_set_country (fo_context, g_value_get_object (value));
+      break;
     case PROP_DIRECTION:
       fo_context_set_direction (fo_context, g_value_get_object (value));
       break;
@@ -2395,6 +2522,9 @@ fo_context_set_property (GObject         *object,
     case PROP_FONT_WEIGHT:
       fo_context_set_font_weight (fo_context, g_value_get_object (value));
       break;
+    case PROP_FORCE_PAGE_COUNT:
+      fo_context_set_force_page_count (fo_context, g_value_get_object (value));
+      break;
     case PROP_FORMAT:
       fo_context_set_format (fo_context, g_value_get_object (value));
       break;
@@ -2409,6 +2539,9 @@ fo_context_set_property (GObject         *object,
       break;
     case PROP_ID:
       fo_context_set_id (fo_context, g_value_get_object (value));
+      break;
+    case PROP_INITIAL_PAGE_NUMBER:
+      fo_context_set_initial_page_number (fo_context, g_value_get_object (value));
       break;
     case PROP_INLINE_PROGRESSION_DIMENSION:
       fo_context_set_inline_progression_dimension (fo_context, g_value_get_object (value));
@@ -2458,6 +2591,9 @@ fo_context_set_property (GObject         *object,
     case PROP_KEEP_WITH_PREVIOUS_WITHIN_PAGE:
       fo_context_set_keep_with_previous_within_page (fo_context, g_value_get_object (value));
       break;
+    case PROP_LANGUAGE:
+      fo_context_set_language (fo_context, g_value_get_object (value));
+      break;
     case PROP_LETTER_VALUE:
       fo_context_set_letter_value (fo_context, g_value_get_object (value));
       break;
@@ -2491,6 +2627,9 @@ fo_context_set_property (GObject         *object,
     case PROP_MASTER_REFERENCE:
       fo_context_set_master_reference (fo_context, g_value_get_object (value));
       break;
+    case PROP_MAXIMUM_REPEATS:
+      fo_context_set_maximum_repeats (fo_context, g_value_get_object (value));
+      break;
     case PROP_MEDIA_USAGE:
       fo_context_set_media_usage (fo_context, g_value_get_object (value));
       break;
@@ -2502,6 +2641,9 @@ fo_context_set_property (GObject         *object,
       break;
     case PROP_NUMBER_ROWS_SPANNED:
       fo_context_set_number_rows_spanned (fo_context, g_value_get_object (value));
+      break;
+    case PROP_ODD_OR_EVEN:
+      fo_context_set_odd_or_even (fo_context, g_value_get_object (value));
       break;
     case PROP_ORPHANS:
       fo_context_set_orphans (fo_context, g_value_get_object (value));
@@ -2563,8 +2705,14 @@ fo_context_set_property (GObject         *object,
     case PROP_PAGE_HEIGHT:
       fo_context_set_page_height (fo_context, g_value_get_object (value));
       break;
+    case PROP_PAGE_POSITION:
+      fo_context_set_page_position (fo_context, g_value_get_object (value));
+      break;
     case PROP_PAGE_WIDTH:
       fo_context_set_page_width (fo_context, g_value_get_object (value));
+      break;
+    case PROP_PRECEDENCE:
+      fo_context_set_precedence (fo_context, g_value_get_object (value));
       break;
     case PROP_PROVISIONAL_DISTANCE_BETWEEN_STARTS:
       fo_context_set_provisional_distance_between_starts (fo_context, g_value_get_object (value));
@@ -2574,6 +2722,9 @@ fo_context_set_property (GObject         *object,
       break;
     case PROP_REF_ID:
       fo_context_set_ref_id (fo_context, g_value_get_object (value));
+      break;
+    case PROP_REFERENCE_ORIENTATION:
+      fo_context_set_reference_orientation (fo_context, g_value_get_object (value));
       break;
     case PROP_REGION_NAME:
       fo_context_set_region_name (fo_context, g_value_get_object (value));
@@ -2746,6 +2897,9 @@ fo_context_get_property (GObject         *object,
     case PROP_BASELINE_SHIFT:
       g_value_set_object (value, G_OBJECT (fo_context_get_baseline_shift (fo_context)));
       break;
+    case PROP_BLANK_OR_NOT_BLANK:
+      g_value_set_object (value, G_OBJECT (fo_context_get_blank_or_not_blank (fo_context)));
+      break;
     case PROP_BLOCK_PROGRESSION_DIMENSION:
       g_value_set_object (value, G_OBJECT (fo_context_get_block_progression_dimension (fo_context)));
       break;
@@ -2902,6 +3056,9 @@ fo_context_get_property (GObject         *object,
     case PROP_CONTENT_WIDTH:
       g_value_set_object (value, G_OBJECT (fo_context_get_content_width (fo_context)));
       break;
+    case PROP_COUNTRY:
+      g_value_set_object (value, G_OBJECT (fo_context_get_country (fo_context)));
+      break;
     case PROP_DIRECTION:
       g_value_set_object (value, G_OBJECT (fo_context_get_direction (fo_context)));
       break;
@@ -2938,6 +3095,9 @@ fo_context_get_property (GObject         *object,
     case PROP_FONT_WEIGHT:
       g_value_set_object (value, G_OBJECT (fo_context_get_font_weight (fo_context)));
       break;
+    case PROP_FORCE_PAGE_COUNT:
+      g_value_set_object (value, G_OBJECT (fo_context_get_force_page_count (fo_context)));
+      break;
     case PROP_FORMAT:
       g_value_set_object (value, G_OBJECT (fo_context_get_format (fo_context)));
       break;
@@ -2952,6 +3112,9 @@ fo_context_get_property (GObject         *object,
       break;
     case PROP_ID:
       g_value_set_object (value, G_OBJECT (fo_context_get_id (fo_context)));
+      break;
+    case PROP_INITIAL_PAGE_NUMBER:
+      g_value_set_object (value, G_OBJECT (fo_context_get_initial_page_number (fo_context)));
       break;
     case PROP_INLINE_PROGRESSION_DIMENSION:
       g_value_set_object (value, G_OBJECT (fo_context_get_inline_progression_dimension (fo_context)));
@@ -3001,6 +3164,9 @@ fo_context_get_property (GObject         *object,
     case PROP_KEEP_WITH_PREVIOUS_WITHIN_PAGE:
       g_value_set_object (value, G_OBJECT (fo_context_get_keep_with_previous_within_page (fo_context)));
       break;
+    case PROP_LANGUAGE:
+      g_value_set_object (value, G_OBJECT (fo_context_get_language (fo_context)));
+      break;
     case PROP_LETTER_VALUE:
       g_value_set_object (value, G_OBJECT (fo_context_get_letter_value (fo_context)));
       break;
@@ -3034,6 +3200,9 @@ fo_context_get_property (GObject         *object,
     case PROP_MASTER_REFERENCE:
       g_value_set_object (value, G_OBJECT (fo_context_get_master_reference (fo_context)));
       break;
+    case PROP_MAXIMUM_REPEATS:
+      g_value_set_object (value, G_OBJECT (fo_context_get_maximum_repeats (fo_context)));
+      break;
     case PROP_MEDIA_USAGE:
       g_value_set_object (value, G_OBJECT (fo_context_get_media_usage (fo_context)));
       break;
@@ -3045,6 +3214,9 @@ fo_context_get_property (GObject         *object,
       break;
     case PROP_NUMBER_ROWS_SPANNED:
       g_value_set_object (value, G_OBJECT (fo_context_get_number_rows_spanned (fo_context)));
+      break;
+    case PROP_ODD_OR_EVEN:
+      g_value_set_object (value, G_OBJECT (fo_context_get_odd_or_even (fo_context)));
       break;
     case PROP_ORPHANS:
       g_value_set_object (value, G_OBJECT (fo_context_get_orphans (fo_context)));
@@ -3106,8 +3278,14 @@ fo_context_get_property (GObject         *object,
     case PROP_PAGE_HEIGHT:
       g_value_set_object (value, G_OBJECT (fo_context_get_page_height (fo_context)));
       break;
+    case PROP_PAGE_POSITION:
+      g_value_set_object (value, G_OBJECT (fo_context_get_page_position (fo_context)));
+      break;
     case PROP_PAGE_WIDTH:
       g_value_set_object (value, G_OBJECT (fo_context_get_page_width (fo_context)));
+      break;
+    case PROP_PRECEDENCE:
+      g_value_set_object (value, G_OBJECT (fo_context_get_precedence (fo_context)));
       break;
     case PROP_PROVISIONAL_DISTANCE_BETWEEN_STARTS:
       g_value_set_object (value, G_OBJECT (fo_context_get_provisional_distance_between_starts (fo_context)));
@@ -3117,6 +3295,9 @@ fo_context_get_property (GObject         *object,
       break;
     case PROP_REF_ID:
       g_value_set_object (value, G_OBJECT (fo_context_get_ref_id (fo_context)));
+      break;
+    case PROP_REFERENCE_ORIENTATION:
+      g_value_set_object (value, G_OBJECT (fo_context_get_reference_orientation (fo_context)));
       break;
     case PROP_REGION_NAME:
       g_value_set_object (value, G_OBJECT (fo_context_get_region_name (fo_context)));
@@ -3213,7 +3394,7 @@ fo_context_new (void)
 
 /**
  * fo_context_get_alignment_adjust:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "alignment-adjust" property of @fo_context.
  *
@@ -3241,11 +3422,12 @@ fo_context_set_alignment_adjust (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_alignment_adjust == NULL || FO_IS_PROPERTY_ALIGNMENT_ADJUST (new_alignment_adjust));
+  g_return_if_fail ((new_alignment_adjust == NULL) ||
+		    FO_IS_PROPERTY_ALIGNMENT_ADJUST (new_alignment_adjust));
 
   if (new_alignment_adjust != NULL)
     {
-      g_object_ref (new_alignment_adjust);
+      g_object_ref_sink (new_alignment_adjust);
     }
   if (fo_context->alignment_adjust != NULL)
     {
@@ -3257,7 +3439,7 @@ fo_context_set_alignment_adjust (FoContext *fo_context,
 
 /**
  * fo_context_get_alignment_baseline:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "alignment-baseline" property of @fo_context.
  *
@@ -3285,11 +3467,12 @@ fo_context_set_alignment_baseline (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_alignment_baseline == NULL || FO_IS_PROPERTY_ALIGNMENT_BASELINE (new_alignment_baseline));
+  g_return_if_fail ((new_alignment_baseline == NULL) ||
+		    FO_IS_PROPERTY_ALIGNMENT_BASELINE (new_alignment_baseline));
 
   if (new_alignment_baseline != NULL)
     {
-      g_object_ref (new_alignment_baseline);
+      g_object_ref_sink (new_alignment_baseline);
     }
   if (fo_context->alignment_baseline != NULL)
     {
@@ -3301,7 +3484,7 @@ fo_context_set_alignment_baseline (FoContext *fo_context,
 
 /**
  * fo_context_get_background_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "background-color" property of @fo_context.
  *
@@ -3329,11 +3512,12 @@ fo_context_set_background_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_background_color == NULL || FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
+  g_return_if_fail ((new_background_color == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_COLOR (new_background_color));
 
   if (new_background_color != NULL)
     {
-      g_object_ref (new_background_color);
+      g_object_ref_sink (new_background_color);
     }
   if (fo_context->background_color != NULL)
     {
@@ -3345,7 +3529,7 @@ fo_context_set_background_color (FoContext *fo_context,
 
 /**
  * fo_context_get_background_image:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "background-image" property of @fo_context.
  *
@@ -3373,11 +3557,12 @@ fo_context_set_background_image (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_background_image == NULL || FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
+  g_return_if_fail ((new_background_image == NULL) ||
+		    FO_IS_PROPERTY_BACKGROUND_IMAGE (new_background_image));
 
   if (new_background_image != NULL)
     {
-      g_object_ref (new_background_image);
+      g_object_ref_sink (new_background_image);
     }
   if (fo_context->background_image != NULL)
     {
@@ -3389,7 +3574,7 @@ fo_context_set_background_image (FoContext *fo_context,
 
 /**
  * fo_context_get_baseline_shift:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "baseline-shift" property of @fo_context.
  *
@@ -3417,11 +3602,12 @@ fo_context_set_baseline_shift (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_baseline_shift == NULL || FO_IS_PROPERTY_BASELINE_SHIFT (new_baseline_shift));
+  g_return_if_fail ((new_baseline_shift == NULL) ||
+		    FO_IS_PROPERTY_BASELINE_SHIFT (new_baseline_shift));
 
   if (new_baseline_shift != NULL)
     {
-      g_object_ref (new_baseline_shift);
+      g_object_ref_sink (new_baseline_shift);
     }
   if (fo_context->baseline_shift != NULL)
     {
@@ -3432,8 +3618,53 @@ fo_context_set_baseline_shift (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_blank_or_not_blank:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "blank-or-not-blank" property of @fo_context.
+ *
+ * Return value: The "blank-or-not-blank" property value.
+**/
+FoProperty *
+fo_context_get_blank_or_not_blank (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->blank_or_not_blank;
+}
+
+/**
+ * fo_context_set_blank_or_not_blank:
+ * @fo_context: The #FoContext object.
+ * @new_blank_or_not_blank: The new "blank-or-not-blank" property value.
+ * 
+ * Sets the "blank-or-not-blank" property of @fo_context to @new_blank_or_not_blank.
+ **/
+void
+fo_context_set_blank_or_not_blank (FoContext *fo_context,
+		         FoProperty *new_blank_or_not_blank)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_blank_or_not_blank == NULL) ||
+		    FO_IS_PROPERTY_BLANK_OR_NOT_BLANK (new_blank_or_not_blank));
+
+  if (new_blank_or_not_blank != NULL)
+    {
+      g_object_ref_sink (new_blank_or_not_blank);
+    }
+  if (fo_context->blank_or_not_blank != NULL)
+    {
+      g_object_unref (fo_context->blank_or_not_blank);
+    }
+  fo_context->blank_or_not_blank = new_blank_or_not_blank;
+  /*g_object_notify (G_OBJECT (fo_context), "blank-or-not-blank");*/
+}
+
+/**
  * fo_context_get_block_progression_dimension:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "block-progression-dimension" property of @fo_context.
  *
@@ -3461,11 +3692,12 @@ fo_context_set_block_progression_dimension (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_block_progression_dimension == NULL || FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION (new_block_progression_dimension));
+  g_return_if_fail ((new_block_progression_dimension == NULL) ||
+		    FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION (new_block_progression_dimension));
 
   if (new_block_progression_dimension != NULL)
     {
-      g_object_ref (new_block_progression_dimension);
+      g_object_ref_sink (new_block_progression_dimension);
     }
   if (fo_context->block_progression_dimension != NULL)
     {
@@ -3477,7 +3709,7 @@ fo_context_set_block_progression_dimension (FoContext *fo_context,
 
 /**
  * fo_context_get_block_progression_dimension_minimum:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "block-progression-dimension-minimum" property of @fo_context.
  *
@@ -3505,11 +3737,12 @@ fo_context_set_block_progression_dimension_minimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_block_progression_dimension_minimum == NULL || FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION_MINIMUM (new_block_progression_dimension_minimum));
+  g_return_if_fail ((new_block_progression_dimension_minimum == NULL) ||
+		    FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION_MINIMUM (new_block_progression_dimension_minimum));
 
   if (new_block_progression_dimension_minimum != NULL)
     {
-      g_object_ref (new_block_progression_dimension_minimum);
+      g_object_ref_sink (new_block_progression_dimension_minimum);
     }
   if (fo_context->block_progression_dimension_minimum != NULL)
     {
@@ -3521,7 +3754,7 @@ fo_context_set_block_progression_dimension_minimum (FoContext *fo_context,
 
 /**
  * fo_context_get_block_progression_dimension_optimum:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "block-progression-dimension-optimum" property of @fo_context.
  *
@@ -3549,11 +3782,12 @@ fo_context_set_block_progression_dimension_optimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_block_progression_dimension_optimum == NULL || FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION_OPTIMUM (new_block_progression_dimension_optimum));
+  g_return_if_fail ((new_block_progression_dimension_optimum == NULL) ||
+		    FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION_OPTIMUM (new_block_progression_dimension_optimum));
 
   if (new_block_progression_dimension_optimum != NULL)
     {
-      g_object_ref (new_block_progression_dimension_optimum);
+      g_object_ref_sink (new_block_progression_dimension_optimum);
     }
   if (fo_context->block_progression_dimension_optimum != NULL)
     {
@@ -3565,7 +3799,7 @@ fo_context_set_block_progression_dimension_optimum (FoContext *fo_context,
 
 /**
  * fo_context_get_block_progression_dimension_maximum:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "block-progression-dimension-maximum" property of @fo_context.
  *
@@ -3593,11 +3827,12 @@ fo_context_set_block_progression_dimension_maximum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_block_progression_dimension_maximum == NULL || FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION_MAXIMUM (new_block_progression_dimension_maximum));
+  g_return_if_fail ((new_block_progression_dimension_maximum == NULL) ||
+		    FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION_MAXIMUM (new_block_progression_dimension_maximum));
 
   if (new_block_progression_dimension_maximum != NULL)
     {
-      g_object_ref (new_block_progression_dimension_maximum);
+      g_object_ref_sink (new_block_progression_dimension_maximum);
     }
   if (fo_context->block_progression_dimension_maximum != NULL)
     {
@@ -3609,7 +3844,7 @@ fo_context_set_block_progression_dimension_maximum (FoContext *fo_context,
 
 /**
  * fo_context_get_border:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border" property of @fo_context.
  *
@@ -3637,11 +3872,12 @@ fo_context_set_border (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border == NULL || FO_IS_PROPERTY_BORDER (new_border));
+  g_return_if_fail ((new_border == NULL) ||
+		    FO_IS_PROPERTY_BORDER (new_border));
 
   if (new_border != NULL)
     {
-      g_object_ref (new_border);
+      g_object_ref_sink (new_border);
     }
   if (fo_context->border != NULL)
     {
@@ -3653,7 +3889,7 @@ fo_context_set_border (FoContext *fo_context,
 
 /**
  * fo_context_get_border_after_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-after-color" property of @fo_context.
  *
@@ -3681,11 +3917,12 @@ fo_context_set_border_after_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_after_color == NULL || FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
+  g_return_if_fail ((new_border_after_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_COLOR (new_border_after_color));
 
   if (new_border_after_color != NULL)
     {
-      g_object_ref (new_border_after_color);
+      g_object_ref_sink (new_border_after_color);
     }
   if (fo_context->border_after_color != NULL)
     {
@@ -3697,7 +3934,7 @@ fo_context_set_border_after_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_after_precedence:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-after-precedence" property of @fo_context.
  *
@@ -3725,11 +3962,12 @@ fo_context_set_border_after_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_after_precedence == NULL || FO_IS_PROPERTY_BORDER_AFTER_PRECEDENCE (new_border_after_precedence));
+  g_return_if_fail ((new_border_after_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_PRECEDENCE (new_border_after_precedence));
 
   if (new_border_after_precedence != NULL)
     {
-      g_object_ref (new_border_after_precedence);
+      g_object_ref_sink (new_border_after_precedence);
     }
   if (fo_context->border_after_precedence != NULL)
     {
@@ -3741,7 +3979,7 @@ fo_context_set_border_after_precedence (FoContext *fo_context,
 
 /**
  * fo_context_get_border_after_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-after-style" property of @fo_context.
  *
@@ -3769,11 +4007,12 @@ fo_context_set_border_after_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_after_style == NULL || FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
+  g_return_if_fail ((new_border_after_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_STYLE (new_border_after_style));
 
   if (new_border_after_style != NULL)
     {
-      g_object_ref (new_border_after_style);
+      g_object_ref_sink (new_border_after_style);
     }
   if (fo_context->border_after_style != NULL)
     {
@@ -3785,7 +4024,7 @@ fo_context_set_border_after_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_after_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-after-width" property of @fo_context.
  *
@@ -3813,11 +4052,12 @@ fo_context_set_border_after_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_after_width == NULL || FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
+  g_return_if_fail ((new_border_after_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_AFTER_WIDTH (new_border_after_width));
 
   if (new_border_after_width != NULL)
     {
-      g_object_ref (new_border_after_width);
+      g_object_ref_sink (new_border_after_width);
     }
   if (fo_context->border_after_width != NULL)
     {
@@ -3829,7 +4069,7 @@ fo_context_set_border_after_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_before_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-before-color" property of @fo_context.
  *
@@ -3857,11 +4097,12 @@ fo_context_set_border_before_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_before_color == NULL || FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
+  g_return_if_fail ((new_border_before_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_COLOR (new_border_before_color));
 
   if (new_border_before_color != NULL)
     {
-      g_object_ref (new_border_before_color);
+      g_object_ref_sink (new_border_before_color);
     }
   if (fo_context->border_before_color != NULL)
     {
@@ -3873,7 +4114,7 @@ fo_context_set_border_before_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_before_precedence:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-before-precedence" property of @fo_context.
  *
@@ -3901,11 +4142,12 @@ fo_context_set_border_before_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_before_precedence == NULL || FO_IS_PROPERTY_BORDER_BEFORE_PRECEDENCE (new_border_before_precedence));
+  g_return_if_fail ((new_border_before_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_PRECEDENCE (new_border_before_precedence));
 
   if (new_border_before_precedence != NULL)
     {
-      g_object_ref (new_border_before_precedence);
+      g_object_ref_sink (new_border_before_precedence);
     }
   if (fo_context->border_before_precedence != NULL)
     {
@@ -3917,7 +4159,7 @@ fo_context_set_border_before_precedence (FoContext *fo_context,
 
 /**
  * fo_context_get_border_before_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-before-style" property of @fo_context.
  *
@@ -3945,11 +4187,12 @@ fo_context_set_border_before_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_before_style == NULL || FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
+  g_return_if_fail ((new_border_before_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_STYLE (new_border_before_style));
 
   if (new_border_before_style != NULL)
     {
-      g_object_ref (new_border_before_style);
+      g_object_ref_sink (new_border_before_style);
     }
   if (fo_context->border_before_style != NULL)
     {
@@ -3961,7 +4204,7 @@ fo_context_set_border_before_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_before_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-before-width" property of @fo_context.
  *
@@ -3989,11 +4232,12 @@ fo_context_set_border_before_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_before_width == NULL || FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
+  g_return_if_fail ((new_border_before_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BEFORE_WIDTH (new_border_before_width));
 
   if (new_border_before_width != NULL)
     {
-      g_object_ref (new_border_before_width);
+      g_object_ref_sink (new_border_before_width);
     }
   if (fo_context->border_before_width != NULL)
     {
@@ -4005,7 +4249,7 @@ fo_context_set_border_before_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_bottom:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-bottom" property of @fo_context.
  *
@@ -4033,11 +4277,12 @@ fo_context_set_border_bottom (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_bottom == NULL || FO_IS_PROPERTY_BORDER_BOTTOM (new_border_bottom));
+  g_return_if_fail ((new_border_bottom == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM (new_border_bottom));
 
   if (new_border_bottom != NULL)
     {
-      g_object_ref (new_border_bottom);
+      g_object_ref_sink (new_border_bottom);
     }
   if (fo_context->border_bottom != NULL)
     {
@@ -4049,7 +4294,7 @@ fo_context_set_border_bottom (FoContext *fo_context,
 
 /**
  * fo_context_get_border_bottom_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-bottom-color" property of @fo_context.
  *
@@ -4077,11 +4322,12 @@ fo_context_set_border_bottom_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_bottom_color == NULL || FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
+  g_return_if_fail ((new_border_bottom_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_COLOR (new_border_bottom_color));
 
   if (new_border_bottom_color != NULL)
     {
-      g_object_ref (new_border_bottom_color);
+      g_object_ref_sink (new_border_bottom_color);
     }
   if (fo_context->border_bottom_color != NULL)
     {
@@ -4093,7 +4339,7 @@ fo_context_set_border_bottom_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_bottom_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-bottom-style" property of @fo_context.
  *
@@ -4121,11 +4367,12 @@ fo_context_set_border_bottom_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_bottom_style == NULL || FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
+  g_return_if_fail ((new_border_bottom_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_STYLE (new_border_bottom_style));
 
   if (new_border_bottom_style != NULL)
     {
-      g_object_ref (new_border_bottom_style);
+      g_object_ref_sink (new_border_bottom_style);
     }
   if (fo_context->border_bottom_style != NULL)
     {
@@ -4137,7 +4384,7 @@ fo_context_set_border_bottom_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_bottom_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-bottom-width" property of @fo_context.
  *
@@ -4165,11 +4412,12 @@ fo_context_set_border_bottom_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_bottom_width == NULL || FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
+  g_return_if_fail ((new_border_bottom_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_BOTTOM_WIDTH (new_border_bottom_width));
 
   if (new_border_bottom_width != NULL)
     {
-      g_object_ref (new_border_bottom_width);
+      g_object_ref_sink (new_border_bottom_width);
     }
   if (fo_context->border_bottom_width != NULL)
     {
@@ -4181,7 +4429,7 @@ fo_context_set_border_bottom_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_collapse:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-collapse" property of @fo_context.
  *
@@ -4209,11 +4457,12 @@ fo_context_set_border_collapse (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_collapse == NULL || FO_IS_PROPERTY_BORDER_COLLAPSE (new_border_collapse));
+  g_return_if_fail ((new_border_collapse == NULL) ||
+		    FO_IS_PROPERTY_BORDER_COLLAPSE (new_border_collapse));
 
   if (new_border_collapse != NULL)
     {
-      g_object_ref (new_border_collapse);
+      g_object_ref_sink (new_border_collapse);
     }
   if (fo_context->border_collapse != NULL)
     {
@@ -4225,7 +4474,7 @@ fo_context_set_border_collapse (FoContext *fo_context,
 
 /**
  * fo_context_get_border_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-color" property of @fo_context.
  *
@@ -4253,11 +4502,12 @@ fo_context_set_border_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_color == NULL || FO_IS_PROPERTY_BORDER_COLOR (new_border_color));
+  g_return_if_fail ((new_border_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_COLOR (new_border_color));
 
   if (new_border_color != NULL)
     {
-      g_object_ref (new_border_color);
+      g_object_ref_sink (new_border_color);
     }
   if (fo_context->border_color != NULL)
     {
@@ -4269,7 +4519,7 @@ fo_context_set_border_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_end_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-end-color" property of @fo_context.
  *
@@ -4297,11 +4547,12 @@ fo_context_set_border_end_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_end_color == NULL || FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
+  g_return_if_fail ((new_border_end_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_COLOR (new_border_end_color));
 
   if (new_border_end_color != NULL)
     {
-      g_object_ref (new_border_end_color);
+      g_object_ref_sink (new_border_end_color);
     }
   if (fo_context->border_end_color != NULL)
     {
@@ -4313,7 +4564,7 @@ fo_context_set_border_end_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_end_precedence:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-end-precedence" property of @fo_context.
  *
@@ -4341,11 +4592,12 @@ fo_context_set_border_end_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_end_precedence == NULL || FO_IS_PROPERTY_BORDER_END_PRECEDENCE (new_border_end_precedence));
+  g_return_if_fail ((new_border_end_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_PRECEDENCE (new_border_end_precedence));
 
   if (new_border_end_precedence != NULL)
     {
-      g_object_ref (new_border_end_precedence);
+      g_object_ref_sink (new_border_end_precedence);
     }
   if (fo_context->border_end_precedence != NULL)
     {
@@ -4357,7 +4609,7 @@ fo_context_set_border_end_precedence (FoContext *fo_context,
 
 /**
  * fo_context_get_border_end_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-end-style" property of @fo_context.
  *
@@ -4385,11 +4637,12 @@ fo_context_set_border_end_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_end_style == NULL || FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
+  g_return_if_fail ((new_border_end_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_STYLE (new_border_end_style));
 
   if (new_border_end_style != NULL)
     {
-      g_object_ref (new_border_end_style);
+      g_object_ref_sink (new_border_end_style);
     }
   if (fo_context->border_end_style != NULL)
     {
@@ -4401,7 +4654,7 @@ fo_context_set_border_end_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_end_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-end-width" property of @fo_context.
  *
@@ -4429,11 +4682,12 @@ fo_context_set_border_end_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_end_width == NULL || FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
+  g_return_if_fail ((new_border_end_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_END_WIDTH (new_border_end_width));
 
   if (new_border_end_width != NULL)
     {
-      g_object_ref (new_border_end_width);
+      g_object_ref_sink (new_border_end_width);
     }
   if (fo_context->border_end_width != NULL)
     {
@@ -4445,7 +4699,7 @@ fo_context_set_border_end_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_left:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-left" property of @fo_context.
  *
@@ -4473,11 +4727,12 @@ fo_context_set_border_left (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_left == NULL || FO_IS_PROPERTY_BORDER_LEFT (new_border_left));
+  g_return_if_fail ((new_border_left == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT (new_border_left));
 
   if (new_border_left != NULL)
     {
-      g_object_ref (new_border_left);
+      g_object_ref_sink (new_border_left);
     }
   if (fo_context->border_left != NULL)
     {
@@ -4489,7 +4744,7 @@ fo_context_set_border_left (FoContext *fo_context,
 
 /**
  * fo_context_get_border_left_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-left-color" property of @fo_context.
  *
@@ -4517,11 +4772,12 @@ fo_context_set_border_left_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_left_color == NULL || FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
+  g_return_if_fail ((new_border_left_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_COLOR (new_border_left_color));
 
   if (new_border_left_color != NULL)
     {
-      g_object_ref (new_border_left_color);
+      g_object_ref_sink (new_border_left_color);
     }
   if (fo_context->border_left_color != NULL)
     {
@@ -4533,7 +4789,7 @@ fo_context_set_border_left_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_left_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-left-style" property of @fo_context.
  *
@@ -4561,11 +4817,12 @@ fo_context_set_border_left_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_left_style == NULL || FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
+  g_return_if_fail ((new_border_left_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_STYLE (new_border_left_style));
 
   if (new_border_left_style != NULL)
     {
-      g_object_ref (new_border_left_style);
+      g_object_ref_sink (new_border_left_style);
     }
   if (fo_context->border_left_style != NULL)
     {
@@ -4577,7 +4834,7 @@ fo_context_set_border_left_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_left_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-left-width" property of @fo_context.
  *
@@ -4605,11 +4862,12 @@ fo_context_set_border_left_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_left_width == NULL || FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
+  g_return_if_fail ((new_border_left_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_LEFT_WIDTH (new_border_left_width));
 
   if (new_border_left_width != NULL)
     {
-      g_object_ref (new_border_left_width);
+      g_object_ref_sink (new_border_left_width);
     }
   if (fo_context->border_left_width != NULL)
     {
@@ -4621,7 +4879,7 @@ fo_context_set_border_left_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_right:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-right" property of @fo_context.
  *
@@ -4649,11 +4907,12 @@ fo_context_set_border_right (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_right == NULL || FO_IS_PROPERTY_BORDER_RIGHT (new_border_right));
+  g_return_if_fail ((new_border_right == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT (new_border_right));
 
   if (new_border_right != NULL)
     {
-      g_object_ref (new_border_right);
+      g_object_ref_sink (new_border_right);
     }
   if (fo_context->border_right != NULL)
     {
@@ -4665,7 +4924,7 @@ fo_context_set_border_right (FoContext *fo_context,
 
 /**
  * fo_context_get_border_right_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-right-color" property of @fo_context.
  *
@@ -4693,11 +4952,12 @@ fo_context_set_border_right_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_right_color == NULL || FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
+  g_return_if_fail ((new_border_right_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_COLOR (new_border_right_color));
 
   if (new_border_right_color != NULL)
     {
-      g_object_ref (new_border_right_color);
+      g_object_ref_sink (new_border_right_color);
     }
   if (fo_context->border_right_color != NULL)
     {
@@ -4709,7 +4969,7 @@ fo_context_set_border_right_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_right_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-right-style" property of @fo_context.
  *
@@ -4737,11 +4997,12 @@ fo_context_set_border_right_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_right_style == NULL || FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
+  g_return_if_fail ((new_border_right_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_STYLE (new_border_right_style));
 
   if (new_border_right_style != NULL)
     {
-      g_object_ref (new_border_right_style);
+      g_object_ref_sink (new_border_right_style);
     }
   if (fo_context->border_right_style != NULL)
     {
@@ -4753,7 +5014,7 @@ fo_context_set_border_right_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_right_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-right-width" property of @fo_context.
  *
@@ -4781,11 +5042,12 @@ fo_context_set_border_right_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_right_width == NULL || FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
+  g_return_if_fail ((new_border_right_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_RIGHT_WIDTH (new_border_right_width));
 
   if (new_border_right_width != NULL)
     {
-      g_object_ref (new_border_right_width);
+      g_object_ref_sink (new_border_right_width);
     }
   if (fo_context->border_right_width != NULL)
     {
@@ -4797,7 +5059,7 @@ fo_context_set_border_right_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_separation:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-separation" property of @fo_context.
  *
@@ -4825,11 +5087,12 @@ fo_context_set_border_separation (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_separation == NULL || FO_IS_PROPERTY_BORDER_SEPARATION (new_border_separation));
+  g_return_if_fail ((new_border_separation == NULL) ||
+		    FO_IS_PROPERTY_BORDER_SEPARATION (new_border_separation));
 
   if (new_border_separation != NULL)
     {
-      g_object_ref (new_border_separation);
+      g_object_ref_sink (new_border_separation);
     }
   if (fo_context->border_separation != NULL)
     {
@@ -4841,7 +5104,7 @@ fo_context_set_border_separation (FoContext *fo_context,
 
 /**
  * fo_context_get_border_start_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-start-color" property of @fo_context.
  *
@@ -4869,11 +5132,12 @@ fo_context_set_border_start_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_start_color == NULL || FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
+  g_return_if_fail ((new_border_start_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_COLOR (new_border_start_color));
 
   if (new_border_start_color != NULL)
     {
-      g_object_ref (new_border_start_color);
+      g_object_ref_sink (new_border_start_color);
     }
   if (fo_context->border_start_color != NULL)
     {
@@ -4885,7 +5149,7 @@ fo_context_set_border_start_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_start_precedence:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-start-precedence" property of @fo_context.
  *
@@ -4913,11 +5177,12 @@ fo_context_set_border_start_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_start_precedence == NULL || FO_IS_PROPERTY_BORDER_START_PRECEDENCE (new_border_start_precedence));
+  g_return_if_fail ((new_border_start_precedence == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_PRECEDENCE (new_border_start_precedence));
 
   if (new_border_start_precedence != NULL)
     {
-      g_object_ref (new_border_start_precedence);
+      g_object_ref_sink (new_border_start_precedence);
     }
   if (fo_context->border_start_precedence != NULL)
     {
@@ -4929,7 +5194,7 @@ fo_context_set_border_start_precedence (FoContext *fo_context,
 
 /**
  * fo_context_get_border_start_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-start-style" property of @fo_context.
  *
@@ -4957,11 +5222,12 @@ fo_context_set_border_start_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_start_style == NULL || FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
+  g_return_if_fail ((new_border_start_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_STYLE (new_border_start_style));
 
   if (new_border_start_style != NULL)
     {
-      g_object_ref (new_border_start_style);
+      g_object_ref_sink (new_border_start_style);
     }
   if (fo_context->border_start_style != NULL)
     {
@@ -4973,7 +5239,7 @@ fo_context_set_border_start_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_start_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-start-width" property of @fo_context.
  *
@@ -5001,11 +5267,12 @@ fo_context_set_border_start_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_start_width == NULL || FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
+  g_return_if_fail ((new_border_start_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_START_WIDTH (new_border_start_width));
 
   if (new_border_start_width != NULL)
     {
-      g_object_ref (new_border_start_width);
+      g_object_ref_sink (new_border_start_width);
     }
   if (fo_context->border_start_width != NULL)
     {
@@ -5017,7 +5284,7 @@ fo_context_set_border_start_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-style" property of @fo_context.
  *
@@ -5045,11 +5312,12 @@ fo_context_set_border_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_style == NULL || FO_IS_PROPERTY_BORDER_STYLE (new_border_style));
+  g_return_if_fail ((new_border_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_STYLE (new_border_style));
 
   if (new_border_style != NULL)
     {
-      g_object_ref (new_border_style);
+      g_object_ref_sink (new_border_style);
     }
   if (fo_context->border_style != NULL)
     {
@@ -5061,7 +5329,7 @@ fo_context_set_border_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_top:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-top" property of @fo_context.
  *
@@ -5089,11 +5357,12 @@ fo_context_set_border_top (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_top == NULL || FO_IS_PROPERTY_BORDER_TOP (new_border_top));
+  g_return_if_fail ((new_border_top == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP (new_border_top));
 
   if (new_border_top != NULL)
     {
-      g_object_ref (new_border_top);
+      g_object_ref_sink (new_border_top);
     }
   if (fo_context->border_top != NULL)
     {
@@ -5105,7 +5374,7 @@ fo_context_set_border_top (FoContext *fo_context,
 
 /**
  * fo_context_get_border_top_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-top-color" property of @fo_context.
  *
@@ -5133,11 +5402,12 @@ fo_context_set_border_top_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_top_color == NULL || FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
+  g_return_if_fail ((new_border_top_color == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_COLOR (new_border_top_color));
 
   if (new_border_top_color != NULL)
     {
-      g_object_ref (new_border_top_color);
+      g_object_ref_sink (new_border_top_color);
     }
   if (fo_context->border_top_color != NULL)
     {
@@ -5149,7 +5419,7 @@ fo_context_set_border_top_color (FoContext *fo_context,
 
 /**
  * fo_context_get_border_top_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-top-style" property of @fo_context.
  *
@@ -5177,11 +5447,12 @@ fo_context_set_border_top_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_top_style == NULL || FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
+  g_return_if_fail ((new_border_top_style == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_STYLE (new_border_top_style));
 
   if (new_border_top_style != NULL)
     {
-      g_object_ref (new_border_top_style);
+      g_object_ref_sink (new_border_top_style);
     }
   if (fo_context->border_top_style != NULL)
     {
@@ -5193,7 +5464,7 @@ fo_context_set_border_top_style (FoContext *fo_context,
 
 /**
  * fo_context_get_border_top_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-top-width" property of @fo_context.
  *
@@ -5221,11 +5492,12 @@ fo_context_set_border_top_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_top_width == NULL || FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
+  g_return_if_fail ((new_border_top_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_TOP_WIDTH (new_border_top_width));
 
   if (new_border_top_width != NULL)
     {
-      g_object_ref (new_border_top_width);
+      g_object_ref_sink (new_border_top_width);
     }
   if (fo_context->border_top_width != NULL)
     {
@@ -5237,7 +5509,7 @@ fo_context_set_border_top_width (FoContext *fo_context,
 
 /**
  * fo_context_get_border_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "border-width" property of @fo_context.
  *
@@ -5265,11 +5537,12 @@ fo_context_set_border_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_border_width == NULL || FO_IS_PROPERTY_BORDER_WIDTH (new_border_width));
+  g_return_if_fail ((new_border_width == NULL) ||
+		    FO_IS_PROPERTY_BORDER_WIDTH (new_border_width));
 
   if (new_border_width != NULL)
     {
-      g_object_ref (new_border_width);
+      g_object_ref_sink (new_border_width);
     }
   if (fo_context->border_width != NULL)
     {
@@ -5281,7 +5554,7 @@ fo_context_set_border_width (FoContext *fo_context,
 
 /**
  * fo_context_get_break_after:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "break-after" property of @fo_context.
  *
@@ -5309,11 +5582,12 @@ fo_context_set_break_after (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_break_after == NULL || FO_IS_PROPERTY_BREAK_AFTER (new_break_after));
+  g_return_if_fail ((new_break_after == NULL) ||
+		    FO_IS_PROPERTY_BREAK_AFTER (new_break_after));
 
   if (new_break_after != NULL)
     {
-      g_object_ref (new_break_after);
+      g_object_ref_sink (new_break_after);
     }
   if (fo_context->break_after != NULL)
     {
@@ -5325,7 +5599,7 @@ fo_context_set_break_after (FoContext *fo_context,
 
 /**
  * fo_context_get_break_before:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "break-before" property of @fo_context.
  *
@@ -5353,11 +5627,12 @@ fo_context_set_break_before (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_break_before == NULL || FO_IS_PROPERTY_BREAK_BEFORE (new_break_before));
+  g_return_if_fail ((new_break_before == NULL) ||
+		    FO_IS_PROPERTY_BREAK_BEFORE (new_break_before));
 
   if (new_break_before != NULL)
     {
-      g_object_ref (new_break_before);
+      g_object_ref_sink (new_break_before);
     }
   if (fo_context->break_before != NULL)
     {
@@ -5369,7 +5644,7 @@ fo_context_set_break_before (FoContext *fo_context,
 
 /**
  * fo_context_get_character:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "character" property of @fo_context.
  *
@@ -5397,11 +5672,12 @@ fo_context_set_character (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_character == NULL || FO_IS_PROPERTY_CHARACTER (new_character));
+  g_return_if_fail ((new_character == NULL) ||
+		    FO_IS_PROPERTY_CHARACTER (new_character));
 
   if (new_character != NULL)
     {
-      g_object_ref (new_character);
+      g_object_ref_sink (new_character);
     }
   if (fo_context->character != NULL)
     {
@@ -5413,7 +5689,7 @@ fo_context_set_character (FoContext *fo_context,
 
 /**
  * fo_context_get_clip:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "clip" property of @fo_context.
  *
@@ -5441,11 +5717,12 @@ fo_context_set_clip (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_clip == NULL || FO_IS_PROPERTY_CLIP (new_clip));
+  g_return_if_fail ((new_clip == NULL) ||
+		    FO_IS_PROPERTY_CLIP (new_clip));
 
   if (new_clip != NULL)
     {
-      g_object_ref (new_clip);
+      g_object_ref_sink (new_clip);
     }
   if (fo_context->clip != NULL)
     {
@@ -5457,7 +5734,7 @@ fo_context_set_clip (FoContext *fo_context,
 
 /**
  * fo_context_get_color:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "color" property of @fo_context.
  *
@@ -5485,11 +5762,12 @@ fo_context_set_color (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_color == NULL || FO_IS_PROPERTY_COLOR (new_color));
+  g_return_if_fail ((new_color == NULL) ||
+		    FO_IS_PROPERTY_COLOR (new_color));
 
   if (new_color != NULL)
     {
-      g_object_ref (new_color);
+      g_object_ref_sink (new_color);
     }
   if (fo_context->color != NULL)
     {
@@ -5501,7 +5779,7 @@ fo_context_set_color (FoContext *fo_context,
 
 /**
  * fo_context_get_column_number:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "column-number" property of @fo_context.
  *
@@ -5529,11 +5807,12 @@ fo_context_set_column_number (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_column_number == NULL || FO_IS_PROPERTY_COLUMN_NUMBER (new_column_number));
+  g_return_if_fail ((new_column_number == NULL) ||
+		    FO_IS_PROPERTY_COLUMN_NUMBER (new_column_number));
 
   if (new_column_number != NULL)
     {
-      g_object_ref (new_column_number);
+      g_object_ref_sink (new_column_number);
     }
   if (fo_context->column_number != NULL)
     {
@@ -5545,7 +5824,7 @@ fo_context_set_column_number (FoContext *fo_context,
 
 /**
  * fo_context_get_column_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "column-width" property of @fo_context.
  *
@@ -5573,11 +5852,12 @@ fo_context_set_column_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_column_width == NULL || FO_IS_PROPERTY_COLUMN_WIDTH (new_column_width));
+  g_return_if_fail ((new_column_width == NULL) ||
+		    FO_IS_PROPERTY_COLUMN_WIDTH (new_column_width));
 
   if (new_column_width != NULL)
     {
-      g_object_ref (new_column_width);
+      g_object_ref_sink (new_column_width);
     }
   if (fo_context->column_width != NULL)
     {
@@ -5589,7 +5869,7 @@ fo_context_set_column_width (FoContext *fo_context,
 
 /**
  * fo_context_get_content_height:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "content-height" property of @fo_context.
  *
@@ -5617,11 +5897,12 @@ fo_context_set_content_height (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_content_height == NULL || FO_IS_PROPERTY_CONTENT_HEIGHT (new_content_height));
+  g_return_if_fail ((new_content_height == NULL) ||
+		    FO_IS_PROPERTY_CONTENT_HEIGHT (new_content_height));
 
   if (new_content_height != NULL)
     {
-      g_object_ref (new_content_height);
+      g_object_ref_sink (new_content_height);
     }
   if (fo_context->content_height != NULL)
     {
@@ -5633,7 +5914,7 @@ fo_context_set_content_height (FoContext *fo_context,
 
 /**
  * fo_context_get_content_type:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "content-type" property of @fo_context.
  *
@@ -5661,11 +5942,12 @@ fo_context_set_content_type (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_content_type == NULL || FO_IS_PROPERTY_CONTENT_TYPE (new_content_type));
+  g_return_if_fail ((new_content_type == NULL) ||
+		    FO_IS_PROPERTY_CONTENT_TYPE (new_content_type));
 
   if (new_content_type != NULL)
     {
-      g_object_ref (new_content_type);
+      g_object_ref_sink (new_content_type);
     }
   if (fo_context->content_type != NULL)
     {
@@ -5677,7 +5959,7 @@ fo_context_set_content_type (FoContext *fo_context,
 
 /**
  * fo_context_get_content_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "content-width" property of @fo_context.
  *
@@ -5705,11 +5987,12 @@ fo_context_set_content_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_content_width == NULL || FO_IS_PROPERTY_CONTENT_WIDTH (new_content_width));
+  g_return_if_fail ((new_content_width == NULL) ||
+		    FO_IS_PROPERTY_CONTENT_WIDTH (new_content_width));
 
   if (new_content_width != NULL)
     {
-      g_object_ref (new_content_width);
+      g_object_ref_sink (new_content_width);
     }
   if (fo_context->content_width != NULL)
     {
@@ -5720,8 +6003,53 @@ fo_context_set_content_width (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_country:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "country" property of @fo_context.
+ *
+ * Return value: The "country" property value.
+**/
+FoProperty *
+fo_context_get_country (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->country;
+}
+
+/**
+ * fo_context_set_country:
+ * @fo_context: The #FoContext object.
+ * @new_country: The new "country" property value.
+ * 
+ * Sets the "country" property of @fo_context to @new_country.
+ **/
+void
+fo_context_set_country (FoContext *fo_context,
+		         FoProperty *new_country)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_country == NULL) ||
+		    FO_IS_PROPERTY_COUNTRY (new_country));
+
+  if (new_country != NULL)
+    {
+      g_object_ref_sink (new_country);
+    }
+  if (fo_context->country != NULL)
+    {
+      g_object_unref (fo_context->country);
+    }
+  fo_context->country = new_country;
+  /*g_object_notify (G_OBJECT (fo_context), "country");*/
+}
+
+/**
  * fo_context_get_direction:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "direction" property of @fo_context.
  *
@@ -5749,11 +6077,12 @@ fo_context_set_direction (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_direction == NULL || FO_IS_PROPERTY_DIRECTION (new_direction));
+  g_return_if_fail ((new_direction == NULL) ||
+		    FO_IS_PROPERTY_DIRECTION (new_direction));
 
   if (new_direction != NULL)
     {
-      g_object_ref (new_direction);
+      g_object_ref_sink (new_direction);
     }
   if (fo_context->direction != NULL)
     {
@@ -5765,7 +6094,7 @@ fo_context_set_direction (FoContext *fo_context,
 
 /**
  * fo_context_get_display_align:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "display-align" property of @fo_context.
  *
@@ -5793,11 +6122,12 @@ fo_context_set_display_align (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_display_align == NULL || FO_IS_PROPERTY_DISPLAY_ALIGN (new_display_align));
+  g_return_if_fail ((new_display_align == NULL) ||
+		    FO_IS_PROPERTY_DISPLAY_ALIGN (new_display_align));
 
   if (new_display_align != NULL)
     {
-      g_object_ref (new_display_align);
+      g_object_ref_sink (new_display_align);
     }
   if (fo_context->display_align != NULL)
     {
@@ -5809,7 +6139,7 @@ fo_context_set_display_align (FoContext *fo_context,
 
 /**
  * fo_context_get_dominant_baseline:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "dominant-baseline" property of @fo_context.
  *
@@ -5837,11 +6167,12 @@ fo_context_set_dominant_baseline (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_dominant_baseline == NULL || FO_IS_PROPERTY_DOMINANT_BASELINE (new_dominant_baseline));
+  g_return_if_fail ((new_dominant_baseline == NULL) ||
+		    FO_IS_PROPERTY_DOMINANT_BASELINE (new_dominant_baseline));
 
   if (new_dominant_baseline != NULL)
     {
-      g_object_ref (new_dominant_baseline);
+      g_object_ref_sink (new_dominant_baseline);
     }
   if (fo_context->dominant_baseline != NULL)
     {
@@ -5853,7 +6184,7 @@ fo_context_set_dominant_baseline (FoContext *fo_context,
 
 /**
  * fo_context_get_end_indent:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "end-indent" property of @fo_context.
  *
@@ -5881,11 +6212,12 @@ fo_context_set_end_indent (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_end_indent == NULL || FO_IS_PROPERTY_END_INDENT (new_end_indent));
+  g_return_if_fail ((new_end_indent == NULL) ||
+		    FO_IS_PROPERTY_END_INDENT (new_end_indent));
 
   if (new_end_indent != NULL)
     {
-      g_object_ref (new_end_indent);
+      g_object_ref_sink (new_end_indent);
     }
   if (fo_context->end_indent != NULL)
     {
@@ -5897,7 +6229,7 @@ fo_context_set_end_indent (FoContext *fo_context,
 
 /**
  * fo_context_get_extent:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "extent" property of @fo_context.
  *
@@ -5925,11 +6257,12 @@ fo_context_set_extent (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_extent == NULL || FO_IS_PROPERTY_EXTENT (new_extent));
+  g_return_if_fail ((new_extent == NULL) ||
+		    FO_IS_PROPERTY_EXTENT (new_extent));
 
   if (new_extent != NULL)
     {
-      g_object_ref (new_extent);
+      g_object_ref_sink (new_extent);
     }
   if (fo_context->extent != NULL)
     {
@@ -5941,7 +6274,7 @@ fo_context_set_extent (FoContext *fo_context,
 
 /**
  * fo_context_get_flow_name:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "flow-name" property of @fo_context.
  *
@@ -5969,11 +6302,12 @@ fo_context_set_flow_name (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_flow_name == NULL || FO_IS_PROPERTY_FLOW_NAME (new_flow_name));
+  g_return_if_fail ((new_flow_name == NULL) ||
+		    FO_IS_PROPERTY_FLOW_NAME (new_flow_name));
 
   if (new_flow_name != NULL)
     {
-      g_object_ref (new_flow_name);
+      g_object_ref_sink (new_flow_name);
     }
   if (fo_context->flow_name != NULL)
     {
@@ -5985,7 +6319,7 @@ fo_context_set_flow_name (FoContext *fo_context,
 
 /**
  * fo_context_get_font_family:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "font-family" property of @fo_context.
  *
@@ -6013,11 +6347,12 @@ fo_context_set_font_family (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_font_family == NULL || FO_IS_PROPERTY_FONT_FAMILY (new_font_family));
+  g_return_if_fail ((new_font_family == NULL) ||
+		    FO_IS_PROPERTY_FONT_FAMILY (new_font_family));
 
   if (new_font_family != NULL)
     {
-      g_object_ref (new_font_family);
+      g_object_ref_sink (new_font_family);
     }
   if (fo_context->font_family != NULL)
     {
@@ -6029,7 +6364,7 @@ fo_context_set_font_family (FoContext *fo_context,
 
 /**
  * fo_context_get_font_size:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "font-size" property of @fo_context.
  *
@@ -6057,11 +6392,12 @@ fo_context_set_font_size (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_font_size == NULL || FO_IS_PROPERTY_FONT_SIZE (new_font_size));
+  g_return_if_fail ((new_font_size == NULL) ||
+		    FO_IS_PROPERTY_FONT_SIZE (new_font_size));
 
   if (new_font_size != NULL)
     {
-      g_object_ref (new_font_size);
+      g_object_ref_sink (new_font_size);
     }
   if (fo_context->font_size != NULL)
     {
@@ -6073,7 +6409,7 @@ fo_context_set_font_size (FoContext *fo_context,
 
 /**
  * fo_context_get_font_stretch:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "font-stretch" property of @fo_context.
  *
@@ -6101,11 +6437,12 @@ fo_context_set_font_stretch (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_font_stretch == NULL || FO_IS_PROPERTY_FONT_STRETCH (new_font_stretch));
+  g_return_if_fail ((new_font_stretch == NULL) ||
+		    FO_IS_PROPERTY_FONT_STRETCH (new_font_stretch));
 
   if (new_font_stretch != NULL)
     {
-      g_object_ref (new_font_stretch);
+      g_object_ref_sink (new_font_stretch);
     }
   if (fo_context->font_stretch != NULL)
     {
@@ -6117,7 +6454,7 @@ fo_context_set_font_stretch (FoContext *fo_context,
 
 /**
  * fo_context_get_font_style:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "font-style" property of @fo_context.
  *
@@ -6145,11 +6482,12 @@ fo_context_set_font_style (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_font_style == NULL || FO_IS_PROPERTY_FONT_STYLE (new_font_style));
+  g_return_if_fail ((new_font_style == NULL) ||
+		    FO_IS_PROPERTY_FONT_STYLE (new_font_style));
 
   if (new_font_style != NULL)
     {
-      g_object_ref (new_font_style);
+      g_object_ref_sink (new_font_style);
     }
   if (fo_context->font_style != NULL)
     {
@@ -6161,7 +6499,7 @@ fo_context_set_font_style (FoContext *fo_context,
 
 /**
  * fo_context_get_font_variant:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "font-variant" property of @fo_context.
  *
@@ -6189,11 +6527,12 @@ fo_context_set_font_variant (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_font_variant == NULL || FO_IS_PROPERTY_FONT_VARIANT (new_font_variant));
+  g_return_if_fail ((new_font_variant == NULL) ||
+		    FO_IS_PROPERTY_FONT_VARIANT (new_font_variant));
 
   if (new_font_variant != NULL)
     {
-      g_object_ref (new_font_variant);
+      g_object_ref_sink (new_font_variant);
     }
   if (fo_context->font_variant != NULL)
     {
@@ -6205,7 +6544,7 @@ fo_context_set_font_variant (FoContext *fo_context,
 
 /**
  * fo_context_get_font_weight:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "font-weight" property of @fo_context.
  *
@@ -6233,11 +6572,12 @@ fo_context_set_font_weight (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_font_weight == NULL || FO_IS_PROPERTY_FONT_WEIGHT (new_font_weight));
+  g_return_if_fail ((new_font_weight == NULL) ||
+		    FO_IS_PROPERTY_FONT_WEIGHT (new_font_weight));
 
   if (new_font_weight != NULL)
     {
-      g_object_ref (new_font_weight);
+      g_object_ref_sink (new_font_weight);
     }
   if (fo_context->font_weight != NULL)
     {
@@ -6248,8 +6588,53 @@ fo_context_set_font_weight (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_force_page_count:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "force-page-count" property of @fo_context.
+ *
+ * Return value: The "force-page-count" property value.
+**/
+FoProperty *
+fo_context_get_force_page_count (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->force_page_count;
+}
+
+/**
+ * fo_context_set_force_page_count:
+ * @fo_context: The #FoContext object.
+ * @new_force_page_count: The new "force-page-count" property value.
+ * 
+ * Sets the "force-page-count" property of @fo_context to @new_force_page_count.
+ **/
+void
+fo_context_set_force_page_count (FoContext *fo_context,
+		         FoProperty *new_force_page_count)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_force_page_count == NULL) ||
+		    FO_IS_PROPERTY_FORCE_PAGE_COUNT (new_force_page_count));
+
+  if (new_force_page_count != NULL)
+    {
+      g_object_ref_sink (new_force_page_count);
+    }
+  if (fo_context->force_page_count != NULL)
+    {
+      g_object_unref (fo_context->force_page_count);
+    }
+  fo_context->force_page_count = new_force_page_count;
+  /*g_object_notify (G_OBJECT (fo_context), "force-page-count");*/
+}
+
+/**
  * fo_context_get_format:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "format" property of @fo_context.
  *
@@ -6277,11 +6662,12 @@ fo_context_set_format (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_format == NULL || FO_IS_PROPERTY_FORMAT (new_format));
+  g_return_if_fail ((new_format == NULL) ||
+		    FO_IS_PROPERTY_FORMAT (new_format));
 
   if (new_format != NULL)
     {
-      g_object_ref (new_format);
+      g_object_ref_sink (new_format);
     }
   if (fo_context->format != NULL)
     {
@@ -6293,7 +6679,7 @@ fo_context_set_format (FoContext *fo_context,
 
 /**
  * fo_context_get_grouping_separator:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "grouping-separator" property of @fo_context.
  *
@@ -6321,11 +6707,12 @@ fo_context_set_grouping_separator (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_grouping_separator == NULL || FO_IS_PROPERTY_GROUPING_SEPARATOR (new_grouping_separator));
+  g_return_if_fail ((new_grouping_separator == NULL) ||
+		    FO_IS_PROPERTY_GROUPING_SEPARATOR (new_grouping_separator));
 
   if (new_grouping_separator != NULL)
     {
-      g_object_ref (new_grouping_separator);
+      g_object_ref_sink (new_grouping_separator);
     }
   if (fo_context->grouping_separator != NULL)
     {
@@ -6337,7 +6724,7 @@ fo_context_set_grouping_separator (FoContext *fo_context,
 
 /**
  * fo_context_get_grouping_size:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "grouping-size" property of @fo_context.
  *
@@ -6365,11 +6752,12 @@ fo_context_set_grouping_size (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_grouping_size == NULL || FO_IS_PROPERTY_GROUPING_SIZE (new_grouping_size));
+  g_return_if_fail ((new_grouping_size == NULL) ||
+		    FO_IS_PROPERTY_GROUPING_SIZE (new_grouping_size));
 
   if (new_grouping_size != NULL)
     {
-      g_object_ref (new_grouping_size);
+      g_object_ref_sink (new_grouping_size);
     }
   if (fo_context->grouping_size != NULL)
     {
@@ -6381,7 +6769,7 @@ fo_context_set_grouping_size (FoContext *fo_context,
 
 /**
  * fo_context_get_height:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "height" property of @fo_context.
  *
@@ -6409,11 +6797,12 @@ fo_context_set_height (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_height == NULL || FO_IS_PROPERTY_HEIGHT (new_height));
+  g_return_if_fail ((new_height == NULL) ||
+		    FO_IS_PROPERTY_HEIGHT (new_height));
 
   if (new_height != NULL)
     {
-      g_object_ref (new_height);
+      g_object_ref_sink (new_height);
     }
   if (fo_context->height != NULL)
     {
@@ -6425,7 +6814,7 @@ fo_context_set_height (FoContext *fo_context,
 
 /**
  * fo_context_get_id:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "id" property of @fo_context.
  *
@@ -6453,11 +6842,12 @@ fo_context_set_id (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_id == NULL || FO_IS_PROPERTY_ID (new_id));
+  g_return_if_fail ((new_id == NULL) ||
+		    FO_IS_PROPERTY_ID (new_id));
 
   if (new_id != NULL)
     {
-      g_object_ref (new_id);
+      g_object_ref_sink (new_id);
     }
   if (fo_context->id != NULL)
     {
@@ -6468,8 +6858,53 @@ fo_context_set_id (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_initial_page_number:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "initial-page-number" property of @fo_context.
+ *
+ * Return value: The "initial-page-number" property value.
+**/
+FoProperty *
+fo_context_get_initial_page_number (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->initial_page_number;
+}
+
+/**
+ * fo_context_set_initial_page_number:
+ * @fo_context: The #FoContext object.
+ * @new_initial_page_number: The new "initial-page-number" property value.
+ * 
+ * Sets the "initial-page-number" property of @fo_context to @new_initial_page_number.
+ **/
+void
+fo_context_set_initial_page_number (FoContext *fo_context,
+		         FoProperty *new_initial_page_number)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_initial_page_number == NULL) ||
+		    FO_IS_PROPERTY_INITIAL_PAGE_NUMBER (new_initial_page_number));
+
+  if (new_initial_page_number != NULL)
+    {
+      g_object_ref_sink (new_initial_page_number);
+    }
+  if (fo_context->initial_page_number != NULL)
+    {
+      g_object_unref (fo_context->initial_page_number);
+    }
+  fo_context->initial_page_number = new_initial_page_number;
+  /*g_object_notify (G_OBJECT (fo_context), "initial-page-number");*/
+}
+
+/**
  * fo_context_get_inline_progression_dimension:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "inline-progression-dimension" property of @fo_context.
  *
@@ -6497,11 +6932,12 @@ fo_context_set_inline_progression_dimension (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_inline_progression_dimension == NULL || FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION (new_inline_progression_dimension));
+  g_return_if_fail ((new_inline_progression_dimension == NULL) ||
+		    FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION (new_inline_progression_dimension));
 
   if (new_inline_progression_dimension != NULL)
     {
-      g_object_ref (new_inline_progression_dimension);
+      g_object_ref_sink (new_inline_progression_dimension);
     }
   if (fo_context->inline_progression_dimension != NULL)
     {
@@ -6513,7 +6949,7 @@ fo_context_set_inline_progression_dimension (FoContext *fo_context,
 
 /**
  * fo_context_get_inline_progression_dimension_minimum:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "inline-progression-dimension-minimum" property of @fo_context.
  *
@@ -6541,11 +6977,12 @@ fo_context_set_inline_progression_dimension_minimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_inline_progression_dimension_minimum == NULL || FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION_MINIMUM (new_inline_progression_dimension_minimum));
+  g_return_if_fail ((new_inline_progression_dimension_minimum == NULL) ||
+		    FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION_MINIMUM (new_inline_progression_dimension_minimum));
 
   if (new_inline_progression_dimension_minimum != NULL)
     {
-      g_object_ref (new_inline_progression_dimension_minimum);
+      g_object_ref_sink (new_inline_progression_dimension_minimum);
     }
   if (fo_context->inline_progression_dimension_minimum != NULL)
     {
@@ -6557,7 +6994,7 @@ fo_context_set_inline_progression_dimension_minimum (FoContext *fo_context,
 
 /**
  * fo_context_get_inline_progression_dimension_optimum:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "inline-progression-dimension-optimum" property of @fo_context.
  *
@@ -6585,11 +7022,12 @@ fo_context_set_inline_progression_dimension_optimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_inline_progression_dimension_optimum == NULL || FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION_OPTIMUM (new_inline_progression_dimension_optimum));
+  g_return_if_fail ((new_inline_progression_dimension_optimum == NULL) ||
+		    FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION_OPTIMUM (new_inline_progression_dimension_optimum));
 
   if (new_inline_progression_dimension_optimum != NULL)
     {
-      g_object_ref (new_inline_progression_dimension_optimum);
+      g_object_ref_sink (new_inline_progression_dimension_optimum);
     }
   if (fo_context->inline_progression_dimension_optimum != NULL)
     {
@@ -6601,7 +7039,7 @@ fo_context_set_inline_progression_dimension_optimum (FoContext *fo_context,
 
 /**
  * fo_context_get_inline_progression_dimension_maximum:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "inline-progression-dimension-maximum" property of @fo_context.
  *
@@ -6629,11 +7067,12 @@ fo_context_set_inline_progression_dimension_maximum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_inline_progression_dimension_maximum == NULL || FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION_MAXIMUM (new_inline_progression_dimension_maximum));
+  g_return_if_fail ((new_inline_progression_dimension_maximum == NULL) ||
+		    FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION_MAXIMUM (new_inline_progression_dimension_maximum));
 
   if (new_inline_progression_dimension_maximum != NULL)
     {
-      g_object_ref (new_inline_progression_dimension_maximum);
+      g_object_ref_sink (new_inline_progression_dimension_maximum);
     }
   if (fo_context->inline_progression_dimension_maximum != NULL)
     {
@@ -6645,7 +7084,7 @@ fo_context_set_inline_progression_dimension_maximum (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_together:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-together" property of @fo_context.
  *
@@ -6673,11 +7112,12 @@ fo_context_set_keep_together (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_together == NULL || FO_IS_PROPERTY_KEEP_TOGETHER (new_keep_together));
+  g_return_if_fail ((new_keep_together == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER (new_keep_together));
 
   if (new_keep_together != NULL)
     {
-      g_object_ref (new_keep_together);
+      g_object_ref_sink (new_keep_together);
     }
   if (fo_context->keep_together != NULL)
     {
@@ -6689,7 +7129,7 @@ fo_context_set_keep_together (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_together_within_column:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-together-within-column" property of @fo_context.
  *
@@ -6717,11 +7157,12 @@ fo_context_set_keep_together_within_column (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_together_within_column == NULL || FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_COLUMN (new_keep_together_within_column));
+  g_return_if_fail ((new_keep_together_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_COLUMN (new_keep_together_within_column));
 
   if (new_keep_together_within_column != NULL)
     {
-      g_object_ref (new_keep_together_within_column);
+      g_object_ref_sink (new_keep_together_within_column);
     }
   if (fo_context->keep_together_within_column != NULL)
     {
@@ -6733,7 +7174,7 @@ fo_context_set_keep_together_within_column (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_together_within_line:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-together-within-line" property of @fo_context.
  *
@@ -6761,11 +7202,12 @@ fo_context_set_keep_together_within_line (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_together_within_line == NULL || FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_LINE (new_keep_together_within_line));
+  g_return_if_fail ((new_keep_together_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_LINE (new_keep_together_within_line));
 
   if (new_keep_together_within_line != NULL)
     {
-      g_object_ref (new_keep_together_within_line);
+      g_object_ref_sink (new_keep_together_within_line);
     }
   if (fo_context->keep_together_within_line != NULL)
     {
@@ -6777,7 +7219,7 @@ fo_context_set_keep_together_within_line (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_together_within_page:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-together-within-page" property of @fo_context.
  *
@@ -6805,11 +7247,12 @@ fo_context_set_keep_together_within_page (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_together_within_page == NULL || FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_PAGE (new_keep_together_within_page));
+  g_return_if_fail ((new_keep_together_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_TOGETHER_WITHIN_PAGE (new_keep_together_within_page));
 
   if (new_keep_together_within_page != NULL)
     {
-      g_object_ref (new_keep_together_within_page);
+      g_object_ref_sink (new_keep_together_within_page);
     }
   if (fo_context->keep_together_within_page != NULL)
     {
@@ -6821,7 +7264,7 @@ fo_context_set_keep_together_within_page (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_next:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-next" property of @fo_context.
  *
@@ -6849,11 +7292,12 @@ fo_context_set_keep_with_next (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_next == NULL || FO_IS_PROPERTY_KEEP_WITH_NEXT (new_keep_with_next));
+  g_return_if_fail ((new_keep_with_next == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT (new_keep_with_next));
 
   if (new_keep_with_next != NULL)
     {
-      g_object_ref (new_keep_with_next);
+      g_object_ref_sink (new_keep_with_next);
     }
   if (fo_context->keep_with_next != NULL)
     {
@@ -6865,7 +7309,7 @@ fo_context_set_keep_with_next (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_next_within_column:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-next-within-column" property of @fo_context.
  *
@@ -6893,11 +7337,12 @@ fo_context_set_keep_with_next_within_column (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_next_within_column == NULL || FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_COLUMN (new_keep_with_next_within_column));
+  g_return_if_fail ((new_keep_with_next_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_COLUMN (new_keep_with_next_within_column));
 
   if (new_keep_with_next_within_column != NULL)
     {
-      g_object_ref (new_keep_with_next_within_column);
+      g_object_ref_sink (new_keep_with_next_within_column);
     }
   if (fo_context->keep_with_next_within_column != NULL)
     {
@@ -6909,7 +7354,7 @@ fo_context_set_keep_with_next_within_column (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_next_within_line:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-next-within-line" property of @fo_context.
  *
@@ -6937,11 +7382,12 @@ fo_context_set_keep_with_next_within_line (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_next_within_line == NULL || FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_LINE (new_keep_with_next_within_line));
+  g_return_if_fail ((new_keep_with_next_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_LINE (new_keep_with_next_within_line));
 
   if (new_keep_with_next_within_line != NULL)
     {
-      g_object_ref (new_keep_with_next_within_line);
+      g_object_ref_sink (new_keep_with_next_within_line);
     }
   if (fo_context->keep_with_next_within_line != NULL)
     {
@@ -6953,7 +7399,7 @@ fo_context_set_keep_with_next_within_line (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_next_within_page:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-next-within-page" property of @fo_context.
  *
@@ -6981,11 +7427,12 @@ fo_context_set_keep_with_next_within_page (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_next_within_page == NULL || FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_PAGE (new_keep_with_next_within_page));
+  g_return_if_fail ((new_keep_with_next_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_NEXT_WITHIN_PAGE (new_keep_with_next_within_page));
 
   if (new_keep_with_next_within_page != NULL)
     {
-      g_object_ref (new_keep_with_next_within_page);
+      g_object_ref_sink (new_keep_with_next_within_page);
     }
   if (fo_context->keep_with_next_within_page != NULL)
     {
@@ -6997,7 +7444,7 @@ fo_context_set_keep_with_next_within_page (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_previous:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-previous" property of @fo_context.
  *
@@ -7025,11 +7472,12 @@ fo_context_set_keep_with_previous (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_previous == NULL || FO_IS_PROPERTY_KEEP_WITH_PREVIOUS (new_keep_with_previous));
+  g_return_if_fail ((new_keep_with_previous == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS (new_keep_with_previous));
 
   if (new_keep_with_previous != NULL)
     {
-      g_object_ref (new_keep_with_previous);
+      g_object_ref_sink (new_keep_with_previous);
     }
   if (fo_context->keep_with_previous != NULL)
     {
@@ -7041,7 +7489,7 @@ fo_context_set_keep_with_previous (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_previous_within_column:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-previous-within-column" property of @fo_context.
  *
@@ -7069,11 +7517,12 @@ fo_context_set_keep_with_previous_within_column (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_previous_within_column == NULL || FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_COLUMN (new_keep_with_previous_within_column));
+  g_return_if_fail ((new_keep_with_previous_within_column == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_COLUMN (new_keep_with_previous_within_column));
 
   if (new_keep_with_previous_within_column != NULL)
     {
-      g_object_ref (new_keep_with_previous_within_column);
+      g_object_ref_sink (new_keep_with_previous_within_column);
     }
   if (fo_context->keep_with_previous_within_column != NULL)
     {
@@ -7085,7 +7534,7 @@ fo_context_set_keep_with_previous_within_column (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_previous_within_line:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-previous-within-line" property of @fo_context.
  *
@@ -7113,11 +7562,12 @@ fo_context_set_keep_with_previous_within_line (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_previous_within_line == NULL || FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_LINE (new_keep_with_previous_within_line));
+  g_return_if_fail ((new_keep_with_previous_within_line == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_LINE (new_keep_with_previous_within_line));
 
   if (new_keep_with_previous_within_line != NULL)
     {
-      g_object_ref (new_keep_with_previous_within_line);
+      g_object_ref_sink (new_keep_with_previous_within_line);
     }
   if (fo_context->keep_with_previous_within_line != NULL)
     {
@@ -7129,7 +7579,7 @@ fo_context_set_keep_with_previous_within_line (FoContext *fo_context,
 
 /**
  * fo_context_get_keep_with_previous_within_page:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "keep-with-previous-within-page" property of @fo_context.
  *
@@ -7157,11 +7607,12 @@ fo_context_set_keep_with_previous_within_page (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_keep_with_previous_within_page == NULL || FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE (new_keep_with_previous_within_page));
+  g_return_if_fail ((new_keep_with_previous_within_page == NULL) ||
+		    FO_IS_PROPERTY_KEEP_WITH_PREVIOUS_WITHIN_PAGE (new_keep_with_previous_within_page));
 
   if (new_keep_with_previous_within_page != NULL)
     {
-      g_object_ref (new_keep_with_previous_within_page);
+      g_object_ref_sink (new_keep_with_previous_within_page);
     }
   if (fo_context->keep_with_previous_within_page != NULL)
     {
@@ -7172,8 +7623,53 @@ fo_context_set_keep_with_previous_within_page (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_language:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "language" property of @fo_context.
+ *
+ * Return value: The "language" property value.
+**/
+FoProperty *
+fo_context_get_language (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->language;
+}
+
+/**
+ * fo_context_set_language:
+ * @fo_context: The #FoContext object.
+ * @new_language: The new "language" property value.
+ * 
+ * Sets the "language" property of @fo_context to @new_language.
+ **/
+void
+fo_context_set_language (FoContext *fo_context,
+		         FoProperty *new_language)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_language == NULL) ||
+		    FO_IS_PROPERTY_LANGUAGE (new_language));
+
+  if (new_language != NULL)
+    {
+      g_object_ref_sink (new_language);
+    }
+  if (fo_context->language != NULL)
+    {
+      g_object_unref (fo_context->language);
+    }
+  fo_context->language = new_language;
+  /*g_object_notify (G_OBJECT (fo_context), "language");*/
+}
+
+/**
  * fo_context_get_letter_value:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "letter-value" property of @fo_context.
  *
@@ -7201,11 +7697,12 @@ fo_context_set_letter_value (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_letter_value == NULL || FO_IS_PROPERTY_LETTER_VALUE (new_letter_value));
+  g_return_if_fail ((new_letter_value == NULL) ||
+		    FO_IS_PROPERTY_LETTER_VALUE (new_letter_value));
 
   if (new_letter_value != NULL)
     {
-      g_object_ref (new_letter_value);
+      g_object_ref_sink (new_letter_value);
     }
   if (fo_context->letter_value != NULL)
     {
@@ -7217,7 +7714,7 @@ fo_context_set_letter_value (FoContext *fo_context,
 
 /**
  * fo_context_get_line_height:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "line-height" property of @fo_context.
  *
@@ -7245,11 +7742,12 @@ fo_context_set_line_height (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_line_height == NULL || FO_IS_PROPERTY_LINE_HEIGHT (new_line_height));
+  g_return_if_fail ((new_line_height == NULL) ||
+		    FO_IS_PROPERTY_LINE_HEIGHT (new_line_height));
 
   if (new_line_height != NULL)
     {
-      g_object_ref (new_line_height);
+      g_object_ref_sink (new_line_height);
     }
   if (fo_context->line_height != NULL)
     {
@@ -7261,7 +7759,7 @@ fo_context_set_line_height (FoContext *fo_context,
 
 /**
  * fo_context_get_line_stacking_strategy:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "line-stacking-strategy" property of @fo_context.
  *
@@ -7289,11 +7787,12 @@ fo_context_set_line_stacking_strategy (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_line_stacking_strategy == NULL || FO_IS_PROPERTY_LINE_STACKING_STRATEGY (new_line_stacking_strategy));
+  g_return_if_fail ((new_line_stacking_strategy == NULL) ||
+		    FO_IS_PROPERTY_LINE_STACKING_STRATEGY (new_line_stacking_strategy));
 
   if (new_line_stacking_strategy != NULL)
     {
-      g_object_ref (new_line_stacking_strategy);
+      g_object_ref_sink (new_line_stacking_strategy);
     }
   if (fo_context->line_stacking_strategy != NULL)
     {
@@ -7305,7 +7804,7 @@ fo_context_set_line_stacking_strategy (FoContext *fo_context,
 
 /**
  * fo_context_get_linefeed_treatment:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "linefeed-treatment" property of @fo_context.
  *
@@ -7333,11 +7832,12 @@ fo_context_set_linefeed_treatment (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_linefeed_treatment == NULL || FO_IS_PROPERTY_LINEFEED_TREATMENT (new_linefeed_treatment));
+  g_return_if_fail ((new_linefeed_treatment == NULL) ||
+		    FO_IS_PROPERTY_LINEFEED_TREATMENT (new_linefeed_treatment));
 
   if (new_linefeed_treatment != NULL)
     {
-      g_object_ref (new_linefeed_treatment);
+      g_object_ref_sink (new_linefeed_treatment);
     }
   if (fo_context->linefeed_treatment != NULL)
     {
@@ -7349,7 +7849,7 @@ fo_context_set_linefeed_treatment (FoContext *fo_context,
 
 /**
  * fo_context_get_margin:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "margin" property of @fo_context.
  *
@@ -7377,11 +7877,12 @@ fo_context_set_margin (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_margin == NULL || FO_IS_PROPERTY_MARGIN (new_margin));
+  g_return_if_fail ((new_margin == NULL) ||
+		    FO_IS_PROPERTY_MARGIN (new_margin));
 
   if (new_margin != NULL)
     {
-      g_object_ref (new_margin);
+      g_object_ref_sink (new_margin);
     }
   if (fo_context->margin != NULL)
     {
@@ -7393,7 +7894,7 @@ fo_context_set_margin (FoContext *fo_context,
 
 /**
  * fo_context_get_margin_bottom:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "margin-bottom" property of @fo_context.
  *
@@ -7421,11 +7922,12 @@ fo_context_set_margin_bottom (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_margin_bottom == NULL || FO_IS_PROPERTY_MARGIN_BOTTOM (new_margin_bottom));
+  g_return_if_fail ((new_margin_bottom == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_BOTTOM (new_margin_bottom));
 
   if (new_margin_bottom != NULL)
     {
-      g_object_ref (new_margin_bottom);
+      g_object_ref_sink (new_margin_bottom);
     }
   if (fo_context->margin_bottom != NULL)
     {
@@ -7437,7 +7939,7 @@ fo_context_set_margin_bottom (FoContext *fo_context,
 
 /**
  * fo_context_get_margin_left:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "margin-left" property of @fo_context.
  *
@@ -7465,11 +7967,12 @@ fo_context_set_margin_left (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_margin_left == NULL || FO_IS_PROPERTY_MARGIN_LEFT (new_margin_left));
+  g_return_if_fail ((new_margin_left == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_LEFT (new_margin_left));
 
   if (new_margin_left != NULL)
     {
-      g_object_ref (new_margin_left);
+      g_object_ref_sink (new_margin_left);
     }
   if (fo_context->margin_left != NULL)
     {
@@ -7481,7 +7984,7 @@ fo_context_set_margin_left (FoContext *fo_context,
 
 /**
  * fo_context_get_margin_right:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "margin-right" property of @fo_context.
  *
@@ -7509,11 +8012,12 @@ fo_context_set_margin_right (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_margin_right == NULL || FO_IS_PROPERTY_MARGIN_RIGHT (new_margin_right));
+  g_return_if_fail ((new_margin_right == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_RIGHT (new_margin_right));
 
   if (new_margin_right != NULL)
     {
-      g_object_ref (new_margin_right);
+      g_object_ref_sink (new_margin_right);
     }
   if (fo_context->margin_right != NULL)
     {
@@ -7525,7 +8029,7 @@ fo_context_set_margin_right (FoContext *fo_context,
 
 /**
  * fo_context_get_margin_top:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "margin-top" property of @fo_context.
  *
@@ -7553,11 +8057,12 @@ fo_context_set_margin_top (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_margin_top == NULL || FO_IS_PROPERTY_MARGIN_TOP (new_margin_top));
+  g_return_if_fail ((new_margin_top == NULL) ||
+		    FO_IS_PROPERTY_MARGIN_TOP (new_margin_top));
 
   if (new_margin_top != NULL)
     {
-      g_object_ref (new_margin_top);
+      g_object_ref_sink (new_margin_top);
     }
   if (fo_context->margin_top != NULL)
     {
@@ -7569,7 +8074,7 @@ fo_context_set_margin_top (FoContext *fo_context,
 
 /**
  * fo_context_get_master_name:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "master-name" property of @fo_context.
  *
@@ -7597,11 +8102,12 @@ fo_context_set_master_name (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_master_name == NULL || FO_IS_PROPERTY_MASTER_NAME (new_master_name));
+  g_return_if_fail ((new_master_name == NULL) ||
+		    FO_IS_PROPERTY_MASTER_NAME (new_master_name));
 
   if (new_master_name != NULL)
     {
-      g_object_ref (new_master_name);
+      g_object_ref_sink (new_master_name);
     }
   if (fo_context->master_name != NULL)
     {
@@ -7613,7 +8119,7 @@ fo_context_set_master_name (FoContext *fo_context,
 
 /**
  * fo_context_get_master_reference:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "master-reference" property of @fo_context.
  *
@@ -7641,11 +8147,12 @@ fo_context_set_master_reference (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_master_reference == NULL || FO_IS_PROPERTY_MASTER_REFERENCE (new_master_reference));
+  g_return_if_fail ((new_master_reference == NULL) ||
+		    FO_IS_PROPERTY_MASTER_REFERENCE (new_master_reference));
 
   if (new_master_reference != NULL)
     {
-      g_object_ref (new_master_reference);
+      g_object_ref_sink (new_master_reference);
     }
   if (fo_context->master_reference != NULL)
     {
@@ -7656,8 +8163,53 @@ fo_context_set_master_reference (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_maximum_repeats:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "maximum-repeats" property of @fo_context.
+ *
+ * Return value: The "maximum-repeats" property value.
+**/
+FoProperty *
+fo_context_get_maximum_repeats (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->maximum_repeats;
+}
+
+/**
+ * fo_context_set_maximum_repeats:
+ * @fo_context: The #FoContext object.
+ * @new_maximum_repeats: The new "maximum-repeats" property value.
+ * 
+ * Sets the "maximum-repeats" property of @fo_context to @new_maximum_repeats.
+ **/
+void
+fo_context_set_maximum_repeats (FoContext *fo_context,
+		         FoProperty *new_maximum_repeats)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_maximum_repeats == NULL) ||
+		    FO_IS_PROPERTY_MAXIMUM_REPEATS (new_maximum_repeats));
+
+  if (new_maximum_repeats != NULL)
+    {
+      g_object_ref_sink (new_maximum_repeats);
+    }
+  if (fo_context->maximum_repeats != NULL)
+    {
+      g_object_unref (fo_context->maximum_repeats);
+    }
+  fo_context->maximum_repeats = new_maximum_repeats;
+  /*g_object_notify (G_OBJECT (fo_context), "maximum-repeats");*/
+}
+
+/**
  * fo_context_get_media_usage:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "media-usage" property of @fo_context.
  *
@@ -7685,11 +8237,12 @@ fo_context_set_media_usage (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_media_usage == NULL || FO_IS_PROPERTY_MEDIA_USAGE (new_media_usage));
+  g_return_if_fail ((new_media_usage == NULL) ||
+		    FO_IS_PROPERTY_MEDIA_USAGE (new_media_usage));
 
   if (new_media_usage != NULL)
     {
-      g_object_ref (new_media_usage);
+      g_object_ref_sink (new_media_usage);
     }
   if (fo_context->media_usage != NULL)
     {
@@ -7701,7 +8254,7 @@ fo_context_set_media_usage (FoContext *fo_context,
 
 /**
  * fo_context_get_number_columns_repeated:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "number-columns-repeated" property of @fo_context.
  *
@@ -7729,11 +8282,12 @@ fo_context_set_number_columns_repeated (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_number_columns_repeated == NULL || FO_IS_PROPERTY_NUMBER_COLUMNS_REPEATED (new_number_columns_repeated));
+  g_return_if_fail ((new_number_columns_repeated == NULL) ||
+		    FO_IS_PROPERTY_NUMBER_COLUMNS_REPEATED (new_number_columns_repeated));
 
   if (new_number_columns_repeated != NULL)
     {
-      g_object_ref (new_number_columns_repeated);
+      g_object_ref_sink (new_number_columns_repeated);
     }
   if (fo_context->number_columns_repeated != NULL)
     {
@@ -7745,7 +8299,7 @@ fo_context_set_number_columns_repeated (FoContext *fo_context,
 
 /**
  * fo_context_get_number_columns_spanned:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "number-columns-spanned" property of @fo_context.
  *
@@ -7773,11 +8327,12 @@ fo_context_set_number_columns_spanned (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_number_columns_spanned == NULL || FO_IS_PROPERTY_NUMBER_COLUMNS_SPANNED (new_number_columns_spanned));
+  g_return_if_fail ((new_number_columns_spanned == NULL) ||
+		    FO_IS_PROPERTY_NUMBER_COLUMNS_SPANNED (new_number_columns_spanned));
 
   if (new_number_columns_spanned != NULL)
     {
-      g_object_ref (new_number_columns_spanned);
+      g_object_ref_sink (new_number_columns_spanned);
     }
   if (fo_context->number_columns_spanned != NULL)
     {
@@ -7789,7 +8344,7 @@ fo_context_set_number_columns_spanned (FoContext *fo_context,
 
 /**
  * fo_context_get_number_rows_spanned:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "number-rows-spanned" property of @fo_context.
  *
@@ -7817,11 +8372,12 @@ fo_context_set_number_rows_spanned (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_number_rows_spanned == NULL || FO_IS_PROPERTY_NUMBER_ROWS_SPANNED (new_number_rows_spanned));
+  g_return_if_fail ((new_number_rows_spanned == NULL) ||
+		    FO_IS_PROPERTY_NUMBER_ROWS_SPANNED (new_number_rows_spanned));
 
   if (new_number_rows_spanned != NULL)
     {
-      g_object_ref (new_number_rows_spanned);
+      g_object_ref_sink (new_number_rows_spanned);
     }
   if (fo_context->number_rows_spanned != NULL)
     {
@@ -7832,8 +8388,53 @@ fo_context_set_number_rows_spanned (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_odd_or_even:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "odd-or-even" property of @fo_context.
+ *
+ * Return value: The "odd-or-even" property value.
+**/
+FoProperty *
+fo_context_get_odd_or_even (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->odd_or_even;
+}
+
+/**
+ * fo_context_set_odd_or_even:
+ * @fo_context: The #FoContext object.
+ * @new_odd_or_even: The new "odd-or-even" property value.
+ * 
+ * Sets the "odd-or-even" property of @fo_context to @new_odd_or_even.
+ **/
+void
+fo_context_set_odd_or_even (FoContext *fo_context,
+		         FoProperty *new_odd_or_even)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_odd_or_even == NULL) ||
+		    FO_IS_PROPERTY_ODD_OR_EVEN (new_odd_or_even));
+
+  if (new_odd_or_even != NULL)
+    {
+      g_object_ref_sink (new_odd_or_even);
+    }
+  if (fo_context->odd_or_even != NULL)
+    {
+      g_object_unref (fo_context->odd_or_even);
+    }
+  fo_context->odd_or_even = new_odd_or_even;
+  /*g_object_notify (G_OBJECT (fo_context), "odd-or-even");*/
+}
+
+/**
  * fo_context_get_orphans:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "orphans" property of @fo_context.
  *
@@ -7861,11 +8462,12 @@ fo_context_set_orphans (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_orphans == NULL || FO_IS_PROPERTY_ORPHANS (new_orphans));
+  g_return_if_fail ((new_orphans == NULL) ||
+		    FO_IS_PROPERTY_ORPHANS (new_orphans));
 
   if (new_orphans != NULL)
     {
-      g_object_ref (new_orphans);
+      g_object_ref_sink (new_orphans);
     }
   if (fo_context->orphans != NULL)
     {
@@ -7877,7 +8479,7 @@ fo_context_set_orphans (FoContext *fo_context,
 
 /**
  * fo_context_get_overflow:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "overflow" property of @fo_context.
  *
@@ -7905,11 +8507,12 @@ fo_context_set_overflow (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_overflow == NULL || FO_IS_PROPERTY_OVERFLOW (new_overflow));
+  g_return_if_fail ((new_overflow == NULL) ||
+		    FO_IS_PROPERTY_OVERFLOW (new_overflow));
 
   if (new_overflow != NULL)
     {
-      g_object_ref (new_overflow);
+      g_object_ref_sink (new_overflow);
     }
   if (fo_context->overflow != NULL)
     {
@@ -7921,7 +8524,7 @@ fo_context_set_overflow (FoContext *fo_context,
 
 /**
  * fo_context_get_padding:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding" property of @fo_context.
  *
@@ -7949,11 +8552,12 @@ fo_context_set_padding (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding == NULL || FO_IS_PROPERTY_PADDING (new_padding));
+  g_return_if_fail ((new_padding == NULL) ||
+		    FO_IS_PROPERTY_PADDING (new_padding));
 
   if (new_padding != NULL)
     {
-      g_object_ref (new_padding);
+      g_object_ref_sink (new_padding);
     }
   if (fo_context->padding != NULL)
     {
@@ -7965,7 +8569,7 @@ fo_context_set_padding (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_after:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-after" property of @fo_context.
  *
@@ -7993,11 +8597,12 @@ fo_context_set_padding_after (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_after == NULL || FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
+  g_return_if_fail ((new_padding_after == NULL) ||
+		    FO_IS_PROPERTY_PADDING_AFTER (new_padding_after));
 
   if (new_padding_after != NULL)
     {
-      g_object_ref (new_padding_after);
+      g_object_ref_sink (new_padding_after);
     }
   if (fo_context->padding_after != NULL)
     {
@@ -8009,7 +8614,7 @@ fo_context_set_padding_after (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_after_length:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-after-length" property of @fo_context.
  *
@@ -8037,11 +8642,12 @@ fo_context_set_padding_after_length (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_after_length == NULL || FO_IS_PROPERTY_PADDING_AFTER_LENGTH (new_padding_after_length));
+  g_return_if_fail ((new_padding_after_length == NULL) ||
+		    FO_IS_PROPERTY_PADDING_AFTER_LENGTH (new_padding_after_length));
 
   if (new_padding_after_length != NULL)
     {
-      g_object_ref (new_padding_after_length);
+      g_object_ref_sink (new_padding_after_length);
     }
   if (fo_context->padding_after_length != NULL)
     {
@@ -8053,7 +8659,7 @@ fo_context_set_padding_after_length (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_after_condity:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-after-conditionality" property of @fo_context.
  *
@@ -8081,11 +8687,12 @@ fo_context_set_padding_after_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_after_condity == NULL || FO_IS_PROPERTY_PADDING_AFTER_CONDITY (new_padding_after_condity));
+  g_return_if_fail ((new_padding_after_condity == NULL) ||
+		    FO_IS_PROPERTY_PADDING_AFTER_CONDITY (new_padding_after_condity));
 
   if (new_padding_after_condity != NULL)
     {
-      g_object_ref (new_padding_after_condity);
+      g_object_ref_sink (new_padding_after_condity);
     }
   if (fo_context->padding_after_condity != NULL)
     {
@@ -8097,7 +8704,7 @@ fo_context_set_padding_after_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_before:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-before" property of @fo_context.
  *
@@ -8125,11 +8732,12 @@ fo_context_set_padding_before (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_before == NULL || FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
+  g_return_if_fail ((new_padding_before == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BEFORE (new_padding_before));
 
   if (new_padding_before != NULL)
     {
-      g_object_ref (new_padding_before);
+      g_object_ref_sink (new_padding_before);
     }
   if (fo_context->padding_before != NULL)
     {
@@ -8141,7 +8749,7 @@ fo_context_set_padding_before (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_before_length:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-before-length" property of @fo_context.
  *
@@ -8169,11 +8777,12 @@ fo_context_set_padding_before_length (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_before_length == NULL || FO_IS_PROPERTY_PADDING_BEFORE_LENGTH (new_padding_before_length));
+  g_return_if_fail ((new_padding_before_length == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BEFORE_LENGTH (new_padding_before_length));
 
   if (new_padding_before_length != NULL)
     {
-      g_object_ref (new_padding_before_length);
+      g_object_ref_sink (new_padding_before_length);
     }
   if (fo_context->padding_before_length != NULL)
     {
@@ -8185,7 +8794,7 @@ fo_context_set_padding_before_length (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_before_condity:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-before-conditionality" property of @fo_context.
  *
@@ -8213,11 +8822,12 @@ fo_context_set_padding_before_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_before_condity == NULL || FO_IS_PROPERTY_PADDING_BEFORE_CONDITY (new_padding_before_condity));
+  g_return_if_fail ((new_padding_before_condity == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BEFORE_CONDITY (new_padding_before_condity));
 
   if (new_padding_before_condity != NULL)
     {
-      g_object_ref (new_padding_before_condity);
+      g_object_ref_sink (new_padding_before_condity);
     }
   if (fo_context->padding_before_condity != NULL)
     {
@@ -8229,7 +8839,7 @@ fo_context_set_padding_before_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_bottom:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-bottom" property of @fo_context.
  *
@@ -8257,11 +8867,12 @@ fo_context_set_padding_bottom (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_bottom == NULL || FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
+  g_return_if_fail ((new_padding_bottom == NULL) ||
+		    FO_IS_PROPERTY_PADDING_BOTTOM (new_padding_bottom));
 
   if (new_padding_bottom != NULL)
     {
-      g_object_ref (new_padding_bottom);
+      g_object_ref_sink (new_padding_bottom);
     }
   if (fo_context->padding_bottom != NULL)
     {
@@ -8273,7 +8884,7 @@ fo_context_set_padding_bottom (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_end:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-end" property of @fo_context.
  *
@@ -8301,11 +8912,12 @@ fo_context_set_padding_end (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_end == NULL || FO_IS_PROPERTY_PADDING_END (new_padding_end));
+  g_return_if_fail ((new_padding_end == NULL) ||
+		    FO_IS_PROPERTY_PADDING_END (new_padding_end));
 
   if (new_padding_end != NULL)
     {
-      g_object_ref (new_padding_end);
+      g_object_ref_sink (new_padding_end);
     }
   if (fo_context->padding_end != NULL)
     {
@@ -8317,7 +8929,7 @@ fo_context_set_padding_end (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_end_length:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-end-length" property of @fo_context.
  *
@@ -8345,11 +8957,12 @@ fo_context_set_padding_end_length (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_end_length == NULL || FO_IS_PROPERTY_PADDING_END_LENGTH (new_padding_end_length));
+  g_return_if_fail ((new_padding_end_length == NULL) ||
+		    FO_IS_PROPERTY_PADDING_END_LENGTH (new_padding_end_length));
 
   if (new_padding_end_length != NULL)
     {
-      g_object_ref (new_padding_end_length);
+      g_object_ref_sink (new_padding_end_length);
     }
   if (fo_context->padding_end_length != NULL)
     {
@@ -8361,7 +8974,7 @@ fo_context_set_padding_end_length (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_end_condity:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-end-conditionality" property of @fo_context.
  *
@@ -8389,11 +9002,12 @@ fo_context_set_padding_end_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_end_condity == NULL || FO_IS_PROPERTY_PADDING_END_CONDITY (new_padding_end_condity));
+  g_return_if_fail ((new_padding_end_condity == NULL) ||
+		    FO_IS_PROPERTY_PADDING_END_CONDITY (new_padding_end_condity));
 
   if (new_padding_end_condity != NULL)
     {
-      g_object_ref (new_padding_end_condity);
+      g_object_ref_sink (new_padding_end_condity);
     }
   if (fo_context->padding_end_condity != NULL)
     {
@@ -8405,7 +9019,7 @@ fo_context_set_padding_end_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_left:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-left" property of @fo_context.
  *
@@ -8433,11 +9047,12 @@ fo_context_set_padding_left (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_left == NULL || FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
+  g_return_if_fail ((new_padding_left == NULL) ||
+		    FO_IS_PROPERTY_PADDING_LEFT (new_padding_left));
 
   if (new_padding_left != NULL)
     {
-      g_object_ref (new_padding_left);
+      g_object_ref_sink (new_padding_left);
     }
   if (fo_context->padding_left != NULL)
     {
@@ -8449,7 +9064,7 @@ fo_context_set_padding_left (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_right:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-right" property of @fo_context.
  *
@@ -8477,11 +9092,12 @@ fo_context_set_padding_right (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_right == NULL || FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
+  g_return_if_fail ((new_padding_right == NULL) ||
+		    FO_IS_PROPERTY_PADDING_RIGHT (new_padding_right));
 
   if (new_padding_right != NULL)
     {
-      g_object_ref (new_padding_right);
+      g_object_ref_sink (new_padding_right);
     }
   if (fo_context->padding_right != NULL)
     {
@@ -8493,7 +9109,7 @@ fo_context_set_padding_right (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_start:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-start" property of @fo_context.
  *
@@ -8521,11 +9137,12 @@ fo_context_set_padding_start (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_start == NULL || FO_IS_PROPERTY_PADDING_START (new_padding_start));
+  g_return_if_fail ((new_padding_start == NULL) ||
+		    FO_IS_PROPERTY_PADDING_START (new_padding_start));
 
   if (new_padding_start != NULL)
     {
-      g_object_ref (new_padding_start);
+      g_object_ref_sink (new_padding_start);
     }
   if (fo_context->padding_start != NULL)
     {
@@ -8537,7 +9154,7 @@ fo_context_set_padding_start (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_start_length:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-start-length" property of @fo_context.
  *
@@ -8565,11 +9182,12 @@ fo_context_set_padding_start_length (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_start_length == NULL || FO_IS_PROPERTY_PADDING_START_LENGTH (new_padding_start_length));
+  g_return_if_fail ((new_padding_start_length == NULL) ||
+		    FO_IS_PROPERTY_PADDING_START_LENGTH (new_padding_start_length));
 
   if (new_padding_start_length != NULL)
     {
-      g_object_ref (new_padding_start_length);
+      g_object_ref_sink (new_padding_start_length);
     }
   if (fo_context->padding_start_length != NULL)
     {
@@ -8581,7 +9199,7 @@ fo_context_set_padding_start_length (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_start_condity:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-start-conditionality" property of @fo_context.
  *
@@ -8609,11 +9227,12 @@ fo_context_set_padding_start_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_start_condity == NULL || FO_IS_PROPERTY_PADDING_START_CONDITY (new_padding_start_condity));
+  g_return_if_fail ((new_padding_start_condity == NULL) ||
+		    FO_IS_PROPERTY_PADDING_START_CONDITY (new_padding_start_condity));
 
   if (new_padding_start_condity != NULL)
     {
-      g_object_ref (new_padding_start_condity);
+      g_object_ref_sink (new_padding_start_condity);
     }
   if (fo_context->padding_start_condity != NULL)
     {
@@ -8625,7 +9244,7 @@ fo_context_set_padding_start_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_padding_top:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "padding-top" property of @fo_context.
  *
@@ -8653,11 +9272,12 @@ fo_context_set_padding_top (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_padding_top == NULL || FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
+  g_return_if_fail ((new_padding_top == NULL) ||
+		    FO_IS_PROPERTY_PADDING_TOP (new_padding_top));
 
   if (new_padding_top != NULL)
     {
-      g_object_ref (new_padding_top);
+      g_object_ref_sink (new_padding_top);
     }
   if (fo_context->padding_top != NULL)
     {
@@ -8669,7 +9289,7 @@ fo_context_set_padding_top (FoContext *fo_context,
 
 /**
  * fo_context_get_page_height:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "page-height" property of @fo_context.
  *
@@ -8697,11 +9317,12 @@ fo_context_set_page_height (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_page_height == NULL || FO_IS_PROPERTY_PAGE_HEIGHT (new_page_height));
+  g_return_if_fail ((new_page_height == NULL) ||
+		    FO_IS_PROPERTY_PAGE_HEIGHT (new_page_height));
 
   if (new_page_height != NULL)
     {
-      g_object_ref (new_page_height);
+      g_object_ref_sink (new_page_height);
     }
   if (fo_context->page_height != NULL)
     {
@@ -8712,8 +9333,53 @@ fo_context_set_page_height (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_page_position:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "page-position" property of @fo_context.
+ *
+ * Return value: The "page-position" property value.
+**/
+FoProperty *
+fo_context_get_page_position (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->page_position;
+}
+
+/**
+ * fo_context_set_page_position:
+ * @fo_context: The #FoContext object.
+ * @new_page_position: The new "page-position" property value.
+ * 
+ * Sets the "page-position" property of @fo_context to @new_page_position.
+ **/
+void
+fo_context_set_page_position (FoContext *fo_context,
+		         FoProperty *new_page_position)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_page_position == NULL) ||
+		    FO_IS_PROPERTY_PAGE_POSITION (new_page_position));
+
+  if (new_page_position != NULL)
+    {
+      g_object_ref_sink (new_page_position);
+    }
+  if (fo_context->page_position != NULL)
+    {
+      g_object_unref (fo_context->page_position);
+    }
+  fo_context->page_position = new_page_position;
+  /*g_object_notify (G_OBJECT (fo_context), "page-position");*/
+}
+
+/**
  * fo_context_get_page_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "page-width" property of @fo_context.
  *
@@ -8741,11 +9407,12 @@ fo_context_set_page_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_page_width == NULL || FO_IS_PROPERTY_PAGE_WIDTH (new_page_width));
+  g_return_if_fail ((new_page_width == NULL) ||
+		    FO_IS_PROPERTY_PAGE_WIDTH (new_page_width));
 
   if (new_page_width != NULL)
     {
-      g_object_ref (new_page_width);
+      g_object_ref_sink (new_page_width);
     }
   if (fo_context->page_width != NULL)
     {
@@ -8756,8 +9423,53 @@ fo_context_set_page_width (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_precedence:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "precedence" property of @fo_context.
+ *
+ * Return value: The "precedence" property value.
+**/
+FoProperty *
+fo_context_get_precedence (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->precedence;
+}
+
+/**
+ * fo_context_set_precedence:
+ * @fo_context: The #FoContext object.
+ * @new_precedence: The new "precedence" property value.
+ * 
+ * Sets the "precedence" property of @fo_context to @new_precedence.
+ **/
+void
+fo_context_set_precedence (FoContext *fo_context,
+		         FoProperty *new_precedence)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_precedence == NULL) ||
+		    FO_IS_PROPERTY_PRECEDENCE (new_precedence));
+
+  if (new_precedence != NULL)
+    {
+      g_object_ref_sink (new_precedence);
+    }
+  if (fo_context->precedence != NULL)
+    {
+      g_object_unref (fo_context->precedence);
+    }
+  fo_context->precedence = new_precedence;
+  /*g_object_notify (G_OBJECT (fo_context), "precedence");*/
+}
+
+/**
  * fo_context_get_provisional_distance_between_starts:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "provisional-distance-between-starts" property of @fo_context.
  *
@@ -8785,11 +9497,12 @@ fo_context_set_provisional_distance_between_starts (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_provisional_distance_between_starts == NULL || FO_IS_PROPERTY_PROVISIONAL_DISTANCE_BETWEEN_STARTS (new_provisional_distance_between_starts));
+  g_return_if_fail ((new_provisional_distance_between_starts == NULL) ||
+		    FO_IS_PROPERTY_PROVISIONAL_DISTANCE_BETWEEN_STARTS (new_provisional_distance_between_starts));
 
   if (new_provisional_distance_between_starts != NULL)
     {
-      g_object_ref (new_provisional_distance_between_starts);
+      g_object_ref_sink (new_provisional_distance_between_starts);
     }
   if (fo_context->provisional_distance_between_starts != NULL)
     {
@@ -8801,7 +9514,7 @@ fo_context_set_provisional_distance_between_starts (FoContext *fo_context,
 
 /**
  * fo_context_get_provisional_label_separation:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "provisional-label-separation" property of @fo_context.
  *
@@ -8829,11 +9542,12 @@ fo_context_set_provisional_label_separation (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_provisional_label_separation == NULL || FO_IS_PROPERTY_PROVISIONAL_LABEL_SEPARATION (new_provisional_label_separation));
+  g_return_if_fail ((new_provisional_label_separation == NULL) ||
+		    FO_IS_PROPERTY_PROVISIONAL_LABEL_SEPARATION (new_provisional_label_separation));
 
   if (new_provisional_label_separation != NULL)
     {
-      g_object_ref (new_provisional_label_separation);
+      g_object_ref_sink (new_provisional_label_separation);
     }
   if (fo_context->provisional_label_separation != NULL)
     {
@@ -8845,7 +9559,7 @@ fo_context_set_provisional_label_separation (FoContext *fo_context,
 
 /**
  * fo_context_get_ref_id:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "ref-id" property of @fo_context.
  *
@@ -8873,11 +9587,12 @@ fo_context_set_ref_id (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_ref_id == NULL || FO_IS_PROPERTY_REF_ID (new_ref_id));
+  g_return_if_fail ((new_ref_id == NULL) ||
+		    FO_IS_PROPERTY_REF_ID (new_ref_id));
 
   if (new_ref_id != NULL)
     {
-      g_object_ref (new_ref_id);
+      g_object_ref_sink (new_ref_id);
     }
   if (fo_context->ref_id != NULL)
     {
@@ -8888,8 +9603,53 @@ fo_context_set_ref_id (FoContext *fo_context,
 }
 
 /**
+ * fo_context_get_reference_orientation:
+ * @fo_context: The #FoContext object.
+ * 
+ * Gets the "reference-orientation" property of @fo_context.
+ *
+ * Return value: The "reference-orientation" property value.
+**/
+FoProperty *
+fo_context_get_reference_orientation (FoContext *fo_context)
+{
+  g_return_val_if_fail (fo_context != NULL, NULL);
+  g_return_val_if_fail (FO_IS_CONTEXT (fo_context), NULL);
+
+  return fo_context->reference_orientation;
+}
+
+/**
+ * fo_context_set_reference_orientation:
+ * @fo_context: The #FoContext object.
+ * @new_reference_orientation: The new "reference-orientation" property value.
+ * 
+ * Sets the "reference-orientation" property of @fo_context to @new_reference_orientation.
+ **/
+void
+fo_context_set_reference_orientation (FoContext *fo_context,
+		         FoProperty *new_reference_orientation)
+{
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
+  g_return_if_fail ((new_reference_orientation == NULL) ||
+		    FO_IS_PROPERTY_REFERENCE_ORIENTATION (new_reference_orientation));
+
+  if (new_reference_orientation != NULL)
+    {
+      g_object_ref_sink (new_reference_orientation);
+    }
+  if (fo_context->reference_orientation != NULL)
+    {
+      g_object_unref (fo_context->reference_orientation);
+    }
+  fo_context->reference_orientation = new_reference_orientation;
+  /*g_object_notify (G_OBJECT (fo_context), "reference-orientation");*/
+}
+
+/**
  * fo_context_get_region_name:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "region-name" property of @fo_context.
  *
@@ -8917,11 +9677,12 @@ fo_context_set_region_name (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_region_name == NULL || FO_IS_PROPERTY_REGION_NAME (new_region_name));
+  g_return_if_fail ((new_region_name == NULL) ||
+		    FO_IS_PROPERTY_REGION_NAME (new_region_name));
 
   if (new_region_name != NULL)
     {
-      g_object_ref (new_region_name);
+      g_object_ref_sink (new_region_name);
     }
   if (fo_context->region_name != NULL)
     {
@@ -8933,7 +9694,7 @@ fo_context_set_region_name (FoContext *fo_context,
 
 /**
  * fo_context_get_role:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "role" property of @fo_context.
  *
@@ -8961,11 +9722,12 @@ fo_context_set_role (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_role == NULL || FO_IS_PROPERTY_ROLE (new_role));
+  g_return_if_fail ((new_role == NULL) ||
+		    FO_IS_PROPERTY_ROLE (new_role));
 
   if (new_role != NULL)
     {
-      g_object_ref (new_role);
+      g_object_ref_sink (new_role);
     }
   if (fo_context->role != NULL)
     {
@@ -8977,7 +9739,7 @@ fo_context_set_role (FoContext *fo_context,
 
 /**
  * fo_context_get_scaling:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "scaling" property of @fo_context.
  *
@@ -9005,11 +9767,12 @@ fo_context_set_scaling (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_scaling == NULL || FO_IS_PROPERTY_SCALING (new_scaling));
+  g_return_if_fail ((new_scaling == NULL) ||
+		    FO_IS_PROPERTY_SCALING (new_scaling));
 
   if (new_scaling != NULL)
     {
-      g_object_ref (new_scaling);
+      g_object_ref_sink (new_scaling);
     }
   if (fo_context->scaling != NULL)
     {
@@ -9021,7 +9784,7 @@ fo_context_set_scaling (FoContext *fo_context,
 
 /**
  * fo_context_get_scaling_method:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "scaling-method" property of @fo_context.
  *
@@ -9049,11 +9812,12 @@ fo_context_set_scaling_method (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_scaling_method == NULL || FO_IS_PROPERTY_SCALING_METHOD (new_scaling_method));
+  g_return_if_fail ((new_scaling_method == NULL) ||
+		    FO_IS_PROPERTY_SCALING_METHOD (new_scaling_method));
 
   if (new_scaling_method != NULL)
     {
-      g_object_ref (new_scaling_method);
+      g_object_ref_sink (new_scaling_method);
     }
   if (fo_context->scaling_method != NULL)
     {
@@ -9065,7 +9829,7 @@ fo_context_set_scaling_method (FoContext *fo_context,
 
 /**
  * fo_context_get_score_spaces:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "score-spaces" property of @fo_context.
  *
@@ -9093,11 +9857,12 @@ fo_context_set_score_spaces (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_score_spaces == NULL || FO_IS_PROPERTY_SCORE_SPACES (new_score_spaces));
+  g_return_if_fail ((new_score_spaces == NULL) ||
+		    FO_IS_PROPERTY_SCORE_SPACES (new_score_spaces));
 
   if (new_score_spaces != NULL)
     {
-      g_object_ref (new_score_spaces);
+      g_object_ref_sink (new_score_spaces);
     }
   if (fo_context->score_spaces != NULL)
     {
@@ -9109,7 +9874,7 @@ fo_context_set_score_spaces (FoContext *fo_context,
 
 /**
  * fo_context_get_source_document:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "source-document" property of @fo_context.
  *
@@ -9137,11 +9902,12 @@ fo_context_set_source_document (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_source_document == NULL || FO_IS_PROPERTY_SOURCE_DOCUMENT (new_source_document));
+  g_return_if_fail ((new_source_document == NULL) ||
+		    FO_IS_PROPERTY_SOURCE_DOCUMENT (new_source_document));
 
   if (new_source_document != NULL)
     {
-      g_object_ref (new_source_document);
+      g_object_ref_sink (new_source_document);
     }
   if (fo_context->source_document != NULL)
     {
@@ -9153,7 +9919,7 @@ fo_context_set_source_document (FoContext *fo_context,
 
 /**
  * fo_context_get_space_after:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "space-after" property of @fo_context.
  *
@@ -9181,11 +9947,12 @@ fo_context_set_space_after (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_after == NULL || FO_IS_PROPERTY_SPACE_AFTER (new_space_after));
+  g_return_if_fail ((new_space_after == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER (new_space_after));
 
   if (new_space_after != NULL)
     {
-      g_object_ref (new_space_after);
+      g_object_ref_sink (new_space_after);
     }
   if (fo_context->space_after != NULL)
     {
@@ -9208,11 +9975,12 @@ fo_context_set_space_after_minimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_after_minimum == NULL || FO_IS_PROPERTY_SPACE_AFTER_MINIMUM (new_space_after_minimum));
+  g_return_if_fail ((new_space_after_minimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER_MINIMUM (new_space_after_minimum));
 
   if (new_space_after_minimum != NULL)
     {
-      g_object_ref (new_space_after_minimum);
+      g_object_ref_sink (new_space_after_minimum);
     }
   if (fo_context->space_after_minimum != NULL)
     {
@@ -9235,11 +10003,12 @@ fo_context_set_space_after_optimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_after_optimum == NULL || FO_IS_PROPERTY_SPACE_AFTER_OPTIMUM (new_space_after_optimum));
+  g_return_if_fail ((new_space_after_optimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER_OPTIMUM (new_space_after_optimum));
 
   if (new_space_after_optimum != NULL)
     {
-      g_object_ref (new_space_after_optimum);
+      g_object_ref_sink (new_space_after_optimum);
     }
   if (fo_context->space_after_optimum != NULL)
     {
@@ -9262,11 +10031,12 @@ fo_context_set_space_after_maximum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_after_maximum == NULL || FO_IS_PROPERTY_SPACE_AFTER_MAXIMUM (new_space_after_maximum));
+  g_return_if_fail ((new_space_after_maximum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER_MAXIMUM (new_space_after_maximum));
 
   if (new_space_after_maximum != NULL)
     {
-      g_object_ref (new_space_after_maximum);
+      g_object_ref_sink (new_space_after_maximum);
     }
   if (fo_context->space_after_maximum != NULL)
     {
@@ -9289,11 +10059,12 @@ fo_context_set_space_after_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_after_precedence == NULL || FO_IS_PROPERTY_SPACE_AFTER_PRECEDENCE (new_space_after_precedence));
+  g_return_if_fail ((new_space_after_precedence == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER_PRECEDENCE (new_space_after_precedence));
 
   if (new_space_after_precedence != NULL)
     {
-      g_object_ref (new_space_after_precedence);
+      g_object_ref_sink (new_space_after_precedence);
     }
   if (fo_context->space_after_precedence != NULL)
     {
@@ -9316,11 +10087,12 @@ fo_context_set_space_after_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_after_condity == NULL || FO_IS_PROPERTY_SPACE_AFTER_CONDITY (new_space_after_condity));
+  g_return_if_fail ((new_space_after_condity == NULL) ||
+		    FO_IS_PROPERTY_SPACE_AFTER_CONDITY (new_space_after_condity));
 
   if (new_space_after_condity != NULL)
     {
-      g_object_ref (new_space_after_condity);
+      g_object_ref_sink (new_space_after_condity);
     }
   if (fo_context->space_after_condity != NULL)
     {
@@ -9332,7 +10104,7 @@ fo_context_set_space_after_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_space_before:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "space-before" property of @fo_context.
  *
@@ -9360,11 +10132,12 @@ fo_context_set_space_before (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_before == NULL || FO_IS_PROPERTY_SPACE_BEFORE (new_space_before));
+  g_return_if_fail ((new_space_before == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE (new_space_before));
 
   if (new_space_before != NULL)
     {
-      g_object_ref (new_space_before);
+      g_object_ref_sink (new_space_before);
     }
   if (fo_context->space_before != NULL)
     {
@@ -9387,11 +10160,12 @@ fo_context_set_space_before_minimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_before_minimum == NULL || FO_IS_PROPERTY_SPACE_BEFORE_MINIMUM (new_space_before_minimum));
+  g_return_if_fail ((new_space_before_minimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE_MINIMUM (new_space_before_minimum));
 
   if (new_space_before_minimum != NULL)
     {
-      g_object_ref (new_space_before_minimum);
+      g_object_ref_sink (new_space_before_minimum);
     }
   if (fo_context->space_before_minimum != NULL)
     {
@@ -9414,11 +10188,12 @@ fo_context_set_space_before_optimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_before_optimum == NULL || FO_IS_PROPERTY_SPACE_BEFORE_OPTIMUM (new_space_before_optimum));
+  g_return_if_fail ((new_space_before_optimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE_OPTIMUM (new_space_before_optimum));
 
   if (new_space_before_optimum != NULL)
     {
-      g_object_ref (new_space_before_optimum);
+      g_object_ref_sink (new_space_before_optimum);
     }
   if (fo_context->space_before_optimum != NULL)
     {
@@ -9441,11 +10216,12 @@ fo_context_set_space_before_maximum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_before_maximum == NULL || FO_IS_PROPERTY_SPACE_BEFORE_MAXIMUM (new_space_before_maximum));
+  g_return_if_fail ((new_space_before_maximum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE_MAXIMUM (new_space_before_maximum));
 
   if (new_space_before_maximum != NULL)
     {
-      g_object_ref (new_space_before_maximum);
+      g_object_ref_sink (new_space_before_maximum);
     }
   if (fo_context->space_before_maximum != NULL)
     {
@@ -9468,11 +10244,12 @@ fo_context_set_space_before_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_before_precedence == NULL || FO_IS_PROPERTY_SPACE_BEFORE_PRECEDENCE (new_space_before_precedence));
+  g_return_if_fail ((new_space_before_precedence == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE_PRECEDENCE (new_space_before_precedence));
 
   if (new_space_before_precedence != NULL)
     {
-      g_object_ref (new_space_before_precedence);
+      g_object_ref_sink (new_space_before_precedence);
     }
   if (fo_context->space_before_precedence != NULL)
     {
@@ -9495,11 +10272,12 @@ fo_context_set_space_before_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_before_condity == NULL || FO_IS_PROPERTY_SPACE_BEFORE_CONDITY (new_space_before_condity));
+  g_return_if_fail ((new_space_before_condity == NULL) ||
+		    FO_IS_PROPERTY_SPACE_BEFORE_CONDITY (new_space_before_condity));
 
   if (new_space_before_condity != NULL)
     {
-      g_object_ref (new_space_before_condity);
+      g_object_ref_sink (new_space_before_condity);
     }
   if (fo_context->space_before_condity != NULL)
     {
@@ -9511,7 +10289,7 @@ fo_context_set_space_before_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_space_end:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "space-end" property of @fo_context.
  *
@@ -9539,11 +10317,12 @@ fo_context_set_space_end (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_end == NULL || FO_IS_PROPERTY_SPACE_END (new_space_end));
+  g_return_if_fail ((new_space_end == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END (new_space_end));
 
   if (new_space_end != NULL)
     {
-      g_object_ref (new_space_end);
+      g_object_ref_sink (new_space_end);
     }
   if (fo_context->space_end != NULL)
     {
@@ -9566,11 +10345,12 @@ fo_context_set_space_end_minimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_end_minimum == NULL || FO_IS_PROPERTY_SPACE_END_MINIMUM (new_space_end_minimum));
+  g_return_if_fail ((new_space_end_minimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END_MINIMUM (new_space_end_minimum));
 
   if (new_space_end_minimum != NULL)
     {
-      g_object_ref (new_space_end_minimum);
+      g_object_ref_sink (new_space_end_minimum);
     }
   if (fo_context->space_end_minimum != NULL)
     {
@@ -9593,11 +10373,12 @@ fo_context_set_space_end_optimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_end_optimum == NULL || FO_IS_PROPERTY_SPACE_END_OPTIMUM (new_space_end_optimum));
+  g_return_if_fail ((new_space_end_optimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END_OPTIMUM (new_space_end_optimum));
 
   if (new_space_end_optimum != NULL)
     {
-      g_object_ref (new_space_end_optimum);
+      g_object_ref_sink (new_space_end_optimum);
     }
   if (fo_context->space_end_optimum != NULL)
     {
@@ -9620,11 +10401,12 @@ fo_context_set_space_end_maximum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_end_maximum == NULL || FO_IS_PROPERTY_SPACE_END_MAXIMUM (new_space_end_maximum));
+  g_return_if_fail ((new_space_end_maximum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END_MAXIMUM (new_space_end_maximum));
 
   if (new_space_end_maximum != NULL)
     {
-      g_object_ref (new_space_end_maximum);
+      g_object_ref_sink (new_space_end_maximum);
     }
   if (fo_context->space_end_maximum != NULL)
     {
@@ -9647,11 +10429,12 @@ fo_context_set_space_end_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_end_precedence == NULL || FO_IS_PROPERTY_SPACE_END_PRECEDENCE (new_space_end_precedence));
+  g_return_if_fail ((new_space_end_precedence == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END_PRECEDENCE (new_space_end_precedence));
 
   if (new_space_end_precedence != NULL)
     {
-      g_object_ref (new_space_end_precedence);
+      g_object_ref_sink (new_space_end_precedence);
     }
   if (fo_context->space_end_precedence != NULL)
     {
@@ -9674,11 +10457,12 @@ fo_context_set_space_end_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_end_condity == NULL || FO_IS_PROPERTY_SPACE_END_CONDITY (new_space_end_condity));
+  g_return_if_fail ((new_space_end_condity == NULL) ||
+		    FO_IS_PROPERTY_SPACE_END_CONDITY (new_space_end_condity));
 
   if (new_space_end_condity != NULL)
     {
-      g_object_ref (new_space_end_condity);
+      g_object_ref_sink (new_space_end_condity);
     }
   if (fo_context->space_end_condity != NULL)
     {
@@ -9690,7 +10474,7 @@ fo_context_set_space_end_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_space_start:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "space-start" property of @fo_context.
  *
@@ -9718,11 +10502,12 @@ fo_context_set_space_start (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_start == NULL || FO_IS_PROPERTY_SPACE_START (new_space_start));
+  g_return_if_fail ((new_space_start == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START (new_space_start));
 
   if (new_space_start != NULL)
     {
-      g_object_ref (new_space_start);
+      g_object_ref_sink (new_space_start);
     }
   if (fo_context->space_start != NULL)
     {
@@ -9745,11 +10530,12 @@ fo_context_set_space_start_minimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_start_minimum == NULL || FO_IS_PROPERTY_SPACE_START_MINIMUM (new_space_start_minimum));
+  g_return_if_fail ((new_space_start_minimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START_MINIMUM (new_space_start_minimum));
 
   if (new_space_start_minimum != NULL)
     {
-      g_object_ref (new_space_start_minimum);
+      g_object_ref_sink (new_space_start_minimum);
     }
   if (fo_context->space_start_minimum != NULL)
     {
@@ -9772,11 +10558,12 @@ fo_context_set_space_start_optimum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_start_optimum == NULL || FO_IS_PROPERTY_SPACE_START_OPTIMUM (new_space_start_optimum));
+  g_return_if_fail ((new_space_start_optimum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START_OPTIMUM (new_space_start_optimum));
 
   if (new_space_start_optimum != NULL)
     {
-      g_object_ref (new_space_start_optimum);
+      g_object_ref_sink (new_space_start_optimum);
     }
   if (fo_context->space_start_optimum != NULL)
     {
@@ -9799,11 +10586,12 @@ fo_context_set_space_start_maximum (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_start_maximum == NULL || FO_IS_PROPERTY_SPACE_START_MAXIMUM (new_space_start_maximum));
+  g_return_if_fail ((new_space_start_maximum == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START_MAXIMUM (new_space_start_maximum));
 
   if (new_space_start_maximum != NULL)
     {
-      g_object_ref (new_space_start_maximum);
+      g_object_ref_sink (new_space_start_maximum);
     }
   if (fo_context->space_start_maximum != NULL)
     {
@@ -9826,11 +10614,12 @@ fo_context_set_space_start_precedence (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_start_precedence == NULL || FO_IS_PROPERTY_SPACE_START_PRECEDENCE (new_space_start_precedence));
+  g_return_if_fail ((new_space_start_precedence == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START_PRECEDENCE (new_space_start_precedence));
 
   if (new_space_start_precedence != NULL)
     {
-      g_object_ref (new_space_start_precedence);
+      g_object_ref_sink (new_space_start_precedence);
     }
   if (fo_context->space_start_precedence != NULL)
     {
@@ -9853,11 +10642,12 @@ fo_context_set_space_start_condity (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_space_start_condity == NULL || FO_IS_PROPERTY_SPACE_START_CONDITY (new_space_start_condity));
+  g_return_if_fail ((new_space_start_condity == NULL) ||
+		    FO_IS_PROPERTY_SPACE_START_CONDITY (new_space_start_condity));
 
   if (new_space_start_condity != NULL)
     {
-      g_object_ref (new_space_start_condity);
+      g_object_ref_sink (new_space_start_condity);
     }
   if (fo_context->space_start_condity != NULL)
     {
@@ -9869,7 +10659,7 @@ fo_context_set_space_start_condity (FoContext *fo_context,
 
 /**
  * fo_context_get_span:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "span" property of @fo_context.
  *
@@ -9897,11 +10687,12 @@ fo_context_set_span (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_span == NULL || FO_IS_PROPERTY_SPAN (new_span));
+  g_return_if_fail ((new_span == NULL) ||
+		    FO_IS_PROPERTY_SPAN (new_span));
 
   if (new_span != NULL)
     {
-      g_object_ref (new_span);
+      g_object_ref_sink (new_span);
     }
   if (fo_context->span != NULL)
     {
@@ -9913,7 +10704,7 @@ fo_context_set_span (FoContext *fo_context,
 
 /**
  * fo_context_get_src:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "src" property of @fo_context.
  *
@@ -9941,11 +10732,12 @@ fo_context_set_src (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_src == NULL || FO_IS_PROPERTY_SRC (new_src));
+  g_return_if_fail ((new_src == NULL) ||
+		    FO_IS_PROPERTY_SRC (new_src));
 
   if (new_src != NULL)
     {
-      g_object_ref (new_src);
+      g_object_ref_sink (new_src);
     }
   if (fo_context->src != NULL)
     {
@@ -9957,7 +10749,7 @@ fo_context_set_src (FoContext *fo_context,
 
 /**
  * fo_context_get_start_indent:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "start-indent" property of @fo_context.
  *
@@ -9985,11 +10777,12 @@ fo_context_set_start_indent (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_start_indent == NULL || FO_IS_PROPERTY_START_INDENT (new_start_indent));
+  g_return_if_fail ((new_start_indent == NULL) ||
+		    FO_IS_PROPERTY_START_INDENT (new_start_indent));
 
   if (new_start_indent != NULL)
     {
-      g_object_ref (new_start_indent);
+      g_object_ref_sink (new_start_indent);
     }
   if (fo_context->start_indent != NULL)
     {
@@ -10001,7 +10794,7 @@ fo_context_set_start_indent (FoContext *fo_context,
 
 /**
  * fo_context_get_table_layout:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "table-layout" property of @fo_context.
  *
@@ -10029,11 +10822,12 @@ fo_context_set_table_layout (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_table_layout == NULL || FO_IS_PROPERTY_TABLE_LAYOUT (new_table_layout));
+  g_return_if_fail ((new_table_layout == NULL) ||
+		    FO_IS_PROPERTY_TABLE_LAYOUT (new_table_layout));
 
   if (new_table_layout != NULL)
     {
-      g_object_ref (new_table_layout);
+      g_object_ref_sink (new_table_layout);
     }
   if (fo_context->table_layout != NULL)
     {
@@ -10045,7 +10839,7 @@ fo_context_set_table_layout (FoContext *fo_context,
 
 /**
  * fo_context_get_text_align:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "text-align" property of @fo_context.
  *
@@ -10073,11 +10867,12 @@ fo_context_set_text_align (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_text_align == NULL || FO_IS_PROPERTY_TEXT_ALIGN (new_text_align));
+  g_return_if_fail ((new_text_align == NULL) ||
+		    FO_IS_PROPERTY_TEXT_ALIGN (new_text_align));
 
   if (new_text_align != NULL)
     {
-      g_object_ref (new_text_align);
+      g_object_ref_sink (new_text_align);
     }
   if (fo_context->text_align != NULL)
     {
@@ -10089,7 +10884,7 @@ fo_context_set_text_align (FoContext *fo_context,
 
 /**
  * fo_context_get_text_indent:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "text-indent" property of @fo_context.
  *
@@ -10117,11 +10912,12 @@ fo_context_set_text_indent (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_text_indent == NULL || FO_IS_PROPERTY_TEXT_INDENT (new_text_indent));
+  g_return_if_fail ((new_text_indent == NULL) ||
+		    FO_IS_PROPERTY_TEXT_INDENT (new_text_indent));
 
   if (new_text_indent != NULL)
     {
-      g_object_ref (new_text_indent);
+      g_object_ref_sink (new_text_indent);
     }
   if (fo_context->text_indent != NULL)
     {
@@ -10133,7 +10929,7 @@ fo_context_set_text_indent (FoContext *fo_context,
 
 /**
  * fo_context_get_unicode_bidi:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "unicode-bidi" property of @fo_context.
  *
@@ -10161,11 +10957,12 @@ fo_context_set_unicode_bidi (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_unicode_bidi == NULL || FO_IS_PROPERTY_UNICODE_BIDI (new_unicode_bidi));
+  g_return_if_fail ((new_unicode_bidi == NULL) ||
+		    FO_IS_PROPERTY_UNICODE_BIDI (new_unicode_bidi));
 
   if (new_unicode_bidi != NULL)
     {
-      g_object_ref (new_unicode_bidi);
+      g_object_ref_sink (new_unicode_bidi);
     }
   if (fo_context->unicode_bidi != NULL)
     {
@@ -10177,7 +10974,7 @@ fo_context_set_unicode_bidi (FoContext *fo_context,
 
 /**
  * fo_context_get_white_space_collapse:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "white-space-collapse" property of @fo_context.
  *
@@ -10205,11 +11002,12 @@ fo_context_set_white_space_collapse (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_white_space_collapse == NULL || FO_IS_PROPERTY_WHITE_SPACE_COLLAPSE (new_white_space_collapse));
+  g_return_if_fail ((new_white_space_collapse == NULL) ||
+		    FO_IS_PROPERTY_WHITE_SPACE_COLLAPSE (new_white_space_collapse));
 
   if (new_white_space_collapse != NULL)
     {
-      g_object_ref (new_white_space_collapse);
+      g_object_ref_sink (new_white_space_collapse);
     }
   if (fo_context->white_space_collapse != NULL)
     {
@@ -10221,7 +11019,7 @@ fo_context_set_white_space_collapse (FoContext *fo_context,
 
 /**
  * fo_context_get_white_space_treatment:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "white-space-treatment" property of @fo_context.
  *
@@ -10249,11 +11047,12 @@ fo_context_set_white_space_treatment (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_white_space_treatment == NULL || FO_IS_PROPERTY_WHITE_SPACE_TREATMENT (new_white_space_treatment));
+  g_return_if_fail ((new_white_space_treatment == NULL) ||
+		    FO_IS_PROPERTY_WHITE_SPACE_TREATMENT (new_white_space_treatment));
 
   if (new_white_space_treatment != NULL)
     {
-      g_object_ref (new_white_space_treatment);
+      g_object_ref_sink (new_white_space_treatment);
     }
   if (fo_context->white_space_treatment != NULL)
     {
@@ -10265,7 +11064,7 @@ fo_context_set_white_space_treatment (FoContext *fo_context,
 
 /**
  * fo_context_get_widows:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "widows" property of @fo_context.
  *
@@ -10293,11 +11092,12 @@ fo_context_set_widows (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_widows == NULL || FO_IS_PROPERTY_WIDOWS (new_widows));
+  g_return_if_fail ((new_widows == NULL) ||
+		    FO_IS_PROPERTY_WIDOWS (new_widows));
 
   if (new_widows != NULL)
     {
-      g_object_ref (new_widows);
+      g_object_ref_sink (new_widows);
     }
   if (fo_context->widows != NULL)
     {
@@ -10309,7 +11109,7 @@ fo_context_set_widows (FoContext *fo_context,
 
 /**
  * fo_context_get_width:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "width" property of @fo_context.
  *
@@ -10337,11 +11137,12 @@ fo_context_set_width (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_width == NULL || FO_IS_PROPERTY_WIDTH (new_width));
+  g_return_if_fail ((new_width == NULL) ||
+		    FO_IS_PROPERTY_WIDTH (new_width));
 
   if (new_width != NULL)
     {
-      g_object_ref (new_width);
+      g_object_ref_sink (new_width);
     }
   if (fo_context->width != NULL)
     {
@@ -10353,7 +11154,7 @@ fo_context_set_width (FoContext *fo_context,
 
 /**
  * fo_context_get_wrap_option:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "wrap-option" property of @fo_context.
  *
@@ -10381,11 +11182,12 @@ fo_context_set_wrap_option (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_wrap_option == NULL || FO_IS_PROPERTY_WRAP_OPTION (new_wrap_option));
+  g_return_if_fail ((new_wrap_option == NULL) ||
+		    FO_IS_PROPERTY_WRAP_OPTION (new_wrap_option));
 
   if (new_wrap_option != NULL)
     {
-      g_object_ref (new_wrap_option);
+      g_object_ref_sink (new_wrap_option);
     }
   if (fo_context->wrap_option != NULL)
     {
@@ -10397,7 +11199,7 @@ fo_context_set_wrap_option (FoContext *fo_context,
 
 /**
  * fo_context_get_writing_mode:
- * @fo_context: The @FoContext object.
+ * @fo_context: The #FoContext object.
  * 
  * Gets the "writing-mode" property of @fo_context.
  *
@@ -10425,11 +11227,12 @@ fo_context_set_writing_mode (FoContext *fo_context,
 {
   g_return_if_fail (fo_context != NULL);
   g_return_if_fail (FO_IS_CONTEXT (fo_context));
-  g_return_if_fail (new_writing_mode == NULL || FO_IS_PROPERTY_WRITING_MODE (new_writing_mode));
+  g_return_if_fail ((new_writing_mode == NULL) ||
+		    FO_IS_PROPERTY_WRITING_MODE (new_writing_mode));
 
   if (new_writing_mode != NULL)
     {
-      g_object_ref (new_writing_mode);
+      g_object_ref_sink (new_writing_mode);
     }
   if (fo_context->writing_mode != NULL)
     {
@@ -10464,6 +11267,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_background_image (src));
   fo_context_set_baseline_shift (context,
       fo_context_get_baseline_shift (src));
+  fo_context_set_blank_or_not_blank (context,
+      fo_context_get_blank_or_not_blank (src));
   fo_context_set_block_progression_dimension (context,
       fo_context_get_block_progression_dimension (src));
   fo_context_set_block_progression_dimension_minimum (context,
@@ -10568,6 +11373,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_content_type (src));
   fo_context_set_content_width (context,
       fo_context_get_content_width (src));
+  fo_context_set_country (context,
+      fo_context_get_country (src));
   fo_context_set_direction (context,
       fo_context_get_direction (src));
   fo_context_set_display_align (context,
@@ -10592,6 +11399,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_font_variant (src));
   fo_context_set_font_weight (context,
       fo_context_get_font_weight (src));
+  fo_context_set_force_page_count (context,
+      fo_context_get_force_page_count (src));
   fo_context_set_format (context,
       fo_context_get_format (src));
   fo_context_set_grouping_separator (context,
@@ -10602,6 +11411,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_height (src));
   fo_context_set_id (context,
       fo_context_get_id (src));
+  fo_context_set_initial_page_number (context,
+      fo_context_get_initial_page_number (src));
   fo_context_set_inline_progression_dimension (context,
       fo_context_get_inline_progression_dimension (src));
   fo_context_set_inline_progression_dimension_minimum (context,
@@ -10634,6 +11445,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_keep_with_previous_within_line (src));
   fo_context_set_keep_with_previous_within_page (context,
       fo_context_get_keep_with_previous_within_page (src));
+  fo_context_set_language (context,
+      fo_context_get_language (src));
   fo_context_set_letter_value (context,
       fo_context_get_letter_value (src));
   fo_context_set_line_height (context,
@@ -10656,6 +11469,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_master_name (src));
   fo_context_set_master_reference (context,
       fo_context_get_master_reference (src));
+  fo_context_set_maximum_repeats (context,
+      fo_context_get_maximum_repeats (src));
   fo_context_set_media_usage (context,
       fo_context_get_media_usage (src));
   fo_context_set_number_columns_repeated (context,
@@ -10664,6 +11479,8 @@ fo_context_copy (FoContext *src)
       fo_context_get_number_columns_spanned (src));
   fo_context_set_number_rows_spanned (context,
       fo_context_get_number_rows_spanned (src));
+  fo_context_set_odd_or_even (context,
+      fo_context_get_odd_or_even (src));
   fo_context_set_orphans (context,
       fo_context_get_orphans (src));
   fo_context_set_overflow (context,
@@ -10704,14 +11521,20 @@ fo_context_copy (FoContext *src)
       fo_context_get_padding_top (src));
   fo_context_set_page_height (context,
       fo_context_get_page_height (src));
+  fo_context_set_page_position (context,
+      fo_context_get_page_position (src));
   fo_context_set_page_width (context,
       fo_context_get_page_width (src));
+  fo_context_set_precedence (context,
+      fo_context_get_precedence (src));
   fo_context_set_provisional_distance_between_starts (context,
       fo_context_get_provisional_distance_between_starts (src));
   fo_context_set_provisional_label_separation (context,
       fo_context_get_provisional_label_separation (src));
   fo_context_set_ref_id (context,
       fo_context_get_ref_id (src));
+  fo_context_set_reference_orientation (context,
+      fo_context_get_reference_orientation (src));
   fo_context_set_region_name (context,
       fo_context_get_region_name (src));
   fo_context_set_role (context,
@@ -10779,766 +11602,836 @@ fo_context_merge (FoContext *primary, FoContext *secondary)
 {
   if (primary == NULL && secondary != NULL)
     {
-      primary = g_object_ref (secondary);
+      primary = g_object_ref_sink (secondary);
     }
 
   if (primary->alignment_adjust == NULL)
     {
       primary->alignment_adjust =
-        g_object_ref (fo_property_alignment_adjust_get_initial ());
+        g_object_ref_sink (fo_property_alignment_adjust_get_initial ());
     }
   if (primary->alignment_baseline == NULL)
     {
       primary->alignment_baseline =
-        g_object_ref (fo_property_alignment_baseline_get_initial ());
+        g_object_ref_sink (fo_property_alignment_baseline_get_initial ());
     }
   if (primary->background_color == NULL)
     {
       primary->background_color =
-        g_object_ref (fo_property_background_color_get_initial ());
+        g_object_ref_sink (fo_property_background_color_get_initial ());
     }
   if (primary->background_image == NULL)
     {
       primary->background_image =
-        g_object_ref (fo_property_background_image_get_initial ());
+        g_object_ref_sink (fo_property_background_image_get_initial ());
     }
   if (primary->baseline_shift == NULL)
     {
       primary->baseline_shift =
-        g_object_ref (fo_property_baseline_shift_get_initial ());
+        g_object_ref_sink (fo_property_baseline_shift_get_initial ());
+    }
+  if (primary->blank_or_not_blank == NULL)
+    {
+      primary->blank_or_not_blank =
+        g_object_ref_sink (fo_property_blank_or_not_blank_get_initial ());
     }
   if (primary->block_progression_dimension == NULL)
     {
       primary->block_progression_dimension =
-        g_object_ref (fo_property_block_progression_dimension_get_initial ());
+        g_object_ref_sink (fo_property_block_progression_dimension_get_initial ());
+    }
+  if (primary->block_progression_dimension_minimum == NULL)
+    {
+      primary->block_progression_dimension_minimum =
+        g_object_ref_sink (fo_property_block_progression_dimension_minimum_get_initial ());
+    }
+  if (primary->block_progression_dimension_optimum == NULL)
+    {
+      primary->block_progression_dimension_optimum =
+        g_object_ref_sink (fo_property_block_progression_dimension_optimum_get_initial ());
+    }
+  if (primary->block_progression_dimension_maximum == NULL)
+    {
+      primary->block_progression_dimension_maximum =
+        g_object_ref_sink (fo_property_block_progression_dimension_maximum_get_initial ());
     }
   if (primary->border == NULL)
     {
       primary->border =
-        g_object_ref (fo_property_border_get_initial ());
+        g_object_ref_sink (fo_property_border_get_initial ());
     }
   if (primary->border_after_color == NULL)
     {
       primary->border_after_color =
-        g_object_ref (fo_property_border_after_color_get_initial ());
+        g_object_ref_sink (fo_property_border_after_color_get_initial ());
     }
   if (primary->border_after_precedence == NULL)
     {
       primary->border_after_precedence =
-        g_object_ref (fo_property_border_after_precedence_get_initial ());
+        g_object_ref_sink (fo_property_border_after_precedence_get_initial ());
     }
   if (primary->border_after_style == NULL)
     {
       primary->border_after_style =
-        g_object_ref (fo_property_border_after_style_get_initial ());
+        g_object_ref_sink (fo_property_border_after_style_get_initial ());
     }
   if (primary->border_after_width == NULL)
     {
       primary->border_after_width =
-        g_object_ref (fo_property_border_after_width_get_initial ());
+        g_object_ref_sink (fo_property_border_after_width_get_initial ());
     }
   if (primary->border_before_color == NULL)
     {
       primary->border_before_color =
-        g_object_ref (fo_property_border_before_color_get_initial ());
+        g_object_ref_sink (fo_property_border_before_color_get_initial ());
     }
   if (primary->border_before_precedence == NULL)
     {
       primary->border_before_precedence =
-        g_object_ref (fo_property_border_before_precedence_get_initial ());
+        g_object_ref_sink (fo_property_border_before_precedence_get_initial ());
     }
   if (primary->border_before_style == NULL)
     {
       primary->border_before_style =
-        g_object_ref (fo_property_border_before_style_get_initial ());
+        g_object_ref_sink (fo_property_border_before_style_get_initial ());
     }
   if (primary->border_before_width == NULL)
     {
       primary->border_before_width =
-        g_object_ref (fo_property_border_before_width_get_initial ());
+        g_object_ref_sink (fo_property_border_before_width_get_initial ());
     }
   if (primary->border_bottom == NULL)
     {
       primary->border_bottom =
-        g_object_ref (fo_property_border_bottom_get_initial ());
+        g_object_ref_sink (fo_property_border_bottom_get_initial ());
     }
   if (primary->border_bottom_color == NULL)
     {
       primary->border_bottom_color =
-        g_object_ref (fo_property_border_bottom_color_get_initial ());
+        g_object_ref_sink (fo_property_border_bottom_color_get_initial ());
     }
   if (primary->border_bottom_style == NULL)
     {
       primary->border_bottom_style =
-        g_object_ref (fo_property_border_bottom_style_get_initial ());
+        g_object_ref_sink (fo_property_border_bottom_style_get_initial ());
     }
   if (primary->border_bottom_width == NULL)
     {
       primary->border_bottom_width =
-        g_object_ref (fo_property_border_bottom_width_get_initial ());
+        g_object_ref_sink (fo_property_border_bottom_width_get_initial ());
     }
   if (primary->border_collapse == NULL &&
       secondary->border_collapse != NULL)
     {
       primary->border_collapse =
-        g_object_ref (secondary->border_collapse);
+        g_object_ref_sink (secondary->border_collapse);
     }
   if (primary->border_color == NULL)
     {
       primary->border_color =
-        g_object_ref (fo_property_border_color_get_initial ());
+        g_object_ref_sink (fo_property_border_color_get_initial ());
     }
   if (primary->border_end_color == NULL)
     {
       primary->border_end_color =
-        g_object_ref (fo_property_border_end_color_get_initial ());
+        g_object_ref_sink (fo_property_border_end_color_get_initial ());
     }
   if (primary->border_end_precedence == NULL)
     {
       primary->border_end_precedence =
-        g_object_ref (fo_property_border_end_precedence_get_initial ());
+        g_object_ref_sink (fo_property_border_end_precedence_get_initial ());
     }
   if (primary->border_end_style == NULL)
     {
       primary->border_end_style =
-        g_object_ref (fo_property_border_end_style_get_initial ());
+        g_object_ref_sink (fo_property_border_end_style_get_initial ());
     }
   if (primary->border_end_width == NULL)
     {
       primary->border_end_width =
-        g_object_ref (fo_property_border_end_width_get_initial ());
+        g_object_ref_sink (fo_property_border_end_width_get_initial ());
     }
   if (primary->border_left == NULL)
     {
       primary->border_left =
-        g_object_ref (fo_property_border_left_get_initial ());
+        g_object_ref_sink (fo_property_border_left_get_initial ());
     }
   if (primary->border_left_color == NULL)
     {
       primary->border_left_color =
-        g_object_ref (fo_property_border_left_color_get_initial ());
+        g_object_ref_sink (fo_property_border_left_color_get_initial ());
     }
   if (primary->border_left_style == NULL)
     {
       primary->border_left_style =
-        g_object_ref (fo_property_border_left_style_get_initial ());
+        g_object_ref_sink (fo_property_border_left_style_get_initial ());
     }
   if (primary->border_left_width == NULL)
     {
       primary->border_left_width =
-        g_object_ref (fo_property_border_left_width_get_initial ());
+        g_object_ref_sink (fo_property_border_left_width_get_initial ());
     }
   if (primary->border_right == NULL)
     {
       primary->border_right =
-        g_object_ref (fo_property_border_right_get_initial ());
+        g_object_ref_sink (fo_property_border_right_get_initial ());
     }
   if (primary->border_right_color == NULL)
     {
       primary->border_right_color =
-        g_object_ref (fo_property_border_right_color_get_initial ());
+        g_object_ref_sink (fo_property_border_right_color_get_initial ());
     }
   if (primary->border_right_style == NULL)
     {
       primary->border_right_style =
-        g_object_ref (fo_property_border_right_style_get_initial ());
+        g_object_ref_sink (fo_property_border_right_style_get_initial ());
     }
   if (primary->border_right_width == NULL)
     {
       primary->border_right_width =
-        g_object_ref (fo_property_border_right_width_get_initial ());
+        g_object_ref_sink (fo_property_border_right_width_get_initial ());
     }
   if (primary->border_separation == NULL &&
       secondary->border_separation != NULL)
     {
       primary->border_separation =
-        g_object_ref (secondary->border_separation);
+        g_object_ref_sink (secondary->border_separation);
     }
   if (primary->border_start_color == NULL)
     {
       primary->border_start_color =
-        g_object_ref (fo_property_border_start_color_get_initial ());
+        g_object_ref_sink (fo_property_border_start_color_get_initial ());
     }
   if (primary->border_start_precedence == NULL)
     {
       primary->border_start_precedence =
-        g_object_ref (fo_property_border_start_precedence_get_initial ());
+        g_object_ref_sink (fo_property_border_start_precedence_get_initial ());
     }
   if (primary->border_start_style == NULL)
     {
       primary->border_start_style =
-        g_object_ref (fo_property_border_start_style_get_initial ());
+        g_object_ref_sink (fo_property_border_start_style_get_initial ());
     }
   if (primary->border_start_width == NULL)
     {
       primary->border_start_width =
-        g_object_ref (fo_property_border_start_width_get_initial ());
+        g_object_ref_sink (fo_property_border_start_width_get_initial ());
     }
   if (primary->border_style == NULL)
     {
       primary->border_style =
-        g_object_ref (fo_property_border_style_get_initial ());
+        g_object_ref_sink (fo_property_border_style_get_initial ());
     }
   if (primary->border_top == NULL)
     {
       primary->border_top =
-        g_object_ref (fo_property_border_top_get_initial ());
+        g_object_ref_sink (fo_property_border_top_get_initial ());
     }
   if (primary->border_top_color == NULL)
     {
       primary->border_top_color =
-        g_object_ref (fo_property_border_top_color_get_initial ());
+        g_object_ref_sink (fo_property_border_top_color_get_initial ());
     }
   if (primary->border_top_style == NULL)
     {
       primary->border_top_style =
-        g_object_ref (fo_property_border_top_style_get_initial ());
+        g_object_ref_sink (fo_property_border_top_style_get_initial ());
     }
   if (primary->border_top_width == NULL)
     {
       primary->border_top_width =
-        g_object_ref (fo_property_border_top_width_get_initial ());
+        g_object_ref_sink (fo_property_border_top_width_get_initial ());
     }
   if (primary->border_width == NULL)
     {
       primary->border_width =
-        g_object_ref (fo_property_border_width_get_initial ());
+        g_object_ref_sink (fo_property_border_width_get_initial ());
     }
   if (primary->break_after == NULL)
     {
       primary->break_after =
-        g_object_ref (fo_property_break_after_get_initial ());
+        g_object_ref_sink (fo_property_break_after_get_initial ());
     }
   if (primary->break_before == NULL)
     {
       primary->break_before =
-        g_object_ref (fo_property_break_before_get_initial ());
+        g_object_ref_sink (fo_property_break_before_get_initial ());
     }
   if (primary->character == NULL)
     {
       primary->character =
-        g_object_ref (fo_property_character_get_initial ());
+        g_object_ref_sink (fo_property_character_get_initial ());
     }
   if (primary->clip == NULL)
     {
       primary->clip =
-        g_object_ref (fo_property_clip_get_initial ());
+        g_object_ref_sink (fo_property_clip_get_initial ());
     }
   if (primary->color == NULL &&
       secondary->color != NULL)
     {
       primary->color =
-        g_object_ref (secondary->color);
+        g_object_ref_sink (secondary->color);
     }
   if (primary->column_number == NULL)
     {
       primary->column_number =
-        g_object_ref (fo_property_column_number_get_initial ());
+        g_object_ref_sink (fo_property_column_number_get_initial ());
     }
   if (primary->column_width == NULL)
     {
       primary->column_width =
-        g_object_ref (fo_property_column_width_get_initial ());
+        g_object_ref_sink (fo_property_column_width_get_initial ());
     }
   if (primary->content_height == NULL)
     {
       primary->content_height =
-        g_object_ref (fo_property_content_height_get_initial ());
+        g_object_ref_sink (fo_property_content_height_get_initial ());
     }
   if (primary->content_type == NULL)
     {
       primary->content_type =
-        g_object_ref (fo_property_content_type_get_initial ());
+        g_object_ref_sink (fo_property_content_type_get_initial ());
     }
   if (primary->content_width == NULL)
     {
       primary->content_width =
-        g_object_ref (fo_property_content_width_get_initial ());
+        g_object_ref_sink (fo_property_content_width_get_initial ());
+    }
+  if (primary->country == NULL &&
+      secondary->country != NULL)
+    {
+      primary->country =
+        g_object_ref_sink (secondary->country);
     }
   if (primary->direction == NULL &&
       secondary->direction != NULL)
     {
       primary->direction =
-        g_object_ref (secondary->direction);
+        g_object_ref_sink (secondary->direction);
     }
   if (primary->display_align == NULL &&
       secondary->display_align != NULL)
     {
       primary->display_align =
-        g_object_ref (secondary->display_align);
+        g_object_ref_sink (secondary->display_align);
     }
   if (primary->dominant_baseline == NULL)
     {
       primary->dominant_baseline =
-        g_object_ref (fo_property_dominant_baseline_get_initial ());
+        g_object_ref_sink (fo_property_dominant_baseline_get_initial ());
     }
   if (primary->end_indent == NULL &&
       secondary->end_indent != NULL)
     {
       primary->end_indent =
-        g_object_ref (secondary->end_indent);
+        g_object_ref_sink (secondary->end_indent);
     }
   if (primary->extent == NULL)
     {
       primary->extent =
-        g_object_ref (fo_property_extent_get_initial ());
+        g_object_ref_sink (fo_property_extent_get_initial ());
     }
   if (primary->flow_name == NULL)
     {
       primary->flow_name =
-        g_object_ref (fo_property_flow_name_get_initial ());
+        g_object_ref_sink (fo_property_flow_name_get_initial ());
     }
   if (primary->font_family == NULL &&
       secondary->font_family != NULL)
     {
       primary->font_family =
-        g_object_ref (secondary->font_family);
+        g_object_ref_sink (secondary->font_family);
     }
   if (primary->font_size == NULL &&
       secondary->font_size != NULL)
     {
       primary->font_size =
-        g_object_ref (secondary->font_size);
+        g_object_ref_sink (secondary->font_size);
     }
   if (primary->font_stretch == NULL &&
       secondary->font_stretch != NULL)
     {
       primary->font_stretch =
-        g_object_ref (secondary->font_stretch);
+        g_object_ref_sink (secondary->font_stretch);
     }
   if (primary->font_style == NULL &&
       secondary->font_style != NULL)
     {
       primary->font_style =
-        g_object_ref (secondary->font_style);
+        g_object_ref_sink (secondary->font_style);
     }
   if (primary->font_variant == NULL &&
       secondary->font_variant != NULL)
     {
       primary->font_variant =
-        g_object_ref (secondary->font_variant);
+        g_object_ref_sink (secondary->font_variant);
     }
   if (primary->font_weight == NULL &&
       secondary->font_weight != NULL)
     {
       primary->font_weight =
-        g_object_ref (secondary->font_weight);
+        g_object_ref_sink (secondary->font_weight);
+    }
+  if (primary->force_page_count == NULL)
+    {
+      primary->force_page_count =
+        g_object_ref_sink (fo_property_force_page_count_get_initial ());
     }
   if (primary->format == NULL)
     {
       primary->format =
-        g_object_ref (fo_property_format_get_initial ());
+        g_object_ref_sink (fo_property_format_get_initial ());
     }
   if (primary->grouping_separator == NULL)
     {
       primary->grouping_separator =
-        g_object_ref (fo_property_grouping_separator_get_initial ());
+        g_object_ref_sink (fo_property_grouping_separator_get_initial ());
     }
   if (primary->grouping_size == NULL)
     {
       primary->grouping_size =
-        g_object_ref (fo_property_grouping_size_get_initial ());
+        g_object_ref_sink (fo_property_grouping_size_get_initial ());
     }
   if (primary->height == NULL)
     {
       primary->height =
-        g_object_ref (fo_property_height_get_initial ());
+        g_object_ref_sink (fo_property_height_get_initial ());
     }
   if (primary->id == NULL)
     {
-      primary->id =
-        g_object_ref (fo_property_id_get_initial ());
+      /* It's a new ID value, not just the same value to which to add
+	 another reference. */
+      primary->id = 
+        g_object_ref_sink (fo_property_id_get_initial ());
+    }
+  if (primary->initial_page_number == NULL)
+    {
+      primary->initial_page_number =
+        g_object_ref_sink (fo_property_initial_page_number_get_initial ());
     }
   if (primary->inline_progression_dimension == NULL)
     {
       primary->inline_progression_dimension =
-	g_object_ref (fo_property_inline_progression_dimension_get_initial ());
+	g_object_ref_sink (fo_property_inline_progression_dimension_get_initial ());
     }
   if (primary->keep_together == NULL &&
       secondary->keep_together != NULL)
     {
       primary->keep_together =
-        g_object_ref (secondary->keep_together);
+        g_object_ref_sink (secondary->keep_together);
     }
   if (primary->keep_together_within_column == NULL)
     {
       primary->keep_together_within_column =
-        g_object_ref (fo_property_keep_together_within_column_get_initial ());
+        g_object_ref_sink (fo_property_keep_together_within_column_get_initial ());
     }
   if (primary->keep_together_within_line == NULL)
     {
       primary->keep_together_within_line =
-        g_object_ref (fo_property_keep_together_within_line_get_initial ());
+        g_object_ref_sink (fo_property_keep_together_within_line_get_initial ());
     }
   if (primary->keep_together_within_page == NULL)
     {
       primary->keep_together_within_page =
-        g_object_ref (fo_property_keep_together_within_page_get_initial ());
+        g_object_ref_sink (fo_property_keep_together_within_page_get_initial ());
     }
   if (primary->keep_with_next == NULL)
     {
       primary->keep_with_next =
-        g_object_ref (fo_property_keep_with_next_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_next_get_initial ());
     }
   if (primary->keep_with_next_within_column == NULL)
     {
       primary->keep_with_next_within_column =
-        g_object_ref (fo_property_keep_with_next_within_column_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_next_within_column_get_initial ());
     }
   if (primary->keep_with_next_within_line == NULL)
     {
       primary->keep_with_next_within_line =
-        g_object_ref (fo_property_keep_with_next_within_line_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_next_within_line_get_initial ());
     }
   if (primary->keep_with_next_within_page == NULL)
     {
       primary->keep_with_next_within_page =
-        g_object_ref (fo_property_keep_with_next_within_page_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_next_within_page_get_initial ());
     }
   if (primary->keep_with_previous == NULL)
     {
       primary->keep_with_previous =
-        g_object_ref (fo_property_keep_with_previous_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_previous_get_initial ());
     }
   if (primary->keep_with_previous_within_column == NULL)
     {
       primary->keep_with_previous_within_column =
-        g_object_ref (fo_property_keep_with_previous_within_column_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_previous_within_column_get_initial ());
     }
   if (primary->keep_with_previous_within_line == NULL)
     {
       primary->keep_with_previous_within_line =
-        g_object_ref (fo_property_keep_with_previous_within_line_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_previous_within_line_get_initial ());
     }
   if (primary->keep_with_previous_within_page == NULL)
     {
       primary->keep_with_previous_within_page =
-        g_object_ref (fo_property_keep_with_previous_within_page_get_initial ());
+        g_object_ref_sink (fo_property_keep_with_previous_within_page_get_initial ());
+    }
+  if (primary->language == NULL &&
+      secondary->language != NULL)
+    {
+      primary->language =
+        g_object_ref_sink (secondary->language);
     }
   if (primary->letter_value == NULL)
     {
       primary->letter_value =
-        g_object_ref (fo_property_letter_value_get_initial ());
+        g_object_ref_sink (fo_property_letter_value_get_initial ());
     }
   if (primary->line_height == NULL &&
       secondary->line_height != NULL)
     {
       primary->line_height =
-        g_object_ref (secondary->line_height);
+        g_object_ref_sink (secondary->line_height);
     }
   if (primary->line_stacking_strategy == NULL &&
       secondary->line_stacking_strategy != NULL)
     {
       primary->line_stacking_strategy =
-        g_object_ref (secondary->line_stacking_strategy);
+        g_object_ref_sink (secondary->line_stacking_strategy);
     }
   if (primary->linefeed_treatment == NULL &&
       secondary->linefeed_treatment != NULL)
     {
       primary->linefeed_treatment =
-        g_object_ref (secondary->linefeed_treatment);
+        g_object_ref_sink (secondary->linefeed_treatment);
     }
   if (primary->margin == NULL)
     {
       primary->margin =
-        g_object_ref (fo_property_margin_get_initial ());
+        g_object_ref_sink (fo_property_margin_get_initial ());
     }
   if (primary->margin_bottom == NULL)
     {
       primary->margin_bottom =
-        g_object_ref (fo_property_margin_bottom_get_initial ());
+        g_object_ref_sink (fo_property_margin_bottom_get_initial ());
     }
   if (primary->margin_left == NULL)
     {
       primary->margin_left =
-        g_object_ref (fo_property_margin_left_get_initial ());
+        g_object_ref_sink (fo_property_margin_left_get_initial ());
     }
   if (primary->margin_right == NULL)
     {
       primary->margin_right =
-        g_object_ref (fo_property_margin_right_get_initial ());
+        g_object_ref_sink (fo_property_margin_right_get_initial ());
     }
   if (primary->margin_top == NULL)
     {
       primary->margin_top =
-        g_object_ref (fo_property_margin_top_get_initial ());
+        g_object_ref_sink (fo_property_margin_top_get_initial ());
     }
   if (primary->master_name == NULL)
     {
       primary->master_name =
-        g_object_ref (fo_property_master_name_get_initial ());
+        g_object_ref_sink (fo_property_master_name_get_initial ());
     }
   if (primary->master_reference == NULL)
     {
       primary->master_reference =
-        g_object_ref (fo_property_master_reference_get_initial ());
+        g_object_ref_sink (fo_property_master_reference_get_initial ());
+    }
+  if (primary->maximum_repeats == NULL)
+    {
+      primary->maximum_repeats =
+        g_object_ref_sink (fo_property_maximum_repeats_get_initial ());
     }
   if (primary->media_usage == NULL)
     {
       primary->media_usage =
-        g_object_ref (fo_property_media_usage_get_initial ());
+        g_object_ref_sink (fo_property_media_usage_get_initial ());
     }
   if (primary->number_columns_repeated == NULL)
     {
       primary->number_columns_repeated =
-        g_object_ref (fo_property_number_columns_repeated_get_initial ());
+        g_object_ref_sink (fo_property_number_columns_repeated_get_initial ());
     }
   if (primary->number_columns_spanned == NULL)
     {
       primary->number_columns_spanned =
-        g_object_ref (fo_property_number_columns_spanned_get_initial ());
+        g_object_ref_sink (fo_property_number_columns_spanned_get_initial ());
     }
   if (primary->number_rows_spanned == NULL)
     {
       primary->number_rows_spanned =
-        g_object_ref (fo_property_number_rows_spanned_get_initial ());
+        g_object_ref_sink (fo_property_number_rows_spanned_get_initial ());
+    }
+  if (primary->odd_or_even == NULL)
+    {
+      primary->odd_or_even =
+        g_object_ref_sink (fo_property_odd_or_even_get_initial ());
     }
   if (primary->orphans == NULL &&
       secondary->orphans != NULL)
     {
       primary->orphans =
-        g_object_ref (secondary->orphans);
+        g_object_ref_sink (secondary->orphans);
     }
   if (primary->overflow == NULL)
     {
       primary->overflow =
-        g_object_ref (fo_property_overflow_get_initial ());
+        g_object_ref_sink (fo_property_overflow_get_initial ());
     }
   if (primary->padding == NULL)
     {
       primary->padding =
-        g_object_ref (fo_property_padding_get_initial ());
+        g_object_ref_sink (fo_property_padding_get_initial ());
     }
   if (primary->padding_after == NULL)
     {
       primary->padding_after =
-        g_object_ref (fo_property_padding_after_get_initial ());
+        g_object_ref_sink (fo_property_padding_after_get_initial ());
     }
   if (primary->padding_after_length == NULL)
     {
       primary->padding_after_length =
-        g_object_ref (fo_property_padding_after_length_get_initial ());
+        g_object_ref_sink (fo_property_padding_after_length_get_initial ());
     }
   if (primary->padding_after_condity == NULL)
     {
       primary->padding_after_condity =
-        g_object_ref (fo_property_padding_after_condity_get_initial ());
+        g_object_ref_sink (fo_property_padding_after_condity_get_initial ());
     }
   if (primary->padding_before == NULL)
     {
       primary->padding_before =
-        g_object_ref (fo_property_padding_before_get_initial ());
+        g_object_ref_sink (fo_property_padding_before_get_initial ());
     }
   if (primary->padding_before_length == NULL)
     {
       primary->padding_before_length =
-        g_object_ref (fo_property_padding_before_length_get_initial ());
+        g_object_ref_sink (fo_property_padding_before_length_get_initial ());
     }
   if (primary->padding_before_condity == NULL)
     {
       primary->padding_before_condity =
-        g_object_ref (fo_property_padding_before_condity_get_initial ());
+        g_object_ref_sink (fo_property_padding_before_condity_get_initial ());
     }
   if (primary->padding_bottom == NULL)
     {
       primary->padding_bottom =
-        g_object_ref (fo_property_padding_bottom_get_initial ());
+        g_object_ref_sink (fo_property_padding_bottom_get_initial ());
     }
   if (primary->padding_end == NULL)
     {
       primary->padding_end =
-        g_object_ref (fo_property_padding_end_get_initial ());
+        g_object_ref_sink (fo_property_padding_end_get_initial ());
     }
   if (primary->padding_end_length == NULL)
     {
       primary->padding_end_length =
-        g_object_ref (fo_property_padding_end_length_get_initial ());
+        g_object_ref_sink (fo_property_padding_end_length_get_initial ());
     }
   if (primary->padding_end_condity == NULL)
     {
       primary->padding_end_condity =
-        g_object_ref (fo_property_padding_end_condity_get_initial ());
+        g_object_ref_sink (fo_property_padding_end_condity_get_initial ());
     }
   if (primary->padding_left == NULL)
     {
       primary->padding_left =
-        g_object_ref (fo_property_padding_left_get_initial ());
+        g_object_ref_sink (fo_property_padding_left_get_initial ());
     }
   if (primary->padding_right == NULL)
     {
       primary->padding_right =
-        g_object_ref (fo_property_padding_right_get_initial ());
+        g_object_ref_sink (fo_property_padding_right_get_initial ());
     }
   if (primary->padding_start == NULL)
     {
       primary->padding_start =
-        g_object_ref (fo_property_padding_start_get_initial ());
+        g_object_ref_sink (fo_property_padding_start_get_initial ());
     }
   if (primary->padding_start_length == NULL)
     {
       primary->padding_start_length =
-        g_object_ref (fo_property_padding_start_length_get_initial ());
+        g_object_ref_sink (fo_property_padding_start_length_get_initial ());
     }
   if (primary->padding_start_condity == NULL)
     {
       primary->padding_start_condity =
-        g_object_ref (fo_property_padding_start_condity_get_initial ());
+        g_object_ref_sink (fo_property_padding_start_condity_get_initial ());
     }
   if (primary->padding_top == NULL)
     {
       primary->padding_top =
-        g_object_ref (fo_property_padding_top_get_initial ());
+        g_object_ref_sink (fo_property_padding_top_get_initial ());
     }
   if (primary->page_height == NULL)
     {
       primary->page_height =
-        g_object_ref (fo_property_page_height_get_initial ());
+        g_object_ref_sink (fo_property_page_height_get_initial ());
+    }
+  if (primary->page_position == NULL)
+    {
+      primary->page_position =
+        g_object_ref_sink (fo_property_page_position_get_initial ());
     }
   if (primary->page_width == NULL)
     {
       primary->page_width =
-        g_object_ref (fo_property_page_width_get_initial ());
+        g_object_ref_sink (fo_property_page_width_get_initial ());
+    }
+  if (primary->precedence == NULL)
+    {
+      primary->precedence =
+        g_object_ref_sink (fo_property_precedence_get_initial ());
     }
   if (primary->provisional_distance_between_starts == NULL &&
       secondary->provisional_distance_between_starts != NULL)
     {
       primary->provisional_distance_between_starts =
-        g_object_ref (secondary->provisional_distance_between_starts);
+        g_object_ref_sink (secondary->provisional_distance_between_starts);
     }
   if (primary->provisional_label_separation == NULL &&
       secondary->provisional_label_separation != NULL)
     {
       primary->provisional_label_separation =
-        g_object_ref (secondary->provisional_label_separation);
+        g_object_ref_sink (secondary->provisional_label_separation);
     }
   if (primary->ref_id == NULL)
     {
       primary->ref_id =
-        g_object_ref (fo_property_ref_id_get_initial ());
+        g_object_ref_sink (fo_property_ref_id_get_initial ());
+    }
+  if (primary->reference_orientation == NULL &&
+      secondary->reference_orientation != NULL)
+    {
+      primary->reference_orientation =
+        g_object_ref_sink (secondary->reference_orientation);
     }
   if (primary->region_name == NULL)
     {
       primary->region_name =
-        g_object_ref (fo_property_region_name_get_initial ());
+        g_object_ref_sink (fo_property_region_name_get_initial ());
     }
   if (primary->role == NULL)
     {
       primary->role =
-        g_object_ref (fo_property_role_get_initial ());
+        g_object_ref_sink (fo_property_role_get_initial ());
     }
   if (primary->scaling == NULL)
     {
       primary->scaling =
-        g_object_ref (fo_property_scaling_get_initial ());
+        g_object_ref_sink (fo_property_scaling_get_initial ());
     }
   if (primary->scaling_method == NULL)
     {
       primary->scaling_method =
-        g_object_ref (fo_property_scaling_method_get_initial ());
+        g_object_ref_sink (fo_property_scaling_method_get_initial ());
     }
   if (primary->score_spaces == NULL &&
       secondary->score_spaces != NULL)
     {
       primary->score_spaces =
-        g_object_ref (secondary->score_spaces);
+        g_object_ref_sink (secondary->score_spaces);
     }
   if (primary->source_document == NULL)
     {
       primary->source_document =
-        g_object_ref (fo_property_source_document_get_initial ());
+        g_object_ref_sink (fo_property_source_document_get_initial ());
     }
   if (primary->space_after == NULL)
     {
       primary->space_after =
-	g_object_ref (fo_property_space_after_get_initial ());
+	g_object_ref_sink (fo_property_space_after_get_initial ());
     }
   if (primary->space_before == NULL)
     {
       primary->space_before =
-	g_object_ref (fo_property_space_before_get_initial ());
+	g_object_ref_sink (fo_property_space_before_get_initial ());
     }
   if (primary->space_end == NULL)
     {
       primary->space_end =
-	g_object_ref (fo_property_space_end_get_initial ());
+	g_object_ref_sink (fo_property_space_end_get_initial ());
     }
   if (primary->space_start == NULL)
     {
       primary->space_start =
-	g_object_ref (fo_property_space_start_get_initial ());
+	g_object_ref_sink (fo_property_space_start_get_initial ());
     }
   if (primary->span == NULL)
     {
       primary->span =
-        g_object_ref (fo_property_span_get_initial ());
+        g_object_ref_sink (fo_property_span_get_initial ());
     }
   if (primary->src == NULL)
     {
       primary->src =
-        g_object_ref (fo_property_src_get_initial ());
+        g_object_ref_sink (fo_property_src_get_initial ());
     }
   if (primary->start_indent == NULL &&
       secondary->start_indent != NULL)
     {
       primary->start_indent =
-        g_object_ref (secondary->start_indent);
+        g_object_ref_sink (secondary->start_indent);
     }
   if (primary->table_layout == NULL)
     {
       primary->table_layout =
-        g_object_ref (fo_property_table_layout_get_initial ());
+        g_object_ref_sink (fo_property_table_layout_get_initial ());
     }
   if (primary->text_align == NULL &&
       secondary->text_align != NULL)
     {
       primary->text_align =
-        g_object_ref (secondary->text_align);
+        g_object_ref_sink (secondary->text_align);
     }
   if (primary->text_indent == NULL &&
       secondary->text_indent != NULL)
     {
       primary->text_indent =
-        g_object_ref (secondary->text_indent);
+        g_object_ref_sink (secondary->text_indent);
     }
   if (primary->unicode_bidi == NULL)
     {
       primary->unicode_bidi =
-        g_object_ref (fo_property_unicode_bidi_get_initial ());
+        g_object_ref_sink (fo_property_unicode_bidi_get_initial ());
     }
   if (primary->white_space_collapse == NULL &&
       secondary->white_space_collapse != NULL)
     {
       primary->white_space_collapse =
-        g_object_ref (secondary->white_space_collapse);
+        g_object_ref_sink (secondary->white_space_collapse);
     }
   if (primary->white_space_treatment == NULL &&
       secondary->white_space_treatment != NULL)
     {
       primary->white_space_treatment =
-        g_object_ref (secondary->white_space_treatment);
+        g_object_ref_sink (secondary->white_space_treatment);
     }
   if (primary->widows == NULL &&
       secondary->widows != NULL)
     {
       primary->widows =
-        g_object_ref (secondary->widows);
+        g_object_ref_sink (secondary->widows);
     }
   if (primary->width == NULL)
     {
       primary->width =
-        g_object_ref (fo_property_width_get_initial ());
+        g_object_ref_sink (fo_property_width_get_initial ());
     }
   if (primary->wrap_option == NULL &&
       secondary->wrap_option != NULL)
     {
       primary->wrap_option =
-        g_object_ref (secondary->wrap_option);
+        g_object_ref_sink (secondary->wrap_option);
     }
   if (primary->writing_mode == NULL &&
       secondary->writing_mode != NULL)
     {
       primary->writing_mode =
-        g_object_ref (secondary->writing_mode);
+        g_object_ref_sink (secondary->writing_mode);
     }
 }
 
@@ -11572,6 +12465,10 @@ fo_context_property_slist_foreach (gpointer property,
   else if (FO_IS_PROPERTY_BASELINE_SHIFT (property))
     {
       fo_context_set_baseline_shift (context, property);
+    }
+  else if (FO_IS_PROPERTY_BLANK_OR_NOT_BLANK (property))
+    {
+      fo_context_set_blank_or_not_blank (context, property);
     }
   else if (FO_IS_PROPERTY_BLOCK_PROGRESSION_DIMENSION (property))
     {
@@ -11781,6 +12678,10 @@ fo_context_property_slist_foreach (gpointer property,
     {
       fo_context_set_content_width (context, property);
     }
+  else if (FO_IS_PROPERTY_COUNTRY (property))
+    {
+      fo_context_set_country (context, property);
+    }
   else if (FO_IS_PROPERTY_DIRECTION (property))
     {
       fo_context_set_direction (context, property);
@@ -11829,6 +12730,10 @@ fo_context_property_slist_foreach (gpointer property,
     {
       fo_context_set_font_weight (context, property);
     }
+  else if (FO_IS_PROPERTY_FORCE_PAGE_COUNT (property))
+    {
+      fo_context_set_force_page_count (context, property);
+    }
   else if (FO_IS_PROPERTY_FORMAT (property))
     {
       fo_context_set_format (context, property);
@@ -11848,6 +12753,10 @@ fo_context_property_slist_foreach (gpointer property,
   else if (FO_IS_PROPERTY_ID (property))
     {
       fo_context_set_id (context, property);
+    }
+  else if (FO_IS_PROPERTY_INITIAL_PAGE_NUMBER (property))
+    {
+      fo_context_set_initial_page_number (context, property);
     }
   else if (FO_IS_PROPERTY_INLINE_PROGRESSION_DIMENSION (property))
     {
@@ -11913,6 +12822,10 @@ fo_context_property_slist_foreach (gpointer property,
     {
       fo_context_set_keep_with_previous_within_page (context, property);
     }
+  else if (FO_IS_PROPERTY_LANGUAGE (property))
+    {
+      fo_context_set_language (context, property);
+    }
   else if (FO_IS_PROPERTY_LETTER_VALUE (property))
     {
       fo_context_set_letter_value (context, property);
@@ -11957,6 +12870,10 @@ fo_context_property_slist_foreach (gpointer property,
     {
       fo_context_set_master_reference (context, property);
     }
+  else if (FO_IS_PROPERTY_MAXIMUM_REPEATS (property))
+    {
+      fo_context_set_maximum_repeats (context, property);
+    }
   else if (FO_IS_PROPERTY_MEDIA_USAGE (property))
     {
       fo_context_set_media_usage (context, property);
@@ -11972,6 +12889,10 @@ fo_context_property_slist_foreach (gpointer property,
   else if (FO_IS_PROPERTY_NUMBER_ROWS_SPANNED (property))
     {
       fo_context_set_number_rows_spanned (context, property);
+    }
+  else if (FO_IS_PROPERTY_ODD_OR_EVEN (property))
+    {
+      fo_context_set_odd_or_even (context, property);
     }
   else if (FO_IS_PROPERTY_ORPHANS (property))
     {
@@ -12053,9 +12974,17 @@ fo_context_property_slist_foreach (gpointer property,
     {
       fo_context_set_page_height (context, property);
     }
+  else if (FO_IS_PROPERTY_PAGE_POSITION (property))
+    {
+      fo_context_set_page_position (context, property);
+    }
   else if (FO_IS_PROPERTY_PAGE_WIDTH (property))
     {
       fo_context_set_page_width (context, property);
+    }
+  else if (FO_IS_PROPERTY_PRECEDENCE (property))
+    {
+      fo_context_set_precedence (context, property);
     }
   else if (FO_IS_PROPERTY_PROVISIONAL_DISTANCE_BETWEEN_STARTS (property))
     {
@@ -12068,6 +12997,10 @@ fo_context_property_slist_foreach (gpointer property,
   else if (FO_IS_PROPERTY_REF_ID (property))
     {
       fo_context_set_ref_id (context, property);
+    }
+  else if (FO_IS_PROPERTY_REFERENCE_ORIENTATION (property))
+    {
+      fo_context_set_reference_orientation (context, property);
     }
   else if (FO_IS_PROPERTY_REGION_NAME (property))
     {
@@ -12270,47 +13203,47 @@ fo_context_update_from_slist (FoContext *context,
 
 /**
  * fo_context_debug_dump:
- * @object: #FoContext instance to be dumped.
- * @depth:  Relative indent to apply to the output.
+ * @fo_context: #FoContext instance to be dumped.
+ * @depth:      Relative indent to apply to the output.
  * 
- * Dump information about @object and its properties.
+ * Dump information about @fo_context and its properties.
  **/
 void
-fo_context_debug_dump (FoObject *object,
+fo_context_debug_dump (FoObject *fo_context,
 		       gint      depth)
 {
   gchar *indent = g_strnfill (depth * 2, ' ');
-  gchar* object_sprintf;
+  gchar* fo_context_sprintf;
 
-  g_return_if_fail (object != NULL);
-  g_return_if_fail (FO_IS_CONTEXT (object));
+  g_return_if_fail (fo_context != NULL);
+  g_return_if_fail (FO_IS_CONTEXT (fo_context));
 
-  object_sprintf = fo_object_debug_sprintf (object);
+  fo_context_sprintf = fo_object_debug_sprintf (fo_context);
 
   g_log (G_LOG_DOMAIN,
 	 G_LOG_LEVEL_DEBUG,
 	 "%s%s",
 	 indent,
-	 object_sprintf);
+	 fo_context_sprintf);
 
-  g_free (object_sprintf);
+  g_free (fo_context_sprintf);
   g_free (indent);
 
-  fo_context_debug_dump_properties (FO_CONTEXT (object),
-				    depth + 2);
+  _debug_dump_properties (FO_CONTEXT (fo_context),
+			  depth + 2);
 }
 
 /**
- * fo_context_debug_dump_properties:
+ * _debug_dump_properties:
  * @fo_context: The #FoContext object.
  * @depth: Indent level to add to the output.
  * 
  * Calls #fo_object_debug_dump on each property of @fo then calls
  * debug_dump_properties method of parent class.
  **/
-void
-fo_context_debug_dump_properties (FoContext *fo_context,
-                                  gint  depth)
+static void
+_debug_dump_properties (FoContext *fo_context,
+                        gint  depth)
 {
 
   g_return_if_fail (fo_context != NULL);
@@ -12321,6 +13254,7 @@ fo_context_debug_dump_properties (FoContext *fo_context,
   fo_object_debug_dump (fo_context->background_color, depth);
   fo_object_debug_dump (fo_context->background_image, depth);
   fo_object_debug_dump (fo_context->baseline_shift, depth);
+  fo_object_debug_dump (fo_context->blank_or_not_blank, depth);
   fo_object_debug_dump (fo_context->block_progression_dimension, depth);
   fo_object_debug_dump (fo_context->block_progression_dimension_minimum, depth);
   fo_object_debug_dump (fo_context->block_progression_dimension_optimum, depth);
@@ -12373,6 +13307,7 @@ fo_context_debug_dump_properties (FoContext *fo_context,
   fo_object_debug_dump (fo_context->content_height, depth);
   fo_object_debug_dump (fo_context->content_type, depth);
   fo_object_debug_dump (fo_context->content_width, depth);
+  fo_object_debug_dump (fo_context->country, depth);
   fo_object_debug_dump (fo_context->direction, depth);
   fo_object_debug_dump (fo_context->display_align, depth);
   fo_object_debug_dump (fo_context->dominant_baseline, depth);
@@ -12385,11 +13320,13 @@ fo_context_debug_dump_properties (FoContext *fo_context,
   fo_object_debug_dump (fo_context->font_style, depth);
   fo_object_debug_dump (fo_context->font_variant, depth);
   fo_object_debug_dump (fo_context->font_weight, depth);
+  fo_object_debug_dump (fo_context->force_page_count, depth);
   fo_object_debug_dump (fo_context->format, depth);
   fo_object_debug_dump (fo_context->grouping_separator, depth);
   fo_object_debug_dump (fo_context->grouping_size, depth);
   fo_object_debug_dump (fo_context->height, depth);
   fo_object_debug_dump (fo_context->id, depth);
+  fo_object_debug_dump (fo_context->initial_page_number, depth);
   fo_object_debug_dump (fo_context->inline_progression_dimension, depth);
   fo_object_debug_dump (fo_context->inline_progression_dimension_minimum, depth);
   fo_object_debug_dump (fo_context->inline_progression_dimension_optimum, depth);
@@ -12406,6 +13343,7 @@ fo_context_debug_dump_properties (FoContext *fo_context,
   fo_object_debug_dump (fo_context->keep_with_previous_within_column, depth);
   fo_object_debug_dump (fo_context->keep_with_previous_within_line, depth);
   fo_object_debug_dump (fo_context->keep_with_previous_within_page, depth);
+  fo_object_debug_dump (fo_context->language, depth);
   fo_object_debug_dump (fo_context->letter_value, depth);
   fo_object_debug_dump (fo_context->line_height, depth);
   fo_object_debug_dump (fo_context->line_stacking_strategy, depth);
@@ -12417,10 +13355,12 @@ fo_context_debug_dump_properties (FoContext *fo_context,
   fo_object_debug_dump (fo_context->margin_top, depth);
   fo_object_debug_dump (fo_context->master_name, depth);
   fo_object_debug_dump (fo_context->master_reference, depth);
+  fo_object_debug_dump (fo_context->maximum_repeats, depth);
   fo_object_debug_dump (fo_context->media_usage, depth);
   fo_object_debug_dump (fo_context->number_columns_repeated, depth);
   fo_object_debug_dump (fo_context->number_columns_spanned, depth);
   fo_object_debug_dump (fo_context->number_rows_spanned, depth);
+  fo_object_debug_dump (fo_context->odd_or_even, depth);
   fo_object_debug_dump (fo_context->orphans, depth);
   fo_object_debug_dump (fo_context->overflow, depth);
   fo_object_debug_dump (fo_context->padding, depth);
@@ -12435,10 +13375,13 @@ fo_context_debug_dump_properties (FoContext *fo_context,
   fo_object_debug_dump (fo_context->padding_start, depth);
   fo_object_debug_dump (fo_context->padding_top, depth);
   fo_object_debug_dump (fo_context->page_height, depth);
+  fo_object_debug_dump (fo_context->page_position, depth);
   fo_object_debug_dump (fo_context->page_width, depth);
+  fo_object_debug_dump (fo_context->precedence, depth);
   fo_object_debug_dump (fo_context->provisional_distance_between_starts, depth);
   fo_object_debug_dump (fo_context->provisional_label_separation, depth);
   fo_object_debug_dump (fo_context->ref_id, depth);
+  fo_object_debug_dump (fo_context->reference_orientation, depth);
   fo_object_debug_dump (fo_context->region_name, depth);
   fo_object_debug_dump (fo_context->role, depth);
   fo_object_debug_dump (fo_context->scaling, depth);

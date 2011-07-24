@@ -1,3 +1,4 @@
+## libfo
 ## Process this file with automake to produce Makefile.in
 
 SUBDIRS = area fo datatype property expr util .

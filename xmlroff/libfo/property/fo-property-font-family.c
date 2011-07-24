@@ -414,7 +414,8 @@ fo_property_font_family_new_from_expr (FoPropertyClass *property_class,
 
       if (tmp_error != NULL)
 	{
-	  g_message ("%s", tmp_error->message);
+	  g_message ("%s",
+		     tmp_error->message);
 	  g_propagate_error (error,
 			     tmp_error);
 	  return NULL;

@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2003 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -154,9 +155,9 @@ _version_info_default ()
  * fo_libfo_module_version_info_from_name:
  * @name: Registered #FoObject type name, e.g., "FoDocCairo"
  * 
- * Gets the #LibfoVersionInfo for
+ * Gets the #LibfoVersionInfo for @name.
  * 
- * Returns: 
+ * Returns: #LibfoVersionInfo for @name.
  **/
 const LibfoVersionInfo *
 fo_libfo_module_version_info_from_name (const gchar *name)

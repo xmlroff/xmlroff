@@ -1,9 +1,10 @@
 /* Fo
- * fo-conditional_page_master_reference.h: 'conditional-page-master-reference' formatting object
+ * fo-conditional-page-master-reference.h: 'conditional-page-master-reference' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
-  * Copyright (C) 2007 Menteith Consulting Ltd
-*
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
+ *
  * See COPYING for the status of this software.
  */
 
@@ -16,7 +17,18 @@
 
 G_BEGIN_DECLS
 
+/**
+ * FoConditionalPageMasterReference:
+ *
+ * Instance of the 'conditional-page-master-reference' formatting object.
+ **/
 typedef struct _FoConditionalPageMasterReference      FoConditionalPageMasterReference;
+
+/**
+ * FoConditionalPageMasterReferenceClass:
+ *
+ * Class structure for the 'conditional-page-master-reference' formatting object.
+ **/
 typedef struct _FoConditionalPageMasterReferenceClass FoConditionalPageMasterReferenceClass;
 
 #define FO_TYPE_CONDITIONAL_PAGE_MASTER_REFERENCE              (fo_conditional_page_master_reference_get_type ())
@@ -30,9 +42,15 @@ typedef struct _FoConditionalPageMasterReferenceClass FoConditionalPageMasterRef
 GType        fo_conditional_page_master_reference_get_type (void) G_GNUC_CONST;
 FoFo *       fo_conditional_page_master_reference_new      (void);
 
-FoProperty * fo_conditional_page_master_reference_get_master_reference (FoFo       *fo_fo);
-void         fo_conditional_page_master_reference_set_master_reference (FoFo       *fo_fo,
-                                                                        FoProperty *new_master_reference);
+FoProperty * fo_conditional_page_master_reference_get_blank_or_not_blank (FoFo       *fo_fo);
+void         fo_conditional_page_master_reference_set_blank_or_not_blank (FoFo       *fo_fo,
+                                                                          FoProperty *new_blank_or_not_blank);
+FoProperty * fo_conditional_page_master_reference_get_odd_or_even (FoFo       *fo_fo);
+void         fo_conditional_page_master_reference_set_odd_or_even (FoFo       *fo_fo,
+                                                                   FoProperty *new_odd_or_even);
+FoProperty * fo_conditional_page_master_reference_get_page_position (FoFo       *fo_fo);
+void         fo_conditional_page_master_reference_set_page_position (FoFo       *fo_fo,
+                                                                     FoProperty *new_page_position);
 
 G_END_DECLS
 
