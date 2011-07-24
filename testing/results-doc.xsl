@@ -199,7 +199,15 @@
               <td colspan="2"  style="background-color: white">
                 <b>Pages </b>
                 <xsl:for-each select="$pdf/pwd/png">
-                  <a href="#page{position()}"><xsl:value-of select="position()"/></a>
+									<xsl:variable name="name" select="@name"/>
+                  <a href="#page{position()}">
+										<xsl:if test="../../diff/png[@name = $name]/@size != 0">
+											<xsl:attribute name="style">
+												<xsl:text>color: white; background-color: red</xsl:text>
+											</xsl:attribute>
+										</xsl:if>
+										<xsl:value-of select="position()"/>
+									</a>
                   <xsl:if test="position() != last()">
                     <xsl:text>, </xsl:text>
                   </xsl:if>
@@ -214,7 +222,7 @@
                       <xsl:with-param name="id" select="$id"/>
                       <xsl:with-param name="results" select="$results"/>
                       <xsl:with-param name="results-top-base" select="$results-top-base"/>
-                      <xsl:with-param name="sccipts-base" select="$scripts-base"/>
+                      <xsl:with-param name="scripts-base" select="$scripts-base"/>
                     </xsl:call-template>
                   </xsl:when>
                   <xsl:otherwise>
