@@ -120,6 +120,12 @@
 	<xsl:with-param name="value" select="$XSL_PROCESSOR_FLAGS"/>
       </xsl:call-template>
     </xsl:if>
+    <xsl:if test="$SERVER_PORT_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'server-port'"/>
+	<xsl:with-param name="value" select="$SERVER_PORT"/>
+      </xsl:call-template>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template name="option-pi">
