@@ -154,7 +154,7 @@ foreach $gTestDir (@lTestDirs) {
 		    (!-e "stereo/$lPNGFile" || -M $lPNGFile < -M "stereo/$lPNGFile") &&
 		    (!-e "diff/$lPNGFile" || -s _)) {
 		    $command = "$COMPOSITE -stereo +0+0  $lPNGFile ref/$lPNGFile stereo/$lPNGFile";
-		    print STDERR "$command\n";
+		    #print STDERR "$command\n";
 		    $rc = 0xffff & system $command;
 		    if ($rc != 0) {
 			$gError++;
