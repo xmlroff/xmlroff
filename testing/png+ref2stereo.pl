@@ -117,7 +117,9 @@ foreach $gTestDir (@lTestDirs) {
 	if (-e "ref/$lPDFFile") {
 	    # 'diff' needs to ignore the 'CreationDate' and other lines
 	    # since these change each time the test is run.
-	    system "diff -N -a -I \"^/ID\" -I \"^/CreationDate\" -I \"^<dc:\" -I \"^<xmp:\" ref/$lPDFFile $lPDFFile 1>diff/$lPDFFile 2>>diff/$lPDFFile";
+            # FOP appears to use a hash to store images, so order of
+	    # '/Im' commands can change between runs when using FOP.
+	    system "diff -N -a -I \"^/ID\" -I \"^/CreationDate\" -I \"^<dc:\" -I \"^<xmp:\" -I \"^  /Im\" ref/$lPDFFile $lPDFFile 1>diff/$lPDFFile 2>>diff/$lPDFFile";
 	    if ($? >> 8 > 1) {
 		$gError++;
 		warn("Creating 'diff' of \"$lPDFFile\" failed.");
@@ -144,7 +146,7 @@ foreach $gTestDir (@lTestDirs) {
 	    @lPwdPNGFiles = sort (grep (/^$lBasename\.\d{2}\.png$/, readdir (PWD)));
 
 	    foreach $lPNGFile (@lPwdPNGFiles) {
-		if (system "$IDENTIFY -quiet -format \"%#\" $lPNGFile" != "$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile") {
+		if (`$IDENTIFY -quiet -format \"%#\" $lPNGFile` != `$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile`) {
 		    system "echo -n 1 > diff/$lPNGFile";
 		} else {
 		    unlink("diff/$lPNGFile");
