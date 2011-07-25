@@ -34,10 +34,10 @@ my $weblog = MyWebLog->new();
 
 my $httpd = HTTP::Daemon::Threaded->new(
     Port                    => 8081,
-    MaxClients              => 20,
+    MaxClients              => 3,
     ContentParams   => $contparams,
     SessionCache    => $sessions,
-    LogLevel                => 3,           # full info logging
+    LogLevel                => 1,           # full info logging
     EventLogger             => $evtlog,
     WebLogger               => $weblog,
     DocRoot                 => './',        # root directory for default file handler
