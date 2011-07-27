@@ -126,6 +126,13 @@
 	<xsl:with-param name="value" select="$SERVER_PORT"/>
       </xsl:call-template>
     </xsl:if>
+    <xsl:if test="$TITLE_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+	<xsl:with-param name="option" select="'title'"/>
+	<xsl:with-param name="value" select="$TITLE"/>
+      </xsl:call-template>
+    </xsl:if>
+		<xsl:text>&#10;</xsl:text>
   </xsl:template>
 
   <xsl:template name="option-pi">

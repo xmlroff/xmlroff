@@ -225,7 +225,16 @@ AC_SUBST(PROJECT_NAME)
 # Title used in generated reports.
 #
 title_default="xmlroff Test Results"
+title_setter=$default_setter
 
+# Default may be overridden by a PI in the results document.
+if test -f "$TEST_RESULTS" ; then
+  results_title=["`$PERL -n -e'if(/<\?xt-title\s+([^?]+)\?>/) {print \$1;}' $TEST_RESULTS`"]
+  if test "x$results_title" != "x" ; then
+    title_default="$results_title"
+    title_setter=$results_setter
+  fi
+fi
 AC_ARG_WITH(title,
 	    AC_HELP_STRING([--with-title],
 			   [Title used in generated reports (default="xmlroff Test Results")]),
@@ -235,8 +244,14 @@ if test "x$with_title" = "x" ; then
   TITLE=$title_default
 else
   TITLE=$with_title
+  title_setter=$option_setter
 fi
-AC_DEFINE_UNQUOTED(TITLE,"$TITLE", [Title used in generated reports.])
+AC_DEFINE_UNQUOTED(TITLE,
+	           "$TITLE",
+		   [Title used in generated reports.])
+AC_DEFINE_UNQUOTED(TITLE_SETTER,
+	           "$title_setter",
+	           [Where TITLE was set.])
 
 #
 # Current date.  Meant to be set on the command line.
@@ -687,6 +702,7 @@ color:               \"$COLOR\" ($color_setter)
 command-patterns:    \"$COMMAND_PATTERNS\" ($command_patterns_setter)
 default-stylesheet:  \"$DEFAULT_STYLESHEET\" ($default_stylesheet_setter)
 project-name:        \"$PROJECT_NAME\" ($project_name_setter)
+title:               \"$TITLE\" ($title_setter)
 test-subset:         \"$TEST_SUBSET\" ($test_subset_setter)
 testsuites:          \"$TESTSUITES\" ($testsuites_setter)
 trac:                \"$TRAC\" ($trac_setter)
