@@ -843,12 +843,29 @@ group id of the 'testing' directory *before* running any of the
 stylesheets or scripts.
 
 
+make-fop-testsuite.pl
+---------------------
+
+Creates a W3C-format testsuite file from FOP "layoutengine" tests.
+
+Usage:
+
+   make-fop-testsuite.pl [--verbose] [--stylesheet Stylesheet] \
+      [--title Title] TestsDir
+
+where:
+
+  Title         = Profile name in the generated testsuite
+  Stylesheet    = Filename or URL of stylesheet for all tests
+  TestsDir      = Directory containing the tests directories
+
+
 12. License
 ===========
 
-The stylesheets and other content are licensed under a BSD-style
-license.  See the file COPYING for details.
+The stylesheets and other content are licensed under a BSD license.
+See the file COPYING for details.
 
 
 Tony Graham
-14 January 2010
+27 July 2011
