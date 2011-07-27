@@ -1,6 +1,7 @@
 #! /usr/bin/perl
 #
 # Copyright (c) 2007 Menteith Consulting Ltd
+# Copyright (c) 2011 Mentea
 #
 # Write a starter 'testsuite.xml' file for the XML files in
 # subdirectories of the specified directory.
@@ -157,8 +158,8 @@ EndOfTest
 #
 # Sorts names that differ only in numeric suffix in numeric order.
 sub GroupSort {
-    $a =~ m/(\d+)\.xml/ and $aprefix = $` and $adigits = $1 and
-	$b =~ m/(\d+)\.xml/ and $bprefix = $` and $bdigits = $1 and
+    $a =~ m/(\d+)\.(xml|fo)/ and $aprefix = $` and $adigits = $1 and
+	$b =~ m/(\d+)\.(xml|fo)/ and $bprefix = $` and $bdigits = $1 and
 	$aprefix eq $bprefix and $adigits <=> $bdigits
 	or
     $a cmp $b;
