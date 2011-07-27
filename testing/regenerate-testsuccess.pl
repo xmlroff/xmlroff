@@ -12,7 +12,6 @@ use CGI qw/:standard/;
 require("config.pl");
 
 $cWorkingDir = "/usr/local/src/xslfo/$BASENAME";
-$cResultsXML = "$cWorkingDir/$TEST_RESULTS";
 $cXsltproc = '/usr/bin/xsltproc';
 $cTestResultsBase = "/$BASENAME";
 
