@@ -5,6 +5,7 @@
 
 <!-- Copyright (C) 2001, 2004 Sun Microsystems -->
 <!-- Copyright (C) 2007-2009 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2011 Mentea -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -209,6 +210,18 @@
     <!-- String to substitute for '%s'.  Optional. -->
     <xsl:param name="stylesheet"/>
 
+    <xsl:if test="$DEBUG >= 2">
+      <xsl:message>
+        <xsl:text>command-patterns: '</xsl:text>
+        <xsl:value-of select="$command-patterns"/>
+        <xsl:text>'; input: '</xsl:text>
+        <xsl:value-of select="$input"/>
+        <xsl:text>'; stylesheet: '</xsl:text>
+        <xsl:value-of select="$stylesheet"/>
+        <xsl:text>'</xsl:text>
+      </xsl:message>
+    </xsl:if>
+
     <xsl:variable name="first-pattern">
       <xsl:choose>
         <xsl:when test="contains($command-patterns, ';')">
@@ -310,7 +323,7 @@
             </xsl:when>
             <xsl:when test="$format-code = 's'">
               <xsl:choose>
-                <xsl:when test="$stylesheet">
+                <xsl:when test="$stylesheet != ''">
                   <xsl:value-of select="$stylesheet"/>
                 </xsl:when>
                 <xsl:otherwise>
