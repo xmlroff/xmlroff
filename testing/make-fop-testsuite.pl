@@ -122,7 +122,8 @@ sub ProcessDir {
 
     print "<testcases profile=\"$pDir\" base=\"$pDir\">\n";
 
-    my(@lPwdSourceFiles) = sort (grep (/\.(xml)$/, readdir (PWD)));
+    my(@lPwdSourceFiles) =
+	sort GroupSort (grep (/\.(xml)$/, readdir (PWD)));
 
     if (@lPwdSourceFiles) {
 	foreach $lSourceFile (@lPwdSourceFiles) {
@@ -167,3 +168,10 @@ EndOfTest
     chdir "..";
 }
 
+sub GroupSort {
+    $a =~ m/(\d+)\.xml/ and $aprefix = $` and $adigits = $1 and
+	$b =~ m/(\d+)\.xml/ and $bprefix = $` and $bdigits = $1 and
+	$aprefix eq $bprefix and $adigits <=> $bdigits
+	or
+    $a cmp $b;
+}
