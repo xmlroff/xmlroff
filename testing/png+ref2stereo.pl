@@ -146,7 +146,8 @@ foreach $gTestDir (@lTestDirs) {
 	    @lPwdPNGFiles = sort (grep (/^$lBasename\.\d{2}\.png$/, readdir (PWD)));
 
 	    foreach $lPNGFile (@lPwdPNGFiles) {
-		if (`$IDENTIFY -quiet -format \"%#\" $lPNGFile` != `$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile`) {
+		if (!-e "ref/$lPNGFile" ||
+		    `$IDENTIFY -quiet -format \"%#\" $lPNGFile` != `$IDENTIFY -quiet -format \"%#\" ref/$lPNGFile`) {
 		    system "echo -n 1 > diff/$lPNGFile";
 		} else {
 		    unlink("diff/$lPNGFile");
