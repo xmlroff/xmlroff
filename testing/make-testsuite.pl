@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#! /usr/bin/perl
 #
 # Copyright (c) 2007 Menteith Consulting Ltd
 #
@@ -114,7 +114,7 @@ sub ProcessDir {
 
     print "<testcases profile=\"$pDir\" base=\"$pDir\">\n";
 
-    my(@lPwdSourceFiles) = sort (grep (/\.(xml|fo)$/, readdir (PWD)));
+    my(@lPwdSourceFiles) = sort GroupSort (grep (/\.(xml|fo)$/, readdir (PWD)));
 
     if (@lPwdSourceFiles) {
 	foreach $lSourceFile (@lPwdSourceFiles) {
@@ -151,3 +151,15 @@ EndOfTest
     chdir "..";
 }
 
+
+############################################################
+# $GroupSort($a, $b)
+#
+# Sorts names that differ only in numeric suffix in numeric order.
+sub GroupSort {
+    $a =~ m/(\d+)\.xml/ and $aprefix = $` and $adigits = $1 and
+	$b =~ m/(\d+)\.xml/ and $bprefix = $` and $bdigits = $1 and
+	$aprefix eq $bprefix and $adigits <=> $bdigits
+	or
+    $a cmp $b;
+}
