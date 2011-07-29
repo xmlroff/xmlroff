@@ -114,32 +114,31 @@
 		<xsl:param name="test-results-testcases"/>
 		<xsl:variable name="id" select="@id"/>
 		<xsl:variable
-				name="test-results"
+				name="test-result"
 				select="$test-results-testcases/testresult[@id = $id]"/>
     <xsl:if test="$DEBUG">
       <xsl:message>base: '<xsl:value-of select="$test-results-testcases/@base"/>'</xsl:message>
       <xsl:message>id: '<xsl:value-of select="@id"/>'</xsl:message>
-      <xsl:message>id: '<xsl:value-of select="$test-results/@id"/>'</xsl:message>
-      <xsl:message>count: '<xsl:value-of select="count($test-results-testcases/testresult[@id = $id])"/>'</xsl:message>
+      <xsl:message>id: '<xsl:value-of select="$test-result/@id"/>'</xsl:message>
     </xsl:if>
     <testresult
 				id="{@id}" results="{@id}.pdf" agreement="issues"
 				specproblem="no" testproblem="no">
 			<xsl:choose>
-				<xsl:when test="count($test-results)">
+				<xsl:when test="count($test-result)">
 					<xsl:attribute name="results">
-						<xsl:value-of select="$test-results/@results"/>
+						<xsl:value-of select="$test-result/@results"/>
 					</xsl:attribute>
 					<xsl:attribute name="agreement">
-						<xsl:value-of select="$test-results/@agreement"/>
+						<xsl:value-of select="$test-result/@agreement"/>
 					</xsl:attribute>
 					<xsl:attribute name="specproblem">
-						<xsl:value-of select="$test-results/@specproblem"/>
+						<xsl:value-of select="$test-result/@specproblem"/>
 					</xsl:attribute>
 					<xsl:attribute name="testproblem">
-						<xsl:value-of select="$test-results/@testproblem"/>
+						<xsl:value-of select="$test-result/@testproblem"/>
 					</xsl:attribute>
-					<xsl:value-of select="$test-results"/>
+					<xsl:value-of select="$test-result"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:text>Results not yet verified</xsl:text>
