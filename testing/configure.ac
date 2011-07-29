@@ -218,7 +218,12 @@ else
   PROJECT_NAME=$with_project_name
   project_name_setter=$option_setter
 fi
-AC_DEFINE_UNQUOTED(PROJECT_NAME,"$PROJECT_NAME", [Project name used in URLs.])
+AC_DEFINE_UNQUOTED(PROJECT_NAME,
+	           "$PROJECT_NAME",
+		   [Project name used in URLs.])
+AC_DEFINE_UNQUOTED(PROJECT_NAME_SETTER,
+	           "$project_name_setter",
+	           [Where PROJECT_NAME was set.])
 AC_SUBST(PROJECT_NAME)
 
 #
