@@ -9,6 +9,7 @@
 
 <!-- Copyright (C) 2004 Sun Microsystems -->
 <!-- Copyright (C) 2007-2008 Menteith Consulting Ltd -->
+<!-- Copyright (C) 2011 Mentea -->
 <!-- See COPYING for the status of this software. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -19,10 +20,13 @@
   <xsl:import href="config.xsl"/>
   <xsl:import href="common.xsl"/>
 
-  <xsl:output method="xml" omit-xml-declaration="yes"/>
+  <xsl:output method="xml" encoding="iso-8859-1"/>
   
   <xsl:variable name="testsuite-hrefs"
     select="document($TESTSUITES)/testsuites/testsuite/@href"/>
+
+  <xsl:variable name="test-results-testcases"
+    select="document($TEST_RESULTS)/testsuite/testcases"/>
 
   <xsl:variable name="testsuites-dirname">
     <xsl:call-template name="dirname">
@@ -57,7 +61,10 @@
     </xsl:if>
     <xsl:apply-templates select="document(.)/testsuite">
       <xsl:with-param name="base" select="$base"/>
-    </xsl:apply-templates>
+			<xsl:with-param
+					name="test-results-testcases"
+					select="$test-results-testcases[@base = $base]"/>
+		</xsl:apply-templates>
     
   </xsl:template>
     
@@ -69,70 +76,133 @@
   
   <xsl:template match="testsuite">
     <xsl:param name="base"/>
+		<xsl:param name="test-results-testcases"/>
+    <xsl:if test="$DEBUG">
+      <xsl:message>base: '<xsl:value-of select="$base"/>'</xsl:message>
+      <xsl:message>base: '<xsl:value-of select="$test-results-testcases/@base"/>'</xsl:message>
+    </xsl:if>
     <testcases>
       <xsl:if test="$base">
         <xsl:attribute name="base">
           <xsl:value-of select="$base"/>
         </xsl:attribute>
       </xsl:if>
-      <xsl:apply-templates select="@* | node()"/>
+      <xsl:apply-templates select="@* | node()">
+				<xsl:with-param
+						name="test-results-testcases"
+						select="$test-results-testcases/testcases"/>
+			</xsl:apply-templates>
     </testcases>
   </xsl:template>
   
+  <xsl:template match="testcases">
+		<xsl:param name="test-results-testcases"/>
+    <xsl:if test="$DEBUG">
+      <xsl:message>base: '<xsl:value-of select="@base"/>'</xsl:message>
+      <xsl:message>base: '<xsl:value-of select="$test-results-testcases/@base"/>'</xsl:message>
+    </xsl:if>
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()">
+				<xsl:with-param
+						name="test-results-testcases"
+						select="$test-results-testcases[@base = current()/@base]"/>
+			</xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
   <xsl:template match="test">
-    <testresult id="{@id}" results="{@id}.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+		<xsl:param name="test-results-testcases"/>
+		<xsl:variable name="id" select="@id"/>
+		<xsl:variable
+				name="test-results"
+				select="$test-results-testcases/testresult[@id = $id]"/>
+    <xsl:if test="$DEBUG">
+      <xsl:message>base: '<xsl:value-of select="$test-results-testcases/@base"/>'</xsl:message>
+      <xsl:message>id: '<xsl:value-of select="@id"/>'</xsl:message>
+      <xsl:message>id: '<xsl:value-of select="$test-results/@id"/>'</xsl:message>
+      <xsl:message>count: '<xsl:value-of select="count($test-results-testcases/testresult[@id = $id])"/>'</xsl:message>
+    </xsl:if>
+    <testresult
+				id="{@id}" results="{@id}.pdf" agreement="issues"
+				specproblem="no" testproblem="no">
+			<xsl:choose>
+				<xsl:when test="count($test-results)">
+					<xsl:attribute name="results">
+						<xsl:value-of select="$test-results/@results"/>
+					</xsl:attribute>
+					<xsl:attribute name="agreement">
+						<xsl:value-of select="$test-results/@agreement"/>
+					</xsl:attribute>
+					<xsl:attribute name="specproblem">
+						<xsl:value-of select="$test-results/@specproblem"/>
+					</xsl:attribute>
+					<xsl:attribute name="testproblem">
+						<xsl:value-of select="$test-results/@testproblem"/>
+					</xsl:attribute>
+					<xsl:value-of select="$test-results"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>Results not yet verified</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+		</testresult>
   </xsl:template>
   
   <xsl:template name="options">
+    <xsl:if test="$PROJECT_NAME_SETTER != 'default'">
+      <xsl:call-template name="option-pi">
+				<xsl:with-param name="option" select="'project-name'"/>
+				<xsl:with-param name="value" select="$PROJECT_NAME"/>
+      </xsl:call-template>
+    </xsl:if>
     <xsl:if test="$COMMAND_PATTERNS_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'command-patterns'"/>
-	<xsl:with-param name="value" select="$COMMAND_PATTERNS"/>
+				<xsl:with-param name="option" select="'command-patterns'"/>
+				<xsl:with-param name="value" select="$COMMAND_PATTERNS"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$DEFAULT_STYLESHEET_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'default-stylesheet'"/>
-	<xsl:with-param name="value" select="$DEFAULT_STYLESHEET"/>
+				<xsl:with-param name="option" select="'default-stylesheet'"/>
+				<xsl:with-param name="value" select="$DEFAULT_STYLESHEET"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$TESTSUITES_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'testsuites'"/>
-	<xsl:with-param name="value" select="$testsuites"/>
+				<xsl:with-param name="option" select="'testsuites'"/>
+				<xsl:with-param name="value" select="$testsuites"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$TRAC_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'trac'"/>
-	<xsl:with-param name="value" select="$TRAC"/>
+				<xsl:with-param name="option" select="'trac'"/>
+				<xsl:with-param name="value" select="$TRAC"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$XSL_PROCESSOR_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'xsl-processor'"/>
-	<xsl:with-param name="value" select="$XSL_PROCESSOR"/>
+				<xsl:with-param name="option" select="'xsl-processor'"/>
+				<xsl:with-param name="value" select="$XSL_PROCESSOR"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$XSL_PROCESSOR_FLAGS_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'xsl-processor-flags'"/>
-	<xsl:with-param name="value" select="$XSL_PROCESSOR_FLAGS"/>
+				<xsl:with-param name="option" select="'xsl-processor-flags'"/>
+				<xsl:with-param name="value" select="$XSL_PROCESSOR_FLAGS"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$SERVER_PORT_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'server-port'"/>
-	<xsl:with-param name="value" select="$SERVER_PORT"/>
+				<xsl:with-param name="option" select="'server-port'"/>
+				<xsl:with-param name="value" select="$SERVER_PORT"/>
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$TITLE_SETTER != 'default'">
       <xsl:call-template name="option-pi">
-	<xsl:with-param name="option" select="'title'"/>
-	<xsl:with-param name="value" select="$TITLE"/>
+				<xsl:with-param name="option" select="'title'"/>
+				<xsl:with-param name="value" select="$TITLE"/>
       </xsl:call-template>
     </xsl:if>
-		<xsl:text>&#10;</xsl:text>
   </xsl:template>
 
   <xsl:template name="option-pi">
