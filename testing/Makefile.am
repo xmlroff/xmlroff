@@ -76,11 +76,10 @@ png+ref2stereo.stamp: png+ref2stereo.pl dotests.stamp config.pl
 	$(XSLTPROC) --novalid testsuites2testresults.xsl $(TESTSUITES) > \
 		@TEST_RESULTS@
 
-testresults.stamp $(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSOR) png+ref2stereo.stamp @TEST_RESULTS@
+$(TESTSUCCESS): testsuccess.pl $(TESTING_PARAM) $(XSL_PROCESSOR) png+ref2stereo.stamp @TEST_RESULTS@
 	perl testsuccess.pl . > $(TESTSUCCESS)
-	touch $@
 
-$(REPORT_HTML):	testsuccess.xsl results-doc.xsl results-xml.xsl $(TESTSUCCESS) $(TESTING_PARAM) testresults.stamp config.pl $(STYLE_CSS)
+$(REPORT_HTML):	testsuccess.xsl results-doc.xsl results-xml.xsl $(TESTSUCCESS) $(TESTING_PARAM) config.pl $(STYLE_CSS)
 	$(XSLTPROC) -o $@ --novalid \
 	--stringparam date "`date`" $(REPORT_PARAM) \
 	testsuccess.xsl @TEST_RESULTS@
