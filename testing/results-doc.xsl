@@ -247,12 +247,22 @@
                       <xsl:text>Page </xsl:text>
                       <xsl:value-of select="position()"/>
                       <xsl:text> </xsl:text></span>
-                    <xsl:value-of select="$name"/>
+                    <span>
+		      <xsl:if
+			  test="../../diff/png[@name=$name]/@size != 0">
+			<xsl:attribute name="style">color: #F00</xsl:attribute>
+		      </xsl:if>
+		      <xsl:value-of select="$name"/>
+		    </span>
                   </a>
                 </td>
                 <xsl:if test="$REFERENCE">
                   <xsl:if test="../../ref/png[@name=$name]">
                     <td>
+		      <xsl:if
+			  test="../../diff/png[@name=$name]/@size != 0">
+			<xsl:attribute name="style">color: #0FF</xsl:attribute>
+		      </xsl:if>
                       <span class="png-title">Reference</span>
                     </td>
                   </xsl:if>
