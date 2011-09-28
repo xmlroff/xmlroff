@@ -31,11 +31,13 @@ and, occasionally, better documentation.
 5. Working with the results
 6. Bundling the test results
 7. When the test suite changes
-8. Testing an alternative XSL processor
-9. DocBook testdocs
-10. Setting defaults in the test results file
-11. Gory details
-12. License
+8. Setting up a web server for updating results
+9. Testing an alternative XSL processor
+10. DocBook testdocs
+11. FOP "layoutengine" Tests
+12. Setting defaults in the test results file
+13. Gory details
+14. License
 
 
 1. Testing xmlroff
@@ -194,6 +196,10 @@ Individual steps
 
       file:///path/to/testing/index.html
 
+   or start the threaded standalone web server:
+
+      perl threaded.pl
+
    or start the standalone web server:
 
       perl testing-server.pl
@@ -209,9 +215,9 @@ Individual steps
    update-results.pl installed correctly, you can update the test
    results using the form in the individual test result page.
 
-   At present, the test result page is *not* updated to reflect your
-   changes.  The page is only updated if you run testsuccess.xsl
-   again.
+   At present, the test result page is updated to reflect your changes
+   only when using 'threaded.pl'.  Otherwise, the page is updated only
+   once you run 'testsuccess.xsl' again.
 
 
 6. Bundling the test results
@@ -234,7 +240,7 @@ Individual steps
    run and the reports were generated.
 
 
-7. When the Test Suite Changes
+7. When the test suite changes
 ==============================
 
 1. Re-run test2sh.xsl to update the script that runs the tests:
@@ -255,7 +261,91 @@ Individual steps
 4. Run the tests, which will now include the new tests.
 
 
-8. Testing an Alternative XSL Processor
+8. Setting up a web server for updating results
+===============================================
+
+There are currently three ways to run a web server so you can update
+the test results using the form in the individual HTML reports:
+
+ - threaded.pl
+
+ - testing-server.pl
+
+ - Apache
+
+threaded.pl
+-----------
+
+Based on a 'HTTP::Daemon::Threaded' example, this supports updating
+individual results' HTML.
+
+testing-server.pl
+-----------------
+
+Based on 'HTTP::Daemon', this supports updating the main test results
+XML file from individual reports but does not regenerate the
+individual report's HTML at this time.
+
+Apache and update-results.pl
+----------------------------
+
+Allowing the update-results.pl CGI script to modify files is probably
+a security no-no, so it's probably best to use this setup on a machine
+that isn't accessible to the wider Internet.
+
+Suggestions on how to improve the setup are welcome, but the best way
+that has been found so far is:
+
+1. Copy 'testing.conf' to '/etc/apache2/conf.d' (or make a symbolic
+   link to the file).
+
+2. Adjust the paths in the 'testing.conf' copy as necessary to
+   match your setup.
+
+   The '--with-project-name' and '--with-basename' values are used in
+   'testing.conf'.
+
+3. Restart apache, e.g.:
+
+      sudo /etc/init.d/apache2 restart
+
+4. Make the group id sticky (i.e., 'chmod g+s ...') for the current
+   directory and all the generated directories.
+
+   Alternatively, a simplistic solution if you have the 'acl' option
+   set for the current file system in '/etc/fstab' is:
+
+      setfacl -m u:www-data:rwx .
+
+
+A previous method that would require rolling back changes in
+testsuccess.xsl and update-results.pl is:
+
+1. Create a new group, e.g. 'testing'.
+
+2. Make the user id that runs the web server (e.g., 'apache') a member
+   of the group.
+
+3. Make any users who will be running the scripts and stylesheets also
+   members of the group.
+
+4. Change the group id of the generated test result files and report
+   files to the new group.
+
+5. Change the mode of the generated test result files and report files
+   to '664'.
+
+6. Change the group id of the 'testing' directory to the new group.
+
+7. Make the group id sticky (i.e., 'chmod g+s ...') for the current
+   directory and all the generated directories.
+
+It is probably simplest to create the group and just set the sticky
+group id of the 'testing' directory *before* running any of the
+stylesheets or scripts.
+
+
+9. Testing an Alternative XSL Processor
 =======================================
 
 You can test XSL processors other than xmlroff by specifying the
@@ -292,8 +382,8 @@ The format strings are:
         in the test definition and --with-default-stylesheet is
         specified, the default stylesheet.
 
-        When neither a test nor a default stylesheet is specified,
-        this format string is not substituted.
+        When neither a per-test stylesheet nor a default stylesheet is
+        specified, this format string is not substituted.
 
    %o   Output file
 
@@ -319,14 +409,19 @@ the second, when %c is unevaluated; the third, when %s is unevaluated;
 and the fourth will always be evaluated since it contains no optional
 format strings.
 
-This example shows how to test using the Antenna House XSL Formatter
-on Linux:
+This example shows how to configure to test using the Antenna House
+Formatter on Linux:
 
-   ./configure --with-xsl-processor=/usr/XSLFormatterV41/run.sh \
+   ./configure --with-xsl-processor=/usr/AHFormatterV53/run.sh \
       --with-command-patterns="%p -o %o -d %i"
 
+This example shows how to configure to test using FOP on Linux:
 
-9. DocBook testdocs
+   ./configure --with-xsl-processor=fop \
+      --with-command-patterns="%p -r -xml %i -xsl %s -pdf %o;%p -r -fo %i -pdf %o"
+
+
+10. DocBook testdocs
 ===================
 
 The DocBook SourceForge project maintains a set of test documents.
@@ -388,7 +483,25 @@ stylesheet:
    DocBook stylesheets.
    
 
-10. Setting Defaults in the Test Results File
+11. FOP "layoutengine" Tests
+============================
+
+make-fop-testsuite.pl creates a W3C-format testsuite file from FOP
+"layoutengine" tests.
+
+Usage:
+
+   make-fop-testsuite.pl [--verbose] [--stylesheet Stylesheet] \
+      [--title Title] TestsDir
+
+where:
+
+  Title         = Profile name in the generated testsuite
+  Stylesheet    = Filename or URL of stylesheet for all tests
+  TestsDir      = Directory containing the tests directories
+
+
+12. Setting Defaults in the Test Results File
 =============================================
 
 Configuring a test run using many non-standard parameters -- e.g. when
@@ -413,16 +526,24 @@ meaning "xmlroff testing") are:
  --with-command-patterns      xt-command-patterns
  --with-default-stylesheet    xt-default-stylesheet
  --with-project-name          xt-project-name
+ --with-server-port	      xt-server-port
  --with-test-subset           xt-test-subset
  --with-testsuites            xt-testsuites
+ --with-title 		      xt-title
  --with-trac                  xt-trac
  --with-xsl-processor         xt-xsl-processor
  --with-xsl-processor-flags   xt-xsl-processor-flags
 
-The option without a PI (since you need it to find the file with the
-PIs) is:
+The options without a PI are:
 
+ --with-changelog-oldest
+ --with-convert
+ --with-compare
+ --with-composite
+ --with-debug
+ --with-identify
  --with-test-results
+ --with-xsltproc
 
 The priority for setting a parameter, from lowest to highest, is:
 
@@ -435,7 +556,7 @@ the settable parameters and where the parameter was set ('default',
 'results', or 'option').
 
 
-11. Gory Details
+13. Gory Details
 ================
 
 Test Cases
@@ -784,83 +905,7 @@ files to its 'ref' subdirectory, zeroes the corresponding files in the
 'stereo' subdirectory.
 
 
-Letting update-results.pl modify files
---------------------------------------
-
-Allowing the update-results.pl CGI script to modify files is probably
-a security no-no, so it's probably best to use this setup on a machine
-that isn't accessible to the wider Internet.
-
-Suggestions on how to improve the setup are welcome, but the best way
-that has been found so far is:
-
-1. Copy 'testing.conf' to '/etc/apache2/conf.d' (or make a symbolic
-   link to the file).
-
-2. Adjust the paths in the 'testing.conf' copy as necessary to
-   match your setup.
-
-   The '--with-project-name' and '--with-basename' values are used in
-   'testing.conf'.
-
-3. Restart apache, e.g.:
-
-      sudo /etc/init.d/apache2 restart
-
-4. Make the group id sticky (i.e., 'chmod g+s ...') for the current
-   directory and all the generated directories.
-
-   Alternatively, a simplistic solution if you have the 'acl' option
-   set for the current file system in '/etc/fstab' is:
-
-      setfacl -m u:www-data:rwx .
-
-
-A previous method that would require rolling back changes in
-testsuccess.xsl and update-results.pl is:
-
-1. Create a new group, e.g. 'testing'.
-
-2. Make the user id that runs the web server (e.g., 'apache') a member
-   of the group.
-
-3. Make any users who will be running the scripts and stylesheets also
-   members of the group.
-
-4. Change the group id of the generated test result files and report
-   files to the new group.
-
-5. Change the mode of the generated test result files and report files
-   to '664'.
-
-6. Change the group id of the 'testing' directory to the new group.
-
-7. Make the group id sticky (i.e., 'chmod g+s ...') for the current
-   directory and all the generated directories.
-
-It is probably simplest to create the group and just set the sticky
-group id of the 'testing' directory *before* running any of the
-stylesheets or scripts.
-
-
-make-fop-testsuite.pl
----------------------
-
-Creates a W3C-format testsuite file from FOP "layoutengine" tests.
-
-Usage:
-
-   make-fop-testsuite.pl [--verbose] [--stylesheet Stylesheet] \
-      [--title Title] TestsDir
-
-where:
-
-  Title         = Profile name in the generated testsuite
-  Stylesheet    = Filename or URL of stylesheet for all tests
-  TestsDir      = Directory containing the tests directories
-
-
-12. License
+14. License
 ===========
 
 The stylesheets and other content are licensed under a BSD license.
@@ -868,4 +913,4 @@ See the file COPYING for details.
 
 
 Tony Graham
-27 July 2011
+1 October 2011
