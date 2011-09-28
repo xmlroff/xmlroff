@@ -1,0 +1,6 @@
+.deps
+Makefile
+Makefile.in
+libfo-features.h
+libfo-compat.c
+s-libfo-compat-c
