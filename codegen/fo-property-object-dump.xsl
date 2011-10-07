@@ -1247,9 +1247,13 @@ _init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> *<
     </xsl:text><xsl:choose>
       <xsl:when test="$initial-value-string">
         <xsl:text>g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_</xsl:text>
-        <xsl:call-template name="to-upper">
-          <xsl:with-param name="string" select="$initial-value-string"/>
-        </xsl:call-template>
+	<xsl:call-template name="hyphen-colon-to-underscore">
+	  <xsl:with-param name="string">
+	    <xsl:call-template name="to-upper">
+	      <xsl:with-param name="string" select="$initial-value-string"/>
+	    </xsl:call-template>
+	  </xsl:with-param>
+	</xsl:call-template>
         <xsl:text>))</xsl:text>
       </xsl:when>
       <xsl:otherwise>NULL</xsl:otherwise>
