@@ -1153,9 +1153,7 @@ _get_property (GObject    *object,
                GValue     *value,
                GParamSpec *pspec)
 {
-  FoFo *fo_fo;
-
-  fo_fo = FO_FO (object);
+  FoFo *fo_fo = FO_FO (object);
 
   switch (prop_id)
     {
@@ -1234,9 +1232,7 @@ _set_property (GObject      *object,
                const GValue *value,
                GParamSpec   *pspec)
 {
-  FoFo *fo_fo;
-
-  fo_fo = FO_FO (object);
+  FoFo *fo_fo = FO_FO (object);
 
   switch (prop_id)
     {
