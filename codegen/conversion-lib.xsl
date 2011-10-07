@@ -388,7 +388,8 @@
       </xsl:otherwise>
     </xsl:choose>
     <xsl:text>,
-			  </xsl:text><xsl:value-of select="$param-flags"/><xsl:text>));
+			  </xsl:text><xsl:value-of select="$param-flags"/>
+        | G_PARAM_STATIC_STRINGS<xsl:text>));
 </xsl:text>
   </xsl:template>
 
