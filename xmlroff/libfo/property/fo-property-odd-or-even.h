@@ -2,7 +2,8 @@
  * fo-property-odd-or-even.h: 'odd-or-even' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -11,7 +12,7 @@
 #define __FO_PROPERTY_ODD_OR_EVEN_H__
 
 #include <libfo/fo-utils.h>
-#include <property/fo-property.h>
+#include <libfo/property/fo-property.h>
 
 G_BEGIN_DECLS
 

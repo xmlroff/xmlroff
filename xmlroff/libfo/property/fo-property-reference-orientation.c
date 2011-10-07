@@ -2,24 +2,34 @@
  * fo-property-reference-orientation.c: 'reference-orientation' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-reference-orientation.h"
 
-/* reference-orientation */
-/* Inherited: TRUE */
-/* Shorthand: FALSE */
-/* 0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit */
-/* Initial value: 0 */
+/**
+ * SECTION:fo-property-reference-orientation
+ * @short_description: 'reference-orientation' property
+ *
+ * Inherited: TRUE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: 0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit
+ *
+ * Initial value: 0
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;reference-orientation">http://www.w3.org/TR/xsl11/&num;reference-orientation</ulink>
+ */
 
 struct _FoPropertyReferenceOrientation
 {
@@ -31,16 +41,15 @@ struct _FoPropertyReferenceOrientationClass
   FoPropertyClass parent_class;
 };
 
-static void fo_property_reference_orientation_init         (FoPropertyReferenceOrientation      *property_reference_orientation);
-static void fo_property_reference_orientation_class_init   (FoPropertyReferenceOrientationClass *klass);
-static void fo_property_reference_orientation_finalize     (GObject       *object);
+static void _init         (FoPropertyReferenceOrientation      *property_reference_orientation);
+static void _class_init   (FoPropertyReferenceOrientationClass *klass);
 
-static FoDatatype * fo_property_reference_orientation_resolve_enum (const gchar *token,
-                                                                    FoContext   *context,
-                                                                    GError     **error);
-static FoDatatype * fo_property_reference_orientation_validate (FoDatatype *datatype,
-                                                                FoContext  *context,
-                                                                GError    **error);
+static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
+static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 
 static const gchar class_name[] = "reference-orientation";
 static gpointer parent_class;
@@ -65,12 +74,12 @@ fo_property_reference_orientation_get_type (void)
         sizeof (FoPropertyReferenceOrientationClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_reference_orientation_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoPropertyReferenceOrientation),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_reference_orientation_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 
@@ -83,58 +92,41 @@ fo_property_reference_orientation_get_type (void)
 }
 
 /**
- * fo_property_reference_orientation_init:
+ * _init:
  * @reference_orientation: #FoPropertyReferenceOrientation object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoPropertyReferenceOrientation.
  **/
-void
-fo_property_reference_orientation_init (FoPropertyReferenceOrientation *reference_orientation)
+static void
+_init (FoPropertyReferenceOrientation *reference_orientation)
 {
   FO_PROPERTY (reference_orientation)->value =
-    g_object_ref (fo_enum_factory_get_enum_by_nick ("0"));
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_0));
 }
 
 /**
- * fo_property_reference_orientation_class_init:
+ * _class_init:
  * @klass: #FoPropertyReferenceOrientationClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoPropertyReferenceOrientationClass.
  **/
-void
-fo_property_reference_orientation_class_init (FoPropertyReferenceOrientationClass *klass)
+static void
+_class_init (FoPropertyReferenceOrientationClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_reference_orientation_finalize;
 
   property_class->is_inherited = TRUE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
-    fo_property_reference_orientation_resolve_enum;
+    _resolve_enum;
   property_class->validate =
-    fo_property_reference_orientation_validate;
+    _validate;
   property_class->get_initial =
     fo_property_reference_orientation_get_initial;
-}
-
-/**
- * fo_property_reference_orientation_finalize:
- * @object: #FoPropertyReferenceOrientation object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyReferenceOrientation.
- **/
-void
-fo_property_reference_orientation_finalize (GObject *object)
-{
-  FoPropertyReferenceOrientation *reference_orientation;
-
-  reference_orientation = FO_PROPERTY_REFERENCE_ORIENTATION (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 
@@ -158,7 +150,7 @@ fo_property_reference_orientation_new (void)
 }
 
 /**
- * fo_property_reference_orientation_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -172,10 +164,10 @@ fo_property_reference_orientation_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_reference_orientation_resolve_enum (const gchar *token,
-                                                FoContext   *context,
-                                                GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+               FoContext   *context,
+               GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
@@ -204,7 +196,7 @@ fo_property_reference_orientation_resolve_enum (const gchar *token,
 }
 
 /**
- * fo_property_reference_orientation_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -216,9 +208,9 @@ fo_property_reference_orientation_resolve_enum (const gchar *token,
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_reference_orientation_validate (FoDatatype *datatype,
-                                            FoContext  *context,
-                                            GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
@@ -268,7 +260,7 @@ fo_property_reference_orientation_validate (FoDatatype *datatype,
       token = fo_string_get_value (datatype);
 
       new_datatype =
-        fo_property_reference_orientation_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
@@ -281,7 +273,7 @@ fo_property_reference_orientation_validate (FoDatatype *datatype,
       token = fo_name_get_value (datatype);
 
       new_datatype =
-        fo_property_reference_orientation_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 

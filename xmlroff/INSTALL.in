@@ -186,7 +186,7 @@ There are many ways to use the stylesheet:
    The pkg-config file for libfo defines a variable for the location
    of 'libfo-compat.xsl':
 
-      xsltproc `pkg-config --variable=compat_stylesheet libfo-0.5` in.fo > out.fo
+      xsltproc `pkg-config --variable=compat_stylesheet libfo-0.6` in.fo > out.fo
 
 When you supply a 'verbose' parameter with a non-false value when
 using 'libfo-compat.xsl' with xsltproc, the stylesheet prints status

@@ -42,7 +42,7 @@ To write a copy of the built-in libfo-compat.xsl stylesheet:
 
 To get the location of the installed libfo-compat.xsl stylesheet:
 
-   pkg-config --variable=compat_stylesheet libfo-0.5
+   pkg-config --variable=compat_stylesheet libfo-0.6
 
 To disable compatibility processing:
 

@@ -1,8 +1,9 @@
 /* Fo
  * fo-area-reference.h: Reference area object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -11,7 +12,7 @@
 #define __FO_AREA_REFERENCE_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/area/fo-area.h>
+#include <libfo/area/fo-area-area.h>
 
 G_BEGIN_DECLS
 

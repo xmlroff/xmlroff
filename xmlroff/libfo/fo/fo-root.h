@@ -1,9 +1,9 @@
-/*
- * Fo
+/* Fo
  * fo-root.h: 'root' formatting object
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -17,7 +17,18 @@
 
 G_BEGIN_DECLS
 
+/**
+ * FoRoot:
+ *
+ * Instance of the 'root' formatting object.
+ **/
 typedef struct _FoRoot      FoRoot;
+
+/**
+ * FoRootClass:
+ *
+ * Class structure for the 'root' formatting object.
+ **/
 typedef struct _FoRootClass FoRootClass;
 
 #define FO_TYPE_ROOT              (fo_root_get_type ())

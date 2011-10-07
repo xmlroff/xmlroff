@@ -1,8 +1,9 @@
 /* Fo
  * fo-area-page.c: Page area object
  *
- * Copyright (C) 2001 Sun Microsystems
+ * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -822,8 +823,8 @@ _clone_child_region (FoArea  *region,
   FoAreaRegionNameAndArea *name_and_page =
     (FoAreaRegionNameAndArea *) data;
 
-  if (strcmp (fo_area_region_get_region_name (region),
-	      name_and_page->name) != 0)
+  if (g_strcmp0 (fo_area_region_get_region_name (region),
+		 name_and_page->name) != 0)
     {
       /* Clone the region if it's not the one currently being split,
 	 but keep a ref to it while it's not in any tree. */

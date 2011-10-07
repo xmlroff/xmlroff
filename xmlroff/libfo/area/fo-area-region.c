@@ -321,8 +321,8 @@ fo_area_region_is_named_region (FoArea  *region,
 
   g_return_val_if_fail (FO_IS_AREA_REGION (region), TRUE);
 
-  if (strcmp (name_and_area->name,
-	      fo_area_region_get_region_name (region)) == 0)
+  if (g_strcmp0 (name_and_area->name,
+		 fo_area_region_get_region_name (region)) == 0)
     {
       name_and_area->area = region;
       return TRUE;

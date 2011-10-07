@@ -1,8 +1,9 @@
 /* Fo
  * fo-property-alignment-adjust.h: 'alignment-adjust' property
  *
- * Copyright (C) 2001 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2001-2006 Sun Microsystems
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -29,12 +30,23 @@ G_BEGIN_DECLS
 #define FO_PROPERTY_ALIGNMENT_ADJUST_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS ((obj), FO_TYPE_PROPERTY_ALIGNMENT_ADJUST, FoPropertyAlignmentAdjustClass))
 
 
+/**
+ * FoPropertyAlignmentAdjust:
+ *
+ * Instance of the 'alignment-adjust' property.
+ **/
 typedef struct _FoPropertyAlignmentAdjust      FoPropertyAlignmentAdjust;
+
+/**
+ * FoPropertyAlignmentAdjustClass:
+ *
+ * Class structure for the 'alignment-adjust' property.
+ **/
 typedef struct _FoPropertyAlignmentAdjustClass FoPropertyAlignmentAdjustClass;
 
-GType       fo_property_alignment_adjust_get_type    (void) G_GNUC_CONST;
-FoProperty* fo_property_alignment_adjust_new         (void);
-FoProperty* fo_property_alignment_adjust_get_initial (void);
+GType        fo_property_alignment_adjust_get_type    (void) G_GNUC_CONST;
+FoProperty * fo_property_alignment_adjust_new         (void);
+FoProperty * fo_property_alignment_adjust_get_initial (void);
 
 G_END_DECLS
 

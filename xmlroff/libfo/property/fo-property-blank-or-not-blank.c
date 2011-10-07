@@ -2,24 +2,34 @@
  * fo-property-blank-or-not-blank.c: 'blank-or-not-blank' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
- * See Copying for the status of this software.
+ * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-blank-or-not-blank.h"
 
-/* blank-or-not-blank */
-/* Inherited: FALSE */
-/* Shorthand: FALSE */
-/* blank | not-blank | any | inherit */
-/* Initial value: any */
+/**
+ * SECTION:fo-property-blank-or-not-blank
+ * @short_description: 'blank-or-not-blank' property
+ *
+ * Inherited: FALSE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: blank | not-blank | any | inherit
+ *
+ * Initial value: any
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;blank-or-not-blank">http://www.w3.org/TR/xsl11/&num;blank-or-not-blank</ulink>
+ */
 
 struct _FoPropertyBlankOrNotBlank
 {
@@ -31,16 +41,15 @@ struct _FoPropertyBlankOrNotBlankClass
   FoPropertyClass parent_class;
 };
 
-static void fo_property_blank_or_not_blank_init         (FoPropertyBlankOrNotBlank      *property_blank_or_not_blank);
-static void fo_property_blank_or_not_blank_class_init   (FoPropertyBlankOrNotBlankClass *klass);
-static void fo_property_blank_or_not_blank_finalize     (GObject       *object);
+static void _init         (FoPropertyBlankOrNotBlank      *property_blank_or_not_blank);
+static void _class_init   (FoPropertyBlankOrNotBlankClass *klass);
 
-static FoDatatype * fo_property_blank_or_not_blank_resolve_enum (const gchar *token,
-                                                                 FoContext   *context,
-                                                                 GError     **error);
-static FoDatatype * fo_property_blank_or_not_blank_validate (FoDatatype *datatype,
-                                                             FoContext  *context,
-                                                             GError    **error);
+static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
+static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 
 static const gchar class_name[] = "blank-or-not-blank";
 static gpointer parent_class;
@@ -65,12 +74,12 @@ fo_property_blank_or_not_blank_get_type (void)
         sizeof (FoPropertyBlankOrNotBlankClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_blank_or_not_blank_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoPropertyBlankOrNotBlank),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_blank_or_not_blank_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 
@@ -83,58 +92,41 @@ fo_property_blank_or_not_blank_get_type (void)
 }
 
 /**
- * fo_property_blank_or_not_blank_init:
+ * _init:
  * @blank_or_not_blank: #FoPropertyBlankOrNotBlank object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoPropertyBlankOrNotBlank.
  **/
-void
-fo_property_blank_or_not_blank_init (FoPropertyBlankOrNotBlank *blank_or_not_blank)
+static void
+_init (FoPropertyBlankOrNotBlank *blank_or_not_blank)
 {
   FO_PROPERTY (blank_or_not_blank)->value =
-    g_object_ref (fo_enum_factory_get_enum_by_nick ("any"));
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_ANY));
 }
 
 /**
- * fo_property_blank_or_not_blank_class_init:
+ * _class_init:
  * @klass: #FoPropertyBlankOrNotBlankClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoPropertyBlankOrNotBlankClass.
  **/
-void
-fo_property_blank_or_not_blank_class_init (FoPropertyBlankOrNotBlankClass *klass)
+static void
+_class_init (FoPropertyBlankOrNotBlankClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_blank_or_not_blank_finalize;
 
   property_class->is_inherited = FALSE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
-    fo_property_blank_or_not_blank_resolve_enum;
+    _resolve_enum;
   property_class->validate =
-    fo_property_blank_or_not_blank_validate;
+    _validate;
   property_class->get_initial =
     fo_property_blank_or_not_blank_get_initial;
-}
-
-/**
- * fo_property_blank_or_not_blank_finalize:
- * @object: #FoPropertyBlankOrNotBlank object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyBlankOrNotBlank.
- **/
-void
-fo_property_blank_or_not_blank_finalize (GObject *object)
-{
-  FoPropertyBlankOrNotBlank *blank_or_not_blank;
-
-  blank_or_not_blank = FO_PROPERTY_BLANK_OR_NOT_BLANK (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 
@@ -158,7 +150,7 @@ fo_property_blank_or_not_blank_new (void)
 }
 
 /**
- * fo_property_blank_or_not_blank_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -172,10 +164,10 @@ fo_property_blank_or_not_blank_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_blank_or_not_blank_resolve_enum (const gchar *token,
-                                             FoContext   *context,
-                                             GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+               FoContext   *context,
+               GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
@@ -200,7 +192,7 @@ fo_property_blank_or_not_blank_resolve_enum (const gchar *token,
 }
 
 /**
- * fo_property_blank_or_not_blank_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -212,9 +204,9 @@ fo_property_blank_or_not_blank_resolve_enum (const gchar *token,
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_blank_or_not_blank_validate (FoDatatype *datatype,
-                                         FoContext  *context,
-                                         GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
@@ -260,7 +252,7 @@ fo_property_blank_or_not_blank_validate (FoDatatype *datatype,
       token = fo_string_get_value (datatype);
 
       new_datatype =
-        fo_property_blank_or_not_blank_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
@@ -273,7 +265,7 @@ fo_property_blank_or_not_blank_validate (FoDatatype *datatype,
       token = fo_name_get_value (datatype);
 
       new_datatype =
-        fo_property_blank_or_not_blank_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 

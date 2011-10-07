@@ -2,7 +2,8 @@
  * fo-root.c: 'root' formatting object
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -25,26 +26,26 @@ enum {
   PROP_MEDIA_USAGE
 };
 
-static void fo_root_class_init  (FoRootClass *klass);
-static void fo_root_get_property (GObject      *object,
-                                  guint         prop_id,
-                                  GValue       *value,
-                                  GParamSpec   *pspec);
-static void fo_root_set_property (GObject      *object,
-                                  guint         prop_id,
-                                  const GValue *value,
-                                  GParamSpec   *pspec);
-static void fo_root_dispose    (GObject           *object);
-static gboolean fo_root_validate_content (FoFo    *fo,
-                                          GError **error);
-static void fo_root_validate (FoFo      *fo,
-                              FoContext *current_context,
-                              FoContext *parent_context,
-                              GError   **error);
-static void fo_root_update_from_context (FoFo      *fo,
-                                         FoContext *context);
-static void fo_root_debug_dump_properties (FoFo *fo,
-                                           gint  depth);
+static void _class_init            (FoRootClass *klass);
+static void _dispose               (GObject      *object);
+static void _get_property          (GObject      *object,
+                                    guint         prop_id,
+                                    GValue       *value,
+                                    GParamSpec   *pspec);
+static void _set_property          (GObject      *object,
+                                    guint         prop_id,
+                                    const GValue *value,
+                                    GParamSpec   *pspec);
+static gboolean _validate_content  (FoFo         *fo,
+                                    GError     **error);
+static void _validate              (FoFo         *fo,
+                                    FoContext    *current_context,
+                                    FoContext    *parent_context,
+                                    GError      **error);
+static void _update_from_context   (FoFo         *fo,
+                                    FoContext    *context);
+static void _debug_dump_properties (FoFo         *fo,
+                                    gint          depth);
 
 static gpointer parent_class;
 
@@ -67,7 +68,7 @@ fo_root_get_type (void)
 	  sizeof (FoRootClass),
 	  NULL,           /* base_init */
 	  NULL,           /* base_finalize */
-	  (GClassInitFunc) fo_root_class_init,
+	  (GClassInitFunc) _class_init,
 	  NULL,           /* class_finalize */
 	  NULL,           /* class_data */
 	  sizeof (FoRoot),
@@ -85,30 +86,29 @@ fo_root_get_type (void)
 }
 
 /**
- * fo_root_class_init:
+ * _class_init:
  * @klass: #FoRootClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoRootClass.
  **/
-void
-fo_root_class_init (FoRootClass *klass)
+static void
+_class_init (FoRootClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoFoClass *fofo_class = FO_FO_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->dispose = fo_root_dispose;
+  object_class->dispose = _dispose;
 
-  object_class->get_property = fo_root_get_property;
-  object_class->set_property = fo_root_set_property;
+  object_class->get_property = _get_property;
+  object_class->set_property = _set_property;
 
   fofo_class->validate_content =
-    fo_root_validate_content;
-  fofo_class->validate2 =
-    fo_root_validate;
-  fofo_class->update_from_context = fo_root_update_from_context;
-  fofo_class->debug_dump_properties = fo_root_debug_dump_properties;
+    _validate_content;
+  fofo_class->validate2 = _validate;
+  fofo_class->update_from_context = _update_from_context;
+  fofo_class->debug_dump_properties = _debug_dump_properties;
 
   g_object_class_install_property
     (object_class,
@@ -121,13 +121,13 @@ fo_root_class_init (FoRootClass *klass)
 }
 
 /**
- * fo_root_dispose:
+ * _dispose:
  * @object: #FoRoot object to dispose.
  * 
  * Implements #GObjectDisposeFunc for #FoRoot.
  **/
-void
-fo_root_dispose (GObject *object)
+static void
+_dispose (GObject *object)
 {
   FoFo *fo = FO_FO (object);
 
@@ -138,7 +138,7 @@ fo_root_dispose (GObject *object)
 }
 
 /**
- * fo_root_get_property:
+ * _get_property:
  * @object:  #GObject whose property will be retrieved.
  * @prop_id: Property ID assigned when property registered.
  * @value:   GValue to set with property value.
@@ -146,11 +146,11 @@ fo_root_dispose (GObject *object)
  * 
  * Implements #GObjectGetPropertyFunc for #FoRoot.
  **/
-void
-fo_root_get_property (GObject    *object,
-                      guint       prop_id,
-                      GValue     *value,
-                      GParamSpec *pspec)
+static void
+_get_property (GObject    *object,
+               guint       prop_id,
+               GValue     *value,
+               GParamSpec *pspec)
 {
   FoFo *fo_fo;
 
@@ -168,7 +168,7 @@ fo_root_get_property (GObject    *object,
 }
 
 /**
- * fo_root_set_property:
+ * _set_property:
  * @object:  #GObject whose property will be set.
  * @prop_id: Property ID assigned when property registered.
  * @value:   New value for property.
@@ -176,11 +176,11 @@ fo_root_get_property (GObject    *object,
  * 
  * Implements #GObjectSetPropertyFunc for #FoRoot.
  **/
-void
-fo_root_set_property (GObject      *object,
-                      guint         prop_id,
-                      const GValue *value,
-                      GParamSpec   *pspec)
+static void
+_set_property (GObject      *object,
+               guint         prop_id,
+               const GValue *value,
+               GParamSpec   *pspec)
 {
   FoFo *fo_fo;
 
@@ -212,7 +212,7 @@ fo_root_new (void)
 }
 
 /**
- * fo_root_validate_content:
+ * _validate_content:
  * @fo:    #FoRoot object to validate.
  * @error: #GError indicating error condition, if any.
  * 
@@ -224,8 +224,8 @@ fo_root_new (void)
  * Return value: %FALSE if content model okay, %TRUE if not.
  **/
 gboolean
-fo_root_validate_content (FoFo    *fo,
-                          GError **error)
+_validate_content (FoFo    *fo,
+                   GError **error)
 {
   FoNode *child_node;
   GError *tmp_error;
@@ -357,7 +357,7 @@ fo_root_resolve_media_usage (FoFo      *fo,
 }
 
 /**
- * fo_root_validate:
+ * _validate:
  * @fo:              #FoRoot object to validate.
  * @current_context: #FoContext associated with current object.
  * @parent_context:  #FoContext associated with parent FO.
@@ -367,21 +367,19 @@ fo_root_resolve_media_usage (FoFo      *fo,
  * @current_context, then update @fo property values.  Set @error if
  * an error occurred.
  **/
-void
-fo_root_validate (FoFo      *fo,
-                  FoContext *current_context,
-                  FoContext *parent_context,
-                  GError   **error)
+static void
+_validate (FoFo      *fo,
+           FoContext *current_context,
+           FoContext *parent_context,
+           GError   **error)
 {
-  FoRoot *fo_root;
-
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_ROOT (fo));
   g_return_if_fail (FO_IS_CONTEXT (current_context));
   g_return_if_fail (FO_IS_CONTEXT (parent_context));
   g_return_if_fail (error == NULL || *error == NULL);
 
-  fo_root = FO_ROOT (fo);
+  FoRoot *fo_root = FO_ROOT (fo);
 
   fo_root_resolve_media_usage (fo, current_context);
   fo_context_merge (current_context, parent_context);
@@ -389,15 +387,15 @@ fo_root_validate (FoFo      *fo,
 }
 
 /**
- * fo_root_update_from_context:
+ * _update_from_context:
  * @fo:      The #FoFo object.
  * @context: The #FoContext object from which to update the properties of @fo.
  * 
  * Sets the properties of @fo to the corresponding property values in @context.
  **/
-void
-fo_root_update_from_context (FoFo      *fo,
-                             FoContext *context)
+static void
+_update_from_context (FoFo      *fo,
+                      FoContext *context)
 {
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_ROOT (fo));
@@ -409,16 +407,16 @@ fo_root_update_from_context (FoFo      *fo,
 }
 
 /**
- * fo_root_debug_dump_properties:
+ * _debug_dump_properties:
  * @fo:    The #FoFo object.
  * @depth: Indent level to add to the output.
  * 
  * Calls #fo_object_debug_dump on each property of @fo then calls
  * debug_dump_properties method of parent class.
  **/
-void
-fo_root_debug_dump_properties (FoFo *fo,
-                               gint  depth)
+static void
+_debug_dump_properties (FoFo *fo,
+                        gint  depth)
 {
   FoRoot *fo_root;
 
@@ -431,6 +429,10 @@ fo_root_debug_dump_properties (FoFo *fo,
 
   FO_FO_CLASS (parent_class)->debug_dump_properties (fo, depth + 1);
 }
+
+/*
+ * These get/set functions are completely auto-generated.
+ */
 
 /**
  * fo_root_get_media_usage:
@@ -471,7 +473,7 @@ fo_root_set_media_usage (FoFo *fo_fo,
 
   if (new_media_usage != NULL)
     {
-      g_object_ref (new_media_usage);
+      g_object_ref_sink (new_media_usage);
     }
   if (fo_root->media_usage != NULL)
     {
