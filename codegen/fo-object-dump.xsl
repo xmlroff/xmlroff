@@ -685,7 +685,7 @@ static void _class_init            (Fo</xsl:text><xsl:value-of select="$camelcas
   <xsl:text>static void _table_border_fo_init  (FoTableBorderFoIface *iface);&#10;</xsl:text>
 </xsl:if>
 
-<xsl:text>static void _finalize              (GObject      *object);
+<xsl:text>static void _dispose               (GObject      *object);
 </xsl:text>
 
 <xsl:if test="$properties">
@@ -855,7 +855,7 @@ _class_init (Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>Cl
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = _finalize;
+  object_class->dispose = _dispose;
 </xsl:text>
 
 <xsl:if test="$properties">
@@ -1079,13 +1079,13 @@ _table_border_fo_init (FoTableBorderFoIface *iface)
 </xsl:if>
 
 <xsl:text>/**
- * _finalize:
- * @object: #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> object to finalize.
+ * _dispose:
+ * @object: #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text> object to dispose.
  * 
- * Implements #GObjectFinalizeFunc for #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>.
+ * Implements #GObjectDisposeFunc for #Fo</xsl:text><xsl:value-of select="$camelcase-object"/><xsl:text>.
  **/
 static void
-_finalize (GObject *object)
+_dispose (GObject *object)
 {
   FoFo *fo = FO_FO (object);
 
@@ -1132,7 +1132,7 @@ _finalize (GObject *object)
     </xsl:choose>
   </xsl:for-each>
 <xsl:text>
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 </xsl:text>
 
