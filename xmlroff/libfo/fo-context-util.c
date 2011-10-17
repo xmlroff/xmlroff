@@ -72,7 +72,6 @@
 #include "property/fo-property-writing-mode.h"
 #include "area/fo-area-area.h"
 #include "area/fo-area-reference.h"
-#include "datatype/fo-all-datatype.h"
 
 /**
  * fo_context_util_height_width_resolve:

@@ -12,7 +12,7 @@
 #define __FO_AREA_REFERENCE_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/area/fo-area-area.h>
+#include <libfo/area/fo-area.h>
 
 G_BEGIN_DECLS
 

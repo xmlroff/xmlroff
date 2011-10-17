@@ -11,7 +11,7 @@
 #define __FO_AREA_REGION_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/area/fo-area-reference.h>
+#include <libfo/area/fo-area.h>
 
 G_BEGIN_DECLS
 

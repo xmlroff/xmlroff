@@ -1,4 +1,3 @@
-
 /* Fo
  * fo-area-area.c: Area area object
  *

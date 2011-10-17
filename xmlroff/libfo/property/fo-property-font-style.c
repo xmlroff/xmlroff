@@ -2,13 +2,14 @@
  * fo-property-font-style.c: 'font-style' property
  *
  * Copyright (C) 2001-2006 Sun Microsystems
- * Copyright (C) 2007-2008 Menteith Consulting Ltd
+ * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011 Mentea
  *
  * See COPYING for the status of this software.
  */
 
 #include <string.h>
-#include "libfo/fo-utils.h"
+#include "fo-utils.h"
 #include "fo-context.h"
 #include "datatype/fo-datatype.h"
 #include "property/fo-property-private.h"
@@ -16,11 +17,20 @@
 #include "property/fo-property-font-size.h"
 #include "property/fo-property-font-style.h"
 
-/* font-style */
-/* Inherited: TRUE */
-/* Shorthand: FALSE */
-/* normal | italic | oblique | backslant | inherit */
-/* Initial value: normal */
+/**
+ * SECTION:fo-property-font-style
+ * @short_description: 'font-style' property
+ *
+ * Inherited: TRUE
+ *
+ * Shorthand: FALSE
+ *
+ * Value: normal | italic | oblique | backslant | inherit
+ *
+ * Initial value: normal
+ *
+ * Definition: <ulink url="http://www.w3.org/TR/xsl11/&num;font-style">http://www.w3.org/TR/xsl11/&num;font-style</ulink>
+ */
 
 struct _FoPropertyFontStyle
 {
@@ -32,17 +42,16 @@ struct _FoPropertyFontStyleClass
   FoPropertyClass parent_class;
 };
 
-static void fo_property_font_style_init         (FoPropertyFontStyle      *property_font_style);
-static void fo_property_font_style_class_init   (FoPropertyFontStyleClass *klass);
-static void fo_property_font_style_finalize     (GObject       *object);
-static void fo_property_font_style_text_property_init (FoPropertyTextPropertyIface *iface);
+static void _init         (FoPropertyFontStyle      *property_font_style);
+static void _class_init   (FoPropertyFontStyleClass *klass);
+static void _text_property_init (FoPropertyTextPropertyIface *iface);
 
-static FoDatatype * fo_property_font_style_resolve_enum (const gchar *token,
-                                                         FoContext   *context,
-                                                         GError     **error);
-static FoDatatype * fo_property_font_style_validate (FoDatatype *datatype,
-                                                     FoContext  *context,
-                                                     GError    **error);
+static FoDatatype * _resolve_enum (const gchar *token,
+                                   FoContext   *context,
+                                   GError     **error);
+static FoDatatype * _validate     (FoDatatype  *datatype,
+                                   FoContext   *context,
+                                   GError     **error);
 static PangoAttribute * fo_property_font_style_new_attr (FoProperty *property);
 
 static const gchar class_name[] = "font-style";
@@ -68,18 +77,18 @@ fo_property_font_style_get_type (void)
         sizeof (FoPropertyFontStyleClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) fo_property_font_style_class_init,
+        (GClassInitFunc) _class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (FoPropertyFontStyle),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) fo_property_font_style_init,
+        (GInstanceInitFunc) _init,
 	NULL		/* value_table */
       };
 
       static const GInterfaceInfo fo_property_text_property_info =
       {
-	(GInterfaceInitFunc) fo_property_font_style_text_property_init, /* interface_init */
+	(GInterfaceInitFunc) _text_property_init, /* interface_init */
         NULL,
         NULL
       };
@@ -97,68 +106,51 @@ fo_property_font_style_get_type (void)
 }
 
 /**
- * fo_property_font_style_init:
+ * _init:
  * @font_style: #FoPropertyFontStyle object to initialise.
  * 
  * Implements #GInstanceInitFunc for #FoPropertyFontStyle.
  **/
-void
-fo_property_font_style_init (FoPropertyFontStyle *font_style)
+static void
+_init (FoPropertyFontStyle *font_style)
 {
   FO_PROPERTY (font_style)->value =
-    g_object_ref (fo_enum_factory_get_enum_by_nick ("normal"));
+    g_object_ref (fo_enum_factory_get_enum_by_value (FO_ENUM_ENUM_NORMAL));
 }
 
 /**
- * fo_property_font_style_class_init:
+ * _class_init:
  * @klass: #FoPropertyFontStyleClass object to initialise.
  * 
  * Implements #GClassInitFunc for #FoPropertyFontStyleClass.
  **/
-void
-fo_property_font_style_class_init (FoPropertyFontStyleClass *klass)
+static void
+_class_init (FoPropertyFontStyleClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  object_class->finalize = fo_property_font_style_finalize;
 
   property_class->is_inherited = TRUE;
   property_class->is_shorthand = FALSE;
   property_class->resolve_enum =
-    fo_property_font_style_resolve_enum;
+    _resolve_enum;
   property_class->validate =
-    fo_property_font_style_validate;
+    _validate;
   property_class->get_initial =
     fo_property_font_style_get_initial;
 }
 
 /**
- * fo_property_font_style_finalize:
- * @object: #FoPropertyFontStyle object to finalize.
- * 
- * Implements #GObjectFinalizeFunc for #FoPropertyFontStyle.
- **/
-void
-fo_property_font_style_finalize (GObject *object)
-{
-  FoPropertyFontStyle *font_style;
-
-  font_style = FO_PROPERTY_FONT_STYLE (object);
-
-  G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-/**
- * fo_property_font_style_text_property_init:
+ * _text_property_init:
  * @iface: #FoPropertyTextPropertyIFace structure for this class.
  * 
  * Initialize #FoPropertyTextPropertyIface interface for this class.
  **/
-void
-fo_property_font_style_text_property_init (FoPropertyTextPropertyIface *iface)
+static void
+_text_property_init (FoPropertyTextPropertyIface *iface)
 {
   iface->new_attr = fo_property_font_style_new_attr;
 }
@@ -183,7 +175,7 @@ fo_property_font_style_new (void)
 }
 
 /**
- * fo_property_font_style_resolve_enum:
+ * _resolve_enum:
  * @token:   Token from the XML attribute value to be evaluated as an
  *           enumeration token.
  * @context: #FoContext object from which to possibly inherit values.
@@ -197,10 +189,10 @@ fo_property_font_style_new (void)
  * 
  * Return value: Resolved enumeration value or NULL.
  **/
-FoDatatype*
-fo_property_font_style_resolve_enum (const gchar *token,
-                                     FoContext   *context,
-                                     GError     **error)
+static FoDatatype *
+_resolve_enum (const gchar *token,
+               FoContext   *context,
+               GError     **error)
 {
   g_return_val_if_fail (token != NULL, NULL);
   g_return_val_if_fail (FO_IS_CONTEXT (context), NULL);
@@ -226,7 +218,7 @@ fo_property_font_style_resolve_enum (const gchar *token,
 }
 
 /**
- * fo_property_font_style_validate:
+ * _validate:
  * @datatype: #FoDatatype to be validated against allowed datatypes and
  *            values for current property.
  * @context:  #FoContext object from which to possibly inherit values.
@@ -238,9 +230,9 @@ fo_property_font_style_resolve_enum (const gchar *token,
  * Return value: Valid datatype value or NULL.
  **/
 FoDatatype*
-fo_property_font_style_validate (FoDatatype *datatype,
-                                 FoContext  *context,
-                                 GError    **error)
+_validate (FoDatatype *datatype,
+           FoContext  *context,
+           GError    **error)
 {
   FoDatatype *new_datatype;
   GError     *tmp_error = NULL;
@@ -287,7 +279,7 @@ fo_property_font_style_validate (FoDatatype *datatype,
       token = fo_string_get_value (datatype);
 
       new_datatype =
-        fo_property_font_style_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
@@ -300,7 +292,7 @@ fo_property_font_style_validate (FoDatatype *datatype,
       token = fo_name_get_value (datatype);
 
       new_datatype =
-        fo_property_font_style_resolve_enum (token, context, &tmp_error);
+        _resolve_enum (token, context, &tmp_error);
 
       g_object_unref (datatype);
 
@@ -372,11 +364,11 @@ fo_property_font_style_to_pango_style (FoProperty *property)
   font_style = fo_enum_get_value (property->value);
 
   /* Pango doesn't support 'backslant' styles */
-  if (font_style == FO_ENUM_ENUM_ITALIC)
+  if (font_style == FO_ENUM_FONT_STYLE_ITALIC)
     {
       pango_font_style = PANGO_STYLE_ITALIC;
     }
-  else if (font_style == FO_ENUM_ENUM_OBLIQUE)
+  else if (font_style == FO_ENUM_FONT_STYLE_OBLIQUE)
     {
       pango_font_style = PANGO_STYLE_OBLIQUE;
     }
