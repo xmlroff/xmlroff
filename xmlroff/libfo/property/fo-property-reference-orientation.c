@@ -113,11 +113,9 @@ _init (FoPropertyReferenceOrientation *reference_orientation)
 static void
 _class_init (FoPropertyReferenceOrientationClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
-
 
   property_class->is_inherited = TRUE;
   property_class->is_shorthand = FALSE;
@@ -128,7 +126,6 @@ _class_init (FoPropertyReferenceOrientationClass *klass)
   property_class->get_initial =
     fo_property_reference_orientation_get_initial;
 }
-
 
 /**
  * fo_property_reference_orientation_new:
@@ -280,6 +277,69 @@ _validate (FoDatatype *datatype,
       fo_propagate_and_return_val_if_error (error, tmp_error, NULL);
 
       return new_datatype;
+    }
+  else if (FO_IS_NUMBER (datatype))
+    {
+      gfloat float_value = fo_number_get_value (datatype);
+
+      if ((float_value == 0) || (float_value == 90) ||
+	  (float_value == 180) || (float_value == 270) ||
+	  (float_value == -90) || (float_value == -180) ||
+	  (float_value == -270))
+	{
+	  new_datatype = fo_integer_new_with_value ((int) float_value);
+	  g_object_unref (datatype);
+
+	  return new_datatype;
+	}
+      else
+	{
+	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
+
+	  g_set_error (error,
+		       FO_FO_ERROR,
+		       FO_FO_ERROR_DATATYPE,
+		       _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE]),
+		       class_name,
+		       datatype_sprintf,
+		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
+
+	  g_object_unref (datatype);
+
+	  g_free (datatype_sprintf);
+
+	  return NULL;
+	}
+    }
+  else if (FO_IS_INTEGER (datatype))
+    {
+      gint int_value = fo_integer_get_value (datatype);
+
+      if ((int_value == 0) || (int_value == 90) ||
+	  (int_value == 180) || (int_value == 270) ||
+	  (int_value == -90) || (int_value == -180) ||
+	  (int_value == -270))
+	{
+	  return datatype;
+	}
+      else
+	{
+	  gchar *datatype_sprintf = fo_object_sprintf (datatype);
+
+	  g_set_error (error,
+		       FO_FO_ERROR,
+		       FO_FO_ERROR_DATATYPE,
+		       _(fo_fo_error_messages[FO_FO_ERROR_DATATYPE]),
+		       class_name,
+		       datatype_sprintf,
+		       g_type_name (G_TYPE_FROM_INSTANCE (datatype)));
+
+	  g_object_unref (datatype);
+
+	  g_free (datatype_sprintf);
+
+	  return NULL;
+	}
     }
   else
     {
