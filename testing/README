@@ -98,6 +98,7 @@ Testing xmlroff requires:
    In the 'testdocs' directory, run 'make-testsuite.pl' from this
    module to create a usable testsuite.xml file, e.g.:
 
+      cd testdocs
       perl ../testing/make-testsuite.pl \
          --stylesheet \
          http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl \
