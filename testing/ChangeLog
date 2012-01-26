@@ -1,3 +1,138 @@
+2011-08-09  Tony Graham
+
+	* [r763] results-doc.xsl: Changing colors of PNG name and
+	  'Reference' to match their colors in 'stereo' view to make it
+	  easier to remember which one is which.
+
+2011-08-05  Tony Graham
+
+	* [r762] Makefile.am: Stopped making testsuccess.xml twice.
+
+2011-07-29  Tony Graham
+
+	* [r761] testsuites2testresults.xsl: Minor cleanup.
+
+	* [r760] configure.ac: Added another setting to config.h output.
+
+	* [r759] testsuites2testresults.xsl: Incorporating results from
+	  current $TEST_RESULTS and other changes so (if testsuites haven't
+	  changed) can exactly replicate current test results. Currently
+	  guaranteed to break if $TEST_RESULTS does not exist.
+
+2011-07-27  Tony Graham
+
+	* [r758] png+ref2stereo.pl: Wasn't coping if no 'ref' PNGs for a
+	  test.
+
+	* [r757] regenerate-testsuccess.pl: Removed unused variable.
+
+	* [r756] common.xsl: When matching command patterns, wasn't coping
+	  properly without a default stylesheet.
+
+	* [r755] configure.ac, testsuites2testresults.xsl: Carrying 'title'
+	  to and from PI in test results XML.
+
+	* [r754] make-testsuite.pl: Also sorting '\d.fo' files.
+
+	* [r753] README: Added section on 'make-fop-testsuite.pl'.
+
+	* [r752] make-testsuite.pl: Sorting tests with names that differ
+	  only in numeric suffix in numeric order.
+
+	* [r751] make-fop-testsuite.pl: Sorting tests with names that
+	  differ only in numeric suffix in numeric order.
+
+2011-07-25  Tony Graham
+
+	* [r750] threaded.pl: Reduced 'MaxClients' and 'LogLevel'.
+
+	* [r749] png+ref2stereo.pl: FOP appears to use a hash to store
+	  images, so order of '/Im' commands can change between runs when
+	  using FOP. Was doing the wrong thing with results when comparing
+	  identity of two PNGs.
+
+2011-07-24  Tony Graham
+
+	* [r747] threaded.pl: Allowing '.' in more types of filenames.
+
+	* [r746] results-doc.xsl: Changing background color on links to
+	  pages that have differences.
+
+	* [r745] png+ref2stereo.pl: Stopped printing command.
+
+	* [r744] testsuites2testresults.xsl: Added server port setter to
+	  option PIs.
+
+	* [r743] test2sh.xsl: Removed unused 'debug' param.
+
+2011-07-18  Tony Graham
+
+	* [r742] configure.ac: Corrected more 'setter' settings.
+
+2011-07-14  Tony Graham
+
+	* [r741] configure.ac, h2pl.pl, threaded.pl: Setting standalone
+	  server port from configure setting.
+
+	* [r740] png+ref2stereo.pl: Back to using 'composite -stereo +0+0'
+	  since it shows different colors for additions and deletions
+	  (provided the pixels have a red or green component).
+
+	* [r739] png+ref2stereo.pl: More thrashing to stop false positives.
+
+2011-07-13  Tony Graham
+
+	* [r738] png+ref2stereo.pl: Giving false positives for current PDF
+	  matching reference.
+
+2011-07-12  Tony Graham
+
+	* [r737] TestCGI.pm, results-doc.xsl, testresults.xsl, threaded.pl,
+	  update-results-xml.xsl[CPY]: Reimplemented 'make-results.pl' in
+	  TestCGI.pm so can now update test results from 'threaded.pl' web
+	  server so no longer need Apache installed to be able to use form
+	  in individual results.
+
+	* [r736] make-fop-testsuite.pl: Fixed Perl path.
+
+	* [r735] Makefile.am, configure.ac, png+ref2stereo.pl: Combination
+	  of FOP and recent ImageMagick putting in extra metadata in both
+	  PDFs and PNGs produced from PDFs so had to get smarter about
+	  comparing files. Also using ImageMagick 'compare' to produce
+	  better looking 'stereo' files (which aren't really 'stereo' files
+	  anymore).
+
+2011-07-08  Tony Graham
+
+	* [r732] configure.ac: Setting project name with command-line
+	  option wasn't being reported as an option.
+
+2011-06-01  Tony Graham
+
+	* [r705] ., .cvsignore: Ignoring more files and directories.
+
+2011-05-27  Tony Graham
+
+	* [r704] ., .cvsignore: Ignoring some files.
+
+	* [r703] Makefile.am, results-xml.xsl, testresults.xsl,
+	  testsuccess.xsl: Producing individual reports as XML to be
+	  processed by client-side XSLT.
+
+	* [r702] README: Minor edit.
+
+	* [r701] MyContentParams.pm, MyEventLog.pm, MyWebLog.pm,
+	  TestCGI.pm, TestHTTPReq.pm: Modules for 'threaded.pl'.
+
+2011-05-26  Tony Graham
+
+	* [r700] common.xsl, results-doc.xsl, testresults.xsl,
+	  testsuccess.xsl: Working on producing individual test reports as
+	  XML that is transformed to HTML in client browser.
+
+	* [r699] threaded.pl: Perl threaded http server based on
+	  'HTTP::Daemon::Threaded' module.
+
 2010-01-14  Tony Graham
 
 	* [r649] ChangeLog: Updated for 0.6.2.
