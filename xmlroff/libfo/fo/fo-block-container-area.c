@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2001 Sun Microsystems
  * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011-2012 Mentea
  *
  * See COPYING for the status of this software.
  */
