@@ -2,7 +2,7 @@
 <testsuite profile="xmlroff with PDF output"><testcases base="testsuite" profile="xmlroff Test Suite">
   
   <testcases profile="expression" base="expression">
-    
+
     <testresult id="expression1" results="expression1.pdf" agreement="full" specproblem="no" testproblem="no"/>
     <testresult id="from-table-column1" results="from-table-column1.pdf" agreement="issues" specproblem="no" testproblem="no">Fails as expected.  Too many assertion failure messages.  Ticket #17.</testresult>
     <testresult id="from-table-column2" results="from-table-column2.pdf" agreement="full" specproblem="no" testproblem="no">Fails as expected.</testresult>
@@ -20,6 +20,7 @@
     </testcases>
     <testcases profile="declaration-pagination-layout" base="declaration-pagination-layout">
       <testcases profile="region-body" base="region-body">
+        <testresult id="region-body-border1" results="region-body-border1.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
         <testresult id="region-body-overflow1" results="region-body-overflow1.pdf" agreement="full" specproblem="no" testproblem="no">Treated as auto in accordance with XSL 1.0 spec.</testresult>
       <testresult id="region-body-overflow2" results="region-body-overflow2.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow3" results="region-body-overflow3.pdf" agreement="full" specproblem="no" testproblem="no">Treated as 'auto' in accordance with XSL 1.0 spec.</testresult>
@@ -28,6 +29,24 @@
       <testresult id="region-body-overflow6" results="region-body-overflow6.pdf" agreement="full" specproblem="no" testproblem="no"/>
       <testresult id="region-body-overflow7" results="region-body-overflow7.pdf" agreement="full" specproblem="no" testproblem="no"/>
     </testcases>
+      <testcases profile="region-before" base="region-before">
+        <testresult id="region-before-background-1" results="region-before-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="region-after" base="region-after">
+        <testresult id="region-after-background-1" results="region-after-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="region-start" base="region-start">
+        <testresult id="region-start-background-1" results="region-start-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="region-end" base="region-end">
+        <testresult id="region-end-background-1" results="region-end-background-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
+      <testcases profile="simple-page-master" base="simple-page-master">
+        <testresult id="region-before-after" results="region-before-after.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="region-before-after-2" results="region-before-after-2.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="region-before-after-start-end-1" results="region-before-after-start-end-1.pdf" agreement="full" specproblem="no" testproblem="no"/>
+        <testresult id="region-before-after-start-end-2" results="region-before-after-start-end-2.pdf" agreement="full" specproblem="no" testproblem="no"/>
+      </testcases>
     </testcases>
     <testcases profile="inline" base="inline">
       <testcases profile="external-graphic" base="external-graphic">
@@ -37,6 +56,13 @@
         <testresult id="external-graphic-4" results="external-graphic-4.pdf" agreement="full" specproblem="no" testproblem="no"/>
         <testresult id="external-graphic-5" results="external-graphic-5.pdf" agreement="full" specproblem="no" testproblem="no"/>
         <testresult id="external-graphic-6" results="external-graphic-6.pdf" agreement="issues" specproblem="no" testproblem="no">No graphic.  PDF blows up Evince, convert, etc.</testresult>
+        <testresult id="external-graphic-7" results="external-graphic-7.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="external-graphic-8" results="external-graphic-8.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="external-graphic-9" results="external-graphic-9.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="external-graphic-10" results="external-graphic-10.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="external-graphic-11" results="external-graphic-11.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="external-graphic-12" results="external-graphic-12.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+        <testresult id="external-graphic-13" results="external-graphic-13.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
       </testcases>
     </testcases>
     <testcases profile="list" base="list">
@@ -191,7 +217,7 @@
   </testcases>
 
   <testcases profile="structure" base="structure">
-    
+
     <testresult id="element-content" results="element-content.pdf" agreement="full" specproblem="no" testproblem="no"/>
 
   </testcases>
@@ -203,8 +229,12 @@
     <testresult id="unsupported-property" results="unsupported-property.pdf" agreement="issues" specproblem="no" testproblem="yes">No message.</testresult>
 
   </testcases>
+  <testcases profile="other" base="other">
+    <testresult id="non-fo" results="non-fo.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+    <testresult id="fo-foo" results="fo-foo.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
+    <testresult id="non-fo-foo" results="non-fo-foo.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
   </testcases>
-
+</testcases>
 <testcases base="testdocs" profile="Test Suite">
 <testcases profile="graphics" base="graphics">
 <testresult id="svg-001" results="svg-001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
@@ -431,6 +461,7 @@
 <testresult id="sgmltag" results="sgmltag.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="sidebar.001" results="sidebar.001.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="simplelist.001" results="simplelist.001.pdf" agreement="issues" specproblem="no" testproblem="no">No output.</testresult>
+<testresult id="simplemsgentry" results="simplemsgentry.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
 <testresult id="simplesect.001" results="simplesect.001.pdf" agreement="issues" specproblem="no" testproblem="no">Forward references don't work. Ticket #77.</testresult>
 <testresult id="stamp.001" results="stamp.001.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
 <testresult id="stamp.002" results="stamp.002.pdf" agreement="issues" specproblem="no" testproblem="no">No image.  Ticket #80.</testresult>
@@ -498,6 +529,9 @@
 <testresult id="productionset.004" results="productionset.004.pdf" agreement="full" specproblem="no" testproblem="no"/>
 <testresult id="productionset.005" results="productionset.005.pdf" agreement="issues" specproblem="no" testproblem="no">No forward references. No links.</testresult>
 <testresult id="productionset.006" results="productionset.006.pdf" agreement="full" specproblem="no" testproblem="no"/>
+</testcases>
+<testcases profile="graphics" base="graphics">
+<testresult id="svg-001" results="svg-001.pdf" agreement="issues" specproblem="no" testproblem="no">Results not yet verified</testresult>
 </testcases>
 <testcases profile="mathml" base="mathml">
 <testresult id="informalequation-mml.001" results="informalequation-mml.001.pdf" agreement="issues" specproblem="no" testproblem="no">No equation.</testresult>
