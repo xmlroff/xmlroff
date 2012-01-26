@@ -2289,6 +2289,24 @@ FO_COLOR_PROFILE_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>fo-fixed-page-sequence-walker</FILE>
+FoFixedPageSequenceWalker
+FoFixedPageSequenceWalkerClass
+FO_FIXED_PAGE_SEQUENCE_WALKER_ERROR
+fo_fixed_page_sequence_walker_error_quark
+fo_fixed_page_sequence_walker_new
+fo_fixed_page_sequence_walker_get_page_master
+<SUBSECTION Standard>
+FO_FIXED_PAGE_SEQUENCE_WALKER
+FO_IS_FIXED_PAGE_SEQUENCE_WALKER
+FO_TYPE_FIXED_PAGE_SEQUENCE_WALKER
+fo_fixed_page_sequence_walker_get_type
+FO_FIXED_PAGE_SEQUENCE_WALKER_CLASS
+FO_IS_FIXED_PAGE_SEQUENCE_WALKER_CLASS
+FO_FIXED_PAGE_SEQUENCE_WALKER_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>fo-conditional-page-master-reference</FILE>
 <TITLE>conditional-page-master-reference</TITLE>
 FoConditionalPageMasterReference
@@ -3803,6 +3821,24 @@ FO_MULTI_CASE_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>fo-sequenced-page-sequence-walker</FILE>
+FoSequencedPageSequenceWalker
+FoSequencedPageSequenceWalkerClass
+FO_SEQUENCED_PAGE_SEQUENCE_WALKER_ERROR
+fo_sequenced_page_sequence_walker_error_quark
+fo_sequenced_page_sequence_walker_new
+fo_sequenced_page_sequence_walker_get_page_master
+<SUBSECTION Standard>
+FO_SEQUENCED_PAGE_SEQUENCE_WALKER
+FO_IS_SEQUENCED_PAGE_SEQUENCE_WALKER
+FO_TYPE_SEQUENCED_PAGE_SEQUENCE_WALKER
+fo_sequenced_page_sequence_walker_get_type
+FO_SEQUENCED_PAGE_SEQUENCE_WALKER_CLASS
+FO_IS_SEQUENCED_PAGE_SEQUENCE_WALKER_CLASS
+FO_SEQUENCED_PAGE_SEQUENCE_WALKER_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>fo-page-master</FILE>
 FoPageMaster
 FoPageMasterClass
@@ -4431,6 +4467,17 @@ FoSimplePageMaster
 FoSimplePageMasterClass
 fo_simple_page_master_new
 <SUBSECTION>
+fo_simple_page_master_get_region_body
+fo_simple_page_master_set_region_body
+fo_simple_page_master_get_region_before
+fo_simple_page_master_set_region_before
+fo_simple_page_master_get_region_after
+fo_simple_page_master_set_region_after
+fo_simple_page_master_get_region_start
+fo_simple_page_master_set_region_start
+fo_simple_page_master_get_region_end
+fo_simple_page_master_set_region_end
+<SUBSECTION>
 fo_simple_page_master_get_end_indent
 fo_simple_page_master_set_end_indent
 fo_simple_page_master_get_margin_bottom
@@ -4455,6 +4502,7 @@ fo_simple_page_master_get_writing_mode
 fo_simple_page_master_set_writing_mode
 <SUBSECTION>
 fo_simple_page_master_region_name_get
+fo_simple_page_master_get_area
 <SUBSECTION Standard>
 FO_SIMPLE_PAGE_MASTER
 FO_IS_SIMPLE_PAGE_MASTER
@@ -5297,6 +5345,27 @@ fo_table_header_get_type
 FO_TABLE_HEADER_CLASS
 FO_IS_TABLE_HEADER_CLASS
 FO_TABLE_HEADER_GET_CLASS
+</SECTION>
+
+<SECTION>
+<FILE>fo-page-sequence-walker</FILE>
+FoPageSequenceWalker
+FoPageSequenceWalkerClass
+fo_page_sequence_walker_new
+fo_page_sequence_walker_new_from_page_sequence
+fo_page_sequence_walker_next_page_master
+fo_page_sequence_walker_end_page_masters
+FO_PAGE_SEQUENCE_WALKER_ERROR
+fo_page_sequence_walker_error_quark
+FoPageSequenceWalkerError
+<SUBSECTION Standard>
+FO_PAGE_SEQUENCE_WALKER
+FO_IS_PAGE_SEQUENCE_WALKER
+FO_TYPE_PAGE_SEQUENCE_WALKER
+fo_page_sequence_walker_get_type
+FO_PAGE_SEQUENCE_WALKER_CLASS
+FO_IS_PAGE_SEQUENCE_WALKER_CLASS
+FO_PAGE_SEQUENCE_WALKER_GET_CLASS
 </SECTION>
 
 <SECTION>
@@ -6331,6 +6400,22 @@ fo_property_border_end_style_get_type
 FO_PROPERTY_BORDER_END_STYLE_CLASS
 FO_IS_PROPERTY_BORDER_END_STYLE_CLASS
 FO_PROPERTY_BORDER_END_STYLE_GET_CLASS
+</SECTION>
+
+<SECTION>
+<FILE>fo-property-reference-orientation</FILE>
+FoPropertyReferenceOrientation
+FoPropertyReferenceOrientationClass
+fo_property_reference_orientation_new
+fo_property_reference_orientation_get_initial
+<SUBSECTION Standard>
+FO_PROPERTY_REFERENCE_ORIENTATION
+FO_IS_PROPERTY_REFERENCE_ORIENTATION
+FO_TYPE_PROPERTY_REFERENCE_ORIENTATION
+fo_property_reference_orientation_get_type
+FO_PROPERTY_REFERENCE_ORIENTATION_CLASS
+FO_IS_PROPERTY_REFERENCE_ORIENTATION_CLASS
+FO_PROPERTY_REFERENCE_ORIENTATION_GET_CLASS
 </SECTION>
 
 <SECTION>
@@ -8489,6 +8574,22 @@ fo_property_space_start_optimum_get_type
 FO_PROPERTY_SPACE_START_OPTIMUM_CLASS
 FO_IS_PROPERTY_SPACE_START_OPTIMUM_CLASS
 FO_PROPERTY_SPACE_START_OPTIMUM_GET_CLASS
+</SECTION>
+
+<SECTION>
+<FILE>fo-property-blank-or-not-blank</FILE>
+FoPropertyBlankOrNotBlank
+FoPropertyBlankOrNotBlankClass
+fo_property_blank_or_not_blank_new
+fo_property_blank_or_not_blank_get_initial
+<SUBSECTION Standard>
+FO_PROPERTY_BLANK_OR_NOT_BLANK
+FO_IS_PROPERTY_BLANK_OR_NOT_BLANK
+FO_TYPE_PROPERTY_BLANK_OR_NOT_BLANK
+fo_property_blank_or_not_blank_get_type
+FO_PROPERTY_BLANK_OR_NOT_BLANK_CLASS
+FO_IS_PROPERTY_BLANK_OR_NOT_BLANK_CLASS
+FO_PROPERTY_BLANK_OR_NOT_BLANK_GET_CLASS
 </SECTION>
 
 <SECTION>
