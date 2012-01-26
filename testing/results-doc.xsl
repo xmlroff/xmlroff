@@ -250,7 +250,7 @@
                     <span>
 		      <xsl:if
 			  test="../../diff/png[@name=$name]/@size != 0">
-			<xsl:attribute name="style">color: #F00</xsl:attribute>
+			<xsl:attribute name="style">color: #F00; font-weight: bold</xsl:attribute>
 		      </xsl:if>
 		      <xsl:value-of select="$name"/>
 		    </span>
