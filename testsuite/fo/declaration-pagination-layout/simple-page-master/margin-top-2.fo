@@ -1,0 +1,20 @@
+<!-- xmlroff testsuite -->
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master
+          master-name="first"
+          margin-top="1in"
+          page-width="8in"
+          page-height="11in">
+          <fo:region-body border="thin solid black" margin-top="1in"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence
+      master-reference="first">
+      <fo:flow
+        flow-name="xsl-region-body"
+        font-size="10pt">
+        <fo:block space-after="12pt" font-size="12pt">simple-page-master with margin-top="1in" and region-body with margin-top="1in".</fo:block>
+      </fo:flow>
+</fo:page-sequence>
+</fo:root>
