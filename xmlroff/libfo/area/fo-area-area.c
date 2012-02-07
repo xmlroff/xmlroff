@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2001 Sun Microsystems
  * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2011-2012 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -43,14 +44,14 @@ static void fo_area_area_get_property   (GObject         *object,
 					 GParamSpec      *pspec);
 static void fo_area_area_finalize    (GObject           *object);
 
-static void fo_area_area_debug_dump_properties (FoArea *area,
-						gint depth);
+static void _debug_dump_properties (FoArea *area,
+				    gint depth);
 static FoArea* _split_before_height (FoArea *area,
 				     gdouble max_height);
 static gboolean _split_before_height_check (FoArea *area,
 					    gdouble max_height);
-static void fo_area_area_update_after_clone (FoArea *clone,
-					     FoArea *original);
+static void _update_after_clone (FoArea *clone,
+				 FoArea *original);
 static void fo_area_area_resolve_child_ipdim (FoArea *fo_area);
 
 static gpointer parent_class;
@@ -105,8 +106,8 @@ fo_area_area_class_init (FoAreaAreaClass *klass)
   object_class->set_property = fo_area_area_set_property;
   object_class->get_property = fo_area_area_get_property;
 
-  fo_area_class->debug_dump_properties = fo_area_area_debug_dump_properties;
-  fo_area_class->update_after_clone = fo_area_area_update_after_clone;
+  fo_area_class->debug_dump_properties = _debug_dump_properties;
+  fo_area_class->update_after_clone = _update_after_clone;
 
   g_object_class_install_property
     (object_class,
@@ -933,8 +934,9 @@ fo_area_area_get_space_after (FoArea *fo_area)
   return fo_area_area->space_after;
 }
 
-void
-fo_area_area_debug_dump_properties (FoArea *area, gint depth)
+static void
+_debug_dump_properties (FoArea *area,
+			gint    depth)
 {
   FoAreaArea *area_area;
   gchar *indent = g_strnfill (depth * 2, ' ');
@@ -999,7 +1001,7 @@ fo_area_area_debug_dump_properties (FoArea *area, gint depth)
 }
 
 /**
- * fo_area_area_update_after_clone:
+ * _update_after_clone:
  * @clone:    New object cloned from @original
  * @original: Original area object
  * 
@@ -1007,8 +1009,8 @@ fo_area_area_debug_dump_properties (FoArea *area, gint depth)
  * match those of @original
  **/
 void
-fo_area_area_update_after_clone (FoArea *clone,
-				 FoArea *original)
+_update_after_clone (FoArea *clone,
+		     FoArea *original)
 {
   FoAreaArea *original_area_area, *clone_area_area;
 

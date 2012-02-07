@@ -464,10 +464,12 @@ _size_request (FoArea *child)
 
   fo_area_area_set_height (parent,
 			   total_child_height +
+			   fo_area_area_get_space_before (parent) +
 			   fo_area_area_get_border_before (parent) +
 			   fo_area_area_get_padding_before (parent) +
 			   fo_area_area_get_padding_after (parent) +
-			   fo_area_area_get_border_after (parent));
+			   fo_area_area_get_border_after (parent) +
+			   fo_area_area_get_space_after (parent));
 
   /* Don't bother doing a size_request if still fit within
      available height */
@@ -484,10 +486,12 @@ _size_request (FoArea *child)
       fo_area_set_child_available_ipdim (parent, child_available_ipdim);
       child_available_bpdim =
 	MAX (fo_area_get_available_height (parent) -
+	     fo_area_area_get_space_before (parent) -
 	     fo_area_area_get_border_before (parent) -
 	     fo_area_area_get_padding_before (parent) -
 	     fo_area_area_get_padding_after (parent) -
-	     fo_area_area_get_border_after (parent),
+	     fo_area_area_get_border_after (parent) -
+	     fo_area_area_get_space_after (parent),
 	     0);
       fo_area_set_child_available_bpdim (parent, child_available_bpdim);
 #if defined(LIBFO_DEBUG) && 1
@@ -512,10 +516,12 @@ _size_request (FoArea *child)
 	     total_child_height);
 #endif
   fo_area_set_next_x (parent,
+		      fo_area_area_get_start_indent (parent) +
 		      fo_area_area_get_border_start (parent) +
 		      fo_area_area_get_padding_start (parent));
   fo_area_set_next_y (parent,
-		      - (fo_area_area_get_border_before (parent) +
+		      - (fo_area_area_get_space_before (parent) +
+			 fo_area_area_get_border_before (parent) +
 			 fo_area_area_get_padding_before (parent)));
 
   if (total_child_height <= child_available_bpdim)

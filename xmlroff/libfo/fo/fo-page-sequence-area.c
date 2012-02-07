@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2001-2006 Sun Microsystems
  * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011-2012 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -114,10 +115,10 @@ fo_page_sequence_area_new (FoFo                *fo_node,
       use_parent_area = fo_area_parent (use_parent_area);
     }
 
+  fo_area_set_is_first (FO_AREA (*new_area),
+			page_number == 0 ? TRUE : FALSE);
   fo_area_page_set_page_number (*new_area,
 				page_number + 1);
-  fo_area_set_is_first (FO_AREA (*new_area),
-			FALSE);
 
   fo_area_set_next_x (*new_area,
 		      fo_area_page_get_margin_left (*new_area));

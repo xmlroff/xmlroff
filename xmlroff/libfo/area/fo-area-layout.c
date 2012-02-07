@@ -26,7 +26,8 @@ enum {
 };
 
 
-static void fo_area_layout_class_init   (FoAreaLayoutClass *klass);
+static void _init         (FoAreaLayout      *fo_area_layout);
+static void _class_init   (FoAreaLayoutClass *klass);
 static void fo_area_layout_get_property (GObject           *object,
 					 guint              prop_id,
 					 GValue            *value,
@@ -51,10 +52,10 @@ static gpointer parent_class;
 
 /**
  * fo_area_layout_get_type:
- * @void: 
- * 
+ * @void:
+ *
  * Register the #FoAreaLayout object type.
- * 
+ *
  * Return value: #GType value of the #FoAreaLayout object type.
  **/
 GType
@@ -65,41 +66,53 @@ fo_area_layout_get_type (void)
   if (!object_type)
     {
       static const GTypeInfo object_info =
-      {
-        sizeof (FoAreaLayoutClass),
-        (GBaseInitFunc) NULL,
-        (GBaseFinalizeFunc) NULL,
-        (GClassInitFunc) fo_area_layout_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (FoAreaLayout),
-        0,              /* n_preallocs */
-        NULL,		/* instance_init */
-	NULL
-      };
-      
+	{
+	  sizeof (FoAreaLayoutClass),
+	  (GBaseInitFunc) NULL,
+	  (GBaseFinalizeFunc) NULL,
+	  (GClassInitFunc) _class_init,
+	  NULL,           /* class_finalize */
+	  NULL,           /* class_data */
+	  sizeof (FoAreaLayout),
+	  0,              /* n_preallocs */
+	  (GInstanceInitFunc) _init,
+	  NULL
+	};
+
       object_type = g_type_register_static (FO_TYPE_AREA_AREA,
                                             "FoAreaLayout",
                                             &object_info, 0);
     }
-  
+
   return object_type;
 }
 
 /**
- * fo_area_layout_class_init:
+ * _init:
+ * @fo_area_layout: #FoAreaLayout object to initialise.
+ *
+ * Implements #GInstanceInitFunc for #FoAreaLayout.
+ **/
+static void
+_init (FoAreaLayout *fo_area_layout)
+{
+  FO_AREA (fo_area_layout)->class = FO_AREA_FLAG_CLASS_NORMAL;
+}
+
+/**
+ * _class_init:
  * @klass: FoAreaLayoutClass object to initialise.
- * 
+ *
  * Implements GClassInitFunc for FoAreaLayoutClass.
  **/
-void
-fo_area_layout_class_init (FoAreaLayoutClass *klass)
+static void
+_class_init (FoAreaLayoutClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoAreaClass *fo_area_class = FO_AREA_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
-  
+
   object_class->dispose = _dispose;
 
   object_class->set_property = fo_area_layout_set_property;
@@ -125,7 +138,7 @@ fo_area_layout_class_init (FoAreaLayoutClass *klass)
 /**
  * _dispose:
  * @object: FoAreaLayout object to dispose
- * 
+ *
  * Implements GObjectDisposeFunc for FoAreaLayout
  **/
 static void
@@ -146,7 +159,7 @@ _dispose (GObject *object)
  * @prop_id: Property ID assigned when property registered
  * @value:   GValue to set with property value
  * @pspec:   Parameter specification for this property type
- * 
+ *
  * Implements #GObjectGetPropertyFunc for FoAreaLayout
  **/
 void
@@ -175,7 +188,7 @@ fo_area_layout_get_property (GObject         *object,
  * @prop_id: Property ID assigned when property registered
  * @value:   New value for property
  * @pspec:   Parameter specification for this property type
- * 
+ *
  * Implements #GObjectSetPropertyFunc for FoAreaLayout
  **/
 void
@@ -201,9 +214,9 @@ fo_area_layout_set_property (GObject         *object,
 
 /**
  * fo_area_layout_new:
- * 
+ *
  * Creates a new #FoAreaLayout initialized to default value.
- * 
+ *
  * Return value: the new #FoAreaLayout
  **/
 FoArea *
@@ -216,9 +229,9 @@ fo_area_layout_new (void)
 /**
  * fo_area_layout_new_with_layout:
  * @layout: #FoLayout used by the new #FoAreaLayout
- * 
+ *
  * Creates a new #FoAreaLayout initialized with @layout.
- * 
+ *
  * Return value: the new #FoAreaLayout
  **/
 FoArea *
@@ -253,7 +266,7 @@ fo_area_layout_get_layout (FoArea *fo_area_layout)
  * fo_area_layout_set_layout:
  * @fo_area_layout: The #FoAreaLayout object
  * @new_layout: The new "layout" property value
- * 
+ *
  * Sets the #layout property of @area_area to @new_layout
 **/
 void
@@ -323,7 +336,7 @@ fo_area_layout_get_line_first (FoArea *fo_area_layout)
  * fo_area_layout_set_line_first:
  * @fo_area_layout: The #FoAreaLayout object
  * @new_line_first: The new "line_first" property value
- * 
+ *
  * Sets the #line-first property of @area_area to @new_line_first
 **/
 void
@@ -358,7 +371,7 @@ fo_area_layout_get_line_last (FoArea *fo_area_layout)
  * fo_area_layout_set_line_last:
  * @fo_area_layout: The #FoAreaLayout object.
  * @new_line_last:  The new "line_last" property value.
- * 
+ *
  * Sets the #line-last property of @fo_area_layout to @new_line_last.
 **/
 void
@@ -390,7 +403,7 @@ _debug_dump_line_height (gpointer value,
  * _debug_dump_properties:
  * @area:  The #FoArea object
  * @depth: Indent level to add to the output
- * 
+ *
  * Logs the value of each significant property of @area then calls
  * debug_dump_properties method of parent class.
  **/
@@ -439,7 +452,7 @@ _debug_dump_properties (FoArea *area,
  * fo_area_layout_update_after_clone:
  * @clone:    New object cloned from @original
  * @original: Original area object
- * 
+ *
  * Update the FoAreaArea-specific instance variables of @clone to
  * match those of @original
  **/
@@ -470,7 +483,7 @@ fo_area_layout_update_after_clone (FoArea *clone,
  * fo_area_layout_split_before_height:
  * @area:   #FoArea to be split
  * @height: Maximum block-progression-dimension of @area
- * 
+ *
  * Split @area at or before @height.
  *
  * Return value: The part of @area spit from @area, or NULL if unsplit.
@@ -504,7 +517,7 @@ fo_area_layout_split_before_height (FoArea *area,
       (float) GPOINTER_TO_INT (g_slist_nth_data (line_heights,
 						 line_first - 1)) /
       PANGO_SCALE;
-			       
+
   widows =
     fo_integer_get_value (fo_property_get_value (fo_block_get_widows (area->generated_by)));
   orphans =
@@ -650,7 +663,7 @@ fo_area_layout_split_before_height (FoArea *area,
 			     max_height);
 #endif
 		}
-	    }      
+	    }
 	  line_index++;
 	  line_heights = line_heights->next;
 	}
@@ -662,7 +675,7 @@ fo_area_layout_split_before_height (FoArea *area,
  * fo_area_layout_split_before_height_check:
  * @area:   #FoArea to be split
  * @height: Maximum block-progression-dimension of @area
- * 
+ *
  * Check whether @area can split at or before @height.
  *
  * Return value: TRUE if can split, otherwise FALSE.
@@ -695,7 +708,7 @@ fo_area_layout_split_before_height_check (FoArea *area,
       (float) GPOINTER_TO_INT (g_slist_nth_data (line_heights,
 						 line_first - 1)) /
       PANGO_SCALE;
-			       
+
   widows =
     fo_integer_get_value (fo_property_get_value (FO_PROPERTY (fo_block_get_widows (area->generated_by))));
   orphans =
@@ -804,7 +817,7 @@ fo_area_layout_split_before_height_check (FoArea *area,
 			     max_height);
 #endif
 		}
-	    }      
+	    }
 	  line_index++;
 	  line_heights = line_heights->next;
 	}
@@ -815,7 +828,7 @@ fo_area_layout_split_before_height_check (FoArea *area,
 /**
  * _resolve_text_align:
  * @area:   #FoArea.
- * 
+ *
  * Determine the Pango alignment from the XSL 'text-align' property.
  **/
 static void
@@ -871,7 +884,7 @@ _resolve_text_align (FoArea *area)
  * fo_area_layout_get_line_height:
  * @fo_area_layout: #FoArea.
  * @line_number:    Number of the line for which to get the height.
- * 
+ *
  * Get the height of line @line_number.
  *
  * Return value: The line height in points.

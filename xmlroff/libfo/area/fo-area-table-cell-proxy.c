@@ -4,6 +4,7 @@
  *
  * Copyright (C) 2001 Sun Microsystems
  * Copyright (C) 2007-2009 Menteith Consulting Ltd
+ * Copyright (C) 2011-2012 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -276,17 +277,6 @@ fo_area_table_cell_proxy_debug_dump_properties (FoArea *area, gint depth)
 
   g_free (indent);
   FO_AREA_CLASS (parent_class)->debug_dump_properties (area, depth + 1);
-}
-
-FoArea*
-fo_area_table_cell_proxy_add_child (FoArea *parent, FoArea *child)
-{
-  g_return_val_if_fail (parent != NULL, NULL);
-  g_return_val_if_fail (FO_IS_AREA_TABLE_CELL_PROXY (parent), NULL);
-  g_return_val_if_fail (child != NULL, NULL);
-
-  g_assert_not_reached ();
-  return NULL;
 }
 
 /**

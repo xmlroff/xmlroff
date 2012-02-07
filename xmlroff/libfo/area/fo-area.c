@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2001 Sun Microsystems
  * Copyright (C) 2007-2010 Menteith Consulting Ltd
+ * Copyright (C) 2011-2012 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -91,8 +92,8 @@ static void     _debug_dump_properties_default (FoArea *area,
 						gint depth);
 static void     fo_area_draw (FoArea *area, gpointer output);
 static FoArea*  fo_area_clone_default (FoArea *original);
-static void     fo_area_update_after_clone_default        (FoArea *clone,
-							   FoArea *original);
+static void     _update_after_clone_default        (FoArea *clone,
+						    FoArea *original);
 static FoArea*  fo_area_split_before_height_default       (FoArea *area,
 							   gdouble  height);
 static gboolean fo_area_split_before_height_check_default (FoArea *area,
@@ -204,7 +205,7 @@ _base_class_init (FoAreaClass *klass)
   klass->debug_dump_properties = _debug_dump_properties_default;
   klass->add_child = fo_area_real_add_child;
   klass->clone = fo_area_clone_default;
-  klass->update_after_clone = fo_area_update_after_clone_default;
+  klass->update_after_clone = _update_after_clone_default;
   klass->split_before_height = fo_area_split_before_height_default;
   klass->split_before_height_check = fo_area_split_before_height_check_default;
   klass->split_after_height = fo_area_split_after_height_default;
@@ -1263,16 +1264,16 @@ fo_area_update_after_clone (FoArea *clone,
 }
 
 /**
- * fo_area_update_after_clone_default:
+ * _update_after_clone_default:
  * @clone:    New object cloned from @original
  * @original: Original area object
  * 
  * Update the FoArea-specific instance variables of @clone to match
  * those of @original.
  **/
-void
-fo_area_update_after_clone_default (FoArea *clone,
-				    FoArea *original)
+static void
+_update_after_clone_default (FoArea *clone,
+			     FoArea *original)
 {
   g_return_if_fail (clone != NULL);
   g_return_if_fail (FO_IS_AREA (clone));

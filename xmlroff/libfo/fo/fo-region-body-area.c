@@ -22,10 +22,10 @@ fo_region_body_area_new (FoFo    *fo,
   g_return_if_fail (context != NULL);
   g_return_if_fail (error == NULL || *error == NULL);
 
-  FoDoc *fo_doc = context->fo_doc;
-  FoArea *use_parent_area = context->parent_area;
+  /* FoDoc *fo_doc = context->fo_doc; */
+  /* FoArea *use_parent_area = context->parent_area; */
   FoArea **new_area = context->new_area;
-  guint debug_level = context->debug_level;
+  /* guint debug_level = context->debug_level; */
 
   *new_area = g_object_ref_sink (fo_area_region_new ());
 
@@ -53,16 +53,32 @@ fo_region_body_area_new (FoFo    *fo,
   fo_area_area_set_padding_after (*new_area,
     fo_length_get_value (fo_property_get_value (fo_cbpbp_fo_get_padding_after (fo))));
 
+  fo_area_area_set_space_before (*new_area,
+    fo_length_get_value (fo_property_get_value (FO_REGION_BODY (fo)->margin_top)));
+  fo_area_area_set_space_after (*new_area,
+    fo_length_get_value (fo_property_get_value (FO_REGION_BODY (fo)->margin_bottom)));
+  fo_area_area_set_start_indent (*new_area,
+    fo_length_get_value (fo_property_get_value (FO_REGION_BODY (fo)->margin_left)));
+  fo_area_area_set_end_indent (*new_area,
+    fo_length_get_value (fo_property_get_value (FO_REGION_BODY (fo)->margin_right)));
+
   fo_area_area_set_height (*new_area,
+			   fo_area_area_get_space_before (*new_area) +
 			   fo_area_area_get_border_before (*new_area) +
 			   fo_area_area_get_padding_before (*new_area) +
 			   fo_area_area_get_padding_after (*new_area) +
-			   fo_area_area_get_border_after (*new_area));
+			   fo_area_area_get_border_after (*new_area) +
+			   fo_area_area_get_space_after (*new_area));
   fo_area_area_set_width (*new_area,
 			  fo_area_area_get_border_start (*new_area) +
 			  fo_area_area_get_padding_start (*new_area) +
 			  fo_area_area_get_padding_end (*new_area) +
 			  fo_area_area_get_border_end (*new_area));
+
+  fo_area_set_next_x (*new_area,
+		      fo_area_area_get_start_indent (*new_area));
+  fo_area_set_next_y (*new_area,
+		      -fo_area_area_get_space_before (*new_area));
 
   FoProperty *writing_mode = fo_region_get_writing_mode (fo);
 

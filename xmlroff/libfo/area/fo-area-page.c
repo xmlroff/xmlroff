@@ -740,7 +740,7 @@ _add_child (FoArea *parent,
   g_return_val_if_fail (child != NULL, NULL);
   g_return_val_if_fail (FO_IS_AREA_VIEWPORT_REFERENCE (child), NULL);
 
-  return fo_area_real_add_child (parent, child);
+  return FO_AREA_CLASS (parent_class)->add_child (parent, child);
 }
 
 static FoArea*

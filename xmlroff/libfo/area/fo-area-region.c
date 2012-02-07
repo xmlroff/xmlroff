@@ -27,8 +27,8 @@ struct _FoAreaRegionClass
   FoAreaViewportReferenceClass parent_class;
 };
 
-static void fo_area_region_init         (FoAreaRegion      *fo_area_region);
-static void fo_area_region_class_init   (FoAreaRegionClass *klass);
+static void _init         (FoAreaRegion      *fo_area_region);
+static void _class_init   (FoAreaRegionClass *klass);
 static void _get_property (GObject           *object,
 			   guint              prop_id,
 			   GValue            *value,
@@ -68,12 +68,12 @@ fo_area_region_get_type (void)
 	  sizeof (FoAreaRegionClass),
 	  (GBaseInitFunc) NULL,
 	  (GBaseFinalizeFunc) NULL,
-	  (GClassInitFunc) fo_area_region_class_init,
+	  (GClassInitFunc) _class_init,
 	  NULL,           /* class_finalize */
 	  NULL,           /* class_data */
 	  sizeof (FoAreaRegion),
 	  0,              /* n_preallocs */
-	  (GInstanceInitFunc) fo_area_region_init,
+	  (GInstanceInitFunc) _init,
 	  NULL		  /* value_table */
 	};
       
@@ -91,8 +91,8 @@ fo_area_region_get_type (void)
  * 
  * Implements #GInstanceInitFunc for #FoAreaRegion.
  **/
-void
-fo_area_region_init (FoAreaRegion *fo_area_region)
+static void
+_init (FoAreaRegion *fo_area_region)
 {
   fo_area_region->region_name = NULL;
 
@@ -105,8 +105,8 @@ fo_area_region_init (FoAreaRegion *fo_area_region)
  * 
  * Implements #GClassInitFunc for #FoAreaRegionClass
  **/
-void
-fo_area_region_class_init (FoAreaRegionClass *klass)
+static void
+_class_init (FoAreaRegionClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
