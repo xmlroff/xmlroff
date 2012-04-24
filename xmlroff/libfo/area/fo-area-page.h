@@ -11,7 +11,7 @@
 #define __FO_AREA_PAGE_H__
 
 #include <libfo/fo-utils.h>
-#include <libfo/area/fo-area.h>
+#include <libfo/area/fo-area-viewport-reference.h>
 
 G_BEGIN_DECLS
 

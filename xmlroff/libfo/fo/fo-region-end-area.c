@@ -15,14 +15,14 @@
 void
 fo_region_end_area_new (FoFo                *fo,
 			FoFoAreaNew2Context *context,
-			GError             **error)
+			GError             **error G_GNUC_UNUSED)
 {
   FoProperty *writing_mode;
 
-  FoDoc *fo_doc = context->fo_doc;
-  FoArea *parent_area = context->parent_area;
+  /*FoDoc *fo_doc = context->fo_doc;*/
+  /*FoArea *parent_area = context->parent_area;*/
   FoArea **new_area = context->new_area;
-  guint debug_level = context->debug_level;
+  /*guint debug_level = context->debug_level;*/
 
   g_return_if_fail (fo != NULL);
   g_return_if_fail (FO_IS_REGION_END (fo));

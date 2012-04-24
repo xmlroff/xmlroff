@@ -761,25 +761,6 @@ fo_area_page_first_leaf (FoArea *area)
   return use_area;
 }
 
-static FoArea*
-_last_leaf (FoArea *area)
-{
-  FoArea *use_area;
-
-  /* Return HULL if can't use 'area'. */
-  g_return_val_if_fail (area != NULL, NULL);
-  g_return_val_if_fail (FO_IS_AREA (area), NULL);
-
-  use_area = area;
-
-  while (!FO_AREA_IS_LEAF (use_area))
-    {
-      use_area = fo_area_last_child (use_area);
-    }
-
-  return use_area;
-}
-
 static gboolean
 fo_area_page_vr_adjust (FoArea  *area,
 			gpointer data G_GNUC_UNUSED)
@@ -834,32 +815,6 @@ _clone_child_region (FoArea  *region,
 			 clone_region);
       g_object_unref (clone_region);
     }
-}
-
-static FoArea *
-_get_named_region (FoArea *page,
-		   const gchar *region_name)
-{
-  /* Return HULL if can't use 'page' or 'region_name'. */
-  g_return_val_if_fail (page != NULL, NULL);
-  g_return_val_if_fail (FO_IS_AREA_PAGE (page), NULL);
-  g_return_val_if_fail (region_name != NULL, NULL);
-
-  FoAreaRegionNameAndArea name_and_area =
-    {
-      region_name,
-      NULL
-    };
-
-  fo_area_traverse (page,
-		    G_POST_ORDER,
-		    G_TRAVERSE_LEAVES,
-		    2,
-		    fo_area_region_is_named_region,
-		    &name_and_area);
-
-  /* name_and_area.area is non-NULL only if the region was found. */
-  return name_and_area.area;
 }
 
 static FoArea *

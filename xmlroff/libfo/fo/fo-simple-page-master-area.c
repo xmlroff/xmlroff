@@ -31,9 +31,9 @@ fo_simple_page_master_area_new (FoFo                *fo,
   g_return_if_fail (error == NULL || *error == NULL);
 
   FoDoc *fo_doc = context->fo_doc;
-  FoArea *use_parent_area = context->parent_area;
+  /*FoArea *use_parent_area = context->parent_area;*/
   FoArea **new_area = context->new_area;
-  guint debug_level = context->debug_level;
+  /*guint debug_level = context->debug_level;*/
 
   *new_area = NULL;
 

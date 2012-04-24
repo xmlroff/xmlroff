@@ -49,10 +49,10 @@ fo_page_sequence_area_new (FoFo                *fo_node,
   g_return_if_fail (context != NULL);
   g_return_if_fail (error == NULL || *error == NULL);
 
-  FoDoc *fo_doc = context->fo_doc;
+  /*FoDoc *fo_doc = context->fo_doc;*/
   FoArea *use_parent_area = context->parent_area;
   FoArea **new_area = context->new_area;
-  guint debug_level = context->debug_level;
+  /*guint debug_level = context->debug_level;*/
 
   *new_area = NULL;
 
