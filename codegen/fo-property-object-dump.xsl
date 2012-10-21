@@ -1269,11 +1269,9 @@ _init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text> *<
 static void
 _class_init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:text>Class *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   FoPropertyClass *property_class = FO_PROPERTY_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
-
 </xsl:text>
 
     <xsl:if test="$expr-eval">
@@ -1318,10 +1316,10 @@ _class_init (FoProperty</xsl:text><xsl:value-of select="$property-type"/><xsl:te
   property_class->get_initial =
     fo_property_</xsl:text><xsl:value-of select="$property-identifier"/><xsl:text>_get_initial;
 }
-
 </xsl:text>
 <xsl:if test="$is-text-property">
-  <xsl:text>/**
+  <xsl:text>
+/**
  * _text_property_init:
  * @iface: #FoPropertyTextPropertyIFace structure for this class.
  * 
