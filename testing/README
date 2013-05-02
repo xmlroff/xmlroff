@@ -80,8 +80,8 @@ Testing xmlroff requires:
 ===================
 
 1. Download and install the xmlroff 'testsuite' package from
-   http://xmlroff.org/ or check it out from the Subversion repository
-   at svn://svn.xmlroff.org/trunk/testing.
+   http://xmlroff.org/ or clone the git repository at
+   https://github.com/MenteaXML/xmlroff.git.
 
 2. Make sure that testsuites.xml refers to the testsuite.xml file in
    the 'testsuite' package.
@@ -413,7 +413,7 @@ format strings.
 This example shows how to configure to test using the Antenna House
 Formatter on Linux:
 
-   ./configure --with-xsl-processor=/usr/AHFormatterV53/run.sh \
+   ./configure --with-xsl-processor=/usr/AHFormatterV6_64/run.sh \
       --with-command-patterns="%p -o %o -d %i"
 
 This example shows how to configure to test using FOP on Linux:
