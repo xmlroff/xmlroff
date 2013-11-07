@@ -34,7 +34,7 @@ my $weblog = MyWebLog->new();
 
 my $httpd = HTTP::Daemon::Threaded->new(
     Port                    => 8081,
-    MaxClients              => 3,
+    MaxClients              => 10,
     ContentParams   => $contparams,
     SessionCache    => $sessions,
     LogLevel                => 1,           # full info logging

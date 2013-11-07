@@ -136,7 +136,7 @@ foreach $gTestDir (@lTestDirs) {
 	    if (-e "$lBasename.00.png") {
 		unlink(glob("$lBasename.*.png"));
 	    }
-	    $rc = 0xffff & system "$CONVERT -depth 8 -type palette $lPDFFile $lBasename.%02d.png";
+	    $rc = 0xffff & system "$CONVERT -bordercolor white -border 0 -alpha off $lPDFFile $lBasename.%02d.png";
 	    if ($rc != 0) {
 		$gError++;
 		warn("Creating PNG of \"$lPDFFile\" failed.");

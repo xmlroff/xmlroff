@@ -12,6 +12,10 @@ RESULTS_PACKAGE=$(PROJECT_NAME)-$(BASENAME)
 
 EXTRA_DIST = \
 	$(STYLE_CSS).in			\
+	MyContentParams.pm		\
+	MyEventLog.pm			\
+	MyWebLog.pm			\
+	TestCGI.pm			\
 	bottom-left.png			\
 	bottom-right.png		\
 	cairo-pdf-results.xml		\
@@ -24,26 +28,30 @@ EXTRA_DIST = \
 	h2xsl.pl			\
 	identity.xsl			\
 	make-fop-testsuite.pl		\
-	make-success-report.sh		\
 	make-fop-testsuite.pl		\
+	make-success-report.sh		\
 	make-testsuite.pl		\
 	png+ref2stereo.pl		\
 	regenerate-testsuccess.pl	\
 	results-doc.xsl			\
+	results-xml.xsl			\
 	test2makefile.xsl		\
 	test2sh.xsl			\
-	testing.conf.in			\
 	testing-server.pl		\
+	testing.conf.in			\
+	testresults.xsl			\
 	testsuccess.pl			\
 	testsuccess.xsl			\
 	testsuites.xml			\
 	testsuites2testresults.xsl	\
+	threaded.pl			\
 	top-left.png			\
 	top-right.png			\
 	update-result.xsl		\
 	update-results.pl		\
-	xmlroff-testing.conf		\
+	update-results-xml.xsl		\
 	xmlroff-testing-cairo-pdf.conf	\
+	xmlroff-testing.conf		\
 	xmlroff-testing-cairo-ps.conf
 
 noinst_HEADERS = \

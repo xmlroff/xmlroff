@@ -94,8 +94,10 @@
       <html>
         <head>
           <title>
+            <xsl:value-of select="$id"/>
+            <xsl:text> - </xsl:text>
             <xsl:value-of select="$results/ancestor::testsuite/@profile"/>
-            <xsl:text>: </xsl:text>
+            <xsl:text> - </xsl:text>
             <xsl:for-each select="$results/ancestor::*/@base">
               <xsl:value-of select="."/>
               <xsl:text>/</xsl:text>
