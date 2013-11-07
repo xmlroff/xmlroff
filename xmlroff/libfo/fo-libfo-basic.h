@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2003 Sun Microsystems
  * Copyright (C) 2007 Menteith Consulting Ltd
+ * Copyright (C) 2013 Mentea
  *
  * See COPYING for the status of this software.
  */
@@ -11,8 +12,7 @@
 #define __FO_LIBFO_BASIC_H__
 
 #include <stdio.h>
-#include <glib/gtypes.h>
-#include <glib/gerror.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 
