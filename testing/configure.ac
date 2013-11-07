@@ -137,7 +137,7 @@ AC_CHECK_PROGS(PERL, perl5 perl)
 dnl
 dnl Check for svn2cl for generating ChangeLog
 dnl
-enable_svn2cl=yes
+enable_svn2cl=no
 changelog_oldest=364
 AC_PATH_PROG([SVN2CL], [svn2cl])
 if test -z "$SVN2CL"; then
