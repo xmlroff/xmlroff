@@ -4,3 +4,7 @@ Makefile.in
 libfo-features.h
 libfo-compat.c
 s-libfo-compat-c
+*.la
+*.lo
+*.o
+.libs
