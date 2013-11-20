@@ -203,6 +203,7 @@ fo_xml_doc_new_from_memory (const gchar    *buffer,
       g_set_error (error,
 		   FO_XML_DOC_ERROR,
 		   FO_XML_DOC_ERROR_MEMORY_PARSE_FAILED,
+		   "%s",
 		   _(fo_xml_doc_error_messages[FO_XML_DOC_ERROR_MEMORY_PARSE_FAILED]));
 
     }
@@ -246,6 +247,7 @@ fo_xml_doc_new_from_string (const gchar    *curr,
       g_set_error (error,
 		   FO_XML_DOC_ERROR,
 		   FO_XML_DOC_ERROR_MEMORY_PARSE_FAILED,
+		   "%s",
 		   _(fo_xml_doc_error_messages[FO_XML_DOC_ERROR_MEMORY_PARSE_FAILED]));
 
     }

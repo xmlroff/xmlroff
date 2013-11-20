@@ -1139,6 +1139,7 @@ fo_table_column_validate (FoFo      *fo,
       g_set_error (error,
 		   FO_TABLE_COLUMN_ERROR,
 		   FO_FO_ERROR_DATATYPE,
+		   "%s",
 		   _(fo_table_column_error_messages[FO_TABLE_COLUMN_ERROR_FIXED_NO_WIDTH]));
 
       fo_object_log_warning (FO_OBJECT (fo),

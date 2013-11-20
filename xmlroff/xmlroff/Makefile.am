@@ -25,4 +25,5 @@ xmlroff_LDADD = \
 	$(PANGO_LIBS) \
 	$(GNOMEPRINT_LIBS) \
 	$(LIBXSLT_LIBS) \
-	$(FREETYPE_LIBS)
+	$(FREETYPE_LIBS) \
+	-lm

@@ -259,6 +259,7 @@ opt_arg_to_property_name (FoExprContext *context,
 	  g_set_error (error,
 		       FO_EXPR_EVAL_ERROR,
 		       FO_EXPR_EVAL_ERROR_INVALID_TYPE,
+		       "%s",
 		       fo_expr_eval_error_messages[FO_EXPR_EVAL_ERROR_INVALID_TYPE]);
 	}
 
@@ -269,6 +270,7 @@ opt_arg_to_property_name (FoExprContext *context,
 	  g_set_error (error,
 		       FO_EXPR_EVAL_ERROR,
 		       FO_EXPR_EVAL_ERROR_INVALID_ARITY,
+		       "%s",
 		       fo_expr_eval_error_messages[FO_EXPR_EVAL_ERROR_INVALID_ARITY]);
     }
 
@@ -1206,6 +1208,7 @@ datatype_to_color_component (FoDatatype *datatype,
       g_set_error (error,
 		   FO_EXPR_EVAL_ERROR,
 		   FO_EXPR_EVAL_ERROR_INVALID_TYPE,
+		   "%s",
 		   fo_expr_eval_error_messages[FO_EXPR_EVAL_ERROR_INVALID_TYPE]);
     }
 

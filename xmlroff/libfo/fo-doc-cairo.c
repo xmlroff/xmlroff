@@ -362,6 +362,7 @@ fo_doc_cairo_open_file (FoDoc          *fo_doc,
 	  g_set_error (error,
 		       FO_DOC_ERROR,
 		       FO_DOC_ERROR_UNSUPPORTED_FORMAT,
+		       "%s",
 		       N_(fo_doc_error_messages[FO_DOC_ERROR_UNSUPPORTED_FORMAT]));
 	}
       break;
@@ -378,6 +379,7 @@ fo_doc_cairo_open_file (FoDoc          *fo_doc,
       g_set_error (error,
 		   FO_DOC_ERROR,
 		   FO_DOC_ERROR_UNSUPPORTED_FORMAT,
+		  "%s",
 		   N_(fo_doc_error_messages[FO_DOC_ERROR_UNSUPPORTED_FORMAT]));
 
     }
@@ -424,6 +426,7 @@ _fo_doc_cairo_create_cr (FoDocCairo   *fo_doc_cairo,
       g_set_error (error,
 		   FO_DOC_ERROR,
 		   FO_DOC_ERROR_FAILED,
+		   "%s",
 		   N_(fo_doc_error_messages[FO_DOC_ERROR_FAILED]));
       return;
     }
@@ -441,6 +444,7 @@ _fo_doc_cairo_create_cr (FoDocCairo   *fo_doc_cairo,
       g_set_error (error,
 		   FO_DOC_ERROR,
 		   FO_DOC_ERROR_FAILED,
+		   "%s",
 		   N_(fo_doc_error_messages[FO_DOC_ERROR_FAILED]));
       return;
     }

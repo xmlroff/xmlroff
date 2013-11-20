@@ -34,4 +34,5 @@ test_LDFLAGS = -static
 test_LDADD = \
 	$(CUNIT_LIBS)		\
 	$(PANGO_LIBS)		\
-	../libfo/libfo-0.6.la
+	../libfo/libfo-0.6.la	\
+	-lm

@@ -1311,6 +1311,7 @@ fo_node_log_or_propagate_error (FoObject *fo_object,
 
   new_error = g_error_new (src->domain,
 			   src->code,
+			   "%s",
 			   new_message->str);
 
   g_string_free (new_message, TRUE);
@@ -1367,6 +1368,7 @@ fo_node_maybe_propagate_error (FoObject *fo_object,
 
   new_error = g_error_new (src->domain,
 			   src->code,
+			   "%s",
 			   new_message->str);
 
   g_string_free (new_message, TRUE);

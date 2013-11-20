@@ -97,6 +97,7 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
       g_set_error (error,
 		   FO_XSLT_TRANSFORMER_ERROR,
 		   FO_XSLT_TRANSFORMER_ERROR_NO_STYLESHEET_DOC,
+		   "%s",
 		   _(fo_xslt_transformer_error_messages[FO_XSLT_TRANSFORMER_ERROR_NO_STYLESHEET_DOC]));
       return NULL;
     }
@@ -107,6 +108,7 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
       g_set_error (error,
 		   FO_XSLT_TRANSFORMER_ERROR,
 		   FO_XSLT_TRANSFORMER_ERROR_NO_XML_DOC,
+		   "%s",
 		   _(fo_xslt_transformer_error_messages[FO_XSLT_TRANSFORMER_ERROR_NO_XML_DOC]));
       return NULL;
     }
@@ -119,6 +121,7 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
       g_set_error (error,
 		   FO_XSLT_TRANSFORMER_ERROR,
 		   FO_XSLT_TRANSFORMER_ERROR_PARSE_FAILED,
+		   "%s",
 		   _(fo_xslt_transformer_error_messages[FO_XSLT_TRANSFORMER_ERROR_PARSE_FAILED]));
 
       return NULL;
@@ -135,6 +138,7 @@ fo_xslt_transformer_do_transform (FoXmlDoc          *xml_doc,
 	  g_set_error (error,
 		       FO_XSLT_TRANSFORMER_ERROR,
 		       FO_XSLT_TRANSFORMER_ERROR_TRANSFORM_FAILED,
+		       "%s",
 		       _(fo_xslt_transformer_error_messages[FO_XSLT_TRANSFORMER_ERROR_TRANSFORM_FAILED]));
 
 	  return NULL;

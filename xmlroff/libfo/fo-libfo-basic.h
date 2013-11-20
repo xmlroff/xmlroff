@@ -11,8 +11,7 @@
 #define __FO_LIBFO_BASIC_H__
 
 #include <stdio.h>
-#include <glib/gtypes.h>
-#include <glib/gerror.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 
