@@ -1025,6 +1025,7 @@ fo_xsl_formatter_format (FoXslFormatter *fo_xsl_formatter,
       g_set_error (error,
 		   FO_XSL_FORMATTER_ERROR,
 		   FO_XSL_FORMATTER_ERROR_RESULT_TREE_NOT_FO,
+		   "%s\n%s",
 		   _(fo_xsl_formatter_error_messages[FO_XSL_FORMATTER_ERROR_RESULT_TREE_NOT_FO]),
 		   root_element->ns == NULL ? NULL : root_element->ns->href,
 		   root_element->name);

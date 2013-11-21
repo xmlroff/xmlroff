@@ -1369,6 +1369,7 @@ fo_expr_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_EXTRA_EXPR,
+		   "%s\n%p",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_EXTRA_EXPR]),
 		   fo_expr_context_cur_ptr (context));
     }
@@ -1708,6 +1709,7 @@ fo_expr_padding_eval (const gchar         *string,
       g_set_error (error,
 		   FO_EXPR_ERROR,
 		   FO_EXPR_ERROR_EXTRA_STACK,
+		   "%s\n\s",
 		   _(fo_expr_error_messages[FO_EXPR_ERROR_EXTRA_STACK]),
 		   string);
 

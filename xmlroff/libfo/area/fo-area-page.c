@@ -966,7 +966,7 @@ _region_body_size_request (FoArea *page,
 	  GError *error = g_error_new (FO_AREA_PAGE_ERROR,
 				       FO_AREA_PAGE_ERROR_OVERFLOW,
 				       "%s",
-				       N_(fo_area_page_error_messages[FO_AREA_PAGE_ERROR_OVERFLOW]));
+				       fo_area_page_error_messages[FO_AREA_PAGE_ERROR_OVERFLOW]);
 
 	  fo_object_log_warning (FO_OBJECT (region_body),
 				 &error);

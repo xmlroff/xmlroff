@@ -2240,6 +2240,7 @@ fo_table_span_info_start_row (FoFo    *fo,
       g_set_error (error,
 		   FO_TABLE_ERROR,
 		   FO_TABLE_ERROR_SPANNING_CELLS_FILL_ROW,
+		   "%s",
 		   fo_table_error_messages[FO_TABLE_ERROR_SPANNING_CELLS_FILL_ROW]);
     }
   */
