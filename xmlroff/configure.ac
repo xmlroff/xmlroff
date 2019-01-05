@@ -19,7 +19,7 @@ dnl   xmlroff_interface_age = 0;
 
 m4_define([xmlroff_version_major],0)
 m4_define([xmlroff_version_minor],6)
-m4_define([xmlroff_version_micro],2)
+m4_define([xmlroff_version_micro],3)
 m4_define([xmlroff_interface_age],0)
 m4_define([xmlroff_version],
           [xmlroff_version_major.xmlroff_version_minor.xmlroff_version_micro])
@@ -159,7 +159,7 @@ PKG_CHECK_MODULES(GTK_DOC,
 		  gtk-doc >= $GTK_DOC_MIN_VERSION,
 		  have_gtk_doc=true,
 		  :)
-AC_MSG_RESULT($have_gtk_doc)
+#AC_MSG_RESULT($have_gtk_doc)
 
 AM_CONDITIONAL(HAVE_GTK_DOC, $have_gtk_doc)
 AC_SUBST(HAVE_GTK_DOC, $have_gtk_doc)
@@ -251,19 +251,16 @@ AC_SUBST(REBUILD)
 #
 # Checks for FreeType
 #
-FREETYPE_LIBS=
-FREETYPE_CFLAGS=
-have_freetype=false
-AC_PATH_PROG(FREETYPE_CONFIG, freetype-config, no)
-if test "x$FREETYPE_CONFIG" != "xno" ; then
-  FREETYPE_CFLAGS=`$FREETYPE_CONFIG --cflags`
-  FREETYPE_LIBS=`$FREETYPE_CONFIG --libs`
+FREETYPE_PACKAGES=freetype2
+#FREETYPE_REQUIRED_VERSION=1.0.3
 
-  AC_CHECK_LIB(freetype, FT_New_Face, have_freetype=true
-	       ,:,$FREETYPE_LIBS)
-fi
-AC_SUBST(FREETYPE_LIBS)
-AC_SUBST(FREETYPE_CFLAGS)
+have_freetype=false
+
+PKG_CHECK_MODULES(FREETYPE,
+		  $FREETYPE_PACKAGES,
+		  have_freetype=true,
+		  :)
+
 AM_CONDITIONAL(HAVE_FREETYPE, $have_freetype) 
 
 AH_TEMPLATE([ENABLE_GP],
@@ -452,7 +449,7 @@ case "$host" in
     xmlroff_platform_win32=no
     ;;
 esac
-AC_MSG_RESULT([$xmlroff_platform_win32])
+#AC_MSG_RESULT([$xmlroff_platform_win32])
 AM_CONDITIONAL(PLATFORM_WIN32, test "$xmlroff_platform_win32" = "yes")
 
 AH_TEMPLATE([PIXELS_PER_INCH],
