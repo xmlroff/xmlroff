@@ -2,6 +2,7 @@
 *.pc
 *.pdf
 *.spec
+*~
 INSTALL
 Makefile
 Makefile.in
